@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on カウル Tech Blog</title>
-    <link>http://housmart.github.io/post/</link>
-    <description>Recent content in Posts on カウル Tech Blog</description>
+    <title>Hackathon on カウル Tech Blog</title>
+    <link>http://housmart.github.io/tags/hackathon/</link>
+    <description>Recent content in Hackathon on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 17 Feb 2016 16:57:26 +0900</lastBuildDate>
-    <atom:link href="http://housmart.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://housmart.github.io/tags/hackathon/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Hack Day 2016ハッカソンに参加しました！</title>
@@ -97,76 +97,6 @@ TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバ�
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8e8SL2kEUFObnBivBczy_Pa10P5X5Jjfn2VVOc_WydnoSmQeuPyKi179CpDeaS-OVmny_u_rbrs=s800&#34; title=&#34;Hackey&#34;/&gt;&lt;/p&gt;
 
 &lt;p&gt;Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>カウルTech Blog開始！</title>
-      <link>http://housmart.github.io/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B</link>
-      <pubDate>Mon, 08 Feb 2016 17:45:55 +0900</pubDate>
-      
-      <guid>http://housmart.github.io/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B</guid>
-      <description>
-
-&lt;h2 id=&#34;ブログ始めました:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;ブログ始めました。&lt;/h2&gt;
-
-&lt;p&gt;はじめまして！カウル開発チームの宮永と申します。&lt;/p&gt;
-
-&lt;p&gt;本日よりカウルTech Blogを開始いたしました。&lt;/p&gt;
-
-&lt;p&gt;サービスの裏側やシステムに関する技術的トピック、開発チームの雰囲気など&lt;br&gt;
-カウル開発の「空気」のようなモノが伝わればよいかなと思っております。&lt;/p&gt;
-
-&lt;p&gt;※Tech Blogとありますが、Techなことに特化しない回もあると思いますがあしからず。&lt;/p&gt;
-
-&lt;p&gt;今回は第１回ということで自己紹介を。&lt;/p&gt;
-
-&lt;h2 id=&#34;自己紹介:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;自己紹介&lt;/h2&gt;
-
-&lt;p&gt;公式的な自己紹介はカウルのTOP（ &lt;a href=&#34;https://kawlu.com/market&#34;&gt;https://kawlu.com/market&lt;/a&gt; ）にありますので、
-そちらとは異なるフランクな内容で行きたいと思います。&lt;/p&gt;
-
-&lt;p&gt;私、宮永は福岡県北九州の生まれで根っからのサッカー小僧です。
-幼稚園、小学校、中学校、高校、大学とサッカーを続け、サッカーに対する情熱は今も冷めておりません。&lt;/p&gt;
-
-&lt;p&gt;ただ、東京はサッカーが出来るところも少ないので近年はフットサルがメインです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://housmart.github.io/images/2016020804.png&#34; title=&#34;全員集合！&#34;&gt;
-弊社の社員が勢揃いした写真です。
-&lt;div style=&#34;margin-bottom:100px&#34;&gt;&lt;/div&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;開発の話へ:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;開発の話へ。。&lt;/h2&gt;
-
-&lt;p&gt;このままだとサッカーブログになりそうなので、開発の話に戻ります。&lt;/p&gt;
-
-&lt;p&gt;私は新卒（2011年）から5年ほど楽天株式会社でエンジニア、プロデューサとしてシステム開発を担当させていただきました。
-学ぶ事が多く楽天では本当に充実した日々を過ごせたと思っております。&lt;/p&gt;
-
-&lt;p&gt;好きな言語は・・という話もしたいのですが、本当に好みがなくどれでもやりだすと好きになります。
-ですので、今はカウル開発でも使っているRubyは結構好きです。&lt;/p&gt;
-
-&lt;p&gt;カウルではCTOという立派な役職を頂いておりますが、エンジニア業務がメインで
-今は仕事をしております。
-「とにかく世の中に役立つものを創りたい」欲が強く、今カウルの開発に携われている私は
-なかなかの幸せ者であると思っております。&lt;/p&gt;
-
-&lt;p&gt;圧倒的に自由な不動産市場の創造を目指し、やることは多いですが、
-日々精進して大きなサービスとしていけるよう頑張ります。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://housmart.github.io/images/2016020803.JPG&#34; title=&#34;&#34;&gt;
-頻繁にMTGを行い、カウルの改善点を洗い出ししています。
-&lt;div style=&#34;margin-bottom:100px&#34;&gt;&lt;/div&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;最近ハマっていること:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;最近ハマっていること&lt;/h2&gt;
-
-&lt;p&gt;弊社のオフィスは渋谷にあるのですが、とにかく飲食店が豊富で毎日昼食に困りません。
-最近は社員皆で国際料理のお店巡りが流行ってます。
-（ペルー、オーストラリア、ブラジルなどなど渋谷にはとにかく多くの国際料理店が存在します。）&lt;/p&gt;
-
-&lt;h2 id=&#34;最後に:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;最後に&lt;/h2&gt;
-
-&lt;p&gt;今回はこのくらいで終わりとさせていただきます。
-引き続き、皆様どうぞよろしくお願いします。&lt;/p&gt;
 </description>
     </item>
     

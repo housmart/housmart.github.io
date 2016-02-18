@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Hack Day 2016ハッカソンに参加しました！ &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.15" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったブログサイトです。">
+    
+    
+    <link rel="icon" href="http://housmart.github.io/favicon.ico">
+    <link rel="apple-touch-icon" href="http://housmart.github.io/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://housmart.github.io/css/style.css">
+    <link rel="stylesheet" href="http://housmart.github.io/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://housmart.github.io/css/monokai.css">
+    <link rel="stylesheet" href="http://housmart.github.io/css/custom_main.css">
+    <link rel="stylesheet" href="http://housmart.github.io/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <meta property="og:title" content="Hack Day 2016ハッカソンに参加しました！" />
+<meta property="og:description" content="今週からHousmartで働く松江です！ 先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。 作ったもの KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。 KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。 ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う みんなの笑顔を検知して、合いの手を入れたり一緒に笑う 飲み会中の自然な笑顔画像を集めておく 1つ目の機能は、まさしく夢のビールのオートデプロイです！！ 使ったもの 主に以下のデバイス・APIを使用して作りました。 THETA S Clarifaiの画像解析API Docomoの画像認識API THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。 RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。 https://developers.theta360.com/ja/docs/v2/api_reference/ ClarifaiはGoogle Cloud Visionのように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。 例えば以下のビール画像であれば&rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&rdquo;といった情報が得られます。 泡があること、冷たいこと、室内であることも認識されていて驚きです。 動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。 Clarifaiのデモ ClarifaiのAPIドキュメント 苦労したところ・工夫したところ Clarifaiの前はGoogle Cloud Visionの使用を検討していましたが審査が間に合いませんでした。 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。 審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。 ビールの認識精度も上がらずに思考錯誤をしました。 開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。 ここは背景に暗めの色の布を置くことで判定率が上がりました。 しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。 実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。 また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。 さいごに 今回の作ったものはこちらのレポジトリに置いています。 https://github.com/housmart/kizukai また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！ Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://housmart.github.io/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" />
+
+
+<meta property="og:updated_time" content="2016-02-17T16:57:26&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="Hack Day 2016ハッカソンに参加しました！">
+<meta itemprop="description" content="今週からHousmartで働く松江です！ 先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。 作ったもの KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。 KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。 ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う みんなの笑顔を検知して、合いの手を入れたり一緒に笑う 飲み会中の自然な笑顔画像を集めておく 1つ目の機能は、まさしく夢のビールのオートデプロイです！！ 使ったもの 主に以下のデバイス・APIを使用して作りました。 THETA S Clarifaiの画像解析API Docomoの画像認識API THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。 RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。 https://developers.theta360.com/ja/docs/v2/api_reference/ ClarifaiはGoogle Cloud Visionのように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。 例えば以下のビール画像であれば&rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&rdquo;といった情報が得られます。 泡があること、冷たいこと、室内であることも認識されていて驚きです。 動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。 Clarifaiのデモ ClarifaiのAPIドキュメント 苦労したところ・工夫したところ Clarifaiの前はGoogle Cloud Visionの使用を検討していましたが審査が間に合いませんでした。 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。 審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。 ビールの認識精度も上がらずに思考錯誤をしました。 開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。 ここは背景に暗めの色の布を置くことで判定率が上がりました。 しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。 実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。 また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。 さいごに 今回の作ったものはこちらのレポジトリに置いています。 https://github.com/housmart/kizukai また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！ Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！">
+
+
+<meta itemprop="dateModified" content="2016-02-17T16:57:26&#43;09:00" />
+<meta itemprop="wordCount" content="64">
+
+
+
+<meta itemprop="keywords" content="event,member,event,hackathon,introduction," />
+
+    
+
+  <meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:title" content="Hack Day 2016ハッカソンに参加しました！"/>
+<meta name="twitter:description" content="今週からHousmartで働く松江です！ 先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。 作ったもの KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。 KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。 ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う みんなの笑顔を検知して、合いの手を入れたり一緒に笑う 飲み会中の自然な笑顔画像を集めておく 1つ目の機能は、まさしく夢のビールのオートデプロイです！！ 使ったもの 主に以下のデバイス・APIを使用して作りました。 THETA S Clarifaiの画像解析API Docomoの画像認識API THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。 RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。 https://developers.theta360.com/ja/docs/v2/api_reference/ ClarifaiはGoogle Cloud Visionのように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。 例えば以下のビール画像であれば&rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&rdquo;といった情報が得られます。 泡があること、冷たいこと、室内であることも認識されていて驚きです。 動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。 Clarifaiのデモ ClarifaiのAPIドキュメント 苦労したところ・工夫したところ Clarifaiの前はGoogle Cloud Visionの使用を検討していましたが審査が間に合いませんでした。 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。 審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。 ビールの認識精度も上がらずに思考錯誤をしました。 開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。 ここは背景に暗めの色の布を置くことで判定率が上がりました。 しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。 実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。 また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。 さいごに 今回の作ったものはこちらのレポジトリに置いています。 https://github.com/housmart/kizukai また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！ Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://housmart.github.io/" id="logo"><i class="logo" style="background-image: url('http://housmart.github.io/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://housmart.github.io/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://housmart.github.io/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://housmart.github.io/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://housmart.github.io/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://housmart.github.io/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://housmart.github.io/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://housmart.github.io/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://housmart.github.io/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://housmart.github.io/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://housmart.github.io/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        2
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          3
+          
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://housmart.github.io/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F">
+    <h1 class="article-title" itemprop="name">
+        Hack Day 2016ハッカソンに参加しました！
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-02-17 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-02-17</time>
+            &middot;
+            64
+            words
+            &middot;
+            1
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://housmart.github.io/categories/event">event</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://housmart.github.io/tags/event">event</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://housmart.github.io/tags/hackathon">hackathon</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>今週からHousmartで働く松江です！</p>
+
+<p>先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントである<a href="http://hackday.jp/2016/">Hack Day 2016</a>に参加してきたのでこの場を借りてご紹介します。</p>
+
+<h2 id="作ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb">作ったもの</h2>
+
+<script async class="speakerdeck-embed" data-id="3617987a7a094929bc4d490782dcf797" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p>KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。</p>
+
+<p>KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。</p>
+
+<ol>
+<li>ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う</li>
+<li>みんなの笑顔を検知して、合いの手を入れたり一緒に笑う</li>
+<li>飲み会中の自然な笑顔画像を集めておく</li>
+</ol>
+
+<p>1つ目の機能は、まさしく夢の<strong>ビールのオートデプロイ</strong>です！！</p>
+
+<p><img src="https://lh3.googleusercontent.com/0qgHEBRne3GBTsPTkJn5MqAsYdFihI-3LTJSm8P33iOraRoy36An06qGGQo8pC5jKr0afMeqOFA=s800" title="Demo"/></p>
+
+<h3 id="使ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb">使ったもの</h3>
+
+<p>主に以下のデバイス・APIを使用して作りました。</p>
+
+<ul>
+<li><a href="https://theta360.com/ja/about/theta/s.html">THETA S</a></li>
+<li><a href="http://www.clarifai.com/">Clarifaiの画像解析API</a></li>
+<li><a href="https://dev.smt.docomo.ne.jp/?p=docs.api.page&amp;api_name=image_recognition&amp;p_name=api_usage_scenario">Docomoの画像認識API</a></li>
+</ul>
+
+<p>THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。</p>
+
+<blockquote>
+<p>RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。<br />
+<a href="https://developers.theta360.com/ja/docs/v2/api_reference/">https://developers.theta360.com/ja/docs/v2/api_reference/</a></p>
+</blockquote>
+
+<p>Clarifaiは<a href="https://cloud.google.com/vision/">Google Cloud Vision</a>のように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。
+例えば以下のビール画像であれば&rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&rdquo;といった情報が得られます。
+泡があること、冷たいこと、室内であることも認識されていて驚きです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/g2L3vh5pcQrdyl-o5UrM8GZOgy7n6hfAjL5LHzB52Oz-uaKUHwwF2PQczrS2G_OUzAGTQExgBdM=s400" title="Beer"/></p>
+
+<p>動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。</p>
+
+<ul>
+<li><a href="http://www.clarifai.com/#demo">Clarifaiのデモ</a></li>
+<li><a href="http://newdocs.clarifai.com/guide/info#info">ClarifaiのAPIドキュメント</a></li>
+</ul>
+
+<h3 id="苦労したところ-工夫したところ:3fc30d4efb0f9f17a0ee9ad6f39c20bb">苦労したところ・工夫したところ</h3>
+
+<p>Clarifaiの前は<a href="https://cloud.google.com/vision/">Google Cloud Vision</a>の使用を検討していましたが審査が間に合いませんでした。
+Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。
+審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。</p>
+
+<p>ビールの認識精度も上がらずに思考錯誤をしました。
+開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。
+ここは背景に暗めの色の布を置くことで判定率が上がりました。
+しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。
+実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。</p>
+
+<p>また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。
+TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。</p>
+
+<h3 id="さいごに:3fc30d4efb0f9f17a0ee9ad6f39c20bb">さいごに</h3>
+
+<p>今回の作ったものはこちらのレポジトリに置いています。</p>
+
+<p><a href="https://github.com/housmart/kizukai">https://github.com/housmart/kizukai</a></p>
+
+<p>また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！</p>
+
+<p><img src="https://lh3.googleusercontent.com/M4uyXV2O1J0hKXoqWvnah4stqPaOAQm9z2f9G-7Vb7Pd3FCTIRd2wrbJKcoWRyxvb2y4m018HWc=s400" title="Hackey"/></p>
+
+<p><img src="https://lh3.googleusercontent.com/8e8SL2kEUFObnBivBczy_Pa10P5X5Jjfn2VVOc_WydnoSmQeuPyKi179CpDeaS-OVmny_u_rbrs=s800" title="Hackey"/></p>
+
+<p>Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！</p>
+
+            </div>
+            <footer class="article-footer">
+    <a data-url="http://housmart.github.io/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" data-id="3fc30d4efb0f9f17a0ee9ad6f39c20bb" class="article-share-link">
+        Share
+    </a>
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://housmart.github.io/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">カウルTech Blog開始！</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://housmart.github.io/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800)" alt="Hack Day 2016ハッカソンに参加しました！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://housmart.github.io/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://housmart.github.io/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" class="title">Hack Day 2016ハッカソンに参加しました！</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-02-17 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-02-17</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://housmart.github.io/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(http://housmart.github.io/images/2016020801.JPG)" alt="Hack Day 2016ハッカソンに参加しました！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://housmart.github.io/categories/member">
+                        member
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://housmart.github.io/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B" class="title">カウルTech Blog開始！</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-02-08 17:45:55 &#43;0900 JST" itemprop="datePublished">2016-02-08</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://housmart.github.io/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://housmart.github.io/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://housmart.github.io/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://housmart.github.io/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://housmart.github.io/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://housmart.github.io/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://housmart.github.io/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://housmart.github.io/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://housmart.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://housmart.github.io/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
