@@ -20,7 +20,10 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <meta property="og:title" content="Hack Day 2016ハッカソンに参加しました！" />
-<meta property="og:description" content="今週からHousmartで働く松江です！ 先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。 作ったもの KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。 KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。 ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う みんなの笑顔を検知して、合いの手を入れたり一緒に笑う 飲み会中の自然な笑顔画像を集めておく 1つ目の機能は、まさしく夢のビールのオートデプロイです！！ 使ったもの 主に以下のデバイス・APIを使用して作りました。 THETA S Clarifaiの画像解析API Docomoの画像認識API THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。 RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。 https://developers.theta360.com/ja/docs/v2/api_reference/ ClarifaiはGoogle Cloud Visionのように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。 例えば以下のビール画像であれば&rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&rdquo;といった情報が得られます。 泡があること、冷たいこと、室内であることも認識されていて驚きです。 動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。 Clarifaiのデモ ClarifaiのAPIドキュメント 苦労したところ・工夫したところ Clarifaiの前はGoogle Cloud Visionの使用を検討していましたが審査が間に合いませんでした。 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。 審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。 ビールの認識精度も上がらずに思考錯誤をしました。 開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。 ここは背景に暗めの色の布を置くことで判定率が上がりました。 しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。 実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。 また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。 さいごに 今回の作ったものはこちらのレポジトリに置いています。 https://github.com/housmart/kizukai また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！ Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！" />
+<meta property="og:description" content="今週からHousmartで働く松江です！
+
+先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://housmart.github.io/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" />
 
@@ -39,11 +42,14 @@
     
     
 <meta itemprop="name" content="Hack Day 2016ハッカソンに参加しました！">
-<meta itemprop="description" content="今週からHousmartで働く松江です！ 先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。 作ったもの KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。 KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。 ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う みんなの笑顔を検知して、合いの手を入れたり一緒に笑う 飲み会中の自然な笑顔画像を集めておく 1つ目の機能は、まさしく夢のビールのオートデプロイです！！ 使ったもの 主に以下のデバイス・APIを使用して作りました。 THETA S Clarifaiの画像解析API Docomoの画像認識API THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。 RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。 https://developers.theta360.com/ja/docs/v2/api_reference/ ClarifaiはGoogle Cloud Visionのように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。 例えば以下のビール画像であれば&rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&rdquo;といった情報が得られます。 泡があること、冷たいこと、室内であることも認識されていて驚きです。 動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。 Clarifaiのデモ ClarifaiのAPIドキュメント 苦労したところ・工夫したところ Clarifaiの前はGoogle Cloud Visionの使用を検討していましたが審査が間に合いませんでした。 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。 審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。 ビールの認識精度も上がらずに思考錯誤をしました。 開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。 ここは背景に暗めの色の布を置くことで判定率が上がりました。 しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。 実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。 また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。 さいごに 今回の作ったものはこちらのレポジトリに置いています。 https://github.com/housmart/kizukai また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！ Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！">
+<meta itemprop="description" content="今週からHousmartで働く松江です！
+
+先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。
+">
 
 
 <meta itemprop="dateModified" content="2016-02-17T16:57:26&#43;09:00" />
-<meta itemprop="wordCount" content="64">
+<meta itemprop="wordCount" content="1382">
 
 
 
@@ -56,7 +62,10 @@
 
 
 <meta name="twitter:title" content="Hack Day 2016ハッカソンに参加しました！"/>
-<meta name="twitter:description" content="今週からHousmartで働く松江です！ 先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。 作ったもの KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。 KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。 ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う みんなの笑顔を検知して、合いの手を入れたり一緒に笑う 飲み会中の自然な笑顔画像を集めておく 1つ目の機能は、まさしく夢のビールのオートデプロイです！！ 使ったもの 主に以下のデバイス・APIを使用して作りました。 THETA S Clarifaiの画像解析API Docomoの画像認識API THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。 RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。 https://developers.theta360.com/ja/docs/v2/api_reference/ ClarifaiはGoogle Cloud Visionのように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。 例えば以下のビール画像であれば&rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&rdquo;といった情報が得られます。 泡があること、冷たいこと、室内であることも認識されていて驚きです。 動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。 Clarifaiのデモ ClarifaiのAPIドキュメント 苦労したところ・工夫したところ Clarifaiの前はGoogle Cloud Visionの使用を検討していましたが審査が間に合いませんでした。 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。 審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。 ビールの認識精度も上がらずに思考錯誤をしました。 開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。 ここは背景に暗めの色の布を置くことで判定率が上がりました。 しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。 実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。 また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。 さいごに 今回の作ったものはこちらのレポジトリに置いています。 https://github.com/housmart/kizukai また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！ Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！"/>
+<meta name="twitter:description" content="今週からHousmartで働く松江です！
+
+先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントであるHack Day 2016に参加してきたのでこの場を借りてご紹介します。
+"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 
@@ -270,10 +279,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2016-02-17 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-02-17</time>
             &middot;
-            64
+            1382
             words
             &middot;
-            1
+            3
             minute read
         </div>
 
@@ -344,7 +353,7 @@
 <li><a href="https://dev.smt.docomo.ne.jp/?p=docs.api.page&amp;api_name=image_recognition&amp;p_name=api_usage_scenario">Docomoの画像認識API</a></li>
 </ul>
 
-<p>THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。</p>
+<p>THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いやすいものになっていました。</p>
 
 <blockquote>
 <p>RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。<br />

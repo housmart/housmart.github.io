@@ -49,7 +49,7 @@
 &lt;li&gt;&lt;a href=&#34;https://dev.smt.docomo.ne.jp/?p=docs.api.page&amp;amp;api_name=image_recognition&amp;amp;p_name=api_usage_scenario&#34;&gt;Docomoの画像認識API&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いものになっていました。&lt;/p&gt;
+&lt;p&gt;THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いやすいものになっていました。&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。&lt;br /&gt;
