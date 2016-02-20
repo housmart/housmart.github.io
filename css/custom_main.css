@@ -29,10 +29,15 @@
 /* Social buttons */
 
 .share {
-  width: 170px;
+  width: 180px;
   margin-left: auto;
 }
-.article-share-twitter, .article-share-facebook, .article-share-pinterest, .article-share-google, .article-share-hatena {
+.share > .article-share-twitter,
+.share > .article-share-facebook,
+.share > .article-share-pinterest,
+.share > .article-share-google,
+.share > .article-share-hatena,
+.share > .article-share-pocket {
   width: 20px;
   height: 20px;
   display: block;
@@ -42,7 +47,12 @@
   text-shadow: 0 1px #fff;
   padding-left: 10px;
 }
-.article-share-twitter:before, .article-share-facebook:before, .article-share-pinterest:before, .article-share-google:before .article-share-hatena:before {
+.share > .article-share-twitter:before,
+.share > .article-share-facebook:before,
+.share > .article-share-pinterest:before,
+.share > .article-share-google:before,
+.share > .article-share-hatena:before,
+.share > .article-share-pocket:before {
   font-size: 20px;
   width: 20px;
   height: 20px;
@@ -53,10 +63,25 @@
   margin-left: -10px;
   text-align: center;
 }
+.share > .article-share-twitter:hover,
+.share > .article-share-facebook:hover,
+.share > .article-share-pinterest:hover,
+.share > .article-share-google:hover,
+.share > .article-share-hatena:hover,
+.share > .article-share-pocket:hover {
+  color: #fff;
+}
+.article-share-hatena:hover {
+  background: #2f62c9;
+  text-shadow: 0 1px #008abe;
+}
+.article-share-pocket:hover {
+  background: #d13f4e;
+  text-shadow: 0 1px #008abe;
+}
 .fa-hatena:before {
   content: "B!";
   font-family: Verdana;
   font-weight: bold;
   display: inline-block;
-  font-size: 18px;
 }
