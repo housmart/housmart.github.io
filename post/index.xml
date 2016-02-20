@@ -23,7 +23,9 @@
 
 &lt;h2 id=&#34;作ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;作ったもの&lt;/h2&gt;
 
-&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;3617987a7a094929bc4d490782dcf797&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+&lt;div class=&#34;embed-video-container&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/ZgpvXK3wfkc&#34; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;p&gt;スライド: &lt;a href=&#34;https://speakerdeck.com/matsue/kizukai-at-hack-day-2016&#34;&gt;https://speakerdeck.com/matsue/kizukai-at-hack-day-2016&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。&lt;/p&gt;
 
@@ -74,6 +76,9 @@
 &lt;p&gt;Clarifaiの前は&lt;a href=&#34;https://cloud.google.com/vision/&#34;&gt;Google Cloud Vision&lt;/a&gt;の使用を検討していましたが審査が間に合いませんでした。
 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。
 審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;追記: Google Cloud Visionの&lt;a href=&#34;ttp://googlecloudplatform.blogspot.jp/2016/02/Google-Cloud-Vision-API-enters-beta-open-to-all-to-try.html&#34;&gt;ベータ版の提供が始まり&lt;/a&gt;、申請すればすぐ使えます。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;ビールの認識精度も上がらずに思考錯誤をしました。
 開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。

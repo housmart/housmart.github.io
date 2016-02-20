@@ -1,11 +1,24 @@
 .site-title {
   color: #00d1c1 !important;
 }
-
 #kawlu_banner {
-  width:100%;
+  width: 100%;
 }
-
 .site-title {
   font-size: 22px !important;
+}
+.embed-video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 1.5em;
+}
+.embed-video-container iframe, .embed-video-container object, .embed-video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
