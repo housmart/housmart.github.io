@@ -6,8 +6,139 @@
     <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 17 Feb 2016 16:57:26 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Mar 2016 16:57:26 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</title>
+      <link>http://techblog.housmart.co.jp/2016/03/03/%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%81%AE%E8%B2%A0%E8%8D%B7%E5%AF%BE%E7%AD%96aws-x-rails-%E3%81%AE%E5%A0%B4%E5%90%88%E5%89%8D%E7%B7%A8</link>
+      <pubDate>Thu, 03 Mar 2016 16:57:26 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/03/03/%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%81%AE%E8%B2%A0%E8%8D%B7%E5%AF%BE%E7%AD%96aws-x-rails-%E3%81%AE%E5%A0%B4%E5%90%88%E5%89%8D%E7%B7%A8</guid>
+      <description>
+
+&lt;p&gt;Housmart高松です。&lt;/p&gt;
+
+&lt;p&gt;先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;WBSサイト(不動産流通に革新は起こるか): &lt;a href=&#34;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&#34;&gt;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&lt;/a&gt;&lt;br /&gt;
+仲介手数料無料の不動産サイト「カウル」: &lt;a href=&#34;https://kawlu.com/&#34;&gt;https://kawlu.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？&lt;br /&gt;
+そんな時の参考になれば幸いです。&lt;/p&gt;
+
+&lt;h2 id=&#34;内容:08e118674fea9989bc7c591023d8b196&#34;&gt;内容&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;前提
+
+&lt;ul&gt;
+&lt;li&gt;前回の失敗&lt;/li&gt;
+&lt;li&gt;フロントエンド システム構成&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;事前準備
+
+&lt;ul&gt;
+&lt;li&gt;負荷予測&lt;/li&gt;
+&lt;li&gt;サーバ台数決定&lt;/li&gt;
+&lt;li&gt;サーバ増強&lt;/li&gt;
+&lt;li&gt;その他&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;実際のアクセス数と振り返り&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;1-前提:08e118674fea9989bc7c591023d8b196&#34;&gt;1.前提&lt;/h2&gt;
+
+&lt;h3 id=&#34;前回の失敗:08e118674fea9989bc7c591023d8b196&#34;&gt;前回の失敗&lt;/h3&gt;
+
+&lt;p&gt;つい半月ほど前に別の局の朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。&lt;/p&gt;
+
+&lt;p&gt;かすっただけで右腕を持って行かれたぐらいのダメージを受けました。衝撃でした。&lt;br /&gt;
+この反省から &lt;strong&gt;準備大事！&lt;/strong&gt; ということを学んだので今回はしっかりと準備をして望みました。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196&#34;&gt;フロントエンド システム構成&lt;/h3&gt;
+
+&lt;p&gt;「カウル」フロントエンドのシステム構成を簡単にご紹介します。&lt;br /&gt;
+基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;自社メディアであるマンションジャーナル&lt;/a&gt;も運営しているため、Wordpressが動くサーバが別にあります。&lt;br /&gt;
+SEOの観点からサブディレクトリで Web app と自社メディアの切り分けを行っており、クラウドフロントでサブディレクトリごとにアクセスを振り分けています。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160303_01.png&#34; title=&#34;Kawlu Front Architecture&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;今回は各EC2サーバをオートスケールグループに入れ冗長化を行い、負荷見積もりにしたがってスペックと台数を決定しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;2-事前準備:08e118674fea9989bc7c591023d8b196&#34;&gt;2.事前準備&lt;/h2&gt;
+
+&lt;h3 id=&#34;負荷予測:08e118674fea9989bc7c591023d8b196&#34;&gt;負荷予測&lt;/h3&gt;
+
+&lt;p&gt;負荷予測に関しては以下の記事を参考にさせていただきました。&lt;br /&gt;
+&lt;a href=&#34;http://qiita.com/chase0213/items/b5ecd4377f60605332e1&#34;&gt;[Qiita]gatling による負荷試験とテレビ露出見積り&lt;/a&gt;
+&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;まず、総アクセス数を以下の式により求めます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合 (=総アクセス人数)
+                      × 一人あたりの平均閲覧ページ数
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;今回はテレビ東京なので&lt;a href=&#34;http://www.tv-tokyo.co.jp/contents/ir/jpn/media/mediadata.html&#34;&gt;関東圏で約4,000万人のリーチ&lt;/a&gt;、深夜帯なので視聴率 &lt;strong&gt;5%&lt;/strong&gt; 、テレビを見てWebで検索する人が視聴した人全体の &lt;strong&gt;5%&lt;/strong&gt; と仮定し、一人あたりの平均閲覧ページ数は過去実績から2ページとしました。&lt;br /&gt;
+これらの仮定の上で、放送中の総アクセス数は以下のように求まります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;総アクセス数 = 4,000万 × 5% × 5% × 2 = 20万アクセス
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;テレビすごい！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;これをテレビ出演時間で割ると一秒あたりの平均リクエスト数(QPS)が求まります。弊社の紹介が何分間流れるかは本番を見るまで分からなかったのですが、今回は5分間と仮置きしました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;出演時間のQPS = 20万アクセス ÷ 300秒 = 平均 667 QPS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記はあくまで平均の値なので、この数字ピッタリに合わせて構築するとアクセスがスパイクした時にリソースが足りなくなってしまいます。&lt;br /&gt;
+せっかくのチャンス、1アクセスたりとも落としたくなかったので、アクセスがスパイクすることも考慮に入れてバッファを積み &lt;strong&gt;1000 QPS&lt;/strong&gt; に耐えられる構成にしようということに決めました。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;サーバ台数決定:08e118674fea9989bc7c591023d8b196&#34;&gt;サーバ台数決定&lt;/h3&gt;
+
+&lt;p&gt;こちらも先ほどの&lt;a href=&#34;http://qiita.com/chase0213/items/b5ecd4377f60605332e1&#34;&gt;Qiita記事&lt;/a&gt;を参考にAWSサーバのスペックと台数を決定しました。&lt;/p&gt;
+
+&lt;p&gt;EC2とRDSで動く Rails x MySQL の構成で、1vCPUあたり100[QPS]程度のリクエストを捌くことが可能なようです。
+今回の構成も参考記事の構成とほぼ似ているため、大きく外すことはないだろうということでこちらの結果をそのまま流用させていただきました。&lt;/p&gt;
+
+&lt;p&gt;全体で10vCPU必要ということで、Front・APIサーバ共に &lt;strong&gt;t2.medium x 5 台&lt;/strong&gt; の構成に決定しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;サーバ増強:08e118674fea9989bc7c591023d8b196&#34;&gt;サーバ増強&lt;/h3&gt;
+
+&lt;p&gt;深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
+ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。&lt;br /&gt;
+各上限を上げるためにはAWSに申請が必要なようです。詳しくはこちら→&lt;a href=&#34;http://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-resource-limits.html&#34;&gt;Amazon EC2 サービスの制限&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;初期の設定でEC2インスタンスは20個までに制限されているようです。&lt;/p&gt;
+
+&lt;p&gt;今回はAWSのサポートセンターに「テレビの放送があるので！」とメッセージを添えて申請を送ったところ、数時間後にご対応いただけたので事なきを得ましたが、危ないところでした。AWSの中の人ありがとうございました。みなさん &lt;strong&gt;是非この制限の存在を頭に入れておいてください&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;その他:08e118674fea9989bc7c591023d8b196&#34;&gt;その他&lt;/h3&gt;
+
+&lt;p&gt;その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。&lt;br /&gt;
+万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160303_02.jpg&#34; title=&#34;Stand by&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;はたしてどの程度アクセスが来たのでしょうか！？[後編]に続く&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Hack Day 2016ハッカソンに参加しました！</title>
