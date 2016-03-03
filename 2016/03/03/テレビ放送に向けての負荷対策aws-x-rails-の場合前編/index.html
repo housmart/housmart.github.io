@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編] &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.15" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったブログサイトです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs" />
+    <meta property="og:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" />
+<meta property="og:description" content="Housmart高松です。
+
+先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
+
+
+WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
+仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+
+
+突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
+そんな時の参考になれば幸いです。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/03/%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%81%AE%E8%B2%A0%E8%8D%B7%E5%AF%BE%E7%AD%96aws-x-rails-%E3%81%AE%E5%A0%B4%E5%90%88%E5%89%8D%E7%B7%A8" />
+
+  <meta property="og:image" content="https://kawlu.com/journal/wp-content/uploads/2016/02/d5d5798d67a91b63cee313322be37a5f-1.jpg" />
+
+
+<meta property="og:updated_time" content="2016-03-03T16:57:26&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]">
+<meta itemprop="description" content="Housmart高松です。
+
+先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
+
+
+WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
+仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+
+
+突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
+そんな時の参考になれば幸いです。
+">
+
+
+<meta itemprop="dateModified" content="2016-03-03T16:57:26&#43;09:00" />
+<meta itemprop="wordCount" content="2007">
+
+  <meta itemprop="image" content="https://kawlu.com/journal/wp-content/uploads/2016/02/d5d5798d67a91b63cee313322be37a5f-1.jpg">
+
+
+
+<meta itemprop="keywords" content="event,infra,member,event,hackathon,infra,introduction,media," />
+
+    
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="https://kawlu.com/journal/wp-content/uploads/2016/02/d5d5798d67a91b63cee313322be37a5f-1.jpg"/>
+
+
+
+<meta name="twitter:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]"/>
+<meta name="twitter:description" content="Housmart高松です。
+
+先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
+
+
+WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
+仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+
+
+突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
+そんな時の参考になれば幸いです。
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+  
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+    
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        3
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          5
+          
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+      <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://kawlu.com/journal/wp-content/uploads/2016/02/d5d5798d67a91b63cee313322be37a5f-1.jpg" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/03/03/%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%81%AE%E8%B2%A0%E8%8D%B7%E5%AF%BE%E7%AD%96aws-x-rails-%E3%81%AE%E5%A0%B4%E5%90%88%E5%89%8D%E7%B7%A8">
+    <h1 class="article-title" itemprop="name">
+        テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-03-03 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-03</time>
+            &middot;
+            2007
+            words
+            &middot;
+            5
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/media">media</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>Housmart高松です。</p>
+
+<p>先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。</p>
+
+<blockquote>
+<p>WBSサイト(不動産流通に革新は起こるか): <a href="http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/">http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/</a><br />
+仲介手数料無料の不動産サイト「カウル」: <a href="https://kawlu.com/">https://kawlu.com/</a></p>
+</blockquote>
+
+<p>突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？<br />
+そんな時の参考になれば幸いです。</p>
+
+<h2 id="内容:08e118674fea9989bc7c591023d8b196">内容</h2>
+
+<ol>
+<li>前提
+
+<ul>
+<li>前回の失敗</li>
+<li>フロントエンド システム構成</li>
+</ul></li>
+<li>事前準備
+
+<ul>
+<li>負荷予測</li>
+<li>サーバ台数決定</li>
+<li>サーバ増強</li>
+<li>その他</li>
+</ul></li>
+<li>実際のアクセス数と振り返り</li>
+</ol>
+
+<hr />
+
+<h2 id="1-前提:08e118674fea9989bc7c591023d8b196">1.前提</h2>
+
+<h3 id="前回の失敗:08e118674fea9989bc7c591023d8b196">前回の失敗</h3>
+
+<p>つい半月ほど前に別の局で朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。</p>
+
+<p>かすっただけで右腕を持って行かれたぐらいのダメージを受けました。衝撃でした。<br />
+この反省から <strong>準備大事！</strong> ということを学んだので今回はしっかりと準備をして望みました。</p>
+
+<p><br></p>
+
+<h3 id="フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196">フロントエンド システム構成</h3>
+
+<p>「カウル」フロントエンドのシステム構成を簡単にご紹介します。<br />
+基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、<a href="https://kawlu.com/journal/">自社メディアであるマンションジャーナル</a>も運営しているため、Wordpressが動くサーバが別にあります。<br />
+SEOの観点からサブディレクトリで Web app と自社メディアの切り分けを行っており、クラウドフロントでサブディレクトリごとにアクセスを振り分けています。</p>
+
+<p><img src="/images/20160303_01.png" title="Kawlu Front Architecture"></p>
+
+<p>今回は各EC2サーバをオートスケールグループに入れ冗長化を行い、負荷見積もりにしたがってスペックと台数を決定しました。</p>
+
+<p><br></p>
+
+<h2 id="2-事前準備:08e118674fea9989bc7c591023d8b196">2.事前準備</h2>
+
+<h3 id="負荷予測:08e118674fea9989bc7c591023d8b196">負荷予測</h3>
+
+<p>負荷予測に関しては以下の記事を参考にさせていただきました。<br />
+<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">[Qiita]gatling による負荷試験とテレビ露出見積り</a>
+<br></p>
+
+<p>まず、総アクセス数を以下の式により求めます。</p>
+
+<pre><code>総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合 (=総アクセス人数)
+                      × 一人あたりの平均閲覧ページ数
+</code></pre>
+
+<p>今回はテレビ東京なので<a href="http://www.tv-tokyo.co.jp/contents/ir/jpn/media/mediadata.html">関東圏で約4,000万人のリーチ</a>、深夜帯なので視聴率 <strong>5%</strong> 、テレビを見てWebで検索する人が視聴した人全体の <strong>5%</strong> と仮定し、一人あたりの平均閲覧ページ数は過去実績から2ページとしました。<br />
+これらの仮定の上で、放送中の総アクセス数は以下のように求まります。</p>
+
+<pre><code>総アクセス数 = 4,000万 × 5% × 5% × 2 = 20万アクセス
+</code></pre>
+
+<p><strong>テレビすごい！</strong></p>
+
+<p>これをテレビ出演時間で割ると一秒あたりの平均リクエスト数(QPS)が求まります。弊社の紹介が何分間流れるかは本番を見るまで分からなかったのですが、今回は5分間と仮置きしました。</p>
+
+<pre><code>出演時間のQPS = 20万アクセス ÷ 300秒 = 平均 667 QPS
+</code></pre>
+
+<p>上記はあくまで平均の値なので、この数字ピッタリに合わせて構築するとアクセスがスパイクした時にリソースが足りなくなってしまいます。<br />
+せっかくのチャンス、1アクセスたりとも落としたくなかったので、アクセスがスパイクすることも考慮に入れてバッファを積み <strong>1000 QPS</strong> に耐えられる構成にしようということに決めました。</p>
+
+<p><br></p>
+
+<h3 id="サーバ台数決定:08e118674fea9989bc7c591023d8b196">サーバ台数決定</h3>
+
+<p>こちらも先ほどの<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">Qiita記事</a>を参考にAWSサーバのスペックと台数を決定しました。</p>
+
+<p>EC2とRDSで動く Rails x MySQL の構成で、1vCPUあたり100[QPS]程度のリクエストを捌くことが可能なようです。
+今回の構成も参考記事の構成とほぼ似ているため、大きく外すことはないだろうということでこちらの結果をそのまま流用させていただきました。</p>
+
+<p>Front・APIサーバ共に10vCPU必要ということで、それぞれ <strong>t2.medium x 5 台</strong> の構成に決定しました。</p>
+
+<p><br></p>
+
+<h3 id="サーバ増強:08e118674fea9989bc7c591023d8b196">サーバ増強</h3>
+
+<p>深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
+ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。<br />
+各上限を上げるためにはAWSに申請が必要なようです。詳しくはこちら→<a href="http://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 サービスの制限</a></p>
+
+<p>初期の設定でEC2インスタンスは20個までに制限されているようです。</p>
+
+<p>今回はAWSのサポートセンターに「テレビの放送があるので！」とメッセージを添えて申請を送ったところ、数時間後にご対応いただけたので事なきを得ましたが、危ないところでした。AWSの中の人ありがとうございました。みなさん <strong>是この制限の存在を頭に入れておいてください</strong> 。</p>
+
+<p><br></p>
+
+<h3 id="その他:08e118674fea9989bc7c591023d8b196">その他</h3>
+
+<p>その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。<br />
+万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。</p>
+
+<p><img src="/images/20160303_02.jpg" title="Stand by"></p>
+
+<p>はたしてどの程度アクセスが来たのでしょうか！？[後編]に続く</p>
+
+            </div>
+            <footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/03/%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%81%AE%E8%B2%A0%E8%8D%B7%E5%AF%BE%E7%AD%96aws-x-rails-%E3%81%AE%E5%A0%B4%E5%90%88%E5%89%8D%E7%B7%A8" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2f%25E3%2583%2586%25E3%2583%25AC%25E3%2583%2593%25E6%2594%25BE%25E9%2580%2581%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%25A6%25E3%2581%25AE%25E8%25B2%25A0%25E8%258D%25B7%25E5%25AF%25BE%25E7%25AD%2596aws-x-rails-%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25E5%2589%258D%25E7%25B7%25A8" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%89%8d%e7%b7%a8%5d&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2f%25E3%2583%2586%25E3%2583%25AC%25E3%2583%2593%25E6%2594%25BE%25E9%2580%2581%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%25A6%25E3%2581%25AE%25E8%25B2%25A0%25E8%258D%25B7%25E5%25AF%25BE%25E7%25AD%2596aws-x-rails-%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25E5%2589%258D%25E7%25B7%25A8" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2f%25E3%2583%2586%25E3%2583%25AC%25E3%2583%2593%25E6%2594%25BE%25E9%2580%2581%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%25A6%25E3%2581%25AE%25E8%25B2%25A0%25E8%258D%25B7%25E5%25AF%25BE%25E7%25AD%2596aws-x-rails-%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25E5%2589%258D%25E7%25B7%25A8" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2f%25E3%2583%2586%25E3%2583%25AC%25E3%2583%2593%25E6%2594%25BE%25E9%2580%2581%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%25A6%25E3%2581%25AE%25E8%25B2%25A0%25E8%258D%25B7%25E5%25AF%25BE%25E7%25AD%2596aws-x-rails-%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25E5%2589%258D%25E7%25B7%25A8&amp;description=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%89%8d%e7%b7%a8%5d" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2f%25E3%2583%2586%25E3%2583%25AC%25E3%2583%2593%25E6%2594%25BE%25E9%2580%2581%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%25A6%25E3%2581%25AE%25E8%25B2%25A0%25E8%258D%25B7%25E5%25AF%25BE%25E7%25AD%2596aws-x-rails-%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25E5%2589%258D%25E7%25B7%25A8" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Hack Day 2016ハッカソンに参加しました！</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+      <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/03/03/%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%81%AE%E8%B2%A0%E8%8D%B7%E5%AF%BE%E7%AD%96aws-x-rails-%E3%81%AE%E5%A0%B4%E5%90%88%E5%89%8D%E7%B7%A8" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://kawlu.com/journal/wp-content/uploads/2016/02/d5d5798d67a91b63cee313322be37a5f-1.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/03/03/%E3%83%86%E3%83%AC%E3%83%93%E6%94%BE%E9%80%81%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%81%AE%E8%B2%A0%E8%8D%B7%E5%AF%BE%E7%AD%96aws-x-rails-%E3%81%AE%E5%A0%B4%E5%90%88%E5%89%8D%E7%B7%A8" class="title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-03-03 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-03</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" class="title">Hack Day 2016ハッカソンに参加しました！</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-02-17 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-02-17</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(http://techblog.housmart.co.jp/images/2016020801.JPG)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/member">
+                        member
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B" class="title">カウルTech Blog開始！</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-02-08 17:45:55 &#43;0900 JST" itemprop="datePublished">2016-02-08</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+  </div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
+
