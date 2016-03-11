@@ -6,8 +6,193 @@
     <description>Recent content in Event on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 03 Mar 2016 16:57:26 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Mar 2016 16:57:26 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/tags/event/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]</title>
+      <link>http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2</link>
+      <pubDate>Thu, 10 Mar 2016 16:57:26 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2</guid>
+      <description>
+
+&lt;p&gt;Housmart高松です。&lt;/p&gt;
+
+&lt;p&gt;先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。&lt;br /&gt;
+前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。&lt;/p&gt;
+
+&lt;p&gt;※前編をご覧になっていない方は&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/&#34;&gt;こちら&lt;/a&gt;を先にご覧ください。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;WBSサイト(不動産流通に革新は起こるか): &lt;a href=&#34;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&#34;&gt;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&lt;/a&gt;&lt;br /&gt;
+仲介手数料無料の不動産サイト「カウル」: &lt;a href=&#34;https://kawlu.com/&#34;&gt;https://kawlu.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;内容:3d905968c659a2d9572fbb959d952a4f&#34;&gt;内容&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;前提 [前編]&lt;/li&gt;
+&lt;li&gt;事前準備 [前編]&lt;/li&gt;
+&lt;li&gt;放送当日
+
+&lt;ul&gt;
+&lt;li&gt;直前の放送時間変更&lt;/li&gt;
+&lt;li&gt;放送内容&lt;/li&gt;
+&lt;li&gt;アクセス数まとめ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;振り返りとまとめ
+
+&lt;ul&gt;
+&lt;li&gt;アクセス予想振り返り&lt;/li&gt;
+&lt;li&gt;まとめ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;3-放送当日:3d905968c659a2d9572fbb959d952a4f&#34;&gt;3.放送当日&lt;/h2&gt;
+
+&lt;h3 id=&#34;直前の放送時間変更:3d905968c659a2d9572fbb959d952a4f&#34;&gt;直前の放送時間変更&lt;/h3&gt;
+
+&lt;p&gt;WBSは通常23時からの放送なのですが、この日は前の番組が世界卓球の日本vsドイツ戦でした。最終ゲームまでもつれ込む白熱の試合だったため放送時間がぎりぎりまで伸びて、放送開始が0時30分に変更になりました。&lt;/p&gt;
+
+&lt;p&gt;以前とくダネで紹介していただいた時も他の大きいニュースの影響で放送日が2度延期されたという経験もあり、テレビは本当に放映されるまでは気を抜けないなという印象です。&lt;/p&gt;
+
+&lt;p&gt;会社のメンバーで真剣に卓球を応援していたのですが、残念ながら日本が2-3で負けてしまいました。&lt;br /&gt;
+この放送時間の変更がどの程度視聴率に影響するかはわかりませんが、気を取り直していざ放送に望みます。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;放送内容:3d905968c659a2d9572fbb959d952a4f&#34;&gt;放送内容&lt;/h3&gt;
+
+&lt;p&gt;放送が始まり15分、いよいよ特集のコーナーです。&lt;br /&gt;
+今回は不動産ベンチャーの新しい取り組みという切り口で、大家さんと直接やりとりをすることで仲介手数料を無料にする賃貸サービスの &lt;strong&gt;ウチコミ！&lt;/strong&gt; さんと共に弊社を取り上げていただきました。&lt;/p&gt;
+
+&lt;p&gt;大江アナウンサーが従来の中古不動産売買の仲介手数料をフリップを使って説明します。
+&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160310_00.png&#34; title=&#34;seen0&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;間にウチコミさんの紹介をはさみ、&lt;br /&gt;
+会社名とともにオフィスが映りました。
+&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160310_01.png&#34; title=&#34;seen1&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;「今年一月、売買の仲介手数料を無料にするカウルというサービスを始めました」&lt;br /&gt;
+のナレーションと共にサービス名、TOPページのアップが映ります。
+&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160310_02.png&#34; title=&#34;seen2&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;サービスの説明が続きます。どのくらい経費を抑えられるか、月額１万円の会員サービスの説明など。&lt;br /&gt;
+このあたりでピンと来てくれた方は検索を始めてくれるのではないでしょうか。
+&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160310_03.png&#34; title=&#34;seen3&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;弊社代表針山が熱い思いを語ります。このシーンも社名が入っています。
+&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160310_04.png&#34; title=&#34;seen4&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;最後は実際にカウルで物件を購入していただいた方のインタビューが流れます。
+&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160310_05.png&#34; title=&#34;access graph&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;
+今回は全体で2分ほどの紹介でした。そのうち3分の1程度はサービス名もしくは社名が画面に写っていました。&lt;br /&gt;
+ナレーションでもサービス名を3回・社名を1回読み上げてもらえたので、検索のためのキーワードは十分に視聴者の方の頭に残ったのではないかと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;アクセス数まとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;アクセス数まとめ&lt;/h3&gt;
+
+&lt;p&gt;実際のアクセス数を見てみましょう。&lt;/p&gt;
+
+&lt;p&gt;AWSのCloudWatchで見たバランサへのアクセス数のグラフです。&lt;br /&gt;
+一分間単位の合計値が見れて便利ですね。これはバランサへのすべてのアクセスの合計なので画像やJavascript、CSSの読み込みもカウントされることに注意してください。
+&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160310_06.png&#34; title=&#34;access graph&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;カウルの場合、画像などを合計するとTOPページの読み込みで30回程度バランサへのアクセスが発生します。
+それを考慮にいれて計算すると、最大で分間 &lt;strong&gt;450アクセス&lt;/strong&gt; が来ており、アクセスが増えてから落ち着くまでにトータルで &lt;strong&gt;2千件&lt;/strong&gt; ほどのアクセスが来ていました。&lt;/p&gt;
+
+&lt;p&gt;また、実際にサーバ上のログを集計したところ、 &lt;strong&gt;30QPS（秒間アクセス）&lt;/strong&gt; が今回の最大値でした。&lt;br /&gt;
+前編で予想した667QPSとは程遠い結果となってしまいました。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;4-振り返りとまとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;4.振り返りとまとめ&lt;/h2&gt;
+
+&lt;h3 id=&#34;アクセス予想振り返り:3d905968c659a2d9572fbb959d952a4f&#34;&gt;アクセス予想振り返り&lt;/h3&gt;
+
+&lt;p&gt;実際の結果を持って事前の予想を振り返ってみましょう。&lt;br /&gt;
+テレビ出演に舞い上がってテンション高めに予想していた部分を冷静に下方修正してみると、以下の様な数値が妥当では無いかと思いました。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;事前予想&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;結果からの推測&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;テレビ局のリーチ人数&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4,000万&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4,000万&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;視聴率&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;font color=&#34;red&#34;&gt;2%&lt;/font&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Web検索する人の割合&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;font color=&#34;red&#34;&gt;0.25%&lt;/font&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;一人あたりの閲覧ページ数&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;総アクセス数&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;20万&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2千&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;放映時間が深夜1時近くになってしまったことを考慮に入れて視聴率は2%、&lt;br /&gt;
+Web検索する人の割合は400人に一人だと仮定して0.25%（この数字はサービスの内容や紹介のされ方によって大きく変わるとは思いますが、冷静に考えるとテレビを見ていて5%の確率で検索はしないですよね）&lt;br /&gt;
+また、カウルの場合はTOPページに情報をたくさん盛り込んでいるので、興味を持ってもらえた人はTOPページの滞在時間が長くなる傾向があります。なので、放送前後数分間における一人あたりの閲覧ページ数を1と仮定しなおしました。&lt;/p&gt;
+
+&lt;p&gt;その上で再度総アクセス数を計算してみると、今回のテレビ放映の前後で来てもらえたユーザ数とほぼイコールの2千件となりました。&lt;/p&gt;
+
+&lt;p&gt;また、最大QPSの試算に関しては、2千件の総アクセスに対して最大30QPS、つまり総アクセス数の &lt;strong&gt;1.5%&lt;/strong&gt; のアクセスがピークの1秒間に来たという数字が一つの指標になるのでは無いでしょうか。&lt;br /&gt;
+（上記のアクセスグラフを見ても分かる通り、紹介が終わった次の1分間にアクセスが集中しているなど、一定の傾向があるような気がしました）&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;まとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;まとめ&lt;/h3&gt;
+
+&lt;p&gt;今回の事例の振り返りの内容も含めて、テレビ出演時の負荷見積もりの式を再度掲載しておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合(≒0.25%) (=総アクセス人数)
+                      × 一人あたりの平均閲覧ページ数
+
+最大QPS = 総アクセス数 × 1.5%(※実測値から算出した割合)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これにある程度バッファを設ければ妥当な見積もりとなりそうです。
+今回は事前の予想がつかなかったことで見積もりを大きく外してしまいましたが、AWSコストとしては数ドル程度の損失だったので助かりました。AWSさまさまです。&lt;/p&gt;
+
+&lt;p&gt;後日談ですが、WBSは&lt;a href=&#34;http://txbiz.tv-tokyo.co.jp/&#34;&gt;オンデマンド&lt;/a&gt;で見ている方も結構多いようで、翌日以降も数日間アクセスが増えていました。&lt;/p&gt;
+
+&lt;p&gt;夢の20万アクセスには遠く及びませんでしたが、まだローンチして1ヶ月半のカウルにとっては認知してもらう大変よい機会になりました。&lt;br /&gt;
+また、ビジネスモデル的にも信用が大事になってくる領域なので、その点でも大きくプラスになったと思います。&lt;/p&gt;
+
+&lt;p&gt;今後の皆さんの参考になれば幸いです。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</title>
@@ -46,7 +231,8 @@
 &lt;li&gt;サーバ増強&lt;/li&gt;
 &lt;li&gt;その他&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;実際のアクセス数と振り返り&lt;/li&gt;
+&lt;li&gt;放送当日 [後編]&lt;/li&gt;
+&lt;li&gt;振り返りとまとめ [後編]&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;hr /&gt;
@@ -136,7 +322,8 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160303_02.jpg&#34; title=&#34;Stand by&#34;&gt;&lt;/p&gt;
 
-&lt;p&gt;はたしてどの程度アクセスが来たのでしょうか！？[後編]に続く&lt;/p&gt;
+&lt;p&gt;はたしてどの程度アクセスが来たのでしょうか！？
+&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/&#34;&gt;[後編]&lt;/a&gt;に続く&lt;/p&gt;
 </description>
     </item>
     
