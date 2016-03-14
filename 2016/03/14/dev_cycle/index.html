@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編] &middot; カウル Tech Blog</title>
+    <title>スタートアップのCTOになって2ヶ月で作った開発サイクル &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.15" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,26 +19,17 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" />
-<meta property="og:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
-" />
+    <meta property="og:title" content="スタートアップのCTOになって2ヶ月で作った開発サイクル" />
+<meta property="og:description" content="Housmartの宮永です！ 今回はカウル開発チームの開発サイクルを紹介させていただきます。 好ましい開発サイクルはサービスや企業、組織規模など" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/14/dev_cycle" />
 
-  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160310_top.jpg" />
+  <meta property="og:image" content="https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w1834-h460-no" />
+
+  <meta property="og:image" content="http://techblog.housmart.co.jp/" />
 
 
-<meta property="og:updated_time" content="2016-03-10T16:57:26&#43;09:00"/>
+<meta property="og:updated_time" content="2016-03-14T10:43:07&#43;09:00"/>
 
 
 
@@ -51,25 +42,16 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
     
     
-<meta itemprop="name" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]">
-<meta itemprop="description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
+<meta itemprop="name" content="スタートアップのCTOになって2ヶ月で作った開発サイクル">
+<meta itemprop="description" content="Housmartの宮永です！ 今回はカウル開発チームの開発サイクルを紹介させていただきます。 好ましい開発サイクルはサービスや企業、組織規模など">
 
 
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+<meta itemprop="dateModified" content="2016-03-14T10:43:07&#43;09:00" />
+<meta itemprop="wordCount" content="1819">
 
-">
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w1834-h460-no">
 
-
-<meta itemprop="dateModified" content="2016-03-10T16:57:26&#43;09:00" />
-<meta itemprop="wordCount" content="2528">
-
-  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160310_top.jpg">
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/">
 
 
 
@@ -79,23 +61,12 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160310_top.jpg"/>
+  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w1834-h460-no"/>
 
 
 
-<meta name="twitter:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]"/>
-<meta name="twitter:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
-"/>
+<meta name="twitter:title" content="スタートアップのCTOになって2ヶ月で作った開発サイクル"/>
+<meta name="twitter:description" content="Housmartの宮永です！ 今回はカウル開発チームの開発サイクルを紹介させていただきます。 好ましい開発サイクルはサービスや企業、組織規模など"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 
@@ -294,25 +265,25 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
         <div class="article-inner">
             
                 
-                <img src="http://techblog.housmart.co.jp//images/20160310_top.jpg" class="article-banner">
+                <img src="https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w1834-h460-no" class="article-banner">
                 
             
 
             <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2">
+    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle">
     <h1 class="article-title" itemprop="name">
-        テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]
+        スタートアップのCTOになって2ヶ月で作った開発サイクル
     </h1>
     </a>
     <div class="article-meta">
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2016-03-10 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-10</time>
+            <time datetime="2016-03-14 10:43:07 &#43;0900 JST" itemprop="datePublished">2016-03-14</time>
             &middot;
-            2528
+            1819
             words
             &middot;
-            6
+            4
             minute read
         </div>
 
@@ -323,7 +294,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/work">work</a>
                 
                 
             </div>
@@ -336,13 +307,10 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-tags"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/work">work</a>
                 &middot;
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/media">media</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
                 
                 
             </div>
@@ -354,190 +322,142 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-entry" itemprop="articleBody">
                 
 
-<p>Housmart高松です。</p>
+<p>Housmartの宮永です！</p>
 
-<p>先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。<br />
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。</p>
+<p>今回はカウル開発チームの開発サイクルを紹介させていただきます。</p>
 
-<p>※前編をご覧になっていない方は<a href="/2016/03/03/prepare_for_wbs/">こちら</a>を先にご覧ください。</p>
+<p>好ましい開発サイクルはサービスや企業、組織規模などに応じて
+<br>異なるものだと思いますので、このブログでもまずはチーム体制など
+<br>開発手法の採用背景となるところから説明いたします。</p>
 
-<blockquote>
-<p>WBSサイト(不動産流通に革新は起こるか): <a href="http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/">http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/</a><br />
-仲介手数料無料の不動産サイト「カウル」: <a href="https://kawlu.com/">https://kawlu.com/</a></p>
-</blockquote>
+<h2 id="チーム体制-サービスについて:59e6fbbe48cf3c93d0fcd90023c8e617">チーム体制、サービスについて</h2>
 
-<h2 id="内容:3d905968c659a2d9572fbb959d952a4f">内容</h2>
+<p>カウル開発には５人のメンバーがいます。</p>
 
-<ol>
-<li>前提 [前編]</li>
-<li>事前準備 [前編]</li>
-<li>放送当日
+<p>エンジニア：３人<br />
+デザイナー：１人<br />
+プロダクトオーナー：１人</p>
 
-<ul>
-<li>直前の放送時間変更</li>
-<li>放送内容</li>
-<li>アクセス数まとめ</li>
-</ul></li>
-<li>振り返りとまとめ
+<p>実作業ベースで5人の役割が決まっていますが、<br />
+サービスをどのように良くしていくかは皆で話し合って考えます。<br />
+<img src="https://lh3.googleusercontent.com/GdlKYeSVOlFEptMb58q8dWz0AsnXtGYH64ZCLjsGIgzbqLXEWrf-oCXBdLLaTDqTPd-HCdt-U8_tSftgNnygWXsLIlL_zAqOitDaaTNtjKxQ4U6kFosC010T5HPudK6wNicrGaQw9aHdtPwVaXGxwRu1Z5szy4wn6kIQTGtFTILUuV-4MU7PfHcgT-kfja008ZvBYk9WGBGU-qff7evePLb7NyL3U891byN60biTi4KrgVeJi10ncRXb08AuE7AmJBub53In9DJDe2akl2bCUw9t8OuDCTWIS-TCHgQv-P_1mDJvOD7AWn6BScPVr06wzweL5RcOD7OFCtO9Z3AOIeZVU7pBhgZuxOZRDHUaTfcvnVStKn_endCYTU04A-TRydky3BNsLuQJMjzY8jqtMnKe3iahK1NpcxcbgXz9A3QXQHtPvlObXE1jtNJMP-R4kIOhEpuAfh24hry9umPMKiI99bFsTzn-YNNdgc6TEbKYZFzBRS7pXbxLLgABSP7hWU0B93jpyVU3dBtUTDrpW2oCQDgyyQnXxQ5cgOyH_I_Cy6bq4tiReIlVfysPqSkCXiU=w1330-h918-no" title="カウル開発メンバー"/>
+<br><br><br>
+サービス（<a href="https://kawlu.com/">カウル</a>）はリリースされてからまだ２ヶ月弱で
+<br>サービスローンチ後に想定外の運用業務が発生したり、ユーザからの改善要望も多く、
+<br>開発すべきこと（開発優先度）は日々変化しかなり流動的なものとなってます。
+<br>そのため、要件リストの優先度付けをこまめに行う必要があります。</p>
 
-<ul>
-<li>アクセス予想振り返り</li>
-<li>まとめ</li>
-</ul></li>
-</ol>
+<h2 id="開発サイクル:59e6fbbe48cf3c93d0fcd90023c8e617">開発サイクル</h2>
+
+<p>上記のような背景に伴い、
+<br><b>「少ない人数で要件の流動性に対応しながら開発する」</b>
+<br>ことが求められているため、弊社では<b>スクラム開発</b>を採用しています。
+<br>要求の変化に対応するため、１スプリント<b>１週間</b>と恐ろしく短いです。</p>
+
+<h3 id="スクラム開発の流れ-スプリントフロー:59e6fbbe48cf3c93d0fcd90023c8e617">スクラム開発の流れ（スプリントフロー）</h3>
+
+<p>大まかな流れとしては</p>
+
+<p>①皆でがつっと話しあって<br />
+②ゴリゴリ開発→リリース<br />
+③振り返る</p>
+
+<p>とかなり標準的なものです。<br />
+<img src='https://lh3.googleusercontent.com/xLL4vwECoqVoBQy6opHNMRQ32bMb4JNjgqL8jFrep_HVOvdUA1mIeP-MNWz-hHYdIaMVKnnYAsYc6AO87_qwt-RgdAhhWNyYy5jhjm83jL4wO0YKXoGisKG03xg70gtHbRb4uGa981d8biPKUDiLEJRJ1WKNg2Qt2Jh8Xx3sLBsXIVHTEp3SA2R260VopYXj2SFG7jWj2Vfu9jv1rTDdbWDfmnz_HFzyrNjLI6V4uVb2KVuamnGVRNNqPJbkP0MCllKygcXn0Caa0wd51-k_RDZWxTbW0WMq6OCUGgynJFk2rjR9-b4SWDacTlVTrZWQxt1ClpjCcgVLvQDnSaKUBgyBahxKe6bwdLVc-gcFAxRR8kU59AIdDWpmfdPPcLAm3V5DBAXt4Wi1Fv7se09qOLz6ycHXQ0AWIKHiVPyxMiAR69nAN0HTZkVSTHahs9NCSKbFOkj54mPo-WTze2l84LdG4p65YEoO2oPb_CmOHCSFBwIYk2mZjfd6qmuJ-MVwGRdifg9hhUYHsiD58unL6CgjTQ0whR3HHgfaZPhX9_LYGFFv1KWbcPb0RisgOmXQgEQ=w864-h520-no' title='スプリントフロー'></p>
 
 <hr />
 
-<h2 id="3-放送当日:3d905968c659a2d9572fbb959d952a4f">3.放送当日</h2>
+<p><p>各曜日の作業詳細</p></p>
 
-<h3 id="直前の放送時間変更:3d905968c659a2d9572fbb959d952a4f">直前の放送時間変更</h3>
+<h4 id="月曜:59e6fbbe48cf3c93d0fcd90023c8e617">月曜</h4>
 
-<p>WBSは通常23時からの放送なのですが、この日は前の番組が世界卓球の日本vsドイツ戦でした。最終ゲームまでもつれ込む白熱の試合だったため放送時間がぎりぎりまで伸びて、放送開始が0時30分に変更になりました。</p>
+<p>「プランニング（バックログリファインメント、スプリント設計、仕様検討、設計）」<br />
+JIRA上で管理しているバックログチケットを整理、優先度付けして、1スプリントのゴールを決めます。<br />
+優先度付の基準はサービス軸、開発軸両面から判断しています。
+（直近のサービスの課題は集客だからこの開発をしよう！や  メディア露出があるので、負荷対策をスプリントの中心にしましょう！などなど）</p>
 
-<p>以前とくダネで紹介していただいた時も他の大きいニュースの影響で放送日が2度延期されたという経験もあり、テレビは本当に放映されるまでは気を抜けないなという印象です。</p>
+<p>スプリントのゴールが明確になったら、次は仕様検討や設計に入ります。<br />
+遅くても火曜日から開発のため、仕様や設計に関する課題はこの日に全て話し合います。<br />
+タスク化した後、タスクを割り振ってこの日は終了です。</p>
 
-<p>会社のメンバーで真剣に卓球を応援していたのですが、残念ながら日本が2-3で負けてしまいました。<br />
-この放送時間の変更がどの程度視聴率に影響するかはわかりませんが、気を取り直していざ放送に望みます。</p>
+<h4 id="火曜:59e6fbbe48cf3c93d0fcd90023c8e617">火曜</h4>
 
-<p><br></p>
+<p>「開発！！開発！！開発！！」<br />
+それぞれ割り振ったタスクを元に作業を進める。今は主に開発案件が多いので、
+大体火曜は開発が中心。小さな開発案件の場合はテスト通過後、その日にデプロイすることもあります。</p>
 
-<h3 id="放送内容:3d905968c659a2d9572fbb959d952a4f">放送内容</h3>
+<h4 id="水曜:59e6fbbe48cf3c93d0fcd90023c8e617">水曜</h4>
 
-<p>放送が始まり15分、いよいよ特集のコーナーです。<br />
-今回は不動産ベンチャーの新しい取り組みという切り口で、大家さんと直接やりとりをすることで仲介手数料を無料にする賃貸サービスの <strong>ウチコミ！</strong> さんと共に弊社を取り上げていただきました。</p>
+<p>「すいすい水曜日」<br />
+スタートアップ企業とは言え、投資は大事ということで水曜は技術投資の日にしています。<br />
+何でもやって良い日ということで、各自興味をもった技術に触れて知的探究をしています。<br />
+弊社のマックス（松江さん）はこの日が一番楽しそうにしてます。</p>
 
-<p>大江アナウンサーが従来の中古不動産売買の仲介手数料をフリップを使って説明します。
-<img src="/images/20160310_00.png" title="seen0"></p>
+<p><img src='https://lh3.googleusercontent.com/c19pSZRRfG0ep_CrZMTq0BbStAiwyq0joFyeF3VdyOFyG8ByDM0gWSBi1MsCEaWdIYe6JlDea2LU9iNmBwHjU-CRSmcGKOW1Db4lO3dCYcgJhaPRZFioNX8v0KL_EQFVELXaFvOjIZmkTSkqVm5RPwxZXne1o0Gnaf8xIIoUVLIdKPI7vlmbGsyHMzfB6ghYPOjUPQSyeHSgzifAOzK4Qy-R9jxFy4SBCpQ9KAaZ9-zhnhHonTG2CZaVq0QDzxGHfFQ0M_maEkSDzp5179yN8_usn-OFAZ0tS_uAI4yclFiHhRtY464PX9iLZtCSicP5Noto3MftGuPsrCWNanHkqeS6tukv7MfkD5HHEfl2Xat0OX8vheXoGCo4NMiHBGCpiFWP0jkq6yoMIWH2fnHxTywDbx8MKvJGkcuC16PPCJdXHrF_KHhKl4k1D_Jac8Jajh035NpxYwFrYCDVNYJQoP1Ty1DQqOggForjGmwENd1F4mVHJcKmCR7Yr_dJmNQZoF0UCuUFhan2fGmxfAe5y8Jr64kmlBDFdQdTO5aVp5B7Ti1CJ2wtXfnndw3PQuiVzBA=w811-h431-no' title='マックスが楽しそう'>
+<a href="https://theta360.com/ja/">theta</a>で遊ぶマックス</p>
 
-<p>間にウチコミさんの紹介をはさみ、<br />
-会社名とともにオフィスが映りました。
-<img src="/images/20160310_01.png" title="seen1"></p>
+<h4 id="木曜:59e6fbbe48cf3c93d0fcd90023c8e617">木曜</h4>
 
-<p>「今年一月、売買の仲介手数料を無料にするカウルというサービスを始めました」<br />
-のナレーションと共にサービス名、TOPページのアップが映ります。
-<img src="/images/20160310_02.png" title="seen2"></p>
+<p>「テスト！テスト！デプロイ！」<br />
+スプリントの終了が迫っている！ということで
+デプロイに向かって皆頑張ります。
+木曜の午後（夕方まで）の間はユーザアクセスも落ち着いているため、
+このタイミングでリリースすることが多いです。</p>
 
-<p>サービスの説明が続きます。どのくらい経費を抑えられるか、月額１万円の会員サービスの説明など。<br />
-このあたりでピンと来てくれた方は検索を始めてくれるのではないでしょうか。
-<img src="/images/20160310_03.png" title="seen3"></p>
+<p><img src='https://lh3.googleusercontent.com/CW1hOFyueBlMkTgS3ofWjnhI-39jyGyGd_yEQAZBBqWHruVqERVa8sx3TzIZfF8F9KmkBuh8fIJdP4PBVeziJmqPEERZquErrge4VcIH1kW0YM7haILis0VcoCBdXaO8hNCl0-0DN1S-sPr-ZGsuku3z6QubGi8_OsROJWUkFQ67Bs1usFXWHqJpeUaOGbCC8mDL7NX1uXn7YXw2oMd7UPthZEl5FLumbuaZ4yM7P5AEf6rUPo30GQY7Z103DeMdEsHZJtPj78RdlhnND-QNdYnDoUxKUaCFqIq-5y7vEz6tDlkWyQMS1q_y0yt8afXU0xAT9Ob-TRtro4koBqgt5PTbCpgqR-zBizRxddBcFGryOPD7s7Cu_4O9VJYxf5g4vN-vLALYLiMBEgIYi4pEeauoPCwzpPqjS0pqe-eajar-hdO_ql9MlsAfVmY2UtT9Dv0zP6-Bb5vyMJfocGrGnf-h_Wam28w1eeE9kbZe6xsUCZVkikzdNjFdxA0_yMowEV8XdWsyf4ioo1DTazbz8NvCMTcldB2DL7MvwJjPGL1ZIPf7GjZiD2VXP-TbP_u4DWc=w1184-h666-no' title='プロダクトオーナーが喜んだ顔'><br />
+待ちわびたリリースにプロダクトオーナーもウキウキ</p>
 
-<p>弊社代表針山が熱い思いを語ります。このシーンも社名が入っています。
-<img src="/images/20160310_04.png" title="seen4"></p>
+<h4 id="金曜:59e6fbbe48cf3c93d0fcd90023c8e617">金曜</h4>
 
-<p>最後は実際にカウルで物件を購入していただいた方のインタビューが流れます。
-<img src="/images/20160310_05.png" title="access graph"></p>
+<p>「振り返り＆改善デー」<br />
+１週間のスプリントを振り返ります。振り返りで上がった課題のうち、１日でできる改善案を皆で検討します。
+その後、タスク化してそれぞれが1日で終わる範囲でこなしていくという流れです。<br />
+その他にも開発環境改善系やサービスとして考えると優先度が高くならないタスクを改善デーで消化することも多いです。<br />
+（コードリファクタリング、CI化など）</p>
 
-<p><br>
-今回は全体で2分ほどの紹介でした。そのうち3分の1程度はサービス名もしくは社名が画面に写っていました。<br />
-ナレーションでもサービス名を3回・社名を1回読み上げてもらえたので、検索のためのキーワードは十分に視聴者の方の頭に残ったのではないかと思います。</p>
+<hr />
 
-<p><br></p>
+<h3 id="スクラム開発を通して:59e6fbbe48cf3c93d0fcd90023c8e617">スクラム開発を通して</h3>
 
-<h3 id="アクセス数まとめ:3d905968c659a2d9572fbb959d952a4f">アクセス数まとめ</h3>
+<p>実践期間だいぶ短いですが、スクラム開発を振り返ります。</p>
 
-<p>実際のアクセス数を見てみましょう。</p>
+<h4 id="良い点:59e6fbbe48cf3c93d0fcd90023c8e617">（良い点）</h4>
 
-<p>AWSのCloudWatchで見たバランサへのアクセス数のグラフです。<br />
-一分間単位の合計値が見れて便利ですね。これはバランサへのすべてのアクセスの合計なので画像やJavascript、CSSの読み込みもカウントされることに注意してください。
-<img src="/images/20160310_06.png" title="access graph"></p>
+<ul>
+<li>限られたリソースの中で、効率よく優先度の高いものから対応できている</li>
+<li>1週間を1スプリントにしているので生活リズムが浸透しやすくメリハリのある日々が過ごせる（月曜は話しあいの日、水曜は自由な日などなど）</li>
+</ul>
 
-<p>カウルの場合、画像などを合計するとTOPページの読み込みで30回程度バランサへのアクセスが発生します。
-それを考慮にいれて計算すると、最大で分間 <strong>450アクセス</strong> が来ており、アクセスが増えてから落ち着くまでにトータルで <strong>2千件</strong> ほどのアクセスが来ていました。</p>
+<h4 id="悪い点-改善点:59e6fbbe48cf3c93d0fcd90023c8e617">（悪い点、改善点）</h4>
 
-<p>また、実際にサーバ上のログを集計したところ、 <strong>30QPS（秒間アクセス）</strong> が今回の最大値でした。<br />
-前編で予想した667QPSとは程遠い結果となってしまいました。</p>
+<ul>
+<li>チーム全体の生産性の向上までは振り返られてはいない。（本気では取り組めていない）
+<br>（生産性向上開発環境整備、自動化に対する動機づけができていない）</li>
+<li>かなりのスピードで開発しているつもりですが、バックログは一向に減らない。。。</li>
+</ul>
 
-<p><br></p>
+<p><img src="https://lh3.googleusercontent.com/aL5simLXtjlVg4Nb8tweg2s4HK-vcoT-v7XNJAxtxUiX7xKJSRaCfMHsTZrGa4jSqlvc1TS7oEHuSCRtC7CSyvc_tMEmGs3YdWNKKZLqp26_HMjtt4k9oQktMVC4EIBe__a7E6tTNLj2jIvGyXAHC6ZGnBdNAJyhlbf0rNXZcMkFnl7iqUu4KWTCwCiO27pROr2H67EAOVyn1xWQc5YUi0DJKc8Xf4je3eQtn6-59WwNgk5uPKLzT138yl7-rMZLjqQ-W9okFPbG5rrBlixfeaHCsvPlJlsLN90twTCaqeghrFcV8MqEClM8zxTGJc_dknxr7XXIc4eA8Nr1iaWRzE9mPWYcMVJ8tHdWwdJM332UC8_BMSVbcnYKHMZ17zGAZxdrT8bSCFpvQfrO1LJe09tiSMVPfiz5U9sOuDP6hGVp6gB5b784M4UbXmioF5YTG0lIIxecRw2SIG-r0dzDsImeCayvgNX-pwdmSubMZOU3UlpNm6tpKnEJqRQCNdoaOJscwRbNpKfE5kiQO_xJebvO3RMyUj2IOxfGTiLZfDv4ebp8ezAIdKE7ILswOMubfhY=w1179-h629-no" title="Jira"/>
+※赤線がタスクの増加、緑線がタスクの消化を示します。<br />
+やりたいことがどんどん増えてなかなか消化が追いつきません。<br />
+(生産性の向上が今後の課題です)</p>
 
-<h2 id="4-振り返りとまとめ:3d905968c659a2d9572fbb959d952a4f">4.振り返りとまとめ</h2>
+<h2 id="最後に:59e6fbbe48cf3c93d0fcd90023c8e617">最後に</h2>
 
-<h3 id="アクセス予想振り返り:3d905968c659a2d9572fbb959d952a4f">アクセス予想振り返り</h3>
+<p>今回はカウル開発チームの開発手法について紹介させていただきました。<br />
+おかげさまでユーザ様も増えてきており、やることはたっぷりありますが、<br />
+引き続きカウル開発チームはがっちりスクラムを組んで邁進してまいります！</p>
 
-<p>実際の結果を持って事前の予想を振り返ってみましょう。<br />
-テレビ出演に舞い上がってテンション高めに予想していた部分を冷静に下方修正してみると、以下の様な数値が妥当では無いかと思いました。</p>
-
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">事前予想</th>
-<th align="center">結果からの推測</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="center">テレビ局のリーチ人数</td>
-<td align="center">4,000万</td>
-<td align="center">4,000万</td>
-</tr>
-
-<tr>
-<td align="center">視聴率</td>
-<td align="center">5%</td>
-<td align="center"><font color="red">2%</font></td>
-</tr>
-
-<tr>
-<td align="center">Web検索する人の割合</td>
-<td align="center">5%</td>
-<td align="center"><font color="red">0.25%</font></td>
-</tr>
-
-<tr>
-<td align="center">一人あたりの閲覧ページ数</td>
-<td align="center">2</td>
-<td align="center"><font color="red">1</font></td>
-</tr>
-
-<tr>
-<td align="center">総アクセス数</td>
-<td align="center">20万</td>
-<td align="center">2千</td>
-</tr>
-</tbody>
-</table>
-
-<p>放映時間が深夜1時近くになってしまったことを考慮に入れて視聴率は2%、<br />
-Web検索する人の割合は400人に一人だと仮定して0.25%（この数字はサービスの内容や紹介のされ方によって大きく変わるとは思いますが、冷静に考えるとテレビを見ていて5%の確率で検索はしないですよね）<br />
-また、カウルの場合はTOPページに情報をたくさん盛り込んでいるので、興味を持ってもらえた人はTOPページの滞在時間が長くなる傾向があります。なので、放送前後数分間における一人あたりの閲覧ページ数を1と仮定しなおしました。</p>
-
-<p>その上で再度総アクセス数を計算してみると、今回のテレビ放映の前後で来てもらえたユーザ数とほぼイコールの2千件となりました。</p>
-
-<p>また、最大QPSの試算に関しては、2千件の総アクセスに対して最大30QPS、つまり総アクセス数の <strong>1.5%</strong> のアクセスがピークの1秒間に来たという数字が一つの指標になるのでは無いでしょうか。<br />
-（上記のアクセスグラフを見ても分かる通り、紹介が終わった次の1分間にアクセスが集中しているなど、一定の傾向があるような気がしました）</p>
-
-<p><br></p>
-
-<h3 id="まとめ:3d905968c659a2d9572fbb959d952a4f">まとめ</h3>
-
-<p>今回の事例の振り返りの内容も含めて、テレビ出演時の負荷見積もりの式を再度掲載しておきます。</p>
-
-<pre><code>総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合(≒0.25%) (=総アクセス人数)
-                      × 一人あたりの平均閲覧ページ数
-
-最大QPS = 総アクセス数 × 1.5%(※実測値から算出した割合)
-</code></pre>
-
-<p>これにある程度バッファを設ければ妥当な見積もりとなりそうです。
-今回は事前の予想がつかなかったことで見積もりを大きく外してしまいましたが、AWSコストとしては数ドル程度の損失だったので助かりました。AWSさまさまです。</p>
-
-<p>後日談ですが、WBSは<a href="http://txbiz.tv-tokyo.co.jp/">オンデマンド</a>で見ている方も結構多いようで、翌日以降も数日間アクセスが増えていました。</p>
-
-<p>夢の20万アクセスには遠く及びませんでしたが、まだローンチして1ヶ月半のカウルにとっては認知してもらう大変よい機会になりました。<br />
-また、ビジネスモデル的にも信用が大事になってくる領域なので、その点でも大きくプラスになったと思います。</p>
-
-<p>今後の皆さんの参考になれば幸いです。</p>
+<p>以上。</p>
 
             </div>
             <footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%be%8c%e7%b7%a8%5d&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2&amp;description=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%be%8c%e7%b7%a8%5d" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/14/dev_cycle" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="スタートアップのCTOになって2ヶ月で作った開発サイクル" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%aeCTO%e3%81%ab%e3%81%aa%e3%81%a3%e3%81%a62%e3%83%b6%e6%9c%88%e3%81%a7%e4%bd%9c%e3%81%a3%e3%81%9f%e9%96%8b%e7%99%ba%e3%82%b5%e3%82%a4%e3%82%af%e3%83%ab&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%aeCTO%e3%81%ab%e3%81%aa%e3%81%a3%e3%81%a62%e3%83%b6%e6%9c%88%e3%81%a7%e4%bd%9c%e3%81%a3%e3%81%9f%e9%96%8b%e7%99%ba%e3%82%b5%e3%82%a4%e3%82%af%e3%83%ab" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -549,21 +469,14 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
         
 <nav id="article-nav">
     
-    <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</div>
+      <div class="article-nav-title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]</div>
     </a>
     
 
-    
-    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">スタートアップのCTOになって2ヶ月で作った開発サイクル</div>
-    </a>
     
 </nav>
 
@@ -591,7 +504,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w1834-h460-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w1834-h460-no)" alt="スタートアップのCTOになって2ヶ月で作った開発サイクル" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -616,7 +529,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="スタートアップのCTOになって2ヶ月で作った開発サイクル" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -641,7 +554,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160303_top.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160303_top.jpg)" alt="スタートアップのCTOになって2ヶ月で作った開発サイクル" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -666,7 +579,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800)" alt="スタートアップのCTOになって2ヶ月で作った開発サイクル" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -691,7 +604,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp/images/2016020801.JPG)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp/images/2016020801.JPG)" alt="スタートアップのCTOになって2ヶ月で作った開発サイクル" class="thumbnail-image"></span>
                         
                     
                     </a>
