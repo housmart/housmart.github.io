@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編] &middot; カウル Tech Blog</title>
+    <title>脱・巨大なモノリシックアプリ！DRYなRails分割方法 &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.15" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,27 +19,27 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" />
-    <meta property="og:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" />
-<meta property="og:description" content="Housmart高松です。
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/03/24/git-submodule-for-dry-rails/" />
+    <meta property="og:title" content="脱・巨大なモノリシックアプリ！DRYなRails分割方法" />
+<meta property="og:description" content="Housmartの松江です。
 
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
+Railsでアプリケーションを開発していると、管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと や、
+分割したプロジェクト間の管理・同期が煩雑になってしまうこと ありますよね。
+
+今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。
 
 
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい
+分割後はプロジェクト間で必要なロジックを共有したい
 
-
-突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
-そんな時の参考になれば幸いです。
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/24/git-submodule-for-dry-rails/" />
 
-  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160303_top.jpg" />
+  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160324/kawlu-simple-architecture-20160324.svg" />
 
 
-<meta property="og:updated_time" content="2016-03-03T16:57:26&#43;09:00"/>
+<meta property="og:updated_time" content="2016-03-24T14:54:34&#43;09:00"/>
 
 
 
@@ -52,25 +52,25 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
     
     
-<meta itemprop="name" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]">
-<meta itemprop="description" content="Housmart高松です。
+<meta itemprop="name" content="脱・巨大なモノリシックアプリ！DRYなRails分割方法">
+<meta itemprop="description" content="Housmartの松江です。
 
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
+Railsでアプリケーションを開発していると、管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと や、
+分割したプロジェクト間の管理・同期が煩雑になってしまうこと ありますよね。
+
+今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。
 
 
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい
+分割後はプロジェクト間で必要なロジックを共有したい
 
-
-突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
-そんな時の参考になれば幸いです。
 ">
 
 
-<meta itemprop="dateModified" content="2016-03-03T16:57:26&#43;09:00" />
-<meta itemprop="wordCount" content="2014">
+<meta itemprop="dateModified" content="2016-03-24T14:54:34&#43;09:00" />
+<meta itemprop="wordCount" content="2698">
 
-  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160303_top.jpg">
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160324/kawlu-simple-architecture-20160324.svg">
 
 
 
@@ -80,22 +80,22 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160303_top.jpg"/>
+  <meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160324/kawlu-simple-architecture-20160324.svg"/>
 
 
 
-<meta name="twitter:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]"/>
-<meta name="twitter:description" content="Housmart高松です。
+<meta name="twitter:title" content="脱・巨大なモノリシックアプリ！DRYなRails分割方法"/>
+<meta name="twitter:description" content="Housmartの松江です。
 
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
+Railsでアプリケーションを開発していると、管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと や、
+分割したプロジェクト間の管理・同期が煩雑になってしまうこと ありますよね。
+
+今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。
 
 
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい
+分割後はプロジェクト間で必要なロジックを共有したい
 
-
-突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
-そんな時の参考になれば幸いです。
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
@@ -295,25 +295,25 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
         <div class="article-inner">
             
                 
-                <img src="http://techblog.housmart.co.jp//images/20160303_top.jpg" class="article-banner">
+                <img src="http://techblog.housmart.co.jp//images/20160324/kawlu-simple-architecture-20160324.svg" class="article-banner">
                 
             
 
             <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/">
+    <a href="http://techblog.housmart.co.jp/2016/03/24/git-submodule-for-dry-rails/">
     <h1 class="article-title" itemprop="name">
-        テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]
+        脱・巨大なモノリシックアプリ！DRYなRails分割方法
     </h1>
     </a>
     <div class="article-meta">
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2016-03-03 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-03</time>
+            <time datetime="2016-03-24 14:54:34 &#43;0900 JST" itemprop="datePublished">2016-03-24</time>
             &middot;
-            2014
+            2698
             words
             &middot;
-            5
+            6
             minute read
         </div>
 
@@ -324,7 +324,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">operation</a>
                 
                 
             </div>
@@ -337,13 +337,13 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-tags"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/operation">operation</a>
                 &middot;
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/rails">rails</a>
                 &middot;
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/media">media</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/git">git</a>
                 
                 
             </div>
@@ -355,138 +355,152 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-entry" itemprop="articleBody">
                 
 
-<p>Housmart高松です。</p>
+<p>Housmartの松江です。</p>
 
-<p>先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。</p>
+<p>Railsでアプリケーションを開発していると、<strong>管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと</strong> や、
+<strong>分割したプロジェクト間の管理・同期が煩雑になってしまうこと</strong> ありますよね。</p>
 
-<blockquote>
-<p>WBSサイト(不動産流通に革新は起こるか): <a href="http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/">http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/</a><br />
-仲介手数料無料の不動産サイト「カウル」: <a href="https://kawlu.com/">https://kawlu.com/</a></p>
-</blockquote>
-
-<p>突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？<br />
-そんな時の参考になれば幸いです。</p>
-
-<h2 id="内容:08e118674fea9989bc7c591023d8b196">内容</h2>
+<p>今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。</p>
 
 <ol>
-<li>前提
-
-<ul>
-<li>前回の失敗</li>
-<li>フロントエンド システム構成</li>
-</ul></li>
-<li>事前準備
-
-<ul>
-<li>負荷予測</li>
-<li>サーバ台数決定</li>
-<li>サーバ増強</li>
-<li>その他</li>
-</ul></li>
-<li>放送当日 [後編]</li>
-<li>振り返りとまとめ [後編]</li>
+<li><strong>巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい</strong></li>
+<li><strong>分割後はプロジェクト間で必要なロジックを共有したい</strong></li>
 </ol>
 
-<hr />
+<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
 
-<h2 id="1-前提:08e118674fea9989bc7c591023d8b196">1.前提</h2>
+<p>不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。</p>
 
-<h3 id="前回の失敗:08e118674fea9989bc7c591023d8b196">前回の失敗</h3>
+<ul>
+<li>詳細情報: 最寄り駅・エレベータの有無・ペット可否など</li>
+<li>部屋情報: 間取り・方角・契約の進行状況など</li>
+</ul>
 
-<p>つい半月ほど前に別の局で朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。</p>
+<p>上記を社員が効率よく管理するため、管理者用のアプリケーションが別途用意されています。</p>
 
-<p>かすっただけで右腕を持って行かれたぐらいのダメージを受けました。衝撃でした。<br />
-この反省から <strong>準備大事！</strong> ということを学んだので今回はしっかりと準備をして望みました。</p>
+<ul>
+<li>ユーザ用のRailsプロジェクト</li>
+<li>管理者用のRailsプロジェクト</li>
+</ul>
 
-<p><br></p>
+<p>上記のように2つのプロジェクトに分割しているのは、巨大な1つのRailsプロジェクトになり管理が難しくなることを避けるためです。</p>
 
-<h3 id="フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196">フロントエンド システム構成</h3>
+<p>しかし、複数のプロジェクトに分割した後、DBテーブルの追加・変更があった場合等に <strong>&ldquo;2つのプロジェクトそれぞれに同じ変更を行う&rdquo;</strong> 必要のある状況が発生するようになりました。
+これは以下の様な問題を引き起こします。</p>
 
-<p>「カウル」フロントエンドのシステム構成を簡単にご紹介します。<br />
-基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、<a href="https://kawlu.com/journal/">自社メディアであるマンションジャーナル</a>も運営しているため、Wordpressが動くサーバが別にあります。<br />
-SEOの観点からサブディレクトリで Web app と自社メディアの切り分けを行っており、クラウドフロントでサブディレクトリごとにアクセスを振り分けています。</p>
+<ul>
+<li>2つのプロジェクトに変更を行うコストがかかる</li>
+<li>プロジェクト間での同期できていなかった場合に予期しないエラーが発生する</li>
+</ul>
 
-<p><img src="/images/20160303_01.png" title="Kawlu Front Architecture"></p>
+<p>カウルではこの状況を <strong>Gitのsubmodule</strong> を用いて改善しています。</p>
 
-<p>今回は各EC2サーバをオートスケールグループに入れ冗長化を行い、負荷見積もりにしたがってスペックと台数を決定しました。</p>
+<h2 id="実際の構成:186562e261a7107c8b7de063b569e16d">実際の構成</h2>
 
-<p><br></p>
+<p>Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。</p>
 
-<h2 id="2-事前準備:08e118674fea9989bc7c591023d8b196">2.事前準備</h2>
+<p>カウルのRailsプロジェクトでは <code>${RAILS_ROOT}/app/models</code> 以下がsubmodule扱いになっており、<strong>複数のRailsプロジェクトから同じモデルクラス群が扱える</strong> ようになっています。</p>
 
-<h3 id="負荷予測:08e118674fea9989bc7c591023d8b196">負荷予測</h3>
+<pre><code class="language-bash">rails_app_1
+├── app
+│    ├── controllers
+│    ├── views
+│    ├── models   -&gt; ../models_repo/app/models   # シンボリックリンク
+│    ├── ...
+├── models_repo # submodule
+├── ...
 
-<p>負荷予測に関しては以下の記事を参考にさせていただきました。<br />
-<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">[Qiita]gatling による負荷試験とテレビ露出見積り</a>
-<br></p>
-
-<p>まず、総アクセス数を以下の式により求めます。</p>
-
-<pre><code>総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合 (=総アクセス人数)
-                      × 一人あたりの平均閲覧ページ数
+rails_app_2
+├── app
+│    ├── controllers
+│    ├── views
+│    ├── models   -&gt; ../models_repo/app/models   # シンボリックリンク
+│    ├── ...
+├── models_repo # submodule
+├── ...
 </code></pre>
 
-<p>今回はテレビ東京なので<a href="http://www.tv-tokyo.co.jp/contents/ir/jpn/media/mediadata.html">関東圏で約4,000万人のリーチ</a>、深夜帯なので視聴率 <strong>5%</strong> 、テレビを見てWebで検索する人が視聴した人全体の <strong>5%</strong> と仮定し、一人あたりの平均閲覧ページ数は過去実績から2ページとしました。<br />
-これらの仮定の上で、放送中の総アクセス数は以下のように求まります。</p>
+<p><img src="/images/20160324/kawlu-simple-architecture-20160324.svg"></img></p>
 
-<pre><code>総アクセス数 = 4,000万 × 5% × 5% × 2 = 20万アクセス
+<p>この構成にすることでRailsのもともとのディレクトリ構成を変えることなく、<strong>モデル周りにあるロジックを複数のRailsプロジェクトで共有することができる</strong> ようになります。</p>
+
+<p>submodule以下は最新のmasterブランチを追うことで簡単に同期がとれるため、ユーザ用のアプリケーションで追加されたロジックが管理者用アプリケーションで使えないという問題は起きなくなりました。</p>
+
+<p>また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。</p>
+
+<h3 id="submoduleの難しさ:186562e261a7107c8b7de063b569e16d">submoduleの難しさ</h3>
+
+<p>submoduleでの運用を開始した当初、以下の部分で使い難さがありました。</p>
+
+<ol>
+<li>単一のGitレポジトリとpush手順が変わる</li>
+<li>プルリクエスト間でコンフリクトが起きやすい</li>
+</ol>
+
+<p>1つ目のpush手順の違いは、submoduleを含むレポジトリの操作に慣れないうちは特に不便に感じます。
+submoduleを含まないレポジトリであれば <code>git add</code> して <code>git push</code> するのは1回だけで済みますが、submoduleを含む場合は2回行う必要があります。</p>
+
+<pre><code class="language-bash"># submoduleを含まないレポジトリでのpush
+project_dir $ git add
+project_dir $ git push
+
+# submoduleを含むレポジトリでのpush (submodule内にも差分がある場合)
+project_dir $ cd submodule_dir
+submodule_dir $ git add
+submodule_dir $ git push
+submodule_dir $ cd ..
+project_dir $ git add
+project_dir $ git push
 </code></pre>
 
-<p><strong>テレビすごい！</strong></p>
+<p>2つ目のコンフリクト問題は、submodule内のファイルに変更のあるプルリクエストが複数来ていた場合に発生します。</p>
 
-<p>これをテレビ出演時間で割ると一秒あたりの平均リクエスト数(QPS)が求まります。弊社の紹介が何分間流れるかは本番を見るまで分からなかったのですが、今回は5分間と仮置きしました。</p>
+<p><img src="/images/20160324/git-submodule-20160325.svg"></img></p>
 
-<pre><code>出演時間のQPS = 20万アクセス ÷ 300秒 = 平均 667 QPS
-</code></pre>
+<p>上記の図のようにsubmoduleを扱うGitレポジトリでは、<strong>submodule内のどのコミットからどのコミットへの参照に切り替えるか</strong> という内容を含むコミットが発生します。</p>
 
-<p>上記はあくまで平均の値なので、この数字ピッタリに合わせて構築するとアクセスがスパイクした時にリソースが足りなくなってしまいます。<br />
-せっかくのチャンス、1アクセスたりとも落としたくなかったので、アクセスがスパイクすることも考慮に入れてバッファを積み <strong>1000 QPS</strong> に耐えられる構成にしようということに決めました。</p>
+<ul>
+<li>コミット&rdquo;ロ&rdquo;: submodule内のコミット&rdquo;1&rdquo;から&rdquo;2&rdquo;へ参照を変えるコミット</li>
+<li>コミット&rdquo;B&rdquo;: submodule内のコミット&rdquo;1&rdquo;から&rdquo;3&rdquo;へ参照を変えるコミット</li>
+</ul>
 
-<p><br></p>
+<p>上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は<code>submodule内のコミット&quot;4&quot;から◯◯へ参照を変えるコミット</code>でなければならないからです。</p>
 
-<h3 id="サーバ台数決定:08e118674fea9989bc7c591023d8b196">サーバ台数決定</h3>
+<h2 id="submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d">submoduleを簡単に運用するためのbot運用</h2>
 
-<p>こちらも先ほどの<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">Qiita記事</a>を参考にAWSサーバのスペックと台数を決定しました。</p>
+<p>Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
+submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。</p>
 
-<p>EC2とRDSで動く Rails x MySQL の構成で、1vCPUあたり100[QPS]程度のリクエストを捌くことが可能なようです。
-今回の構成も参考記事の構成とほぼ似ているため、大きく外すことはないだろうということでこちらの結果をそのまま流用させていただきました。</p>
+<p><img src="/images/20160324/git-submodule-20160325-2.svg"></img></p>
 
-<p>Front・APIサーバ共に10vCPU必要ということで、それぞれ <strong>t2.medium x 5 台</strong> の構成に決定しました。</p>
+<p>submoduleレポジトリでメインブランチ上にマージコミット発生すると、botが自動でsubmodule更新のコミット(図の&rdquo;ロ&rdquo;と&rdquo;B&rdquo;)を行います。
+これによりコミット&rdquo;2&rdquo;と&rdquo;3&rdquo;が両方含まれているコミットを <strong>コンフリクトすることなく使う</strong> ことができます。</p>
 
-<p><br></p>
+<p>また、bot導入前はsubmoduleのマージコミットに対して参照をしようとするとsubmoduleレポジトリ内のプルリクエストが閉じるのを待つ必要がありましたが、この運用では <strong>submoduleレポジトリ上のプルリクエストがマージされるのを待たず</strong> にマージコミットをそれぞれのRailsレポジトリで使っていくことができるので、コミット&rdquo;2&rdquo;や&rdquo;3&rdquo;を含め損ねることはありません。</p>
 
-<h3 id="サーバ増強:08e118674fea9989bc7c591023d8b196">サーバ増強</h3>
+<p>その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。</p>
 
-<p>深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
-ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。<br />
-各上限を上げるためにはAWSに申請が必要なようです。詳しくはこちら→<a href="http://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 サービスの制限</a></p>
+<h2 id="まとめ:186562e261a7107c8b7de063b569e16d">まとめ</h2>
 
-<p>初期の設定でEC2インスタンスは20個までに制限されているようです。</p>
+<p>今回のご紹介した運用の概要は以下です。</p>
 
-<p>今回はAWSのサポートセンターに「テレビの放送があるので！」とメッセージを添えて申請を送ったところ、数時間後にご対応いただけたので事なきを得ましたが、危ないところでした。AWSの中の人ありがとうございました。みなさん <strong>是非この制限の存在を頭に入れておいてください</strong> 。</p>
+<ol>
+<li><strong>管理機能は別Railsプロジェクトに分けた</strong></li>
+<li><strong>model部分をsubmodule化して、複数のRails間で共有した</strong></li>
+<li><strong>submoduleの運用はbotに任せた</strong></li>
+</ol>
 
-<p><br></p>
-
-<h3 id="その他:08e118674fea9989bc7c591023d8b196">その他</h3>
-
-<p>その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。<br />
-万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。</p>
-
-<p><img src="/images/20160303_02.jpg" title="Stand by"></p>
-
-<p>はたしてどの程度アクセスが来たのでしょうか！？
-<a href="/2016/03/10/prepare_for_wbs2/">[後編]</a>に続く</p>
+<p><a href="https://kawlu.com/market">カウル</a>では今後もより良い運用を目指して日々改善を行っていきます！</p>
 
             </div>
             <footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%89%8d%e7%b7%a8%5d&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f&amp;description=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%89%8d%e7%b7%a8%5d" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/24/git-submodule-for-dry-rails/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="脱・巨大なモノリシックアプリ！DRYなRails分割方法" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f24%2fgit-submodule-for-dry-rails%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e8%84%b1%e3%83%bb%e5%b7%a8%e5%a4%a7%e3%81%aa%e3%83%a2%e3%83%8e%e3%83%aa%e3%82%b7%e3%83%83%e3%82%af%e3%82%a2%e3%83%97%e3%83%aa%ef%bc%81DRY%e3%81%aaRails%e5%88%86%e5%89%b2%e6%96%b9%e6%b3%95&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f24%2fgit-submodule-for-dry-rails%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f24%2fgit-submodule-for-dry-rails%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f24%2fgit-submodule-for-dry-rails%2f&amp;description=%e8%84%b1%e3%83%bb%e5%b7%a8%e5%a4%a7%e3%81%aa%e3%83%a2%e3%83%8e%e3%83%aa%e3%82%b7%e3%83%83%e3%82%af%e3%82%a2%e3%83%97%e3%83%aa%ef%bc%81DRY%e3%81%aaRails%e5%88%86%e5%89%b2%e6%96%b9%e6%b3%95" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f24%2fgit-submodule-for-dry-rails%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -498,21 +512,14 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
         
 <nav id="article-nav">
     
-    <a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">Hack Day 2016ハッカソンに参加しました！</div>
+      <div class="article-nav-title">スタートアップのCTOになって2ヶ月で作った開発サイクル</div>
     </a>
     
 
-    
-    <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]</div>
-    </a>
     
 </nav>
 
@@ -537,10 +544,10 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
             
             <li>
                 <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/03/24/git-submodule-for-dry-rails/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160324/kawlu-simple-architecture-20160324.svg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160324/kawlu-simple-architecture-20160324.svg)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -553,9 +560,9 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                         </a>
                     </p>
                     
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="title">脱・巨大なモノリシックアプリ！DRYなRails分割方法</a></p>
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/03/24/git-submodule-for-dry-rails/" class="title">脱・巨大なモノリシックアプリ！DRYなRails分割方法</a></p>
                     <p class="item-date">
-                        <time datetime="2016-03-28 10:34:34 &#43;0900 JST" itemprop="datePublished">2016-03-28</time>
+                        <time datetime="2016-03-24 14:54:34 &#43;0900 JST" itemprop="datePublished">2016-03-24</time>
                     </p>
                 </div>
             </li>
@@ -565,7 +572,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w650)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w650)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -590,7 +597,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -615,7 +622,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160303_top.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160303_top.jpg)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -640,7 +647,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
                         
                     
                     </a>
