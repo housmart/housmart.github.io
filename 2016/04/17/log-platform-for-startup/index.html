@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>スタートアップのための「お金と時間がかからない」ログ分析基盤 &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.15" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったブログサイトです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" />
+    <meta property="og:title" content="スタートアップのための「お金と時間がかからない」ログ分析基盤" />
+<meta property="og:description" content="Housmart高松です。
+
+「ログ分析基盤」というと、すでにかなり大きいサービスでの事例がSlideShareなどで共有されているのをよく目にしますが、
+立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。
+
+そこで今回は、まだユーザが少ないフェーズでも「お金と時間をあまりかけずに」導入できるログ分析基盤について、カウルでの事例をご紹介いたします。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" />
+
+  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160419/hands-woman-laptop-notebook.jpg" />
+
+
+<meta property="og:updated_time" content="2016-04-17T22:39:26&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="スタートアップのための「お金と時間がかからない」ログ分析基盤">
+<meta itemprop="description" content="Housmart高松です。
+
+「ログ分析基盤」というと、すでにかなり大きいサービスでの事例がSlideShareなどで共有されているのをよく目にしますが、
+立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。
+
+そこで今回は、まだユーザが少ないフェーズでも「お金と時間をあまりかけずに」導入できるログ分析基盤について、カウルでの事例をご紹介いたします。
+">
+
+
+<meta itemprop="dateModified" content="2016-04-17T22:39:26&#43;09:00" />
+<meta itemprop="wordCount" content="5547">
+
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160419/hands-woman-laptop-notebook.jpg">
+
+
+
+<meta itemprop="keywords" content="data-analysis,event,infra,member,operation,work,data-analysis,development,event,git,hackathon,infra,introduction,media,operation,rails,work," />
+
+    
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160419/hands-woman-laptop-notebook.jpg"/>
+
+
+
+<meta name="twitter:title" content="スタートアップのための「お金と時間がかからない」ログ分析基盤"/>
+<meta name="twitter:description" content="Housmart高松です。
+
+「ログ分析基盤」というと、すでにかなり大きいサービスでの事例がSlideShareなどで共有されているのをよく目にしますが、
+立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。
+
+そこで今回は、まだユーザが少ないフェーズでも「お金と時間をあまりかけずに」導入できるログ分析基盤について、カウルでの事例をご紹介いたします。
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        7
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          11
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/">
+    <h1 class="article-title" itemprop="name">
+        スタートアップのための「お金と時間がかからない」ログ分析基盤
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-04-17 22:39:26 &#43;0900 JST" itemprop="datePublished">2016-04-17</time>
+            &middot;
+            5547
+            words
+            &middot;
+            12
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/data-analysis">data analysis</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/data-analysis">data analysis</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>Housmart高松です。</p>
+
+<p>「ログ分析基盤」というと、すでにかなり大きいサービスでの事例がSlideShareなどで共有されているのをよく目にしますが、
+立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。</p>
+
+<p>そこで今回は、まだユーザが少ないフェーズでも「お金と時間をあまりかけずに」導入できるログ分析基盤について、カウルでの事例をご紹介いたします。</p>
+
+<p>小規模のサービスであってもログをしっかりと収集・分析してサービスの改善に役立てていくことは非常に大切なことです。<br />
+一方で、データ収集のためのJavascriptの開発やWebサーバの構築と管理、データストアやデータ処理基盤の選定や設定などに専属で人を割くことができないのもスタートアップの実情ではないでしょうか。</p>
+
+<p>そこでカウルでは安価に利用できるSaaSをいくつか組み合わせることで、簡単に始められて、かつ要求を十分にみたせる環境を構築しています。</p>
+
+<p><br></p>
+
+<h2 id="前提:a22806189072a20136e84a4adca315d5">前提</h2>
+
+<p><a href="https://kawlu.com/market">カウル</a>は中古マンションをお得に購入・売却できるWeb不動産サービスを運営しています。<br />
+現状としては、サービス開始から3ヶ月で登録ユーザ数が1000人弱、日々&lt;100ユーザがアクティブにサイトに訪れています。</p>
+
+<p>また、今回の選定にあたっては前職での知見をもとにデータの具体的な利用用途やシステムの運用コストまで考慮に入れるよう心がけました。<br />
+（前職では国内大手のECサイトでログデータの広告利用を主な業務としていました。過去データを使った広告クリック率の予測、レコメンドロジックを用いたパーソナライズド広告、その他データマーケティング活動の支援など）</p>
+
+<p><br></p>
+
+<h2 id="全体概要:a22806189072a20136e84a4adca315d5">全体概要</h2>
+
+<p>カウルではユーザ獲得の流れとして</p>
+
+<ul>
+<li>自社メディア or 広告経由でランディングページに集客する</li>
+<li>ランディングページからトライアルユーザになってもらい</li>
+<li>2週間の無料トライアル期間を提供し</li>
+<li>トライアル期間後、料金プランを選択してもらい本登録ユーザになってもらう</li>
+</ul>
+
+<p>というステップを作っています。</p>
+
+<p>なのでログ分析基盤もそれに合わせて</p>
+
+<ol>
+<li>集客からトライアルユーザになるまで</li>
+<li>トライアルユーザになってから本登録ユーザになるまで</li>
+</ol>
+
+<p>の大きく2つに分けて別々のサービスを利用しています。</p>
+
+<p><br></p>
+
+<h2 id="1-集客からトライアルユーザになるまで:a22806189072a20136e84a4adca315d5">1. 集客からトライアルユーザになるまで</h2>
+
+<p>このステップでは主に以下の切り口でデータを見ています。</p>
+
+<ul>
+<li>日々のアクセス数とコンバージョン数のトラッキング</li>
+<li>検索からの流入数とコンバージョンの計測</li>
+<li>ランディングページの改善（ユーザの滞在時間、ランディングページがどこまで読まれているか、コンバージョン率の計測）</li>
+<li>自社メディア（<a href="https://kawlu.com/journal/">マンションジャーナル</a>、<a href="https://kawlu.com/library/">カウルライブラリー</a>）からの流入とコンバージョンの計測</li>
+<li>広告施策の効果測定</li>
+</ul>
+
+<p>ここではツールとしてGoogle Analytics（GA）を用いています。</p>
+
+<p>検索や広告からの流入の効果計測を網羅的かつ簡単に計測するという点でやはりGAは優れたツールなので、カウルでも積極的に活用しています。<br />
+基本的にすべて無料で利用できる点、画面からアカウント設定をしてページにタグを埋めるだけで利用開始できる点も利用者としては非常に嬉しいです。</p>
+
+<p><img src="/images/20160419/google_analytics_logo.png" title="google_analytics_logo" width="60%""></p>
+
+<p>GAは利用している方も多いと思うので詳細な説明は割愛しますが、中でもおすすめしたい設定をいくつか挙げてみます。</p>
+
+<h3 id="google-tag-manager-gtm-の利用:a22806189072a20136e84a4adca315d5">Google Tag Manager（GTM)の利用</h3>
+
+<p>GTMはGoogleが提供する無料のタグコンテナツール（タグを一元管理でき、色々な条件に合わせてタグを出し分けてくれるツール）です。<br />
+無料にもかかわらずタグのプレビュー機能やバージョン管理もついており、頻繁にコードを書き換えるスタートアップの環境においてアプリケーションと各種トラッキングタグを非同期にメンテナンスできることは大きなメリットだといえるでしょう。<br />
+GAのタグに変数を渡す際に「data layer」という層を経由するなど、若干特殊な知識が必要になりますが、広告も含めたトラッキングタグ管理全体としての見通しも良くなるので是非導入をおすすめします。</p>
+
+<p>参考）<br />
+<a href="https://support.google.com/tagmanager/answer/6102821?hl=ja">Google タグマネージャヘルプ - Google タグマネージャの概要</a><br />
+<a href="http://analyze.siraberu.info/post-521/">GoogleタグマネージャでGoogleアナリティクスのタグを管理する方法！</a></p>
+
+<h3 id="カスタムキャンペーンパラメータの利用:a22806189072a20136e84a4adca315d5">カスタムキャンペーンパラメータの利用</h3>
+
+<p>各種広告の効果測定をキャンペーンごとに切り分けるためにGoogle Analyticsが公式でサポートしているパラメータです。<br />
+通常は広告キャンペーンの効果測定に使うように説明されていますが、カウルでは自社メディアからの流入の切り分けにもこのパラメータを使用しています。<br />
+公式でサポートされているパラメータなので、遷移元のURLに一度設定しておくと、特にレポートのカスタムをすることなくPV数やコンバージョン数を流入元ごとに切り分けることができます。<br />
+この機能を用いて自社メディアのどんな記事がコンバージョンにつながりやすいかなど、記事ごとの分析に役立てています。</p>
+
+<p>参考）<br />
+<a href="https://support.google.com/analytics/answer/1033863?hl=ja&amp;ref_topic=1032998">Google アナリティクスヘルプ - カスタム キャンペーン</a><br />
+<a href="https://www.techloco.co.jp/blog/content/41">Google アナリティクスで広告からのアクセスを計測する方法</a></p>
+
+<h3 id="ランディングページのスクロールの計測:a22806189072a20136e84a4adca315d5">ランディングページのスクロールの計測</h3>
+
+<p>カウルでは扱う商品が高額であるということもあり、ランディングページでより多くの情報を提供して安心してトライアルユーザになってもらうために、かなり縦長のランディングページを用意しています。<br />
+縦長のランディングページの効果測定と改善においては、どのセクションにどのくらいユーザが滞在したか、どこまでスクロールして見てもらえたかが重要な指標となってきます。<br />
+そこでカウルではscrolldepthというJavascriptライブラリをGA/GTMと組み合わせて利用しています。</p>
+
+<p>参考）<br />
+<a href="http://scrolldepth.parsnip.io/">http://scrolldepth.parsnip.io/</a><br />
+<a href="https://www.youtube.com/watch?v=UoOh58pvqG4">How to install Scroll Depth Tracking with Google Tag Manager [動画]</a></p>
+
+<h3 id="クロスデバイスビューの設定:a22806189072a20136e84a4adca315d5">クロスデバイスビューの設定</h3>
+
+<p>トライアル期間中のユーザに対する深い分析は、後半で記載する別のSaaSを利用して行っているのですが、大まかな傾向を見るのにはGoogle Analyticsのクロスデバイスビューも有効です。<br />
+GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、クロスデバイスでのユーザトラッキングを可能にします（同一のユーザがPCとスマホでアクセスした場合にも同一ユーザとみなしてレポートが見られます）。<br />
+また、私自身はまだ試せていないのですが、ユーザIDごとに時系列でユーザの行動を見れる「ユーザエクスプローラ」という機能が2016年春からβ版で公開されており、こちらの機能も期待できそうです。</p>
+
+<p>参考）<br />
+<a href="https://support.google.com/analytics/answer/3123662?hl=ja&amp;ref_topic=3123660">Google アナリティクスヘルプ - User ID 機能について</a><br />
+<a href="http://strobolights.xyz/web/2016/04/03/google/">【Googleアナリティクス】ユーザーエクスプローラーの使い方</a></p>
+
+<p>GAまわりのドキュメントは日本語でたくさんあるのですが、内容が古いものも散見されるため、おかしいなと思ったら公式のドキュメントを参照することをおすすめします。</p>
+
+<p><br></p>
+
+<h2 id="2-トライアルユーザになってから本登録ユーザになるまで:a22806189072a20136e84a4adca315d5">2. トライアルユーザになってから本登録ユーザになるまで</h2>
+
+<p>続いて、トライアルユーザが本ユーザになるまでのデータ収集と活用について説明します。<br />
+このステップでは主に以下の内容でデータを分析しています。</p>
+
+<ul>
+<li>ユーザ一人ひとりのサイト上での行動の定性的・定量的な評価</li>
+<li>サイトからの通知（メール、メッセンジャー）に対する反応の評価</li>
+<li>有料会員化したユーザの行動パターン分析</li>
+<li>ユーザがどこでサイトの利用をやめてしまうかの分析</li>
+</ul>
+
+<p>ここでは<a href="https://keen.io/">keen.io</a>というログ収集基盤を提供しているSaaSを、周辺のツールと組み合わせて使用しています。</p>
+
+<h3 id="keen-ioとは:a22806189072a20136e84a4adca315d5">keen.ioとは</h3>
+
+<p><img src="/images/20160419/keenio_logo.png" title="keenio_logo"></p>
+
+<p>2011年に創業されたシリコンバレーにある企業のプロダクトで、UnityやAdobe、O&rsquo;REILLYなど有名企業も複数使っているようです。</p>
+
+<p>使い方は簡単で、keen.ioが公開しているAPIにログの書き込みリクエストを送るだけで、データの記録とストアを行ってくれます。自社でのWebサーバやストレージの管理は不要です。<br />
+keen.ioのサイトからアカウント作成後、<a href="https://github.com/keen/common-web">CommonWeb</a>というkeen.io公式のログ収集用Javascriptライブラリをサイトに導入し（このときバックエンドにkeen.ioのSaaSを指定します）、APIキーを設定するだけで導入は完了です。</p>
+
+<p>CommonWebの基本的な機能として、PageView・Click・FormSubmissionをすべて記録できるので、サイト内の行動トラッキングとしては一旦はこれで十分かと思います。</p>
+
+<p>貯まったデータに対して専用のUIからクエリングができるほか、API経由でもクエリングや生ログのCSVダウンロード・S3へのロードをサポートしています。<br />
+手元のPythonなどで処理する場合はCSVダウンロードしたものを処理するようにしています。<br />
+将来的にデータが大きくなったとしてもkeen.io→S3→EMR（もしくはBigQuery）の流れで処理できると予想しています。</p>
+
+<p>また、APIのクライアントも各種言語（CURL / JS / RUBY / PYTHON / PHP / JAVA / .NET）でサポートされているため、自社のRailsアプリからログを記録したり、JavascriptとHTMLで自作のダッシュボードも簡単に作成することができます。<br />
+（APIドキュメントは<a href="https://keen.io/docs/api/#extract-to-csv-file">こちら</a>）</p>
+
+<h3 id="keen-ioを採用した理由:a22806189072a20136e84a4adca315d5">keen.ioを採用した理由</h3>
+
+<p>以下の（わがままな）要求や要件をすべてクリアしていたのがkeen.ioを採用した理由です。</p>
+
+<ul>
+<li>サイト上のユーザ行動をすべてトラッキングしたい</li>
+<li>サイト上のユーザ行動だけでなく、サイトからの通知（メール、メッセンジャー、プッシュ通知）のログも一元管理したい</li>
+<li>溜まったデータに対して簡単な集計クエリを投げたい（KPIダッシュボードのデータストアとしても使いたい）</li>
+<li>整形された生データをダウンロードしてきて機械学習などの入力としたい</li>
+<li>サイト上のユーザ行動データ収集用のJavascriptを書くのが面倒</li>
+<li>ログを記録するためのWebサーバの構築・管理もやりたくない</li>
+<li>とにかく楽に作りたい</li>
+<li>とはいえお金はあまり掛けられない</li>
+</ul>
+
+<p>他にも代替案はあるかと思いますが、基本的には、<br />
+&ndash; タグを入れるだけで導入が簡単にできる一方で、生ログへのクエリングやダウンロードには対応していない「マーケター」用のツール（Mixpanelなど）を採用するか<br />
+&ndash; fluentdなどのOSSを利用しつつ足りないツールやコードを内製で作りながらBigQueryやS3にデータを流し込むか<br />
+の2択になるかと思います。</p>
+
+<p>前者だと要件が満たせず、後者だと構築や運用に手間がかかってしまうという点が懸念となり、今回はkeen.ioを採用しました。</p>
+
+<p>（TreasureDataは上記をほとんどクリアしていて非常に魅力的なのですが、立ち上げたばかりのサービスで導入するには料金が少々お高いようでしたので今回の採用は見送りました。）</p>
+
+<h3 id="費用について:a22806189072a20136e84a4adca315d5">費用について</h3>
+
+<p>気になるお値段ですが、一ヶ月あたりに記録するイベント数により料金が決まる仕組みになっており、サポートが無いプランであれば月間5万イベントまでは無料で利用できます。</p>
+
+<p>無料枠を超えても10万イベント/月までは月額＄20、100万イベント/月までは月額＄125と安価で、クエリングに対しての課金は発生しないなど、自前でサーバを構えることを考えると導入するコストメリットは十分にあるのではないかと思います。<br />
+（料金について詳しくは<a href="https://keen.io/plans/self-service/">こちら</a>）</p>
+
+<h3 id="sendgrid-メール配信saas-との連携:a22806189072a20136e84a4adca315d5">Sendgrid（メール配信SaaS）との連携</h3>
+
+<p>もう一つおすすめしたい機能は<a href="https://sendgrid.kke.co.jp/">Sendgrid</a>との連携です。<br />
+Sendgridはメールの配信から開封・クリックの計測までを一括して行ってくれるSaaSです。加えてメールがスパム判定されていないかを確認する機能や、ユーザごとのメール配信停止機能を提供しています。</p>
+
+<p>カウルでもメール配信にSendgridを使用しているのですが、keen.ioとSendgridは効果測定の機能がインテグレーションされているため、設定を一つ入れるだけでメール関連のイベントもすべてkeen.ioのデータストアに集約することができます。<br />
+参考）<a href="https://keen.io/docs/integrations/sendgrid/">SendGrid Integration</a></p>
+
+<p>この機能のおかげで、「どのユーザにいつどんな内容のメールを送って、その結果ユーザがどのような行動を取ったか」を簡単なシェルコマンド一つで抽出することが可能になっています。</p>
+
+<pre><code>USER_ID=123 &amp;&amp; sort \
+  &lt;(jq -r '.result[] | [.keen.timestamp, &quot;pageview&quot;, .page_url] | @tsv' \
+    &lt;(curl &quot;https://api.keen.io/3.0/projects/${PRJ_ID}/queries/extraction&quot; -H &quot;Authorization:${API_KEY}&quot; -H 'Content-Type: application/json' -d &quot;{\&quot;event_collection\&quot;:\&quot;pageviews\&quot;,\&quot;timeframe\&quot;:\&quot;this_14_days\&quot;,\&quot;filters\&quot;:[{\&quot;property_name\&quot;:\&quot;user_id\&quot;,\&quot;operator\&quot;:\&quot;eq\&quot;,\&quot;property_value\&quot;:${USER_ID}}]}&quot;)) \
+  &lt;(jq -r '.result[] | [.keen.timestamp, .event, .category] | @tsv' \
+    &lt;(curl &quot;https://api.keen.io/3.0/projects/${PRJ_ID}/queries/extraction&quot; -H &quot;Authorization:${API_KEY}&quot; -H 'Content-Type: application/json' -d &quot;{\&quot;event_collection\&quot;:\&quot;Sendgrid Email Events\&quot;,\&quot;timeframe\&quot;:\&quot;this_14_days\&quot;,\&quot;filters\&quot;:[{\&quot;property_name\&quot;:\&quot;user_id\&quot;,\&quot;operator\&quot;:\&quot;eq\&quot;,\&quot;property_value\&quot;:${USER_ID}}]}&quot;))
+
+# 出力結果サンプル
+2016-04-06T09:37:34.000Z        processed       【カウル】メールアドレスの認証を行ってください
+2016-04-06T09:37:39.000Z        delivered       【カウル】メールアドレスの認証を行ってください
+2016-04-06T09:37:46.000Z        open    【カウル】メールアドレスの認証を行ってください
+2016-04-06T09:37:49.000Z        click   【カウル】メールアドレスの認証を行ってください
+2016-04-06T09:37:52.287Z        pageview        https://kawlu.com/market/profile/new
+2016-04-06T09:38:16.594Z        pageview        https://kawlu.com/market/requirements/new
+2016-04-06T09:38:28.107Z        pageview        https://kawlu.com/market/subscription/thankyou?course_id=2
+2016-04-06T09:39:35.410Z        pageview        https://kawlu.com/market
+2016-04-06T09:39:47.010Z        pageview        https://kawlu.com/market/messages
+2016-04-06T09:39:51.971Z        pageview        https://kawlu.com/market/conds/manage
+2016-04-06T09:39:53.867Z        pageview        https://kawlu.com/market/conds/new
+2016-04-06T09:40:17.000Z        processed       【カウル】新しいマンションの紹介があります
+2016-04-06T09:40:20.000Z        delivered       【カウル】新しいマンションの紹介があります
+2016-04-06T09:40:54.000Z        pageview        https://kawlu.com/market/messages
+2016-04-06T09:40:57.619Z        pageview        https://kawlu.com/market
+2016-04-06T09:40:59.388Z        pageview        https://kawlu.com/market/wishlists
+2016-04-06T09:41:04.784Z        pageview        https://kawlu.com/library
+</code></pre>
+
+<p><br></p>
+
+<h2 id="まとめ:a22806189072a20136e84a4adca315d5">まとめ</h2>
+
+<p>今回は立ち上げたばかりのサービスでも導入できるログ分析基盤についてご紹介いたしました。<br />
+新規ユーザ獲得までの分析にはマーケティング方面に強いGoogle Analyticsを、無料ユーザを有料会員化するためのより深い分析にはkeen.ioを導入しています。</p>
+
+<p>実際の導入には実働で丸4日程度（上記の調査も全て含めた稼働日数）、利用料金は今のところGoogle Analytics・keen.ioともに無料で使えています。</p>
+
+<p>実際に導入してからまだ2ヶ月弱なのですが、現時点ではかなり快適に使えています。<br />
+運用していく中での知見などあればまた書きます。</p>
+
+<p><br>
+<a href="http://www.turnyourideasintoreality.com/2016/02/kauru/">REALITY - 不動産売買市場をディスラプトするHousmart、不動産を買いたい人が本当にハッピーになるサービス 「カウル」をローンチ。</a></p>
+
+<p><a href="https://kawlu.com/market">【カウル】仲介手数料無料の中古マンション売買サービス</a></p>
+
+            </div>
+            <footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="スタートアップのための「お金と時間がかからない」ログ分析基盤" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%80%8c%e3%81%8a%e9%87%91%e3%81%a8%e6%99%82%e9%96%93%e3%81%8c%e3%81%8b%e3%81%8b%e3%82%89%e3%81%aa%e3%81%84%e3%80%8d%e3%83%ad%e3%82%b0%e5%88%86%e6%9e%90%e5%9f%ba%e7%9b%a4&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%80%8c%e3%81%8a%e9%87%91%e3%81%a8%e6%99%82%e9%96%93%e3%81%8c%e3%81%8b%e3%81%8b%e3%82%89%e3%81%aa%e3%81%84%e3%80%8d%e3%83%ad%e3%82%b0%e5%88%86%e6%9e%90%e5%9f%ba%e7%9b%a4" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">脱・巨大なモノリシックアプリ！DRYなRails分割方法</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="スタートアップのための「お金と時間がかからない」ログ分析基盤" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                        data analysis
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="title">スタートアップのための「お金と時間がかからない」ログ分析基盤</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-04-17 22:39:26 &#43;0900 JST" itemprop="datePublished">2016-04-17</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160324/kawlu-simple-architecture-20160324.svg)" alt="スタートアップのための「お金と時間がかからない」ログ分析基盤" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">
+                        operation
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="title">脱・巨大なモノリシックアプリ！DRYなRails分割方法</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-03-28 10:34:34 &#43;0900 JST" itemprop="datePublished">2016-03-28</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w650)" alt="スタートアップのための「お金と時間がかからない」ログ分析基盤" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/work">
+                        work
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" class="title">スタートアップのCTOになって2ヶ月で作った開発サイクル</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-03-14 10:43:07 &#43;0900 JST" itemprop="datePublished">2016-03-14</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="スタートアップのための「お金と時間がかからない」ログ分析基盤" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-03-10 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-10</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160303_top.jpg)" alt="スタートアップのための「お金と時間がかからない」ログ分析基盤" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" class="title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-03-03 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-03</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

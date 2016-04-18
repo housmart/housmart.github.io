@@ -158,12 +158,12 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        6
+        7
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          10
+          11
         
         <span>
             Tags
@@ -238,6 +238,99 @@
 
     <section id="main">
     
+    
+    <article class="article article-type-post" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+            <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" itemprop="url">
+                
+                <img src="http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg" class="article-banner">
+                
+            
+            </a>
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/">
+    <h1 class="article-title" itemprop="name">
+        スタートアップのための「お金と時間がかからない」ログ分析基盤
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-04-17 22:39:26 &#43;0900 JST" itemprop="datePublished">2016-04-17</time>
+            &middot;
+            5547
+            words
+            &middot;
+            12
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/data-analysis">data analysis</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/data-analysis">data analysis</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>
+                    Housmart高松です。</p>
+
+<p>「ログ分析基盤」というと、すでにかなり大きいサービスでの事例がSlideShareなどで共有されているのをよく目にしますが、
+立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。</p>
+
+<p>そこで今回は、まだユーザが少ないフェーズでも「お金と時間をあまりかけずに」導入できるログ分析基盤について、カウルでの事例をご紹介いたします。
+                    <br>
+                </p>
+                <p class="article-more-link">
+                    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/">
+                        Read more
+                    </a>
+                </p>
+            </div>
+            <footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="スタートアップのための「お金と時間がかからない」ログ分析基盤" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%80%8c%e3%81%8a%e9%87%91%e3%81%a8%e6%99%82%e9%96%93%e3%81%8c%e3%81%8b%e3%81%8b%e3%82%89%e3%81%aa%e3%81%84%e3%80%8d%e3%83%ad%e3%82%b0%e5%88%86%e6%9e%90%e5%9f%ba%e7%9b%a4&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%80%8c%e3%81%8a%e9%87%91%e3%81%a8%e6%99%82%e9%96%93%e3%81%8c%e3%81%8b%e3%81%8b%e3%82%89%e3%81%aa%e3%81%84%e3%80%8d%e3%83%ad%e3%82%b0%e5%88%86%e6%9e%90%e5%9f%ba%e7%9b%a4" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f17%2flog-platform-for-startup%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+    </article>
     
     <article class="article article-type-post" itemscope="" itemprop="blogPost">
         <div class="article-inner">
@@ -837,6 +930,31 @@
             
             <li>
                 <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="カウル Tech Blog" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                        data analysis
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="title">スタートアップのための「お金と時間がかからない」ログ分析基盤</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-04-17 22:39:26 &#43;0900 JST" itemprop="datePublished">2016-04-17</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
                     <a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="thumbnail">
                     
                         
@@ -935,31 +1053,6 @@
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/Qi2AhOzVtlsYH2fBJSPQndDLyIegwVhEigPn6R3Gys5jfhgTwHWZ-CI72-3RN3hWW_sQ2PJfKpU=s800)" alt="カウル Tech Blog" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
-                        event
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/" class="title">Hack Day 2016ハッカソンに参加しました！</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-02-17 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-02-17</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -972,6 +1065,13 @@
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
         <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
@@ -1025,6 +1125,13 @@
         <ul class="category-list">
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
                     development
                 </a>
@@ -1056,7 +1163,7 @@
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
                     infra
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -1108,6 +1215,8 @@
         Tag cloud
     </h3>
     <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
         
         <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
         
