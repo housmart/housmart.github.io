@@ -22,12 +22,12 @@
 &lt;p&gt;「ログ分析基盤」というと、すでにかなり大きいサービスでの事例がSlideShareなどで共有されているのをよく目にしますが、
 立ち上がったばかりのサービスに適用するには&amp;rdquo;too much&amp;rdquo;な内容となっていることが多いかと思います。&lt;/p&gt;
 
-&lt;p&gt;そこで今回は、まだユーザが少ないフェーズでも「お金と時間をあまりかけずに」導入できるログ分析基盤について、カウルでの事例をご紹介いたします。&lt;/p&gt;
+&lt;p&gt;そこで今回は、まだユーザが少ないフェーズでも &lt;strong&gt;「お金と時間をあまりかけずに」&lt;/strong&gt; 導入できるログ分析基盤について、カウルでの事例をご紹介いたします。&lt;/p&gt;
 
 &lt;p&gt;小規模のサービスであってもログをしっかりと収集・分析してサービスの改善に役立てていくことは非常に大切なことです。&lt;br /&gt;
 一方で、データ収集のためのJavascriptの開発やWebサーバの構築と管理、データストアやデータ処理基盤の選定や設定などに専属で人を割くことができないのもスタートアップの実情ではないでしょうか。&lt;/p&gt;
 
-&lt;p&gt;そこでカウルでは安価に利用できるSaaSをいくつか組み合わせることで、簡単に始められて、かつ要求を十分にみたせる環境を構築しています。&lt;/p&gt;
+&lt;p&gt;そこでカウルでは &lt;strong&gt;安価に利用できるSaaSをいくつか組み合わせることで、簡単に始められて、かつ要求を十分にみたせる環境を構築&lt;/strong&gt; しています。&lt;/p&gt;
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
@@ -77,10 +77,10 @@
 &lt;li&gt;広告施策の効果測定&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ここではツールとしてGoogle Analytics（GA）を用いています。&lt;/p&gt;
+&lt;p&gt;ここではツールとしてi &lt;strong&gt;Google Analytics（GA）&lt;/strong&gt; を用いています。&lt;/p&gt;
 
 &lt;p&gt;検索や広告からの流入の効果計測を網羅的かつ簡単に計測するという点でやはりGAは優れたツールなので、カウルでも積極的に活用しています。&lt;br /&gt;
-基本的にすべて無料で利用できる点、画面からアカウント設定をしてページにタグを埋めるだけで利用開始できる点も利用者としては非常に嬉しいです。&lt;/p&gt;
+基本的に &lt;strong&gt;すべて無料で利用できる&lt;/strong&gt; 点、画面から &lt;strong&gt;アカウント設定をしてページにタグを埋めるだけで利用開始できる&lt;/strong&gt; 点も利用者としては非常に嬉しいです。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160419/google_analytics_logo.png&#34; title=&#34;google_analytics_logo&#34; width=&#34;60%&#34;&#34;&gt;&lt;/p&gt;
 
@@ -143,7 +143,7 @@ GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、
 &lt;li&gt;ユーザがどこでサイトの利用をやめてしまうかの分析&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ここでは&lt;a href=&#34;https://keen.io/&#34;&gt;keen.io&lt;/a&gt;というログ収集基盤を提供しているSaaSを、周辺のツールと組み合わせて使用しています。&lt;/p&gt;
+&lt;p&gt;ここでは &lt;strong&gt;&lt;a href=&#34;https://keen.io/&#34;&gt;keen.io&lt;/a&gt;というログ収集基盤を提供しているSaaS&lt;/strong&gt; を、周辺のツールと組み合わせて使用しています。&lt;/p&gt;
 
 &lt;h3 id=&#34;keen-ioとは:a22806189072a20136e84a4adca315d5&#34;&gt;keen.ioとは&lt;/h3&gt;
 
@@ -174,8 +174,8 @@ keen.ioのサイトからアカウント作成後、&lt;a href=&#34;https://gith
 &lt;li&gt;整形された生データをダウンロードしてきて機械学習などの入力としたい&lt;/li&gt;
 &lt;li&gt;サイト上のユーザ行動データ収集用のJavascriptを書くのが面倒&lt;/li&gt;
 &lt;li&gt;ログを記録するためのWebサーバの構築・管理もやりたくない&lt;/li&gt;
-&lt;li&gt;とにかく楽に作りたい&lt;/li&gt;
-&lt;li&gt;とはいえお金はあまり掛けられない&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;とにかく楽に作りたい&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;とはいえお金はあまり掛けられない&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;他にも代替案はあるかと思いますが、基本的には、&lt;br /&gt;
@@ -189,7 +189,7 @@ keen.ioのサイトからアカウント作成後、&lt;a href=&#34;https://gith
 
 &lt;h3 id=&#34;費用について:a22806189072a20136e84a4adca315d5&#34;&gt;費用について&lt;/h3&gt;
 
-&lt;p&gt;気になるお値段ですが、一ヶ月あたりに記録するイベント数により料金が決まる仕組みになっており、サポートが無いプランであれば月間5万イベントまでは無料で利用できます。&lt;/p&gt;
+&lt;p&gt;気になるお値段ですが、一ヶ月あたりに記録するイベント数により料金が決まる仕組みになっており、サポートが無いプランであれば &lt;strong&gt;月間5万イベントまでは無料&lt;/strong&gt; で利用できます。&lt;/p&gt;
 
 &lt;p&gt;無料枠を超えても10万イベント/月までは月額＄20、100万イベント/月までは月額＄125と安価で、クエリングに対しての課金は発生しないなど、自前でサーバを構えることを考えると導入するコストメリットは十分にあるのではないかと思います。&lt;br /&gt;
 （料金について詳しくは&lt;a href=&#34;https://keen.io/plans/self-service/&#34;&gt;こちら&lt;/a&gt;）&lt;/p&gt;
@@ -199,10 +199,10 @@ keen.ioのサイトからアカウント作成後、&lt;a href=&#34;https://gith
 &lt;p&gt;もう一つおすすめしたい機能は&lt;a href=&#34;https://sendgrid.kke.co.jp/&#34;&gt;Sendgrid&lt;/a&gt;との連携です。&lt;br /&gt;
 Sendgridはメールの配信から開封・クリックの計測までを一括して行ってくれるSaaSです。加えてメールがスパム判定されていないかを確認する機能や、ユーザごとのメール配信停止機能を提供しています。&lt;/p&gt;
 
-&lt;p&gt;カウルでもメール配信にSendgridを使用しているのですが、keen.ioとSendgridは効果測定の機能がインテグレーションされているため、設定を一つ入れるだけでメール関連のイベントもすべてkeen.ioのデータストアに集約することができます。&lt;br /&gt;
+&lt;p&gt;カウルでもメール配信にSendgridを使用しているのですが、keen.ioとSendgridは効果測定の機能がインテグレーションされているため、 &lt;strong&gt;設定を一つ入れるだけでメール関連のイベントもすべてkeen.ioのデータストアに集約することができます&lt;/strong&gt; 。&lt;br /&gt;
 参考）&lt;a href=&#34;https://keen.io/docs/integrations/sendgrid/&#34;&gt;SendGrid Integration&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;この機能のおかげで、「どのユーザにいつどんな内容のメールを送って、その結果ユーザがどのような行動を取ったか」を簡単なシェルコマンド一つで抽出することが可能になっています。&lt;/p&gt;
+&lt;p&gt;この機能のおかげで、&lt;strong&gt;どのユーザにいつどんな内容のメールを送って、その結果ユーザがどのような行動を取ったか&lt;/strong&gt; を簡単なシェルコマンド一つで抽出することが可能になっています。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;USER_ID=123 &amp;amp;&amp;amp; sort \
   &amp;lt;(jq -r &#39;.result[] | [.keen.timestamp, &amp;quot;pageview&amp;quot;, .page_url] | @tsv&#39; \
