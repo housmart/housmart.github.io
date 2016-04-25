@@ -6,8 +6,108 @@
     <description>Recent content in Posts on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 17 Apr 2016 22:39:26 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 Apr 2016 22:04:13 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>観光名所ならぬ開発名所？熱海で開発合宿♪</title>
+      <link>http://techblog.housmart.co.jp/2016/04/24/atami_de_sprint/</link>
+      <pubDate>Sun, 24 Apr 2016 22:04:13 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/04/24/atami_de_sprint/</guid>
+      <description>
+
+&lt;p&gt;Housmartの宮永です！&lt;/p&gt;
+
+&lt;p&gt;先週（4/18 - 4/22）は熱海で開発合宿（スプリント）を開催しましたので、&lt;br /&gt;
+そのことについて書きたいと思います。&lt;/p&gt;
+
+&lt;p&gt;どんなに素晴らしいオフィスでもずっと同じ場所で作業をしていると&lt;br /&gt;
+何となく集中力がなくなったり、生産性や創造性を劣化させていたり、というか根本的に飽きてきますよね（笑）&lt;br /&gt;
+ってことで試しに今回は環境を変えて熱海でスプリントをしてきました。&lt;br /&gt;
+&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;合宿スケジュール:c24eb79dee0ca4c00431511210782430&#34;&gt;合宿スケジュール&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/8kmxKjIRDUCCHAgmF-3MWOq8VzEcZzw2Z1kD_4BE2H6R0OD8no8_UFnT6uHwdLvXkcA_OL4qtDHcXCWzateKftT0SsWp2z1SlpRPh4b9rq4_te4qDtOCnVlVqT59rA77-fLDZ8GrVXaXCIx72lsHCkEMTQkkg_-Y5ZJX6sINA0t8znSfvkIhPvqYUq7LBiubXM6SFu0R5KYIpPYWIrXYB1OVr0ro_HjOgUFrU451Dap4Q_YNMzel1v35XzQ0toNOuzGl2Goc0G04-8Whr66ibdtt9WSPyIym_HGXoD9UarIB0Jth2jGdPkk_84D8hm4i48xcc5QjVRY8ggpUikHLLZGXMBPkZDMoeKRO8_7xQvlD8ELmgjcG614UFS9aILPdfD-WD5Xk2L6_6dAs9WgEwGTVV2dC0MXbgSumasl5Y6xn1B2CNUkTSO-BApkerqcA5xIPK46d8yg6YzqO55bAiscEAEKMtYd7clTS_f5q_ObT-mRFOww9U6S06aBtH8KLv_dF2lT0MLEbkcqYWsP8zDDv-eQDLwegH7rAVGLQtaPZnbjSWano7ddeNssSqOpjnIN4=w650-h453-no&#39; title=&#39;スプリントスケジュール&#39; alt=&#39;１週間の流れ&#39;&gt;&lt;/p&gt;
+
+&lt;p&gt;過去ブログ(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/14/dev_cycle/&#34;&gt;スタートアップのCTOになって2ヶ月で作った開発サイクル&lt;/a&gt;)でもご紹介させていただきました通り、弊社は1weekスプリントを採用しております。&lt;br /&gt;
+事業サイドのメンバーはオフィスを離れられない事情もあったので、&lt;br /&gt;
+スプリント計画だけ（月曜日）オフィスで過ごし、火曜ー金曜を&lt;span style=&#34;color:red&#34;&gt;男３人で&lt;/span&gt;熱海で過ごしました。&lt;br /&gt;
+※開発チームの自由な行動をいつも許容してくれる針山さん、三瓶さんにはいつも感謝ですm(__)m&lt;br /&gt;
+※TOP写真に出てくる女の子は出てきません。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;仕事場としての熱海:c24eb79dee0ca4c00431511210782430&#34;&gt;仕事場としての熱海&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/xm08OMtE9OqAOhCo8m0gjzUSnweeANNMt7ulP0DyrQoVQbeNZplB9zurd3LKLR-7S7O0NmuSjXuYwA-NFEkDXn064YtDGHpnSCsXn8fVSyuXER2hFWGKwBis7x5N4aYikyrfqFZFkEwixRYq56VKU1ISQMbIXqVHhZDv-4XoC5fnws5OoBXG3vqhda34JGBg8a2EcA0Lyi3uXyFF8P4zLwxcpCi_JdwN4WevyDlejzM8RTF5Wvll3MXeWkzawJqiE-SRvWqRhP0LfvY5wEyDHT9rUQS7sNn7zKnuzY0Ah53rTAjWOreo17Wm5tSlUOFqFIc48xmQrxM2_t9n9g4qkDdFPO0LSIKL0BGeuvdeTZ4lam8pnW9e98aMsF64N6GGp5m-hqGOe_NVcM6ifcW9DY7OMMijHmsq3TOMmh15vjqk2HglmGqgNgmf5VMjLioxr-1ihHq3mc9WmmM1tUcBZpeXESl5nQ7QwfESuqOUO2vcweOzuvvdnRs-sf62homk7etSewN12LV68QxpcGT9JKGcV_7E_vtWTp-wsRT7diNb3Y7eh6_7h8XUHiECPBRRHenl=w650-h958-no&#34; title=&#34;atami_sea&#34; alt=&#34;熱海は景色が最高でした。&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;観光場所としての熱海はこの時期温泉を軸に、釣りに行くもよし、名所を回って楽しみもよし、海を散歩するもよしといった感じになるかと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/e-x0IpMplf5xWgc3M4BTMwExsTXdjK3fv4dffI62wJeK5ZclYQL5Fbz5HqZq9cIOP_p2mVPc6HGmK3e51LTJJwIfQkT6uSLejzJ0XeyIUNzbYoA58QqhJ4BHktP527SSNtlAG25khnikK-uBWuUQC5a3-by_lp3zMnk6-8LCcQ4XFNSA86CVGkwjqHB5K83NurdxzXCVjP9Hp4N22YzResO5gR465PmHygeyXUY9sh2Ho6xPBkIfDruVutuj1NQufKyuAJdYOOcYoYzrHK2-Rpv3uJuH1D1ojcRIfG_zFDNyMK1Mt7MO1Q31hYQ38-4oq4mCyindZKxU1ranXnCbA2lzTMD_gWHGsf1aCLB4HKcOCr7KZ1N0-2GjmexxWhrwZ57JvL8FcCjxG9pgZDxYeQgq3gS1GY6PNygaKqeUdcqxHA-WjZvyRBL7Rr7-h8R0IaRqMbAjmPHxgGv5iFH6mfNapjpfICB9GjwAJu-i3UP-aRTHIAW2dJ6cbNQvwKV7T1KNrvFcKKE58BH4DYtv_9UkNWc4BndQMkdaEmA5zMUr2Lup_MTuKNK-hi62W_oA-BZz=w941-h720-no&#34; title=&#34;働く、休む、働く・・が永遠と繰り返されます。&#34; alt=&#39;働く、休む、働く・・が永遠と繰り返されます。&#39;&gt;&lt;/p&gt;
+
+&lt;p&gt;仕事場として熱海を見ると、釣りをする以外は長時間遊んでしまうような誘惑が少なく、&lt;br /&gt;
+温泉や食事など短時間でリラックスできる娯楽が多いので、こまめに休憩を挟み、緩急つけたリズムの良い活動が出来ます。&lt;br /&gt;
+開発して、美味しいご飯食べて、開発して、温泉つかってのような半恒久的サイクルで、１週間過ごせたかと思います。&lt;/p&gt;
+
+&lt;p&gt;日中のネット環境については何も考えずに行きましたが、たまたまWi-Fiが利用できるカフェを見つけられたので
+大変お世話になりました。（&lt;a href=&#34;http://caferoca.jp/&#34;&gt;CAFERoCA&lt;/a&gt;さん連日ありがとうございました。）&lt;/p&gt;
+
+&lt;h2 id=&#34;所感:c24eb79dee0ca4c00431511210782430&#34;&gt;所感&lt;/h2&gt;
+
+&lt;p&gt;そんな熱海スプリントを振り返ると、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;東京から近いため移動疲れなし&lt;/li&gt;
+&lt;li&gt;（先述した通り）熱海には遊びの誘惑が少なかったので開発にガッツリ集中できた&lt;/li&gt;
+&lt;li&gt;気分転換が適度にできたので作業も捗った&lt;/li&gt;
+&lt;li&gt;美味しいものを食べて幸せになった&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;反省点としては&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;タスク管理（主に記録）が結構雑になってしまった。。。(非日常が日常的作業を忘却させる)&lt;/li&gt;
+&lt;li&gt;ディスプレイがないと結構辛い（普段使っている大きめなディスプレイの有り難みが分かった）&lt;/li&gt;
+&lt;li&gt;話しあいになるとホワイトボードが欲しくなる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;などなど勢いで出発したため、準備不足を露呈した結果に。。&lt;/p&gt;
+
+&lt;h2 id=&#34;special-thanks:c24eb79dee0ca4c00431511210782430&#34;&gt;Special thanks&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#39;http://caferoca.jp/wp-content/themes/roca/imgs/RoCA_img.jpg&#39; width=650&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://caferoca.jp/&#34;&gt;CAFERoCA&lt;/a&gt;さん&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;日中の作業場所として連日お世話になりました！&lt;br /&gt;
+個人的にはここのぐり茶が美味しくて毎日飲んでました。&lt;/p&gt;
+
+&lt;p&gt;静かで落ち着いた雰囲気を醸し出す素敵なカフェでした。&lt;br /&gt;
+&lt;hr&gt;
+&lt;div class=&#34;airbnb-embed-frame&#34; data-city-link-index=&#34;1&#34; data-eb=&#34;1460550563_3fq5NvEuvlW/2RAS&#34; data-eu=&#34;bqBUVANHr9EOkihHlErqNJ3WctOp9xGaehbtddxBJYox7oIRpje/fxuJk0kx lq0X8EdvvVl+aTxfu0ygWYeGPmcPI6rRuYpB4fcO0O0ybM5Bkvg4JPx8GWdb +hX0k1WUHyZRfDFxmUDfyHeV+ZsOq/0yKIqhN/zN96iRjGYkqdu/QvGw0ezM R1uMBtj9+5JCFd5TRzdSymjOwgnb8Hgl2me+0/iBdE3ytNfQ4ANIiCJXn8dY M28xtwUokhoBMBpPfjXV6SeLFDpRjzj58YAPHn1L4N2I9g4Eq3isow2aEnhk +j8JIVvN6dwVsMXQClg1iGKWKsfNad5WR5A2iw/yJQ== &#34; data-embed-source-type=&#34;p3&#34; data-trigger-source-type=&#34;p3&#34; data-listing-id=&#34;4248292&#34; data-photo-url=&#34;https://a0.muscache.com/im/pictures/67373651/f24cd987_original.jpg?aki_policy=x_large&#34; data-view=&#34;listing_frame&#34; style=&#34;max-width:600px;margin:auto;transition:height .2s;&#34;&gt;&lt;img src=&#34;https://a0.muscache.com/im/pictures/67373651/f24cd987_original.jpg?aki_policy=x_large&#34; style=&#34;max-width:100%;&#34; alt=&#34;&#34;/&gt;&lt;div&gt;&lt;a href=&#34;https://www.airbnb.jp/rooms/4248292&#34; rel=&#34;nofollow&#34;&gt;&lt;h4&gt;熱海の24時間温泉＆オーシャンビュー&lt;/h4&gt;&lt;/a&gt;&lt;div&gt;熱海市, 静岡県, 日本&lt;/div&gt;&lt;blockquote&gt;熱海駅から徒歩20分､ﾊﾞｽで10分｡快適な1部屋ﾏﾝｼｮﾝ｡理想は2人､最大4人まで泊まることができます｡ 部屋からは熱海の海と山と街を一望できます｡花火大会は圧巻の一言です｡ 温泉､ｷｯﾁﾝ､冷蔵庫､ｴｱｺﾝ､ﾄｲﾚ､ﾃﾚﾋﾞなどご用意しております｡ 2人でも4人でも宿泊可ですが2人が最も快適な広さです｡ This room is only for Japanese people.&lt;/blockquote&gt;&lt;/div&gt;&lt;script async=&#34;&#34; src=&#34;https://www.airbnb.jp/embeddable/airbnb_jssdk&#34;&gt;&lt;/script&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;宿について&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;知人のお家ということで今回は利用させていただきました！&lt;br /&gt;
+３人で利用しましたが広さ的にも十分でした。&lt;br /&gt;
+またこのマンションには温泉が付いているんですがこれがまた素晴らしい。&lt;br /&gt;
+海を見ながら温泉につかってと贅沢な場所でした。&lt;/p&gt;
+
+&lt;p&gt;Airbnbにも出ているらしいのでぜひ興味のある方はご利用くださいm(__)m&lt;br /&gt;
+&lt;a href=&#34;https://www.airbnb.jp/rooms/4248292&#34;&gt;https://www.airbnb.jp/rooms/4248292&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;最後に:c24eb79dee0ca4c00431511210782430&#34;&gt;最後に&lt;/h2&gt;
+
+&lt;p&gt;今回はカウル開発チームの開発合宿について紹介させていただきました。&lt;br /&gt;
+カウルでの働き方としても新たな試みとなり、とてもよかったので、これからも定期的に実施したいと思います！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>スタートアップのための「お金と時間がかからない」ログ分析基盤</title>

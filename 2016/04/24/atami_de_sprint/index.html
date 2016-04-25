@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>脱・巨大なモノリシックアプリ！DRYなRails分割方法 &middot; カウル Tech Blog</title>
+    <title>観光名所ならぬ開発名所？熱海で開発合宿♪ &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.15" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,27 +19,18 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" />
-    <meta property="og:title" content="脱・巨大なモノリシックアプリ！DRYなRails分割方法" />
-<meta property="og:description" content="Housmartの松江です。
-
-Railsでアプリケーションを開発していると、管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと や、
-分割したプロジェクト間の管理・同期が煩雑になってしまうこと ありますよね。
-
-今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。
-
-
-巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい
-分割後はプロジェクト間で必要なロジックを共有したい
-
-" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/04/24/atami_de_sprint/" />
+    <meta property="og:title" content="観光名所ならぬ開発名所？熱海で開発合宿♪" />
+<meta property="og:description" content="Housmartの宮永です！ 先週（4/18 - 4/22）は熱海で開発合宿（スプリント）を開催しましたので、 そのことについて書きたいと思います。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/04/24/atami_de_sprint/" />
 
-  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160324/kawlu-simple-architecture-20160324.png" />
+  <meta property="og:image" content="https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no" />
+
+  <meta property="og:image" content="http://techblog.housmart.co.jp/" />
 
 
-<meta property="og:updated_time" content="2016-03-28T10:34:34&#43;09:00"/>
+<meta property="og:updated_time" content="2016-04-24T22:04:13&#43;09:00"/>
 
 
 
@@ -52,25 +43,16 @@ Railsでアプリケーションを開発していると、管理者機能や周
 
     
     
-<meta itemprop="name" content="脱・巨大なモノリシックアプリ！DRYなRails分割方法">
-<meta itemprop="description" content="Housmartの松江です。
-
-Railsでアプリケーションを開発していると、管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと や、
-分割したプロジェクト間の管理・同期が煩雑になってしまうこと ありますよね。
-
-今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。
+<meta itemprop="name" content="観光名所ならぬ開発名所？熱海で開発合宿♪">
+<meta itemprop="description" content="Housmartの宮永です！ 先週（4/18 - 4/22）は熱海で開発合宿（スプリント）を開催しましたので、 そのことについて書きたいと思います。">
 
 
-巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい
-分割後はプロジェクト間で必要なロジックを共有したい
+<meta itemprop="dateModified" content="2016-04-24T22:04:13&#43;09:00" />
+<meta itemprop="wordCount" content="1487">
 
-">
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no">
 
-
-<meta itemprop="dateModified" content="2016-03-28T10:34:34&#43;09:00" />
-<meta itemprop="wordCount" content="2698">
-
-  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160324/kawlu-simple-architecture-20160324.png">
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/">
 
 
 
@@ -80,23 +62,12 @@ Railsでアプリケーションを開発していると、管理者機能や周
 
 
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160324/kawlu-simple-architecture-20160324.png"/>
+  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no"/>
 
 
 
-<meta name="twitter:title" content="脱・巨大なモノリシックアプリ！DRYなRails分割方法"/>
-<meta name="twitter:description" content="Housmartの松江です。
-
-Railsでアプリケーションを開発していると、管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと や、
-分割したプロジェクト間の管理・同期が煩雑になってしまうこと ありますよね。
-
-今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。
-
-
-巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい
-分割後はプロジェクト間で必要なロジックを共有したい
-
-"/>
+<meta name="twitter:title" content="観光名所ならぬ開発名所？熱海で開発合宿♪"/>
+<meta name="twitter:description" content="Housmartの宮永です！ 先週（4/18 - 4/22）は熱海で開発合宿（スプリント）を開催しましたので、 そのことについて書きたいと思います。"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 
@@ -295,25 +266,25 @@ Railsでアプリケーションを開発していると、管理者機能や周
         <div class="article-inner">
             
                 
-                <img src="http://techblog.housmart.co.jp//images/20160324/kawlu-simple-architecture-20160324.svg" class="article-banner">
+                <img src="https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no" class="article-banner">
                 
             
 
             <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/">
+    <a href="http://techblog.housmart.co.jp/2016/04/24/atami_de_sprint/">
     <h1 class="article-title" itemprop="name">
-        脱・巨大なモノリシックアプリ！DRYなRails分割方法
+        観光名所ならぬ開発名所？熱海で開発合宿♪
     </h1>
     </a>
     <div class="article-meta">
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2016-03-28 10:34:34 &#43;0900 JST" itemprop="datePublished">2016-03-28</time>
+            <time datetime="2016-04-24 22:04:13 &#43;0900 JST" itemprop="datePublished">2016-04-24</time>
             &middot;
-            2698
+            1487
             words
             &middot;
-            6
+            3
             minute read
         </div>
 
@@ -324,7 +295,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">operation</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/work">work</a>
                 
                 
             </div>
@@ -337,13 +308,10 @@ Railsでアプリケーションを開発していると、管理者機能や周
             <div class="article-category">
                 <i class="fa fa-tags"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/operation">operation</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/work">work</a>
                 &middot;
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/rails">rails</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/git">git</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
                 
                 
             </div>
@@ -355,152 +323,105 @@ Railsでアプリケーションを開発していると、管理者機能や周
             <div class="article-entry" itemprop="articleBody">
                 
 
-<p>Housmartの松江です。</p>
+<p>Housmartの宮永です！</p>
 
-<p>Railsでアプリケーションを開発していると、<strong>管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと</strong> や、
-<strong>分割したプロジェクト間の管理・同期が煩雑になってしまうこと</strong> ありますよね。</p>
+<p>先週（4/18 - 4/22）は熱海で開発合宿（スプリント）を開催しましたので、<br />
+そのことについて書きたいと思います。</p>
 
-<p>今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。</p>
+<p>どんなに素晴らしいオフィスでもずっと同じ場所で作業をしていると<br />
+何となく集中力がなくなったり、生産性や創造性を劣化させていたり、というか根本的に飽きてきますよね（笑）<br />
+ってことで試しに今回は環境を変えて熱海でスプリントをしてきました。<br />
+<br></p>
 
-<ol>
-<li><strong>巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい</strong></li>
-<li><strong>分割後はプロジェクト間で必要なロジックを共有したい</strong></li>
-</ol>
+<h2 id="合宿スケジュール:c24eb79dee0ca4c00431511210782430">合宿スケジュール</h2>
 
-<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
+<p><img src='https://lh3.googleusercontent.com/8kmxKjIRDUCCHAgmF-3MWOq8VzEcZzw2Z1kD_4BE2H6R0OD8no8_UFnT6uHwdLvXkcA_OL4qtDHcXCWzateKftT0SsWp2z1SlpRPh4b9rq4_te4qDtOCnVlVqT59rA77-fLDZ8GrVXaXCIx72lsHCkEMTQkkg_-Y5ZJX6sINA0t8znSfvkIhPvqYUq7LBiubXM6SFu0R5KYIpPYWIrXYB1OVr0ro_HjOgUFrU451Dap4Q_YNMzel1v35XzQ0toNOuzGl2Goc0G04-8Whr66ibdtt9WSPyIym_HGXoD9UarIB0Jth2jGdPkk_84D8hm4i48xcc5QjVRY8ggpUikHLLZGXMBPkZDMoeKRO8_7xQvlD8ELmgjcG614UFS9aILPdfD-WD5Xk2L6_6dAs9WgEwGTVV2dC0MXbgSumasl5Y6xn1B2CNUkTSO-BApkerqcA5xIPK46d8yg6YzqO55bAiscEAEKMtYd7clTS_f5q_ObT-mRFOww9U6S06aBtH8KLv_dF2lT0MLEbkcqYWsP8zDDv-eQDLwegH7rAVGLQtaPZnbjSWano7ddeNssSqOpjnIN4=w650-h453-no' title='スプリントスケジュール' alt='１週間の流れ'></p>
 
-<p>不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。</p>
+<p>過去ブログ(<a href="/2016/03/14/dev_cycle/">スタートアップのCTOになって2ヶ月で作った開発サイクル</a>)でもご紹介させていただきました通り、弊社は1weekスプリントを採用しております。<br />
+事業サイドのメンバーはオフィスを離れられない事情もあったので、<br />
+スプリント計画だけ（月曜日）オフィスで過ごし、火曜ー金曜を<span style="color:red">男３人で</span>熱海で過ごしました。<br />
+※開発チームの自由な行動をいつも許容してくれる針山さん、三瓶さんにはいつも感謝ですm(__)m<br />
+※TOP写真に出てくる女の子は出てきません。</p>
 
-<ul>
-<li>詳細情報: 最寄り駅・エレベータの有無・ペット可否など</li>
-<li>部屋情報: 間取り・方角・契約の進行状況など</li>
-</ul>
+<p><br></p>
 
-<p>上記を社員が効率よく管理するため、管理者用のアプリケーションが別途用意されています。</p>
+<h2 id="仕事場としての熱海:c24eb79dee0ca4c00431511210782430">仕事場としての熱海</h2>
 
-<ul>
-<li>ユーザ用のRailsプロジェクト</li>
-<li>管理者用のRailsプロジェクト</li>
-</ul>
+<p><img src="https://lh3.googleusercontent.com/xm08OMtE9OqAOhCo8m0gjzUSnweeANNMt7ulP0DyrQoVQbeNZplB9zurd3LKLR-7S7O0NmuSjXuYwA-NFEkDXn064YtDGHpnSCsXn8fVSyuXER2hFWGKwBis7x5N4aYikyrfqFZFkEwixRYq56VKU1ISQMbIXqVHhZDv-4XoC5fnws5OoBXG3vqhda34JGBg8a2EcA0Lyi3uXyFF8P4zLwxcpCi_JdwN4WevyDlejzM8RTF5Wvll3MXeWkzawJqiE-SRvWqRhP0LfvY5wEyDHT9rUQS7sNn7zKnuzY0Ah53rTAjWOreo17Wm5tSlUOFqFIc48xmQrxM2_t9n9g4qkDdFPO0LSIKL0BGeuvdeTZ4lam8pnW9e98aMsF64N6GGp5m-hqGOe_NVcM6ifcW9DY7OMMijHmsq3TOMmh15vjqk2HglmGqgNgmf5VMjLioxr-1ihHq3mc9WmmM1tUcBZpeXESl5nQ7QwfESuqOUO2vcweOzuvvdnRs-sf62homk7etSewN12LV68QxpcGT9JKGcV_7E_vtWTp-wsRT7diNb3Y7eh6_7h8XUHiECPBRRHenl=w650-h958-no" title="atami_sea" alt="熱海は景色が最高でした。"></p>
 
-<p>上記のように2つのプロジェクトに分割しているのは、巨大な1つのRailsプロジェクトになり管理が難しくなることを避けるためです。</p>
+<p>観光場所としての熱海はこの時期温泉を軸に、釣りに行くもよし、名所を回って楽しみもよし、海を散歩するもよしといった感じになるかと思います。</p>
 
-<p>しかし、複数のプロジェクトに分割した後、DBテーブルの追加・変更があった場合等に <strong>&ldquo;2つのプロジェクトそれぞれに同じ変更を行う&rdquo;</strong> 必要のある状況が発生するようになりました。
-これは以下の様な問題を引き起こします。</p>
+<p><img src="https://lh3.googleusercontent.com/e-x0IpMplf5xWgc3M4BTMwExsTXdjK3fv4dffI62wJeK5ZclYQL5Fbz5HqZq9cIOP_p2mVPc6HGmK3e51LTJJwIfQkT6uSLejzJ0XeyIUNzbYoA58QqhJ4BHktP527SSNtlAG25khnikK-uBWuUQC5a3-by_lp3zMnk6-8LCcQ4XFNSA86CVGkwjqHB5K83NurdxzXCVjP9Hp4N22YzResO5gR465PmHygeyXUY9sh2Ho6xPBkIfDruVutuj1NQufKyuAJdYOOcYoYzrHK2-Rpv3uJuH1D1ojcRIfG_zFDNyMK1Mt7MO1Q31hYQ38-4oq4mCyindZKxU1ranXnCbA2lzTMD_gWHGsf1aCLB4HKcOCr7KZ1N0-2GjmexxWhrwZ57JvL8FcCjxG9pgZDxYeQgq3gS1GY6PNygaKqeUdcqxHA-WjZvyRBL7Rr7-h8R0IaRqMbAjmPHxgGv5iFH6mfNapjpfICB9GjwAJu-i3UP-aRTHIAW2dJ6cbNQvwKV7T1KNrvFcKKE58BH4DYtv_9UkNWc4BndQMkdaEmA5zMUr2Lup_MTuKNK-hi62W_oA-BZz=w941-h720-no" title="働く、休む、働く・・が永遠と繰り返されます。" alt='働く、休む、働く・・が永遠と繰り返されます。'></p>
 
-<ul>
-<li>2つのプロジェクトに変更を行うコストがかかる</li>
-<li>プロジェクト間での同期できていなかった場合に予期しないエラーが発生する</li>
-</ul>
+<p>仕事場として熱海を見ると、釣りをする以外は長時間遊んでしまうような誘惑が少なく、<br />
+温泉や食事など短時間でリラックスできる娯楽が多いので、こまめに休憩を挟み、緩急つけたリズムの良い活動が出来ます。<br />
+開発して、美味しいご飯食べて、開発して、温泉つかってのような半恒久的サイクルで、１週間過ごせたかと思います。</p>
 
-<p>カウルではこの状況を <strong>Gitのsubmodule</strong> を用いて改善しています。</p>
+<p>日中のネット環境については何も考えずに行きましたが、たまたまWi-Fiが利用できるカフェを見つけられたので
+大変お世話になりました。（<a href="http://caferoca.jp/">CAFERoCA</a>さん連日ありがとうございました。）</p>
 
-<h2 id="実際の構成:186562e261a7107c8b7de063b569e16d">実際の構成</h2>
+<h2 id="所感:c24eb79dee0ca4c00431511210782430">所感</h2>
 
-<p>Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。</p>
-
-<p>カウルのRailsプロジェクトでは <code>${RAILS_ROOT}/app/models</code> 以下がsubmodule扱いになっており、<strong>複数のRailsプロジェクトから同じモデルクラス群が扱える</strong> ようになっています。</p>
-
-<pre><code class="language-bash">rails_app_1
-├── app
-│    ├── controllers
-│    ├── views
-│    ├── models   -&gt; ../models_repo/app/models   # シンボリックリンク
-│    ├── ...
-├── models_repo # submodule
-├── ...
-
-rails_app_2
-├── app
-│    ├── controllers
-│    ├── views
-│    ├── models   -&gt; ../models_repo/app/models   # シンボリックリンク
-│    ├── ...
-├── models_repo # submodule
-├── ...
-</code></pre>
-
-<p><img src="/images/20160324/kawlu-simple-architecture-20160324.svg"></img></p>
-
-<p>この構成にすることでRailsのもともとのディレクトリ構成を変えることなく、<strong>モデル周りにあるロジックを複数のRailsプロジェクトで共有することができる</strong> ようになります。</p>
-
-<p>submodule以下は最新のmasterブランチを追うことで簡単に同期がとれるため、ユーザ用のアプリケーションで追加されたロジックが管理者用アプリケーションで使えないという問題は起きなくなりました。</p>
-
-<p>また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。</p>
-
-<h3 id="submoduleの難しさ:186562e261a7107c8b7de063b569e16d">submoduleの難しさ</h3>
-
-<p>submoduleでの運用を開始した当初、以下の部分で使い難さがありました。</p>
-
-<ol>
-<li>単一のGitレポジトリとpush手順が変わる</li>
-<li>プルリクエスト間でコンフリクトが起きやすい</li>
-</ol>
-
-<p>1つ目のpush手順の違いは、submoduleを含むレポジトリの操作に慣れないうちは特に不便に感じます。
-submoduleを含まないレポジトリであれば <code>git add</code> して <code>git push</code> するのは1回だけで済みますが、submoduleを含む場合は2回行う必要があります。</p>
-
-<pre><code class="language-bash"># submoduleを含まないレポジトリでのpush
-project_dir $ git add
-project_dir $ git push
-
-# submoduleを含むレポジトリでのpush (submodule内にも差分がある場合)
-project_dir $ cd submodule_dir
-submodule_dir $ git add
-submodule_dir $ git push
-submodule_dir $ cd ..
-project_dir $ git add
-project_dir $ git push
-</code></pre>
-
-<p>2つ目のコンフリクト問題は、submodule内のファイルに変更のあるプルリクエストが複数来ていた場合に発生します。</p>
-
-<p><img src="/images/20160324/git-submodule-20160325.svg"></img></p>
-
-<p>上記の図のようにsubmoduleを扱うGitレポジトリでは、<strong>submodule内のどのコミットからどのコミットへの参照に切り替えるか</strong> という内容を含むコミットが発生します。</p>
+<p>そんな熱海スプリントを振り返ると、</p>
 
 <ul>
-<li>コミット&rdquo;ロ&rdquo;: submodule内のコミット&rdquo;1&rdquo;から&rdquo;2&rdquo;へ参照を変えるコミット</li>
-<li>コミット&rdquo;B&rdquo;: submodule内のコミット&rdquo;1&rdquo;から&rdquo;3&rdquo;へ参照を変えるコミット</li>
+<li>東京から近いため移動疲れなし</li>
+<li>（先述した通り）熱海には遊びの誘惑が少なかったので開発にガッツリ集中できた</li>
+<li>気分転換が適度にできたので作業も捗った</li>
+<li>美味しいものを食べて幸せになった</li>
 </ul>
 
-<p>上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は<code>submodule内のコミット&quot;4&quot;から◯◯へ参照を変えるコミット</code>でなければならないからです。</p>
+<p>反省点としては</p>
 
-<h2 id="submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d">submoduleを簡単に運用するためのbot運用</h2>
+<ul>
+<li>タスク管理（主に記録）が結構雑になってしまった。。。(非日常が日常的作業を忘却させる)</li>
+<li>ディスプレイがないと結構辛い（普段使っている大きめなディスプレイの有り難みが分かった）</li>
+<li>話しあいになるとホワイトボードが欲しくなる</li>
+</ul>
 
-<p>Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
-submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。</p>
+<p>などなど勢いで出発したため、準備不足を露呈した結果に。。</p>
 
-<p><img src="/images/20160324/git-submodule-20160325-2.svg"></img></p>
+<h2 id="special-thanks:c24eb79dee0ca4c00431511210782430">Special thanks</h2>
 
-<p>submoduleレポジトリでメインブランチ上にマージコミット発生すると、botが自動でsubmodule更新のコミット(図の&rdquo;ロ&rdquo;と&rdquo;B&rdquo;)を行います。
-これによりコミット&rdquo;2&rdquo;と&rdquo;3&rdquo;が両方含まれているコミットを <strong>コンフリクトすることなく使う</strong> ことができます。</p>
+<p><img src='http://caferoca.jp/wp-content/themes/roca/imgs/RoCA_img.jpg' width=650></p>
 
-<p>また、bot導入前はsubmoduleのマージコミットに対して参照をしようとするとsubmoduleレポジトリ内のプルリクエストが閉じるのを待つ必要がありましたが、この運用では <strong>submoduleレポジトリ上のプルリクエストがマージされるのを待たず</strong> にマージコミットをそれぞれのRailsレポジトリで使っていくことができるので、コミット&rdquo;2&rdquo;や&rdquo;3&rdquo;を含め損ねることはありません。</p>
+<ul>
+<li><a href="http://caferoca.jp/">CAFERoCA</a>さん</li>
+</ul>
 
-<p>その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。</p>
+<p>日中の作業場所として連日お世話になりました！<br />
+個人的にはここのぐり茶が美味しくて毎日飲んでました。</p>
 
-<h2 id="まとめ:186562e261a7107c8b7de063b569e16d">まとめ</h2>
+<p>静かで落ち着いた雰囲気を醸し出す素敵なカフェでした。<br />
+<hr>
+<div class="airbnb-embed-frame" data-city-link-index="1" data-eb="1460550563_3fq5NvEuvlW/2RAS" data-eu="bqBUVANHr9EOkihHlErqNJ3WctOp9xGaehbtddxBJYox7oIRpje/fxuJk0kx lq0X8EdvvVl+aTxfu0ygWYeGPmcPI6rRuYpB4fcO0O0ybM5Bkvg4JPx8GWdb +hX0k1WUHyZRfDFxmUDfyHeV+ZsOq/0yKIqhN/zN96iRjGYkqdu/QvGw0ezM R1uMBtj9+5JCFd5TRzdSymjOwgnb8Hgl2me+0/iBdE3ytNfQ4ANIiCJXn8dY M28xtwUokhoBMBpPfjXV6SeLFDpRjzj58YAPHn1L4N2I9g4Eq3isow2aEnhk +j8JIVvN6dwVsMXQClg1iGKWKsfNad5WR5A2iw/yJQ== " data-embed-source-type="p3" data-trigger-source-type="p3" data-listing-id="4248292" data-photo-url="https://a0.muscache.com/im/pictures/67373651/f24cd987_original.jpg?aki_policy=x_large" data-view="listing_frame" style="max-width:600px;margin:auto;transition:height .2s;"><img src="https://a0.muscache.com/im/pictures/67373651/f24cd987_original.jpg?aki_policy=x_large" style="max-width:100%;" alt=""/><div><a href="https://www.airbnb.jp/rooms/4248292" rel="nofollow"><h4>熱海の24時間温泉＆オーシャンビュー</h4></a><div>熱海市, 静岡県, 日本</div><blockquote>熱海駅から徒歩20分､ﾊﾞｽで10分｡快適な1部屋ﾏﾝｼｮﾝ｡理想は2人､最大4人まで泊まることができます｡ 部屋からは熱海の海と山と街を一望できます｡花火大会は圧巻の一言です｡ 温泉､ｷｯﾁﾝ､冷蔵庫､ｴｱｺﾝ､ﾄｲﾚ､ﾃﾚﾋﾞなどご用意しております｡ 2人でも4人でも宿泊可ですが2人が最も快適な広さです｡ This room is only for Japanese people.</blockquote></div><script async="" src="https://www.airbnb.jp/embeddable/airbnb_jssdk"></script></div></p>
 
-<p>今回のご紹介した運用の概要は以下です。</p>
+<ul>
+<li>宿について</li>
+</ul>
 
-<ol>
-<li><strong>管理機能は別Railsプロジェクトに分けた</strong></li>
-<li><strong>model部分をsubmodule化して、複数のRails間で共有した</strong></li>
-<li><strong>submoduleの運用はbotに任せた</strong></li>
-</ol>
+<p>知人のお家ということで今回は利用させていただきました！<br />
+３人で利用しましたが広さ的にも十分でした。<br />
+またこのマンションには温泉が付いているんですがこれがまた素晴らしい。<br />
+海を見ながら温泉につかってと贅沢な場所でした。</p>
 
-<p><a href="https://kawlu.com/market">カウル</a>では今後もより良い運用を目指して日々改善を行っていきます！</p>
+<p>Airbnbにも出ているらしいのでぜひ興味のある方はご利用くださいm(__)m<br />
+<a href="https://www.airbnb.jp/rooms/4248292">https://www.airbnb.jp/rooms/4248292</a></p>
+
+<h2 id="最後に:c24eb79dee0ca4c00431511210782430">最後に</h2>
+
+<p>今回はカウル開発チームの開発合宿について紹介させていただきました。<br />
+カウルでの働き方としても新たな試みとなり、とてもよかったので、これからも定期的に実施したいと思います！</p>
 
             </div>
             <footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="脱・巨大なモノリシックアプリ！DRYなRails分割方法" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e8%84%b1%e3%83%bb%e5%b7%a8%e5%a4%a7%e3%81%aa%e3%83%a2%e3%83%8e%e3%83%aa%e3%82%b7%e3%83%83%e3%82%af%e3%82%a2%e3%83%97%e3%83%aa%ef%bc%81DRY%e3%81%aaRails%e5%88%86%e5%89%b2%e6%96%b9%e6%b3%95&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f&amp;description=%e8%84%b1%e3%83%bb%e5%b7%a8%e5%a4%a7%e3%81%aa%e3%83%a2%e3%83%8e%e3%83%aa%e3%82%b7%e3%83%83%e3%82%af%e3%82%a2%e3%83%97%e3%83%aa%ef%bc%81DRY%e3%81%aaRails%e5%88%86%e5%89%b2%e6%96%b9%e6%b3%95" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/04/24/atami_de_sprint/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="観光名所ならぬ開発名所？熱海で開発合宿♪" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f24%2fatami_de_sprint%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e8%a6%b3%e5%85%89%e5%90%8d%e6%89%80%e3%81%aa%e3%82%89%e3%81%ac%e9%96%8b%e7%99%ba%e5%90%8d%e6%89%80%ef%bc%9f%e7%86%b1%e6%b5%b7%e3%81%a7%e9%96%8b%e7%99%ba%e5%90%88%e5%ae%bf%e2%99%aa&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f24%2fatami_de_sprint%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f24%2fatami_de_sprint%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f24%2fatami_de_sprint%2f&amp;description=%e8%a6%b3%e5%85%89%e5%90%8d%e6%89%80%e3%81%aa%e3%82%89%e3%81%ac%e9%96%8b%e7%99%ba%e5%90%8d%e6%89%80%ef%bc%9f%e7%86%b1%e6%b5%b7%e3%81%a7%e9%96%8b%e7%99%ba%e5%90%88%e5%ae%bf%e2%99%aa" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f04%2f24%2fatami_de_sprint%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -512,21 +433,14 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
         
 <nav id="article-nav">
     
-    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">スタートアップのCTOになって2ヶ月で作った開発サイクル</div>
+      <div class="article-nav-title">スタートアップのための「お金と時間がかからない」ログ分析基盤</div>
     </a>
     
 
-    
-    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">スタートアップのための「お金と時間がかからない」ログ分析基盤</div>
-    </a>
     
 </nav>
 
@@ -554,7 +468,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                     <a href="http://techblog.housmart.co.jp/2016/04/24/atami_de_sprint/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no)" alt="観光名所ならぬ開発名所？熱海で開発合宿♪" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -579,7 +493,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                     <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="観光名所ならぬ開発名所？熱海で開発合宿♪" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -604,7 +518,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                     <a href="http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160324/kawlu-simple-architecture-20160324.svg)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160324/kawlu-simple-architecture-20160324.svg)" alt="観光名所ならぬ開発名所？熱海で開発合宿♪" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -629,7 +543,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                     <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w650)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w650)" alt="観光名所ならぬ開発名所？熱海で開発合宿♪" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -654,7 +568,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                     <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="観光名所ならぬ開発名所？熱海で開発合宿♪" class="thumbnail-image"></span>
                         
                     
                     </a>
