@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Event on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/categories/event/</link>
-    <description>Recent content in Event on カウル Tech Blog</description>
+    <title>Pitch on カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/pitch/</link>
+    <description>Recent content in Pitch on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 14 May 2016 22:48:09 +0900</lastBuildDate>
-    <atom:link href="http://techblog.housmart.co.jp/categories/event/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://techblog.housmart.co.jp/tags/pitch/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>スタートアップ発表者が見たSlush Asia 2016の舞台裏</title>
@@ -202,102 +202,6 @@
 スタッフの皆様、ありがとうございました！&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/O5fkqHOtYeqmubHd2GsNIQEjPxCgZ7h6pCpgsEtdx7oXT_kJ4_3Jnd24FMzyP4hNi4ROXrlKEDlwcWeo-2hhuxlUDjFBbBV-1j63m1WeYeQYU-6J1NL7qx7p3oSSvyTpHJnl7KsfRs2QV-C3r_Zc2tTbanZk7QpLDKw3D08cY2RwjuIxmYXymfJX4NS93qQouGHwE5V47UAE4znElH4BEOszJR2NQBR0tD_HIX768MgtCyc3vqSf3_U11sLsnYg2HHGHss__vKnIGwNn6AzituNrN4dU_TLuJAk0tqx81anvk613HOpis6SvJ6mFiqn5dgzt_tHwl5a1eFrqLiL4BV8HQL6K3ckCZCZwPqeS0A9du4JU5mFE1O5tDxZoGIw3qV6LcsDbco31wk2UJP4N0Bv-UPl3n9jnYRSJlU-hkfuYE8nEyoZVg8pY7VMRCfvq4UpEfi5KfiZ9IQSEHV_v1hM0-RbsLo69XaEEiGh5WnAY0ylI_J8q6X2_PW1BnZ4WzglI5Zom3UPGzB4pCTL1672VO4pQaFp7kxj6c7eS_0DCDufl1n67mMb6zaV5xEY-YJabvfjSs_0elc3MQwvtwMoA7Ms62EE=w650&#34;&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hack Day 2016ハッカソンに参加しました！</title>
-      <link>http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/</link>
-      <pubDate>Wed, 17 Feb 2016 16:57:26 +0900</pubDate>
-      
-      <guid>http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/</guid>
-      <description>
-
-&lt;p&gt;今週からHousmartで働く松江です！&lt;/p&gt;
-
-&lt;p&gt;先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントである&lt;a href=&#34;http://hackday.jp/2016/&#34;&gt;Hack Day 2016&lt;/a&gt;に参加してきたのでこの場を借りてご紹介します。&lt;/p&gt;
-
-&lt;h2 id=&#34;作ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;作ったもの&lt;/h2&gt;
-
-&lt;div class=&#34;embed-video-container&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/ZgpvXK3wfkc&#34; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-&lt;p&gt;スライド: &lt;a href=&#34;https://speakerdeck.com/matsue/kizukai-at-hack-day-2016&#34;&gt;https://speakerdeck.com/matsue/kizukai-at-hack-day-2016&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;KizukAIという、飲み会でちょっとした気遣いのできるAIを作りました。&lt;/p&gt;
-
-&lt;p&gt;KizukAIは飲み会のテーブルに置くことを想定して作られており、出来ることは以下の3つです。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;ビールがなくなったことを検知してビールの追加注文、またはお冷の注文を行う&lt;/li&gt;
-&lt;li&gt;みんなの笑顔を検知して、合いの手を入れたり一緒に笑う&lt;/li&gt;
-&lt;li&gt;飲み会中の自然な笑顔画像を集めておく&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;1つ目の機能は、まさしく夢の&lt;strong&gt;ビールのオートデプロイ&lt;/strong&gt;です！！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/0qgHEBRne3GBTsPTkJn5MqAsYdFihI-3LTJSm8P33iOraRoy36An06qGGQo8pC5jKr0afMeqOFA=s800&#34; title=&#34;Demo&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;使ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;使ったもの&lt;/h3&gt;
-
-&lt;p&gt;主に以下のデバイス・APIを使用して作りました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://theta360.com/ja/about/theta/s.html&#34;&gt;THETA S&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.clarifai.com/&#34;&gt;Clarifaiの画像解析API&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://dev.smt.docomo.ne.jp/?p=docs.api.page&amp;amp;api_name=image_recognition&amp;amp;p_name=api_usage_scenario&#34;&gt;Docomoの画像認識API&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;THETA Sは、以下のようにドキュメントに書かれているようにAPIが変更され、先代よりもAPIが扱いやすいものになっていました。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;RICOH THETA API v2は、Google社のOpen Spherical Camera API Version 1.0（OSC）に準拠しています。&lt;br /&gt;
-&lt;a href=&#34;https://developers.theta360.com/ja/docs/v2/api_reference/&#34;&gt;https://developers.theta360.com/ja/docs/v2/api_reference/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Clarifaiは&lt;a href=&#34;https://cloud.google.com/vision/&#34;&gt;Google Cloud Vision&lt;/a&gt;のように、画像に写っている物体や状況に関する情報を返してくれるAPIを提供しています。
-例えば以下のビール画像であれば&amp;rdquo;Beer, Glass, Foam, Cold, Drink, Indoor&amp;rdquo;といった情報が得られます。
-泡があること、冷たいこと、室内であることも認識されていて驚きです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/g2L3vh5pcQrdyl-o5UrM8GZOgy7n6hfAjL5LHzB52Oz-uaKUHwwF2PQczrS2G_OUzAGTQExgBdM=s400&#34; title=&#34;Beer&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;動画にも同等のことができるようなので、そちらも使うと面白いことができそうです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.clarifai.com/#demo&#34;&gt;Clarifaiのデモ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://newdocs.clarifai.com/guide/info#info&#34;&gt;ClarifaiのAPIドキュメント&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;苦労したところ-工夫したところ:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;苦労したところ・工夫したところ&lt;/h3&gt;
-
-&lt;p&gt;Clarifaiの前は&lt;a href=&#34;https://cloud.google.com/vision/&#34;&gt;Google Cloud Vision&lt;/a&gt;の使用を検討していましたが審査が間に合いませんでした。
-Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。
-審査には時間がかかるので、利用を検討する方は早めに申し込んでおくと良いと思います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;追記: Google Cloud Visionの&lt;a href=&#34;ttp://googlecloudplatform.blogspot.jp/2016/02/Google-Cloud-Vision-API-enters-beta-open-to-all-to-try.html&#34;&gt;ベータ版の提供が始まり&lt;/a&gt;、申請すればすぐ使えます。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ビールの認識精度も上がらずに思考錯誤をしました。
-開発会場で撮影されたビール画像は、背景が白いためかオフィスの写真と判定されビールとなかなか判定されませんでした。
-ここは背景に暗めの色の布を置くことで判定率が上がりました。
-しかし、白い背景を黒でデータ上で塗りつぶしたり、画像からビールジョッキ部分だけの切り抜いただけではビールの判定率はあまり変わりませんでした。
-実際の居酒屋でテストしたところ、ビールが持ち上げられて卓上から離れている時間以外はほぼ認識できていたので、暗めの部屋や十分な泡もビールっぽさとして必要なのかもしれません。&lt;/p&gt;
-
-&lt;p&gt;また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。
-TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。&lt;/p&gt;
-
-&lt;h3 id=&#34;さいごに:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;さいごに&lt;/h3&gt;
-
-&lt;p&gt;今回の作ったものはこちらのレポジトリに置いています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/housmart/kizukai&#34;&gt;https://github.com/housmart/kizukai&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;また、幸いにも入賞することができ、CerevoさんのHackeyを頂いたので、これを使ってまた何か作ったらレポートしようと思います！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/M4uyXV2O1J0hKXoqWvnah4stqPaOAQm9z2f9G-7Vb7Pd3FCTIRd2wrbJKcoWRyxvb2y4m018HWc=s400&#34; title=&#34;Hackey&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8e8SL2kEUFObnBivBczy_Pa10P5X5Jjfn2VVOc_WydnoSmQeuPyKi179CpDeaS-OVmny_u_rbrs=s800&#34; title=&#34;Hackey&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！&lt;/p&gt;
 </description>
     </item>
     
