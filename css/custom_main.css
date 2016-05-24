@@ -85,3 +85,7 @@
   font-weight: bold;
   display: inline-block;
 }
+.article-entry h1, .article-entry h2, .article-entry h3, .article-entry h4, .article-entry h5, .article-entry h6 {
+    line-height: 1.1em;
+     margin: 2.2em 0 1.1em 0; 
+}
