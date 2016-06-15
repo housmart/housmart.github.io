@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編] &middot; カウル Tech Blog</title>
+    <title>大きめプロジェクトにスクラムを適用する &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.15" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,27 +19,18 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" />
-    <meta property="og:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" />
-<meta property="og:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
-
-突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
-そんな時の参考になれば幸いです。
-" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/" />
+    <meta property="og:title" content="大きめプロジェクトにスクラムを適用する" />
+<meta property="og:description" content="こんにちは！Housmartの宮永です。 過去に弊社のスクラム開発について概要をご紹介(スタートアップのCTOになって2ヶ月で作った開発サイク" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/" />
 
-  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160303_top.jpg" />
+  <meta property="og:image" content="https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no" />
+
+  <meta property="og:image" content="http://techblog.housmart.co.jp/" />
 
 
-<meta property="og:updated_time" content="2016-03-03T16:57:26&#43;09:00"/>
+<meta property="og:updated_time" content="2016-06-15T22:48:09&#43;09:00"/>
 
 
 
@@ -52,25 +43,16 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
     
     
-<meta itemprop="name" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]">
-<meta itemprop="description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
+<meta itemprop="name" content="大きめプロジェクトにスクラムを適用する">
+<meta itemprop="description" content="こんにちは！Housmartの宮永です。 過去に弊社のスクラム開発について概要をご紹介(スタートアップのCTOになって2ヶ月で作った開発サイク">
 
 
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
+<meta itemprop="dateModified" content="2016-06-15T22:48:09&#43;09:00" />
+<meta itemprop="wordCount" content="1902">
 
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no">
 
-突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
-そんな時の参考になれば幸いです。
-">
-
-
-<meta itemprop="dateModified" content="2016-03-03T16:57:26&#43;09:00" />
-<meta itemprop="wordCount" content="2014">
-
-  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160303_top.jpg">
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/">
 
 
 
@@ -80,23 +62,12 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160303_top.jpg"/>
+  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no"/>
 
 
 
-<meta name="twitter:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]"/>
-<meta name="twitter:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
-
-突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
-そんな時の参考になれば幸いです。
-"/>
+<meta name="twitter:title" content="大きめプロジェクトにスクラムを適用する"/>
+<meta name="twitter:description" content="こんにちは！Housmartの宮永です。 過去に弊社のスクラム開発について概要をご紹介(スタートアップのCTOになって2ヶ月で作った開発サイク"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 
@@ -295,25 +266,25 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
         <div class="article-inner">
             
                 
-                <img src="http://techblog.housmart.co.jp//images/20160303_top.jpg" class="article-banner">
+                <img src="https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no" class="article-banner">
                 
             
 
             <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/">
+    <a href="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/">
     <h1 class="article-title" itemprop="name">
-        テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]
+        大きめプロジェクトにスクラムを適用する
     </h1>
     </a>
     <div class="article-meta">
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2016-03-03 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-03</time>
+            <time datetime="2016-06-15 22:48:09 &#43;0900 JST" itemprop="datePublished">2016-06-15</time>
             &middot;
-            2014
+            1902
             words
             &middot;
-            5
+            4
             minute read
         </div>
 
@@ -324,7 +295,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">project</a>
                 
                 
             </div>
@@ -337,13 +308,10 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-tags"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
                 &middot;
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/media">media</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/project">project</a>
                 
                 
             </div>
@@ -355,138 +323,123 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-entry" itemprop="articleBody">
                 
 
-<p>Housmart高松です。</p>
+<p>こんにちは！Housmartの宮永です。</p>
 
-<p>先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。</p>
+<p>過去に弊社のスクラム開発について概要をご紹介(<a href="/2016/03/14/dev_cycle/">スタートアップのCTOになって2ヶ月で作った開発サイクル</a>)させていただきました。
+今回はより実践的な話を説明します。</p>
 
-<blockquote>
-<p>WBSサイト(不動産流通に革新は起こるか): <a href="http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/">http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/</a><br />
-仲介手数料無料の不動産サイト「カウル」: <a href="https://kawlu.com/">https://kawlu.com/</a></p>
-</blockquote>
+<p>以前紹介しました通り、カウル開発チームは1週間／スプリントと短めに取ってますが、<br />
+1週間じゃ収まらないようなサイズのプロジェクトの時はどう管理するの？って話になりますよね。</p>
 
-<p>突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？<br />
-そんな時の参考になれば幸いです。</p>
+<p><img src="https://lh3.googleusercontent.com/DeS4fOe4wso6NXq5n3Bb1JF_ElFoV2Exz5kEIwnvSu9EBcPIw1AJoxIovNFh-yc_a_5J1XA0aqoRWdthxenXaEaMq7ieI--xhM7Xq2yKitNE0y7Med74EoMtaeoVmnrWOxjtQcvgOwhT93QUOctwrO9Oie6aAyeWea_cr6QMocWIvF-bpuLyLRlPWl7dqXOU9TXJtpZnxou-cxrDjsJyVsPf1TzWGu4CrPq1gGYo7DlwokfgvhXXPEBsn49KzmMMNO2ce3uYAR7GWtz6AJ4V3xyiOqt5uEuGEQt0MrIMxLnCsA7BhyiDPgmXeyXG0uELw5dg_CujJYLKBlQpaSTPh-A_-qZKzG823IdryPSoZJwtwVCeVSuFIS3VUHbOTXFFlgIMkJ1n6YypVsUBKG4ZvSkE6Z4IjAkRJyOcg08iLV2gug3UoU14pcAp-P2U3qB9yo6Sab1Jax2qNVrztn00HDC-f9ViFQND7ZhggIZDejXhkNVYTG--sPWfMMdEsZAKWsjLploXmlgldVZk7AN3GZBQqhMEFuWtapxU2CMwfevPaMcOJ_dJh8vZaJK1tTcYUUktpiAVDv2HQCZg_alS9y47QoGcQaM=w650-no"></p>
 
-<h2 id="内容:08e118674fea9989bc7c591023d8b196">内容</h2>
+<p>アジャイルの考え方では、要件を細分化することで1スプリント内に収め、
+あくまでスプリント終了時には新機能をお客様に提供しないといけません。<br />
+しかし、モノによってはそうもいかないケースも有ります（と思ってます）。
+（特に弊社は1週間スプリントですのでザラにあります）</p>
 
-<ol>
-<li>前提
+<p>そういった複数スプリントを要する規模のプロジェクトに対してスクラムをどう適用させるか弊社の事例とともに紹介します。</p>
+
+<h2 id="プロジェクト背景:0c0c5cd24d35767dd52335ae3894aa47">プロジェクト背景</h2>
+
+<p>まずはプロジェクト背景について。<br />
+プロジェクト開始時期は2016/04下旬で、<br />
+この時弊社サービス（<a href="https://kawlu.com">カウル</a>）が抱えていた課題は下記の通りです。</p>
 
 <ul>
-<li>前回の失敗</li>
-<li>フロントエンド システム構成</li>
-</ul></li>
-<li>事前準備
+<li>リテンションが悪い（既存顧客が離脱しがち）</li>
+<li>特にスマホデバイスでの<a href="https://kawlu.com">カウル</a>利用者の離脱が目立つ</li>
+<li>希望条件を入力して提案された物件を見るというサービスを楽しむフローに乗れないユーザが存在（自身の希望条件が何かもわからない）</li>
+</ul>
+
+<p>この課題に対してカウル開発チームは下記解決方針でプロジェクトを進めていきました。</p>
 
 <ul>
-<li>負荷予測</li>
-<li>サーバ台数決定</li>
-<li>サーバ増強</li>
-<li>その他</li>
-</ul></li>
-<li>放送当日 [後編]</li>
-<li>振り返りとまとめ [後編]</li>
-</ol>
+<li>スマホファーストなUIに変更する(スマホベースで要件を決める)</li>
+<li>不動産購入に関する学習コンテンツの配置</li>
+</ul>
 
-<hr />
+<p>スマホファーストについては何を今更感があるかもしれませんが、<br />
+スマホファーストにシフトするかについてはモバイル利用率を考慮して判断したい方針でもあったので、
+十分にスマホでのサイト利用を実感した今回のタイミングで踏み切りました。</p>
 
-<h2 id="1-前提:08e118674fea9989bc7c591023d8b196">1.前提</h2>
+<p>要は<strong>「スマホユーザを中心にリテンションを改善しましょう」</strong>というプロジェクトでした。</p>
 
-<h3 id="前回の失敗:08e118674fea9989bc7c591023d8b196">前回の失敗</h3>
+<p><img src='https://lh3.googleusercontent.com/Yh-oH0obHiSwIP-VVUp_cMSHuUYPHvbxuYB48eqit-9gB9GTkSnPEfMvEHtqS9XxWL6K6MOn69lKwbZ9bPDW7DhvGYLSWyyeOuNEoS_Z3Hj3oOCRBXXuezKLruIOPfToydOmpjRwIPwbA6zXuZSfAC665wEdKC9obNtxy0HiQC08DLvuOA5Q-wiKW7cMVfJ9hZB773CJMlzmVbQ5ZVCu-uc04HPG61_kO39DKNU2NcpvAkPKfgggMBiZz4waVj1tZrYAtay1YaDC1Nw9BPGdu9lgWfknsKgGZejgireLiass9MIK2zWRlOx_9edG_XAUXD2FNNsVgN5XGURlZQbNubz3DgUbdEozfcBRNUn3sgrIwu55trIr2D_mSOWg6u29WAj482BVwXo9H7-F1gaOMlyN8wo_yCVVJsjrtMfoADma_qD88WeBVQ0ojz8-arIFuYRLexfh_fBtQIpOXC6Us3zXHAwZsyMV-umLz5atkE-3t6CCNzhkBHDBQTty-qmoWu5kxtZO_DDp_GSObKM1f6dxznhSusXPouqsWyuoWugRvhjfnB7sHC3WW0Pkc0oxuHMCtWDaTcdnQj0yVID7mBh69KLQDag=w650' alt='スマホユーザの継続利用がテーマでした。'/></p>
 
-<p>つい半月ほど前に別の局で朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。</p>
+<h2 id="プロジェクト-要件概要:0c0c5cd24d35767dd52335ae3894aa47">プロジェクト・要件概要</h2>
 
-<p>かすっただけで右腕を持って行かれたぐらいのダメージを受けました。衝撃でした。<br />
-この反省から <strong>準備大事！</strong> ということを学んだので今回はしっかりと準備をして望みました。</p>
+<h3 id="要件概要:0c0c5cd24d35767dd52335ae3894aa47">要件概要</h3>
 
-<p><br></p>
+<p>要件（概要）は下記の通りです。</p>
 
-<h3 id="フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196">フロントエンド システム構成</h3>
+<ul>
+<li>提案に対するリアクション（気になるか興味なし）を慣習化させるため、表示する提案物件を1枚に限定し、リアクションを取ると次の提案が表示されるUIに改修。</li>
+<li>リアクションについてはトランプカードを操作するような触ってて楽しい操作感に変更。</li>
+<li>そもそも購入知識がないユーザに対しては不動産購入に関する記事を提供。</li>
+</ul>
 
-<p>「カウル」フロントエンドのシステム構成を簡単にご紹介します。<br />
-基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、<a href="https://kawlu.com/journal/">自社メディアであるマンションジャーナル</a>も運営しているため、Wordpressが動くサーバが別にあります。<br />
-SEOの観点からサブディレクトリで Web app と自社メディアの切り分けを行っており、クラウドフロントでサブディレクトリごとにアクセスを振り分けています。</p>
+<p><img src='https://lh3.googleusercontent.com/9i6BpXVgyrWnKwwGShTHAI2R7IeID4ng45Gq_8VwLTxAn_nF-uar4EqOuZpv2Lq3Elk5RZK1BiZEySdMHgqBalhemW9L-ymQGrJGskbj8O4hXlJenwHVIsi08C1SvBuqOiSbPxXBHFB1_iQWoviqKt_M4Pwt2yzGUEEzUo9ZmijXoWpWamDHqn47jY2Fm_SmhkilLviF4P5Z9A3JfltKKKsGymofOc4ow1qVl40-e-t9GhbazHe-fzgaFEBENBfezUYci--USRP60r6VCkOaKRRFj73P7phQiGBOwmrVnfFPpA6dfZLDnlQs-pF_r1e1QC8gK9jeof5jsjclSuHp8t_3cbXKMtfPpE8SMKw1GyAC6piG9iJLwK8Yv4yHJL4PB6skHY3paCL0jVU5pq0nke2jmzzr1MnWnvAP1hj_WMzouv-cWMy-6tL8Q7Rvn_w7vHT5A1TpC4YS75_VL52zRq_Uz_ToYYwJptERK5chLkGLdRDe9biDA-WamJ-cc0SMHAxcmXpa6LekAZU8bfMBXQm4keHXBBoVuZS2SzUgPefxkXPaDHwF_LlyRWz3Jx-qB9KTj4d72_lv8Ky-YzE0MMyFyUmTx-Q=w300' alt='気になる時は右にスワイプ、興味なしの時は左にスワイプ' /></p>
 
-<p><img src="/images/20160303_01.png" title="Kawlu Front Architecture"></p>
+<p>ちなみに技術的なチャレンジとしては今回、リアクションのたびに状態を更新する仕様のため、<a href="https://facebook.github.io/react/">React</a>を本格的に導入しました。
+また提案カードを右に左にさばくUIに関しては<a href="https://github.com/gajus/swing">swing.js</a>を導入しました。</p>
 
-<p>今回は各EC2サーバをオートスケールグループに入れ冗長化を行い、負荷見積もりにしたがってスペックと台数を決定しました。</p>
+<h3 id="スクラムによる管理-スプリントの適用:0c0c5cd24d35767dd52335ae3894aa47">スクラムによる管理（スプリントの適用）</h3>
 
-<p><br></p>
+<p>ここからが本題です。結論から申し上げますと、本プロジェクトは4スプリント消費する結果となりました。</p>
 
-<h2 id="2-事前準備:08e118674fea9989bc7c591023d8b196">2.事前準備</h2>
+<p><img src='https://lh3.googleusercontent.com/bOhDmdJ8YH43fX5RnWZHdDCWMfBXLd59SC1DsoQPZ9gCmWK0j_lge9872lCZDen7sm7H7hqF6Ye6r4DL8cN-Rv636B3G_8tiB2_mFdyXbx5f52xAgu3pudMIIW1oO9sRmfcmm6CHNlNPwTwjqBrNTURLgz5JWgOIOGim0tfhG8Ar0y9HQo3bdXuOhdmdt4EcRMj2592cuaUDWWGh9ZEykdd8Mz5Ezx1l2JYpxlpXRZVvd_FCtVYsxb-5IJ2RdihyBgPKG3FE0emHiBmBEJXcj6trjPUYWC8YOH_8fgEMeFEIREsn8zcSsbRlL7YAfJjorwUVtmj4GRKCK_7Mubm-0qgTDP0m5Z0yjK3RFRfp4YGlOTx4nCyK7OHTHTghiwk6mQjwWe0aoOdCZZ4m-cc9rYlFH2V0IuzXwkgxDcJHoWeWSZGq2hOjHdISNbZy3LLgDGV-k5emE4x5AenF0D25xFLe-3T4EmxJ2KtaJe2YPrVkdUog3_XDyaTOpIOnVmHF0RYmfpLXYZ8obZ7gt-dnmZEHSj9lrq9hrN85z5M6EpEKHDBxhdUWNPX_3R7rauEV8nd2DWic023p2TjkF3-HlAb5fVHKaN8=w650' alt='※GWのため途中空きがあります。'/></p>
 
-<h3 id="負荷予測:08e118674fea9989bc7c591023d8b196">負荷予測</h3>
+<h4 id="第1スプリント:0c0c5cd24d35767dd52335ae3894aa47">第1スプリント</h4>
 
-<p>負荷予測に関しては以下の記事を参考にさせていただきました。<br />
-<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">[Qiita]gatling による負荷試験とテレビ露出見積り</a>
-<br></p>
+<p>技術的検証、UI検証、ユーザヒアリングなどを行いながら<br />
+そもそもニーズあるの？やるとしてできるの？UIとして要件を満たせそう？など<br />
+手戻りが許されないissueから潰していくようなスプリントにしました。</p>
 
-<p>まず、総アクセス数を以下の式により求めます。</p>
+<h4 id="第2スプリント:0c0c5cd24d35767dd52335ae3894aa47">第2スプリント</h4>
 
-<pre><code>総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合 (=総アクセス人数)
-                      × 一人あたりの平均閲覧ページ数
-</code></pre>
+<p>2スプリント目では（より詳細な）要件定義、デザイナー調整（外部）、設計に充てました。<br />
+スプリント全て消化するほどのタスク量はないため、スプリントの後半は別案件の開発をしていました。</p>
 
-<p>今回はテレビ東京なので<a href="http://www.tv-tokyo.co.jp/contents/ir/jpn/media/mediadata.html">関東圏で約4,000万人のリーチ</a>、深夜帯なので視聴率 <strong>5%</strong> 、テレビを見てWebで検索する人が視聴した人全体の <strong>5%</strong> と仮定し、一人あたりの平均閲覧ページ数は過去実績から2ページとしました。<br />
-これらの仮定の上で、放送中の総アクセス数は以下のように求まります。</p>
+<h4 id="第3-4スプリント:0c0c5cd24d35767dd52335ae3894aa47">第3, 4スプリント</h4>
 
-<pre><code>総アクセス数 = 4,000万 × 5% × 5% × 2 = 20万アクセス
-</code></pre>
+<p>本スプリントでは前半で外部デザイナーさんに2日程度来社してもらい、がっつりデザイン。<br />
+その後、開発、テスト、そしてリリースという流れでした。
+当初は第3スプリント内でリリースを目指していましたが、開発ボリュームが想定以上に膨らんでしまったため、<br />
+第3スプリント内でのリリースは間に合わず次のスプリントでのリリースとなりました。</p>
 
-<p><strong>テレビすごい！</strong></p>
+<h2 id="プロジェクト-スクラムの振り返り:0c0c5cd24d35767dd52335ae3894aa47">プロジェクト、スクラムの振り返り</h2>
 
-<p>これをテレビ出演時間で割ると一秒あたりの平均リクエスト数(QPS)が求まります。弊社の紹介が何分間流れるかは本番を見るまで分からなかったのですが、今回は5分間と仮置きしました。</p>
+<h3 id="良かった点:0c0c5cd24d35767dd52335ae3894aa47">良かった点</h3>
 
-<pre><code>出演時間のQPS = 20万アクセス ÷ 300秒 = 平均 667 QPS
-</code></pre>
+<ul>
+<li>プロトタイプのスプリントを設けたことで技術、UI検証に十分な時間を割くことが出来た。</li>
+<li>幸運にも優秀なデザイナーさんご協力頂けて、早期リリースが実現できた。（※完全にデザインありきだったので、<a href="https://dribbble.com/noga419">野上さん</a>に今回ご協力いただけたことに本当に感謝しております！）</li>
+<li>当初の目的であるリテンションについては如実に改善の傾向が見られる</li>
+</ul>
 
-<p>上記はあくまで平均の値なので、この数字ピッタリに合わせて構築するとアクセスがスパイクした時にリソースが足りなくなってしまいます。<br />
-せっかくのチャンス、1アクセスたりとも落としたくなかったので、アクセスがスパイクすることも考慮に入れてバッファを積み <strong>1000 QPS</strong> に耐えられる構成にしようということに決めました。</p>
+<p><img src='https://lh3.googleusercontent.com/Ww8hew5x3tqBeN4PV-fixXAssyYbWh48t9Y7NiUpszShShPTcLJt0YxtEYtOJLezr4mmlT0LLy8ZleCBf8V4rDliZbVfNEuIOglZnpTAohnYgcMNWqzMjYdOWWiNuotnBRB1b0aV_R1u5-P61wTEvsrOS7aQxx0q4cmWqOPURzKXKwR4wvxD115O9SwSes1RgG2VJUOGJWrdwPrXdza34-3kD945v7prVcZTjZIJToCYx9ES8P4GBlrsm9lzUAj5pYpWa-ix1TBHtbV8cEznvFA5b62WpCbUOuOVJj-KUQFy8j_n1iC484nw4vcDh-xwhV2bVj47xZM1Fc2uhntfhV1Uq1adzd4zjI7LPjGHBgi7u1YfjX51MT489fqkFUTeSN3FctPvDoSZrlX4IKN0REGtQ7qlOUll9qDy_n9Q6vB7e5OTjzg7PcFQhP-ge0axsXo-gqazP3kZ-VmteG1GVVDe_Y63YhI2N80F1j4oE5OuQBwodbMfs6LWtxbWd9PfnLzJdhVY5s5TnxBxGId_98GrFjUDJS3L62XvSzo4iYON2yZnfXkgFRmvba6yU2-XDKQ-iB4XLz4iREFuDpB2sSWGujTY8Ws=w650' alt='改善したリテンションに関する指数'></p>
 
-<p><br></p>
+<h3 id="改善点:0c0c5cd24d35767dd52335ae3894aa47">改善点</h3>
 
-<h3 id="サーバ台数決定:08e118674fea9989bc7c591023d8b196">サーバ台数決定</h3>
+<ul>
+<li>結果として良かったものの事前のユーザヒアリングが不足していた。（ユーザが求めていないモノを作ってしまわないかというリスクへの対処）</li>
+<li>デザイナー調整の開始が遅すぎて普通だったらありえないようなギリギリのスケジュールで進めてしまった。(<a href="https://dribbble.com/noga419">野上さん</a>がスーパーデザイナーで助かった。。。)
+<strong>ああ、専属デザイナー欲しいよ！（絶賛募集中です）</strong></li>
+</ul>
 
-<p>こちらも先ほどの<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">Qiita記事</a>を参考にAWSサーバのスペックと台数を決定しました。</p>
-
-<p>EC2とRDSで動く Rails x MySQL の構成で、1vCPUあたり100[QPS]程度のリクエストを捌くことが可能なようです。
-今回の構成も参考記事の構成とほぼ似ているため、大きく外すことはないだろうということでこちらの結果をそのまま流用させていただきました。</p>
-
-<p>Front・APIサーバ共に10vCPU必要ということで、それぞれ <strong>t2.medium x 5 台</strong> の構成に決定しました。</p>
-
-<p><br></p>
-
-<h3 id="サーバ増強:08e118674fea9989bc7c591023d8b196">サーバ増強</h3>
-
-<p>深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
-ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。<br />
-各上限を上げるためにはAWSに申請が必要なようです。詳しくはこちら→<a href="http://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 サービスの制限</a></p>
-
-<p>初期の設定でEC2インスタンスは20個までに制限されているようです。</p>
-
-<p>今回はAWSのサポートセンターに「テレビの放送があるので！」とメッセージを添えて申請を送ったところ、数時間後にご対応いただけたので事なきを得ましたが、危ないところでした。AWSの中の人ありがとうございました。みなさん <strong>是非この制限の存在を頭に入れておいてください</strong> 。</p>
-
-<p><br></p>
-
-<h3 id="その他:08e118674fea9989bc7c591023d8b196">その他</h3>
-
-<p>その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。<br />
-万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。</p>
-
-<p><img src="/images/20160303_02.jpg" title="Stand by"></p>
-
-<p>はたしてどの程度アクセスが来たのでしょうか！？
-<a href="/2016/03/10/prepare_for_wbs2/">[後編]</a>に続く</p>
+<p>ということで今回は大規模プロジェクトとスクラム開発の適用をテーマに紹介させていただきました。
+ありがとうございました！</p>
 
             </div>
             <footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%89%8d%e7%b7%a8%5d&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f&amp;description=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%89%8d%e7%b7%a8%5d" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f03%2fprepare_for_wbs%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="大きめプロジェクトにスクラムを適用する" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f15%2fcard-ui-prj%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e5%a4%a7%e3%81%8d%e3%82%81%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%ab%e3%82%b9%e3%82%af%e3%83%a9%e3%83%a0%e3%82%92%e9%81%a9%e7%94%a8%e3%81%99%e3%82%8b&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f15%2fcard-ui-prj%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f15%2fcard-ui-prj%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f15%2fcard-ui-prj%2f&amp;description=%e5%a4%a7%e3%81%8d%e3%82%81%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%ab%e3%82%b9%e3%82%af%e3%83%a9%e3%83%a0%e3%82%92%e9%81%a9%e7%94%a8%e3%81%99%e3%82%8b" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f15%2fcard-ui-prj%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -498,21 +451,14 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
         
 <nav id="article-nav">
     
-    <a href="http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">Hack Day 2016ハッカソンに参加しました！</div>
+      <div class="article-nav-title">イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート</div>
     </a>
     
 
-    
-    <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]</div>
-    </a>
     
 </nav>
 
@@ -540,7 +486,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no)" alt="大きめプロジェクトにスクラムを適用する" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -565,7 +511,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/JJPqUTE-GFokoaW55BmRJ2_txdrPjwGyvf1uE5_OfmrHlEvm6XXPFbdcTEx7k1-WQkRjDI16HedIteQRrFTSA35ARTQlHPTwvl1RSKr2_kNHX_PiXIfoLPKczsVFPnPDlz9utQY31CbHnEjZP9bhlSktTDIbdr0HJZuwWYGb9NjnIkFbN4maAiiMfIpAzutII8-NRgvZvBKcRbgmOh1P80a2F-3P3eVCYv04BdaPBhQhMlFK2v19YrJ4lw_2NSdLvRcfKXLBmkr8UMH5u1fz4TMApOF4vDqQNEroOw-YxuhnCYD0xm5m5uzzHe-5jdS4ZTk0gErNGmmLg1ycRnKPterRkJbtcSPr6rM5FSdAaeI_iSn21Gmi7njAs4gJbxWTQKNyPLac8rNZ_Y0N9lTPWZliI9TtJMaxrHzMGFeBkwMpTqhWuQJfwrmoj08rGslaaC6j6SGqJHBr2cb2OSgywX4RNqp7ZY9GJSfsVcFhkLZEdGqvE8vgnCt3vIkIjmvz4EsP7GS-tbInBpCE1NQdVFLUH6NhfFEOsTMrPvADXopyNrOCLqu4DR8_U6yJtMNh-usud-EmNKvhaNPOvZUaoOrknHk4vkc=w1024-h768-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JJPqUTE-GFokoaW55BmRJ2_txdrPjwGyvf1uE5_OfmrHlEvm6XXPFbdcTEx7k1-WQkRjDI16HedIteQRrFTSA35ARTQlHPTwvl1RSKr2_kNHX_PiXIfoLPKczsVFPnPDlz9utQY31CbHnEjZP9bhlSktTDIbdr0HJZuwWYGb9NjnIkFbN4maAiiMfIpAzutII8-NRgvZvBKcRbgmOh1P80a2F-3P3eVCYv04BdaPBhQhMlFK2v19YrJ4lw_2NSdLvRcfKXLBmkr8UMH5u1fz4TMApOF4vDqQNEroOw-YxuhnCYD0xm5m5uzzHe-5jdS4ZTk0gErNGmmLg1ycRnKPterRkJbtcSPr6rM5FSdAaeI_iSn21Gmi7njAs4gJbxWTQKNyPLac8rNZ_Y0N9lTPWZliI9TtJMaxrHzMGFeBkwMpTqhWuQJfwrmoj08rGslaaC6j6SGqJHBr2cb2OSgywX4RNqp7ZY9GJSfsVcFhkLZEdGqvE8vgnCt3vIkIjmvz4EsP7GS-tbInBpCE1NQdVFLUH6NhfFEOsTMrPvADXopyNrOCLqu4DR8_U6yJtMNh-usud-EmNKvhaNPOvZUaoOrknHk4vkc=w1024-h768-no)" alt="大きめプロジェクトにスクラムを適用する" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -590,7 +536,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/05/14/slush-asia-2016/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w700)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w700)" alt="大きめプロジェクトにスクラムを適用する" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -615,7 +561,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/04/26/atami_de_sprint/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no)" alt="大きめプロジェクトにスクラムを適用する" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -640,7 +586,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                     <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="大きめプロジェクトにスクラムを適用する" class="thumbnail-image"></span>
                         
                     
                     </a>

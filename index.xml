@@ -6,8 +6,126 @@
     <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 24 May 2016 09:18:46 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jun 2016 22:48:09 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>大きめプロジェクトにスクラムを適用する</title>
+      <link>http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/</link>
+      <pubDate>Wed, 15 Jun 2016 22:48:09 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/</guid>
+      <description>
+
+&lt;p&gt;こんにちは！Housmartの宮永です。&lt;/p&gt;
+
+&lt;p&gt;過去に弊社のスクラム開発について概要をご紹介(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/14/dev_cycle/&#34;&gt;スタートアップのCTOになって2ヶ月で作った開発サイクル&lt;/a&gt;)させていただきました。
+今回はより実践的な話を説明します。&lt;/p&gt;
+
+&lt;p&gt;以前紹介しました通り、カウル開発チームは1週間／スプリントと短めに取ってますが、&lt;br /&gt;
+1週間じゃ収まらないようなサイズのプロジェクトの時はどう管理するの？って話になりますよね。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/DeS4fOe4wso6NXq5n3Bb1JF_ElFoV2Exz5kEIwnvSu9EBcPIw1AJoxIovNFh-yc_a_5J1XA0aqoRWdthxenXaEaMq7ieI--xhM7Xq2yKitNE0y7Med74EoMtaeoVmnrWOxjtQcvgOwhT93QUOctwrO9Oie6aAyeWea_cr6QMocWIvF-bpuLyLRlPWl7dqXOU9TXJtpZnxou-cxrDjsJyVsPf1TzWGu4CrPq1gGYo7DlwokfgvhXXPEBsn49KzmMMNO2ce3uYAR7GWtz6AJ4V3xyiOqt5uEuGEQt0MrIMxLnCsA7BhyiDPgmXeyXG0uELw5dg_CujJYLKBlQpaSTPh-A_-qZKzG823IdryPSoZJwtwVCeVSuFIS3VUHbOTXFFlgIMkJ1n6YypVsUBKG4ZvSkE6Z4IjAkRJyOcg08iLV2gug3UoU14pcAp-P2U3qB9yo6Sab1Jax2qNVrztn00HDC-f9ViFQND7ZhggIZDejXhkNVYTG--sPWfMMdEsZAKWsjLploXmlgldVZk7AN3GZBQqhMEFuWtapxU2CMwfevPaMcOJ_dJh8vZaJK1tTcYUUktpiAVDv2HQCZg_alS9y47QoGcQaM=w650-no&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;アジャイルの考え方では、要件を細分化することで1スプリント内に収め、
+あくまでスプリント終了時には新機能をお客様に提供しないといけません。&lt;br /&gt;
+しかし、モノによってはそうもいかないケースも有ります（と思ってます）。
+（特に弊社は1週間スプリントですのでザラにあります）&lt;/p&gt;
+
+&lt;p&gt;そういった複数スプリントを要する規模のプロジェクトに対してスクラムをどう適用させるか弊社の事例とともに紹介します。&lt;/p&gt;
+
+&lt;h2 id=&#34;プロジェクト背景:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト背景&lt;/h2&gt;
+
+&lt;p&gt;まずはプロジェクト背景について。&lt;br /&gt;
+プロジェクト開始時期は2016/04下旬で、&lt;br /&gt;
+この時弊社サービス（&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;）が抱えていた課題は下記の通りです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;リテンションが悪い（既存顧客が離脱しがち）&lt;/li&gt;
+&lt;li&gt;特にスマホデバイスでの&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;利用者の離脱が目立つ&lt;/li&gt;
+&lt;li&gt;希望条件を入力して提案された物件を見るというサービスを楽しむフローに乗れないユーザが存在（自身の希望条件が何かもわからない）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;この課題に対してカウル開発チームは下記解決方針でプロジェクトを進めていきました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スマホファーストなUIに変更する(スマホベースで要件を決める)&lt;/li&gt;
+&lt;li&gt;不動産購入に関する学習コンテンツの配置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;スマホファーストについては何を今更感があるかもしれませんが、&lt;br /&gt;
+スマホファーストにシフトするかについてはモバイル利用率を考慮して判断したい方針でもあったので、
+十分にスマホでのサイト利用を実感した今回のタイミングで踏み切りました。&lt;/p&gt;
+
+&lt;p&gt;要は&lt;strong&gt;「スマホユーザを中心にリテンションを改善しましょう」&lt;/strong&gt;というプロジェクトでした。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Yh-oH0obHiSwIP-VVUp_cMSHuUYPHvbxuYB48eqit-9gB9GTkSnPEfMvEHtqS9XxWL6K6MOn69lKwbZ9bPDW7DhvGYLSWyyeOuNEoS_Z3Hj3oOCRBXXuezKLruIOPfToydOmpjRwIPwbA6zXuZSfAC665wEdKC9obNtxy0HiQC08DLvuOA5Q-wiKW7cMVfJ9hZB773CJMlzmVbQ5ZVCu-uc04HPG61_kO39DKNU2NcpvAkPKfgggMBiZz4waVj1tZrYAtay1YaDC1Nw9BPGdu9lgWfknsKgGZejgireLiass9MIK2zWRlOx_9edG_XAUXD2FNNsVgN5XGURlZQbNubz3DgUbdEozfcBRNUn3sgrIwu55trIr2D_mSOWg6u29WAj482BVwXo9H7-F1gaOMlyN8wo_yCVVJsjrtMfoADma_qD88WeBVQ0ojz8-arIFuYRLexfh_fBtQIpOXC6Us3zXHAwZsyMV-umLz5atkE-3t6CCNzhkBHDBQTty-qmoWu5kxtZO_DDp_GSObKM1f6dxznhSusXPouqsWyuoWugRvhjfnB7sHC3WW0Pkc0oxuHMCtWDaTcdnQj0yVID7mBh69KLQDag=w650&#39; alt=&#39;スマホユーザの継続利用がテーマでした。&#39;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;プロジェクト-要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
+
+&lt;h3 id=&#34;要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;要件概要&lt;/h3&gt;
+
+&lt;p&gt;要件（概要）は下記の通りです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;提案に対するリアクション（気になるか興味なし）を慣習化させるため、表示する提案物件を1枚に限定し、リアクションを取ると次の提案が表示されるUIに改修。&lt;/li&gt;
+&lt;li&gt;リアクションについてはトランプカードを操作するような触ってて楽しい操作感に変更。&lt;/li&gt;
+&lt;li&gt;そもそも購入知識がないユーザに対しては不動産購入に関する記事を提供。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/9i6BpXVgyrWnKwwGShTHAI2R7IeID4ng45Gq_8VwLTxAn_nF-uar4EqOuZpv2Lq3Elk5RZK1BiZEySdMHgqBalhemW9L-ymQGrJGskbj8O4hXlJenwHVIsi08C1SvBuqOiSbPxXBHFB1_iQWoviqKt_M4Pwt2yzGUEEzUo9ZmijXoWpWamDHqn47jY2Fm_SmhkilLviF4P5Z9A3JfltKKKsGymofOc4ow1qVl40-e-t9GhbazHe-fzgaFEBENBfezUYci--USRP60r6VCkOaKRRFj73P7phQiGBOwmrVnfFPpA6dfZLDnlQs-pF_r1e1QC8gK9jeof5jsjclSuHp8t_3cbXKMtfPpE8SMKw1GyAC6piG9iJLwK8Yv4yHJL4PB6skHY3paCL0jVU5pq0nke2jmzzr1MnWnvAP1hj_WMzouv-cWMy-6tL8Q7Rvn_w7vHT5A1TpC4YS75_VL52zRq_Uz_ToYYwJptERK5chLkGLdRDe9biDA-WamJ-cc0SMHAxcmXpa6LekAZU8bfMBXQm4keHXBBoVuZS2SzUgPefxkXPaDHwF_LlyRWz3Jx-qB9KTj4d72_lv8Ky-YzE0MMyFyUmTx-Q=w300&#39; alt=&#39;気になる時は右にスワイプ、興味なしの時は左にスワイプ&#39; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ちなみに技術的なチャレンジとしては今回、リアクションのたびに状態を更新する仕様のため、&lt;a href=&#34;https://facebook.github.io/react/&#34;&gt;React&lt;/a&gt;を本格的に導入しました。
+また提案カードを右に左にさばくUIに関しては&lt;a href=&#34;https://github.com/gajus/swing&#34;&gt;swing.js&lt;/a&gt;を導入しました。&lt;/p&gt;
+
+&lt;h3 id=&#34;スクラムによる管理-スプリントの適用:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
+
+&lt;p&gt;ここからが本題です。結論から申し上げますと、本プロジェクトは4スプリント消費する結果となりました。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/bOhDmdJ8YH43fX5RnWZHdDCWMfBXLd59SC1DsoQPZ9gCmWK0j_lge9872lCZDen7sm7H7hqF6Ye6r4DL8cN-Rv636B3G_8tiB2_mFdyXbx5f52xAgu3pudMIIW1oO9sRmfcmm6CHNlNPwTwjqBrNTURLgz5JWgOIOGim0tfhG8Ar0y9HQo3bdXuOhdmdt4EcRMj2592cuaUDWWGh9ZEykdd8Mz5Ezx1l2JYpxlpXRZVvd_FCtVYsxb-5IJ2RdihyBgPKG3FE0emHiBmBEJXcj6trjPUYWC8YOH_8fgEMeFEIREsn8zcSsbRlL7YAfJjorwUVtmj4GRKCK_7Mubm-0qgTDP0m5Z0yjK3RFRfp4YGlOTx4nCyK7OHTHTghiwk6mQjwWe0aoOdCZZ4m-cc9rYlFH2V0IuzXwkgxDcJHoWeWSZGq2hOjHdISNbZy3LLgDGV-k5emE4x5AenF0D25xFLe-3T4EmxJ2KtaJe2YPrVkdUog3_XDyaTOpIOnVmHF0RYmfpLXYZ8obZ7gt-dnmZEHSj9lrq9hrN85z5M6EpEKHDBxhdUWNPX_3R7rauEV8nd2DWic023p2TjkF3-HlAb5fVHKaN8=w650&#39; alt=&#39;※GWのため途中空きがあります。&#39;/&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;第1スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第1スプリント&lt;/h4&gt;
+
+&lt;p&gt;技術的検証、UI検証、ユーザヒアリングなどを行いながら&lt;br /&gt;
+そもそもニーズあるの？やるとしてできるの？UIとして要件を満たせそう？など&lt;br /&gt;
+手戻りが許されないissueから潰していくようなスプリントにしました。&lt;/p&gt;
+
+&lt;h4 id=&#34;第2スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第2スプリント&lt;/h4&gt;
+
+&lt;p&gt;2スプリント目では（より詳細な）要件定義、デザイナー調整（外部）、設計に充てました。&lt;br /&gt;
+スプリント全て消化するほどのタスク量はないため、スプリントの後半は別案件の開発をしていました。&lt;/p&gt;
+
+&lt;h4 id=&#34;第3-4スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第3, 4スプリント&lt;/h4&gt;
+
+&lt;p&gt;本スプリントでは前半で外部デザイナーさんに2日程度来社してもらい、がっつりデザイン。&lt;br /&gt;
+その後、開発、テスト、そしてリリースという流れでした。
+当初は第3スプリント内でリリースを目指していましたが、開発ボリュームが想定以上に膨らんでしまったため、&lt;br /&gt;
+第3スプリント内でのリリースは間に合わず次のスプリントでのリリースとなりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;プロジェクト-スクラムの振り返り:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
+
+&lt;h3 id=&#34;良かった点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;良かった点&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プロトタイプのスプリントを設けたことで技術、UI検証に十分な時間を割くことが出来た。&lt;/li&gt;
+&lt;li&gt;幸運にも優秀なデザイナーさんご協力頂けて、早期リリースが実現できた。（※完全にデザインありきだったので、&lt;a href=&#34;https://dribbble.com/noga419&#34;&gt;野上さん&lt;/a&gt;に今回ご協力いただけたことに本当に感謝しております！）&lt;/li&gt;
+&lt;li&gt;当初の目的であるリテンションについては如実に改善の傾向が見られる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Ww8hew5x3tqBeN4PV-fixXAssyYbWh48t9Y7NiUpszShShPTcLJt0YxtEYtOJLezr4mmlT0LLy8ZleCBf8V4rDliZbVfNEuIOglZnpTAohnYgcMNWqzMjYdOWWiNuotnBRB1b0aV_R1u5-P61wTEvsrOS7aQxx0q4cmWqOPURzKXKwR4wvxD115O9SwSes1RgG2VJUOGJWrdwPrXdza34-3kD945v7prVcZTjZIJToCYx9ES8P4GBlrsm9lzUAj5pYpWa-ix1TBHtbV8cEznvFA5b62WpCbUOuOVJj-KUQFy8j_n1iC484nw4vcDh-xwhV2bVj47xZM1Fc2uhntfhV1Uq1adzd4zjI7LPjGHBgi7u1YfjX51MT489fqkFUTeSN3FctPvDoSZrlX4IKN0REGtQ7qlOUll9qDy_n9Q6vB7e5OTjzg7PcFQhP-ge0axsXo-gqazP3kZ-VmteG1GVVDe_Y63YhI2N80F1j4oE5OuQBwodbMfs6LWtxbWd9PfnLzJdhVY5s5TnxBxGId_98GrFjUDJS3L62XvSzo4iYON2yZnfXkgFRmvba6yU2-XDKQ-iB4XLz4iREFuDpB2sSWGujTY8Ws=w650&#39; alt=&#39;改善したリテンションに関する指数&#39;&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;改善点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;改善点&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;結果として良かったものの事前のユーザヒアリングが不足していた。（ユーザが求めていないモノを作ってしまわないかというリスクへの対処）&lt;/li&gt;
+&lt;li&gt;デザイナー調整の開始が遅すぎて普通だったらありえないようなギリギリのスケジュールで進めてしまった。(&lt;a href=&#34;https://dribbble.com/noga419&#34;&gt;野上さん&lt;/a&gt;がスーパーデザイナーで助かった。。。)
+&lt;strong&gt;ああ、専属デザイナー欲しいよ！（絶賛募集中です）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ということで今回は大規模プロジェクトとスクラム開発の適用をテーマに紹介させていただきました。
+ありがとうございました！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート</title>
