@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>Design &middot; カウル Tech Blog</title>
+    <title>なぜdevelopブランチは必要なの？ &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.16" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -9,9 +9,6 @@
     
       <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
     
-    
-      <link href="http://techblog.housmart.co.jp/tags/design/index.xml" rel="alternate" type="application/rss+xml" title="カウル Tech Blog" />
-      <link href="http://techblog.housmart.co.jp/tags/design/index.xml" rel="feed" type="application/rss+xml" title="カウル Tech Blog" />
     
     <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
     <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
@@ -22,37 +19,61 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/tags/design/" />
-    <meta property="og:title" content="Design" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/tags/design/" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" />
+    <meta property="og:title" content="なぜdevelopブランチは必要なの？" />
+<meta property="og:description" content="「Gitのブランチ構成どうしましょうか？」 「とりあえずdevelop切ってやっていきますね。」 そのdevelopブランチ本当に必要でしょうか" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800" />
 
 
-<meta property="og:updated_time" content="2016-05-24T09:18:46&#43;09:00"/>
-
-
-
-
-
+<meta property="og:updated_time" content="2016-06-22T21:25:46&#43;09:00"/>
 
 
 
 
-    
-    
-<meta itemprop="name" content="Design">
-<meta itemprop="description" content="">
+
+
+
+
 
 
     
+    
+<meta itemprop="name" content="なぜdevelopブランチは必要なの？">
+<meta itemprop="description" content="「Gitのブランチ構成どうしましょうか？」 「とりあえずdevelop切ってやっていきますね。」 そのdevelopブランチ本当に必要でしょうか">
+
+
+<meta itemprop="dateModified" content="2016-06-22T21:25:46&#43;09:00" />
+<meta itemprop="wordCount" content="1690">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800">
+
+
+
+<meta itemprop="keywords" content=",data-analysis,design,event,infra,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,media,operation,pitch,project,rails,work," />
+
+    
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800"/>
+
+
+
+<meta name="twitter:title" content="なぜdevelopブランチは必要なの？"/>
+<meta name="twitter:description" content="「Gitのブランチ構成どうしましょうか？」 「とりあえずdevelop切ってやっていきますね。」 そのdevelopブランチ本当に必要でしょうか"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+
 </head>
 <body>
 <div class="container">
 
 
 <div id="container">
-    
+	
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -145,8 +166,9 @@
   </div>
 </header>
 
-    <div class="outer">
-        <aside id="profile">
+   	
+   	<div class="outer">
+	    <aside id="profile">
   <div class="inner profile-inner">
     <div class="base-info profile-block">
       <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
@@ -235,45 +257,204 @@
   </div>
 </aside>
 
-        <section id="main">
-            <section class="archives-wrap">
-                <div class="archive-category-wrap">
-                    <span class="archive-category">Design</span>
-                </div>
-                <div class="archives">
-                    
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
             
-            <a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" class="thumbnail">
                 
-                <span style="background-image:url(https://lh3.googleusercontent.com/JJPqUTE-GFokoaW55BmRJ2_txdrPjwGyvf1uE5_OfmrHlEvm6XXPFbdcTEx7k1-WQkRjDI16HedIteQRrFTSA35ARTQlHPTwvl1RSKr2_kNHX_PiXIfoLPKczsVFPnPDlz9utQY31CbHnEjZP9bhlSktTDIbdr0HJZuwWYGb9NjnIkFbN4maAiiMfIpAzutII8-NRgvZvBKcRbgmOh1P80a2F-3P3eVCYv04BdaPBhQhMlFK2v19YrJ4lw_2NSdLvRcfKXLBmkr8UMH5u1fz4TMApOF4vDqQNEroOw-YxuhnCYD0xm5m5uzzHe-5jdS4ZTk0gErNGmmLg1ycRnKPterRkJbtcSPr6rM5FSdAaeI_iSn21Gmi7njAs4gJbxWTQKNyPLac8rNZ_Y0N9lTPWZliI9TtJMaxrHzMGFeBkwMpTqhWuQJfwrmoj08rGslaaC6j6SGqJHBr2cb2OSgywX4RNqp7ZY9GJSfsVcFhkLZEdGqvE8vgnCt3vIkIjmvz4EsP7GS-tbInBpCE1NQdVFLUH6NhfFEOsTMrPvADXopyNrOCLqu4DR8_U6yJtMNh-usud-EmNKvhaNPOvZUaoOrknHk4vkc=w1024-h768-no)" alt="イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート" class="thumbnail-image"></span>
+                <img src="https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800" class="article-banner">
                 
-            </a>
             
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/">イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2016-05-24 09:18:46 &#43;0900 JST" itemprop="datePublished">2016-05-24</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                </div>
-            </section>
-            <nav id="page-nav">
 
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/">
+    <h1 class="article-title" itemprop="name">
+        なぜdevelopブランチは必要なの？
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
+            &middot;
+            1690
+            words
+            &middot;
+            4
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/"></a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/git">git</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>「Gitのブランチ構成どうしましょうか？」<br />
+「とりあえずdevelop切ってやっていきますね。」</p>
+
+<p>そのdevelopブランチ本当に必要でしょうか。<br />
+developブランチだけ使われていて、masterが全く使われていなかったりしないでしょうか。</p>
+
+<p>よく聞かれるブランチ戦略としては<a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a>や<a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub Flow</a>、、<a href="http://docs.gitlab.com/ee/workflow/gitlab_flow.html">GitLab Flow</a>等があります。<br />
+git-flowにおいてはdevelopやhotfix、releaseといったブランチがありますが、GitHub Flowにはmasterブランチと機能開発ブランチの2つしかありません。GitLab Flowはmasterを中心に開発を行い、productionブランチを安定させていくスタイルです。</p>
+
+<p>実際に新しいプロジェクトを始めるとしたら、どの構成が良いのでしょうか。<br />
+今回はカウルを開発するにあたり採用したブランチの構成とその背景について紹介します。</p>
+
+<h2 id="望んでいたこと">望んでいたこと</h2>
+
+<p>前提としてカウルのプロジェクトを始めるにあたって望んだことは以下の3つです。</p>
+
+<ol>
+<li>ロールバックによるバージョン戻しが容易であること</li>
+<li>問題が起きた場合にバージョン間の問題の切り分けが容易であること</li>
+<li><strong>時間のかかる機能開発中にもバグ修正コミットを差し込めること</strong></li>
+</ol>
+
+<p>1と2については、リリース時にタグをつけておくことで容易に<code>git reset</code>や<code>git diff</code>が出来ます。</p>
+
+<p>3つ目の要件については、developブランチがあるとよいと考えました。</p>
+
+<h2 id="実際のブランチ構成">実際のブランチ構成</h2>
+
+<p>上記を踏まえると、タグづけとdevelopブランチはあると良さそうです。<br />
+よってカウルでは以下の構成をとりました。</p>
+
+<ul>
+<li><strong>master</strong>
+
+<ul>
+<li>テストで確認されたdevelopだけが<code>git merge --no-ff</code>コマンドでマージされる</li>
+<li>急ぎのバグ修正(hotfix)は、確認された後developブランチを経由しない</li>
+<li>リリース時に自動で&rdquo;日付_インデックス&rdquo;tagを付ける(たとえば&rdquo;20160622_01&rdquo;)</li>
+</ul></li>
+<li><strong>develop</strong>
+
+<ul>
+<li>masterから派生したブランチ、featureブランチの派生元</li>
+</ul></li>
+<li><strong>(feature/)チケット番号</strong>
+
+<ul>
+<li>developから派生した機能開発全般のブランチ</li>
+</ul></li>
+<li><strong>(hotifix/)チケット番号</strong>
+
+<ul>
+<li>masterから派生したバグ修正用のブランチ</li>
+</ul></li>
+</ul>
+
+<p>現状、featureやhotixといった修飾は特につけておらず、概念だけメンバー間で共有しています。</p>
+
+<h2 id="実際の開発フロー">実際の開発フロー</h2>
+
+<p>考えた構成を基に以下のような流れで開発を行っています。</p>
+
+<ol>
+<li>最新のdevelopからチケット番号でブランチを切る</li>
+<li>チケット番号ブランチで開発した機能をコミット、プッシュする</li>
+<li>終わったらdevelopにプルリクエストを送り、レビューの後マージされる</li>
+<li>ステージング環境に最新のdevelopを出して確認する</li>
+<li>問題なければdevelopをmasterにマージしタグ付け、 本番に最新のタグをデプロイする</li>
+</ol>
+
+<h2 id="カウルの構成でもdevelopは必要なのか">カウルの構成でもdevelopは必要なのか</h2>
+
+<p>1ヶ月程度かかるような<a href="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/">大きめプロジェクト</a>があり、
+他の機能開発も行っているので今のところはあるとよいと考えています。</p>
+
+<p>また一方で以下の変化を踏まえて、よりgithub-flowに近い構成でも問題ない状況になりつつあると考えています。</p>
+
+<ul>
+<li>コードはすぐにリリースできる状態になっており、日に何度かリリースされることもあり、masterとdevelopの間で違いが少なくなっている</li>
+<li>開発初期に比べてコードのベースはできていて、小中規模機能や他の箇所への影響が少ない開発が多くなっている</li>
+</ul>
+
+<h2 id="いつdevelopブランチは必要なの">いつdevelopブランチは必要なの？</h2>
+
+<p>数日~1週間でブランチがマージされていく状況であればdevelopはなくても問題ないでしょう。シンプルな構成の方がGitの操作も少なくて済みます。<br />
+数週間を越えてブランチがマージされないような状況を開発をしているときはdevelopやreleaseがあると安定したプロダクトを出荷できると考えます。</p>
+
+<hr />
+
+<p>今回はカウルのGitブランチ管理について紹介致しました。<br />
+ユーザに素早く安定した価値を届けらる、開発者にも優しい運用にするべく今後も取り組んでいきます！</p>
+
+<p>by まっくす</p>
+
+            </div>
+            <footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="なぜdevelopブランチは必要なの？" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%81%aa%e3%81%9cdevelop%e3%83%96%e3%83%a9%e3%83%b3%e3%83%81%e3%81%af%e5%bf%85%e8%a6%81%e3%81%aa%e3%81%ae%ef%bc%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f&amp;description=%e3%81%aa%e3%81%9cdevelop%e3%83%96%e3%83%a9%e3%83%b3%e3%83%81%e3%81%af%e5%bf%85%e8%a6%81%e3%81%aa%e3%81%ae%ef%bc%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">大きめプロジェクトにスクラムを適用する</div>
+    </a>
+    
+
+    
 </nav>
 
-        </section>
-        <aside id="sidebar">
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
     
 <div class="widget-wrap">
     <h3 class="widget-title">
@@ -287,7 +468,7 @@
                     <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="なぜdevelopブランチは必要なの？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -312,7 +493,7 @@
                     <a href="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/96jhLGRYapuOtkfvOD73xNZCCTrqExqVdxJUFbNYONQ2-lUSRsRlYzv9U5nJ9AIlMFMcaU6WxkHErwxxwRkDqgaCxi7IAC-uUh-KywOuKDyd4j7MslYiwOc4bb2wZdpygVCTTwgb-r5bbQVfWngLzE8t_IqCGTZM8Vogo0_bP9nQu0ypWV6lrVANod5qnPtXCYeoyiZat3f-ocbjEXZE37s8kgOLI4elz66ZnfKvg_GO_eDhe-fgizOBzfvZn0571YVR8ma2-Ryqfwsb5xAppkNuZsoXiSeKqfqzRkS-9r2qcs9_PRNLbNiAvUAIkav2TCLXlV9QWfwGU-Lkv7l6nk62NCmjnSenKbH6NV-vX8eDn0t1z7w2zlog3axq895JP0a6lB_9XVJcwjLyPf1H2heq3bpfBrsnb5sAsPBcs3g9dPt8l2iB3hxndS-hGx14VPvSbxBAdwMJQ5RiX4mbQ_a0HhW5spbA9oMhs5NzsI350Gh6RqqZ0jZHfT0l1VDG1AleqBtUhlB6dko-BATUYMKxxhrLhVQuLW9CsVjkfszc8Xxo9MBC94jx_w9uth_63gr6CukRCsRzvXQCnToIU7x_xwyV1cM=w650-no)" alt="なぜdevelopブランチは必要なの？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -337,7 +518,7 @@
                     <a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/JJPqUTE-GFokoaW55BmRJ2_txdrPjwGyvf1uE5_OfmrHlEvm6XXPFbdcTEx7k1-WQkRjDI16HedIteQRrFTSA35ARTQlHPTwvl1RSKr2_kNHX_PiXIfoLPKczsVFPnPDlz9utQY31CbHnEjZP9bhlSktTDIbdr0HJZuwWYGb9NjnIkFbN4maAiiMfIpAzutII8-NRgvZvBKcRbgmOh1P80a2F-3P3eVCYv04BdaPBhQhMlFK2v19YrJ4lw_2NSdLvRcfKXLBmkr8UMH5u1fz4TMApOF4vDqQNEroOw-YxuhnCYD0xm5m5uzzHe-5jdS4ZTk0gErNGmmLg1ycRnKPterRkJbtcSPr6rM5FSdAaeI_iSn21Gmi7njAs4gJbxWTQKNyPLac8rNZ_Y0N9lTPWZliI9TtJMaxrHzMGFeBkwMpTqhWuQJfwrmoj08rGslaaC6j6SGqJHBr2cb2OSgywX4RNqp7ZY9GJSfsVcFhkLZEdGqvE8vgnCt3vIkIjmvz4EsP7GS-tbInBpCE1NQdVFLUH6NhfFEOsTMrPvADXopyNrOCLqu4DR8_U6yJtMNh-usud-EmNKvhaNPOvZUaoOrknHk4vkc=w1024-h768-no)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JJPqUTE-GFokoaW55BmRJ2_txdrPjwGyvf1uE5_OfmrHlEvm6XXPFbdcTEx7k1-WQkRjDI16HedIteQRrFTSA35ARTQlHPTwvl1RSKr2_kNHX_PiXIfoLPKczsVFPnPDlz9utQY31CbHnEjZP9bhlSktTDIbdr0HJZuwWYGb9NjnIkFbN4maAiiMfIpAzutII8-NRgvZvBKcRbgmOh1P80a2F-3P3eVCYv04BdaPBhQhMlFK2v19YrJ4lw_2NSdLvRcfKXLBmkr8UMH5u1fz4TMApOF4vDqQNEroOw-YxuhnCYD0xm5m5uzzHe-5jdS4ZTk0gErNGmmLg1ycRnKPterRkJbtcSPr6rM5FSdAaeI_iSn21Gmi7njAs4gJbxWTQKNyPLac8rNZ_Y0N9lTPWZliI9TtJMaxrHzMGFeBkwMpTqhWuQJfwrmoj08rGslaaC6j6SGqJHBr2cb2OSgywX4RNqp7ZY9GJSfsVcFhkLZEdGqvE8vgnCt3vIkIjmvz4EsP7GS-tbInBpCE1NQdVFLUH6NhfFEOsTMrPvADXopyNrOCLqu4DR8_U6yJtMNh-usud-EmNKvhaNPOvZUaoOrknHk4vkc=w1024-h768-no)" alt="なぜdevelopブランチは必要なの？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -362,7 +543,7 @@
                     <a href="http://techblog.housmart.co.jp/2016/05/14/slush-asia-2016/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w700)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w700)" alt="なぜdevelopブランチは必要なの？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -387,7 +568,7 @@
                     <a href="http://techblog.housmart.co.jp/2016/04/26/atami_de_sprint/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/hG7KmKfvknl6QxEu8O2TmVXuQ8XPTpnTGYWTbsi1IsDGjgEDr6lbIarcGuggHU59rD7uQEp80c-QkQ60Ssmc7jEugqapXm5MQkLtD5UbG6jSfKJ-NplAUFXAxkbeyO1iZ6OOS0u-lQ5hJzu0hIP9s9fJkx0TNqWnhOsT0PyZ5TaqfPRPR-nT97ggD7YQgR8hYfp5Zz-NuiGqWi7q--PxaNNzLVrY5eE9ePkWMOuIOXRjbZXkl91XJ4dgwlX1Y60unAyNMtQLJe-QS4BECUKGw6eKRDin9sxuWeXnmRRysfFzOyJg8AAbYKRZ-HZ9oyrKL95T797ng_t9I0nX3hyieMOgSqTg4udWaMRacRkPXigJVyIj7C9LroPUzlfaBrSoLXw1fExl44YfM2Cr4opEMxh11YzrLV-MYLwlSROFhGeVD4IUMg_BnZHqliBShtj2dmLzP3XrgU8pqwxGQ_yEVkytNGHTBEm-2K62GIWAh_-4JNqfn_lMfxLUUqQ1_uHktW95V1tsXctHnBrjS41JoZaTZZNVs5MDyNSduvBh7pTAXWtoWGhweG9HTdzPFylX6VmB=w650-h602-no)" alt="なぜdevelopブランチは必要なの？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -649,7 +830,7 @@
     <div id="toTop" class="fa fa-chevron-up"></div>
 </aside>
 
-    </div>
+	</div>
 </div>
 
 <footer id="footer">

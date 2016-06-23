@@ -6,8 +6,112 @@
     <description>Recent content in Development on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 15 Jun 2016 22:48:09 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jun 2016 21:25:46 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>なぜdevelopブランチは必要なの？</title>
+      <link>http://techblog.housmart.co.jp/2016/06/22/git-workflow/</link>
+      <pubDate>Wed, 22 Jun 2016 21:25:46 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/06/22/git-workflow/</guid>
+      <description>
+
+&lt;p&gt;「Gitのブランチ構成どうしましょうか？」&lt;br /&gt;
+「とりあえずdevelop切ってやっていきますね。」&lt;/p&gt;
+
+&lt;p&gt;そのdevelopブランチ本当に必要でしょうか。&lt;br /&gt;
+developブランチだけ使われていて、masterが全く使われていなかったりしないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;よく聞かれるブランチ戦略としては&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;git-flow&lt;/a&gt;や&lt;a href=&#34;http://scottchacon.com/2011/08/31/github-flow.html&#34;&gt;GitHub Flow&lt;/a&gt;、、&lt;a href=&#34;http://docs.gitlab.com/ee/workflow/gitlab_flow.html&#34;&gt;GitLab Flow&lt;/a&gt;等があります。&lt;br /&gt;
+git-flowにおいてはdevelopやhotfix、releaseといったブランチがありますが、GitHub Flowにはmasterブランチと機能開発ブランチの2つしかありません。GitLab Flowはmasterを中心に開発を行い、productionブランチを安定させていくスタイルです。&lt;/p&gt;
+
+&lt;p&gt;実際に新しいプロジェクトを始めるとしたら、どの構成が良いのでしょうか。&lt;br /&gt;
+今回はカウルを開発するにあたり採用したブランチの構成とその背景について紹介します。&lt;/p&gt;
+
+&lt;h2 id=&#34;望んでいたこと&#34;&gt;望んでいたこと&lt;/h2&gt;
+
+&lt;p&gt;前提としてカウルのプロジェクトを始めるにあたって望んだことは以下の3つです。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ロールバックによるバージョン戻しが容易であること&lt;/li&gt;
+&lt;li&gt;問題が起きた場合にバージョン間の問題の切り分けが容易であること&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;時間のかかる機能開発中にもバグ修正コミットを差し込めること&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1と2については、リリース時にタグをつけておくことで容易に&lt;code&gt;git reset&lt;/code&gt;や&lt;code&gt;git diff&lt;/code&gt;が出来ます。&lt;/p&gt;
+
+&lt;p&gt;3つ目の要件については、developブランチがあるとよいと考えました。&lt;/p&gt;
+
+&lt;h2 id=&#34;実際のブランチ構成&#34;&gt;実際のブランチ構成&lt;/h2&gt;
+
+&lt;p&gt;上記を踏まえると、タグづけとdevelopブランチはあると良さそうです。&lt;br /&gt;
+よってカウルでは以下の構成をとりました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;master&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;テストで確認されたdevelopだけが&lt;code&gt;git merge --no-ff&lt;/code&gt;コマンドでマージされる&lt;/li&gt;
+&lt;li&gt;急ぎのバグ修正(hotfix)は、確認された後developブランチを経由しない&lt;/li&gt;
+&lt;li&gt;リリース時に自動で&amp;rdquo;日付_インデックス&amp;rdquo;tagを付ける(たとえば&amp;rdquo;20160622_01&amp;rdquo;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;develop&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;masterから派生したブランチ、featureブランチの派生元&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;(feature/)チケット番号&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;developから派生した機能開発全般のブランチ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;(hotifix/)チケット番号&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;masterから派生したバグ修正用のブランチ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;現状、featureやhotixといった修飾は特につけておらず、概念だけメンバー間で共有しています。&lt;/p&gt;
+
+&lt;h2 id=&#34;実際の開発フロー&#34;&gt;実際の開発フロー&lt;/h2&gt;
+
+&lt;p&gt;考えた構成を基に以下のような流れで開発を行っています。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;最新のdevelopからチケット番号でブランチを切る&lt;/li&gt;
+&lt;li&gt;チケット番号ブランチで開発した機能をコミット、プッシュする&lt;/li&gt;
+&lt;li&gt;終わったらdevelopにプルリクエストを送り、レビューの後マージされる&lt;/li&gt;
+&lt;li&gt;ステージング環境に最新のdevelopを出して確認する&lt;/li&gt;
+&lt;li&gt;問題なければdevelopをmasterにマージしタグ付け、 本番に最新のタグをデプロイする&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;カウルの構成でもdevelopは必要なのか&#34;&gt;カウルの構成でもdevelopは必要なのか&lt;/h2&gt;
+
+&lt;p&gt;1ヶ月程度かかるような&lt;a href=&#34;http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/&#34;&gt;大きめプロジェクト&lt;/a&gt;があり、
+他の機能開発も行っているので今のところはあるとよいと考えています。&lt;/p&gt;
+
+&lt;p&gt;また一方で以下の変化を踏まえて、よりgithub-flowに近い構成でも問題ない状況になりつつあると考えています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;コードはすぐにリリースできる状態になっており、日に何度かリリースされることもあり、masterとdevelopの間で違いが少なくなっている&lt;/li&gt;
+&lt;li&gt;開発初期に比べてコードのベースはできていて、小中規模機能や他の箇所への影響が少ない開発が多くなっている&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;いつdevelopブランチは必要なの&#34;&gt;いつdevelopブランチは必要なの？&lt;/h2&gt;
+
+&lt;p&gt;数日~1週間でブランチがマージされていく状況であればdevelopはなくても問題ないでしょう。シンプルな構成の方がGitの操作も少なくて済みます。&lt;br /&gt;
+数週間を越えてブランチがマージされないような状況を開発をしているときはdevelopやreleaseがあると安定したプロダクトを出荷できると考えます。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;今回はカウルのGitブランチ管理について紹介致しました。&lt;br /&gt;
+ユーザに素早く安定した価値を届けらる、開発者にも優しい運用にするべく今後も取り組んでいきます！&lt;/p&gt;
+
+&lt;p&gt;by まっくす&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>大きめプロジェクトにスクラムを適用する</title>
@@ -25,7 +129,7 @@
 &lt;p&gt;以前紹介しました通り、カウル開発チームは1週間／スプリントと短めに取ってますが、&lt;br /&gt;
 1週間じゃ収まらないようなサイズのプロジェクトの時はどう管理するの？って話になりますよね。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/hCAFCyecL4RKITv1P48fuBhUy270x01z0uykaV9nWVo5MI10TV4tEp3KWmhksy4fxoE095bgQzksHEoIPTCwZOlH_cGmw3J2V1-GiD8T3A2iJyr7GgSp1YsN5HCkJU24sUixXLQtElu1CXvslFB-0QBtoyb7yxl9cBaColKGEfe3eF1TZCaIfMjt2SrBuOVv1JhU39AHnPLU8znm1s5do874_9VcW1b4X-PAPJvujgNUBDrireZYBUQoEQyl5iqiICeqIbpQgxtOU14luXqQ91CZ1AV8SEekiCN65fubbAg9I8Z1esd8SWANSTI-W_BxHXa0B7swyzB5h44zDBLytDhMiuQATAi3gdC9tfWLUT2sTc7p_cRhQIM3XuY85QAMBexGyPng6mRhyjr6aEH4JKnQmAhQuBy7dXKHdYbWlR9V8O6xMhgZdWg08_izrYWrpTkVR0KMC1AB_QvWJ9RHWcM9iyt3apNGPJzYJXdIE3dejo3gn7betrZiHEKyru2z6F1dgsWSXxcGF2IRY-S11XJMtLXHjK0yfUPKBB8jWNrXY46KMuMJgDbquW_QkSYCHe-PgFqt7MCaMW5iq3LgiKI-cXRJJdA=w650&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/teOBN1hx88WnjkLmj5IAQQdUWSp8w-A_8pyaqW3TG0_1yCLJoQuIX3BqfeXAMAJA-m9fIQJHZ4SRT1DH-K64Zglma9TvzHSxjda0dKX9RNpn6HtvY8PnccXVzZkt7UZqgYkFyy4UYj0WD-vyMZ08WC68JPUf-HlKXM8lvSHzk_6BAjwPDmlwX5kuDBBwT82uq3fTfEZCZY6gIEmT9RCsphAcVHNJCfbVYE3xXENZN0svE5FhouUc97KK5dkNMUAGOJdCjhnK92ROUoKg3ijB8J-hDB6KgsIV9iWz5nWgZNL6PEeXORn3mFp2uR8vKoKM3pr0BsbrW5IG2QJHzdWwx_ZAddKt4DsDGsseRgh6T32hydccuX8wp4AS2fsHM9sTllEqCXIL50UBJVM5X6wMAIWgV3P6ra9JtuNqvXquO_kvaBtDdTJOUaQNOqMnB1HWwGo5LwTxF2p_p00azVBWFF8qkvWpAS6XACj8WaI8H0PBq2Ii9UfL607CRCf-Ai7kztOpwrdwb4eRQK-7RdKKCigMH6XEwkjfu57VHyBiKekNguxe5faEswIvTo2cL4HB375F0pBBXs9na-Ji70AEwfiGI9V-l2w=w650&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;アジャイルの考え方では、要件を細分化することで1スプリント内に収め、
 あくまでスプリント終了時には新機能をお客様に提供しないといけません。&lt;br /&gt;
@@ -34,7 +138,7 @@
 
 &lt;p&gt;そういった複数スプリントを要する規模のプロジェクトに対してスクラムをどう適用させるか弊社の事例とともに紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト背景:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト背景&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト背景&#34;&gt;プロジェクト背景&lt;/h2&gt;
 
 &lt;p&gt;まずはプロジェクト背景について。&lt;br /&gt;
 プロジェクト開始時期は2016/04下旬で、&lt;br /&gt;
@@ -59,11 +163,11 @@
 
 &lt;p&gt;要は&lt;strong&gt;「スマホユーザを中心にリテンションを改善しましょう」&lt;/strong&gt;というプロジェクトでした。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/6KhgEzYf8eYn34J7oNsxcLnxud3JRyqJhrRlEQjBofcWY5JMu4eKo63DCehRZLxN2clPJQ-eiBudz-HSv3y1APcWC4PWJqB5i4V1rD3dTW9Ml6ojl6HC_tmnl3AVuLLTSDjgb8rLTLSEhhb8q_IdFTp8sPlKjQ6H-FzRfn0KEvXsW_CUGc52HUGhOcKuoYPEvbMAVyy3a94-WvQBnwxk2vppD4nCitSOiKxVekU7RTtdpe5Xp1VKJ_xMSCT2IvK7m6lP-joIc1lFdJxoBPbFffpCdWRCyA0aHgtXbxgfA6DzPb3ilky7lsWOj_45ygj7-Ky2JhwbCwZhqBSjr1uN05MfebBQ58p69Xo--D9ld3XsTYR3zFkXnX1uGb6rFiZHIqz2oYJQKnwH9kfqwnCE6FvSgB5vcsdhQfDWIhP7HUHMh-PDEXZAKvI-JU2vDSE70m9uhBUlp8N6IpzBb62aZG1wxr7N6VzEqVXiTYL1rSIJELDD0PMUgfXApD-LOoKlBWsIjo8SqtXI6D8gMcwby4aWTBDCyAptUzLQqaIFfoOsCP5DutxIjRWavJQS7K6cpvHLfFpL5ciWGQ_awO9gUC_3f315ZQo=w650&#39; alt=&#39;スマホユーザの継続利用がテーマでした。&#39;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/b5osB9bYumjeJH7ryNbZWxG1a8Ig34ZYgYo4VEVQhkh4Uv0EWDgxRyeqXhHmMnI8591_Ndk6BpHUeU-PZQHHsDTpauVeKJLyrv7efneYdfq0v5sERMtsSoKYIgXXDXaNyaL2S0LmdYB5TqEd9c3Fj7GMyW0T_m5yBPZDcGHuYYWeA66VZDi39jn-SXmTmhkfQVonUOVNhksxadRPZISBBOZ3RATsrtGbiRK6KDku7p8zhhJ0UG7rpwNXUYXP4iNCSO-YiNI9Etg4MH2Wj3mN88gMaS0S-3zS4I_tjr5C4cvq8S5Iv8zfc0grNECIAJJePTQX4YmIhxWCyQW0q_OAg0YTlaNKEgPypSE6u3jPqkGX4PFqnZf4GoOisRcv-Unbwp3SEvzAAyzw9u736HV5EC5lgUcasc8Vi7uzDAVFYdm-SGvS9TPJkgq_JJ2ftTmba0Juup7aF2hl84ntOC-pfWga5C-i_uW0H4UyTzUKn19Gjd5Kj-K-BIGiH9jgmT-uf-wEqXguJoxkacO4NHRd7laXdjeyCj6dItl_tXhYAWL9zQg-GNw4uE3UkTEYKKwiZk3tnHLo1s1ozPJjmFb5TFw8_2Ao6-w=w650&#39; alt=&#39;スマホユーザの継続利用がテーマでした。&#39;/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト-要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト-要件概要&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
 
-&lt;h3 id=&#34;要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;要件概要&lt;/h3&gt;
+&lt;h3 id=&#34;要件概要&#34;&gt;要件概要&lt;/h3&gt;
 
 &lt;p&gt;要件（概要）は下記の通りです。&lt;/p&gt;
 
@@ -73,38 +177,38 @@
 &lt;li&gt;そもそも購入知識がないユーザに対しては不動産購入に関する記事を提供。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/PgmFlQLT8vfH5sKe8UVxlOs0E6xXMv2nFm73jKiQC4pIqnDSio-3sC8w-EYczUo69YTi0oUL2OBISuvdLZxyBWsktWFh6_yhGNonRiF8qqL9ZjMnIX-1k1P_Z_IlzH6cRrdOM0tv0KrH01fVTRfQDwVE_QD2HQTyZkPILrJqEqRxokEoOaS4AqtdOlhz8_hPa-Smg5FpzpL4nnmF9zDIGUGSVVcemgJgAHO7imEJJNvbPZUWvocX00bNm2DkOF6ab0QCDwL3-dFX2mOvdw_hMgT95QK6np4qHsQ0XWCMbVOtryu9nTBKO4AElgKVrawSByzkirAxY2rP3oM9SaSkU2W2MQ3EjTCYY_FxCIGfBnLbb4MYjleVEwK-YyHpqKwHKo1-zauZqVe-jWFhQn5YhW5GXA3K7Lg5toU3j9pj7H9JNSUkMcRtz3rWR-QES6DTV-zgFcVLY7QHrAcltEcn3_In6lh7cIl6C_c10n7tLpmdkCS5z1WJ0yxpzgtEUAJT4Q9tRwZNz-Bzue1maRskUmmndCcWyyl3DpHSdvrYoGK6CwdiWzRcHjZMW-S6nqWFsg1jN1-UbFD4sP0gTTNLRDmxDVyPK18=w300&#39; alt=&#39;気になる時は右にスワイプ、興味なしの時は左にスワイプ&#39; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/TlCkqLDvGxIndTzx8maika1m6wwU0NuMakePoNaoTqZFUXlpWCQ8OigOslyIoZeZjAKvFE1K8Q-sjodxIHxnIQqxOH-UVN2BBtH4MZBLNkngVVHcyYzilvULauukUL94yHvFdXCUbLxrj4J7nrgOEJ4SLLfLboFWfVz_UgAF2erRBnJod8AUAIngdr7cBtSvkTJI3LdoxzhrbeIkMa6qcjUkUQKOQENF8ymxCoa3iOtpqD92RIgxDxThuUsuuwWgJdaeDftN3wFqxjb8baIRXYwwcj6K0U9uTH21xdkgkuz_tsT4sP6CEgqc5UcpIMPDz0uiUuT7jEKOA_vmRNR44cwXiYG2OJu4FplOUQxLr-qECZy7y8VtBZikMquJsIi1ZoMZmqmIx0AYH1Zmp6osZlJKkFruB39m0cG1cXlWXFflICcV0bQHtJ_Xl7gIAXMzCLv35OLUdrA2p2Uf2kKUTrZ2pB0p1YphOnO4IwXfBqoMzqDtQchKlerTGvR_iHRrFqo-TkL1u18qVavJJz3CJEG8oXHO1ZY1oUz5GZtK0vPzf4_qXCdOi0Ndq8vM_YXsXWXSg1ZEcFbWfiJjJ_9Fikz2UezS0Yo=w300&#39; alt=&#39;気になる時は右にスワイプ、興味なしの時は左にスワイプ&#39; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ちなみに技術的なチャレンジとしては今回、リアクションのたびに状態を更新する仕様のため、&lt;a href=&#34;https://facebook.github.io/react/&#34;&gt;React&lt;/a&gt;を本格的に導入しました。
 また提案カードを右に左にさばくUIに関しては&lt;a href=&#34;https://github.com/gajus/swing&#34;&gt;swing.js&lt;/a&gt;を導入しました。&lt;/p&gt;
 
-&lt;h3 id=&#34;スクラムによる管理-スプリントの適用:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
+&lt;h3 id=&#34;スクラムによる管理-スプリントの適用&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
 
 &lt;p&gt;ここからが本題です。結論から申し上げますと、本プロジェクトは4スプリント消費する結果となりました。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/bOhDmdJ8YH43fX5RnWZHdDCWMfBXLd59SC1DsoQPZ9gCmWK0j_lge9872lCZDen7sm7H7hqF6Ye6r4DL8cN-Rv636B3G_8tiB2_mFdyXbx5f52xAgu3pudMIIW1oO9sRmfcmm6CHNlNPwTwjqBrNTURLgz5JWgOIOGim0tfhG8Ar0y9HQo3bdXuOhdmdt4EcRMj2592cuaUDWWGh9ZEykdd8Mz5Ezx1l2JYpxlpXRZVvd_FCtVYsxb-5IJ2RdihyBgPKG3FE0emHiBmBEJXcj6trjPUYWC8YOH_8fgEMeFEIREsn8zcSsbRlL7YAfJjorwUVtmj4GRKCK_7Mubm-0qgTDP0m5Z0yjK3RFRfp4YGlOTx4nCyK7OHTHTghiwk6mQjwWe0aoOdCZZ4m-cc9rYlFH2V0IuzXwkgxDcJHoWeWSZGq2hOjHdISNbZy3LLgDGV-k5emE4x5AenF0D25xFLe-3T4EmxJ2KtaJe2YPrVkdUog3_XDyaTOpIOnVmHF0RYmfpLXYZ8obZ7gt-dnmZEHSj9lrq9hrN85z5M6EpEKHDBxhdUWNPX_3R7rauEV8nd2DWic023p2TjkF3-HlAb5fVHKaN8=w650&#39; alt=&#39;※GWのため途中空きがあります。&#39;/&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;第1スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第1スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第1スプリント&#34;&gt;第1スプリント&lt;/h4&gt;
 
 &lt;p&gt;技術的検証、UI検証、ユーザヒアリングなどを行いながら&lt;br /&gt;
 そもそもニーズあるの？やるとしてできるの？UIとして要件を満たせそう？など&lt;br /&gt;
 手戻りが許されないissueから潰していくようなスプリントにしました。&lt;/p&gt;
 
-&lt;h4 id=&#34;第2スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第2スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第2スプリント&#34;&gt;第2スプリント&lt;/h4&gt;
 
 &lt;p&gt;2スプリント目では（より詳細な）要件定義、デザイナー調整（外部）、設計に充てました。&lt;br /&gt;
 スプリント全て消化するほどのタスク量はないため、スプリントの後半は別案件の開発をしていました。&lt;/p&gt;
 
-&lt;h4 id=&#34;第3-4スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第3, 4スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第3-4スプリント&#34;&gt;第3, 4スプリント&lt;/h4&gt;
 
 &lt;p&gt;本スプリントでは前半で外部デザイナーさんに2日程度来社してもらい、がっつりデザイン。&lt;br /&gt;
 その後、開発、テスト、そしてリリースという流れでした。
 当初は第3スプリント内でリリースを目指していましたが、開発ボリュームが想定以上に膨らんでしまったため、&lt;br /&gt;
 第3スプリント内でのリリースは間に合わず次のスプリントでのリリースとなりました。&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト-スクラムの振り返り:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト-スクラムの振り返り&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
 
-&lt;h3 id=&#34;良かった点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;良かった点&lt;/h3&gt;
+&lt;h3 id=&#34;良かった点&#34;&gt;良かった点&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;プロトタイプのスプリントを設けたことで技術、UI検証に十分な時間を割くことが出来た。&lt;/li&gt;
@@ -114,7 +218,7 @@
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Ww8hew5x3tqBeN4PV-fixXAssyYbWh48t9Y7NiUpszShShPTcLJt0YxtEYtOJLezr4mmlT0LLy8ZleCBf8V4rDliZbVfNEuIOglZnpTAohnYgcMNWqzMjYdOWWiNuotnBRB1b0aV_R1u5-P61wTEvsrOS7aQxx0q4cmWqOPURzKXKwR4wvxD115O9SwSes1RgG2VJUOGJWrdwPrXdza34-3kD945v7prVcZTjZIJToCYx9ES8P4GBlrsm9lzUAj5pYpWa-ix1TBHtbV8cEznvFA5b62WpCbUOuOVJj-KUQFy8j_n1iC484nw4vcDh-xwhV2bVj47xZM1Fc2uhntfhV1Uq1adzd4zjI7LPjGHBgi7u1YfjX51MT489fqkFUTeSN3FctPvDoSZrlX4IKN0REGtQ7qlOUll9qDy_n9Q6vB7e5OTjzg7PcFQhP-ge0axsXo-gqazP3kZ-VmteG1GVVDe_Y63YhI2N80F1j4oE5OuQBwodbMfs6LWtxbWd9PfnLzJdhVY5s5TnxBxGId_98GrFjUDJS3L62XvSzo4iYON2yZnfXkgFRmvba6yU2-XDKQ-iB4XLz4iREFuDpB2sSWGujTY8Ws=w650&#39; alt=&#39;改善したリテンションに関する指数&#39;&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;改善点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;改善点&lt;/h3&gt;
+&lt;h3 id=&#34;改善点&#34;&gt;改善点&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;結果として良かったものの事前のユーザヒアリングが不足していた。（ユーザが求めていないモノを作ってしまわないかというリスクへの対処）&lt;/li&gt;
@@ -145,7 +249,7 @@
 ってことで試しに今回は環境を変えて熱海でスプリントをしてきました。&lt;br /&gt;
 &lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;合宿スケジュール:c24eb79dee0ca4c00431511210782430&#34;&gt;合宿スケジュール&lt;/h2&gt;
+&lt;h2 id=&#34;合宿スケジュール&#34;&gt;合宿スケジュール&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/8kmxKjIRDUCCHAgmF-3MWOq8VzEcZzw2Z1kD_4BE2H6R0OD8no8_UFnT6uHwdLvXkcA_OL4qtDHcXCWzateKftT0SsWp2z1SlpRPh4b9rq4_te4qDtOCnVlVqT59rA77-fLDZ8GrVXaXCIx72lsHCkEMTQkkg_-Y5ZJX6sINA0t8znSfvkIhPvqYUq7LBiubXM6SFu0R5KYIpPYWIrXYB1OVr0ro_HjOgUFrU451Dap4Q_YNMzel1v35XzQ0toNOuzGl2Goc0G04-8Whr66ibdtt9WSPyIym_HGXoD9UarIB0Jth2jGdPkk_84D8hm4i48xcc5QjVRY8ggpUikHLLZGXMBPkZDMoeKRO8_7xQvlD8ELmgjcG614UFS9aILPdfD-WD5Xk2L6_6dAs9WgEwGTVV2dC0MXbgSumasl5Y6xn1B2CNUkTSO-BApkerqcA5xIPK46d8yg6YzqO55bAiscEAEKMtYd7clTS_f5q_ObT-mRFOww9U6S06aBtH8KLv_dF2lT0MLEbkcqYWsP8zDDv-eQDLwegH7rAVGLQtaPZnbjSWano7ddeNssSqOpjnIN4=w650-h453-no&#39; title=&#39;スプリントスケジュール&#39; alt=&#39;１週間の流れ&#39;&gt;&lt;/p&gt;
 
@@ -157,7 +261,7 @@
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;仕事場としての熱海:c24eb79dee0ca4c00431511210782430&#34;&gt;仕事場としての熱海&lt;/h2&gt;
+&lt;h2 id=&#34;仕事場としての熱海&#34;&gt;仕事場としての熱海&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/xm08OMtE9OqAOhCo8m0gjzUSnweeANNMt7ulP0DyrQoVQbeNZplB9zurd3LKLR-7S7O0NmuSjXuYwA-NFEkDXn064YtDGHpnSCsXn8fVSyuXER2hFWGKwBis7x5N4aYikyrfqFZFkEwixRYq56VKU1ISQMbIXqVHhZDv-4XoC5fnws5OoBXG3vqhda34JGBg8a2EcA0Lyi3uXyFF8P4zLwxcpCi_JdwN4WevyDlejzM8RTF5Wvll3MXeWkzawJqiE-SRvWqRhP0LfvY5wEyDHT9rUQS7sNn7zKnuzY0Ah53rTAjWOreo17Wm5tSlUOFqFIc48xmQrxM2_t9n9g4qkDdFPO0LSIKL0BGeuvdeTZ4lam8pnW9e98aMsF64N6GGp5m-hqGOe_NVcM6ifcW9DY7OMMijHmsq3TOMmh15vjqk2HglmGqgNgmf5VMjLioxr-1ihHq3mc9WmmM1tUcBZpeXESl5nQ7QwfESuqOUO2vcweOzuvvdnRs-sf62homk7etSewN12LV68QxpcGT9JKGcV_7E_vtWTp-wsRT7diNb3Y7eh6_7h8XUHiECPBRRHenl=w650-h958-no&#34; title=&#34;atami_sea&#34; alt=&#34;熱海は景色が最高でした。&#34;&gt;&lt;/p&gt;
 
@@ -172,7 +276,7 @@
 &lt;p&gt;日中のネット環境については何も考えずに行きましたが、たまたまWi-Fiが利用できるカフェを見つけられたので
 大変お世話になりました。（&lt;a href=&#34;http://caferoca.jp/&#34;&gt;CAFERoCA&lt;/a&gt;さん連日ありがとうございました。）&lt;/p&gt;
 
-&lt;h2 id=&#34;所感:c24eb79dee0ca4c00431511210782430&#34;&gt;所感&lt;/h2&gt;
+&lt;h2 id=&#34;所感&#34;&gt;所感&lt;/h2&gt;
 
 &lt;p&gt;そんな熱海スプリントを振り返ると、&lt;/p&gt;
 
@@ -193,7 +297,7 @@
 
 &lt;p&gt;などなど勢いで出発したため、準備不足を露呈した結果に。。&lt;/p&gt;
 
-&lt;h2 id=&#34;special-thanks:c24eb79dee0ca4c00431511210782430&#34;&gt;Special thanks&lt;/h2&gt;
+&lt;h2 id=&#34;special-thanks&#34;&gt;Special thanks&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#39;http://caferoca.jp/wp-content/themes/roca/imgs/RoCA_img.jpg&#39; width=650&gt;&lt;/p&gt;
 
@@ -220,7 +324,7 @@
 &lt;p&gt;Airbnbにも出ているらしいのでぜひ興味のある方はご利用くださいm(__)m&lt;br /&gt;
 &lt;a href=&#34;https://www.airbnb.jp/rooms/4248292&#34;&gt;https://www.airbnb.jp/rooms/4248292&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:c24eb79dee0ca4c00431511210782430&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はカウル開発チームの開発合宿について紹介させていただきました。&lt;br /&gt;
 カウルでの働き方としても新たな試みとなり、とてもよかったので、これからも定期的に実施したいと思います！&lt;/p&gt;
@@ -243,7 +347,7 @@
 &lt;br&gt;異なるものだと思いますので、このブログでもまずはチーム体制など
 &lt;br&gt;開発手法の採用背景となるところから説明いたします。&lt;/p&gt;
 
-&lt;h2 id=&#34;チーム体制-サービスについて:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;チーム体制、サービスについて&lt;/h2&gt;
+&lt;h2 id=&#34;チーム体制-サービスについて&#34;&gt;チーム体制、サービスについて&lt;/h2&gt;
 
 &lt;p&gt;カウル開発には５人のメンバーがいます。&lt;/p&gt;
 
@@ -260,14 +364,14 @@
 &lt;br&gt;開発すべきこと（開発優先度）は日々変化しかなり流動的なものとなってます。
 &lt;br&gt;そのため、要件リストの優先度付けをこまめに行う必要があります。&lt;/p&gt;
 
-&lt;h2 id=&#34;開発サイクル:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;開発サイクル&lt;/h2&gt;
+&lt;h2 id=&#34;開発サイクル&#34;&gt;開発サイクル&lt;/h2&gt;
 
 &lt;p&gt;上記のような背景に伴い、
 &lt;br&gt;&lt;b&gt;「少ない人数で要件の流動性に対応しながら開発する」&lt;/b&gt;
 &lt;br&gt;ことが求められているため、弊社では&lt;b&gt;スクラム開発&lt;/b&gt;を採用しています。
 &lt;br&gt;要求の変化に対応するため、１スプリント&lt;b&gt;１週間&lt;/b&gt;と恐ろしく短いです。&lt;/p&gt;
 
-&lt;h3 id=&#34;スクラム開発の流れ-スプリントフロー:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;スクラム開発の流れ（スプリントフロー）&lt;/h3&gt;
+&lt;h3 id=&#34;スクラム開発の流れ-スプリントフロー&#34;&gt;スクラム開発の流れ（スプリントフロー）&lt;/h3&gt;
 
 &lt;p&gt;大まかな流れとしては&lt;/p&gt;
 
@@ -282,7 +386,7 @@
 
 &lt;p&gt;&lt;p&gt;各曜日の作業詳細&lt;/p&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;月曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;月曜&lt;/h4&gt;
+&lt;h4 id=&#34;月曜&#34;&gt;月曜&lt;/h4&gt;
 
 &lt;p&gt;「プランニング（バックログリファインメント、スプリント設計、仕様検討、設計）」&lt;br /&gt;
 JIRA上で管理しているバックログチケットを整理、優先度付けして、1スプリントのゴールを決めます。&lt;br /&gt;
@@ -293,13 +397,13 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 遅くても火曜日から開発のため、仕様や設計に関する課題はこの日に全て話し合います。&lt;br /&gt;
 タスク化した後、タスクを割り振ってこの日は終了です。&lt;/p&gt;
 
-&lt;h4 id=&#34;火曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;火曜&lt;/h4&gt;
+&lt;h4 id=&#34;火曜&#34;&gt;火曜&lt;/h4&gt;
 
 &lt;p&gt;「開発！！開発！！開発！！」&lt;br /&gt;
 それぞれ割り振ったタスクを元に作業を進める。今は主に開発案件が多いので、
 大体火曜は開発が中心。小さな開発案件の場合はテスト通過後、その日にデプロイすることもあります。&lt;/p&gt;
 
-&lt;h4 id=&#34;水曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;水曜&lt;/h4&gt;
+&lt;h4 id=&#34;水曜&#34;&gt;水曜&lt;/h4&gt;
 
 &lt;p&gt;「すいすい水曜日」&lt;br /&gt;
 スタートアップ企業とは言え、投資は大事ということで水曜は技術投資の日にしています。&lt;br /&gt;
@@ -309,7 +413,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Oc0DHhyDd-dYSIDCg8WJwcnEoLDA7HfirWqfh3ZkjzJam-EUhHAgMEtmjkgeWUPHN52NdwMxB6A=w650&#39; title=&#39;マックスが楽しそう&#39;&gt;
 &lt;a href=&#34;https://theta360.com/ja/&#34;&gt;theta&lt;/a&gt;で遊ぶマックス&lt;/p&gt;
 
-&lt;h4 id=&#34;木曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;木曜&lt;/h4&gt;
+&lt;h4 id=&#34;木曜&#34;&gt;木曜&lt;/h4&gt;
 
 &lt;p&gt;「テスト！テスト！デプロイ！」&lt;br /&gt;
 スプリントの終了が迫っている！ということで
@@ -320,7 +424,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/XtYAMXjVhs_ArSPX7-eOCxlK24TNueuM6-fNl230x5CYSwf8WdSXKSqo8I5Fl4O02l-cIVxtKGyiFZw1B_lGf4WmAbgsNQAkjbkYp58fidiK03mg5qEHtZxW5f8wTzSEDqokpTJ8L9wwi8GPsH_dWAEyy243N3Qk4yFrFxsAwXbNEBvTHmq06BbmpvfctuEJrzzlVzLoTHkVJ6W3_sP4w7h8QBAx3CvOOAUZUFSLuny6L6Rlrcmf_WMy3sOgeJ_2Laqk_SBwmjepY5q7PWYGh-rZ2eA4WE6-kjzBHZme7NJJyVGZ4jf2jHgUFLQLEemwNi_Z7BnoNiLvU3c8lvoiWNsZxqgJrJaCcTkRQ67sqnmlVnqpKMfJOYPC15stCkRiLAP8AUosvORxAucNq_k3ljohrkf2baLoIoJfvs_R7_6UbsvrCdMeLbVy0i7ho4sXuiByBz8SgnmF29EdWf6Y4igQGkJCbsjNlhuZBAnDPWeWKRZQxTHMc9ClvOQZWkfB7t2Cd2q3w6O_5a32GR-Pie357lscympWU9PcPX1ZChbckp_Ah0xjrv1E3FKjSuSmKIM=w650&#39; title=&#39;プロダクトオーナーが喜んだ顔&#39;&gt;&lt;br /&gt;
 待ちわびたリリースにプロダクトオーナーもウキウキ&lt;/p&gt;
 
-&lt;h4 id=&#34;金曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;金曜&lt;/h4&gt;
+&lt;h4 id=&#34;金曜&#34;&gt;金曜&lt;/h4&gt;
 
 &lt;p&gt;「振り返り＆改善デー」&lt;br /&gt;
 １週間のスプリントを振り返ります。振り返りで上がった課題のうち、１日でできる改善案を皆で検討します。
@@ -330,18 +434,18 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 
 &lt;hr /&gt;
 
-&lt;h3 id=&#34;スクラム開発を通して:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;スクラム開発を通して&lt;/h3&gt;
+&lt;h3 id=&#34;スクラム開発を通して&#34;&gt;スクラム開発を通して&lt;/h3&gt;
 
 &lt;p&gt;実践期間だいぶ短いですが、スクラム開発を振り返ります。&lt;/p&gt;
 
-&lt;h4 id=&#34;良い点:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;（良い点）&lt;/h4&gt;
+&lt;h4 id=&#34;良い点&#34;&gt;（良い点）&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;限られたリソースの中で、効率よく優先度の高いものから対応できている&lt;/li&gt;
 &lt;li&gt;1週間を1スプリントにしているので生活リズムが浸透しやすくメリハリのある日々が過ごせる（月曜は話しあいの日、水曜は自由な日などなど）&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;悪い点-改善点:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;（悪い点、改善点）&lt;/h4&gt;
+&lt;h4 id=&#34;悪い点-改善点&#34;&gt;（悪い点、改善点）&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;チーム全体の生産性の向上までは振り返られてはいない。（本気では取り組めていない）
@@ -354,7 +458,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 やりたいことがどんどん増えてなかなか消化が追いつきません。&lt;br /&gt;
 (生産性の向上が今後の課題です)&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はカウル開発チームの開発手法について紹介させていただきました。&lt;br /&gt;
 おかげさまでユーザ様も増えてきており、やることはたっぷりありますが、&lt;br /&gt;

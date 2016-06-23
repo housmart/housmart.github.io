@@ -6,8 +6,112 @@
     <description>Recent content in Posts on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 15 Jun 2016 22:48:09 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jun 2016 21:25:46 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>なぜdevelopブランチは必要なの？</title>
+      <link>http://techblog.housmart.co.jp/2016/06/22/git-workflow/</link>
+      <pubDate>Wed, 22 Jun 2016 21:25:46 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/06/22/git-workflow/</guid>
+      <description>
+
+&lt;p&gt;「Gitのブランチ構成どうしましょうか？」&lt;br /&gt;
+「とりあえずdevelop切ってやっていきますね。」&lt;/p&gt;
+
+&lt;p&gt;そのdevelopブランチ本当に必要でしょうか。&lt;br /&gt;
+developブランチだけ使われていて、masterが全く使われていなかったりしないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;よく聞かれるブランチ戦略としては&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;git-flow&lt;/a&gt;や&lt;a href=&#34;http://scottchacon.com/2011/08/31/github-flow.html&#34;&gt;GitHub Flow&lt;/a&gt;、、&lt;a href=&#34;http://docs.gitlab.com/ee/workflow/gitlab_flow.html&#34;&gt;GitLab Flow&lt;/a&gt;等があります。&lt;br /&gt;
+git-flowにおいてはdevelopやhotfix、releaseといったブランチがありますが、GitHub Flowにはmasterブランチと機能開発ブランチの2つしかありません。GitLab Flowはmasterを中心に開発を行い、productionブランチを安定させていくスタイルです。&lt;/p&gt;
+
+&lt;p&gt;実際に新しいプロジェクトを始めるとしたら、どの構成が良いのでしょうか。&lt;br /&gt;
+今回はカウルを開発するにあたり採用したブランチの構成とその背景について紹介します。&lt;/p&gt;
+
+&lt;h2 id=&#34;望んでいたこと&#34;&gt;望んでいたこと&lt;/h2&gt;
+
+&lt;p&gt;前提としてカウルのプロジェクトを始めるにあたって望んだことは以下の3つです。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ロールバックによるバージョン戻しが容易であること&lt;/li&gt;
+&lt;li&gt;問題が起きた場合にバージョン間の問題の切り分けが容易であること&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;時間のかかる機能開発中にもバグ修正コミットを差し込めること&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1と2については、リリース時にタグをつけておくことで容易に&lt;code&gt;git reset&lt;/code&gt;や&lt;code&gt;git diff&lt;/code&gt;が出来ます。&lt;/p&gt;
+
+&lt;p&gt;3つ目の要件については、developブランチがあるとよいと考えました。&lt;/p&gt;
+
+&lt;h2 id=&#34;実際のブランチ構成&#34;&gt;実際のブランチ構成&lt;/h2&gt;
+
+&lt;p&gt;上記を踏まえると、タグづけとdevelopブランチはあると良さそうです。&lt;br /&gt;
+よってカウルでは以下の構成をとりました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;master&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;テストで確認されたdevelopだけが&lt;code&gt;git merge --no-ff&lt;/code&gt;コマンドでマージされる&lt;/li&gt;
+&lt;li&gt;急ぎのバグ修正(hotfix)は、確認された後developブランチを経由しない&lt;/li&gt;
+&lt;li&gt;リリース時に自動で&amp;rdquo;日付_インデックス&amp;rdquo;tagを付ける(たとえば&amp;rdquo;20160622_01&amp;rdquo;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;develop&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;masterから派生したブランチ、featureブランチの派生元&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;(feature/)チケット番号&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;developから派生した機能開発全般のブランチ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;(hotifix/)チケット番号&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;masterから派生したバグ修正用のブランチ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;現状、featureやhotixといった修飾は特につけておらず、概念だけメンバー間で共有しています。&lt;/p&gt;
+
+&lt;h2 id=&#34;実際の開発フロー&#34;&gt;実際の開発フロー&lt;/h2&gt;
+
+&lt;p&gt;考えた構成を基に以下のような流れで開発を行っています。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;最新のdevelopからチケット番号でブランチを切る&lt;/li&gt;
+&lt;li&gt;チケット番号ブランチで開発した機能をコミット、プッシュする&lt;/li&gt;
+&lt;li&gt;終わったらdevelopにプルリクエストを送り、レビューの後マージされる&lt;/li&gt;
+&lt;li&gt;ステージング環境に最新のdevelopを出して確認する&lt;/li&gt;
+&lt;li&gt;問題なければdevelopをmasterにマージしタグ付け、 本番に最新のタグをデプロイする&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;カウルの構成でもdevelopは必要なのか&#34;&gt;カウルの構成でもdevelopは必要なのか&lt;/h2&gt;
+
+&lt;p&gt;1ヶ月程度かかるような&lt;a href=&#34;http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/&#34;&gt;大きめプロジェクト&lt;/a&gt;があり、
+他の機能開発も行っているので今のところはあるとよいと考えています。&lt;/p&gt;
+
+&lt;p&gt;また一方で以下の変化を踏まえて、よりgithub-flowに近い構成でも問題ない状況になりつつあると考えています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;コードはすぐにリリースできる状態になっており、日に何度かリリースされることもあり、masterとdevelopの間で違いが少なくなっている&lt;/li&gt;
+&lt;li&gt;開発初期に比べてコードのベースはできていて、小中規模機能や他の箇所への影響が少ない開発が多くなっている&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;いつdevelopブランチは必要なの&#34;&gt;いつdevelopブランチは必要なの？&lt;/h2&gt;
+
+&lt;p&gt;数日~1週間でブランチがマージされていく状況であればdevelopはなくても問題ないでしょう。シンプルな構成の方がGitの操作も少なくて済みます。&lt;br /&gt;
+数週間を越えてブランチがマージされないような状況を開発をしているときはdevelopやreleaseがあると安定したプロダクトを出荷できると考えます。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;今回はカウルのGitブランチ管理について紹介致しました。&lt;br /&gt;
+ユーザに素早く安定した価値を届けらる、開発者にも優しい運用にするべく今後も取り組んでいきます！&lt;/p&gt;
+
+&lt;p&gt;by まっくす&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>大きめプロジェクトにスクラムを適用する</title>
@@ -25,7 +129,7 @@
 &lt;p&gt;以前紹介しました通り、カウル開発チームは1週間／スプリントと短めに取ってますが、&lt;br /&gt;
 1週間じゃ収まらないようなサイズのプロジェクトの時はどう管理するの？って話になりますよね。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/hCAFCyecL4RKITv1P48fuBhUy270x01z0uykaV9nWVo5MI10TV4tEp3KWmhksy4fxoE095bgQzksHEoIPTCwZOlH_cGmw3J2V1-GiD8T3A2iJyr7GgSp1YsN5HCkJU24sUixXLQtElu1CXvslFB-0QBtoyb7yxl9cBaColKGEfe3eF1TZCaIfMjt2SrBuOVv1JhU39AHnPLU8znm1s5do874_9VcW1b4X-PAPJvujgNUBDrireZYBUQoEQyl5iqiICeqIbpQgxtOU14luXqQ91CZ1AV8SEekiCN65fubbAg9I8Z1esd8SWANSTI-W_BxHXa0B7swyzB5h44zDBLytDhMiuQATAi3gdC9tfWLUT2sTc7p_cRhQIM3XuY85QAMBexGyPng6mRhyjr6aEH4JKnQmAhQuBy7dXKHdYbWlR9V8O6xMhgZdWg08_izrYWrpTkVR0KMC1AB_QvWJ9RHWcM9iyt3apNGPJzYJXdIE3dejo3gn7betrZiHEKyru2z6F1dgsWSXxcGF2IRY-S11XJMtLXHjK0yfUPKBB8jWNrXY46KMuMJgDbquW_QkSYCHe-PgFqt7MCaMW5iq3LgiKI-cXRJJdA=w650&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/teOBN1hx88WnjkLmj5IAQQdUWSp8w-A_8pyaqW3TG0_1yCLJoQuIX3BqfeXAMAJA-m9fIQJHZ4SRT1DH-K64Zglma9TvzHSxjda0dKX9RNpn6HtvY8PnccXVzZkt7UZqgYkFyy4UYj0WD-vyMZ08WC68JPUf-HlKXM8lvSHzk_6BAjwPDmlwX5kuDBBwT82uq3fTfEZCZY6gIEmT9RCsphAcVHNJCfbVYE3xXENZN0svE5FhouUc97KK5dkNMUAGOJdCjhnK92ROUoKg3ijB8J-hDB6KgsIV9iWz5nWgZNL6PEeXORn3mFp2uR8vKoKM3pr0BsbrW5IG2QJHzdWwx_ZAddKt4DsDGsseRgh6T32hydccuX8wp4AS2fsHM9sTllEqCXIL50UBJVM5X6wMAIWgV3P6ra9JtuNqvXquO_kvaBtDdTJOUaQNOqMnB1HWwGo5LwTxF2p_p00azVBWFF8qkvWpAS6XACj8WaI8H0PBq2Ii9UfL607CRCf-Ai7kztOpwrdwb4eRQK-7RdKKCigMH6XEwkjfu57VHyBiKekNguxe5faEswIvTo2cL4HB375F0pBBXs9na-Ji70AEwfiGI9V-l2w=w650&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;アジャイルの考え方では、要件を細分化することで1スプリント内に収め、
 あくまでスプリント終了時には新機能をお客様に提供しないといけません。&lt;br /&gt;
@@ -34,7 +138,7 @@
 
 &lt;p&gt;そういった複数スプリントを要する規模のプロジェクトに対してスクラムをどう適用させるか弊社の事例とともに紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト背景:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト背景&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト背景&#34;&gt;プロジェクト背景&lt;/h2&gt;
 
 &lt;p&gt;まずはプロジェクト背景について。&lt;br /&gt;
 プロジェクト開始時期は2016/04下旬で、&lt;br /&gt;
@@ -59,11 +163,11 @@
 
 &lt;p&gt;要は&lt;strong&gt;「スマホユーザを中心にリテンションを改善しましょう」&lt;/strong&gt;というプロジェクトでした。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/6KhgEzYf8eYn34J7oNsxcLnxud3JRyqJhrRlEQjBofcWY5JMu4eKo63DCehRZLxN2clPJQ-eiBudz-HSv3y1APcWC4PWJqB5i4V1rD3dTW9Ml6ojl6HC_tmnl3AVuLLTSDjgb8rLTLSEhhb8q_IdFTp8sPlKjQ6H-FzRfn0KEvXsW_CUGc52HUGhOcKuoYPEvbMAVyy3a94-WvQBnwxk2vppD4nCitSOiKxVekU7RTtdpe5Xp1VKJ_xMSCT2IvK7m6lP-joIc1lFdJxoBPbFffpCdWRCyA0aHgtXbxgfA6DzPb3ilky7lsWOj_45ygj7-Ky2JhwbCwZhqBSjr1uN05MfebBQ58p69Xo--D9ld3XsTYR3zFkXnX1uGb6rFiZHIqz2oYJQKnwH9kfqwnCE6FvSgB5vcsdhQfDWIhP7HUHMh-PDEXZAKvI-JU2vDSE70m9uhBUlp8N6IpzBb62aZG1wxr7N6VzEqVXiTYL1rSIJELDD0PMUgfXApD-LOoKlBWsIjo8SqtXI6D8gMcwby4aWTBDCyAptUzLQqaIFfoOsCP5DutxIjRWavJQS7K6cpvHLfFpL5ciWGQ_awO9gUC_3f315ZQo=w650&#39; alt=&#39;スマホユーザの継続利用がテーマでした。&#39;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/b5osB9bYumjeJH7ryNbZWxG1a8Ig34ZYgYo4VEVQhkh4Uv0EWDgxRyeqXhHmMnI8591_Ndk6BpHUeU-PZQHHsDTpauVeKJLyrv7efneYdfq0v5sERMtsSoKYIgXXDXaNyaL2S0LmdYB5TqEd9c3Fj7GMyW0T_m5yBPZDcGHuYYWeA66VZDi39jn-SXmTmhkfQVonUOVNhksxadRPZISBBOZ3RATsrtGbiRK6KDku7p8zhhJ0UG7rpwNXUYXP4iNCSO-YiNI9Etg4MH2Wj3mN88gMaS0S-3zS4I_tjr5C4cvq8S5Iv8zfc0grNECIAJJePTQX4YmIhxWCyQW0q_OAg0YTlaNKEgPypSE6u3jPqkGX4PFqnZf4GoOisRcv-Unbwp3SEvzAAyzw9u736HV5EC5lgUcasc8Vi7uzDAVFYdm-SGvS9TPJkgq_JJ2ftTmba0Juup7aF2hl84ntOC-pfWga5C-i_uW0H4UyTzUKn19Gjd5Kj-K-BIGiH9jgmT-uf-wEqXguJoxkacO4NHRd7laXdjeyCj6dItl_tXhYAWL9zQg-GNw4uE3UkTEYKKwiZk3tnHLo1s1ozPJjmFb5TFw8_2Ao6-w=w650&#39; alt=&#39;スマホユーザの継続利用がテーマでした。&#39;/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト-要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト-要件概要&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
 
-&lt;h3 id=&#34;要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;要件概要&lt;/h3&gt;
+&lt;h3 id=&#34;要件概要&#34;&gt;要件概要&lt;/h3&gt;
 
 &lt;p&gt;要件（概要）は下記の通りです。&lt;/p&gt;
 
@@ -73,38 +177,38 @@
 &lt;li&gt;そもそも購入知識がないユーザに対しては不動産購入に関する記事を提供。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/PgmFlQLT8vfH5sKe8UVxlOs0E6xXMv2nFm73jKiQC4pIqnDSio-3sC8w-EYczUo69YTi0oUL2OBISuvdLZxyBWsktWFh6_yhGNonRiF8qqL9ZjMnIX-1k1P_Z_IlzH6cRrdOM0tv0KrH01fVTRfQDwVE_QD2HQTyZkPILrJqEqRxokEoOaS4AqtdOlhz8_hPa-Smg5FpzpL4nnmF9zDIGUGSVVcemgJgAHO7imEJJNvbPZUWvocX00bNm2DkOF6ab0QCDwL3-dFX2mOvdw_hMgT95QK6np4qHsQ0XWCMbVOtryu9nTBKO4AElgKVrawSByzkirAxY2rP3oM9SaSkU2W2MQ3EjTCYY_FxCIGfBnLbb4MYjleVEwK-YyHpqKwHKo1-zauZqVe-jWFhQn5YhW5GXA3K7Lg5toU3j9pj7H9JNSUkMcRtz3rWR-QES6DTV-zgFcVLY7QHrAcltEcn3_In6lh7cIl6C_c10n7tLpmdkCS5z1WJ0yxpzgtEUAJT4Q9tRwZNz-Bzue1maRskUmmndCcWyyl3DpHSdvrYoGK6CwdiWzRcHjZMW-S6nqWFsg1jN1-UbFD4sP0gTTNLRDmxDVyPK18=w300&#39; alt=&#39;気になる時は右にスワイプ、興味なしの時は左にスワイプ&#39; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/TlCkqLDvGxIndTzx8maika1m6wwU0NuMakePoNaoTqZFUXlpWCQ8OigOslyIoZeZjAKvFE1K8Q-sjodxIHxnIQqxOH-UVN2BBtH4MZBLNkngVVHcyYzilvULauukUL94yHvFdXCUbLxrj4J7nrgOEJ4SLLfLboFWfVz_UgAF2erRBnJod8AUAIngdr7cBtSvkTJI3LdoxzhrbeIkMa6qcjUkUQKOQENF8ymxCoa3iOtpqD92RIgxDxThuUsuuwWgJdaeDftN3wFqxjb8baIRXYwwcj6K0U9uTH21xdkgkuz_tsT4sP6CEgqc5UcpIMPDz0uiUuT7jEKOA_vmRNR44cwXiYG2OJu4FplOUQxLr-qECZy7y8VtBZikMquJsIi1ZoMZmqmIx0AYH1Zmp6osZlJKkFruB39m0cG1cXlWXFflICcV0bQHtJ_Xl7gIAXMzCLv35OLUdrA2p2Uf2kKUTrZ2pB0p1YphOnO4IwXfBqoMzqDtQchKlerTGvR_iHRrFqo-TkL1u18qVavJJz3CJEG8oXHO1ZY1oUz5GZtK0vPzf4_qXCdOi0Ndq8vM_YXsXWXSg1ZEcFbWfiJjJ_9Fikz2UezS0Yo=w300&#39; alt=&#39;気になる時は右にスワイプ、興味なしの時は左にスワイプ&#39; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ちなみに技術的なチャレンジとしては今回、リアクションのたびに状態を更新する仕様のため、&lt;a href=&#34;https://facebook.github.io/react/&#34;&gt;React&lt;/a&gt;を本格的に導入しました。
 また提案カードを右に左にさばくUIに関しては&lt;a href=&#34;https://github.com/gajus/swing&#34;&gt;swing.js&lt;/a&gt;を導入しました。&lt;/p&gt;
 
-&lt;h3 id=&#34;スクラムによる管理-スプリントの適用:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
+&lt;h3 id=&#34;スクラムによる管理-スプリントの適用&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
 
 &lt;p&gt;ここからが本題です。結論から申し上げますと、本プロジェクトは4スプリント消費する結果となりました。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/bOhDmdJ8YH43fX5RnWZHdDCWMfBXLd59SC1DsoQPZ9gCmWK0j_lge9872lCZDen7sm7H7hqF6Ye6r4DL8cN-Rv636B3G_8tiB2_mFdyXbx5f52xAgu3pudMIIW1oO9sRmfcmm6CHNlNPwTwjqBrNTURLgz5JWgOIOGim0tfhG8Ar0y9HQo3bdXuOhdmdt4EcRMj2592cuaUDWWGh9ZEykdd8Mz5Ezx1l2JYpxlpXRZVvd_FCtVYsxb-5IJ2RdihyBgPKG3FE0emHiBmBEJXcj6trjPUYWC8YOH_8fgEMeFEIREsn8zcSsbRlL7YAfJjorwUVtmj4GRKCK_7Mubm-0qgTDP0m5Z0yjK3RFRfp4YGlOTx4nCyK7OHTHTghiwk6mQjwWe0aoOdCZZ4m-cc9rYlFH2V0IuzXwkgxDcJHoWeWSZGq2hOjHdISNbZy3LLgDGV-k5emE4x5AenF0D25xFLe-3T4EmxJ2KtaJe2YPrVkdUog3_XDyaTOpIOnVmHF0RYmfpLXYZ8obZ7gt-dnmZEHSj9lrq9hrN85z5M6EpEKHDBxhdUWNPX_3R7rauEV8nd2DWic023p2TjkF3-HlAb5fVHKaN8=w650&#39; alt=&#39;※GWのため途中空きがあります。&#39;/&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;第1スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第1スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第1スプリント&#34;&gt;第1スプリント&lt;/h4&gt;
 
 &lt;p&gt;技術的検証、UI検証、ユーザヒアリングなどを行いながら&lt;br /&gt;
 そもそもニーズあるの？やるとしてできるの？UIとして要件を満たせそう？など&lt;br /&gt;
 手戻りが許されないissueから潰していくようなスプリントにしました。&lt;/p&gt;
 
-&lt;h4 id=&#34;第2スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第2スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第2スプリント&#34;&gt;第2スプリント&lt;/h4&gt;
 
 &lt;p&gt;2スプリント目では（より詳細な）要件定義、デザイナー調整（外部）、設計に充てました。&lt;br /&gt;
 スプリント全て消化するほどのタスク量はないため、スプリントの後半は別案件の開発をしていました。&lt;/p&gt;
 
-&lt;h4 id=&#34;第3-4スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第3, 4スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第3-4スプリント&#34;&gt;第3, 4スプリント&lt;/h4&gt;
 
 &lt;p&gt;本スプリントでは前半で外部デザイナーさんに2日程度来社してもらい、がっつりデザイン。&lt;br /&gt;
 その後、開発、テスト、そしてリリースという流れでした。
 当初は第3スプリント内でリリースを目指していましたが、開発ボリュームが想定以上に膨らんでしまったため、&lt;br /&gt;
 第3スプリント内でのリリースは間に合わず次のスプリントでのリリースとなりました。&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト-スクラムの振り返り:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト-スクラムの振り返り&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
 
-&lt;h3 id=&#34;良かった点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;良かった点&lt;/h3&gt;
+&lt;h3 id=&#34;良かった点&#34;&gt;良かった点&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;プロトタイプのスプリントを設けたことで技術、UI検証に十分な時間を割くことが出来た。&lt;/li&gt;
@@ -114,7 +218,7 @@
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Ww8hew5x3tqBeN4PV-fixXAssyYbWh48t9Y7NiUpszShShPTcLJt0YxtEYtOJLezr4mmlT0LLy8ZleCBf8V4rDliZbVfNEuIOglZnpTAohnYgcMNWqzMjYdOWWiNuotnBRB1b0aV_R1u5-P61wTEvsrOS7aQxx0q4cmWqOPURzKXKwR4wvxD115O9SwSes1RgG2VJUOGJWrdwPrXdza34-3kD945v7prVcZTjZIJToCYx9ES8P4GBlrsm9lzUAj5pYpWa-ix1TBHtbV8cEznvFA5b62WpCbUOuOVJj-KUQFy8j_n1iC484nw4vcDh-xwhV2bVj47xZM1Fc2uhntfhV1Uq1adzd4zjI7LPjGHBgi7u1YfjX51MT489fqkFUTeSN3FctPvDoSZrlX4IKN0REGtQ7qlOUll9qDy_n9Q6vB7e5OTjzg7PcFQhP-ge0axsXo-gqazP3kZ-VmteG1GVVDe_Y63YhI2N80F1j4oE5OuQBwodbMfs6LWtxbWd9PfnLzJdhVY5s5TnxBxGId_98GrFjUDJS3L62XvSzo4iYON2yZnfXkgFRmvba6yU2-XDKQ-iB4XLz4iREFuDpB2sSWGujTY8Ws=w650&#39; alt=&#39;改善したリテンションに関する指数&#39;&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;改善点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;改善点&lt;/h3&gt;
+&lt;h3 id=&#34;改善点&#34;&gt;改善点&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;結果として良かったものの事前のユーザヒアリングが不足していた。（ユーザが求めていないモノを作ってしまわないかというリスクへの対処）&lt;/li&gt;
@@ -142,7 +246,7 @@
 &lt;p&gt;5/17に品川の Microsoft のオフィスでシリコンバレーのデザイン会社である btrax 主催のイベント &lt;strong&gt;「Design for Innovation 2016」&lt;/strong&gt; が開催されました。&lt;br /&gt;
 今回このイベントに参加してきたので、簡単な参加レポートと雑感をまとめます。&lt;/p&gt;
 
-&lt;h2 id=&#34;design-design:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;「DESIGN ≠ Design」&lt;/h2&gt;
+&lt;h2 id=&#34;design-design&#34;&gt;「DESIGN ≠ Design」&lt;/h2&gt;
 
 &lt;p&gt;btrax の Brandon CEO のオープニングでの言葉です。&lt;/p&gt;
 
@@ -154,7 +258,7 @@
 
 &lt;p&gt;この背景を受けて、アメリカ西海岸でのケーススタディと体験型ワークショップを通してデザインの重要性を体感しようというのが今回のイベントの趣旨でした。&lt;/p&gt;
 
-&lt;h3 id=&#34;イベントの流れ:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;イベントの流れ&lt;/h3&gt;
+&lt;h3 id=&#34;イベントの流れ&#34;&gt;イベントの流れ&lt;/h3&gt;
 
 &lt;p&gt;午前中は最近のデザインの盛り上がりの中でもキーワードとしてよく取り上げられている &lt;strong&gt;&amp;ldquo;Design Thinking&amp;rdquo;を体験するワークショップ&lt;/strong&gt; があり、&lt;br /&gt;
 午後は &lt;strong&gt;シリコンバレーのスタートアップやデザインを積極的に取り入れている日本企業を招いてのトークセッション&lt;/strong&gt; という二部構成でした。&lt;/p&gt;
@@ -163,7 +267,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/LtKoIc5RyMHF2G7NBzf4UebbXTQ-Gcgms6bqXHNdevajqpjhwY5QfS_L4N1g12oo7g6n8eGBghnAncmbg-BC4Jk2KybJU1egg9swx_iKnL2t6ZMZvYatlYFFC0cReochRbz8ySxxn1AgdeMUqk1zKrb1Xs027Vsa7K6qF2uh0-Il4hLzqO8qKJZT5YxU41k3zZFk4ZoECzrGz_722fURgbGFKe6tMG3cCTCFfq9_NcdgyQArfKF_UYaaz4BwE9zwODZaxtTPlGdqowVzPsAiBxUc5-57xkoJyhF-iSLMWV54sr9B79V3KWW0AXbPxhoyXOBbtelVPskfPcUia6uq7HvRbMnEgbpUUSk68Ow9zL9Lpy91x7hGnqUISmhx7Br2wXVs7DV7SfszhuHQMqzBJUzaT_wR7SKBufPX8E3EzuOTi2t4N4hy-GwUs1lpn6ypLRtgqL8iNytX6ckxO9Eh9L5EBtTMH8ZEjSQBHbT6Y2TFMtyT5ozel_doqVItDfJ42huGtBzWGw9wUat7Yf9Tjt7jsf5t6G-KYmpEXjqmaaq3B0xve8zgWOGqPFlBXibLNCZxIvqnNwtgY6rocTkLgdjBcwDbAUs=w1068-h801-no&#34; title=&#34;design_for_innovation_room&#34; width=&#34;60%&#34;&#34;&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;design-thinking-とは:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;Design Thinking とは？&lt;/h2&gt;
+&lt;h2 id=&#34;design-thinking-とは&#34;&gt;Design Thinking とは？&lt;/h2&gt;
 
 &lt;p&gt;「Design Thinking（デザイン思考）」とは、 &lt;strong&gt;デザイナーがデザインする時に用いるアプローチ&lt;/strong&gt; のことです。&lt;br /&gt;
 ヒアリングや調査などを通して課題の本質を見極め、その課題を元にアイデアをたくさん出し（発散させ）、その中から良いアイデアを選びつつ、それらを磨いていくというプロセスをたどります。&lt;/p&gt;
@@ -179,7 +283,7 @@
 &lt;p&gt;(書籍) 誰のためのデザイン？&lt;br /&gt;
 &lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=housmart-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=478850362X&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;1000-songs-in-your-pocket:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;1000 SONGS IN YOUR POCKET&lt;/h3&gt;
+&lt;h3 id=&#34;1000-songs-in-your-pocket&#34;&gt;1000 SONGS IN YOUR POCKET&lt;/h3&gt;
 
 &lt;p&gt;新しいサービスやプロダクトは、「事柄・物事」を「何か新しい方法」で提供することで「価値」を生み出しています。&lt;/p&gt;
 
@@ -200,7 +304,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;どちらの方がユーザにとって良い価値を提供してくれそうでしょうか？&lt;/p&gt;
 
-&lt;h3 id=&#34;design-thinking-ワークショップ:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;Design Thinking ワークショップ&lt;/h3&gt;
+&lt;h3 id=&#34;design-thinking-ワークショップ&#34;&gt;Design Thinking ワークショップ&lt;/h3&gt;
 
 &lt;p&gt;午前中のセッションではこの &amp;ldquo;Design Thinking&amp;rdquo; をコーチのもとで実際に体験することができました。
 今回のお題は「プレゼントをあげる体験をリデザインする」。隣の方とペアになって Design Thinking の実際のプロセスを体験しました。&lt;/p&gt;
@@ -211,7 +315,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;かの有名なデザイン会社 IDEO の Tim Brown も &lt;strong&gt;「デザイン思考は実践が大事だ」&lt;/strong&gt; と言っているように、やってみることで威力を体感できるのではないかと思います。（btraxさんは定常的にデザイン思考を体験できるセミナーをサンフランシスコのオフィスで開催しているそうです。）&lt;/p&gt;
 
-&lt;h2 id=&#34;トークセッション:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;トークセッション&lt;/h2&gt;
+&lt;h2 id=&#34;トークセッション&#34;&gt;トークセッション&lt;/h2&gt;
 
 &lt;p&gt;午後のトークセッションでは、国内外から13名のスピーカーが招待され、全部で6セッション計5時間という濃密なものでした。&lt;/p&gt;
 
@@ -219,7 +323,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;中でも気になったトピックについていくつかまとめていきます。&lt;/p&gt;
 
-&lt;h3 id=&#34;airbnb-のリブランディング:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;Airbnb のリブランディング&lt;/h3&gt;
+&lt;h3 id=&#34;airbnb-のリブランディング&#34;&gt;Airbnb のリブランディング&lt;/h3&gt;
 
 &lt;p&gt;Startups and Designのセッションで、Design Studio のプリンシパルである　John Creson 氏が Airbnb のリブランディングを行った事例を紹介していました。&lt;/p&gt;
 
@@ -235,7 +339,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;※Airbnbのリブランディングについて&lt;a href=&#34;http://nature-dot.com/journal/design/174&#34;&gt;こちら&lt;/a&gt;の記事が参考になったのでご興味ある方はどうぞ&lt;/p&gt;
 
-&lt;h3 id=&#34;大手金融機関のデザイン会社買収:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;大手金融機関のデザイン会社買収&lt;/h3&gt;
+&lt;h3 id=&#34;大手金融機関のデザイン会社買収&#34;&gt;大手金融機関のデザイン会社買収&lt;/h3&gt;
 
 &lt;p&gt;同じセッションでアメリカの大手金融会社の Capital One からもデザインマネージャの方が参加されていました。&lt;/p&gt;
 
@@ -246,7 +350,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;そんな中でも超一流のデザイン会社を会社ごと買収するという、金額的にも大きな決断をしたことで、どれほどデザインを重要視しているかが伝わってくる象徴的な出来事だと思いました。&lt;/p&gt;
 
-&lt;h3 id=&#34;the-future-of-agency-services:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;The Future of Agency Services&lt;/h3&gt;
+&lt;h3 id=&#34;the-future-of-agency-services&#34;&gt;The Future of Agency Services&lt;/h3&gt;
 
 &lt;p&gt;もう一つ印象に残ったのは、経営の中でデザインの重要性が上がってくる中で、コンサル会社・広告代理店・デザイン会社の事業領域がぶつかってきているというトピックです。&lt;br /&gt;
 btrax の Brandon CEO、dentsuの森氏、デザイン会社INFOBAHNの井登氏が登壇されていました。&lt;/p&gt;
@@ -257,7 +361,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;p&gt;btrax の Brandon CEO もこのセッションの中で「ここ2-3年で日本の企業からのリクエストの質も量も格段に上がってきた。課題の理解からアイデア出し、アイデアの実行をして改善のサイクルを回していくような包括的なリクエストが増えてきた」と言っていました。&lt;br /&gt;
 このように事業戦略の中でデザイン会社の存在感が増していくことで、現場でもお互いに相手を意識するタイミングが増えてきたと語っていました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめと雑感:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;まとめと雑感&lt;/h2&gt;
+&lt;h2 id=&#34;まとめと雑感&#34;&gt;まとめと雑感&lt;/h2&gt;
 
 &lt;p&gt;ビジネスを創っていくプロセス、とりわけアイデアを形にするSeedのフェーズにDESIGNを取り込んでいく必要があることはもはや動かしがたい事実であると、今回のイベントを通して強く再認識しました。&lt;/p&gt;
 
@@ -270,7 +374,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;そして、これらはどちらか一方というわけではなく、組織の状況に応じて両方のアプローチから達成する必要があると今回の様々な事例を聞いて感じました。&lt;/p&gt;
 
-&lt;h3 id=&#34;アジャイルがエンジニアにもたらした意味:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;アジャイルがエンジニアにもたらした意味&lt;/h3&gt;
+&lt;h3 id=&#34;アジャイルがエンジニアにもたらした意味&#34;&gt;アジャイルがエンジニアにもたらした意味&lt;/h3&gt;
 
 &lt;p&gt;突然話が飛ぶのですが、この&amp;rdquo;DESIGN&amp;rdquo;の流れはアジャイルがエンジニアにもたらした意味と似ている気がしています。&lt;br /&gt;
 &lt;strong&gt;エンジニアとビジネス上の意思決定を近づけたこと&lt;/strong&gt; がアジャイルの貢献のうちの一つだと思います。&lt;/p&gt;
@@ -281,7 +385,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;一方で、ことデザイナーという仕事に関してはまだまだ「デザイナーさん」として扱っている組織のほうが多いのが現状ではないでしょうか？&lt;/p&gt;
 
-&lt;h3 id=&#34;デザイナーをチームに加える:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;デザイナーをチームに加える&lt;/h3&gt;
+&lt;h3 id=&#34;デザイナーをチームに加える&#34;&gt;デザイナーをチームに加える&lt;/h3&gt;
 
 &lt;p&gt;自分のチームにデザイナーを加えるメリットは、ぱっと思いつくだけでもいくつもあります。プロトタイピングツールを用いたより早いユーザヒアリングのサイクル、コンテクストに沿ったデザイン、意思決定へのユーザ目線、広告クリエイティブの改善、などなど。&lt;/p&gt;
 
@@ -321,7 +425,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;li&gt;振り返ってみて&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;1-申込と書類審査-開催1ヶ月前:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;1. 申込と書類審査(開催1ヶ月前)&lt;/h2&gt;
+&lt;h2 id=&#34;1-申込と書類審査-開催1ヶ月前&#34;&gt;1. 申込と書類審査(開催1ヶ月前)&lt;/h2&gt;
 
 &lt;p&gt;まずスタートアップとしてSlush Asiaにイベント登録すると、以下の情報を登録するフォームを渡されます。
 &lt;strong&gt;入力は全て英語ですので「参加費を払えば登録完了かな？」と思っていると締切直前で焦るので早めに入力しましょう！&lt;/strong&gt;&lt;/p&gt;
@@ -338,7 +442,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;発表に申し込んでいる場合は上記の情報で発表者の選定があり、選ばれると担当者からメールにて連絡があります。&lt;/p&gt;
 
-&lt;h2 id=&#34;2-pitching-perfect-開催1-2-3週間前:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;2. Pitching Perfect(開催1,2,3週間前)&lt;/h2&gt;
+&lt;h2 id=&#34;2-pitching-perfect-開催1-2-3週間前&#34;&gt;2. Pitching Perfect(開催1,2,3週間前)&lt;/h2&gt;
 
 &lt;p&gt;選定後は発表練習の場である「Pitching Perfect」に関する案内が届き、土日で構成された計5セッション(3日間)のうち好きな日程を選び参加することができます。
 英語での発表が初めての場合は2回の参加が推奨されていたため、私達も2回分を申し込みました。&lt;/p&gt;
@@ -356,7 +460,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;今思い返すと、Pitching Perfectは最も落ち着いて他のスタートアップの方々やスタッフと話をできたタイミングでもあります。&lt;/p&gt;
 
-&lt;h2 id=&#34;3-前日リハーサルとmedia-day-開催1日前:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;3. 前日リハーサルとMedia Day(開催1日前)&lt;/h2&gt;
+&lt;h2 id=&#34;3-前日リハーサルとmedia-day-開催1日前&#34;&gt;3. 前日リハーサルとMedia Day(開催1日前)&lt;/h2&gt;
 
 &lt;p&gt;イベント前日には、幕張メッセで設営したての舞台上でリハーサルを行います。
 &lt;strong&gt;発表に使うスライドは開催1週間前に提出締切で、リハーサル後の変更はできません。&lt;/strong&gt;
@@ -371,9 +475,9 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;p&gt;「Media Day」はイベント前日にスタートアップとメディアが交流できるクローズドな場です。
 ここでは選考で選ばれた2組だけ5分のプロダクト発表時間を与えられていました。&lt;/p&gt;
 
-&lt;h2 id=&#34;4-発表当日:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;4. 発表当日&lt;/h2&gt;
+&lt;h2 id=&#34;4-発表当日&#34;&gt;4. 発表当日&lt;/h2&gt;
 
-&lt;h3 id=&#34;予選-準決勝-決勝:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;予選・準決勝・決勝&lt;/h3&gt;
+&lt;h3 id=&#34;予選-準決勝-決勝&#34;&gt;予選・準決勝・決勝&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w650&#34;&gt;&lt;/p&gt;
 
@@ -411,7 +515,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;ピッチの結果、私達は予選・&lt;a href=&#34;http://www.slush.org/announcing-slush-60-semifinalists/&#34;&gt;準決勝&lt;/a&gt;で計2回の発表をすることができ、何名かの投資家の方々とも会うことができました。&lt;/p&gt;
 
-&lt;h3 id=&#34;メインステージ-展示ブース:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;メインステージ・展示ブース&lt;/h3&gt;
+&lt;h3 id=&#34;メインステージ-展示ブース&#34;&gt;メインステージ・展示ブース&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/vWNQI2BAXDhwU_foMqeDhpu90EhTLr-HDVM9yaZgNY_BdiDCWfnD-8JD1-dMMLHSpt9WIL_dRZfswJz1K3Q8rvMLvCmFg3Yh9401OSu1-x4NxjO1C21J3qKcKxbC37w3nASvUyfBbQhc1fnkifSsjVGozFSJUkyie_tQIwdOsmM2S0XwwKKi-pab9DAVNLAsTmXQaMJGr3ZU5mo6KyDDRrJxG7cp1NImUOCQmWyeq18ks8TW9LtoWTHXirUr6HdK-_QgHzCwmQE2J2NAZJD1MjP4VQ8_ZEN3QE_ZeS1JTuN6NojKtHeoe541HUPrFJAxhNGVw3dSrEjFK3plT11oIdU-JsHtRoaDj3OQB3rPdPWXjoM5VckmlEAnP-INV4W_gR-5i7uGWKf8Eh5dYxC5_ut6BRPkiwTseEwDnfYXw-4y0RBb5ABF2DV_Qb12XqU_mu9p130GiUbU7UbSX5roISTkwXqlSdK4kSCAb2w5Nn6tIKeE613b0OcUOfMAUgcLE1QOn6oamqPlNA7CXm7jwtgTuzc4dtBShzvnUZNlNoFeiQHQauhbFGJiuhl7ZDi7ZIi6a2vTYSFNvA8EDtsMxigX6qtNn40=w650&#34;&gt;&lt;/p&gt;
 
@@ -419,7 +523,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 個人的にはモバイル用のアナリティクス系ツールのブースが気になって話を聞いてきました。
 展示の紹介は色々なメディアで紹介されているのでこちらでは割愛します。&lt;/p&gt;
 
-&lt;h3 id=&#34;matchmaking:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;Matchmaking&lt;/h3&gt;
+&lt;h3 id=&#34;matchmaking&#34;&gt;Matchmaking&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/rythxH9XAYSV6lSr9bXnnwNrDuy9C_35CfNvp1p9Zj_8j9_PVlk1PFHVBmMCLlpeArr2vh_LktXqe8dpJpKUDGbf1uG0qr5AJwpsV4lbco0WzEz7FCqZs8TK2b9A8yxTwbrFj_jHDoNoh1jIkGinmysr7PfnRGbGpafjkHc76jDeydjvfAiClFPIj-714lvoFqB7Vks16trccSujXX5t13T66QHGbylW_bfu2GvbvnkkgVxn2pz4hLxbRlfgPI2Vc3e26CA2baDmVL-MlUKG5KqPfJoezXM4U8nWPCgikq-FD3bls-mMyBqoKuj1LtXAR9r6Q3-3bjj8hQ89SGgA5lkzc49AA7BylX6CVi7NNmyDse7xT5ooVqq1yAcUWfUHgIAkSsfbUjqp7mjRXvcwjzI7qIv42AGGokX9_rc9ybPO2J1qy04wA0brbOn8n27IAxxhUuZ4VJNcAxWWiSz4wpO40TqBT7tt-H16SN3ws0VXtDlkSG97w7pRKCiEWXVYRwIzs2Xp4bLvriFffwIm6DS9zcTZEmBpMF6CrHJsltdvvWMpFYII9AbVH5cL6aXl5DB0PSUbnatP4CI5gChAN8nMhjLl-Fw=w800&#34;&gt;&lt;/p&gt;
 
@@ -427,9 +531,9 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 ミーティングできる時間枠は限られているので早めに積極的に利用しましょう。
 私達も投資家の中にいた「厚切りジェイソン」さんにミーティング申請しましたが既に予定が埋まっていました・・。&lt;/p&gt;
 
-&lt;h2 id=&#34;5-振り返ってみて:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;5. 振り返ってみて&lt;/h2&gt;
+&lt;h2 id=&#34;5-振り返ってみて&#34;&gt;5. 振り返ってみて&lt;/h2&gt;
 
-&lt;h3 id=&#34;フィードバックと変遷:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;フィードバックと変遷&lt;/h3&gt;
+&lt;h3 id=&#34;フィードバックと変遷&#34;&gt;フィードバックと変遷&lt;/h3&gt;
 
 &lt;p&gt;Pitching Perfectではたくさんの貴重なフィードバックをいただいたので一部をここで紹介します。&lt;/p&gt;
 
@@ -458,7 +562,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;練習ごとにかなりの数のフィードバックをもらい、それらを踏まえて何度も内容を修正をしました。&lt;/p&gt;
 
-&lt;h3 id=&#34;使った時間:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;使った時間&lt;/h3&gt;
+&lt;h3 id=&#34;使った時間&#34;&gt;使った時間&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;ピッチパーフェクト: 5時間 * 2日
 前日リハーサル: 4.5時間
@@ -472,7 +576,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;p&gt;改めて振り返るとそれなりの時間を使いました。
 資料作成の時間が長いのはフィードバックを貰う度に大きく作りなおしていた結果です。&lt;/p&gt;
 
-&lt;h3 id=&#34;雑感:6af734338e8b45ef268ce90307e3f7c7&#34;&gt;雑感&lt;/h3&gt;
+&lt;h3 id=&#34;雑感&#34;&gt;雑感&lt;/h3&gt;
 
 &lt;p&gt;今回賞を取ったピッチはどれも、発表クオリティが高く、事業の実績や成長性が示されていて、Slush Asia 2016にふさわしいプロダクトが選ばれています。
 そういったプロダクトと比較されることを考えると、ピッチではシード期に近い企業の場合であっても、出せるだけの実績・将来性やデモもしくは動いた場合のイメージをしっかり見せる必要があります。&lt;/p&gt;
@@ -515,7 +619,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 ってことで試しに今回は環境を変えて熱海でスプリントをしてきました。&lt;br /&gt;
 &lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;合宿スケジュール:c24eb79dee0ca4c00431511210782430&#34;&gt;合宿スケジュール&lt;/h2&gt;
+&lt;h2 id=&#34;合宿スケジュール&#34;&gt;合宿スケジュール&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/8kmxKjIRDUCCHAgmF-3MWOq8VzEcZzw2Z1kD_4BE2H6R0OD8no8_UFnT6uHwdLvXkcA_OL4qtDHcXCWzateKftT0SsWp2z1SlpRPh4b9rq4_te4qDtOCnVlVqT59rA77-fLDZ8GrVXaXCIx72lsHCkEMTQkkg_-Y5ZJX6sINA0t8znSfvkIhPvqYUq7LBiubXM6SFu0R5KYIpPYWIrXYB1OVr0ro_HjOgUFrU451Dap4Q_YNMzel1v35XzQ0toNOuzGl2Goc0G04-8Whr66ibdtt9WSPyIym_HGXoD9UarIB0Jth2jGdPkk_84D8hm4i48xcc5QjVRY8ggpUikHLLZGXMBPkZDMoeKRO8_7xQvlD8ELmgjcG614UFS9aILPdfD-WD5Xk2L6_6dAs9WgEwGTVV2dC0MXbgSumasl5Y6xn1B2CNUkTSO-BApkerqcA5xIPK46d8yg6YzqO55bAiscEAEKMtYd7clTS_f5q_ObT-mRFOww9U6S06aBtH8KLv_dF2lT0MLEbkcqYWsP8zDDv-eQDLwegH7rAVGLQtaPZnbjSWano7ddeNssSqOpjnIN4=w650-h453-no&#39; title=&#39;スプリントスケジュール&#39; alt=&#39;１週間の流れ&#39;&gt;&lt;/p&gt;
 
@@ -527,7 +631,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;仕事場としての熱海:c24eb79dee0ca4c00431511210782430&#34;&gt;仕事場としての熱海&lt;/h2&gt;
+&lt;h2 id=&#34;仕事場としての熱海&#34;&gt;仕事場としての熱海&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/xm08OMtE9OqAOhCo8m0gjzUSnweeANNMt7ulP0DyrQoVQbeNZplB9zurd3LKLR-7S7O0NmuSjXuYwA-NFEkDXn064YtDGHpnSCsXn8fVSyuXER2hFWGKwBis7x5N4aYikyrfqFZFkEwixRYq56VKU1ISQMbIXqVHhZDv-4XoC5fnws5OoBXG3vqhda34JGBg8a2EcA0Lyi3uXyFF8P4zLwxcpCi_JdwN4WevyDlejzM8RTF5Wvll3MXeWkzawJqiE-SRvWqRhP0LfvY5wEyDHT9rUQS7sNn7zKnuzY0Ah53rTAjWOreo17Wm5tSlUOFqFIc48xmQrxM2_t9n9g4qkDdFPO0LSIKL0BGeuvdeTZ4lam8pnW9e98aMsF64N6GGp5m-hqGOe_NVcM6ifcW9DY7OMMijHmsq3TOMmh15vjqk2HglmGqgNgmf5VMjLioxr-1ihHq3mc9WmmM1tUcBZpeXESl5nQ7QwfESuqOUO2vcweOzuvvdnRs-sf62homk7etSewN12LV68QxpcGT9JKGcV_7E_vtWTp-wsRT7diNb3Y7eh6_7h8XUHiECPBRRHenl=w650-h958-no&#34; title=&#34;atami_sea&#34; alt=&#34;熱海は景色が最高でした。&#34;&gt;&lt;/p&gt;
 
@@ -542,7 +646,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;p&gt;日中のネット環境については何も考えずに行きましたが、たまたまWi-Fiが利用できるカフェを見つけられたので
 大変お世話になりました。（&lt;a href=&#34;http://caferoca.jp/&#34;&gt;CAFERoCA&lt;/a&gt;さん連日ありがとうございました。）&lt;/p&gt;
 
-&lt;h2 id=&#34;所感:c24eb79dee0ca4c00431511210782430&#34;&gt;所感&lt;/h2&gt;
+&lt;h2 id=&#34;所感&#34;&gt;所感&lt;/h2&gt;
 
 &lt;p&gt;そんな熱海スプリントを振り返ると、&lt;/p&gt;
 
@@ -563,7 +667,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;などなど勢いで出発したため、準備不足を露呈した結果に。。&lt;/p&gt;
 
-&lt;h2 id=&#34;special-thanks:c24eb79dee0ca4c00431511210782430&#34;&gt;Special thanks&lt;/h2&gt;
+&lt;h2 id=&#34;special-thanks&#34;&gt;Special thanks&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#39;http://caferoca.jp/wp-content/themes/roca/imgs/RoCA_img.jpg&#39; width=650&gt;&lt;/p&gt;
 
@@ -590,7 +694,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;p&gt;Airbnbにも出ているらしいのでぜひ興味のある方はご利用くださいm(__)m&lt;br /&gt;
 &lt;a href=&#34;https://www.airbnb.jp/rooms/4248292&#34;&gt;https://www.airbnb.jp/rooms/4248292&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:c24eb79dee0ca4c00431511210782430&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はカウル開発チームの開発合宿について紹介させていただきました。&lt;br /&gt;
 カウルでの働き方としても新たな試みとなり、とてもよかったので、これからも定期的に実施したいと思います！&lt;/p&gt;
@@ -617,7 +721,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;そこでカウルでは &lt;strong&gt;安価に利用できるSaaSをいくつか組み合わせることで、簡単に始められて、かつ要求を十分にみたせる環境を構築&lt;/strong&gt; しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;前提:a22806189072a20136e84a4adca315d5&#34;&gt;前提&lt;/h2&gt;
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;は中古マンションをお得に購入・売却できるWeb不動産サービスを運営しています。&lt;br /&gt;
 現状としては、サービス開始から3ヶ月で登録ユーザ数が1000人弱、日々&amp;lt;100ユーザがアクティブにサイトに訪れています。&lt;/p&gt;
@@ -625,7 +729,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;p&gt;また、今回の選定にあたっては前職での知見をもとにデータの具体的な利用用途やシステムの運用コストまで考慮に入れるよう心がけました。&lt;br /&gt;
 （前職では国内大手のECサイトでログデータの広告利用を主な業務としていました。過去データを使った広告クリック率の予測、レコメンドロジックを用いたパーソナライズド広告、その他データマーケティング活動の支援など）&lt;/p&gt;
 
-&lt;h2 id=&#34;全体概要:a22806189072a20136e84a4adca315d5&#34;&gt;全体概要&lt;/h2&gt;
+&lt;h2 id=&#34;全体概要&#34;&gt;全体概要&lt;/h2&gt;
 
 &lt;p&gt;カウルではユーザ獲得の流れとして&lt;/p&gt;
 
@@ -647,7 +751,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;の大きく2つに分けて別々のサービスを利用しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;1-集客からトライアルユーザになるまで:a22806189072a20136e84a4adca315d5&#34;&gt;1. 集客からトライアルユーザになるまで&lt;/h2&gt;
+&lt;h2 id=&#34;1-集客からトライアルユーザになるまで&#34;&gt;1. 集客からトライアルユーザになるまで&lt;/h2&gt;
 
 &lt;p&gt;このステップでは主に以下の切り口でデータを見ています。&lt;/p&gt;
 
@@ -668,7 +772,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;GAは利用している方も多いと思うので詳細な説明は割愛しますが、中でもおすすめしたい設定をいくつか挙げてみます。&lt;/p&gt;
 
-&lt;h3 id=&#34;google-tag-manager-gtm-の利用:a22806189072a20136e84a4adca315d5&#34;&gt;Google Tag Manager（GTM)の利用&lt;/h3&gt;
+&lt;h3 id=&#34;google-tag-manager-gtm-の利用&#34;&gt;Google Tag Manager（GTM)の利用&lt;/h3&gt;
 
 &lt;p&gt;GTMはGoogleが提供する無料のタグコンテナツール（タグを一元管理でき、色々な条件に合わせてタグを出し分けてくれるツール）です。&lt;br /&gt;
 無料にもかかわらずタグのプレビュー機能やバージョン管理もついており、頻繁にコードを書き換えるスタートアップの環境においてアプリケーションと各種トラッキングタグを非同期にメンテナンスできることは大きなメリットだといえるでしょう。&lt;br /&gt;
@@ -678,7 +782,7 @@ GAのタグに変数を渡す際に「data layer」という層を経由する�
 &lt;a href=&#34;https://support.google.com/tagmanager/answer/6102821?hl=ja&#34;&gt;Google タグマネージャヘルプ - Google タグマネージャの概要&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;http://analyze.siraberu.info/post-521/&#34;&gt;GoogleタグマネージャでGoogleアナリティクスのタグを管理する方法！&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;カスタムキャンペーンパラメータの利用:a22806189072a20136e84a4adca315d5&#34;&gt;カスタムキャンペーンパラメータの利用&lt;/h3&gt;
+&lt;h3 id=&#34;カスタムキャンペーンパラメータの利用&#34;&gt;カスタムキャンペーンパラメータの利用&lt;/h3&gt;
 
 &lt;p&gt;各種広告の効果測定をキャンペーンごとに切り分けるためにGoogle Analyticsが公式でサポートしているパラメータです。&lt;br /&gt;
 通常は広告キャンペーンの効果測定に使うように説明されていますが、カウルでは自社メディアからの流入の切り分けにもこのパラメータを使用しています。&lt;br /&gt;
@@ -689,7 +793,7 @@ GAのタグに変数を渡す際に「data layer」という層を経由する�
 &lt;a href=&#34;https://support.google.com/analytics/answer/1033863?hl=ja&amp;amp;ref_topic=1032998&#34;&gt;Google アナリティクスヘルプ - カスタム キャンペーン&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;https://www.techloco.co.jp/blog/content/41&#34;&gt;Google アナリティクスで広告からのアクセスを計測する方法&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;ランディングページのスクロールの計測:a22806189072a20136e84a4adca315d5&#34;&gt;ランディングページのスクロールの計測&lt;/h3&gt;
+&lt;h3 id=&#34;ランディングページのスクロールの計測&#34;&gt;ランディングページのスクロールの計測&lt;/h3&gt;
 
 &lt;p&gt;カウルでは扱う商品が高額であるということもあり、ランディングページでより多くの情報を提供して安心してトライアルユーザになってもらうために、かなり縦長のランディングページを用意しています。&lt;br /&gt;
 縦長のランディングページの効果測定と改善においては、どのセクションにどのくらいユーザが滞在したか、どこまでスクロールして見てもらえたかが重要な指標となってきます。&lt;br /&gt;
@@ -699,7 +803,7 @@ GAのタグに変数を渡す際に「data layer」という層を経由する�
 &lt;a href=&#34;http://scrolldepth.parsnip.io/&#34;&gt;http://scrolldepth.parsnip.io/&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&#34;https://www.youtube.com/watch?v=UoOh58pvqG4&#34;&gt;How to install Scroll Depth Tracking with Google Tag Manager [動画]&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;クロスデバイスビューの設定:a22806189072a20136e84a4adca315d5&#34;&gt;クロスデバイスビューの設定&lt;/h3&gt;
+&lt;h3 id=&#34;クロスデバイスビューの設定&#34;&gt;クロスデバイスビューの設定&lt;/h3&gt;
 
 &lt;p&gt;トライアル期間中のユーザに対する深い分析は、後半で記載する別のSaaSを利用して行っているのですが、大まかな傾向を見るのにはGoogle Analyticsのクロスデバイスビューも有効です。&lt;br /&gt;
 GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、クロスデバイスでのユーザトラッキングを可能にします（同一のユーザがPCとスマホでアクセスした場合にも同一ユーザとみなしてレポートが見られます）。&lt;br /&gt;
@@ -711,7 +815,7 @@ GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、
 
 &lt;p&gt;GAまわりのドキュメントは日本語でたくさんあるのですが、内容が古いものも散見されるため、おかしいなと思ったら公式のドキュメントを参照することをおすすめします。&lt;/p&gt;
 
-&lt;h2 id=&#34;2-トライアルユーザになってから本登録ユーザになるまで:a22806189072a20136e84a4adca315d5&#34;&gt;2. トライアルユーザになってから本登録ユーザになるまで&lt;/h2&gt;
+&lt;h2 id=&#34;2-トライアルユーザになってから本登録ユーザになるまで&#34;&gt;2. トライアルユーザになってから本登録ユーザになるまで&lt;/h2&gt;
 
 &lt;p&gt;続いて、トライアルユーザが本ユーザになるまでのデータ収集と活用について説明します。&lt;br /&gt;
 このステップでは主に以下の内容でデータを分析しています。&lt;/p&gt;
@@ -725,7 +829,7 @@ GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、
 
 &lt;p&gt;ここでは &lt;strong&gt;&lt;a href=&#34;https://keen.io/&#34;&gt;keen.io&lt;/a&gt;というログ収集基盤を提供しているSaaS&lt;/strong&gt; を、周辺のツールと組み合わせて使用しています。&lt;/p&gt;
 
-&lt;h3 id=&#34;keen-ioとは:a22806189072a20136e84a4adca315d5&#34;&gt;keen.ioとは&lt;/h3&gt;
+&lt;h3 id=&#34;keen-ioとは&#34;&gt;keen.ioとは&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160419/keenio_logo.png&#34; title=&#34;keenio_logo&#34;&gt;&lt;/p&gt;
 
@@ -743,7 +847,7 @@ keen.ioのサイトからアカウント作成後、&lt;a href=&#34;https://gith
 &lt;p&gt;また、APIのクライアントも各種言語（CURL / JS / RUBY / PYTHON / PHP / JAVA / .NET）でサポートされているため、自社のRailsアプリからログを記録したり、JavascriptとHTMLで自作のダッシュボードも簡単に作成することができます。&lt;br /&gt;
 （APIドキュメントは&lt;a href=&#34;https://keen.io/docs/api/#extract-to-csv-file&#34;&gt;こちら&lt;/a&gt;）&lt;/p&gt;
 
-&lt;h3 id=&#34;keen-ioを採用した理由:a22806189072a20136e84a4adca315d5&#34;&gt;keen.ioを採用した理由&lt;/h3&gt;
+&lt;h3 id=&#34;keen-ioを採用した理由&#34;&gt;keen.ioを採用した理由&lt;/h3&gt;
 
 &lt;p&gt;以下の（わがままな）要求や要件をすべてクリアしていたのがkeen.ioを採用した理由です。&lt;/p&gt;
 
@@ -767,14 +871,14 @@ keen.ioのサイトからアカウント作成後、&lt;a href=&#34;https://gith
 
 &lt;p&gt;（TreasureDataは上記をほとんどクリアしていて非常に魅力的なのですが、立ち上げたばかりのサービスで導入するには料金が少々お高いようでしたので今回の採用は見送りました。）&lt;/p&gt;
 
-&lt;h3 id=&#34;費用について:a22806189072a20136e84a4adca315d5&#34;&gt;費用について&lt;/h3&gt;
+&lt;h3 id=&#34;費用について&#34;&gt;費用について&lt;/h3&gt;
 
 &lt;p&gt;気になるお値段ですが、一ヶ月あたりに記録するイベント数により料金が決まる仕組みになっており、サポートが無いプランであれば &lt;strong&gt;月間5万イベントまでは無料&lt;/strong&gt; で利用できます。&lt;/p&gt;
 
 &lt;p&gt;無料枠を超えても10万イベント/月までは月額＄20、100万イベント/月までは月額＄125と安価で、クエリングに対しての課金は発生しないなど、自前でサーバを構えることを考えると導入するコストメリットは十分にあるのではないかと思います。&lt;br /&gt;
 （料金について詳しくは&lt;a href=&#34;https://keen.io/plans/self-service/&#34;&gt;こちら&lt;/a&gt;）&lt;/p&gt;
 
-&lt;h3 id=&#34;sendgrid-メール配信saas-との連携:a22806189072a20136e84a4adca315d5&#34;&gt;Sendgrid（メール配信SaaS）との連携&lt;/h3&gt;
+&lt;h3 id=&#34;sendgrid-メール配信saas-との連携&#34;&gt;Sendgrid（メール配信SaaS）との連携&lt;/h3&gt;
 
 &lt;p&gt;もう一つおすすめしたい機能は&lt;a href=&#34;https://sendgrid.kke.co.jp/&#34;&gt;Sendgrid&lt;/a&gt;との連携です。&lt;br /&gt;
 Sendgridはメールの配信から開封・クリックの計測までを一括して行ってくれるSaaSです。加えてメールがスパム判定されていないかを確認する機能や、ユーザごとのメール配信停止機能を提供しています。&lt;/p&gt;
@@ -810,7 +914,7 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
 2016-04-06T09:41:04.784Z        pageview        https://kawlu.com/library
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;まとめ:a22806189072a20136e84a4adca315d5&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;今回は立ち上げたばかりのサービスでも導入できるログ分析基盤についてご紹介いたしました。&lt;br /&gt;
 新規ユーザ獲得までの分析にはマーケティング方面に強いGoogle Analyticsを、無料ユーザを有料会員化するためのより深い分析にはkeen.ioを導入しています。&lt;/p&gt;
@@ -847,7 +951,7 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
 &lt;li&gt;&lt;strong&gt;分割後はプロジェクト間で必要なロジックを共有したい&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d&#34;&gt;複数のRailsプロジェクト間でロジックを共有したい状況&lt;/h2&gt;
+&lt;h2 id=&#34;複数のrailsプロジェクト間でロジックを共有したい状況&#34;&gt;複数のRailsプロジェクト間でロジックを共有したい状況&lt;/h2&gt;
 
 &lt;p&gt;不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。&lt;/p&gt;
 
@@ -875,7 +979,7 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
 
 &lt;p&gt;カウルではこの状況を &lt;strong&gt;Gitのsubmodule&lt;/strong&gt; を用いて改善しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;実際の構成:186562e261a7107c8b7de063b569e16d&#34;&gt;実際の構成&lt;/h2&gt;
+&lt;h2 id=&#34;実際の構成&#34;&gt;実際の構成&lt;/h2&gt;
 
 &lt;p&gt;Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。&lt;/p&gt;
 
@@ -908,7 +1012,7 @@ rails_app_2
 
 &lt;p&gt;また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。&lt;/p&gt;
 
-&lt;h3 id=&#34;submoduleの難しさ:186562e261a7107c8b7de063b569e16d&#34;&gt;submoduleの難しさ&lt;/h3&gt;
+&lt;h3 id=&#34;submoduleの難しさ&#34;&gt;submoduleの難しさ&lt;/h3&gt;
 
 &lt;p&gt;submoduleでの運用を開始した当初、以下の部分で使い難さがありました。&lt;/p&gt;
 
@@ -946,7 +1050,7 @@ project_dir $ git push
 
 &lt;p&gt;上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は&lt;code&gt;submodule内のコミット&amp;quot;4&amp;quot;から◯◯へ参照を変えるコミット&lt;/code&gt;でなければならないからです。&lt;/p&gt;
 
-&lt;h2 id=&#34;submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d&#34;&gt;submoduleを簡単に運用するためのbot運用&lt;/h2&gt;
+&lt;h2 id=&#34;submoduleを簡単に運用するためのbot運用&#34;&gt;submoduleを簡単に運用するためのbot運用&lt;/h2&gt;
 
 &lt;p&gt;Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
 submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。&lt;/p&gt;
@@ -960,7 +1064,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 
 &lt;p&gt;その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:186562e261a7107c8b7de063b569e16d&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;今回のご紹介した運用の概要は以下です。&lt;/p&gt;
 
@@ -990,7 +1094,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 &lt;br&gt;異なるものだと思いますので、このブログでもまずはチーム体制など
 &lt;br&gt;開発手法の採用背景となるところから説明いたします。&lt;/p&gt;
 
-&lt;h2 id=&#34;チーム体制-サービスについて:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;チーム体制、サービスについて&lt;/h2&gt;
+&lt;h2 id=&#34;チーム体制-サービスについて&#34;&gt;チーム体制、サービスについて&lt;/h2&gt;
 
 &lt;p&gt;カウル開発には５人のメンバーがいます。&lt;/p&gt;
 
@@ -1007,14 +1111,14 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 &lt;br&gt;開発すべきこと（開発優先度）は日々変化しかなり流動的なものとなってます。
 &lt;br&gt;そのため、要件リストの優先度付けをこまめに行う必要があります。&lt;/p&gt;
 
-&lt;h2 id=&#34;開発サイクル:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;開発サイクル&lt;/h2&gt;
+&lt;h2 id=&#34;開発サイクル&#34;&gt;開発サイクル&lt;/h2&gt;
 
 &lt;p&gt;上記のような背景に伴い、
 &lt;br&gt;&lt;b&gt;「少ない人数で要件の流動性に対応しながら開発する」&lt;/b&gt;
 &lt;br&gt;ことが求められているため、弊社では&lt;b&gt;スクラム開発&lt;/b&gt;を採用しています。
 &lt;br&gt;要求の変化に対応するため、１スプリント&lt;b&gt;１週間&lt;/b&gt;と恐ろしく短いです。&lt;/p&gt;
 
-&lt;h3 id=&#34;スクラム開発の流れ-スプリントフロー:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;スクラム開発の流れ（スプリントフロー）&lt;/h3&gt;
+&lt;h3 id=&#34;スクラム開発の流れ-スプリントフロー&#34;&gt;スクラム開発の流れ（スプリントフロー）&lt;/h3&gt;
 
 &lt;p&gt;大まかな流れとしては&lt;/p&gt;
 
@@ -1029,7 +1133,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 
 &lt;p&gt;&lt;p&gt;各曜日の作業詳細&lt;/p&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;月曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;月曜&lt;/h4&gt;
+&lt;h4 id=&#34;月曜&#34;&gt;月曜&lt;/h4&gt;
 
 &lt;p&gt;「プランニング（バックログリファインメント、スプリント設計、仕様検討、設計）」&lt;br /&gt;
 JIRA上で管理しているバックログチケットを整理、優先度付けして、1スプリントのゴールを決めます。&lt;br /&gt;
@@ -1040,13 +1144,13 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 遅くても火曜日から開発のため、仕様や設計に関する課題はこの日に全て話し合います。&lt;br /&gt;
 タスク化した後、タスクを割り振ってこの日は終了です。&lt;/p&gt;
 
-&lt;h4 id=&#34;火曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;火曜&lt;/h4&gt;
+&lt;h4 id=&#34;火曜&#34;&gt;火曜&lt;/h4&gt;
 
 &lt;p&gt;「開発！！開発！！開発！！」&lt;br /&gt;
 それぞれ割り振ったタスクを元に作業を進める。今は主に開発案件が多いので、
 大体火曜は開発が中心。小さな開発案件の場合はテスト通過後、その日にデプロイすることもあります。&lt;/p&gt;
 
-&lt;h4 id=&#34;水曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;水曜&lt;/h4&gt;
+&lt;h4 id=&#34;水曜&#34;&gt;水曜&lt;/h4&gt;
 
 &lt;p&gt;「すいすい水曜日」&lt;br /&gt;
 スタートアップ企業とは言え、投資は大事ということで水曜は技術投資の日にしています。&lt;br /&gt;
@@ -1056,7 +1160,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Oc0DHhyDd-dYSIDCg8WJwcnEoLDA7HfirWqfh3ZkjzJam-EUhHAgMEtmjkgeWUPHN52NdwMxB6A=w650&#39; title=&#39;マックスが楽しそう&#39;&gt;
 &lt;a href=&#34;https://theta360.com/ja/&#34;&gt;theta&lt;/a&gt;で遊ぶマックス&lt;/p&gt;
 
-&lt;h4 id=&#34;木曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;木曜&lt;/h4&gt;
+&lt;h4 id=&#34;木曜&#34;&gt;木曜&lt;/h4&gt;
 
 &lt;p&gt;「テスト！テスト！デプロイ！」&lt;br /&gt;
 スプリントの終了が迫っている！ということで
@@ -1067,7 +1171,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/XtYAMXjVhs_ArSPX7-eOCxlK24TNueuM6-fNl230x5CYSwf8WdSXKSqo8I5Fl4O02l-cIVxtKGyiFZw1B_lGf4WmAbgsNQAkjbkYp58fidiK03mg5qEHtZxW5f8wTzSEDqokpTJ8L9wwi8GPsH_dWAEyy243N3Qk4yFrFxsAwXbNEBvTHmq06BbmpvfctuEJrzzlVzLoTHkVJ6W3_sP4w7h8QBAx3CvOOAUZUFSLuny6L6Rlrcmf_WMy3sOgeJ_2Laqk_SBwmjepY5q7PWYGh-rZ2eA4WE6-kjzBHZme7NJJyVGZ4jf2jHgUFLQLEemwNi_Z7BnoNiLvU3c8lvoiWNsZxqgJrJaCcTkRQ67sqnmlVnqpKMfJOYPC15stCkRiLAP8AUosvORxAucNq_k3ljohrkf2baLoIoJfvs_R7_6UbsvrCdMeLbVy0i7ho4sXuiByBz8SgnmF29EdWf6Y4igQGkJCbsjNlhuZBAnDPWeWKRZQxTHMc9ClvOQZWkfB7t2Cd2q3w6O_5a32GR-Pie357lscympWU9PcPX1ZChbckp_Ah0xjrv1E3FKjSuSmKIM=w650&#39; title=&#39;プロダクトオーナーが喜んだ顔&#39;&gt;&lt;br /&gt;
 待ちわびたリリースにプロダクトオーナーもウキウキ&lt;/p&gt;
 
-&lt;h4 id=&#34;金曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;金曜&lt;/h4&gt;
+&lt;h4 id=&#34;金曜&#34;&gt;金曜&lt;/h4&gt;
 
 &lt;p&gt;「振り返り＆改善デー」&lt;br /&gt;
 １週間のスプリントを振り返ります。振り返りで上がった課題のうち、１日でできる改善案を皆で検討します。
@@ -1077,18 +1181,18 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 
 &lt;hr /&gt;
 
-&lt;h3 id=&#34;スクラム開発を通して:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;スクラム開発を通して&lt;/h3&gt;
+&lt;h3 id=&#34;スクラム開発を通して&#34;&gt;スクラム開発を通して&lt;/h3&gt;
 
 &lt;p&gt;実践期間だいぶ短いですが、スクラム開発を振り返ります。&lt;/p&gt;
 
-&lt;h4 id=&#34;良い点:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;（良い点）&lt;/h4&gt;
+&lt;h4 id=&#34;良い点&#34;&gt;（良い点）&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;限られたリソースの中で、効率よく優先度の高いものから対応できている&lt;/li&gt;
 &lt;li&gt;1週間を1スプリントにしているので生活リズムが浸透しやすくメリハリのある日々が過ごせる（月曜は話しあいの日、水曜は自由な日などなど）&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;悪い点-改善点:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;（悪い点、改善点）&lt;/h4&gt;
+&lt;h4 id=&#34;悪い点-改善点&#34;&gt;（悪い点、改善点）&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;チーム全体の生産性の向上までは振り返られてはいない。（本気では取り組めていない）
@@ -1101,7 +1205,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 やりたいことがどんどん増えてなかなか消化が追いつきません。&lt;br /&gt;
 (生産性の向上が今後の課題です)&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はカウル開発チームの開発手法について紹介させていただきました。&lt;br /&gt;
 おかげさまでユーザ様も増えてきており、やることはたっぷりありますが、&lt;br /&gt;
@@ -1131,7 +1235,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 仲介手数料無料の不動産サイト「カウル」: &lt;a href=&#34;https://kawlu.com/&#34;&gt;https://kawlu.com/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;内容:3d905968c659a2d9572fbb959d952a4f&#34;&gt;内容&lt;/h2&gt;
+&lt;h2 id=&#34;内容&#34;&gt;内容&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;前提 [前編]&lt;/li&gt;
@@ -1153,9 +1257,9 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;3-放送当日:3d905968c659a2d9572fbb959d952a4f&#34;&gt;3.放送当日&lt;/h2&gt;
+&lt;h2 id=&#34;3-放送当日&#34;&gt;3.放送当日&lt;/h2&gt;
 
-&lt;h3 id=&#34;直前の放送時間変更:3d905968c659a2d9572fbb959d952a4f&#34;&gt;直前の放送時間変更&lt;/h3&gt;
+&lt;h3 id=&#34;直前の放送時間変更&#34;&gt;直前の放送時間変更&lt;/h3&gt;
 
 &lt;p&gt;WBSは通常23時からの放送なのですが、この日は前の番組が世界卓球の日本vsドイツ戦でした。最終ゲームまでもつれ込む白熱の試合だったため放送時間がぎりぎりまで伸びて、放送開始が0時30分に変更になりました。&lt;/p&gt;
 
@@ -1166,7 +1270,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;放送内容:3d905968c659a2d9572fbb959d952a4f&#34;&gt;放送内容&lt;/h3&gt;
+&lt;h3 id=&#34;放送内容&#34;&gt;放送内容&lt;/h3&gt;
 
 &lt;p&gt;放送が始まり15分、いよいよ特集のコーナーです。&lt;br /&gt;
 今回は不動産ベンチャーの新しい取り組みという切り口で、大家さんと直接やりとりをすることで仲介手数料を無料にする賃貸サービスの &lt;strong&gt;ウチコミ！&lt;/strong&gt; さんと共に弊社を取り上げていただきました。&lt;/p&gt;
@@ -1198,7 +1302,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;アクセス数まとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;アクセス数まとめ&lt;/h3&gt;
+&lt;h3 id=&#34;アクセス数まとめ&#34;&gt;アクセス数まとめ&lt;/h3&gt;
 
 &lt;p&gt;実際のアクセス数を見てみましょう。&lt;/p&gt;
 
@@ -1214,9 +1318,9 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;4-振り返りとまとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;4.振り返りとまとめ&lt;/h2&gt;
+&lt;h2 id=&#34;4-振り返りとまとめ&#34;&gt;4.振り返りとまとめ&lt;/h2&gt;
 
-&lt;h3 id=&#34;アクセス予想振り返り:3d905968c659a2d9572fbb959d952a4f&#34;&gt;アクセス予想振り返り&lt;/h3&gt;
+&lt;h3 id=&#34;アクセス予想振り返り&#34;&gt;アクセス予想振り返り&lt;/h3&gt;
 
 &lt;p&gt;実際の結果を持って事前の予想を振り返ってみましょう。&lt;br /&gt;
 テレビ出演に舞い上がってテンション高めに予想していた部分を冷静に下方修正してみると、以下の様な数値が妥当では無いかと思いました。&lt;/p&gt;
@@ -1274,7 +1378,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;まとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;まとめ&lt;/h3&gt;
+&lt;h3 id=&#34;まとめ&#34;&gt;まとめ&lt;/h3&gt;
 
 &lt;p&gt;今回の事例の振り返りの内容も含めて、テレビ出演時の負荷見積もりの式を再度掲載しておきます。&lt;/p&gt;
 
@@ -1316,7 +1420,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 &lt;p&gt;突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？&lt;br /&gt;
 そんな時の参考になれば幸いです。&lt;/p&gt;
 
-&lt;h2 id=&#34;内容:08e118674fea9989bc7c591023d8b196&#34;&gt;内容&lt;/h2&gt;
+&lt;h2 id=&#34;内容&#34;&gt;内容&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;前提
@@ -1339,9 +1443,9 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;1-前提:08e118674fea9989bc7c591023d8b196&#34;&gt;1.前提&lt;/h2&gt;
+&lt;h2 id=&#34;1-前提&#34;&gt;1.前提&lt;/h2&gt;
 
-&lt;h3 id=&#34;前回の失敗:08e118674fea9989bc7c591023d8b196&#34;&gt;前回の失敗&lt;/h3&gt;
+&lt;h3 id=&#34;前回の失敗&#34;&gt;前回の失敗&lt;/h3&gt;
 
 &lt;p&gt;つい半月ほど前に別の局で朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。&lt;/p&gt;
 
@@ -1350,7 +1454,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196&#34;&gt;フロントエンド システム構成&lt;/h3&gt;
+&lt;h3 id=&#34;フロントエンド-システム構成&#34;&gt;フロントエンド システム構成&lt;/h3&gt;
 
 &lt;p&gt;「カウル」フロントエンドのシステム構成を簡単にご紹介します。&lt;br /&gt;
 基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;自社メディアであるマンションジャーナル&lt;/a&gt;も運営しているため、Wordpressが動くサーバが別にあります。&lt;br /&gt;
@@ -1362,9 +1466,9 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;2-事前準備:08e118674fea9989bc7c591023d8b196&#34;&gt;2.事前準備&lt;/h2&gt;
+&lt;h2 id=&#34;2-事前準備&#34;&gt;2.事前準備&lt;/h2&gt;
 
-&lt;h3 id=&#34;負荷予測:08e118674fea9989bc7c591023d8b196&#34;&gt;負荷予測&lt;/h3&gt;
+&lt;h3 id=&#34;負荷予測&#34;&gt;負荷予測&lt;/h3&gt;
 
 &lt;p&gt;負荷予測に関しては以下の記事を参考にさせていただきました。&lt;br /&gt;
 &lt;a href=&#34;http://qiita.com/chase0213/items/b5ecd4377f60605332e1&#34;&gt;[Qiita]gatling による負荷試験とテレビ露出見積り&lt;/a&gt;
@@ -1394,7 +1498,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;サーバ台数決定:08e118674fea9989bc7c591023d8b196&#34;&gt;サーバ台数決定&lt;/h3&gt;
+&lt;h3 id=&#34;サーバ台数決定&#34;&gt;サーバ台数決定&lt;/h3&gt;
 
 &lt;p&gt;こちらも先ほどの&lt;a href=&#34;http://qiita.com/chase0213/items/b5ecd4377f60605332e1&#34;&gt;Qiita記事&lt;/a&gt;を参考にAWSサーバのスペックと台数を決定しました。&lt;/p&gt;
 
@@ -1405,7 +1509,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;サーバ増強:08e118674fea9989bc7c591023d8b196&#34;&gt;サーバ増強&lt;/h3&gt;
+&lt;h3 id=&#34;サーバ増強&#34;&gt;サーバ増強&lt;/h3&gt;
 
 &lt;p&gt;深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
 ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。&lt;br /&gt;
@@ -1417,7 +1521,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;その他:08e118674fea9989bc7c591023d8b196&#34;&gt;その他&lt;/h3&gt;
+&lt;h3 id=&#34;その他&#34;&gt;その他&lt;/h3&gt;
 
 &lt;p&gt;その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。&lt;br /&gt;
 万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。&lt;/p&gt;
@@ -1441,7 +1545,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントである&lt;a href=&#34;http://hackday.jp/2016/&#34;&gt;Hack Day 2016&lt;/a&gt;に参加してきたのでこの場を借りてご紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;作ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;作ったもの&lt;/h2&gt;
+&lt;h2 id=&#34;作ったもの&#34;&gt;作ったもの&lt;/h2&gt;
 
 &lt;div class=&#34;embed-video-container&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/ZgpvXK3wfkc&#34; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
 
@@ -1461,7 +1565,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/0qgHEBRne3GBTsPTkJn5MqAsYdFihI-3LTJSm8P33iOraRoy36An06qGGQo8pC5jKr0afMeqOFA=s800&#34; title=&#34;Demo&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;使ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;使ったもの&lt;/h3&gt;
+&lt;h3 id=&#34;使ったもの&#34;&gt;使ったもの&lt;/h3&gt;
 
 &lt;p&gt;主に以下のデバイス・APIを使用して作りました。&lt;/p&gt;
 
@@ -1491,7 +1595,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 &lt;li&gt;&lt;a href=&#34;http://newdocs.clarifai.com/guide/info#info&#34;&gt;ClarifaiのAPIドキュメント&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;苦労したところ-工夫したところ:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;苦労したところ・工夫したところ&lt;/h3&gt;
+&lt;h3 id=&#34;苦労したところ-工夫したところ&#34;&gt;苦労したところ・工夫したところ&lt;/h3&gt;
 
 &lt;p&gt;Clarifaiの前は&lt;a href=&#34;https://cloud.google.com/vision/&#34;&gt;Google Cloud Vision&lt;/a&gt;の使用を検討していましたが審査が間に合いませんでした。
 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。
@@ -1509,7 +1613,7 @@ Google Cloud Visionは現在プレビュー版を提供している段階で、�
 &lt;p&gt;また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。
 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。&lt;/p&gt;
 
-&lt;h3 id=&#34;さいごに:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;さいごに&lt;/h3&gt;
+&lt;h3 id=&#34;さいごに&#34;&gt;さいごに&lt;/h3&gt;
 
 &lt;p&gt;今回の作ったものはこちらのレポジトリに置いています。&lt;/p&gt;
 
@@ -1533,7 +1637,7 @@ TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバ�
       <guid>http://techblog.housmart.co.jp/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B/</guid>
       <description>
 
-&lt;h2 id=&#34;ブログ始めました:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;ブログ始めました。&lt;/h2&gt;
+&lt;h2 id=&#34;ブログ始めました&#34;&gt;ブログ始めました。&lt;/h2&gt;
 
 &lt;p&gt;はじめまして！カウル開発チームの宮永と申します。&lt;/p&gt;
 
@@ -1546,7 +1650,7 @@ TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバ�
 
 &lt;p&gt;今回は第１回ということで自己紹介を。&lt;/p&gt;
 
-&lt;h2 id=&#34;自己紹介:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;自己紹介&lt;/h2&gt;
+&lt;h2 id=&#34;自己紹介&#34;&gt;自己紹介&lt;/h2&gt;
 
 &lt;p&gt;公式的な自己紹介はカウルのTOP（ &lt;a href=&#34;https://kawlu.com/market&#34;&gt;https://kawlu.com/market&lt;/a&gt; ）にありますので、
 そちらとは異なるフランクな内容で行きたいと思います。&lt;/p&gt;
@@ -1560,7 +1664,7 @@ TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバ�
 弊社の社員が勢揃いした写真です。
 &lt;div style=&#34;margin-bottom:100px&#34;&gt;&lt;/div&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;開発の話へ:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;開発の話へ。。&lt;/h2&gt;
+&lt;h2 id=&#34;開発の話へ&#34;&gt;開発の話へ。。&lt;/h2&gt;
 
 &lt;p&gt;このままだとサッカーブログになりそうなので、開発の話に戻ります。&lt;/p&gt;
 
@@ -1582,13 +1686,13 @@ TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバ�
 頻繁にMTGを行い、カウルの改善点を洗い出ししています。
 &lt;div style=&#34;margin-bottom:100px&#34;&gt;&lt;/div&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;最近ハマっていること:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;最近ハマっていること&lt;/h2&gt;
+&lt;h2 id=&#34;最近ハマっていること&#34;&gt;最近ハマっていること&lt;/h2&gt;
 
 &lt;p&gt;弊社のオフィスは渋谷にあるのですが、とにかく飲食店が豊富で毎日昼食に困りません。
 最近は社員皆で国際料理のお店巡りが流行ってます。
 （ペルー、オーストラリア、ブラジルなどなど渋谷にはとにかく多くの国際料理店が存在します。）&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はこのくらいで終わりとさせていただきます。
 引き続き、皆様どうぞよろしくお願いします。&lt;/p&gt;

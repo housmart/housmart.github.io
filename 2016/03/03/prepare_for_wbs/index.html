@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編] &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.16" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -74,7 +74,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 
 
-<meta itemprop="keywords" content="data-analysis,design,event,infra,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,media,operation,pitch,project,rails,work," />
+<meta itemprop="keywords" content=",data-analysis,design,event,infra,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,media,operation,pitch,project,rails,work," />
 
     
 
@@ -212,7 +212,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        11
+        12
         <span>Posts</span>
       </div>
       <div class="article-info-block">
@@ -367,7 +367,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 <p>突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？<br />
 そんな時の参考になれば幸いです。</p>
 
-<h2 id="内容:08e118674fea9989bc7c591023d8b196">内容</h2>
+<h2 id="内容">内容</h2>
 
 <ol>
 <li>前提
@@ -390,9 +390,9 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 <hr />
 
-<h2 id="1-前提:08e118674fea9989bc7c591023d8b196">1.前提</h2>
+<h2 id="1-前提">1.前提</h2>
 
-<h3 id="前回の失敗:08e118674fea9989bc7c591023d8b196">前回の失敗</h3>
+<h3 id="前回の失敗">前回の失敗</h3>
 
 <p>つい半月ほど前に別の局で朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。</p>
 
@@ -401,7 +401,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 <p><br></p>
 
-<h3 id="フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196">フロントエンド システム構成</h3>
+<h3 id="フロントエンド-システム構成">フロントエンド システム構成</h3>
 
 <p>「カウル」フロントエンドのシステム構成を簡単にご紹介します。<br />
 基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、<a href="https://kawlu.com/journal/">自社メディアであるマンションジャーナル</a>も運営しているため、Wordpressが動くサーバが別にあります。<br />
@@ -413,9 +413,9 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h2 id="2-事前準備:08e118674fea9989bc7c591023d8b196">2.事前準備</h2>
+<h2 id="2-事前準備">2.事前準備</h2>
 
-<h3 id="負荷予測:08e118674fea9989bc7c591023d8b196">負荷予測</h3>
+<h3 id="負荷予測">負荷予測</h3>
 
 <p>負荷予測に関しては以下の記事を参考にさせていただきました。<br />
 <a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">[Qiita]gatling による負荷試験とテレビ露出見積り</a>
@@ -445,7 +445,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h3 id="サーバ台数決定:08e118674fea9989bc7c591023d8b196">サーバ台数決定</h3>
+<h3 id="サーバ台数決定">サーバ台数決定</h3>
 
 <p>こちらも先ほどの<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">Qiita記事</a>を参考にAWSサーバのスペックと台数を決定しました。</p>
 
@@ -456,7 +456,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h3 id="サーバ増強:08e118674fea9989bc7c591023d8b196">サーバ増強</h3>
+<h3 id="サーバ増強">サーバ増強</h3>
 
 <p>深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
 ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。<br />
@@ -468,7 +468,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h3 id="その他:08e118674fea9989bc7c591023d8b196">その他</h3>
+<h3 id="その他">その他</h3>
 
 <p>その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。<br />
 万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。</p>
@@ -534,6 +534,31 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/">
+                        
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="title">なぜdevelopブランチは必要なの？</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -635,31 +660,6 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
-                        data analysis
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="title">スタートアップのための「お金と時間がかからない」ログ分析基盤</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-04-17 22:39:26 &#43;0900 JST" itemprop="datePublished">2016-04-17</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -672,6 +672,13 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
         <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/">
+                    
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
@@ -763,7 +770,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
                     development
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -777,7 +784,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
                     git
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">

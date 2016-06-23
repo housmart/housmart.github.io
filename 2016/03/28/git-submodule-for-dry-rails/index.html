@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>脱・巨大なモノリシックアプリ！DRYなRails分割方法 &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.16" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -74,7 +74,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 
 
 
-<meta itemprop="keywords" content="data-analysis,design,event,infra,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,media,operation,pitch,project,rails,work," />
+<meta itemprop="keywords" content=",data-analysis,design,event,infra,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,media,operation,pitch,project,rails,work," />
 
     
 
@@ -212,7 +212,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        11
+        12
         <span>Posts</span>
       </div>
       <div class="article-info-block">
@@ -367,7 +367,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 <li><strong>分割後はプロジェクト間で必要なロジックを共有したい</strong></li>
 </ol>
 
-<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
+<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
 
 <p>不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。</p>
 
@@ -395,7 +395,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 
 <p>カウルではこの状況を <strong>Gitのsubmodule</strong> を用いて改善しています。</p>
 
-<h2 id="実際の構成:186562e261a7107c8b7de063b569e16d">実際の構成</h2>
+<h2 id="実際の構成">実際の構成</h2>
 
 <p>Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。</p>
 
@@ -428,7 +428,7 @@ rails_app_2
 
 <p>また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。</p>
 
-<h3 id="submoduleの難しさ:186562e261a7107c8b7de063b569e16d">submoduleの難しさ</h3>
+<h3 id="submoduleの難しさ">submoduleの難しさ</h3>
 
 <p>submoduleでの運用を開始した当初、以下の部分で使い難さがありました。</p>
 
@@ -466,7 +466,7 @@ project_dir $ git push
 
 <p>上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は<code>submodule内のコミット&quot;4&quot;から◯◯へ参照を変えるコミット</code>でなければならないからです。</p>
 
-<h2 id="submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d">submoduleを簡単に運用するためのbot運用</h2>
+<h2 id="submoduleを簡単に運用するためのbot運用">submoduleを簡単に運用するためのbot運用</h2>
 
 <p>Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
 submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。</p>
@@ -480,7 +480,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 
 <p>その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。</p>
 
-<h2 id="まとめ:186562e261a7107c8b7de063b569e16d">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 
 <p>今回のご紹介した運用の概要は以下です。</p>
 
@@ -548,6 +548,31 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/">
+                        
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="title">なぜdevelopブランチは必要なの？</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -649,31 +674,6 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(http://techblog.housmart.co.jp//images/20160419/hands-woman-laptop-notebook.jpg)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
-                        data analysis
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="title">スタートアップのための「お金と時間がかからない」ログ分析基盤</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-04-17 22:39:26 &#43;0900 JST" itemprop="datePublished">2016-04-17</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -686,6 +686,13 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
         <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/">
+                    
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
@@ -777,7 +784,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
                     development
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -791,7 +798,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
                     git
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
