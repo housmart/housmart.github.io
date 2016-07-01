@@ -29,7 +29,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 &lt;p&gt;実際に新しいプロジェクトを始めるとしたら、どの構成が良いのでしょうか。&lt;br /&gt;
 今回はカウルを開発するにあたり採用したブランチの構成とその背景について紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;望んでいたこと&#34;&gt;望んでいたこと&lt;/h2&gt;
+&lt;h2 id=&#34;望んでいたこと:217c876d54842cb4e941db82592ed025&#34;&gt;望んでいたこと&lt;/h2&gt;
 
 &lt;p&gt;前提としてカウルのプロジェクトを始めるにあたって望んだことは以下の3つです。&lt;/p&gt;
 
@@ -43,7 +43,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 
 &lt;p&gt;3つ目の要件については、developブランチがあるとよいと考えました。&lt;/p&gt;
 
-&lt;h2 id=&#34;実際のブランチ構成&#34;&gt;実際のブランチ構成&lt;/h2&gt;
+&lt;h2 id=&#34;実際のブランチ構成:217c876d54842cb4e941db82592ed025&#34;&gt;実際のブランチ構成&lt;/h2&gt;
 
 &lt;p&gt;上記を踏まえると、タグづけとdevelopブランチはあると良さそうです。&lt;br /&gt;
 よってカウルでは以下の構成をとりました。&lt;/p&gt;
@@ -75,7 +75,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 
 &lt;p&gt;現状、featureやhotixといった修飾は特につけておらず、概念だけメンバー間で共有しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;実際の開発フロー&#34;&gt;実際の開発フロー&lt;/h2&gt;
+&lt;h2 id=&#34;実際の開発フロー:217c876d54842cb4e941db82592ed025&#34;&gt;実際の開発フロー&lt;/h2&gt;
 
 &lt;p&gt;考えた構成を基に以下のような流れで開発を行っています。&lt;/p&gt;
 
@@ -87,7 +87,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 &lt;li&gt;問題なければdevelopをmasterにマージしタグ付け、 本番に最新のタグをデプロイする&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;カウルの構成でもdevelopは必要なのか&#34;&gt;カウルの構成でもdevelopは必要なのか&lt;/h2&gt;
+&lt;h2 id=&#34;カウルの構成でもdevelopは必要なのか:217c876d54842cb4e941db82592ed025&#34;&gt;カウルの構成でもdevelopは必要なのか&lt;/h2&gt;
 
 &lt;p&gt;1ヶ月程度かかるような&lt;a href=&#34;http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/&#34;&gt;大きめプロジェクト&lt;/a&gt;があり、
 他の機能開発も行っているので今のところはあるとよいと考えています。&lt;/p&gt;
@@ -99,7 +99,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 &lt;li&gt;開発初期に比べてコードのベースはできていて、小中規模機能や他の箇所への影響が少ない開発が多くなっている&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;いつdevelopブランチは必要なの&#34;&gt;いつdevelopブランチは必要なの？&lt;/h2&gt;
+&lt;h2 id=&#34;いつdevelopブランチは必要なの:217c876d54842cb4e941db82592ed025&#34;&gt;いつdevelopブランチは必要なの？&lt;/h2&gt;
 
 &lt;p&gt;数日~1週間でブランチがマージされていく状況であればdevelopはなくても問題ないでしょう。シンプルな構成の方がGitの操作も少なくて済みます。&lt;br /&gt;
 数週間を越えてブランチがマージされないような状況を開発をしているときはdevelopやreleaseがあると安定したプロダクトを出荷できると考えます。&lt;/p&gt;

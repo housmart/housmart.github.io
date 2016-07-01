@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>脱・巨大なモノリシックアプリ！DRYなRails分割方法 &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.16" />
+    <meta name="generator" content="Hugo 0.15" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -351,6 +351,10 @@ Railsでアプリケーションを開発していると、管理者機能や周
         
     </div>
 </header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="hatena-bookmark-button" data-hatena-bookmark-title="脱・巨大なモノリシックアプリ！DRYなRails分割方法" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
 
             <div class="article-entry" itemprop="articleBody">
                 
@@ -367,7 +371,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 <li><strong>分割後はプロジェクト間で必要なロジックを共有したい</strong></li>
 </ol>
 
-<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
+<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
 
 <p>不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。</p>
 
@@ -395,7 +399,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 
 <p>カウルではこの状況を <strong>Gitのsubmodule</strong> を用いて改善しています。</p>
 
-<h2 id="実際の構成">実際の構成</h2>
+<h2 id="実際の構成:186562e261a7107c8b7de063b569e16d">実際の構成</h2>
 
 <p>Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。</p>
 
@@ -428,7 +432,7 @@ rails_app_2
 
 <p>また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。</p>
 
-<h3 id="submoduleの難しさ">submoduleの難しさ</h3>
+<h3 id="submoduleの難しさ:186562e261a7107c8b7de063b569e16d">submoduleの難しさ</h3>
 
 <p>submoduleでの運用を開始した当初、以下の部分で使い難さがありました。</p>
 
@@ -466,7 +470,7 @@ project_dir $ git push
 
 <p>上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は<code>submodule内のコミット&quot;4&quot;から◯◯へ参照を変えるコミット</code>でなければならないからです。</p>
 
-<h2 id="submoduleを簡単に運用するためのbot運用">submoduleを簡単に運用するためのbot運用</h2>
+<h2 id="submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d">submoduleを簡単に運用するためのbot運用</h2>
 
 <p>Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
 submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。</p>
@@ -480,7 +484,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 
 <p>その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。</p>
 
-<h2 id="まとめ">まとめ</h2>
+<h2 id="まとめ:186562e261a7107c8b7de063b569e16d">まとめ</h2>
 
 <p>今回のご紹介した運用の概要は以下です。</p>
 
@@ -493,9 +497,13 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 <p><a href="https://kawlu.com/market">カウル</a>では今後もより良い運用を目指して日々改善を行っていきます！</p>
 
             </div>
-            <footer class="article-footer">
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="hatena-bookmark-button" data-hatena-bookmark-title="脱・巨大なモノリシックアプリ！DRYなRails分割方法" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="fa fa-hatena article-share-hatena hatena-bookmark-button" target="_blank" data-hatena-bookmark-title="脱・巨大なモノリシックアプリ！DRYなRails分割方法" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="脱・巨大なモノリシックアプリ！DRYなRails分割方法" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
     <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
     <a href="https://twitter.com/share?text=%e8%84%b1%e3%83%bb%e5%b7%a8%e5%a4%a7%e3%81%aa%e3%83%a2%e3%83%8e%e3%83%aa%e3%82%b7%e3%83%83%e3%82%af%e3%82%a2%e3%83%97%e3%83%aa%ef%bc%81DRY%e3%81%aaRails%e5%88%86%e5%89%b2%e6%96%b9%e6%b3%95&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f28%2fgit-submodule-for-dry-rails%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
@@ -604,7 +612,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                     <a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/JJPqUTE-GFokoaW55BmRJ2_txdrPjwGyvf1uE5_OfmrHlEvm6XXPFbdcTEx7k1-WQkRjDI16HedIteQRrFTSA35ARTQlHPTwvl1RSKr2_kNHX_PiXIfoLPKczsVFPnPDlz9utQY31CbHnEjZP9bhlSktTDIbdr0HJZuwWYGb9NjnIkFbN4maAiiMfIpAzutII8-NRgvZvBKcRbgmOh1P80a2F-3P3eVCYv04BdaPBhQhMlFK2v19YrJ4lw_2NSdLvRcfKXLBmkr8UMH5u1fz4TMApOF4vDqQNEroOw-YxuhnCYD0xm5m5uzzHe-5jdS4ZTk0gErNGmmLg1ycRnKPterRkJbtcSPr6rM5FSdAaeI_iSn21Gmi7njAs4gJbxWTQKNyPLac8rNZ_Y0N9lTPWZliI9TtJMaxrHzMGFeBkwMpTqhWuQJfwrmoj08rGslaaC6j6SGqJHBr2cb2OSgywX4RNqp7ZY9GJSfsVcFhkLZEdGqvE8vgnCt3vIkIjmvz4EsP7GS-tbInBpCE1NQdVFLUH6NhfFEOsTMrPvADXopyNrOCLqu4DR8_U6yJtMNh-usud-EmNKvhaNPOvZUaoOrknHk4vkc=w1024-h768-no)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/F7GXQx32f_mb56GFuNaC3Yl3zhrYpt4O7y2xSeTT32fGC8OiUvqX6ybM59L5gxeUr68aR4GOGgFTSXWioalzT2GP0GzJ_3pARE0lxqvN5kgnIYd24ap8WUH1L-Wv1UdDLQDBf7e46l6ccvx5OeOdXsYGvqv6PJxnrBUqX0-6eOI6gU_ArWtB6B132OtAPGPG-HOBHoH4AxgC9MlAMUuO8dJnJwpW3X6-6gzXa1HiNlD6UJ-NQhUm6YpY731xc2UO5Zo8far-zMG3dIpPO9egNrwM-gpG5Q-chDO-Q7tvy2yK6sVaTRggxGAXhsNSe4zIBPYxWElqWlauCgqPQR2HnMZGpaAZxKrVtN1mzEhVEv5r7IEv3dfw0-_t2g8Qq53csbub3d-sdTyggnMxScqzYgc5rnflPiCB-F6fR7Fe26WUHQxQ2Zc6UZReJCfi121pOKu7hXm_F51gETXqIDsPU1SQHTeOfP9_eOvtJyu9CKPQBiCb1zS5R9vMavzUxy48WVppAdfBGHGaWE89y-JQBPvnVphxl1ai-r6eesg69gTrzfTlyw9tNJMbp3CfcVeVJYsuOQ60qtiIGmJo94De7tGJcXbQF3U=w512-h384-no)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
                         
                     
                     </a>
