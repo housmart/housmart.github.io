@@ -6,8 +6,120 @@
     <description>Recent content in Work on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 26 Apr 2016 08:04:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 24 Aug 2016 21:25:46 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/tags/work/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>スタートアップエンジニアって何に時間を使っているの？</title>
+      <link>http://techblog.housmart.co.jp/2016/08/24/startup-dev/</link>
+      <pubDate>Wed, 24 Aug 2016 21:25:46 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/08/24/startup-dev/</guid>
+      <description>
+
+&lt;p&gt;こんにちは！&lt;br /&gt;
+Housmartの宮永です。&lt;/p&gt;
+
+&lt;p&gt;スタートアップのエンジニアはリソースの都合もあるので
+「何でもやる」というのが一般的認識かと思います。&lt;br /&gt;
+弊社エンジニアもその一般的認識に違わず、何でもやる集団です。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/cI7onjqojgOuX_hNREK4r7DiDNdDUeUWz4WXfO1ZkP4JD9y7sVrBCkFJuzGGnil-Z8mV90d3RvMHJGAHgRAR0mnOSQRRLf7GCRfNQ6AIAQHh8m4FWRfGnslGAsO71UEgRaDd5azasHFdCi7Auv4x-hQER9RLRR_WJXxK9cHy_DNGuLfh3e50iCnmTtdKQo2tEkSDsyFbs098p3TQpXSsDfcOO_4itNG-NWRVmxR4raGlBs-9TnTqzo_g0VahyZk5W_t2_VFcd5ArSaMAbyMSHeuHSR7cq9T7M2PGgcGfeKKaWy4LevlHtvBnJux_LzLkcp4bLaou-9t9aqmLaMOBYgEEx-J3_O3VOWukaUXHmvuYvXo3tT6vScIDevxzq2FF1aBXkrleOTf-vtjRuSpZoW0x_zZBMw1ArFn2pjjB3RY0psquNnoHWM5XwLdL0XTcv3WQwVzPIMBlgQNBzRyt37JQlS5XbWxrx9WxctOhVFa2sSe4AQovJmFR_YXodvTLSUtM1uw8eWuW5clcsqptFhVqE-XBHF0-AluN401UPybcC0hGoqZf-9IGfnAFFzpji61ePv7Mi0H1kdsag9IG246jq0fNoO8=w800-h912-no&#39; alt=&#39;何でもやるエンジニアの3人です。左から松江、宮永、高松&#39;&gt;&lt;/p&gt;
+
+&lt;p&gt;でも「何でもやるんです。」では曖昧すぎて、どういう仕事をしているか全然イメージわきませんよね。&lt;/p&gt;
+
+&lt;p&gt;ということで、&lt;span style=&#39;color:red&#39;&gt;実作業を全て記録している&lt;/span&gt;という弊社の特徴を活かして
+今回は&lt;span style=&#39;color:red&#39;&gt;実作業時間&lt;/span&gt;をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。&lt;/p&gt;
+
+&lt;h2 id=&#34;背景-組織の話:73c321750c199f311b6645bb6a21c072&#34;&gt;＜背景＞組織の話&lt;/h2&gt;
+
+&lt;p&gt;弊社エンジニアは3人。&lt;br /&gt;
+メインプロダクトは中古マンション売買サービスの&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;で、皆で大事に大事に育てています。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/ZsJUQC8OIl5SdHBfqsVCo5lUzThyq309hg2-JW4QrOJBd0c6nNNo6lQb_vFxZJm3e5sFmlKnwvc6dg6Xq7EeZ0ckukTOlu9ZftuL0jK4nyoNlRY5Qi6VB1aEiiE95o_0MYxdT46aSkofHv3Zyuh24LPfP4ehNdFiQ93rIUAisDslti11qOtecqOKdwyHHraMXERJ-cqKhc7PVyPUDx7KIlS0QemwoKEMU5kC_mns0Y9snp5wIEL56rhQ6z-1XBLOd4wjPnMvsp5A3IsF_4DAmlCuKW0lDyxNX4gTmXVTKBj2gj-oZU3X8Xl_kIhLnDFSXpk69M7q6uc1Xu6F6V7Qj_QLu2F1FuwIv7XQgMxJpIpx55pm0eXRNfyxkQnX2rnmVYeGM_82mKmjPtVuxvjzGbNQV1-lnsRAYUBium_uWQ90JeKPX9IGZk8m9uCeODsWpqyDTNoJliz_wv6P_wBUxu5peyyiQjUhUtMSUwHWZKGhs-FV7MNgARrot0v5Y0SZ2GKFa_vAgB8-N1QAxRqo6igXMRuMK31HQQqm_WwYRnKMVB5Zy935AjZzVipPLZiQd8VZRQdoXF5hRcj9hMwaiEf48wQDYTYdYPh-9NLVZ5fInAkY=w650-h912-no&#39; alt=&#39;カウル&#39;&gt;&lt;/p&gt;
+
+&lt;p&gt;エンジニア3人はプロジェクトのプランニングからリリースまで幅広く業務を行います。&lt;br /&gt;
+（これがいわゆる「何でもやる」）&lt;/p&gt;
+
+&lt;h4 id=&#34;主なタスク:73c321750c199f311b6645bb6a21c072&#34;&gt;主なタスク&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プロジェクトプランニング&lt;/li&gt;
+&lt;li&gt;プロジェクト管理&lt;/li&gt;
+&lt;li&gt;設計&lt;/li&gt;
+&lt;li&gt;開発&lt;/li&gt;
+&lt;li&gt;テスト&lt;/li&gt;
+&lt;li&gt;運用（トラブル対応、データ抽出など）&lt;/li&gt;
+&lt;li&gt;KPI管理&lt;/li&gt;
+&lt;li&gt;MTG&lt;/li&gt;
+&lt;li&gt;自由研究&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これだけ色々なことをやっているので、&lt;br /&gt;
+何にどれだけ使っているのかは&lt;span style=&#39;color:red&#39;&gt;記録でもしないかぎり&lt;/span&gt;把握しきれません。&lt;/p&gt;
+
+&lt;h2 id=&#34;作業の記録:73c321750c199f311b6645bb6a21c072&#34;&gt;作業の記録&lt;/h2&gt;
+
+&lt;p&gt;前述のとおり、弊社エンジニアは入社以来、全作業に対して実作業時間を記録しています。&lt;br /&gt;
+細かい話「weekly MTGの参加」や「xxのbug fix」もそれぞれチケット化して記録します。&lt;br /&gt;
+※&lt;a href=&#34;https://ja.atlassian.com/software/jira&#34;&gt;JIRA&lt;/a&gt;で全て管理しています。&lt;br /&gt;
+※ご飯、筋トレ、昼寝は記録対象外。&lt;/p&gt;
+
+&lt;h2 id=&#34;エンジニアの作業実績-2016-01-2016-08:73c321750c199f311b6645bb6a21c072&#34;&gt;エンジニアの作業実績(&lt;sup&gt;2016&lt;/sup&gt;&amp;frasl;&lt;sub&gt;01&lt;/sub&gt; - &lt;sup&gt;2016&lt;/sup&gt;&amp;frasl;&lt;sub&gt;08&lt;/sub&gt;)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/cd4pAvEbM3NfTrcX1DELrhfF9oXpTP2z_Fob_Kovbw_yr4JUTAIfKmAzpcvT9l7GCVTgrYR66rhZxbe22JINTgdKsdkyf6PbJMroX4FN5y-4vJkgJDBTlnailOLBN7_k4Wp09qVW54DSLZ9mCj0HQMIGQAjwKLflaBNbkwmBOR21KSeLo0QLgFedHRosmc7NQzenmDRCmIYAO7-31Igor64cmaX0fsEwXGikzdjVu91jf-21IZrAcw4XjGDIqfeoG99WrsZQVcfjxvyEQzJ2iPPafYI1rc5D7APjwpJpoKaLmvUn4Ce9TGgpaAzxA3FUsuyli2NCXEcbcVYkApgl8SsCGvMr7I2LsNjk4_VYwIWy7apT7X-QmMf5OO0AoPkIdZ_LFBG0zk77jRhH-rCOMCtFg54fMPUA-r_BPMwn2sAP55fE_-M-i5MC3kaTv7-E8K4vA7O3d3-_RN3Kt46xDqCn4uyGM_dd2gSRPC3nElCXaIheA_ZhUQ_a9G1ue38sOWFbMpDR3qrwaRAaSfnBKk1dbFtDL9L9k7amHNHgbaCbEd6K8Klbna9I1M76FRIgop0hoUW9QB4NixszMVCz8QzGfPSa32E=w650-h669-no&#34;&gt;
+&lt;div style=&#34;font-size:12px;margin-top: -25px&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;development : 開発、テスト&lt;/li&gt;
+&lt;li&gt;bug : 本番で発生したバグの修正作業&lt;/li&gt;
+&lt;li&gt;operation : 運用（トラブル対応、データ抽出など）&lt;/li&gt;
+&lt;li&gt;dev-improvement : 開発環境改善に関する作業&lt;/li&gt;
+&lt;li&gt;planning : MTG、プランニング、要件定義、設計、外部との調整作業&lt;/li&gt;
+&lt;li&gt;lab : 自由研究 ※毎週水曜日は1日自由研究時間に充てている&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;br&gt;
+上図は入社した2016/01より約8ヶ月間記録してきた全作業実績です。&lt;br /&gt;
+development(開発)やplanning(MTG、企画)にかける時間は少しずつ上昇していることがわかります。&lt;br /&gt;
+これは案件規模が少しずつ大きくなり企画時間が増えたり、システム自体が少しずつ複雑化していることで開発の時間が増えたりしていることが背景にあります。&lt;/p&gt;
+
+&lt;p&gt;operation(運用), bug(本番で発生したバグの修正作業)は毎月全体の10%程度の工数です。&lt;br /&gt;
+スピード感のある開発を行っているので、多少のバグはしょうがない面もありますが、&lt;br /&gt;
+バグの対応が増えてしまえば他の作業にはねてしまうので、スピードを保ったまま1-5%くらいまでに落とせればと思ってます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/GiCPVq13nhO7yk31s9STFNxBlX19KXlidRnVD2hxBzeb-7AQZMrQa2pzy0cW6oSSm_51e-klLHddSoRNQES8KfvCMNZjPfuqg7SqMlBtSEQen--yKE-4-Al0pMDZJky8yo0VRU2OzZnIYqFNiLWxAC_T2sPnd9m7HxR_ZSVt7KNfaq8cgTHG2hlONZTBgdCH3cgTApXiOUOUAgHzlR_3OQpqDD_c1C4d5Ddf0C9TKTiY7PjQa9gVnYWUyOlFNTLtdwBCW-KlCCmCKjTjKr5IiC6n_CjlF3YavLRaZIkQEVdLUJJd1PRB-dt8S70D2CbHeN1Ev6C1rMpDfze51_UPtpaTqFcPIEEUTNtY-Fh5NVy5jJKyxiu6ogZJicmLJLqZjCbpAHpkoIs4agWihpFe_Z11Awz9jjZAcwY3x7KKsw-xybDwDnmexdyVy1oi6DUGlSBZdc2HJ9_LETi0WC5hknW6J6aWEGrtx4CnVRM5qDRYQTVU0W50THJwZ2QH9VciocJ9D0-xpTLw_9lVUJll3K7U7MA4fvAuv_V13tBhVlvPc3sg8m5UF-kce0OGKbic_qTGgI21W9FOr-v8qndavgk_Dn4upyU=w650-h658-no&#34;&gt;
+&lt;div style=&#34;font-size:12px;margin-top: -25px&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;development : 開発、テスト&lt;/li&gt;
+&lt;li&gt;bug : 本番で発生したバグの修正作業&lt;/li&gt;
+&lt;li&gt;operation : 運用（トラブル対応、データ抽出など）&lt;/li&gt;
+&lt;li&gt;dev-improvement : 開発環境改善に関する作業&lt;/li&gt;
+&lt;li&gt;planning : MTG、プランニング、要件定義、設計、外部との調整作業&lt;/li&gt;
+&lt;li&gt;lab : 自由研究 ※毎週水曜日は1日自由研究時間に充てている&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;上図は作業時間の各種作業の割合を示します。&lt;br /&gt;
+ここ数ヶ月はlab(自由研究)やdev-improvement(開発環境改善)の時間を&lt;br /&gt;
+開発にあてているのが現状です。&lt;/p&gt;
+
+&lt;p&gt;lab（環境改善、自由研究）は弊社にとって投資にあたり&lt;br /&gt;
+会社やプロダクトの成長に欠かせない大事な要素です。&lt;br /&gt;
+時期を見てかける時間も増やしていきたいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;結論-housmartエンジニアの業務とは:73c321750c199f311b6645bb6a21c072&#34;&gt;結論（Housmartエンジニアの業務とは？）&lt;/h2&gt;
+
+&lt;p&gt;ということで作業時間から見たHousmartエンジニアの働き方は下図です。&lt;br /&gt;
+&lt;img src=&#39;https://lh3.googleusercontent.com/FzBf0xEm9MHzaCuVlu8d9ALcMcrLnyZ3ktJPI3FFNS48iV1pCH6GcQ691ztwQZ_OyymkgzKxQn3dePYTmWf1ClG2Lnas1CehUdrjPEL9EaShXkDE19qBSw2B90fKXe4NpyBgXeiQreaauPfFoUT-rZArCmw7UPF3kMg0EaIADoO9VbEwBSQdvXHVyHjg9-6mIrZ0FqA1ENysOsY89c3N7XA6vIeOeI3TWW3mku6lDTJzxHvX-ceNvpd7ZA_JHmrSxA4bBDKaMpdY4JQWVs56TQlh62oOewKJ1YlYk2HUV_qJ8HLvSUxx4wVvARyGF7qFthsNrzhykNowNFz4r7kkL-PJdXHabZFnT_T7LkVB4QeBkkx8WJ10TSIEV2b7SIPbzO1UGIGLa4Q7Uhz3YibwX9fhss11ryOo8O3yAREN5baklINwq9ET-zGPhcB6lj30oHej3EMs7jb_w9kZHETz0P_ZFEE3AqhQH413e09vboqJpSuROc2oMaCAJ9IIg0bkLYhSQR3B_FkCOeGan9a0HfnFaVU1qYXAXJSBNZWZ8uKn2onAZ76vCptynJ90C63_YXNkpDZu5LjElaWKTU2C8_AJ5dm6eXo=w592-h310-no&#39;&gt;&lt;/p&gt;
+
+&lt;p&gt;このような働き方や&lt;span style=&#39;color:red&#39;&gt;ReTech(不動産テック)&lt;/span&gt;に興味のあるエンジニアの方は
+ぜひご連絡ください！&lt;br /&gt;
+お待ちしております。&lt;/p&gt;
+
+&lt;p&gt;akihisa.miyanaga@housmart.com&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>観光名所ならぬ開発名所？熱海で開発合宿♪</title>
