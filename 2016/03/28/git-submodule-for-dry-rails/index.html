@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>脱・巨大なモノリシックアプリ！DRYなRails分割方法 &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.16" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -74,7 +74,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 
 
 
-<meta itemprop="keywords" content=",data-analysis,design,event,infra,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,media,operation,pitch,project,rails,startup,work," />
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,work," />
 
     
 
@@ -212,12 +212,12 @@ Railsでアプリケーションを開発していると、管理者機能や周
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        13
+        14
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          15
+          17
         
         <span>
             Tags
@@ -371,7 +371,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 <li><strong>分割後はプロジェクト間で必要なロジックを共有したい</strong></li>
 </ol>
 
-<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
+<h2 id="複数のrailsプロジェクト間でロジックを共有したい状況">複数のRailsプロジェクト間でロジックを共有したい状況</h2>
 
 <p>不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。</p>
 
@@ -399,7 +399,7 @@ Railsでアプリケーションを開発していると、管理者機能や周
 
 <p>カウルではこの状況を <strong>Gitのsubmodule</strong> を用いて改善しています。</p>
 
-<h2 id="実際の構成:186562e261a7107c8b7de063b569e16d">実際の構成</h2>
+<h2 id="実際の構成">実際の構成</h2>
 
 <p>Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。</p>
 
@@ -432,7 +432,7 @@ rails_app_2
 
 <p>また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。</p>
 
-<h3 id="submoduleの難しさ:186562e261a7107c8b7de063b569e16d">submoduleの難しさ</h3>
+<h3 id="submoduleの難しさ">submoduleの難しさ</h3>
 
 <p>submoduleでの運用を開始した当初、以下の部分で使い難さがありました。</p>
 
@@ -470,7 +470,7 @@ project_dir $ git push
 
 <p>上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は<code>submodule内のコミット&quot;4&quot;から◯◯へ参照を変えるコミット</code>でなければならないからです。</p>
 
-<h2 id="submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d">submoduleを簡単に運用するためのbot運用</h2>
+<h2 id="submoduleを簡単に運用するためのbot運用">submoduleを簡単に運用するためのbot運用</h2>
 
 <p>Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
 submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。</p>
@@ -484,7 +484,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 
 <p>その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。</p>
 
-<h2 id="まとめ:186562e261a7107c8b7de063b569e16d">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 
 <p>今回のご紹介した運用の概要は以下です。</p>
 
@@ -559,6 +559,31 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
             
             <li>
                 <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/mAZo021Zuw_Zp4JraHEVArFU7fsHZRPq1jMm4NsBD8ngJRgAmLHDnEvVvQMK8up4u0mKsO_m_rem7PbvOqqFOK3fTDFik7JizaKkEug2sgIA0G4bUkKTByXAREiqToX5ozEJOAguMKDJhUAnxNhUNVH40EjoNb1J8q7kxWRYZLOItRQlbKm7ggcjOlAxCEI16R4X0_A1XakO4XEpcDbAGrhIdyMA1NWKHHQxuGgGxk6W0JbiR3u3oxpv3yaHjJV5ZBN9HfZ1OpcW6RTodfitUcFhXdjgCm28ghZe1drsVub8JWjjE6CiYAGs4urpJ2tsUI5PrgzD-GXr2RxLekbGBXV7QdOY0ZOfyBLDEHGt1tvD0KZBZAa05ap2VieImvtqxxe3ZIkeNdPMtIE4spLohoGzPV8ZQgpDrGm3epkUm1gXsDFi1-naiDIdvSyXAYZP-e4HWJ8Z5A0UMmjO1yURQ7MmDtVLCvb6QTD_ACW-bb2wneWQovyE6ZTWuA9ghDnYDaxpxEDUzZG2b4d7Xh_7dDIVGGyLTgkyJdZFN5cLIug7LpSK--0CcesoY_GqMbAqXcwkTSFNoAZ1om6XtrI3UjP3E4uN-xWBMEJSYczuYVJ-cf3TGQ=s800)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="title">【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-01 15:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-01</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
                     <a href="http://techblog.housmart.co.jp/2016/08/24/startup-dev/" class="thumbnail">
                     
                         
@@ -570,8 +595,8 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 <div class="item-inner">
                     
                     <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/">
-                        
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">
+                        project
                         </a>
                     </p>
                     
@@ -595,8 +620,8 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 <div class="item-inner">
                     
                     <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/">
-                        
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">
+                        operation
                         </a>
                     </p>
                     
@@ -657,31 +682,6 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/05/14/slush-asia-2016/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w700)" alt="脱・巨大なモノリシックアプリ！DRYなRails分割方法" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
-                        event
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/05/14/slush-asia-2016/" class="title">スタートアップ発表者が見たSlush Asia 2016の舞台裏</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-05-14 22:48:09 &#43;0900 JST" itemprop="datePublished">2016-05-14</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -694,13 +694,6 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
         <ul class="category-list">
-            
-            <li class="category-list-item">
-                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/">
-                    
-                </a>
-                <span class="category-list-count">2</span>
-            </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
@@ -731,6 +724,13 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
                     member
                 </a>
@@ -741,14 +741,14 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
                     operation
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
                     project
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -785,14 +785,14 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
                     design
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
                     development
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">6</span>
             </li>
             
             <li class="category-list-item">
@@ -826,6 +826,13 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
                     introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -873,6 +880,13 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
                     work
                 </a>
@@ -910,6 +924,8 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
         
         <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
         
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
         <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
         
         <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
@@ -921,6 +937,8 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
         <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
         
         <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
         
         <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
         

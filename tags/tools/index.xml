@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/tools/</link>
+    <description>Recent content in Tools on カウル Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 01 Sep 2016 15:54:20 +0900</lastBuildDate>
+    <atom:link href="http://techblog.housmart.co.jp/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</title>
+      <link>http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/</link>
+      <pubDate>Thu, 01 Sep 2016 15:54:20 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/</guid>
+      <description>
+
+&lt;p&gt;「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」&lt;br /&gt;
+こんな疑問を開発前に持つ方向けに、「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントをまとめました。&lt;br /&gt;
+実際にリリースした&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;カウルのアプリ&lt;/a&gt;開発でとった対応も併記しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;企業でiOSアプリを初めて開発するエンジニア&lt;/strong&gt; や &lt;strong&gt;作る機能・スケジュールを決めるプロダクトオーナー&lt;/strong&gt; といった方々の判断の材料になれば幸いです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#service&#34;&gt;サービス・システム設計で考えておきたい5つのこと&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#service2&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#service3&#34;&gt;2.webからアプリへのインストールの導線&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#service1&#34;&gt;3.対応デバイス選定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#service4&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other1&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other&#34;&gt;カウルアプリの中の話&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#other2&#34;&gt;今回のリリースに含めなかった対応&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other3&#34;&gt;開発にかかったコスト&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;div id=&#34;service&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;サービス-システム設計で意識しておきたい5つのこと&#34;&gt;サービス・システム設計で意識しておきたい5つのこと&lt;/h2&gt;
+
+&lt;p&gt;web開発と異なる部分として、プッシュ通知などアプリならではの考慮しておくと良いことがあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service2&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-ユーザにアプリアップデートを促す仕組み&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/h3&gt;
+
+&lt;p&gt;APIのバージョンを上げる際、バージョンアップ前のAPIに合わせて実装されていたアプリが動かなくなる可能性があります。&lt;br /&gt;
+旧バージョンのAPIを使うアプリが残っていると、複数バージョンのAPIを運用していく必要がありますが、運用コストやセキュリティ等の理由で旧バージョンのAPIを閉じる必要も出てくるでしょう。&lt;br /&gt;
+ですので、特定バージョンのアプリにアップデートを促す仕組みを導入できていると将来的な運用コストを抑えることができます。&lt;/p&gt;
+
+&lt;p&gt;カウルでは&lt;a href=&#34;https://firebase.google.com/docs/remote-config/&#34;&gt;Firebase Remote Config&lt;/a&gt;を使用して、通知が必要なバージョンのアプリを管理するようにしています。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service3&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;2-webからアプリへのインストールの導線&#34;&gt;2.webからアプリへのインストールの導線&lt;/h3&gt;
+
+&lt;p&gt;アプリをリリースした後の、webからのアプリをインストールさせるための導線についても考えておきます。&lt;/p&gt;
+
+&lt;p&gt;カウルではランディングページへアクセスした際に&lt;a href=&#34;https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html&#34;&gt;Smart App Banners&lt;/a&gt;を出すようにしつつ、web版への登録ステップも残すことにしました。&lt;br /&gt;
+また、未対応のiOSバージョンの端末にはSmart App Bannersのメタタグを出さないようにしています。&lt;br /&gt;
+ユーザの使用状況に応じて、インストールの導線を追加していくことも検討しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service1&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-対応デバイス選定&#34;&gt;3.対応デバイス選定&lt;/h3&gt;
+
+&lt;p&gt;対応デバイスとOSのバージョンを決めます。&lt;br /&gt;
+カウルでは開発コストを抑えるため以下に絞りました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iPhoneのみ対応(ローテーションの対応は無し)&lt;/li&gt;
+&lt;li&gt;iOS9以降対応&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最新のiOS2バージョンをサポートすることが推奨です。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service4&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;4-appleの審査でリジェクトされることも想定した締切&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/h3&gt;
+
+&lt;p&gt;初回の審査ではリジェクトされる可能性が十分にあるので、余裕をもって審査に出します。&lt;/p&gt;
+
+&lt;p&gt;これまで &lt;strong&gt;1週間程度かかっていたレビューが短縮されて、現在は1日程度になっている&lt;/strong&gt; ようです。&lt;/p&gt;
+
+&lt;p&gt;カウルではメッセージのやりとり・指摘箇所の修正時間も見込んで2週間程のバッファを用意しました。&lt;br /&gt;
+実際、カウルアプリの審査においても決済周りの説明や確認のやりとりに時間を使いました。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;other1&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;5-クラッシュのトラッキング等に使うプラットフォームの選定&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/h3&gt;
+
+&lt;p&gt;リリース後のクラッシュの検知や、プッシュ通知を送るためのプラットフォームを選びます。&lt;br /&gt;
+特にクラッシュ検知ツールはお金もかからず、実装に時間もかからないので何かしらいれておきましょう。&lt;/p&gt;
+
+&lt;p&gt;カウルの開発では以下のツール群を導入して、クラッシュ検知やプッシュ通知を実装しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://get.fabric.io/&#34;&gt;Fabric&lt;/a&gt;関連のツール&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://fabric.io/kits/ios/answers&#34;&gt;Answers&lt;/a&gt;&lt;br /&gt;
+アプリ起動状態のトラッキングをするツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://try.crashlytics.com/beta/&#34;&gt;Beta&lt;/a&gt;&lt;br /&gt;
+開発途中のアプリを関係者に配信してテストするためのツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://fabric.io/kits/ios/crashlytics&#34;&gt;Crashlytics&lt;/a&gt;&lt;br /&gt;
+アプリのクラッシュを検知するツール&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://firebase.google.com/&#34;&gt;Firebase&lt;/a&gt;関連のツール&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/analytics/&#34;&gt;Analytics&lt;/a&gt;&lt;br /&gt;
+アプリ起動状態のトラッキングをするツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/notifications/&#34;&gt;Notifications&lt;/a&gt;&lt;br /&gt;
+プッシュ通知を送るためのツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/remote-config/&#34;&gt;Remote Config&lt;/a&gt;&lt;br /&gt;
+設定をリモートから配信するためのツール(A/Bテスト等に使える)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;div id=&#34;other&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;カウルアプリの中の話&#34;&gt;カウルアプリの中の話&lt;/h2&gt;
+
+&lt;p&gt;&lt;div id=&#34;other2&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;今回のリリースに含めなかった対応&#34;&gt;今回のリリースに含めなかった対応&lt;/h3&gt;
+
+&lt;p&gt;我々は以下のタスクを次のリリースに見送りましたが、スケジュール次第では可能な限り先に対応しておけると素敵です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アナリティクスや既存のログ分析基盤との統合(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/&#34;&gt;カウルのログ分析基盤について&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;自動テストの拡充&lt;/li&gt;
+&lt;li&gt;CI・自動デプロイの環境拡充&lt;/li&gt;
+&lt;li&gt;ASO(App Store Optimization)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;div id=&#34;other3&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;開発にかかったコスト&#34;&gt;開発にかかったコスト&lt;/h3&gt;
+
+&lt;p&gt;JIRAの記録(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/08/24/startup-dev/&#34;&gt;カウルの作業時間記録について&lt;/a&gt;)によると、1.5人月(240時間)ほどの作業時間を使いました。作業内容としては以下の様なタスクを含みます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アプリ実装&lt;/li&gt;
+&lt;li&gt;API修正(プッシュ通知の組み込みなど)&lt;/li&gt;
+&lt;li&gt;モバイルwebのUI修正&lt;/li&gt;
+&lt;li&gt;ミーティングやアップル審査の調整&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;ここに書いてあることはカウルの開発で実施していることの一部です。是非みなさんの意見や、やり方も教えていただけると幸いです！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;のアプリは&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;こちら&lt;/a&gt;です。基本料無料で使えますので、是非ご利用ください！&lt;br /&gt;
+&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;https://itunes.apple.com/app/id1143903849&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;by まっくす&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>なぜdevelopブランチは必要なの？ &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.16" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -62,7 +62,7 @@ developブランチだけ使われていて、masterが全く使われていな�
 
 
 
-<meta itemprop="keywords" content=",data-analysis,design,event,infra,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,media,operation,pitch,project,rails,startup,work," />
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,work," />
 
     
 
@@ -194,12 +194,12 @@ developブランチだけ使われていて、masterが全く使われていな�
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        13
+        14
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          15
+          17
         
         <span>
             Tags
@@ -306,7 +306,7 @@ developブランチだけ使われていて、masterが全く使われていな�
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/"></a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">operation</a>
                 
                 
             </div>
@@ -350,7 +350,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 <p>実際に新しいプロジェクトを始めるとしたら、どの構成が良いのでしょうか。<br />
 今回はカウルを開発するにあたり採用したブランチの構成とその背景について紹介します。</p>
 
-<h2 id="望んでいたこと:217c876d54842cb4e941db82592ed025">望んでいたこと</h2>
+<h2 id="望んでいたこと">望んでいたこと</h2>
 
 <p>前提としてカウルのプロジェクトを始めるにあたって望んだことは以下の3つです。</p>
 
@@ -364,7 +364,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 
 <p>3つ目の要件については、developブランチがあるとよいと考えました。</p>
 
-<h2 id="実際のブランチ構成:217c876d54842cb4e941db82592ed025">実際のブランチ構成</h2>
+<h2 id="実際のブランチ構成">実際のブランチ構成</h2>
 
 <p>上記を踏まえると、タグづけとdevelopブランチはあると良さそうです。<br />
 よってカウルでは以下の構成をとりました。</p>
@@ -396,7 +396,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 
 <p>現状、featureやhotixといった修飾は特につけておらず、概念だけメンバー間で共有しています。</p>
 
-<h2 id="実際の開発フロー:217c876d54842cb4e941db82592ed025">実際の開発フロー</h2>
+<h2 id="実際の開発フロー">実際の開発フロー</h2>
 
 <p>考えた構成を基に以下のような流れで開発を行っています。</p>
 
@@ -408,7 +408,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 <li>問題なければdevelopをmasterにマージしタグ付け、 本番に最新のタグをデプロイする</li>
 </ol>
 
-<h2 id="カウルの構成でもdevelopは必要なのか:217c876d54842cb4e941db82592ed025">カウルの構成でもdevelopは必要なのか</h2>
+<h2 id="カウルの構成でもdevelopは必要なのか">カウルの構成でもdevelopは必要なのか</h2>
 
 <p>1ヶ月程度かかるような<a href="http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/">大きめプロジェクト</a>があり、
 他の機能開発も行っているので今のところはあるとよいと考えています。</p>
@@ -420,7 +420,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 <li>開発初期に比べてコードのベースはできていて、小中規模機能や他の箇所への影響が少ない開発が多くなっている</li>
 </ul>
 
-<h2 id="いつdevelopブランチは必要なの:217c876d54842cb4e941db82592ed025">いつdevelopブランチは必要なの？</h2>
+<h2 id="いつdevelopブランチは必要なの">いつdevelopブランチは必要なの？</h2>
 
 <p>数日~1週間でブランチがマージされていく状況であればdevelopはなくても問題ないでしょう。シンプルな構成の方がGitの操作も少なくて済みます。<br />
 数週間を越えてブランチがマージされないような状況を開発をしているときはdevelopやreleaseがあると安定したプロダクトを出荷できると考えます。</p>
@@ -495,6 +495,31 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
             
             <li>
                 <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/mAZo021Zuw_Zp4JraHEVArFU7fsHZRPq1jMm4NsBD8ngJRgAmLHDnEvVvQMK8up4u0mKsO_m_rem7PbvOqqFOK3fTDFik7JizaKkEug2sgIA0G4bUkKTByXAREiqToX5ozEJOAguMKDJhUAnxNhUNVH40EjoNb1J8q7kxWRYZLOItRQlbKm7ggcjOlAxCEI16R4X0_A1XakO4XEpcDbAGrhIdyMA1NWKHHQxuGgGxk6W0JbiR3u3oxpv3yaHjJV5ZBN9HfZ1OpcW6RTodfitUcFhXdjgCm28ghZe1drsVub8JWjjE6CiYAGs4urpJ2tsUI5PrgzD-GXr2RxLekbGBXV7QdOY0ZOfyBLDEHGt1tvD0KZBZAa05ap2VieImvtqxxe3ZIkeNdPMtIE4spLohoGzPV8ZQgpDrGm3epkUm1gXsDFi1-naiDIdvSyXAYZP-e4HWJ8Z5A0UMmjO1yURQ7MmDtVLCvb6QTD_ACW-bb2wneWQovyE6ZTWuA9ghDnYDaxpxEDUzZG2b4d7Xh_7dDIVGGyLTgkyJdZFN5cLIug7LpSK--0CcesoY_GqMbAqXcwkTSFNoAZ1om6XtrI3UjP3E4uN-xWBMEJSYczuYVJ-cf3TGQ=s800)" alt="なぜdevelopブランチは必要なの？" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="title">【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-01 15:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-01</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
                     <a href="http://techblog.housmart.co.jp/2016/08/24/startup-dev/" class="thumbnail">
                     
                         
@@ -506,8 +531,8 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
                 <div class="item-inner">
                     
                     <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/">
-                        
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">
+                        project
                         </a>
                     </p>
                     
@@ -531,8 +556,8 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
                 <div class="item-inner">
                     
                     <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/">
-                        
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">
+                        operation
                         </a>
                     </p>
                     
@@ -593,31 +618,6 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/05/14/slush-asia-2016/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w700)" alt="なぜdevelopブランチは必要なの？" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
-                        event
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/05/14/slush-asia-2016/" class="title">スタートアップ発表者が見たSlush Asia 2016の舞台裏</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-05-14 22:48:09 &#43;0900 JST" itemprop="datePublished">2016-05-14</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -630,13 +630,6 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
         <ul class="category-list">
-            
-            <li class="category-list-item">
-                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/">
-                    
-                </a>
-                <span class="category-list-count">2</span>
-            </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
@@ -667,6 +660,13 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
                     member
                 </a>
@@ -677,14 +677,14 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
                     operation
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
                     project
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -721,14 +721,14 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
                     design
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
                     development
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">6</span>
             </li>
             
             <li class="category-list-item">
@@ -762,6 +762,13 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
                     introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -809,6 +816,13 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
                     work
                 </a>
@@ -846,6 +860,8 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
         
         <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
         
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
         <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
         
         <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
@@ -857,6 +873,8 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
         <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
         
         <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
         
         <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
         

@@ -31,7 +31,7 @@ Housmartの宮永です。&lt;/p&gt;
 &lt;p&gt;ということで、&lt;span style=&#39;color:red&#39;&gt;実作業を全て記録している&lt;/span&gt;という弊社の特徴を活かして
 今回は&lt;span style=&#39;color:red&#39;&gt;実作業時間&lt;/span&gt;をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;背景-組織の話:73c321750c199f311b6645bb6a21c072&#34;&gt;＜背景＞組織の話&lt;/h2&gt;
+&lt;h2 id=&#34;背景-組織の話&#34;&gt;＜背景＞組織の話&lt;/h2&gt;
 
 &lt;p&gt;弊社エンジニアは3人。&lt;br /&gt;
 メインプロダクトは中古マンション売買サービスの&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;で、皆で大事に大事に育てています。&lt;/p&gt;
@@ -41,7 +41,7 @@ Housmartの宮永です。&lt;/p&gt;
 &lt;p&gt;エンジニア3人はプロジェクトのプランニングからリリースまで幅広く業務を行います。&lt;br /&gt;
 （これがいわゆる「何でもやる」）&lt;/p&gt;
 
-&lt;h4 id=&#34;主なタスク:73c321750c199f311b6645bb6a21c072&#34;&gt;主なタスク&lt;/h4&gt;
+&lt;h4 id=&#34;主なタスク&#34;&gt;主なタスク&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;プロジェクトプランニング&lt;/li&gt;
@@ -58,14 +58,14 @@ Housmartの宮永です。&lt;/p&gt;
 &lt;p&gt;これだけ色々なことをやっているので、&lt;br /&gt;
 何にどれだけ使っているのかは&lt;span style=&#39;color:red&#39;&gt;記録でもしないかぎり&lt;/span&gt;把握しきれません。&lt;/p&gt;
 
-&lt;h2 id=&#34;作業の記録:73c321750c199f311b6645bb6a21c072&#34;&gt;作業の記録&lt;/h2&gt;
+&lt;h2 id=&#34;作業の記録&#34;&gt;作業の記録&lt;/h2&gt;
 
 &lt;p&gt;前述のとおり、弊社エンジニアは入社以来、全作業に対して実作業時間を記録しています。&lt;br /&gt;
 例えば「weekly MTGの参加」や「xxのbug fix」もそれぞれチケット化して記録します。&lt;br /&gt;
 ※&lt;a href=&#34;https://ja.atlassian.com/software/jira&#34;&gt;JIRA&lt;/a&gt;で全て管理しています。&lt;br /&gt;
 ※ご飯、筋トレ、昼寝は記録対象外。&lt;/p&gt;
 
-&lt;h2 id=&#34;エンジニアの作業実績-2016-01-2016-08:73c321750c199f311b6645bb6a21c072&#34;&gt;エンジニアの作業実績(2016 / 01 - 2016 / 08)&lt;/h2&gt;
+&lt;h2 id=&#34;エンジニアの作業実績-2016-01-2016-08&#34;&gt;エンジニアの作業実績(2016 / 01 - 2016 / 08)&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/cd4pAvEbM3NfTrcX1DELrhfF9oXpTP2z_Fob_Kovbw_yr4JUTAIfKmAzpcvT9l7GCVTgrYR66rhZxbe22JINTgdKsdkyf6PbJMroX4FN5y-4vJkgJDBTlnailOLBN7_k4Wp09qVW54DSLZ9mCj0HQMIGQAjwKLflaBNbkwmBOR21KSeLo0QLgFedHRosmc7NQzenmDRCmIYAO7-31Igor64cmaX0fsEwXGikzdjVu91jf-21IZrAcw4XjGDIqfeoG99WrsZQVcfjxvyEQzJ2iPPafYI1rc5D7APjwpJpoKaLmvUn4Ce9TGgpaAzxA3FUsuyli2NCXEcbcVYkApgl8SsCGvMr7I2LsNjk4_VYwIWy7apT7X-QmMf5OO0AoPkIdZ_LFBG0zk77jRhH-rCOMCtFg54fMPUA-r_BPMwn2sAP55fE_-M-i5MC3kaTv7-E8K4vA7O3d3-_RN3Kt46xDqCn4uyGM_dd2gSRPC3nElCXaIheA_ZhUQ_a9G1ue38sOWFbMpDR3qrwaRAaSfnBKk1dbFtDL9L9k7amHNHgbaCbEd6K8Klbna9I1M76FRIgop0hoUW9QB4NixszMVCz8QzGfPSa32E=w650-h669-no&#34;&gt;
 &lt;div style=&#34;font-size:12px;margin-top: -25px&#34;&gt;
@@ -108,7 +108,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 会社やプロダクトの成長に欠かせない大事な要素です。&lt;br /&gt;
 時期を見てかける時間も増やしていきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;結論-housmartエンジニアの業務とは:73c321750c199f311b6645bb6a21c072&#34;&gt;結論（Housmartエンジニアの業務とは？）&lt;/h2&gt;
+&lt;h2 id=&#34;結論-housmartエンジニアの業務とは&#34;&gt;結論（Housmartエンジニアの業務とは？）&lt;/h2&gt;
 
 &lt;p&gt;ということで作業時間から見たHousmartエンジニアの働き方は下図のようになります。&lt;br /&gt;
 &lt;img src=&#39;https://lh3.googleusercontent.com/FzBf0xEm9MHzaCuVlu8d9ALcMcrLnyZ3ktJPI3FFNS48iV1pCH6GcQ691ztwQZ_OyymkgzKxQn3dePYTmWf1ClG2Lnas1CehUdrjPEL9EaShXkDE19qBSw2B90fKXe4NpyBgXeiQreaauPfFoUT-rZArCmw7UPF3kMg0EaIADoO9VbEwBSQdvXHVyHjg9-6mIrZ0FqA1ENysOsY89c3N7XA6vIeOeI3TWW3mku6lDTJzxHvX-ceNvpd7ZA_JHmrSxA4bBDKaMpdY4JQWVs56TQlh62oOewKJ1YlYk2HUV_qJ8HLvSUxx4wVvARyGF7qFthsNrzhykNowNFz4r7kkL-PJdXHabZFnT_T7LkVB4QeBkkx8WJ10TSIEV2b7SIPbzO1UGIGLa4Q7Uhz3YibwX9fhss11ryOo8O3yAREN5baklINwq9ET-zGPhcB6lj30oHej3EMs7jb_w9kZHETz0P_ZFEE3AqhQH413e09vboqJpSuROc2oMaCAJ9IIg0bkLYhSQR3B_FkCOeGan9a0HfnFaVU1qYXAXJSBNZWZ8uKn2onAZ76vCptynJ90C63_YXNkpDZu5LjElaWKTU2C8_AJ5dm6eXo=w592-h310-no&#39;&gt;&lt;/p&gt;

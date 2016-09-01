@@ -6,8 +6,112 @@
     <description>Recent content in Operation on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 28 Mar 2016 10:34:34 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jun 2016 21:25:46 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/categories/operation/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>なぜdevelopブランチは必要なの？</title>
+      <link>http://techblog.housmart.co.jp/2016/06/22/git-workflow/</link>
+      <pubDate>Wed, 22 Jun 2016 21:25:46 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/06/22/git-workflow/</guid>
+      <description>
+
+&lt;p&gt;「Gitのブランチ構成どうしましょうか？」&lt;br /&gt;
+「とりあえずdevelop切ってやっていきますね。」&lt;/p&gt;
+
+&lt;p&gt;そのdevelopブランチ本当に必要でしょうか。&lt;br /&gt;
+developブランチだけ使われていて、masterが全く使われていなかったりしないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;よく聞かれるブランチ戦略としては&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;git-flow&lt;/a&gt;や&lt;a href=&#34;http://scottchacon.com/2011/08/31/github-flow.html&#34;&gt;GitHub Flow&lt;/a&gt;、、&lt;a href=&#34;http://docs.gitlab.com/ee/workflow/gitlab_flow.html&#34;&gt;GitLab Flow&lt;/a&gt;等があります。&lt;br /&gt;
+git-flowにおいてはdevelopやhotfix、releaseといったブランチがありますが、GitHub Flowにはmasterブランチと機能開発ブランチの2つしかありません。GitLab Flowはmasterを中心に開発を行い、productionブランチを安定させていくスタイルです。&lt;/p&gt;
+
+&lt;p&gt;実際に新しいプロジェクトを始めるとしたら、どの構成が良いのでしょうか。&lt;br /&gt;
+今回はカウルを開発するにあたり採用したブランチの構成とその背景について紹介します。&lt;/p&gt;
+
+&lt;h2 id=&#34;望んでいたこと&#34;&gt;望んでいたこと&lt;/h2&gt;
+
+&lt;p&gt;前提としてカウルのプロジェクトを始めるにあたって望んだことは以下の3つです。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ロールバックによるバージョン戻しが容易であること&lt;/li&gt;
+&lt;li&gt;問題が起きた場合にバージョン間の問題の切り分けが容易であること&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;時間のかかる機能開発中にもバグ修正コミットを差し込めること&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1と2については、リリース時にタグをつけておくことで容易に&lt;code&gt;git reset&lt;/code&gt;や&lt;code&gt;git diff&lt;/code&gt;が出来ます。&lt;/p&gt;
+
+&lt;p&gt;3つ目の要件については、developブランチがあるとよいと考えました。&lt;/p&gt;
+
+&lt;h2 id=&#34;実際のブランチ構成&#34;&gt;実際のブランチ構成&lt;/h2&gt;
+
+&lt;p&gt;上記を踏まえると、タグづけとdevelopブランチはあると良さそうです。&lt;br /&gt;
+よってカウルでは以下の構成をとりました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;master&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;テストで確認されたdevelopだけが&lt;code&gt;git merge --no-ff&lt;/code&gt;コマンドでマージされる&lt;/li&gt;
+&lt;li&gt;急ぎのバグ修正(hotfix)は、確認された後developブランチを経由しない&lt;/li&gt;
+&lt;li&gt;リリース時に自動で&amp;rdquo;日付_インデックス&amp;rdquo;tagを付ける(たとえば&amp;rdquo;20160622_01&amp;rdquo;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;develop&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;masterから派生したブランチ、featureブランチの派生元&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;(feature/)チケット番号&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;developから派生した機能開発全般のブランチ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;(hotifix/)チケット番号&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;masterから派生したバグ修正用のブランチ&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;現状、featureやhotixといった修飾は特につけておらず、概念だけメンバー間で共有しています。&lt;/p&gt;
+
+&lt;h2 id=&#34;実際の開発フロー&#34;&gt;実際の開発フロー&lt;/h2&gt;
+
+&lt;p&gt;考えた構成を基に以下のような流れで開発を行っています。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;最新のdevelopからチケット番号でブランチを切る&lt;/li&gt;
+&lt;li&gt;チケット番号ブランチで開発した機能をコミット、プッシュする&lt;/li&gt;
+&lt;li&gt;終わったらdevelopにプルリクエストを送り、レビューの後マージされる&lt;/li&gt;
+&lt;li&gt;ステージング環境に最新のdevelopを出して確認する&lt;/li&gt;
+&lt;li&gt;問題なければdevelopをmasterにマージしタグ付け、 本番に最新のタグをデプロイする&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;カウルの構成でもdevelopは必要なのか&#34;&gt;カウルの構成でもdevelopは必要なのか&lt;/h2&gt;
+
+&lt;p&gt;1ヶ月程度かかるような&lt;a href=&#34;http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/&#34;&gt;大きめプロジェクト&lt;/a&gt;があり、
+他の機能開発も行っているので今のところはあるとよいと考えています。&lt;/p&gt;
+
+&lt;p&gt;また一方で以下の変化を踏まえて、よりgithub-flowに近い構成でも問題ない状況になりつつあると考えています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;コードはすぐにリリースできる状態になっており、日に何度かリリースされることもあり、masterとdevelopの間で違いが少なくなっている&lt;/li&gt;
+&lt;li&gt;開発初期に比べてコードのベースはできていて、小中規模機能や他の箇所への影響が少ない開発が多くなっている&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;いつdevelopブランチは必要なの&#34;&gt;いつdevelopブランチは必要なの？&lt;/h2&gt;
+
+&lt;p&gt;数日~1週間でブランチがマージされていく状況であればdevelopはなくても問題ないでしょう。シンプルな構成の方がGitの操作も少なくて済みます。&lt;br /&gt;
+数週間を越えてブランチがマージされないような状況を開発をしているときはdevelopやreleaseがあると安定したプロダクトを出荷できると考えます。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;今回はカウルのGitブランチ管理について紹介致しました。&lt;br /&gt;
+ユーザに素早く安定した価値を届けらる、開発者にも優しい運用にするべく今後も取り組んでいきます！&lt;/p&gt;
+
+&lt;p&gt;by まっくす&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>脱・巨大なモノリシックアプリ！DRYなRails分割方法</title>
@@ -29,7 +133,7 @@
 &lt;li&gt;&lt;strong&gt;分割後はプロジェクト間で必要なロジックを共有したい&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d&#34;&gt;複数のRailsプロジェクト間でロジックを共有したい状況&lt;/h2&gt;
+&lt;h2 id=&#34;複数のrailsプロジェクト間でロジックを共有したい状況&#34;&gt;複数のRailsプロジェクト間でロジックを共有したい状況&lt;/h2&gt;
 
 &lt;p&gt;不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。&lt;/p&gt;
 
@@ -57,7 +161,7 @@
 
 &lt;p&gt;カウルではこの状況を &lt;strong&gt;Gitのsubmodule&lt;/strong&gt; を用いて改善しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;実際の構成:186562e261a7107c8b7de063b569e16d&#34;&gt;実際の構成&lt;/h2&gt;
+&lt;h2 id=&#34;実際の構成&#34;&gt;実際の構成&lt;/h2&gt;
 
 &lt;p&gt;Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。&lt;/p&gt;
 
@@ -90,7 +194,7 @@ rails_app_2
 
 &lt;p&gt;また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。&lt;/p&gt;
 
-&lt;h3 id=&#34;submoduleの難しさ:186562e261a7107c8b7de063b569e16d&#34;&gt;submoduleの難しさ&lt;/h3&gt;
+&lt;h3 id=&#34;submoduleの難しさ&#34;&gt;submoduleの難しさ&lt;/h3&gt;
 
 &lt;p&gt;submoduleでの運用を開始した当初、以下の部分で使い難さがありました。&lt;/p&gt;
 
@@ -128,7 +232,7 @@ project_dir $ git push
 
 &lt;p&gt;上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は&lt;code&gt;submodule内のコミット&amp;quot;4&amp;quot;から◯◯へ参照を変えるコミット&lt;/code&gt;でなければならないからです。&lt;/p&gt;
 
-&lt;h2 id=&#34;submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d&#34;&gt;submoduleを簡単に運用するためのbot運用&lt;/h2&gt;
+&lt;h2 id=&#34;submoduleを簡単に運用するためのbot運用&#34;&gt;submoduleを簡単に運用するためのbot運用&lt;/h2&gt;
 
 &lt;p&gt;Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
 submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。&lt;/p&gt;
@@ -142,7 +246,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 
 &lt;p&gt;その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:186562e261a7107c8b7de063b569e16d&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;今回のご紹介した運用の概要は以下です。&lt;/p&gt;
 

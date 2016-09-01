@@ -6,8 +6,163 @@
     <description>Recent content in Design on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 24 May 2016 09:18:46 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 01 Sep 2016 15:54:20 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/tags/design/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</title>
+      <link>http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/</link>
+      <pubDate>Thu, 01 Sep 2016 15:54:20 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/</guid>
+      <description>
+
+&lt;p&gt;「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」&lt;br /&gt;
+こんな疑問を開発前に持つ方向けに、「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントをまとめました。&lt;br /&gt;
+実際にリリースした&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;カウルのアプリ&lt;/a&gt;開発でとった対応も併記しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;企業でiOSアプリを初めて開発するエンジニア&lt;/strong&gt; や &lt;strong&gt;作る機能・スケジュールを決めるプロダクトオーナー&lt;/strong&gt; といった方々の判断の材料になれば幸いです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#service&#34;&gt;サービス・システム設計で考えておきたい5つのこと&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#service2&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#service3&#34;&gt;2.webからアプリへのインストールの導線&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#service1&#34;&gt;3.対応デバイス選定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#service4&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other1&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other&#34;&gt;カウルアプリの中の話&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#other2&#34;&gt;今回のリリースに含めなかった対応&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other3&#34;&gt;開発にかかったコスト&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;div id=&#34;service&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;サービス-システム設計で意識しておきたい5つのこと&#34;&gt;サービス・システム設計で意識しておきたい5つのこと&lt;/h2&gt;
+
+&lt;p&gt;web開発と異なる部分として、プッシュ通知などアプリならではの考慮しておくと良いことがあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service2&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-ユーザにアプリアップデートを促す仕組み&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/h3&gt;
+
+&lt;p&gt;APIのバージョンを上げる際、バージョンアップ前のAPIに合わせて実装されていたアプリが動かなくなる可能性があります。&lt;br /&gt;
+旧バージョンのAPIを使うアプリが残っていると、複数バージョンのAPIを運用していく必要がありますが、運用コストやセキュリティ等の理由で旧バージョンのAPIを閉じる必要も出てくるでしょう。&lt;br /&gt;
+ですので、特定バージョンのアプリにアップデートを促す仕組みを導入できていると将来的な運用コストを抑えることができます。&lt;/p&gt;
+
+&lt;p&gt;カウルでは&lt;a href=&#34;https://firebase.google.com/docs/remote-config/&#34;&gt;Firebase Remote Config&lt;/a&gt;を使用して、通知が必要なバージョンのアプリを管理するようにしています。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service3&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;2-webからアプリへのインストールの導線&#34;&gt;2.webからアプリへのインストールの導線&lt;/h3&gt;
+
+&lt;p&gt;アプリをリリースした後の、webからのアプリをインストールさせるための導線についても考えておきます。&lt;/p&gt;
+
+&lt;p&gt;カウルではランディングページへアクセスした際に&lt;a href=&#34;https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html&#34;&gt;Smart App Banners&lt;/a&gt;を出すようにしつつ、web版への登録ステップも残すことにしました。&lt;br /&gt;
+また、未対応のiOSバージョンの端末にはSmart App Bannersのメタタグを出さないようにしています。&lt;br /&gt;
+ユーザの使用状況に応じて、インストールの導線を追加していくことも検討しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service1&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-対応デバイス選定&#34;&gt;3.対応デバイス選定&lt;/h3&gt;
+
+&lt;p&gt;対応デバイスとOSのバージョンを決めます。&lt;br /&gt;
+カウルでは開発コストを抑えるため以下に絞りました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iPhoneのみ対応(ローテーションの対応は無し)&lt;/li&gt;
+&lt;li&gt;iOS9以降対応&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最新のiOS2バージョンをサポートすることが推奨です。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;service4&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;4-appleの審査でリジェクトされることも想定した締切&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/h3&gt;
+
+&lt;p&gt;初回の審査ではリジェクトされる可能性が十分にあるので、余裕をもって審査に出します。&lt;/p&gt;
+
+&lt;p&gt;これまで &lt;strong&gt;1週間程度かかっていたレビューが短縮されて、現在は1日程度になっている&lt;/strong&gt; ようです。&lt;/p&gt;
+
+&lt;p&gt;カウルではメッセージのやりとり・指摘箇所の修正時間も見込んで2週間程のバッファを用意しました。&lt;br /&gt;
+実際、カウルアプリの審査においても決済周りの説明や確認のやりとりに時間を使いました。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;other1&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;5-クラッシュのトラッキング等に使うプラットフォームの選定&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/h3&gt;
+
+&lt;p&gt;リリース後のクラッシュの検知や、プッシュ通知を送るためのプラットフォームを選びます。&lt;br /&gt;
+特にクラッシュ検知ツールはお金もかからず、実装に時間もかからないので何かしらいれておきましょう。&lt;/p&gt;
+
+&lt;p&gt;カウルの開発では以下のツール群を導入して、クラッシュ検知やプッシュ通知を実装しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://get.fabric.io/&#34;&gt;Fabric&lt;/a&gt;関連のツール&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://fabric.io/kits/ios/answers&#34;&gt;Answers&lt;/a&gt;&lt;br /&gt;
+アプリ起動状態のトラッキングをするツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://try.crashlytics.com/beta/&#34;&gt;Beta&lt;/a&gt;&lt;br /&gt;
+開発途中のアプリを関係者に配信してテストするためのツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://fabric.io/kits/ios/crashlytics&#34;&gt;Crashlytics&lt;/a&gt;&lt;br /&gt;
+アプリのクラッシュを検知するツール&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://firebase.google.com/&#34;&gt;Firebase&lt;/a&gt;関連のツール&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/analytics/&#34;&gt;Analytics&lt;/a&gt;&lt;br /&gt;
+アプリ起動状態のトラッキングをするツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/notifications/&#34;&gt;Notifications&lt;/a&gt;&lt;br /&gt;
+プッシュ通知を送るためのツール&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/remote-config/&#34;&gt;Remote Config&lt;/a&gt;&lt;br /&gt;
+設定をリモートから配信するためのツール(A/Bテスト等に使える)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;div id=&#34;other&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;カウルアプリの中の話&#34;&gt;カウルアプリの中の話&lt;/h2&gt;
+
+&lt;p&gt;&lt;div id=&#34;other2&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;今回のリリースに含めなかった対応&#34;&gt;今回のリリースに含めなかった対応&lt;/h3&gt;
+
+&lt;p&gt;我々は以下のタスクを次のリリースに見送りましたが、スケジュール次第では可能な限り先に対応しておけると素敵です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アナリティクスや既存のログ分析基盤との統合(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/&#34;&gt;カウルのログ分析基盤について&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;自動テストの拡充&lt;/li&gt;
+&lt;li&gt;CI・自動デプロイの環境拡充&lt;/li&gt;
+&lt;li&gt;ASO(App Store Optimization)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;div id=&#34;other3&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;開発にかかったコスト&#34;&gt;開発にかかったコスト&lt;/h3&gt;
+
+&lt;p&gt;JIRAの記録(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/08/24/startup-dev/&#34;&gt;カウルの作業時間記録について&lt;/a&gt;)によると、1.5人月(240時間)ほどの作業時間を使いました。作業内容としては以下の様なタスクを含みます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アプリ実装&lt;/li&gt;
+&lt;li&gt;API修正(プッシュ通知の組み込みなど)&lt;/li&gt;
+&lt;li&gt;モバイルwebのUI修正&lt;/li&gt;
+&lt;li&gt;ミーティングやアップル審査の調整&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;ここに書いてあることはカウルの開発で実施していることの一部です。是非みなさんの意見や、やり方も教えていただけると幸いです！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;のアプリは&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;こちら&lt;/a&gt;です。基本料無料で使えますので、是非ご利用ください！&lt;br /&gt;
+&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;https://itunes.apple.com/app/id1143903849&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;by まっくす&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート</title>
@@ -24,7 +179,7 @@
 &lt;p&gt;5/17に品川の Microsoft のオフィスでシリコンバレーのデザイン会社である btrax 主催のイベント &lt;strong&gt;「Design for Innovation 2016」&lt;/strong&gt; が開催されました。&lt;br /&gt;
 今回このイベントに参加してきたので、簡単な参加レポートと雑感をまとめます。&lt;/p&gt;
 
-&lt;h2 id=&#34;design-design:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;「DESIGN ≠ Design」&lt;/h2&gt;
+&lt;h2 id=&#34;design-design&#34;&gt;「DESIGN ≠ Design」&lt;/h2&gt;
 
 &lt;p&gt;btrax の Brandon CEO のオープニングでの言葉です。&lt;/p&gt;
 
@@ -36,7 +191,7 @@
 
 &lt;p&gt;この背景を受けて、アメリカ西海岸でのケーススタディと体験型ワークショップを通してデザインの重要性を体感しようというのが今回のイベントの趣旨でした。&lt;/p&gt;
 
-&lt;h3 id=&#34;イベントの流れ:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;イベントの流れ&lt;/h3&gt;
+&lt;h3 id=&#34;イベントの流れ&#34;&gt;イベントの流れ&lt;/h3&gt;
 
 &lt;p&gt;午前中は最近のデザインの盛り上がりの中でもキーワードとしてよく取り上げられている &lt;strong&gt;&amp;ldquo;Design Thinking&amp;rdquo;を体験するワークショップ&lt;/strong&gt; があり、&lt;br /&gt;
 午後は &lt;strong&gt;シリコンバレーのスタートアップやデザインを積極的に取り入れている日本企業を招いてのトークセッション&lt;/strong&gt; という二部構成でした。&lt;/p&gt;
@@ -45,7 +200,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/LtKoIc5RyMHF2G7NBzf4UebbXTQ-Gcgms6bqXHNdevajqpjhwY5QfS_L4N1g12oo7g6n8eGBghnAncmbg-BC4Jk2KybJU1egg9swx_iKnL2t6ZMZvYatlYFFC0cReochRbz8ySxxn1AgdeMUqk1zKrb1Xs027Vsa7K6qF2uh0-Il4hLzqO8qKJZT5YxU41k3zZFk4ZoECzrGz_722fURgbGFKe6tMG3cCTCFfq9_NcdgyQArfKF_UYaaz4BwE9zwODZaxtTPlGdqowVzPsAiBxUc5-57xkoJyhF-iSLMWV54sr9B79V3KWW0AXbPxhoyXOBbtelVPskfPcUia6uq7HvRbMnEgbpUUSk68Ow9zL9Lpy91x7hGnqUISmhx7Br2wXVs7DV7SfszhuHQMqzBJUzaT_wR7SKBufPX8E3EzuOTi2t4N4hy-GwUs1lpn6ypLRtgqL8iNytX6ckxO9Eh9L5EBtTMH8ZEjSQBHbT6Y2TFMtyT5ozel_doqVItDfJ42huGtBzWGw9wUat7Yf9Tjt7jsf5t6G-KYmpEXjqmaaq3B0xve8zgWOGqPFlBXibLNCZxIvqnNwtgY6rocTkLgdjBcwDbAUs=w1068-h801-no&#34; title=&#34;design_for_innovation_room&#34; width=&#34;60%&#34;&#34;&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;design-thinking-とは:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;Design Thinking とは？&lt;/h2&gt;
+&lt;h2 id=&#34;design-thinking-とは&#34;&gt;Design Thinking とは？&lt;/h2&gt;
 
 &lt;p&gt;「Design Thinking（デザイン思考）」とは、 &lt;strong&gt;デザイナーがデザインする時に用いるアプローチ&lt;/strong&gt; のことです。&lt;br /&gt;
 ヒアリングや調査などを通して課題の本質を見極め、その課題を元にアイデアをたくさん出し（発散させ）、その中から良いアイデアを選びつつ、それらを磨いていくというプロセスをたどります。&lt;/p&gt;
@@ -61,7 +216,7 @@
 &lt;p&gt;(書籍) 誰のためのデザイン？&lt;br /&gt;
 &lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=housmart-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=478850362X&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;1000-songs-in-your-pocket:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;1000 SONGS IN YOUR POCKET&lt;/h3&gt;
+&lt;h3 id=&#34;1000-songs-in-your-pocket&#34;&gt;1000 SONGS IN YOUR POCKET&lt;/h3&gt;
 
 &lt;p&gt;新しいサービスやプロダクトは、「事柄・物事」を「何か新しい方法」で提供することで「価値」を生み出しています。&lt;/p&gt;
 
@@ -82,7 +237,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;どちらの方がユーザにとって良い価値を提供してくれそうでしょうか？&lt;/p&gt;
 
-&lt;h3 id=&#34;design-thinking-ワークショップ:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;Design Thinking ワークショップ&lt;/h3&gt;
+&lt;h3 id=&#34;design-thinking-ワークショップ&#34;&gt;Design Thinking ワークショップ&lt;/h3&gt;
 
 &lt;p&gt;午前中のセッションではこの &amp;ldquo;Design Thinking&amp;rdquo; をコーチのもとで実際に体験することができました。
 今回のお題は「プレゼントをあげる体験をリデザインする」。隣の方とペアになって Design Thinking の実際のプロセスを体験しました。&lt;/p&gt;
@@ -93,7 +248,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;かの有名なデザイン会社 IDEO の Tim Brown も &lt;strong&gt;「デザイン思考は実践が大事だ」&lt;/strong&gt; と言っているように、やってみることで威力を体感できるのではないかと思います。（btraxさんは定常的にデザイン思考を体験できるセミナーをサンフランシスコのオフィスで開催しているそうです。）&lt;/p&gt;
 
-&lt;h2 id=&#34;トークセッション:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;トークセッション&lt;/h2&gt;
+&lt;h2 id=&#34;トークセッション&#34;&gt;トークセッション&lt;/h2&gt;
 
 &lt;p&gt;午後のトークセッションでは、国内外から13名のスピーカーが招待され、全部で6セッション計5時間という濃密なものでした。&lt;/p&gt;
 
@@ -101,7 +256,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;中でも気になったトピックについていくつかまとめていきます。&lt;/p&gt;
 
-&lt;h3 id=&#34;airbnb-のリブランディング:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;Airbnb のリブランディング&lt;/h3&gt;
+&lt;h3 id=&#34;airbnb-のリブランディング&#34;&gt;Airbnb のリブランディング&lt;/h3&gt;
 
 &lt;p&gt;Startups and Designのセッションで、Design Studio のプリンシパルである　John Creson 氏が Airbnb のリブランディングを行った事例を紹介していました。&lt;/p&gt;
 
@@ -117,7 +272,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;※Airbnbのリブランディングについて&lt;a href=&#34;http://nature-dot.com/journal/design/174&#34;&gt;こちら&lt;/a&gt;の記事が参考になったのでご興味ある方はどうぞ&lt;/p&gt;
 
-&lt;h3 id=&#34;大手金融機関のデザイン会社買収:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;大手金融機関のデザイン会社買収&lt;/h3&gt;
+&lt;h3 id=&#34;大手金融機関のデザイン会社買収&#34;&gt;大手金融機関のデザイン会社買収&lt;/h3&gt;
 
 &lt;p&gt;同じセッションでアメリカの大手金融会社の Capital One からもデザインマネージャの方が参加されていました。&lt;/p&gt;
 
@@ -128,7 +283,7 @@ mp3の機能的な向上だけを追い求めるのではなく、iTunesとい�
 
 &lt;p&gt;そんな中でも超一流のデザイン会社を会社ごと買収するという、金額的にも大きな決断をしたことで、どれほどデザインを重要視しているかが伝わってくる象徴的な出来事だと思いました。&lt;/p&gt;
 
-&lt;h3 id=&#34;the-future-of-agency-services:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;The Future of Agency Services&lt;/h3&gt;
+&lt;h3 id=&#34;the-future-of-agency-services&#34;&gt;The Future of Agency Services&lt;/h3&gt;
 
 &lt;p&gt;もう一つ印象に残ったのは、経営の中でデザインの重要性が上がってくる中で、コンサル会社・広告代理店・デザイン会社の事業領域がぶつかってきているというトピックです。&lt;br /&gt;
 btrax の Brandon CEO、dentsuの森氏、デザイン会社INFOBAHNの井登氏が登壇されていました。&lt;/p&gt;
@@ -139,7 +294,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;p&gt;btrax の Brandon CEO もこのセッションの中で「ここ2-3年で日本の企業からのリクエストの質も量も格段に上がってきた。課題の理解からアイデア出し、アイデアの実行をして改善のサイクルを回していくような包括的なリクエストが増えてきた」と言っていました。&lt;br /&gt;
 このように事業戦略の中でデザイン会社の存在感が増していくことで、現場でもお互いに相手を意識するタイミングが増えてきたと語っていました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめと雑感:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;まとめと雑感&lt;/h2&gt;
+&lt;h2 id=&#34;まとめと雑感&#34;&gt;まとめと雑感&lt;/h2&gt;
 
 &lt;p&gt;ビジネスを創っていくプロセス、とりわけアイデアを形にするSeedのフェーズにDESIGNを取り込んでいく必要があることはもはや動かしがたい事実であると、今回のイベントを通して強く再認識しました。&lt;/p&gt;
 
@@ -152,7 +307,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;そして、これらはどちらか一方というわけではなく、組織の状況に応じて両方のアプローチから達成する必要があると今回の様々な事例を聞いて感じました。&lt;/p&gt;
 
-&lt;h3 id=&#34;アジャイルがエンジニアにもたらした意味:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;アジャイルがエンジニアにもたらした意味&lt;/h3&gt;
+&lt;h3 id=&#34;アジャイルがエンジニアにもたらした意味&#34;&gt;アジャイルがエンジニアにもたらした意味&lt;/h3&gt;
 
 &lt;p&gt;突然話が飛ぶのですが、この&amp;rdquo;DESIGN&amp;rdquo;の流れはアジャイルがエンジニアにもたらした意味と似ている気がしています。&lt;br /&gt;
 &lt;strong&gt;エンジニアとビジネス上の意思決定を近づけたこと&lt;/strong&gt; がアジャイルの貢献のうちの一つだと思います。&lt;/p&gt;
@@ -163,7 +318,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;一方で、ことデザイナーという仕事に関してはまだまだ「デザイナーさん」として扱っている組織のほうが多いのが現状ではないでしょうか？&lt;/p&gt;
 
-&lt;h3 id=&#34;デザイナーをチームに加える:d60a3ec48ae2b10f332eebf9a72d5e3c&#34;&gt;デザイナーをチームに加える&lt;/h3&gt;
+&lt;h3 id=&#34;デザイナーをチームに加える&#34;&gt;デザイナーをチームに加える&lt;/h3&gt;
 
 &lt;p&gt;自分のチームにデザイナーを加えるメリットは、ぱっと思いつくだけでもいくつもあります。プロトタイピングツールを用いたより早いユーザヒアリングのサイクル、コンテクストに沿ったデザイン、意思決定へのユーザ目線、広告クリエイティブの改善、などなど。&lt;/p&gt;
 
