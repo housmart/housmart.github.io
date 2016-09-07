@@ -6,8 +6,175 @@
     <description>Recent content in Ios on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 01 Sep 2016 15:54:20 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 07 Sep 2016 17:54:20 +0900</lastBuildDate>
     <atom:link href="http://techblog.housmart.co.jp/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)</title>
+      <link>http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/</link>
+      <pubDate>Wed, 07 Sep 2016 17:54:20 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/</guid>
+      <description>
+
+&lt;p&gt;ショッピングアプリでの経験や&lt;a href=&#34;https://developer.apple.com/ios/human-interface-guidelines/&#34;&gt;iOSガイドライン&lt;/a&gt;(または&lt;a href=&#34;https://material.google.com/&#34;&gt;マテリアルデザイン&lt;/a&gt;)から学んだiOS開発のプラクティスをまとめてみました。&lt;br /&gt;
+弊社より8月30日にリリースした&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;カウルのアプリ&lt;/a&gt;開発でとった対応も併記しています。&lt;/p&gt;
+
+&lt;p&gt;iOSアプリ開発で意識すべきポイントは、チームやコミュニティの中では共有されているものの、まとまった情報を得ることがなかなか難しいかと思います。&lt;br /&gt;
+&lt;strong&gt;これから企業でiOSアプリを初めて開発するエンジニア&lt;/strong&gt; な方々の参考になれば幸いです。&lt;/p&gt;
+
+&lt;p&gt;「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。&lt;br /&gt;
+&lt;a href=&#34;http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/&#34;&gt;「iPhoneアプリを作り始める前に考えておきたい5つのこと」&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#coding&#34;&gt;コーディング&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#coding1&#34;&gt;1.Storyboardを積極的に利用する&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#coding2&#34;&gt;2.SchemeとPreprocessor Macrosを使って環境を切り分ける&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#coding3&#34;&gt;3.UIWebViewは使わずにWKWebViewやSFSafariViewを使う&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#coding4&#34;&gt;4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#coding5&#34;&gt;5.こまめにプルリクエストをマージする&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#coding6&#34;&gt;6.ベータ版を定期的に社内配信する&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#design&#34;&gt;デザイン&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#design1&#34;&gt;1.滑らかにアニメーションさせる&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#design2&#34;&gt;2.UI要素のレイアウトを揃える&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#design3&#34;&gt;3.web処理を意識させない&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;div id=&#34;coding&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;コーディング&#34;&gt;コーディング&lt;/h2&gt;
+
+&lt;p&gt;&lt;div id=&#34;coding1&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-storyboardを積極的に利用する&#34;&gt;1.Storyboardを積極的に利用する&lt;/h3&gt;
+
+&lt;p&gt;UI要素はコードだけで生成することもできますが、Storyboardを積極的に使って実装すると、実行時の画面の状態がプレビューできるので新しくプロジェクトに関わる人がいても理解がしやすくなります。&lt;/p&gt;
+
+&lt;p&gt;一方でデメリットは、AutoLayoutとConstraintsの挙動を覚える必要があること、複数人で同じStoryboardを編集する際にGit上でコンフリクトすることが挙げられます。&lt;br /&gt;
+Storyboardを分割しておくことでコンフリクトは極力減らせます。&lt;/p&gt;
+
+&lt;p&gt;またStoryboardから変更できないようなUI要素については、&lt;code&gt;IBDesignable&lt;/code&gt;を使って拡張します。&lt;br /&gt;
+例えばカウルでは&lt;code&gt;IBDesignable&lt;/code&gt;を使ってStoryboardからボタンの角丸を変更できるようにしつつ、各種ボタンに一定の丸みを持たせるようにしています。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;coding2&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;2-schemeとpreprocessor-macrosを使って環境を切り分ける&#34;&gt;2.SchemeとPreprocessor Macrosを使って環境を切り分ける&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Debug&lt;/code&gt;、&lt;code&gt;Release&lt;/code&gt;以外にも&lt;code&gt;Staging&lt;/code&gt;のようなスキームも定義して、プリプロセッサマクロで以下のような処理をビルド毎に切り分けます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;APIの接続先&lt;/li&gt;
+&lt;li&gt;クラッシュトラッキングやアナリティクスのON/OFF&lt;/li&gt;
+&lt;li&gt;データのキャッシュ時間&lt;/li&gt;
+&lt;li&gt;・・などなど&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本番(または開発中)のバージョンにだけ出したい機能・設定の切り分けに使いましょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;coding3&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-uiwebviewよりwkwebviewやsfsafariviewを使う&#34;&gt;3.UIWebViewよりWKWebViewやSFSafariViewを使う&lt;/h3&gt;
+
+&lt;p&gt;UIWebViewよりWKWebViewの方が、描画が速く、クラッシュも少なく安定します。&lt;br /&gt;
+SFSafariViewはカスタマイズできる部分が少なくなりますが、SafariアプリとCookie等が共有されるので自分のサービス外のURLを開く際などに使うとユーザにとって便利です。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;coding4&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;4-custom-url-schemeやuniversal-links-wkscriptmessagehandlerでwebとネイティブを繋ぐ&#34;&gt;4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ&lt;/h3&gt;
+
+&lt;p&gt;3つを主に以下のような用途で使い分けて、webとネイティブを繋ぎます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;カスタムURLスキーム: Safari等からアプリへの遷移。&lt;code&gt;kawlu://&lt;/code&gt;のようなURLでアプリを起動してくれます。&lt;/li&gt;
+&lt;li&gt;ユニバーサルリンク: Safari等からアプリへの遷移。&lt;code&gt;https://kawlu.com&lt;/code&gt;のようなURLでアプリを直接起動してくれます。&lt;/li&gt;
+&lt;li&gt;WKScriptMessageHandler: アプリ内のWebViewからアプリへの情報渡し。JavaScriptからWebView内に処理を渡してくれます。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;カウルではユニバーサルリンク中心に利用する予定でしたが、このブログを書いている時点では &lt;strong&gt;Safari以外のアプリでリダイレクトリンクを踏んだ際は作動しない&lt;/strong&gt; という挙動があったためカスタムURLスキームも利用しています。&lt;br /&gt;
+以下が具体的にユニバーサルリンクが作動しない事例です。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;トラッキングのためSendgrid経由でメールを送る&lt;/li&gt;
+&lt;li&gt;ユーザがGmailアプリでメール開いてリンクをクリックする&lt;/li&gt;
+&lt;li&gt;リンクはSendgridドメインを経由するリダイレクトになっており、ユニバーサルリンクが作動しない&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;div id=&#34;coding5&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;5-こまめにプルリクエストをマージする&#34;&gt;5.こまめにプルリクエストをマージする&lt;/h3&gt;
+
+&lt;p&gt;複数人で開発を行っているとpbxprojファイルやStoryboardが、コンフリクトして解消に時間を取られるので、プルリクエストを長い間放置しないようしてコンフリクトを減らします。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;coding6&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;6-ベータ版を定期的に社内配信する&#34;&gt;6.ベータ版を定期的に社内配信する&lt;/h3&gt;
+
+&lt;p&gt;動作確認をしたり、認識を合わせる上で一番良いのは実際にアプリをデバイスにインストールして使ってもらうことです。&lt;br /&gt;
+インストールしたくなる度にMacにiPhoneをUSB接続するのでは効率が悪いため、&lt;a href=&#34;http://try.crashlytics.com/beta/&#34;&gt;Crashlytics Beta&lt;/a&gt;等のツールからいつでも関係者がインストールできるようにします。&lt;/p&gt;
+
+&lt;p&gt;カウルの開発では帰宅時に最新版のビルドを配信するようにしていました。&lt;br /&gt;
+今後は&lt;a href=&#34;https://fastlane.tools/&#34;&gt;fastlane&lt;/a&gt;などを利用して、新しいコミットがある度に自動配信できるようにしようと検討中です。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;design&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;デザイン&#34;&gt;デザイン&lt;/h2&gt;
+
+&lt;p&gt;基本的には、標準的なiOSのUI要素を使いつつ、アプリ内での一貫性を重視するようにします。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;design1&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-滑らかにアニメーションさせる&#34;&gt;1.滑らかにアニメーションさせる&lt;/h3&gt;
+
+&lt;p&gt;要素が現れたり消えたり、移動する際に滑らかにアニメーションするようにします。&lt;br /&gt;
+また、時間がかかる処理をしている間はユーザに「読み込みしている」ということを分かるようにします。&lt;/p&gt;
+
+&lt;p&gt;見た目のカッコ良さだけでなく、直前のタップやスクロールという動作から次のアクションへの繋がりが見えるようアニメーションを利用することを心がけます。&lt;/p&gt;
+
+&lt;p&gt;画面描画が重たくなる場合、ユーザに見えていない部分の要素の描画がされてることもあるので&lt;a href=&#34;https://developer.apple.com/library/ios/documentation/ToolsLanguages/Conceptual/Xcode_Overview/ExaminingtheViewHierarchy.html&#34;&gt;描画中のビューを見てデバッグする&lt;/a&gt;のが有効です。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;design2&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;2-ui要素のレイアウトを揃える&#34;&gt;2.UI要素のレイアウトを揃える&lt;/h3&gt;
+
+&lt;p&gt;UI要素のサイズには、標準的なiOSのUI要素がもともと持っているサイズを使うか、サービス内で定義したサイズを使うことで、iOSやサービスの一部として馴染むようにします。&lt;/p&gt;
+
+&lt;p&gt;例えば、ボタン等のタッチ領域は&lt;a href=&#34;https://developer.apple.com/ios/human-interface-guidelines/visual-design/layout/&#34;&gt;44pt以上&lt;/a&gt;にするようにしたり、サービス内で独自に定義するサイズは&lt;a href=&#34;https://material.google.com/layout/metrics-keylines.html&#34;&gt;8の倍数&lt;/a&gt;を使います。&lt;/p&gt;
+
+&lt;p&gt;他にも角丸を統一したり、色についても&lt;a href=&#34;http://qiita.com/furuyan/items/1144b99e4c01c6a6ae27&#34;&gt;サービス用のパレットを追加&lt;/a&gt;したり、定数化して統一化します。&lt;/p&gt;
+
+&lt;p&gt;&lt;div id=&#34;design3&#34;/&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-web処理を意識させない&#34;&gt;3.web処理を意識させない&lt;/h3&gt;
+
+&lt;p&gt;アプリ内で同一サービスのwebページを開く際、それがwebビューであるかどうかユーザが認識する必要はありません。&lt;/p&gt;
+
+&lt;p&gt;具体的にカウルでは、「戻る」ボタンをタップした際や、画面左からのスワイプをした際に、一貫して「直前まで見ていたものに戻る」ために以下のような処理をしています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;webViewであれば、1ページ前に戻る&lt;/li&gt;
+&lt;li&gt;webViewでなければ、1つ前のviewに戻る&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;ここに書いてあることはカウルの開発で実施していることの一部です。是非みなさんの意見や、やり方も教えていただけると幸いです！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;のアプリは&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;こちら&lt;/a&gt;です。基本料無料で使えますので、是非ご利用ください！&lt;br /&gt;
+&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;https://itunes.apple.com/app/id1143903849&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;by まっくす&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</title>
@@ -24,6 +191,11 @@
 過去に携わっていたショッピングアプリでの経験や、先輩アプリエンジニアの方々に教えていただいたことをベースとしています。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;企業でiOSアプリを初めて開発するエンジニア&lt;/strong&gt; や &lt;strong&gt;作る機能・スケジュールを決めるプロダクトオーナー&lt;/strong&gt; といった方々の判断の材料になれば幸いです。&lt;/p&gt;
+
+&lt;p&gt;エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。&lt;br /&gt;
+&lt;a href=&#34;http://techblog.housmart.co.jp/2016/09/06/ios-tips-for-developer/&#34;&gt;ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#service&#34;&gt;サービス・システム設計で考えておきたい5つのこと&lt;/a&gt;
@@ -42,6 +214,8 @@
 &lt;li&gt;&lt;a href=&#34;#other3&#34;&gt;開発にかかったコスト&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;&lt;div id=&#34;service&#34;/&gt;&lt;/p&gt;
 

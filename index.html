@@ -29,7 +29,7 @@
 <meta property="og:url" content="http://techblog.housmart.co.jp/" />
 
 
-<meta property="og:updated_time" content="2016-09-01T15:54:20&#43;09:00"/>
+<meta property="og:updated_time" content="2016-09-07T17:54:20&#43;09:00"/>
 
 
 
@@ -158,7 +158,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        14
+        15
         <span>Posts</span>
       </div>
       <div class="article-info-block">
@@ -242,6 +242,112 @@
     <article class="article article-type-post" itemscope="" itemprop="blogPost">
         <div class="article-inner">
             
+            <a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" itemprop="url">
+                
+                <img src="https://lh3.googleusercontent.com/2E-oF0qTDFYUs4o_uFmYAo4uFsx2g1NISHg2UfiSvqfMDTxOeblr66t3Ml3xlJcz7_5ah5bZWl7WmZpiv6FmzI2SU2r5WzQKS52QMxyMMhXKdDtoGF1WIZ8Am33DfpLh00Cy9D4wlOAnO7DxNdbjadBonWy5P1W7BD1rCa52utStX1VmIqWSX5j5IK3m3Gx8-vN1Ub_VRk3ifMx2h1AwGlgtk2bpu7NSB3DUzB2rjsrLwh3n_LofmeiRHWPl8lTm5UJBUk6htWOKQCwCBsInMEN5-LnSndPIuGQ93gxP8LBQQy6hJXWX_aruMKL3EioA2kWyZlj0RxLK2AWUP6mVUloYoFJV0udlfd5cSfwpjlSlVAK36n7GGsZViWmN19psQ05ISZV0zqzHjXBLc7EpWDycP5WSHjmqr-N2Hgw7gVGfdPjFPWmLBjW9zDjo3Zz5hsZgT32V4NQWfZqiCuMvt5dxi7_g_TObIUPgm-zrzQwdTdnfVdkn3muNWqcZpLstHKarl73PrVrqAGYiSo5cv6xg6dcWYDciFXOQBccW-YdQ5JNNOwrkS4vrW-bLWtxw1yJqawUQ82V_7oUdgGXdmnClAuZzRCSnoMCfW4nY294QOg_FnQ=s800" class="article-banner">
+                
+            
+            </a>
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/">
+    <h1 class="article-title" itemprop="name">
+        ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-09-07 17:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-07</time>
+            &middot;
+            2980
+            words
+            &middot;
+            6
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">ios</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ios">ios</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/design">design</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="hatena-bookmark-button" data-hatena-bookmark-title="ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>
+                    ショッピングアプリでの経験や<a href="https://developer.apple.com/ios/human-interface-guidelines/">iOSガイドライン</a>(または<a href="https://material.google.com/">マテリアルデザイン</a>)から学んだiOS開発のプラクティスをまとめてみました。<br />
+弊社より8月30日にリリースした<a href="https://itunes.apple.com/app/id1143903849">カウルのアプリ</a>開発でとった対応も併記しています。</p>
+
+<p>iOSアプリ開発で意識すべきポイントは、チームやコミュニティの中では共有されているものの、まとまった情報を得ることがなかなか難しいかと思います。<br />
+<strong>これから企業でiOSアプリを初めて開発するエンジニア</strong> な方々の参考になれば幸いです。</p>
+
+<p>「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。<br />
+<a href="/2016/09/01/ios-development-tips/">「iPhoneアプリを作り始める前に考えておきたい5つのこと」</a>
+                    <br>
+                </p>
+                <p class="article-more-link">
+                    <a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/">
+                        Read more
+                    </a>
+                </p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="hatena-bookmark-button" data-hatena-bookmark-title="ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f09%2f07%2fios-tips-for-developer%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%81%a1%e3%82%87%e3%81%a3%e3%81%a8%e3%81%ae%e5%b7%a5%e5%a4%ab%e3%81%a7%e3%82%b9%e3%83%a0%e3%83%bc%e3%82%ba%e3%81%ab%ef%bc%81iOS%e3%82%a2%e3%83%97%e3%83%aa%e9%96%8b%e7%99%ba%e3%81%ae%e3%82%b3%e3%83%849%e3%81%a4%28%e3%82%b3%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%e3%83%bb%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e7%b7%a8%29&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f09%2f07%2fios-tips-for-developer%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f09%2f07%2fios-tips-for-developer%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f09%2f07%2fios-tips-for-developer%2f&amp;description=%e3%81%a1%e3%82%87%e3%81%a3%e3%81%a8%e3%81%ae%e5%b7%a5%e5%a4%ab%e3%81%a7%e3%82%b9%e3%83%a0%e3%83%bc%e3%82%ba%e3%81%ab%ef%bc%81iOS%e3%82%a2%e3%83%97%e3%83%aa%e9%96%8b%e7%99%ba%e3%81%ae%e3%82%b3%e3%83%849%e3%81%a4%28%e3%82%b3%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%e3%83%bb%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e7%b7%a8%29" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f09%2f07%2fios-tips-for-developer%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+    </article>
+    
+    <article class="article article-type-post" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
             <a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" itemprop="url">
                 
                 <img src="https://lh3.googleusercontent.com/mAZo021Zuw_Zp4JraHEVArFU7fsHZRPq1jMm4NsBD8ngJRgAmLHDnEvVvQMK8up4u0mKsO_m_rem7PbvOqqFOK3fTDFik7JizaKkEug2sgIA0G4bUkKTByXAREiqToX5ozEJOAguMKDJhUAnxNhUNVH40EjoNb1J8q7kxWRYZLOItRQlbKm7ggcjOlAxCEI16R4X0_A1XakO4XEpcDbAGrhIdyMA1NWKHHQxuGgGxk6W0JbiR3u3oxpv3yaHjJV5ZBN9HfZ1OpcW6RTodfitUcFhXdjgCm28ghZe1drsVub8JWjjE6CiYAGs4urpJ2tsUI5PrgzD-GXr2RxLekbGBXV7QdOY0ZOfyBLDEHGt1tvD0KZBZAa05ap2VieImvtqxxe3ZIkeNdPMtIE4spLohoGzPV8ZQgpDrGm3epkUm1gXsDFi1-naiDIdvSyXAYZP-e4HWJ8Z5A0UMmjO1yURQ7MmDtVLCvb6QTD_ACW-bb2wneWQovyE6ZTWuA9ghDnYDaxpxEDUzZG2b4d7Xh_7dDIVGGyLTgkyJdZFN5cLIug7LpSK--0CcesoY_GqMbAqXcwkTSFNoAZ1om6XtrI3UjP3E4uN-xWBMEJSYczuYVJ-cf3TGQ=s800" class="article-banner">
@@ -260,7 +366,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2016-09-01 15:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-01</time>
             &middot;
-            2034
+            2145
             words
             &middot;
             5
@@ -311,7 +417,16 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」 こんな疑問を開発前に持つ方向けに、「サービス・システム設計」の観点から新規
+                    「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」<br />
+こんな疑問を開発前に持つ方向けに、「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントをまとめました。</p>
+
+<p>また、弊社より8月30日にリリースした<a href="https://itunes.apple.com/app/id1143903849">カウルのアプリ</a>開発でとった対応も併記しています。<br />
+過去に携わっていたショッピングアプリでの経験や、先輩アプリエンジニアの方々に教えていただいたことをベースとしています。</p>
+
+<p><strong>企業でiOSアプリを初めて開発するエンジニア</strong> や <strong>作る機能・スケジュールを決めるプロダクトオーナー</strong> といった方々の判断の材料になれば幸いです。</p>
+
+<p>エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。<br />
+<a href="/2016/09/06/ios-tips-for-developer/">ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)</a>
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -1167,102 +1282,6 @@ developブランチだけ使われていて、masterが全く使われていな�
         </div>
     </article>
     
-    <article class="article article-type-post" itemscope="" itemprop="blogPost">
-        <div class="article-inner">
-            
-            <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" itemprop="url">
-                
-                <img src="https://lh3.googleusercontent.com/zJGZ7TWLBOZgYoRJvpLfm1wHM54kKUKe9ssi_ZWXbo2-UToj0VKefoJXn9DQ36N23mtHGqZsSWj-px0LikhQdbk_YoC8aQONbQGZUVEE7Cn8C3JS2beVUnEWiw4i1qb_qn4Vq-ZHKpPIQeID2VSlZPiHTdNbXewMKJdPyxexZhCsybNctyV2pqeN9zv1WrLGYOuHQkK7mfE6qKH2OF3Jfy04DEZuGPGCBVJ9uRs7Ag-rBPlyo1WCBh4Lx03eEIZVQykzs11JgyrfVfFxuti6pKpsziJJdYvVpYihrkE6koxjHh6yopEjy_TOLIF7tFN-Ask_pEEnlpjL_7pmuVAkfKZubAbxPGEUd1jNRddb5JvBu7C6seCWCogs73CqF9v1TV2GYf3BlKV92y8I-_078GWlrsLt7lKS7VN63AQHs0rlMIesdcWoukuXCCBr9fti4WUyUWB4TInbAHpvo2JC8X0w4QMvGBB2gcPs8te45g9ZxwR50Zk3yWstoxibbiGDDHMLvRI8Wn3IANtcCfjTNNohycCpxcD_awUOkS07WA-Q9_Fdoj_8UIlOgyLxdqJj4zk=w650" class="article-banner">
-                
-            
-            </a>
-
-            <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/">
-    <h1 class="article-title" itemprop="name">
-        スタートアップのCTOになって2ヶ月で作った開発サイクル
-    </h1>
-    </a>
-    <div class="article-meta">
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2016-03-14 10:43:07 &#43;0900 JST" itemprop="datePublished">2016-03-14</time>
-            &middot;
-            1819
-            words
-            &middot;
-            4
-            minute read
-        </div>
-
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/work">work</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/work">work</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-<div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップのCTOになって2ヶ月で作った開発サイクル" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-
-            <div class="article-entry" itemprop="articleBody">
-                <p>
-                    Housmartの宮永です！ 今回はカウル開発チームの開発サイクルを紹介させていただきます。 好ましい開発サイクルはサービスや企業、組織規模など
-                    <br>
-                </p>
-                <p class="article-more-link">
-                    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/">
-                        Read more
-                    </a>
-                </p>
-            </div>
-            <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップのCTOになって2ヶ月で作った開発サイクル" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-<footer class="article-footer">
-    <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="スタートアップのCTOになって2ヶ月で作った開発サイクル" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%aeCTO%e3%81%ab%e3%81%aa%e3%81%a3%e3%81%a62%e3%83%b6%e6%9c%88%e3%81%a7%e4%bd%9c%e3%81%a3%e3%81%9f%e9%96%8b%e7%99%ba%e3%82%b5%e3%82%a4%e3%82%af%e3%83%ab&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle%2f&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%aeCTO%e3%81%ab%e3%81%aa%e3%81%a3%e3%81%a62%e3%83%b6%e6%9c%88%e3%81%a7%e4%bd%9c%e3%81%a3%e3%81%9f%e9%96%8b%e7%99%ba%e3%82%b5%e3%82%a4%e3%82%af%e3%83%ab" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f14%2fdev_cycle%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
-    </a>
-</div>
-
-    
-</footer>
-
-        </div>
-    </article>
-    
 
     <nav id="page-nav">
 
@@ -1286,6 +1305,31 @@ developブランチだけ使われていて、masterが全く使われていな�
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/2E-oF0qTDFYUs4o_uFmYAo4uFsx2g1NISHg2UfiSvqfMDTxOeblr66t3Ml3xlJcz7_5ah5bZWl7WmZpiv6FmzI2SU2r5WzQKS52QMxyMMhXKdDtoGF1WIZ8Am33DfpLh00Cy9D4wlOAnO7DxNdbjadBonWy5P1W7BD1rCa52utStX1VmIqWSX5j5IK3m3Gx8-vN1Ub_VRk3ifMx2h1AwGlgtk2bpu7NSB3DUzB2rjsrLwh3n_LofmeiRHWPl8lTm5UJBUk6htWOKQCwCBsInMEN5-LnSndPIuGQ93gxP8LBQQy6hJXWX_aruMKL3EioA2kWyZlj0RxLK2AWUP6mVUloYoFJV0udlfd5cSfwpjlSlVAK36n7GGsZViWmN19psQ05ISZV0zqzHjXBLc7EpWDycP5WSHjmqr-N2Hgw7gVGfdPjFPWmLBjW9zDjo3Zz5hsZgT32V4NQWfZqiCuMvt5dxi7_g_TObIUPgm-zrzQwdTdnfVdkn3muNWqcZpLstHKarl73PrVrqAGYiSo5cv6xg6dcWYDciFXOQBccW-YdQ5JNNOwrkS4vrW-bLWtxw1yJqawUQ82V_7oUdgGXdmnClAuZzRCSnoMCfW4nY294QOg_FnQ=s800)" alt="カウル Tech Blog" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="title">ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-07 17:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-07</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -1387,31 +1431,6 @@ developブランチだけ使われていて、masterが全く使われていな�
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/F7GXQx32f_mb56GFuNaC3Yl3zhrYpt4O7y2xSeTT32fGC8OiUvqX6ybM59L5gxeUr68aR4GOGgFTSXWioalzT2GP0GzJ_3pARE0lxqvN5kgnIYd24ap8WUH1L-Wv1UdDLQDBf7e46l6ccvx5OeOdXsYGvqv6PJxnrBUqX0-6eOI6gU_ArWtB6B132OtAPGPG-HOBHoH4AxgC9MlAMUuO8dJnJwpW3X6-6gzXa1HiNlD6UJ-NQhUm6YpY731xc2UO5Zo8far-zMG3dIpPO9egNrwM-gpG5Q-chDO-Q7tvy2yK6sVaTRggxGAXhsNSe4zIBPYxWElqWlauCgqPQR2HnMZGpaAZxKrVtN1mzEhVEv5r7IEv3dfw0-_t2g8Qq53csbub3d-sdTyggnMxScqzYgc5rnflPiCB-F6fR7Fe26WUHQxQ2Zc6UZReJCfi121pOKu7hXm_F51gETXqIDsPU1SQHTeOfP9_eOvtJyu9CKPQBiCb1zS5R9vMavzUxy48WVppAdfBGHGaWE89y-JQBPvnVphxl1ai-r6eesg69gTrzfTlyw9tNJMbp3CfcVeVJYsuOQ60qtiIGmJo94De7tGJcXbQF3U=w512-h384-no)" alt="カウル Tech Blog" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
-                        design
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" class="title">イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-05-24 09:18:46 &#43;0900 JST" itemprop="datePublished">2016-05-24</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -1457,7 +1476,7 @@ developブランチだけ使われていて、masterが全く使われていな�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
                     ios
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -1515,14 +1534,14 @@ developブランチだけ使われていて、masterが全く使われていな�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
                     design
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
                     development
                 </a>
-                <span class="category-list-count">6</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1564,7 +1583,7 @@ developブランチだけ使われていて、masterが全く使われていな�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
                     ios
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">

@@ -25,6 +25,11 @@
 
 &lt;p&gt;&lt;strong&gt;企業でiOSアプリを初めて開発するエンジニア&lt;/strong&gt; や &lt;strong&gt;作る機能・スケジュールを決めるプロダクトオーナー&lt;/strong&gt; といった方々の判断の材料になれば幸いです。&lt;/p&gt;
 
+&lt;p&gt;エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。&lt;br /&gt;
+&lt;a href=&#34;http://techblog.housmart.co.jp/2016/09/06/ios-tips-for-developer/&#34;&gt;ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#service&#34;&gt;サービス・システム設計で考えておきたい5つのこと&lt;/a&gt;
 
@@ -42,6 +47,8 @@
 &lt;li&gt;&lt;a href=&#34;#other3&#34;&gt;開発にかかったコスト&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;&lt;div id=&#34;service&#34;/&gt;&lt;/p&gt;
 
