@@ -39,7 +39,8 @@ RubyKaigiで気になったセッションについて概要と参加したエ�
 
 &lt;h3 id=&#34;isomorphic-web-programming-in-ruby:ce74c359c3858eb7c5425c49bd07819d&#34;&gt;Isomorphic web programming in Ruby&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://rubykaigi.youchan.org/&#34;&gt;発表スライド&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;発表スライド
+&lt;iframe src=&#34;//rubykaigi.youchan.org/&#34; width=&#34;100%&#34; height=&#34;500px&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
 
 &lt;p&gt;Rubyベースの文法でJavaScriptにコンパイルできるOpalを使ったReactライクな仮想DOM実装を紹介されていました。&lt;br /&gt;
 * &lt;a href=&#34;https://github.com/youchan/hyalite&#34;&gt;Hyalite&lt;/a&gt;&lt;/p&gt;
@@ -52,7 +53,8 @@ RubyKaigiで気になったセッションについて概要と参加したエ�
 
 &lt;h3 id=&#34;sciruby-machine-learning-current-status-and-future:ce74c359c3858eb7c5425c49bd07819d&#34;&gt;SciRuby Machine Learning Current Status and Future&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://speakerdeck.com/mrkn/sciruby-machine-learning-current-status-and-future&#34;&gt;発表スライド&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;発表スライド
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;99d3e8a4011542e0bbea092db7650ee5&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;現状では機械学習に関する作業はほとんどRubyで出来ないようです。（弊社でもPythonを使用）
 Rubyで機械学習に関する一連の作業（前処理〜学習〜利用）が出来るようにSciRubyとしてどうやって行くかという発表でした。
@@ -65,7 +67,8 @@ PythonのScikit-learnをRubyから呼び出せるようにしていくのが良�
 
 &lt;h3 id=&#34;recent-advances-in-http-and-controlling-them-using-ruby:ce74c359c3858eb7c5425c49bd07819d&#34;&gt;Recent Advances in HTTP and Controlling them using ruby&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://www.slideshare.net/kazuho/recent-advances-in-http-controlling-them-using-ruby&#34;&gt;発表スライド&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;発表スライド
+&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/3uztRoYgtZJDJ2&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/kazuho/recent-advances-in-http-controlling-them-using-ruby&#34; title=&#34;Recent Advances in HTTP, controlling them using ruby&#34; target=&#34;_blank&#34;&gt;Recent Advances in HTTP, controlling them using ruby&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/kazuho&#34; target=&#34;_blank&#34;&gt;Kazuho Oku&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;現状のHTTPが抱える問題と、それをHTTP/2ではどう解決しようとしているのか、またどこまで利用可能なのかといった動向についての発表でした。
 発表では1つのセッションで複数のリクエストを返す「プッシュ」機能について多くの解説がありました。
