@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Media on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/media/</link>
-    <description>Recent content in Media on カウル Tech Blog</description>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/media/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 10 Mar 2016 16:57:26 +0900</lastBuildDate>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
     <atom:link href="http://techblog.housmart.co.jp/tags/media/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -15,9 +15,7 @@
       <pubDate>Thu, 10 Mar 2016 16:57:26 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/</guid>
-      <description>
-
-&lt;p&gt;Housmart高松です。&lt;/p&gt;
+      <description>&lt;p&gt;Housmart高松です。&lt;/p&gt;
 
 &lt;p&gt;先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。&lt;br /&gt;
 前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。&lt;/p&gt;
@@ -29,7 +27,9 @@
 仲介手数料無料の不動産サイト「カウル」: &lt;a href=&#34;https://kawlu.com/&#34;&gt;https://kawlu.com/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&#34;内容:3d905968c659a2d9572fbb959d952a4f&#34;&gt;内容&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;内容&#34;&gt;内容&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;前提 [前編]&lt;/li&gt;
@@ -51,9 +51,9 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;3-放送当日:3d905968c659a2d9572fbb959d952a4f&#34;&gt;3.放送当日&lt;/h2&gt;
+&lt;h2 id=&#34;3-放送当日&#34;&gt;3.放送当日&lt;/h2&gt;
 
-&lt;h3 id=&#34;直前の放送時間変更:3d905968c659a2d9572fbb959d952a4f&#34;&gt;直前の放送時間変更&lt;/h3&gt;
+&lt;h3 id=&#34;直前の放送時間変更&#34;&gt;直前の放送時間変更&lt;/h3&gt;
 
 &lt;p&gt;WBSは通常23時からの放送なのですが、この日は前の番組が世界卓球の日本vsドイツ戦でした。最終ゲームまでもつれ込む白熱の試合だったため放送時間がぎりぎりまで伸びて、放送開始が0時30分に変更になりました。&lt;/p&gt;
 
@@ -64,7 +64,7 @@
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;放送内容:3d905968c659a2d9572fbb959d952a4f&#34;&gt;放送内容&lt;/h3&gt;
+&lt;h3 id=&#34;放送内容&#34;&gt;放送内容&lt;/h3&gt;
 
 &lt;p&gt;放送が始まり15分、いよいよ特集のコーナーです。&lt;br /&gt;
 今回は不動産ベンチャーの新しい取り組みという切り口で、大家さんと直接やりとりをすることで仲介手数料を無料にする賃貸サービスの &lt;strong&gt;ウチコミ！&lt;/strong&gt; さんと共に弊社を取り上げていただきました。&lt;/p&gt;
@@ -96,7 +96,7 @@
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;アクセス数まとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;アクセス数まとめ&lt;/h3&gt;
+&lt;h3 id=&#34;アクセス数まとめ&#34;&gt;アクセス数まとめ&lt;/h3&gt;
 
 &lt;p&gt;実際のアクセス数を見てみましょう。&lt;/p&gt;
 
@@ -112,9 +112,9 @@
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;4-振り返りとまとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;4.振り返りとまとめ&lt;/h2&gt;
+&lt;h2 id=&#34;4-振り返りとまとめ&#34;&gt;4.振り返りとまとめ&lt;/h2&gt;
 
-&lt;h3 id=&#34;アクセス予想振り返り:3d905968c659a2d9572fbb959d952a4f&#34;&gt;アクセス予想振り返り&lt;/h3&gt;
+&lt;h3 id=&#34;アクセス予想振り返り&#34;&gt;アクセス予想振り返り&lt;/h3&gt;
 
 &lt;p&gt;実際の結果を持って事前の予想を振り返ってみましょう。&lt;br /&gt;
 テレビ出演に舞い上がってテンション高めに予想していた部分を冷静に下方修正してみると、以下の様な数値が妥当では無いかと思いました。&lt;/p&gt;
@@ -172,7 +172,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;まとめ:3d905968c659a2d9572fbb959d952a4f&#34;&gt;まとめ&lt;/h3&gt;
+&lt;h3 id=&#34;まとめ&#34;&gt;まとめ&lt;/h3&gt;
 
 &lt;p&gt;今回の事例の振り返りの内容も含めて、テレビ出演時の負荷見積もりの式を再度掲載しておきます。&lt;/p&gt;
 
@@ -190,8 +190,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 &lt;p&gt;夢の20万アクセスには遠く及びませんでしたが、まだローンチして1ヶ月半のカウルにとっては認知してもらう大変よい機会になりました。&lt;br /&gt;
 また、ビジネスモデル的にも信用が大事になってくる領域なので、その点でも大きくプラスになったと思います。&lt;/p&gt;
 
-&lt;p&gt;今後の皆さんの参考になれば幸いです。&lt;/p&gt;
-</description>
+&lt;p&gt;今後の皆さんの参考になれば幸いです。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -200,9 +199,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
       <pubDate>Thu, 03 Mar 2016 16:57:26 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/</guid>
-      <description>
-
-&lt;p&gt;Housmart高松です。&lt;/p&gt;
+      <description>&lt;p&gt;Housmart高松です。&lt;/p&gt;
 
 &lt;p&gt;先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。&lt;/p&gt;
 
@@ -214,7 +211,9 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 &lt;p&gt;突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？&lt;br /&gt;
 そんな時の参考になれば幸いです。&lt;/p&gt;
 
-&lt;h2 id=&#34;内容:08e118674fea9989bc7c591023d8b196&#34;&gt;内容&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;内容&#34;&gt;内容&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;前提
@@ -237,9 +236,9 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;1-前提:08e118674fea9989bc7c591023d8b196&#34;&gt;1.前提&lt;/h2&gt;
+&lt;h2 id=&#34;1-前提&#34;&gt;1.前提&lt;/h2&gt;
 
-&lt;h3 id=&#34;前回の失敗:08e118674fea9989bc7c591023d8b196&#34;&gt;前回の失敗&lt;/h3&gt;
+&lt;h3 id=&#34;前回の失敗&#34;&gt;前回の失敗&lt;/h3&gt;
 
 &lt;p&gt;つい半月ほど前に別の局で朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。&lt;/p&gt;
 
@@ -248,7 +247,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196&#34;&gt;フロントエンド システム構成&lt;/h3&gt;
+&lt;h3 id=&#34;フロントエンド-システム構成&#34;&gt;フロントエンド システム構成&lt;/h3&gt;
 
 &lt;p&gt;「カウル」フロントエンドのシステム構成を簡単にご紹介します。&lt;br /&gt;
 基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;自社メディアであるマンションジャーナル&lt;/a&gt;も運営しているため、Wordpressが動くサーバが別にあります。&lt;br /&gt;
@@ -260,9 +259,9 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;2-事前準備:08e118674fea9989bc7c591023d8b196&#34;&gt;2.事前準備&lt;/h2&gt;
+&lt;h2 id=&#34;2-事前準備&#34;&gt;2.事前準備&lt;/h2&gt;
 
-&lt;h3 id=&#34;負荷予測:08e118674fea9989bc7c591023d8b196&#34;&gt;負荷予測&lt;/h3&gt;
+&lt;h3 id=&#34;負荷予測&#34;&gt;負荷予測&lt;/h3&gt;
 
 &lt;p&gt;負荷予測に関しては以下の記事を参考にさせていただきました。&lt;br /&gt;
 &lt;a href=&#34;http://qiita.com/chase0213/items/b5ecd4377f60605332e1&#34;&gt;[Qiita]gatling による負荷試験とテレビ露出見積り&lt;/a&gt;
@@ -292,7 +291,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;サーバ台数決定:08e118674fea9989bc7c591023d8b196&#34;&gt;サーバ台数決定&lt;/h3&gt;
+&lt;h3 id=&#34;サーバ台数決定&#34;&gt;サーバ台数決定&lt;/h3&gt;
 
 &lt;p&gt;こちらも先ほどの&lt;a href=&#34;http://qiita.com/chase0213/items/b5ecd4377f60605332e1&#34;&gt;Qiita記事&lt;/a&gt;を参考にAWSサーバのスペックと台数を決定しました。&lt;/p&gt;
 
@@ -303,7 +302,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;サーバ増強:08e118674fea9989bc7c591023d8b196&#34;&gt;サーバ増強&lt;/h3&gt;
+&lt;h3 id=&#34;サーバ増強&#34;&gt;サーバ増強&lt;/h3&gt;
 
 &lt;p&gt;深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
 ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。&lt;br /&gt;
@@ -315,7 +314,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;その他:08e118674fea9989bc7c591023d8b196&#34;&gt;その他&lt;/h3&gt;
+&lt;h3 id=&#34;その他&#34;&gt;その他&lt;/h3&gt;
 
 &lt;p&gt;その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。&lt;br /&gt;
 万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。&lt;/p&gt;
@@ -323,8 +322,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 &lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160303_02.jpg&#34; title=&#34;Stand by&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;はたしてどの程度アクセスが来たのでしょうか！？
-&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/&#34;&gt;[後編]&lt;/a&gt;に続く&lt;/p&gt;
-</description>
+&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/&#34;&gt;[後編]&lt;/a&gt;に続く&lt;/p&gt;</description>
     </item>
     
   </channel>

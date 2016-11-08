@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Project on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/project/</link>
-    <description>Recent content in Project on カウル Tech Blog</description>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/project/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 15 Jun 2016 22:48:09 +0900</lastBuildDate>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
     <atom:link href="http://techblog.housmart.co.jp/tags/project/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -15,14 +15,13 @@
       <pubDate>Wed, 15 Jun 2016 22:48:09 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/</guid>
-      <description>
-
-&lt;p&gt;こんにちは！Housmartの宮永です。&lt;/p&gt;
+      <description>&lt;p&gt;こんにちは！Housmartの宮永です。&lt;/p&gt;
 
 &lt;p&gt;過去に弊社のスクラム開発について概要をご紹介(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/14/dev_cycle/&#34;&gt;スタートアップのCTOになって2ヶ月で作った開発サイクル&lt;/a&gt;)させていただきました。
 今回はより実践的な話を説明します。&lt;/p&gt;
 
-&lt;p&gt;以前紹介しました通り、カウル開発チームは1週間／スプリントと短めに取ってますが、&lt;br /&gt;
+&lt;p&gt;
+以前紹介しました通り、カウル開発チームは1週間／スプリントと短めに取ってますが、&lt;br /&gt;
 1週間じゃ収まらないようなサイズのプロジェクトの時はどう管理するの？って話になりますよね。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/teOBN1hx88WnjkLmj5IAQQdUWSp8w-A_8pyaqW3TG0_1yCLJoQuIX3BqfeXAMAJA-m9fIQJHZ4SRT1DH-K64Zglma9TvzHSxjda0dKX9RNpn6HtvY8PnccXVzZkt7UZqgYkFyy4UYj0WD-vyMZ08WC68JPUf-HlKXM8lvSHzk_6BAjwPDmlwX5kuDBBwT82uq3fTfEZCZY6gIEmT9RCsphAcVHNJCfbVYE3xXENZN0svE5FhouUc97KK5dkNMUAGOJdCjhnK92ROUoKg3ijB8J-hDB6KgsIV9iWz5nWgZNL6PEeXORn3mFp2uR8vKoKM3pr0BsbrW5IG2QJHzdWwx_ZAddKt4DsDGsseRgh6T32hydccuX8wp4AS2fsHM9sTllEqCXIL50UBJVM5X6wMAIWgV3P6ra9JtuNqvXquO_kvaBtDdTJOUaQNOqMnB1HWwGo5LwTxF2p_p00azVBWFF8qkvWpAS6XACj8WaI8H0PBq2Ii9UfL607CRCf-Ai7kztOpwrdwb4eRQK-7RdKKCigMH6XEwkjfu57VHyBiKekNguxe5faEswIvTo2cL4HB375F0pBBXs9na-Ji70AEwfiGI9V-l2w=w650&#34;&gt;&lt;/p&gt;
@@ -34,7 +33,7 @@
 
 &lt;p&gt;そういった複数スプリントを要する規模のプロジェクトに対してスクラムをどう適用させるか弊社の事例とともに紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト背景:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト背景&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト背景&#34;&gt;プロジェクト背景&lt;/h2&gt;
 
 &lt;p&gt;まずはプロジェクト背景について。&lt;br /&gt;
 プロジェクト開始時期は2016/04下旬で、&lt;br /&gt;
@@ -61,9 +60,9 @@
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/b5osB9bYumjeJH7ryNbZWxG1a8Ig34ZYgYo4VEVQhkh4Uv0EWDgxRyeqXhHmMnI8591_Ndk6BpHUeU-PZQHHsDTpauVeKJLyrv7efneYdfq0v5sERMtsSoKYIgXXDXaNyaL2S0LmdYB5TqEd9c3Fj7GMyW0T_m5yBPZDcGHuYYWeA66VZDi39jn-SXmTmhkfQVonUOVNhksxadRPZISBBOZ3RATsrtGbiRK6KDku7p8zhhJ0UG7rpwNXUYXP4iNCSO-YiNI9Etg4MH2Wj3mN88gMaS0S-3zS4I_tjr5C4cvq8S5Iv8zfc0grNECIAJJePTQX4YmIhxWCyQW0q_OAg0YTlaNKEgPypSE6u3jPqkGX4PFqnZf4GoOisRcv-Unbwp3SEvzAAyzw9u736HV5EC5lgUcasc8Vi7uzDAVFYdm-SGvS9TPJkgq_JJ2ftTmba0Juup7aF2hl84ntOC-pfWga5C-i_uW0H4UyTzUKn19Gjd5Kj-K-BIGiH9jgmT-uf-wEqXguJoxkacO4NHRd7laXdjeyCj6dItl_tXhYAWL9zQg-GNw4uE3UkTEYKKwiZk3tnHLo1s1ozPJjmFb5TFw8_2Ao6-w=w650&#39; alt=&#39;スマホユーザの継続利用がテーマでした。&#39;/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト-要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト-要件概要&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
 
-&lt;h3 id=&#34;要件概要:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;要件概要&lt;/h3&gt;
+&lt;h3 id=&#34;要件概要&#34;&gt;要件概要&lt;/h3&gt;
 
 &lt;p&gt;要件（概要）は下記の通りです。&lt;/p&gt;
 
@@ -78,33 +77,33 @@
 &lt;p&gt;ちなみに技術的なチャレンジとしては今回、リアクションのたびに状態を更新する仕様のため、&lt;a href=&#34;https://facebook.github.io/react/&#34;&gt;React&lt;/a&gt;を本格的に導入しました。
 また提案カードを右に左にさばくUIに関しては&lt;a href=&#34;https://github.com/gajus/swing&#34;&gt;swing.js&lt;/a&gt;を導入しました。&lt;/p&gt;
 
-&lt;h3 id=&#34;スクラムによる管理-スプリントの適用:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
+&lt;h3 id=&#34;スクラムによる管理-スプリントの適用&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
 
 &lt;p&gt;ここからが本題です。結論から申し上げますと、本プロジェクトは4スプリント消費する結果となりました。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/bOhDmdJ8YH43fX5RnWZHdDCWMfBXLd59SC1DsoQPZ9gCmWK0j_lge9872lCZDen7sm7H7hqF6Ye6r4DL8cN-Rv636B3G_8tiB2_mFdyXbx5f52xAgu3pudMIIW1oO9sRmfcmm6CHNlNPwTwjqBrNTURLgz5JWgOIOGim0tfhG8Ar0y9HQo3bdXuOhdmdt4EcRMj2592cuaUDWWGh9ZEykdd8Mz5Ezx1l2JYpxlpXRZVvd_FCtVYsxb-5IJ2RdihyBgPKG3FE0emHiBmBEJXcj6trjPUYWC8YOH_8fgEMeFEIREsn8zcSsbRlL7YAfJjorwUVtmj4GRKCK_7Mubm-0qgTDP0m5Z0yjK3RFRfp4YGlOTx4nCyK7OHTHTghiwk6mQjwWe0aoOdCZZ4m-cc9rYlFH2V0IuzXwkgxDcJHoWeWSZGq2hOjHdISNbZy3LLgDGV-k5emE4x5AenF0D25xFLe-3T4EmxJ2KtaJe2YPrVkdUog3_XDyaTOpIOnVmHF0RYmfpLXYZ8obZ7gt-dnmZEHSj9lrq9hrN85z5M6EpEKHDBxhdUWNPX_3R7rauEV8nd2DWic023p2TjkF3-HlAb5fVHKaN8=w650&#39; alt=&#39;※GWのため途中空きがあります。&#39;/&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;第1スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第1スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第1スプリント&#34;&gt;第1スプリント&lt;/h4&gt;
 
 &lt;p&gt;技術的検証、UI検証、ユーザヒアリングなどを行いながら&lt;br /&gt;
 そもそもニーズあるの？やるとしてできるの？UIとして要件を満たせそう？など&lt;br /&gt;
 手戻りが許されないissueから潰していくようなスプリントにしました。&lt;/p&gt;
 
-&lt;h4 id=&#34;第2スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第2スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第2スプリント&#34;&gt;第2スプリント&lt;/h4&gt;
 
 &lt;p&gt;2スプリント目では（より詳細な）要件定義、デザイナー調整（外部）、設計に充てました。&lt;br /&gt;
 スプリント全て消化するほどのタスク量はないため、スプリントの後半は別案件の開発をしていました。&lt;/p&gt;
 
-&lt;h4 id=&#34;第3-4スプリント:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;第3, 4スプリント&lt;/h4&gt;
+&lt;h4 id=&#34;第3-4スプリント&#34;&gt;第3, 4スプリント&lt;/h4&gt;
 
 &lt;p&gt;本スプリントでは前半で外部デザイナーさんに2日程度来社してもらい、がっつりデザイン。&lt;br /&gt;
 その後、開発、テスト、そしてリリースという流れでした。
 当初は第3スプリント内でリリースを目指していましたが、開発ボリュームが想定以上に膨らんでしまったため、&lt;br /&gt;
 第3スプリント内でのリリースは間に合わず次のスプリントでのリリースとなりました。&lt;/p&gt;
 
-&lt;h2 id=&#34;プロジェクト-スクラムの振り返り:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
+&lt;h2 id=&#34;プロジェクト-スクラムの振り返り&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
 
-&lt;h3 id=&#34;良かった点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;良かった点&lt;/h3&gt;
+&lt;h3 id=&#34;良かった点&#34;&gt;良かった点&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;プロトタイプのスプリントを設けたことで技術、UI検証に十分な時間を割くことが出来た。&lt;/li&gt;
@@ -114,7 +113,7 @@
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Ww8hew5x3tqBeN4PV-fixXAssyYbWh48t9Y7NiUpszShShPTcLJt0YxtEYtOJLezr4mmlT0LLy8ZleCBf8V4rDliZbVfNEuIOglZnpTAohnYgcMNWqzMjYdOWWiNuotnBRB1b0aV_R1u5-P61wTEvsrOS7aQxx0q4cmWqOPURzKXKwR4wvxD115O9SwSes1RgG2VJUOGJWrdwPrXdza34-3kD945v7prVcZTjZIJToCYx9ES8P4GBlrsm9lzUAj5pYpWa-ix1TBHtbV8cEznvFA5b62WpCbUOuOVJj-KUQFy8j_n1iC484nw4vcDh-xwhV2bVj47xZM1Fc2uhntfhV1Uq1adzd4zjI7LPjGHBgi7u1YfjX51MT489fqkFUTeSN3FctPvDoSZrlX4IKN0REGtQ7qlOUll9qDy_n9Q6vB7e5OTjzg7PcFQhP-ge0axsXo-gqazP3kZ-VmteG1GVVDe_Y63YhI2N80F1j4oE5OuQBwodbMfs6LWtxbWd9PfnLzJdhVY5s5TnxBxGId_98GrFjUDJS3L62XvSzo4iYON2yZnfXkgFRmvba6yU2-XDKQ-iB4XLz4iREFuDpB2sSWGujTY8Ws=w650&#39; alt=&#39;改善したリテンションに関する指数&#39;&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;改善点:0c0c5cd24d35767dd52335ae3894aa47&#34;&gt;改善点&lt;/h3&gt;
+&lt;h3 id=&#34;改善点&#34;&gt;改善点&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;結果として良かったものの事前のユーザヒアリングが不足していた。（ユーザが求めていないモノを作ってしまわないかというリスクへの対処）&lt;/li&gt;
@@ -123,8 +122,7 @@
 &lt;/ul&gt;
 
 &lt;p&gt;ということで今回は大規模プロジェクトとスクラム開発の適用をテーマに紹介させていただきました。
-ありがとうございました！&lt;/p&gt;
-</description>
+ありがとうございました！&lt;/p&gt;</description>
     </item>
     
   </channel>

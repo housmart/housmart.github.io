@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.17" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -31,6 +31,7 @@
 
 エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。
 ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" />
@@ -62,6 +63,7 @@
 
 エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。
 ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)
+
 ">
 
 
@@ -72,7 +74,7 @@
 
 
 
-<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,work," />
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,ux,work," />
 
     
 
@@ -93,6 +95,7 @@
 
 エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。
 ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)
+
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
@@ -209,12 +212,12 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        16
+        17
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          17
+          18
         
         <span>
             Tags
@@ -357,9 +360,7 @@
 
 
             <div class="article-entry" itemprop="articleBody">
-                
-
-<p>「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」<br />
+                <p>「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」<br />
 こんな疑問を開発前に持つ方向けに、「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントをまとめました。</p>
 
 <p>また、弊社より8月30日にリリースした<a href="https://itunes.apple.com/app/id1143903849">カウルのアプリ</a>開発でとった対応も併記しています。<br />
@@ -369,6 +370,8 @@
 
 <p>エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。<br />
 <a href="/2016/09/06/ios-tips-for-developer/">ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)</a></p>
+
+<p></p>
 
 <hr />
 
@@ -394,13 +397,13 @@
 
 <p><div id="service"/></p>
 
-<h2 id="サービス-システム設計で意識しておきたい5つのこと:21dcbfe84e52c5a1130dbbb32235bf9c">サービス・システム設計で意識しておきたい5つのこと</h2>
+<h2 id="サービス-システム設計で意識しておきたい5つのこと">サービス・システム設計で意識しておきたい5つのこと</h2>
 
 <p>web開発と異なる部分として、プッシュ通知などアプリならではの考慮しておくと良いことがあります。</p>
 
 <p><div id="service2"/></p>
 
-<h3 id="1-ユーザにアプリアップデートを促す仕組み:21dcbfe84e52c5a1130dbbb32235bf9c">1.ユーザにアプリアップデートを促す仕組み</h3>
+<h3 id="1-ユーザにアプリアップデートを促す仕組み">1.ユーザにアプリアップデートを促す仕組み</h3>
 
 <p>APIのバージョンを上げる際、バージョンアップ前のAPIに合わせて実装されていたアプリが動かなくなる可能性があります。<br />
 旧バージョンのAPIを使うアプリが残っていると、複数バージョンのAPIを運用していく必要がありますが、運用コストやセキュリティ等の理由で旧バージョンのAPIを閉じる必要も出てくるでしょう。<br />
@@ -410,7 +413,7 @@
 
 <p><div id="service3"/></p>
 
-<h3 id="2-webからアプリへのインストールの導線:21dcbfe84e52c5a1130dbbb32235bf9c">2.webからアプリへのインストールの導線</h3>
+<h3 id="2-webからアプリへのインストールの導線">2.webからアプリへのインストールの導線</h3>
 
 <p>アプリをリリースした後の、webからのアプリをインストールさせるための導線についても考えておきます。</p>
 
@@ -420,7 +423,7 @@
 
 <p><div id="service1"/></p>
 
-<h3 id="3-対応デバイス選定:21dcbfe84e52c5a1130dbbb32235bf9c">3.対応デバイス選定</h3>
+<h3 id="3-対応デバイス選定">3.対応デバイス選定</h3>
 
 <p>対応デバイスとOSのバージョンを決めます。<br />
 カウルでは開発コストを抑えるため以下に絞りました。</p>
@@ -434,7 +437,7 @@
 
 <p><div id="service4"/></p>
 
-<h3 id="4-appleの審査でリジェクトされることも想定した締切:21dcbfe84e52c5a1130dbbb32235bf9c">4.Appleの審査でリジェクトされることも想定した締切</h3>
+<h3 id="4-appleの審査でリジェクトされることも想定した締切">4.Appleの審査でリジェクトされることも想定した締切</h3>
 
 <p>初回の審査ではリジェクトされる可能性が十分にあるので、余裕をもって審査に出します。</p>
 
@@ -445,7 +448,7 @@
 
 <p><div id="other1"/></p>
 
-<h3 id="5-クラッシュのトラッキング等に使うプラットフォームの選定:21dcbfe84e52c5a1130dbbb32235bf9c">5.クラッシュのトラッキング等に使うプラットフォームの選定</h3>
+<h3 id="5-クラッシュのトラッキング等に使うプラットフォームの選定">5.クラッシュのトラッキング等に使うプラットフォームの選定</h3>
 
 <p>リリース後のクラッシュの検知や、プッシュ通知を送るためのプラットフォームを選びます。<br />
 特にクラッシュ検知ツールはお金もかからず、実装に時間もかからないので何かしらいれておきましょう。</p>
@@ -476,11 +479,11 @@
 
 <p><div id="other"/></p>
 
-<h2 id="カウルアプリの中の話:21dcbfe84e52c5a1130dbbb32235bf9c">カウルアプリの中の話</h2>
+<h2 id="カウルアプリの中の話">カウルアプリの中の話</h2>
 
 <p><div id="other2"/></p>
 
-<h3 id="今回のリリースに含めなかった対応:21dcbfe84e52c5a1130dbbb32235bf9c">今回のリリースに含めなかった対応</h3>
+<h3 id="今回のリリースに含めなかった対応">今回のリリースに含めなかった対応</h3>
 
 <p>我々は以下のタスクを次のリリースに見送りましたが、スケジュール次第では可能な限り先に対応しておけると素敵です。</p>
 
@@ -493,7 +496,7 @@
 
 <p><div id="other3"/></p>
 
-<h3 id="開発にかかったコスト:21dcbfe84e52c5a1130dbbb32235bf9c">開発にかかったコスト</h3>
+<h3 id="開発にかかったコスト">開発にかかったコスト</h3>
 
 <p>JIRAの記録(<a href="http://techblog.housmart.co.jp/2016/08/24/startup-dev/">カウルの作業時間記録について</a>)によると、1.5人月(240時間)ほどの作業時間を使いました。作業内容としては以下の様なタスクを含みます。</p>
 
@@ -512,7 +515,6 @@
 <a href="https://itunes.apple.com/app/id1143903849">https://itunes.apple.com/app/id1143903849</a></p>
 
 <p>by まっくす</p>
-
             </div>
             <div class="hatena_button">
   <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="hatena-bookmark-button" data-hatena-bookmark-title="【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
@@ -573,6 +575,31 @@
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -674,31 +701,6 @@
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">
-                        operation
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="title">なぜdevelopブランチは必要なの？</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -723,7 +725,7 @@
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
                     design
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -802,7 +804,7 @@
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
                     design
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -904,6 +906,13 @@
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
                     work
                 </a>
@@ -956,6 +965,8 @@
         <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
         
         <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
         
         <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
         

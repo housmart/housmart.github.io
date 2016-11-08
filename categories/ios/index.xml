@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ios on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/categories/ios/</link>
-    <description>Recent content in Ios on カウル Tech Blog</description>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/categories/ios/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 07 Sep 2016 17:54:20 +0900</lastBuildDate>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
     <atom:link href="http://techblog.housmart.co.jp/categories/ios/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -15,9 +15,7 @@
       <pubDate>Wed, 07 Sep 2016 17:54:20 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/</guid>
-      <description>
-
-&lt;p&gt;ショッピングアプリでの経験や&lt;a href=&#34;https://developer.apple.com/ios/human-interface-guidelines/&#34;&gt;iOSガイドライン&lt;/a&gt;(または&lt;a href=&#34;https://material.google.com/&#34;&gt;マテリアルデザイン&lt;/a&gt;)から学んだiOS開発のプラクティスをまとめてみました。&lt;br /&gt;
+      <description>&lt;p&gt;ショッピングアプリでの経験や&lt;a href=&#34;https://developer.apple.com/ios/human-interface-guidelines/&#34;&gt;iOSガイドライン&lt;/a&gt;(または&lt;a href=&#34;https://material.google.com/&#34;&gt;マテリアルデザイン&lt;/a&gt;)から学んだiOS開発のプラクティスをまとめてみました。&lt;br /&gt;
 弊社より8月30日にリリースした&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;カウルのアプリ&lt;/a&gt;開発でとった対応も併記しています。&lt;/p&gt;
 
 &lt;p&gt;iOSアプリ開発で意識すべきポイントは、チームやコミュニティの中では共有されているものの、まとまった情報を得ることがなかなか難しいかと思います。&lt;br /&gt;
@@ -25,6 +23,8 @@
 
 &lt;p&gt;「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。&lt;br /&gt;
 &lt;a href=&#34;http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/&#34;&gt;「iPhoneアプリを作り始める前に考えておきたい5つのこと」&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -52,11 +52,11 @@
 
 &lt;p&gt;&lt;div id=&#34;coding&#34;/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;コーディング:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;コーディング&lt;/h2&gt;
+&lt;h2 id=&#34;コーディング&#34;&gt;コーディング&lt;/h2&gt;
 
 &lt;p&gt;&lt;div id=&#34;coding1&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;1-storyboardを積極的に利用する:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;1.Storyboardを積極的に利用する&lt;/h3&gt;
+&lt;h3 id=&#34;1-storyboardを積極的に利用する&#34;&gt;1.Storyboardを積極的に利用する&lt;/h3&gt;
 
 &lt;p&gt;UI要素はコードだけで生成することもできますが、Storyboardを積極的に使って実装すると、実行時の画面の状態がプレビューできるので新しくプロジェクトに関わる人がいても理解がしやすくなります。&lt;/p&gt;
 
@@ -68,7 +68,7 @@ Storyboardを分割しておくことでコンフリクトは極力減らせま�
 
 &lt;p&gt;&lt;div id=&#34;coding2&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;2-schemeとpreprocessor-macrosを使って環境を切り分ける:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;2.SchemeとPreprocessor Macrosを使って環境を切り分ける&lt;/h3&gt;
+&lt;h3 id=&#34;2-schemeとpreprocessor-macrosを使って環境を切り分ける&#34;&gt;2.SchemeとPreprocessor Macrosを使って環境を切り分ける&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;Debug&lt;/code&gt;、&lt;code&gt;Release&lt;/code&gt;以外にも&lt;code&gt;Staging&lt;/code&gt;のようなスキームも定義して、プリプロセッサマクロで以下のような処理をビルド毎に切り分けます。&lt;/p&gt;
 
@@ -83,14 +83,14 @@ Storyboardを分割しておくことでコンフリクトは極力減らせま�
 
 &lt;p&gt;&lt;div id=&#34;coding3&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;3-uiwebviewよりwkwebviewやsfsafariviewを使う:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;3.UIWebViewよりWKWebViewやSFSafariViewを使う&lt;/h3&gt;
+&lt;h3 id=&#34;3-uiwebviewよりwkwebviewやsfsafariviewを使う&#34;&gt;3.UIWebViewよりWKWebViewやSFSafariViewを使う&lt;/h3&gt;
 
 &lt;p&gt;UIWebViewよりWKWebViewの方が、描画が速く、クラッシュも少なく安定します。&lt;br /&gt;
 SFSafariViewはカスタマイズできる部分が少なくなりますが、SafariアプリとCookie等が共有されるので自分のサービス外のURLを開く際などに使うとユーザにとって便利です。&lt;/p&gt;
 
 &lt;p&gt;&lt;div id=&#34;coding4&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;4-custom-url-schemeやuniversal-links-wkscriptmessagehandlerでwebとネイティブを繋ぐ:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ&lt;/h3&gt;
+&lt;h3 id=&#34;4-custom-url-schemeやuniversal-links-wkscriptmessagehandlerでwebとネイティブを繋ぐ&#34;&gt;4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ&lt;/h3&gt;
 
 &lt;p&gt;3つを主に以下のような用途で使い分けて、webとネイティブを繋ぎます。&lt;/p&gt;
 
@@ -111,13 +111,13 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;coding5&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;5-こまめにプルリクエストをマージする:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;5.こまめにプルリクエストをマージする&lt;/h3&gt;
+&lt;h3 id=&#34;5-こまめにプルリクエストをマージする&#34;&gt;5.こまめにプルリクエストをマージする&lt;/h3&gt;
 
 &lt;p&gt;複数人で開発を行っているとpbxprojファイルやStoryboardが、コンフリクトして解消に時間を取られるので、プルリクエストを長い間放置しないようしてコンフリクトを減らします。&lt;/p&gt;
 
 &lt;p&gt;&lt;div id=&#34;coding6&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;6-ベータ版を定期的に社内配信する:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;6.ベータ版を定期的に社内配信する&lt;/h3&gt;
+&lt;h3 id=&#34;6-ベータ版を定期的に社内配信する&#34;&gt;6.ベータ版を定期的に社内配信する&lt;/h3&gt;
 
 &lt;p&gt;動作確認をしたり、認識を合わせる上で一番良いのは実際にアプリをデバイスにインストールして使ってもらうことです。&lt;br /&gt;
 インストールしたくなる度にMacにiPhoneをUSB接続するのでは効率が悪いため、&lt;a href=&#34;http://try.crashlytics.com/beta/&#34;&gt;Crashlytics Beta&lt;/a&gt;等のツールからいつでも関係者がインストールできるようにします。&lt;/p&gt;
@@ -127,13 +127,13 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;design&#34;/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;デザイン:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;デザイン&lt;/h2&gt;
+&lt;h2 id=&#34;デザイン&#34;&gt;デザイン&lt;/h2&gt;
 
 &lt;p&gt;基本的には、標準的なiOSのUI要素を使いつつ、アプリ内での一貫性を重視するようにします。&lt;/p&gt;
 
 &lt;p&gt;&lt;div id=&#34;design1&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;1-滑らかにアニメーションさせる:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;1.滑らかにアニメーションさせる&lt;/h3&gt;
+&lt;h3 id=&#34;1-滑らかにアニメーションさせる&#34;&gt;1.滑らかにアニメーションさせる&lt;/h3&gt;
 
 &lt;p&gt;要素が現れたり消えたり、移動する際に滑らかにアニメーションするようにします。&lt;br /&gt;
 また、時間がかかる処理をしている間はユーザに「読み込みしている」ということを分かるようにします。&lt;/p&gt;
@@ -144,7 +144,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;design2&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;2-ui要素のレイアウトを揃える:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;2.UI要素のレイアウトを揃える&lt;/h3&gt;
+&lt;h3 id=&#34;2-ui要素のレイアウトを揃える&#34;&gt;2.UI要素のレイアウトを揃える&lt;/h3&gt;
 
 &lt;p&gt;UI要素のサイズには、標準的なiOSのUI要素がもともと持っているサイズを使うか、サービス内で定義したサイズを使うことで、iOSやサービスの一部として馴染むようにします。&lt;/p&gt;
 
@@ -154,7 +154,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;design3&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;3-web処理を意識させない:cff9dd2954bd1c9015af79f0d0f92537&#34;&gt;3.web処理を意識させない&lt;/h3&gt;
+&lt;h3 id=&#34;3-web処理を意識させない&#34;&gt;3.web処理を意識させない&lt;/h3&gt;
 
 &lt;p&gt;アプリ内で同一サービスのwebページを開く際、それがwebビューであるかどうかユーザが認識する必要はありません。&lt;/p&gt;
 
@@ -172,8 +172,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 &lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;のアプリは&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;こちら&lt;/a&gt;です。基本料無料で使えますので、是非ご利用ください！&lt;br /&gt;
 &lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;https://itunes.apple.com/app/id1143903849&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;by まっくす&lt;/p&gt;
-</description>
+&lt;p&gt;by まっくす&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -182,9 +181,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
       <pubDate>Thu, 01 Sep 2016 15:54:20 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/</guid>
-      <description>
-
-&lt;p&gt;「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」&lt;br /&gt;
+      <description>&lt;p&gt;「iPhoneアプリ作る前に考慮しておくべきことってなんだろう？」&lt;br /&gt;
 こんな疑問を開発前に持つ方向けに、「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントをまとめました。&lt;/p&gt;
 
 &lt;p&gt;また、弊社より8月30日にリリースした&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;カウルのアプリ&lt;/a&gt;開発でとった対応も併記しています。&lt;br /&gt;
@@ -194,6 +191,8 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。&lt;br /&gt;
 &lt;a href=&#34;http://techblog.housmart.co.jp/2016/09/06/ios-tips-for-developer/&#34;&gt;ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -219,13 +218,13 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;service&#34;/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;サービス-システム設計で意識しておきたい5つのこと:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;サービス・システム設計で意識しておきたい5つのこと&lt;/h2&gt;
+&lt;h2 id=&#34;サービス-システム設計で意識しておきたい5つのこと&#34;&gt;サービス・システム設計で意識しておきたい5つのこと&lt;/h2&gt;
 
 &lt;p&gt;web開発と異なる部分として、プッシュ通知などアプリならではの考慮しておくと良いことがあります。&lt;/p&gt;
 
 &lt;p&gt;&lt;div id=&#34;service2&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;1-ユーザにアプリアップデートを促す仕組み:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/h3&gt;
+&lt;h3 id=&#34;1-ユーザにアプリアップデートを促す仕組み&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/h3&gt;
 
 &lt;p&gt;APIのバージョンを上げる際、バージョンアップ前のAPIに合わせて実装されていたアプリが動かなくなる可能性があります。&lt;br /&gt;
 旧バージョンのAPIを使うアプリが残っていると、複数バージョンのAPIを運用していく必要がありますが、運用コストやセキュリティ等の理由で旧バージョンのAPIを閉じる必要も出てくるでしょう。&lt;br /&gt;
@@ -235,7 +234,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;service3&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;2-webからアプリへのインストールの導線:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;2.webからアプリへのインストールの導線&lt;/h3&gt;
+&lt;h3 id=&#34;2-webからアプリへのインストールの導線&#34;&gt;2.webからアプリへのインストールの導線&lt;/h3&gt;
 
 &lt;p&gt;アプリをリリースした後の、webからのアプリをインストールさせるための導線についても考えておきます。&lt;/p&gt;
 
@@ -245,7 +244,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;service1&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;3-対応デバイス選定:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;3.対応デバイス選定&lt;/h3&gt;
+&lt;h3 id=&#34;3-対応デバイス選定&#34;&gt;3.対応デバイス選定&lt;/h3&gt;
 
 &lt;p&gt;対応デバイスとOSのバージョンを決めます。&lt;br /&gt;
 カウルでは開発コストを抑えるため以下に絞りました。&lt;/p&gt;
@@ -259,7 +258,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;service4&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;4-appleの審査でリジェクトされることも想定した締切:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/h3&gt;
+&lt;h3 id=&#34;4-appleの審査でリジェクトされることも想定した締切&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/h3&gt;
 
 &lt;p&gt;初回の審査ではリジェクトされる可能性が十分にあるので、余裕をもって審査に出します。&lt;/p&gt;
 
@@ -270,7 +269,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;other1&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;5-クラッシュのトラッキング等に使うプラットフォームの選定:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/h3&gt;
+&lt;h3 id=&#34;5-クラッシュのトラッキング等に使うプラットフォームの選定&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/h3&gt;
 
 &lt;p&gt;リリース後のクラッシュの検知や、プッシュ通知を送るためのプラットフォームを選びます。&lt;br /&gt;
 特にクラッシュ検知ツールはお金もかからず、実装に時間もかからないので何かしらいれておきましょう。&lt;/p&gt;
@@ -301,11 +300,11 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;other&#34;/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;カウルアプリの中の話:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;カウルアプリの中の話&lt;/h2&gt;
+&lt;h2 id=&#34;カウルアプリの中の話&#34;&gt;カウルアプリの中の話&lt;/h2&gt;
 
 &lt;p&gt;&lt;div id=&#34;other2&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;今回のリリースに含めなかった対応:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;今回のリリースに含めなかった対応&lt;/h3&gt;
+&lt;h3 id=&#34;今回のリリースに含めなかった対応&#34;&gt;今回のリリースに含めなかった対応&lt;/h3&gt;
 
 &lt;p&gt;我々は以下のタスクを次のリリースに見送りましたが、スケジュール次第では可能な限り先に対応しておけると素敵です。&lt;/p&gt;
 
@@ -318,7 +317,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 &lt;p&gt;&lt;div id=&#34;other3&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;開発にかかったコスト:21dcbfe84e52c5a1130dbbb32235bf9c&#34;&gt;開発にかかったコスト&lt;/h3&gt;
+&lt;h3 id=&#34;開発にかかったコスト&#34;&gt;開発にかかったコスト&lt;/h3&gt;
 
 &lt;p&gt;JIRAの記録(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/08/24/startup-dev/&#34;&gt;カウルの作業時間記録について&lt;/a&gt;)によると、1.5人月(240時間)ほどの作業時間を使いました。作業内容としては以下の様なタスクを含みます。&lt;/p&gt;
 
@@ -336,8 +335,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 &lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;のアプリは&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;こちら&lt;/a&gt;です。基本料無料で使えますので、是非ご利用ください！&lt;br /&gt;
 &lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;https://itunes.apple.com/app/id1143903849&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;by まっくす&lt;/p&gt;
-</description>
+&lt;p&gt;by まっくす&lt;/p&gt;</description>
     </item>
     
   </channel>

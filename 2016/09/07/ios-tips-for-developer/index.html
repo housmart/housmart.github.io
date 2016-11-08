@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編) &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.17" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -29,6 +29,7 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
 
 「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。
 「iPhoneアプリを作り始める前に考えておきたい5つのこと」
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" />
@@ -58,6 +59,7 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
 
 「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。
 「iPhoneアプリを作り始める前に考えておきたい5つのこと」
+
 ">
 
 
@@ -68,7 +70,7 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
 
 
 
-<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,work," />
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,ux,work," />
 
     
 
@@ -87,6 +89,7 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
 
 「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。
 「iPhoneアプリを作り始める前に考えておきたい5つのこと」
+
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
@@ -203,12 +206,12 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        16
+        17
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          17
+          18
         
         <span>
             Tags
@@ -348,9 +351,7 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
 
 
             <div class="article-entry" itemprop="articleBody">
-                
-
-<p>ショッピングアプリでの経験や<a href="https://developer.apple.com/ios/human-interface-guidelines/">iOSガイドライン</a>(または<a href="https://material.google.com/">マテリアルデザイン</a>)から学んだiOS開発のプラクティスをまとめてみました。<br />
+                <p>ショッピングアプリでの経験や<a href="https://developer.apple.com/ios/human-interface-guidelines/">iOSガイドライン</a>(または<a href="https://material.google.com/">マテリアルデザイン</a>)から学んだiOS開発のプラクティスをまとめてみました。<br />
 弊社より8月30日にリリースした<a href="https://itunes.apple.com/app/id1143903849">カウルのアプリ</a>開発でとった対応も併記しています。</p>
 
 <p>iOSアプリ開発で意識すべきポイントは、チームやコミュニティの中では共有されているものの、まとまった情報を得ることがなかなか難しいかと思います。<br />
@@ -358,6 +359,8 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
 
 <p>「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。<br />
 <a href="/2016/09/01/ios-development-tips/">「iPhoneアプリを作り始める前に考えておきたい5つのこと」</a></p>
+
+<p></p>
 
 <hr />
 
@@ -385,11 +388,11 @@ iOSアプリ開発で意識すべきポイントは、チームやコミュニ�
 
 <p><div id="coding"/></p>
 
-<h2 id="コーディング:cff9dd2954bd1c9015af79f0d0f92537">コーディング</h2>
+<h2 id="コーディング">コーディング</h2>
 
 <p><div id="coding1"/></p>
 
-<h3 id="1-storyboardを積極的に利用する:cff9dd2954bd1c9015af79f0d0f92537">1.Storyboardを積極的に利用する</h3>
+<h3 id="1-storyboardを積極的に利用する">1.Storyboardを積極的に利用する</h3>
 
 <p>UI要素はコードだけで生成することもできますが、Storyboardを積極的に使って実装すると、実行時の画面の状態がプレビューできるので新しくプロジェクトに関わる人がいても理解がしやすくなります。</p>
 
@@ -401,7 +404,7 @@ Storyboardを分割しておくことでコンフリクトは極力減らせま�
 
 <p><div id="coding2"/></p>
 
-<h3 id="2-schemeとpreprocessor-macrosを使って環境を切り分ける:cff9dd2954bd1c9015af79f0d0f92537">2.SchemeとPreprocessor Macrosを使って環境を切り分ける</h3>
+<h3 id="2-schemeとpreprocessor-macrosを使って環境を切り分ける">2.SchemeとPreprocessor Macrosを使って環境を切り分ける</h3>
 
 <p><code>Debug</code>、<code>Release</code>以外にも<code>Staging</code>のようなスキームも定義して、プリプロセッサマクロで以下のような処理をビルド毎に切り分けます。</p>
 
@@ -416,14 +419,14 @@ Storyboardを分割しておくことでコンフリクトは極力減らせま�
 
 <p><div id="coding3"/></p>
 
-<h3 id="3-uiwebviewよりwkwebviewやsfsafariviewを使う:cff9dd2954bd1c9015af79f0d0f92537">3.UIWebViewよりWKWebViewやSFSafariViewを使う</h3>
+<h3 id="3-uiwebviewよりwkwebviewやsfsafariviewを使う">3.UIWebViewよりWKWebViewやSFSafariViewを使う</h3>
 
 <p>UIWebViewよりWKWebViewの方が、描画が速く、クラッシュも少なく安定します。<br />
 SFSafariViewはカスタマイズできる部分が少なくなりますが、SafariアプリとCookie等が共有されるので自分のサービス外のURLを開く際などに使うとユーザにとって便利です。</p>
 
 <p><div id="coding4"/></p>
 
-<h3 id="4-custom-url-schemeやuniversal-links-wkscriptmessagehandlerでwebとネイティブを繋ぐ:cff9dd2954bd1c9015af79f0d0f92537">4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ</h3>
+<h3 id="4-custom-url-schemeやuniversal-links-wkscriptmessagehandlerでwebとネイティブを繋ぐ">4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ</h3>
 
 <p>3つを主に以下のような用途で使い分けて、webとネイティブを繋ぎます。</p>
 
@@ -444,13 +447,13 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 <p><div id="coding5"/></p>
 
-<h3 id="5-こまめにプルリクエストをマージする:cff9dd2954bd1c9015af79f0d0f92537">5.こまめにプルリクエストをマージする</h3>
+<h3 id="5-こまめにプルリクエストをマージする">5.こまめにプルリクエストをマージする</h3>
 
 <p>複数人で開発を行っているとpbxprojファイルやStoryboardが、コンフリクトして解消に時間を取られるので、プルリクエストを長い間放置しないようしてコンフリクトを減らします。</p>
 
 <p><div id="coding6"/></p>
 
-<h3 id="6-ベータ版を定期的に社内配信する:cff9dd2954bd1c9015af79f0d0f92537">6.ベータ版を定期的に社内配信する</h3>
+<h3 id="6-ベータ版を定期的に社内配信する">6.ベータ版を定期的に社内配信する</h3>
 
 <p>動作確認をしたり、認識を合わせる上で一番良いのは実際にアプリをデバイスにインストールして使ってもらうことです。<br />
 インストールしたくなる度にMacにiPhoneをUSB接続するのでは効率が悪いため、<a href="http://try.crashlytics.com/beta/">Crashlytics Beta</a>等のツールからいつでも関係者がインストールできるようにします。</p>
@@ -460,13 +463,13 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 <p><div id="design"/></p>
 
-<h2 id="デザイン:cff9dd2954bd1c9015af79f0d0f92537">デザイン</h2>
+<h2 id="デザイン">デザイン</h2>
 
 <p>基本的には、標準的なiOSのUI要素を使いつつ、アプリ内での一貫性を重視するようにします。</p>
 
 <p><div id="design1"/></p>
 
-<h3 id="1-滑らかにアニメーションさせる:cff9dd2954bd1c9015af79f0d0f92537">1.滑らかにアニメーションさせる</h3>
+<h3 id="1-滑らかにアニメーションさせる">1.滑らかにアニメーションさせる</h3>
 
 <p>要素が現れたり消えたり、移動する際に滑らかにアニメーションするようにします。<br />
 また、時間がかかる処理をしている間はユーザに「読み込みしている」ということを分かるようにします。</p>
@@ -477,7 +480,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 <p><div id="design2"/></p>
 
-<h3 id="2-ui要素のレイアウトを揃える:cff9dd2954bd1c9015af79f0d0f92537">2.UI要素のレイアウトを揃える</h3>
+<h3 id="2-ui要素のレイアウトを揃える">2.UI要素のレイアウトを揃える</h3>
 
 <p>UI要素のサイズには、標準的なiOSのUI要素がもともと持っているサイズを使うか、サービス内で定義したサイズを使うことで、iOSやサービスの一部として馴染むようにします。</p>
 
@@ -487,7 +490,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 
 <p><div id="design3"/></p>
 
-<h3 id="3-web処理を意識させない:cff9dd2954bd1c9015af79f0d0f92537">3.web処理を意識させない</h3>
+<h3 id="3-web処理を意識させない">3.web処理を意識させない</h3>
 
 <p>アプリ内で同一サービスのwebページを開く際、それがwebビューであるかどうかユーザが認識する必要はありません。</p>
 
@@ -506,7 +509,6 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 <a href="https://itunes.apple.com/app/id1143903849">https://itunes.apple.com/app/id1143903849</a></p>
 
 <p>by まっくす</p>
-
             </div>
             <div class="hatena_button">
   <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="hatena-bookmark-button" data-hatena-bookmark-title="ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
@@ -567,6 +569,31 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -668,31 +695,6 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">
-                        operation
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="title">なぜdevelopブランチは必要なの？</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -717,7 +719,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
                     design
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -796,7 +798,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
                     design
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -898,6 +900,13 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
                     work
                 </a>
@@ -950,6 +959,8 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
         <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
         
         <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
         
         <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
         

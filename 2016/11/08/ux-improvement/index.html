@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~ &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.17" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" />
+    <meta property="og:title" content="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" />
+<meta property="og:description" content="Housmartの高松です。
+
+みなさんのサービスはUX設計をしっかりと出来ていますか？
+
+現在カウルでは、さらなる使いやすいサービスを目指してUXの再設計を行っています。
+今回はその一部として行ったペルソナの定義、カスタマージャーニーマップの作成などを具体例をもとにご紹介します。
+
+実際のサービス設計では結構抜けてしまいがちなUX設計のフェーズ。ペルソナやカスタマージャーニーマップなど知識としては知っているけど、自分のサービスで実践をしたことがない！という方も多いのではないでしょうか。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/mmJqPb-u0d60KhXhW2pGOpEBqEPzo0ApDsIwDbMToLxI77eHpylIxiIdZf-YTzMJ-8cQsMNnIqyGkLgzfqrUtwjS8DL5WLOnfM3cKncZiRP1dWOHYBhUMWsYVXkESgxT5YOnYps56WbuXYUm26hYCdbU9epaXwbP9APylmgtsAcik4Av1-2Sf3uGlJxpVEya4AFjOKjSDy7XJcebgUPYHlNifrXvVQI3itZ_5qjZrxsnGOT_m0hiqzvzPHKDnORwaf9Tid0sQBSGR3XC5WVhqTbp2MRD-zXwGLn33AwG6FO1B1fgkUExFhIORLEXWRRtBasEtIGO3CDBKYWIeZ0lEag3u7UHKHRvf9_taP4AxNf_g3AyskRxdmnnmABttJ_GZKVgFGUlUg7KDUG02PV-Q5NNJKCllGPIyzkJeq62-9W0m7vNnHijvicwTAtGrw4N34NXCemxBo6xA7M-qilnpvYlCmURo_vmV4Zm6R1ypfOr_47tNOUSJIVQPJ5zJO39lOVYLUIVDQIsPuGtcssdBLWtFdnlJ4jLMI2VJDBQH5fAUR1fTzrKW9ncGzsF7-_C-JUpE_mgWNfsvvmTb5tv1kkp8_IFrNxMWpbO4WSbvetbjyVo=w600" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/OR86Zt2xYvKaRiHbeJeLfjyCg3tmGGJoI_6br12l0XksFDZStiQYSCQCV5gGfx3a5Xg0FfeHNmRofbPGHZJd5D_0jDsJWjW-o6a9W-A-RHfZzgEcem_q582vuw4BwCFO1gMJHe9_kOc-lCy0unI10RNxHPeASjHkkUERK1laxKEKoNXryfv6nuVuv1IyOsilbwKSE1Mq3vsY_iT54rZyTjXblUQOA6dRXvNCSY-aQzhYNlkiCASo8PlVEXn5_wysDaR_W6C7Kw4kAjKnN0OVA2-8PTLJ_5FnIrGEGkxy-FHb5Dod9jdhIhrdOzYP66HvpSFCR05CvxHgBaYL9iJRTdOLRaAwKg17YkiXpZnoKU4jH42X8Y3EtApW3sSqz5MUVwTFelvxfAprS5w1OiUtvfdwXnYUeb7d3pX8yyO9ykVpUlnFckGRcF40ZOPmjFHyRb-cU7lxxQbfl9ehuGnfvZybgLOVMtzZSay-KK384xRMRyPhHKWIHhGObYLhOwz6Xx1pQTgAsPvnbivULhbMnW5G1w7KbrFtQSRvT4Y2wMpJW2IOzmqbiUajSoJ64ahndQOh5TQW7BMSy6QgGA_zXW3g_fApTx3IOSgH6Yt4chl2YIsU=w600" />
+
+
+<meta property="og:updated_time" content="2016-11-08T15:40:44&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~">
+<meta itemprop="description" content="Housmartの高松です。
+
+みなさんのサービスはUX設計をしっかりと出来ていますか？
+
+現在カウルでは、さらなる使いやすいサービスを目指してUXの再設計を行っています。
+今回はその一部として行ったペルソナの定義、カスタマージャーニーマップの作成などを具体例をもとにご紹介します。
+
+実際のサービス設計では結構抜けてしまいがちなUX設計のフェーズ。ペルソナやカスタマージャーニーマップなど知識としては知っているけど、自分のサービスで実践をしたことがない！という方も多いのではないでしょうか。
+">
+
+
+<meta itemprop="dateModified" content="2016-11-08T15:40:44&#43;09:00" />
+<meta itemprop="wordCount" content="2819">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/mmJqPb-u0d60KhXhW2pGOpEBqEPzo0ApDsIwDbMToLxI77eHpylIxiIdZf-YTzMJ-8cQsMNnIqyGkLgzfqrUtwjS8DL5WLOnfM3cKncZiRP1dWOHYBhUMWsYVXkESgxT5YOnYps56WbuXYUm26hYCdbU9epaXwbP9APylmgtsAcik4Av1-2Sf3uGlJxpVEya4AFjOKjSDy7XJcebgUPYHlNifrXvVQI3itZ_5qjZrxsnGOT_m0hiqzvzPHKDnORwaf9Tid0sQBSGR3XC5WVhqTbp2MRD-zXwGLn33AwG6FO1B1fgkUExFhIORLEXWRRtBasEtIGO3CDBKYWIeZ0lEag3u7UHKHRvf9_taP4AxNf_g3AyskRxdmnnmABttJ_GZKVgFGUlUg7KDUG02PV-Q5NNJKCllGPIyzkJeq62-9W0m7vNnHijvicwTAtGrw4N34NXCemxBo6xA7M-qilnpvYlCmURo_vmV4Zm6R1ypfOr_47tNOUSJIVQPJ5zJO39lOVYLUIVDQIsPuGtcssdBLWtFdnlJ4jLMI2VJDBQH5fAUR1fTzrKW9ncGzsF7-_C-JUpE_mgWNfsvvmTb5tv1kkp8_IFrNxMWpbO4WSbvetbjyVo=w600">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/OR86Zt2xYvKaRiHbeJeLfjyCg3tmGGJoI_6br12l0XksFDZStiQYSCQCV5gGfx3a5Xg0FfeHNmRofbPGHZJd5D_0jDsJWjW-o6a9W-A-RHfZzgEcem_q582vuw4BwCFO1gMJHe9_kOc-lCy0unI10RNxHPeASjHkkUERK1laxKEKoNXryfv6nuVuv1IyOsilbwKSE1Mq3vsY_iT54rZyTjXblUQOA6dRXvNCSY-aQzhYNlkiCASo8PlVEXn5_wysDaR_W6C7Kw4kAjKnN0OVA2-8PTLJ_5FnIrGEGkxy-FHb5Dod9jdhIhrdOzYP66HvpSFCR05CvxHgBaYL9iJRTdOLRaAwKg17YkiXpZnoKU4jH42X8Y3EtApW3sSqz5MUVwTFelvxfAprS5w1OiUtvfdwXnYUeb7d3pX8yyO9ykVpUlnFckGRcF40ZOPmjFHyRb-cU7lxxQbfl9ehuGnfvZybgLOVMtzZSay-KK384xRMRyPhHKWIHhGObYLhOwz6Xx1pQTgAsPvnbivULhbMnW5G1w7KbrFtQSRvT4Y2wMpJW2IOzmqbiUajSoJ64ahndQOh5TQW7BMSy6QgGA_zXW3g_fApTx3IOSgH6Yt4chl2YIsU=w600">
+
+
+
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,ux,work," />
+
+    
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/mmJqPb-u0d60KhXhW2pGOpEBqEPzo0ApDsIwDbMToLxI77eHpylIxiIdZf-YTzMJ-8cQsMNnIqyGkLgzfqrUtwjS8DL5WLOnfM3cKncZiRP1dWOHYBhUMWsYVXkESgxT5YOnYps56WbuXYUm26hYCdbU9epaXwbP9APylmgtsAcik4Av1-2Sf3uGlJxpVEya4AFjOKjSDy7XJcebgUPYHlNifrXvVQI3itZ_5qjZrxsnGOT_m0hiqzvzPHKDnORwaf9Tid0sQBSGR3XC5WVhqTbp2MRD-zXwGLn33AwG6FO1B1fgkUExFhIORLEXWRRtBasEtIGO3CDBKYWIeZ0lEag3u7UHKHRvf9_taP4AxNf_g3AyskRxdmnnmABttJ_GZKVgFGUlUg7KDUG02PV-Q5NNJKCllGPIyzkJeq62-9W0m7vNnHijvicwTAtGrw4N34NXCemxBo6xA7M-qilnpvYlCmURo_vmV4Zm6R1ypfOr_47tNOUSJIVQPJ5zJO39lOVYLUIVDQIsPuGtcssdBLWtFdnlJ4jLMI2VJDBQH5fAUR1fTzrKW9ncGzsF7-_C-JUpE_mgWNfsvvmTb5tv1kkp8_IFrNxMWpbO4WSbvetbjyVo=w600"/>
+
+
+
+<meta name="twitter:title" content="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~"/>
+<meta name="twitter:description" content="Housmartの高松です。
+
+みなさんのサービスはUX設計をしっかりと出来ていますか？
+
+現在カウルでは、さらなる使いやすいサービスを目指してUXの再設計を行っています。
+今回はその一部として行ったペルソナの定義、カスタマージャーニーマップの作成などを具体例をもとにご紹介します。
+
+実際のサービス設計では結構抜けてしまいがちなUX設計のフェーズ。ペルソナやカスタマージャーニーマップなど知識としては知っているけど、自分のサービスで実践をしたことがない！という方も多いのではないでしょうか。
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        17
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          18
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/">
+    <h1 class="article-title" itemprop="name">
+        スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+            &middot;
+            2819
+            words
+            &middot;
+            6
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">design</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/design">design</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ux">ux</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>Housmartの高松です。</p>
+
+<p>みなさんのサービスはUX設計をしっかりと出来ていますか？</p>
+
+<p>現在カウルでは、さらなる使いやすいサービスを目指してUXの再設計を行っています。<br />
+今回はその一部として行ったペルソナの定義、カスタマージャーニーマップの作成などを具体例をもとにご紹介します。</p>
+
+<p>実際のサービス設計では結構抜けてしまいがちなUX設計のフェーズ。ペルソナやカスタマージャーニーマップなど知識としては知っているけど、自分のサービスで実践をしたことがない！という方も多いのではないでしょうか。
+</p>
+
+<h2 id="カウルのサービス">カウルのサービス</h2>
+
+<p>カウルはスマホで簡単にマンション探しが出来るサービスをWebとiOSで提供しています。<br />
+ユーザは会員登録後、欲しいマンションの条件を登録するとおすすめのお部屋の提案を受けられます。おすすめのお部屋を見てお気に入りに入れたり、実際に見学の予約をすることもできます。</p>
+
+<p>その他にも購入にかかる費用のシミュレーション機能やマンション購入に関するノウハウも見ることができ、購入の際の契約も一貫してサポートしています。</p>
+
+<p><img src="https://lh3.googleusercontent.com/lfVgkgCfdYbIBJSUyplcUu1vxAJqAmc9_u0MtcUOYR_kI76TgY2zc3rOfjxoGnCVaBdVgsJ0kCakvbztEwDy3fvlxVpWl89Z7TLTaGC9KhnKeyWiCGCE4ns-h4yO5CCmPP0zsJZCMTgqcJWJzXQ1XraC8jPmr2o4eQXDQkGeomfbimYwnWQYLGb53wPBSe3UaO_ldjGlejteJX0OTKRPXvr7JsWh3wnwk6RbB2Ehr13MAVBVmoAs7FyXrgj7SHeM84wpRdq2M5DDzvz-IbCwyHgsctvtKI7FDHOSnElryGaQspYGobivMDP9N2CcU2vBkiBnTWZqXmHTqEj7HFqK8wvnn0Z-7EWFQ4NlKKB7qnBmi0WylmgqdSlZl99hD4GOKD9q7ygdHNgBwKyIk6CeJfd07ZnxU5_7H6pANEsunKUZ_WRGRgHzuOadCMsyz-sqzhFtAu4f1mBrru0a4B8mIoqyIhOaD2PZyhOj8jfpXvUH8-WfNQj_ERinoj7NZIZrhvgaT_7JG3-FYfnyF__HxmiEhoyaxqXO1OjsSIT3WTkwpgmdg3Bi-p8WGhVBNdku6_SgEAszfZDF1moPpozbCYxFz76bRvrj8vt1iW6iaTYpZkDk=h600" alt="希望条件の入力→お部屋の提案→お気に入り" /></p>
+
+<p>また、従来の不動産売買では、過去いくらで売られていた部屋なのか、現在の相場価格はいくらなのかの価格情報を消費者が見ることができなかったのですが、これらの情報を積極的に開示していくことで透明性の高い不動産取引を実現しています。</p>
+
+<p><img src="https://lh3.googleusercontent.com/pWFAV-8AjYXayhdmLa4qsfWfqFPkEshGIpFniIWgBc4tP4RWnY9dlO73MftBnLmzCt-GKc1zMBOFaLrVqN3intU_m2x8IyEIyrdZhSCPwejD-AtuMxBQ0AW2Ax3lcvZgjonhWWs6NIWDRE4qVMydm5JLVJseR9RmwWtk6Q4iOemPgM-mbij9UTHYVtkICAeboLTJuQIUFqEI9BMossrovA9qfDYVtLQ5JyR-maM0CisLVOz64wKBPvwZ7LpTsgcI_TuAa6XWxBkcFeyKnIEdzsy1JpvDoKYW8hJPtYJjWRKBHKGK13J7ZuRqGPEtZpIBya65NGWVoGQqjXsBKldwQt8yPegwqN6JOnX-9GBnhnUuAFVA4iHWNLjVkfWoRceh1fByjMNXKu3s93hCllVlsBPlSdl5G0gBfMajpm9tdFMnsIo8WOrIPrH4ytDJroRQ3aiKI4Mcgkls6FxohJY9-TM7IjJAoLS-Jfx_kD7EpuqrJox7pdWWxBu4Z44iIQNdpy4r_eJWb4NK79DmN1yX_9WofXMnTGKgs1yC8TpHXbeMldKoihnoKhGTubbZSTfhwM0AUWVu2DqXkQNZbArEZlKfdIfpFgILplUB0jtJQy8ymxTx=h600" alt="お部屋の情報と相場" /></p>
+
+<h2 id="なぜ今ux再設計をするのか">なぜ今UX再設計をするのか？</h2>
+
+<p>カウルは既にサービスを開始して10ヶ月経ち、ビジネスとしては利益も出るようになってきたため、今の段階で改めてユーザビリティに関するアンケートを取ってみた結果、一部のユーザがアプリを使いにくいと感じていること、また希望通りの物件の提案を受け取れていないなどの課題が明確になりました。</p>
+
+<p>10ヶ月のサービス運用によりオペレーションやユーザの課題も見えてきたので整理するには良いタイミングだということで、これらの課題を解決してユーザビリティを上げるべく、しっかりと時間をかけてUXの再設計を行うことにしました。</p>
+
+<h2 id="今回やったこと">今回やったこと</h2>
+
+<p>カウル開発チームでは3ヶ月に1度、1週間泊まり込みで開発合宿を行っています。今回は10月最終週に沖縄での開催だったのですが、メインテーマの1つをUXの再設計と決めてディスカッションを行いました。<br />
+エンジニア陣に加えて、遅めの夏休みを取っていたデザイナーのみさと先生を招いて全体の進行をお願いしました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/KOm3Gcx_e7Egl-GcHF4jmIddjUQ3PD1-8bZdRRy0CBRKWbJmJtEioqxFvMBC7P-ZVdkWrQi9LN-5rUEf9k29QIu2gxdBiUQx99b4x3Vr-0NLtg9g4B-Aic4tP3iTafb6SisXaHRLG-I3I0QV6NXIYn0-QRbIQdamh1XV3OuSH7eno94etKBwg3OhcUA2Xj8PWWCk-eHUgQJm2LeyjmlODGV5_QMO_sWU0SczLKIx3m2cWftkft_bhkYqHCZAOgJQBFtYeNiZo4dFu0h_9053AFYvNgYEK8ZV89jqmdxqt2Dzf8c-dYrttron-HZVtE7avPGx9apjeNC_mZcaAWYp2cQaqeovsfMVLkzNA7H0zz17LH3gl-AcYhPT1P1qqm0AsydSsytDJqadAX_eqcApbCC481qe1mGEajx9zl94QTBJVJf1Xqr9erheuM4ezM9Lp_z6Z4OCbET8-mXLQegPoYOu1v0Oqtsvu86LFk0tt466gAEbfGcXgZFDXDNmFYyjMzT7sOcIg8p-m7zrX6NZpFBtK64SRbT0W0o90vedeRWcRvesv5irlo2EGgoJ_d7rkDG8vFoiNnVOAuHeldyKw23tz1ZOj1mdSco6_Yu-AJwfzaDh=h300" alt="アドバイザとして参加してくれたデザイナーのみさと先生" /></p>
+
+<p>ディスカッションに費やした時間は合計10時間程度、具体的な内容は以下です。</p>
+
+<ul>
+<li>ペルソナの定義</li>
+<li>カスタマージャーニーマップの作成</li>
+<li>カスタマージャーニーマップに沿った機能の洗い出し</li>
+<li>メニュー構成の検討</li>
+</ul>
+
+<h2 id="ペルソナの定義">ペルソナの定義</h2>
+
+<p>UX設計の際にペルソナを定めることで、<strong>ユーザ目線でUXを考えることが出来るようになる、具体的なユーザの目線で考えることでチーム内で共通の判断基準が出来る</strong> などのメリットがあります。</p>
+
+<p>既にあるサービスの場合、ユーザへのアンケートを通してよくアプリを利用しているユーザの属性を抽出していくことが望ましいのですが、今回は事前アンケートを実施しなかったので、過去にカウルのサービスを利用してマンションを購入したユーザの属性からペルソナの作成を行いました。</p>
+
+<p>各々が過去のユーザを思い出しながら属性情報（性別、年代、職業、年収など）や生活習慣、どんなことに課題をもっているかなどをポストイットに書き出していきます。そこで挙がった要素を元にユーザ像を作り上げていきます。</p>
+
+<p>今回は全部で5人のペルソナが候補として挙がりましたが、実際のユーザに多そうな属性のペルソナを中心にメインのペルソナ1人とサブのペルソナ2人を最終的に定義しました。</p>
+
+<p>対象となるユーザが狭くなりすぎないよう複数のペルソナを決めましたが、今後の議論での判断がぶれないよう、ペルソナの優先順位を決めておくことが重要です。</p>
+
+<p><img src="https://lh3.googleusercontent.com/mmJqPb-u0d60KhXhW2pGOpEBqEPzo0ApDsIwDbMToLxI77eHpylIxiIdZf-YTzMJ-8cQsMNnIqyGkLgzfqrUtwjS8DL5WLOnfM3cKncZiRP1dWOHYBhUMWsYVXkESgxT5YOnYps56WbuXYUm26hYCdbU9epaXwbP9APylmgtsAcik4Av1-2Sf3uGlJxpVEya4AFjOKjSDy7XJcebgUPYHlNifrXvVQI3itZ_5qjZrxsnGOT_m0hiqzvzPHKDnORwaf9Tid0sQBSGR3XC5WVhqTbp2MRD-zXwGLn33AwG6FO1B1fgkUExFhIORLEXWRRtBasEtIGO3CDBKYWIeZ0lEag3u7UHKHRvf9_taP4AxNf_g3AyskRxdmnnmABttJ_GZKVgFGUlUg7KDUG02PV-Q5NNJKCllGPIyzkJeq62-9W0m7vNnHijvicwTAtGrw4N34NXCemxBo6xA7M-qilnpvYlCmURo_vmV4Zm6R1ypfOr_47tNOUSJIVQPJ5zJO39lOVYLUIVDQIsPuGtcssdBLWtFdnlJ4jLMI2VJDBQH5fAUR1fTzrKW9ncGzsF7-_C-JUpE_mgWNfsvvmTb5tv1kkp8_IFrNxMWpbO4WSbvetbjyVo=w600" alt="ペルソナ作成" /></p>
+
+<p>実際にできたペルソナはこんな感じです。</p>
+
+<pre><code>★花輪誠一郎さん
+・属性情報
+   30代前半既婚男性
+   共働き
+   結婚2年目
+   IT系企業勤務
+   年収600-800万円
+   子供が1人産まれた
+・生活習慣
+   10時-22時で働いている
+   電車通勤
+   夜は友人と飲みに行く
+・ゴールや課題、チャレンジ
+   今住んでる家が手狭になって家探し中
+   生活に安定を求める
+・情報との接し方
+   通勤時間や昼休み、寝る前にスマホで情報収集
+   SmartNews、NewsPicksで情報収集
+・製品やサービスの選び方
+   友人やブロガーがおすすめする商品を買う
+・性格
+   めんどくさがり
+</code></pre>
+
+<h2 id="カスタマージャーニーマップの作成">カスタマージャーニーマップの作成</h2>
+
+<p>続いて、考えたペルソナがサービスを通して体験する項目を洗い出していきます。</p>
+
+<p>カウルは中古マンション購入アプリなので、<br />
+<strong>ユーザがカウルを認知する→会員登録→マンション購入のノウハウの学習→実際にマンションを探す→現地の見学→購入の契約</strong><br />
+の流れを細かく分け、ポストイットに書いていきます。具体的には「お部屋の提案を受ける」、「購入にかかる費用を把握する」くらいの粒度にまとめました。</p>
+
+<p>ここで大事なのは、既に実装されている機能にとらわれずに必要なステップを洗い出すことです。そうすることで現状で足りていない機能を明確にすることができます。</p>
+
+<p>書き出した後はポストイットを時系列に並べ、それぞれのイベント間の遷移を書き出しそれぞれを繋いでいきます。<br />
+今回は通常の遷移を青、ネガティブな要素を含む遷移をオレンジ（見ようとした部屋が既に売れていたのでまた探し直すなど）、離脱の可能性がある部分はピンクで色分けしました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/OR86Zt2xYvKaRiHbeJeLfjyCg3tmGGJoI_6br12l0XksFDZStiQYSCQCV5gGfx3a5Xg0FfeHNmRofbPGHZJd5D_0jDsJWjW-o6a9W-A-RHfZzgEcem_q582vuw4BwCFO1gMJHe9_kOc-lCy0unI10RNxHPeASjHkkUERK1laxKEKoNXryfv6nuVuv1IyOsilbwKSE1Mq3vsY_iT54rZyTjXblUQOA6dRXvNCSY-aQzhYNlkiCASo8PlVEXn5_wysDaR_W6C7Kw4kAjKnN0OVA2-8PTLJ_5FnIrGEGkxy-FHb5Dod9jdhIhrdOzYP66HvpSFCR05CvxHgBaYL9iJRTdOLRaAwKg17YkiXpZnoKU4jH42X8Y3EtApW3sSqz5MUVwTFelvxfAprS5w1OiUtvfdwXnYUeb7d3pX8yyO9ykVpUlnFckGRcF40ZOPmjFHyRb-cU7lxxQbfl9ehuGnfvZybgLOVMtzZSay-KK384xRMRyPhHKWIHhGObYLhOwz6Xx1pQTgAsPvnbivULhbMnW5G1w7KbrFtQSRvT4Y2wMpJW2IOzmqbiUajSoJ64ahndQOh5TQW7BMSy6QgGA_zXW3g_fApTx3IOSgH6Yt4chl2YIsU=w600" alt="カスタマージャーニーマップ" /></p>
+
+<h2 id="機能の洗い出しとメニュー構成の検討">機能の洗い出しとメニュー構成の検討</h2>
+
+<p>ここまで来たら具体的な機能に落とし込む作業に入ります。</p>
+
+<p>書き出したイベントに対応するページを書き出していきます。先程の例で言うと「お部屋の提案を受ける」というイベントは「物件提案ページ」、「購入にかかる費用を把握する」というイベントは「購入費用シミュレータページ」に対応します。</p>
+
+<p>その後似たページをカテゴライズしていき、下タブやグローバルメニューの中にどう配置していくかを話し合いながら、具体的なメニュー構成のアイデアを3つほど考えました。
+カウルのアプリの場合かなり機能数が多いため、ユーザが違和感なく機能を理解して使える構成を意識しました。また、よりユーザ目線を取り入れられるよう、複数のアイデアを出して今後ユーザヒアリングを通して絞り込んでいくというアプローチを取ることにしました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/-gDzsC_es0awgNit_3itly2IF7C_LFY2kfgZKICGi5ljrh1G3CNM-hszM9y-DCtBPCXzxFQi_sXUsY_gqvlg5SxKZpn0kkVVp2KqaTFTTo_hgy_jjI9PxHggZGED_w5FCCvMSK4gjj5kH7RDgmo-r7F6bt0IeHK7q2K_c4TyyKeD9YlJmeugQY1blMvqAmG420O0nVOskEtP4u_ZgtseusYLj_1X9nvu8VZNb_AS363U11bVhfCml8aMXkUHhiTsynBV0OnnG_4zQveuaM0sKKHRtOIrD9BL9wvK65O1gXhfvZnVRZdHSZ5RZl6UOtD1hjDGzTReZMOcRXOoSQ2U17UKO-wrjhAsm-QZOYNCRXCQc1riqDzt3FA6ATA1lW9bK_Bza1FkkhdKMoTRG5VzCHHhsnlNCqwugdYTMjD_wKa3HsHhg_nM-AYw4S3cAEhIviwXvMf-RysKaQKYhaVDk4fM295bJjWi0SnPF3gQXpS5xB8DAR2hvsUu9G8abcQiieioWAKke5LHM-V5j0Qto-1tG5t3IwpZXknsb3D_mA-BWaSgR_hx74f8KshzelOpANTYY3RLdVuvd531WNmuBfh2S-nIjlQi97OOlavIO9jxC-1Y5A=h600" alt="メニュー構成案①" /></p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回の開発合宿ではペルソナの定義、カスタマージャーニーマップの作成からメニュー構成のアイデア出しまでを行いました。</p>
+
+<p>今後は以下のようなステップでさらにUX設計を進めていく予定です。</p>
+
+<ol>
+<li>メニュー構成、メニュー文言に関するユーザヒアリング</li>
+<li>メニュー構成の決定</li>
+<li>UIモックの作成</li>
+<li>UIモックを使ったユーザヒアリング</li>
+<li>モックの改善&amp;ユーザへの再ヒアリング</li>
+<li>設計&amp;実装</li>
+</ol>
+
+<p>これから先のステップに関しても進捗がありましたら書いていこうと思います。<br />
+今後カウルのユーザビリティがどう改善されていくかお楽しみに！</p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f08%2fux-improvement%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%20UX%e8%a8%ad%e8%a8%88%e3%81%ae%e8%88%9e%e5%8f%b0%e8%a3%8f%20~%e3%83%9a%e3%83%ab%e3%82%bd%e3%83%8a%e3%83%bb%e3%82%ab%e3%82%b9%e3%82%bf%e3%83%9e%e3%83%bc%e3%82%b8%e3%83%a3%e3%83%bc%e3%83%8b%e3%83%bc%e3%83%9e%e3%83%83%e3%83%97%e7%b7%a8~&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f08%2fux-improvement%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f08%2fux-improvement%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f08%2fux-improvement%2f&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%20UX%e8%a8%ad%e8%a8%88%e3%81%ae%e8%88%9e%e5%8f%b0%e8%a3%8f%20~%e3%83%9a%e3%83%ab%e3%82%bd%e3%83%8a%e3%83%bb%e3%82%ab%e3%82%b9%e3%82%bf%e3%83%9e%e3%83%bc%e3%82%b8%e3%83%a3%e3%83%bc%e3%83%8b%e3%83%bc%e3%83%9e%e3%83%83%e3%83%97%e7%b7%a8~" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f08%2fux-improvement%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2016/09/17/ruby-kaigi-2016/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">RubyKaigi2016(@京都)に行ってきました！</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/17/ruby-kaigi-2016/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JvArBoA3p6NB1E5aZhZEappII9BeoswwPba3ZApAP3k4hwlG7IOiuDHVZbbn78kxwhOYc1SSR-SZT938RpM59LJMSo7rdNiWT7B6qc2UrZz1R9rtB9-hLkXVkTNYUsWPINE8TEBh3DGYjzt_vkw3Q7Z9QiFSUcAAH9-NrpUzgaQjYzQ4NRh8Fbc-DGpkI9V9VHNFwnfGnBKfBy9arLX-g8jiEZwRs2DHU7z8UX3KjJeqjm6qR9hCqTvD7VMyD26VeeTDNvGoUoqFl12GLFicI7kkFf4FhYyIeVowHq18Jan2ctyDzj6doFbVmCnqQqU67tSJvNKA7L2xjLc6HsBzhUIFEHVOmvV3joQqS5e9bkAyjRmbA93eyb4mJDMjhjnGo2lNfMsoVj8FRBzm9ITGrcgIg3NDIWglzhTpx6Xgv48iDe8OtUZQijmveGcIhZnebAIqRhDrhD2ppdXSpqD_q9k0ImSRYShB0j4jpqU-vdD97aXB4tqJOiaGbqdNPVMTmKyZCF119bvrw5pjQieTTHrulEVFhYDqxFkLZacBK2l4RKy-czFehPq2jw9HJf9ZUaQNSBtt6ufcA8ewWWQPE4OEwbWYRTB61CIEyI1sttld3Hbp=w1007-h446-no)" alt="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/17/ruby-kaigi-2016/" class="title">RubyKaigi2016(@京都)に行ってきました！</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-17 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-09-17</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/2E-oF0qTDFYUs4o_uFmYAo4uFsx2g1NISHg2UfiSvqfMDTxOeblr66t3Ml3xlJcz7_5ah5bZWl7WmZpiv6FmzI2SU2r5WzQKS52QMxyMMhXKdDtoGF1WIZ8Am33DfpLh00Cy9D4wlOAnO7DxNdbjadBonWy5P1W7BD1rCa52utStX1VmIqWSX5j5IK3m3Gx8-vN1Ub_VRk3ifMx2h1AwGlgtk2bpu7NSB3DUzB2rjsrLwh3n_LofmeiRHWPl8lTm5UJBUk6htWOKQCwCBsInMEN5-LnSndPIuGQ93gxP8LBQQy6hJXWX_aruMKL3EioA2kWyZlj0RxLK2AWUP6mVUloYoFJV0udlfd5cSfwpjlSlVAK36n7GGsZViWmN19psQ05ISZV0zqzHjXBLc7EpWDycP5WSHjmqr-N2Hgw7gVGfdPjFPWmLBjW9zDjo3Zz5hsZgT32V4NQWfZqiCuMvt5dxi7_g_TObIUPgm-zrzQwdTdnfVdkn3muNWqcZpLstHKarl73PrVrqAGYiSo5cv6xg6dcWYDciFXOQBccW-YdQ5JNNOwrkS4vrW-bLWtxw1yJqawUQ82V_7oUdgGXdmnClAuZzRCSnoMCfW4nY294QOg_FnQ=s800)" alt="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="title">ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-07 17:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-07</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/mAZo021Zuw_Zp4JraHEVArFU7fsHZRPq1jMm4NsBD8ngJRgAmLHDnEvVvQMK8up4u0mKsO_m_rem7PbvOqqFOK3fTDFik7JizaKkEug2sgIA0G4bUkKTByXAREiqToX5ozEJOAguMKDJhUAnxNhUNVH40EjoNb1J8q7kxWRYZLOItRQlbKm7ggcjOlAxCEI16R4X0_A1XakO4XEpcDbAGrhIdyMA1NWKHHQxuGgGxk6W0JbiR3u3oxpv3yaHjJV5ZBN9HfZ1OpcW6RTodfitUcFhXdjgCm28ghZe1drsVub8JWjjE6CiYAGs4urpJ2tsUI5PrgzD-GXr2RxLekbGBXV7QdOY0ZOfyBLDEHGt1tvD0KZBZAa05ap2VieImvtqxxe3ZIkeNdPMtIE4spLohoGzPV8ZQgpDrGm3epkUm1gXsDFi1-naiDIdvSyXAYZP-e4HWJ8Z5A0UMmjO1yURQ7MmDtVLCvb6QTD_ACW-bb2wneWQovyE6ZTWuA9ghDnYDaxpxEDUzZG2b4d7Xh_7dDIVGGyLTgkyJdZFN5cLIug7LpSK--0CcesoY_GqMbAqXcwkTSFNoAZ1om6XtrI3UjP3E4uN-xWBMEJSYczuYVJ-cf3TGQ=s800)" alt="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="title">【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-01 15:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-01</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/08/24/startup-dev/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/WkSw8U1JBcAZj4gMZ9FPrY1RoNaJo7K4W0hLtW6C1OU3IblfDnXawuGG63JugLLdDd-5SbGpuw8HOtb1vnc8mD-oqMB3J3qtac7a-IuYsqrULBlh2QCcTBbcjARyxzzLqXba7kn0myaXeiwScgW2WLdk8qnI0ppLMNM11kTpIgL4YtF62pu61DUGCxOcnZ70KTEg-6L7umixchtx4xId6TA3gqJyqGDfHEg8KHVaxeRXgY7UnJQqs0VC0V-ZU94niOEPvH5ZjNpenRIIycULl-cgaVL1Pjgji31GbBRgHfVcoy3Q8UiYF1Y_RNWEGafKJQowK5CbN8il1RFTvN7ncqnqgo5ehcrMOah5NZmcV3d6ff9-lBNz8W1awacc5NzU9vMXceZXInVPmVwtgo2sKTt0x184zxsRDHfFn9j-6ng3WnXugG-cS-ylChxoM6xF-v8Gnc6S7jyGVZXbN437VMhpqObrOcl5LIWUSL2PCgRy_SBV44a2Lcu9APPh85eDmn7trT-sQVqtdCQ1mdBPP3Yk5G3GYX0adF_20dsKlkiFSPckgLI5LRqd7UdPKvGT_dlQ2NwaCarZ7en36fgR1FRXDe3dxSw=w640-h480-no)" alt="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">
+                        project
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/08/24/startup-dev/" class="title">スタートアップエンジニアって何に時間を使っているの？</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-08-24 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-08-24</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

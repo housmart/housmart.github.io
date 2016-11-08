@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Work on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/work/</link>
-    <description>Recent content in Work on カウル Tech Blog</description>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/work/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 24 Aug 2016 21:25:46 +0900</lastBuildDate>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
     <atom:link href="http://techblog.housmart.co.jp/tags/work/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -15,9 +15,7 @@
       <pubDate>Wed, 24 Aug 2016 21:25:46 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/08/24/startup-dev/</guid>
-      <description>
-
-&lt;p&gt;こんにちは！&lt;br /&gt;
+      <description>&lt;p&gt;こんにちは！&lt;br /&gt;
 Housmartの宮永です。&lt;/p&gt;
 
 &lt;p&gt;スタートアップのエンジニアはリソースの都合もあるので
@@ -31,7 +29,9 @@ Housmartの宮永です。&lt;/p&gt;
 &lt;p&gt;ということで、&lt;span style=&#39;color:red&#39;&gt;実作業を全て記録している&lt;/span&gt;という弊社の特徴を活かして
 今回は&lt;span style=&#39;color:red&#39;&gt;実作業時間&lt;/span&gt;をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;背景-組織の話:73c321750c199f311b6645bb6a21c072&#34;&gt;＜背景＞組織の話&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;背景-組織の話&#34;&gt;＜背景＞組織の話&lt;/h2&gt;
 
 &lt;p&gt;弊社エンジニアは3人。&lt;br /&gt;
 メインプロダクトは中古マンション売買サービスの&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;で、皆で大事に大事に育てています。&lt;/p&gt;
@@ -41,7 +41,7 @@ Housmartの宮永です。&lt;/p&gt;
 &lt;p&gt;エンジニア3人はプロジェクトのプランニングからリリースまで幅広く業務を行います。&lt;br /&gt;
 （これがいわゆる「何でもやる」）&lt;/p&gt;
 
-&lt;h4 id=&#34;主なタスク:73c321750c199f311b6645bb6a21c072&#34;&gt;主なタスク&lt;/h4&gt;
+&lt;h4 id=&#34;主なタスク&#34;&gt;主なタスク&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;プロジェクトプランニング&lt;/li&gt;
@@ -58,14 +58,14 @@ Housmartの宮永です。&lt;/p&gt;
 &lt;p&gt;これだけ色々なことをやっているので、&lt;br /&gt;
 何にどれだけ使っているのかは&lt;span style=&#39;color:red&#39;&gt;記録でもしないかぎり&lt;/span&gt;把握しきれません。&lt;/p&gt;
 
-&lt;h2 id=&#34;作業の記録:73c321750c199f311b6645bb6a21c072&#34;&gt;作業の記録&lt;/h2&gt;
+&lt;h2 id=&#34;作業の記録&#34;&gt;作業の記録&lt;/h2&gt;
 
 &lt;p&gt;前述のとおり、弊社エンジニアは入社以来、全作業に対して実作業時間を記録しています。&lt;br /&gt;
 例えば「weekly MTGの参加」や「xxのbug fix」もそれぞれチケット化して記録します。&lt;br /&gt;
 ※&lt;a href=&#34;https://ja.atlassian.com/software/jira&#34;&gt;JIRA&lt;/a&gt;で全て管理しています。&lt;br /&gt;
 ※ご飯、筋トレ、昼寝は記録対象外。&lt;/p&gt;
 
-&lt;h2 id=&#34;エンジニアの作業実績-2016-01-2016-08:73c321750c199f311b6645bb6a21c072&#34;&gt;エンジニアの作業実績(2016 / 01 - 2016 / 08)&lt;/h2&gt;
+&lt;h2 id=&#34;エンジニアの作業実績-2016-01-2016-08&#34;&gt;エンジニアの作業実績(2016 / 01 - 2016 / 08)&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/cd4pAvEbM3NfTrcX1DELrhfF9oXpTP2z_Fob_Kovbw_yr4JUTAIfKmAzpcvT9l7GCVTgrYR66rhZxbe22JINTgdKsdkyf6PbJMroX4FN5y-4vJkgJDBTlnailOLBN7_k4Wp09qVW54DSLZ9mCj0HQMIGQAjwKLflaBNbkwmBOR21KSeLo0QLgFedHRosmc7NQzenmDRCmIYAO7-31Igor64cmaX0fsEwXGikzdjVu91jf-21IZrAcw4XjGDIqfeoG99WrsZQVcfjxvyEQzJ2iPPafYI1rc5D7APjwpJpoKaLmvUn4Ce9TGgpaAzxA3FUsuyli2NCXEcbcVYkApgl8SsCGvMr7I2LsNjk4_VYwIWy7apT7X-QmMf5OO0AoPkIdZ_LFBG0zk77jRhH-rCOMCtFg54fMPUA-r_BPMwn2sAP55fE_-M-i5MC3kaTv7-E8K4vA7O3d3-_RN3Kt46xDqCn4uyGM_dd2gSRPC3nElCXaIheA_ZhUQ_a9G1ue38sOWFbMpDR3qrwaRAaSfnBKk1dbFtDL9L9k7amHNHgbaCbEd6K8Klbna9I1M76FRIgop0hoUW9QB4NixszMVCz8QzGfPSa32E=w650-h669-no&#34;&gt;
 &lt;div style=&#34;font-size:12px;margin-top: -25px&#34;&gt;
@@ -108,7 +108,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 会社やプロダクトの成長に欠かせない大事な要素です。&lt;br /&gt;
 時期を見てかける時間も増やしていきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;結論-housmartエンジニアの業務とは:73c321750c199f311b6645bb6a21c072&#34;&gt;結論（Housmartエンジニアの業務とは？）&lt;/h2&gt;
+&lt;h2 id=&#34;結論-housmartエンジニアの業務とは&#34;&gt;結論（Housmartエンジニアの業務とは？）&lt;/h2&gt;
 
 &lt;p&gt;ということで作業時間から見たHousmartエンジニアの働き方は下図のようになります。&lt;br /&gt;
 &lt;img src=&#39;https://lh3.googleusercontent.com/FzBf0xEm9MHzaCuVlu8d9ALcMcrLnyZ3ktJPI3FFNS48iV1pCH6GcQ691ztwQZ_OyymkgzKxQn3dePYTmWf1ClG2Lnas1CehUdrjPEL9EaShXkDE19qBSw2B90fKXe4NpyBgXeiQreaauPfFoUT-rZArCmw7UPF3kMg0EaIADoO9VbEwBSQdvXHVyHjg9-6mIrZ0FqA1ENysOsY89c3N7XA6vIeOeI3TWW3mku6lDTJzxHvX-ceNvpd7ZA_JHmrSxA4bBDKaMpdY4JQWVs56TQlh62oOewKJ1YlYk2HUV_qJ8HLvSUxx4wVvARyGF7qFthsNrzhykNowNFz4r7kkL-PJdXHabZFnT_T7LkVB4QeBkkx8WJ10TSIEV2b7SIPbzO1UGIGLa4Q7Uhz3YibwX9fhss11ryOo8O3yAREN5baklINwq9ET-zGPhcB6lj30oHej3EMs7jb_w9kZHETz0P_ZFEE3AqhQH413e09vboqJpSuROc2oMaCAJ9IIg0bkLYhSQR3B_FkCOeGan9a0HfnFaVU1qYXAXJSBNZWZ8uKn2onAZ76vCptynJ90C63_YXNkpDZu5LjElaWKTU2C8_AJ5dm6eXo=w592-h310-no&#39;&gt;&lt;/p&gt;
@@ -117,8 +117,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 ぜひご連絡ください！&lt;br /&gt;
 お待ちしております。&lt;/p&gt;
 
-&lt;p&gt;akihisa.miyanaga@housmart.com&lt;/p&gt;
-</description>
+&lt;p&gt;akihisa.miyanaga@housmart.com&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -139,7 +138,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 ってことで試しに今回は環境を変えて熱海でスプリントをしてきました。&lt;br /&gt;
 &lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;合宿スケジュール:c24eb79dee0ca4c00431511210782430&#34;&gt;合宿スケジュール&lt;/h2&gt;
+&lt;h2 id=&#34;合宿スケジュール&#34;&gt;合宿スケジュール&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/8kmxKjIRDUCCHAgmF-3MWOq8VzEcZzw2Z1kD_4BE2H6R0OD8no8_UFnT6uHwdLvXkcA_OL4qtDHcXCWzateKftT0SsWp2z1SlpRPh4b9rq4_te4qDtOCnVlVqT59rA77-fLDZ8GrVXaXCIx72lsHCkEMTQkkg_-Y5ZJX6sINA0t8znSfvkIhPvqYUq7LBiubXM6SFu0R5KYIpPYWIrXYB1OVr0ro_HjOgUFrU451Dap4Q_YNMzel1v35XzQ0toNOuzGl2Goc0G04-8Whr66ibdtt9WSPyIym_HGXoD9UarIB0Jth2jGdPkk_84D8hm4i48xcc5QjVRY8ggpUikHLLZGXMBPkZDMoeKRO8_7xQvlD8ELmgjcG614UFS9aILPdfD-WD5Xk2L6_6dAs9WgEwGTVV2dC0MXbgSumasl5Y6xn1B2CNUkTSO-BApkerqcA5xIPK46d8yg6YzqO55bAiscEAEKMtYd7clTS_f5q_ObT-mRFOww9U6S06aBtH8KLv_dF2lT0MLEbkcqYWsP8zDDv-eQDLwegH7rAVGLQtaPZnbjSWano7ddeNssSqOpjnIN4=w650-h453-no&#39; title=&#39;スプリントスケジュール&#39; alt=&#39;１週間の流れ&#39;&gt;&lt;/p&gt;
 
@@ -151,7 +150,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;仕事場としての熱海:c24eb79dee0ca4c00431511210782430&#34;&gt;仕事場としての熱海&lt;/h2&gt;
+&lt;h2 id=&#34;仕事場としての熱海&#34;&gt;仕事場としての熱海&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/xm08OMtE9OqAOhCo8m0gjzUSnweeANNMt7ulP0DyrQoVQbeNZplB9zurd3LKLR-7S7O0NmuSjXuYwA-NFEkDXn064YtDGHpnSCsXn8fVSyuXER2hFWGKwBis7x5N4aYikyrfqFZFkEwixRYq56VKU1ISQMbIXqVHhZDv-4XoC5fnws5OoBXG3vqhda34JGBg8a2EcA0Lyi3uXyFF8P4zLwxcpCi_JdwN4WevyDlejzM8RTF5Wvll3MXeWkzawJqiE-SRvWqRhP0LfvY5wEyDHT9rUQS7sNn7zKnuzY0Ah53rTAjWOreo17Wm5tSlUOFqFIc48xmQrxM2_t9n9g4qkDdFPO0LSIKL0BGeuvdeTZ4lam8pnW9e98aMsF64N6GGp5m-hqGOe_NVcM6ifcW9DY7OMMijHmsq3TOMmh15vjqk2HglmGqgNgmf5VMjLioxr-1ihHq3mc9WmmM1tUcBZpeXESl5nQ7QwfESuqOUO2vcweOzuvvdnRs-sf62homk7etSewN12LV68QxpcGT9JKGcV_7E_vtWTp-wsRT7diNb3Y7eh6_7h8XUHiECPBRRHenl=w650-h958-no&#34; title=&#34;atami_sea&#34; alt=&#34;熱海は景色が最高でした。&#34;&gt;&lt;/p&gt;
 
@@ -166,7 +165,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 &lt;p&gt;日中のネット環境については何も考えずに行きましたが、たまたまWi-Fiが利用できるカフェを見つけられたので
 大変お世話になりました。（&lt;a href=&#34;http://caferoca.jp/&#34;&gt;CAFERoCA&lt;/a&gt;さん連日ありがとうございました。）&lt;/p&gt;
 
-&lt;h2 id=&#34;所感:c24eb79dee0ca4c00431511210782430&#34;&gt;所感&lt;/h2&gt;
+&lt;h2 id=&#34;所感&#34;&gt;所感&lt;/h2&gt;
 
 &lt;p&gt;そんな熱海スプリントを振り返ると、&lt;/p&gt;
 
@@ -187,7 +186,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 
 &lt;p&gt;などなど勢いで出発したため、準備不足を露呈した結果に。。&lt;/p&gt;
 
-&lt;h2 id=&#34;special-thanks:c24eb79dee0ca4c00431511210782430&#34;&gt;Special thanks&lt;/h2&gt;
+&lt;h2 id=&#34;special-thanks&#34;&gt;Special thanks&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#39;http://caferoca.jp/wp-content/themes/roca/imgs/RoCA_img.jpg&#39; width=650&gt;&lt;/p&gt;
 
@@ -214,7 +213,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 &lt;p&gt;Airbnbにも出ているらしいのでぜひ興味のある方はご利用くださいm(__)m&lt;br /&gt;
 &lt;a href=&#34;https://www.airbnb.jp/rooms/4248292&#34;&gt;https://www.airbnb.jp/rooms/4248292&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:c24eb79dee0ca4c00431511210782430&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はカウル開発チームの開発合宿について紹介させていただきました。&lt;br /&gt;
 カウルでの働き方としても新たな試みとなり、とてもよかったので、これからも定期的に実施したいと思います！&lt;/p&gt;
@@ -237,7 +236,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 &lt;br&gt;異なるものだと思いますので、このブログでもまずはチーム体制など
 &lt;br&gt;開発手法の採用背景となるところから説明いたします。&lt;/p&gt;
 
-&lt;h2 id=&#34;チーム体制-サービスについて:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;チーム体制、サービスについて&lt;/h2&gt;
+&lt;h2 id=&#34;チーム体制-サービスについて&#34;&gt;チーム体制、サービスについて&lt;/h2&gt;
 
 &lt;p&gt;カウル開発には５人のメンバーがいます。&lt;/p&gt;
 
@@ -254,14 +253,14 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 &lt;br&gt;開発すべきこと（開発優先度）は日々変化しかなり流動的なものとなってます。
 &lt;br&gt;そのため、要件リストの優先度付けをこまめに行う必要があります。&lt;/p&gt;
 
-&lt;h2 id=&#34;開発サイクル:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;開発サイクル&lt;/h2&gt;
+&lt;h2 id=&#34;開発サイクル&#34;&gt;開発サイクル&lt;/h2&gt;
 
 &lt;p&gt;上記のような背景に伴い、
 &lt;br&gt;&lt;b&gt;「少ない人数で要件の流動性に対応しながら開発する」&lt;/b&gt;
 &lt;br&gt;ことが求められているため、弊社では&lt;b&gt;スクラム開発&lt;/b&gt;を採用しています。
 &lt;br&gt;要求の変化に対応するため、１スプリント&lt;b&gt;１週間&lt;/b&gt;と恐ろしく短いです。&lt;/p&gt;
 
-&lt;h3 id=&#34;スクラム開発の流れ-スプリントフロー:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;スクラム開発の流れ（スプリントフロー）&lt;/h3&gt;
+&lt;h3 id=&#34;スクラム開発の流れ-スプリントフロー&#34;&gt;スクラム開発の流れ（スプリントフロー）&lt;/h3&gt;
 
 &lt;p&gt;大まかな流れとしては&lt;/p&gt;
 
@@ -276,7 +275,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 
 &lt;p&gt;&lt;p&gt;各曜日の作業詳細&lt;/p&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;月曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;月曜&lt;/h4&gt;
+&lt;h4 id=&#34;月曜&#34;&gt;月曜&lt;/h4&gt;
 
 &lt;p&gt;「プランニング（バックログリファインメント、スプリント設計、仕様検討、設計）」&lt;br /&gt;
 JIRA上で管理しているバックログチケットを整理、優先度付けして、1スプリントのゴールを決めます。&lt;br /&gt;
@@ -287,13 +286,13 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 遅くても火曜日から開発のため、仕様や設計に関する課題はこの日に全て話し合います。&lt;br /&gt;
 タスク化した後、タスクを割り振ってこの日は終了です。&lt;/p&gt;
 
-&lt;h4 id=&#34;火曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;火曜&lt;/h4&gt;
+&lt;h4 id=&#34;火曜&#34;&gt;火曜&lt;/h4&gt;
 
 &lt;p&gt;「開発！！開発！！開発！！」&lt;br /&gt;
 それぞれ割り振ったタスクを元に作業を進める。今は主に開発案件が多いので、
 大体火曜は開発が中心。小さな開発案件の場合はテスト通過後、その日にデプロイすることもあります。&lt;/p&gt;
 
-&lt;h4 id=&#34;水曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;水曜&lt;/h4&gt;
+&lt;h4 id=&#34;水曜&#34;&gt;水曜&lt;/h4&gt;
 
 &lt;p&gt;「すいすい水曜日」&lt;br /&gt;
 スタートアップ企業とは言え、投資は大事ということで水曜は技術投資の日にしています。&lt;br /&gt;
@@ -303,7 +302,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Oc0DHhyDd-dYSIDCg8WJwcnEoLDA7HfirWqfh3ZkjzJam-EUhHAgMEtmjkgeWUPHN52NdwMxB6A=w650&#39; title=&#39;マックスが楽しそう&#39;&gt;
 &lt;a href=&#34;https://theta360.com/ja/&#34;&gt;theta&lt;/a&gt;で遊ぶマックス&lt;/p&gt;
 
-&lt;h4 id=&#34;木曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;木曜&lt;/h4&gt;
+&lt;h4 id=&#34;木曜&#34;&gt;木曜&lt;/h4&gt;
 
 &lt;p&gt;「テスト！テスト！デプロイ！」&lt;br /&gt;
 スプリントの終了が迫っている！ということで
@@ -314,7 +313,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 &lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/XtYAMXjVhs_ArSPX7-eOCxlK24TNueuM6-fNl230x5CYSwf8WdSXKSqo8I5Fl4O02l-cIVxtKGyiFZw1B_lGf4WmAbgsNQAkjbkYp58fidiK03mg5qEHtZxW5f8wTzSEDqokpTJ8L9wwi8GPsH_dWAEyy243N3Qk4yFrFxsAwXbNEBvTHmq06BbmpvfctuEJrzzlVzLoTHkVJ6W3_sP4w7h8QBAx3CvOOAUZUFSLuny6L6Rlrcmf_WMy3sOgeJ_2Laqk_SBwmjepY5q7PWYGh-rZ2eA4WE6-kjzBHZme7NJJyVGZ4jf2jHgUFLQLEemwNi_Z7BnoNiLvU3c8lvoiWNsZxqgJrJaCcTkRQ67sqnmlVnqpKMfJOYPC15stCkRiLAP8AUosvORxAucNq_k3ljohrkf2baLoIoJfvs_R7_6UbsvrCdMeLbVy0i7ho4sXuiByBz8SgnmF29EdWf6Y4igQGkJCbsjNlhuZBAnDPWeWKRZQxTHMc9ClvOQZWkfB7t2Cd2q3w6O_5a32GR-Pie357lscympWU9PcPX1ZChbckp_Ah0xjrv1E3FKjSuSmKIM=w650&#39; title=&#39;プロダクトオーナーが喜んだ顔&#39;&gt;&lt;br /&gt;
 待ちわびたリリースにプロダクトオーナーもウキウキ&lt;/p&gt;
 
-&lt;h4 id=&#34;金曜:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;金曜&lt;/h4&gt;
+&lt;h4 id=&#34;金曜&#34;&gt;金曜&lt;/h4&gt;
 
 &lt;p&gt;「振り返り＆改善デー」&lt;br /&gt;
 １週間のスプリントを振り返ります。振り返りで上がった課題のうち、１日でできる改善案を皆で検討します。
@@ -324,18 +323,18 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 
 &lt;hr /&gt;
 
-&lt;h3 id=&#34;スクラム開発を通して:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;スクラム開発を通して&lt;/h3&gt;
+&lt;h3 id=&#34;スクラム開発を通して&#34;&gt;スクラム開発を通して&lt;/h3&gt;
 
 &lt;p&gt;実践期間だいぶ短いですが、スクラム開発を振り返ります。&lt;/p&gt;
 
-&lt;h4 id=&#34;良い点:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;（良い点）&lt;/h4&gt;
+&lt;h4 id=&#34;良い点&#34;&gt;（良い点）&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;限られたリソースの中で、効率よく優先度の高いものから対応できている&lt;/li&gt;
 &lt;li&gt;1週間を1スプリントにしているので生活リズムが浸透しやすくメリハリのある日々が過ごせる（月曜は話しあいの日、水曜は自由な日などなど）&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;悪い点-改善点:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;（悪い点、改善点）&lt;/h4&gt;
+&lt;h4 id=&#34;悪い点-改善点&#34;&gt;（悪い点、改善点）&lt;/h4&gt;
 
 &lt;ul&gt;
 &lt;li&gt;チーム全体の生産性の向上までは振り返られてはいない。（本気では取り組めていない）
@@ -348,7 +347,7 @@ JIRA上で管理しているバックログチケットを整理、優先度付�
 やりたいことがどんどん増えてなかなか消化が追いつきません。&lt;br /&gt;
 (生産性の向上が今後の課題です)&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:59e6fbbe48cf3c93d0fcd90023c8e617&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はカウル開発チームの開発手法について紹介させていただきました。&lt;br /&gt;
 おかげさまでユーザ様も増えてきており、やることはたっぷりありますが、&lt;br /&gt;

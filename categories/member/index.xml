@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Member on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/categories/member/</link>
-    <description>Recent content in Member on カウル Tech Blog</description>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/categories/member/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 08 Feb 2016 17:45:55 +0900</lastBuildDate>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
     <atom:link href="http://techblog.housmart.co.jp/categories/member/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -15,9 +15,7 @@
       <pubDate>Mon, 08 Feb 2016 17:45:55 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B/</guid>
-      <description>
-
-&lt;h2 id=&#34;ブログ始めました:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;ブログ始めました。&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;ブログ始めました&#34;&gt;ブログ始めました。&lt;/h2&gt;
 
 &lt;p&gt;はじめまして！カウル開発チームの宮永と申します。&lt;/p&gt;
 
@@ -30,7 +28,9 @@
 
 &lt;p&gt;今回は第１回ということで自己紹介を。&lt;/p&gt;
 
-&lt;h2 id=&#34;自己紹介:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;自己紹介&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;自己紹介&#34;&gt;自己紹介&lt;/h2&gt;
 
 &lt;p&gt;公式的な自己紹介はカウルのTOP（ &lt;a href=&#34;https://kawlu.com/market&#34;&gt;https://kawlu.com/market&lt;/a&gt; ）にありますので、
 そちらとは異なるフランクな内容で行きたいと思います。&lt;/p&gt;
@@ -44,7 +44,7 @@
 弊社の社員が勢揃いした写真です。
 &lt;div style=&#34;margin-bottom:100px&#34;&gt;&lt;/div&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;開発の話へ:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;開発の話へ。。&lt;/h2&gt;
+&lt;h2 id=&#34;開発の話へ&#34;&gt;開発の話へ。。&lt;/h2&gt;
 
 &lt;p&gt;このままだとサッカーブログになりそうなので、開発の話に戻ります。&lt;/p&gt;
 
@@ -66,17 +66,16 @@
 頻繁にMTGを行い、カウルの改善点を洗い出ししています。
 &lt;div style=&#34;margin-bottom:100px&#34;&gt;&lt;/div&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;最近ハマっていること:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;最近ハマっていること&lt;/h2&gt;
+&lt;h2 id=&#34;最近ハマっていること&#34;&gt;最近ハマっていること&lt;/h2&gt;
 
 &lt;p&gt;弊社のオフィスは渋谷にあるのですが、とにかく飲食店が豊富で毎日昼食に困りません。
 最近は社員皆で国際料理のお店巡りが流行ってます。
 （ペルー、オーストラリア、ブラジルなどなど渋谷にはとにかく多くの国際料理店が存在します。）&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に:b173e18a5e41cddcf9dae1b1b53c3f18&#34;&gt;最後に&lt;/h2&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
 &lt;p&gt;今回はこのくらいで終わりとさせていただきます。
-引き続き、皆様どうぞよろしくお願いします。&lt;/p&gt;
-</description>
+引き続き、皆様どうぞよろしくお願いします。&lt;/p&gt;</description>
     </item>
     
   </channel>

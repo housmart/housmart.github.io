@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>スタートアップのための「お金と時間がかからない」ログ分析基盤 &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.17" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -27,6 +27,7 @@
 立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。
 
 そこで今回は、まだユーザが少ないフェーズでも 「お金と時間をあまりかけずに」 導入できるログ分析基盤について、カウルでの事例をご紹介いたします。
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" />
@@ -54,6 +55,7 @@
 立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。
 
 そこで今回は、まだユーザが少ないフェーズでも 「お金と時間をあまりかけずに」 導入できるログ分析基盤について、カウルでの事例をご紹介いたします。
+
 ">
 
 
@@ -64,7 +66,7 @@
 
 
 
-<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,work," />
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,ux,work," />
 
     
 
@@ -81,6 +83,7 @@
 立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。
 
 そこで今回は、まだユーザが少ないフェーズでも 「お金と時間をあまりかけずに」 導入できるログ分析基盤について、カウルでの事例をご紹介いたします。
+
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
@@ -197,12 +200,12 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        16
+        17
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          17
+          18
         
         <span>
             Tags
@@ -339,21 +342,21 @@
 
 
             <div class="article-entry" itemprop="articleBody">
-                
-
-<p>Housmart高松です。</p>
+                <p>Housmart高松です。</p>
 
 <p>「ログ分析基盤」というと、すでにかなり大きいサービスでの事例がSlideShareなどで共有されているのをよく目にしますが、
 立ち上がったばかりのサービスに適用するには&rdquo;too much&rdquo;な内容となっていることが多いかと思います。</p>
 
 <p>そこで今回は、まだユーザが少ないフェーズでも <strong>「お金と時間をあまりかけずに」</strong> 導入できるログ分析基盤について、カウルでの事例をご紹介いたします。</p>
 
+<p></p>
+
 <p>小規模のサービスであってもログをしっかりと収集・分析してサービスの改善に役立てていくことは非常に大切なことです。<br />
 一方で、データ収集のためのJavascriptの開発やWebサーバの構築と管理、データストアやデータ処理基盤の選定や設定などに専属で人を割くことができないのもスタートアップの実情ではないでしょうか。</p>
 
 <p>そこでカウルでは <strong>安価に利用できるSaaSをいくつか組み合わせることで、簡単に始められて、かつ要求を十分にみたせる環境を構築</strong> しています。</p>
 
-<h2 id="前提:a22806189072a20136e84a4adca315d5">前提</h2>
+<h2 id="前提">前提</h2>
 
 <p><a href="https://kawlu.com/market">カウル</a>は中古マンションをお得に購入・売却できるWeb不動産サービスを運営しています。<br />
 現状としては、サービス開始から3ヶ月で登録ユーザ数が1000人弱、日々&lt;100ユーザがアクティブにサイトに訪れています。</p>
@@ -361,7 +364,7 @@
 <p>また、今回の選定にあたっては前職での知見をもとにデータの具体的な利用用途やシステムの運用コストまで考慮に入れるよう心がけました。<br />
 （前職では国内大手のECサイトでログデータの広告利用を主な業務としていました。過去データを使った広告クリック率の予測、レコメンドロジックを用いたパーソナライズド広告、その他データマーケティング活動の支援など）</p>
 
-<h2 id="全体概要:a22806189072a20136e84a4adca315d5">全体概要</h2>
+<h2 id="全体概要">全体概要</h2>
 
 <p>カウルではユーザ獲得の流れとして</p>
 
@@ -383,7 +386,7 @@
 
 <p>の大きく2つに分けて別々のサービスを利用しています。</p>
 
-<h2 id="1-集客からトライアルユーザになるまで:a22806189072a20136e84a4adca315d5">1. 集客からトライアルユーザになるまで</h2>
+<h2 id="1-集客からトライアルユーザになるまで">1. 集客からトライアルユーザになるまで</h2>
 
 <p>このステップでは主に以下の切り口でデータを見ています。</p>
 
@@ -404,7 +407,7 @@
 
 <p>GAは利用している方も多いと思うので詳細な説明は割愛しますが、中でもおすすめしたい設定をいくつか挙げてみます。</p>
 
-<h3 id="google-tag-manager-gtm-の利用:a22806189072a20136e84a4adca315d5">Google Tag Manager（GTM)の利用</h3>
+<h3 id="google-tag-manager-gtm-の利用">Google Tag Manager（GTM)の利用</h3>
 
 <p>GTMはGoogleが提供する無料のタグコンテナツール（タグを一元管理でき、色々な条件に合わせてタグを出し分けてくれるツール）です。<br />
 無料にもかかわらずタグのプレビュー機能やバージョン管理もついており、頻繁にコードを書き換えるスタートアップの環境においてアプリケーションと各種トラッキングタグを非同期にメンテナンスできることは大きなメリットだといえるでしょう。<br />
@@ -414,7 +417,7 @@ GAのタグに変数を渡す際に「data layer」という層を経由する�
 <a href="https://support.google.com/tagmanager/answer/6102821?hl=ja">Google タグマネージャヘルプ - Google タグマネージャの概要</a><br />
 <a href="http://analyze.siraberu.info/post-521/">GoogleタグマネージャでGoogleアナリティクスのタグを管理する方法！</a></p>
 
-<h3 id="カスタムキャンペーンパラメータの利用:a22806189072a20136e84a4adca315d5">カスタムキャンペーンパラメータの利用</h3>
+<h3 id="カスタムキャンペーンパラメータの利用">カスタムキャンペーンパラメータの利用</h3>
 
 <p>各種広告の効果測定をキャンペーンごとに切り分けるためにGoogle Analyticsが公式でサポートしているパラメータです。<br />
 通常は広告キャンペーンの効果測定に使うように説明されていますが、カウルでは自社メディアからの流入の切り分けにもこのパラメータを使用しています。<br />
@@ -425,7 +428,7 @@ GAのタグに変数を渡す際に「data layer」という層を経由する�
 <a href="https://support.google.com/analytics/answer/1033863?hl=ja&amp;ref_topic=1032998">Google アナリティクスヘルプ - カスタム キャンペーン</a><br />
 <a href="https://www.techloco.co.jp/blog/content/41">Google アナリティクスで広告からのアクセスを計測する方法</a></p>
 
-<h3 id="ランディングページのスクロールの計測:a22806189072a20136e84a4adca315d5">ランディングページのスクロールの計測</h3>
+<h3 id="ランディングページのスクロールの計測">ランディングページのスクロールの計測</h3>
 
 <p>カウルでは扱う商品が高額であるということもあり、ランディングページでより多くの情報を提供して安心してトライアルユーザになってもらうために、かなり縦長のランディングページを用意しています。<br />
 縦長のランディングページの効果測定と改善においては、どのセクションにどのくらいユーザが滞在したか、どこまでスクロールして見てもらえたかが重要な指標となってきます。<br />
@@ -435,7 +438,7 @@ GAのタグに変数を渡す際に「data layer」という層を経由する�
 <a href="http://scrolldepth.parsnip.io/">http://scrolldepth.parsnip.io/</a><br />
 <a href="https://www.youtube.com/watch?v=UoOh58pvqG4">How to install Scroll Depth Tracking with Google Tag Manager [動画]</a></p>
 
-<h3 id="クロスデバイスビューの設定:a22806189072a20136e84a4adca315d5">クロスデバイスビューの設定</h3>
+<h3 id="クロスデバイスビューの設定">クロスデバイスビューの設定</h3>
 
 <p>トライアル期間中のユーザに対する深い分析は、後半で記載する別のSaaSを利用して行っているのですが、大まかな傾向を見るのにはGoogle Analyticsのクロスデバイスビューも有効です。<br />
 GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、クロスデバイスでのユーザトラッキングを可能にします（同一のユーザがPCとスマホでアクセスした場合にも同一ユーザとみなしてレポートが見られます）。<br />
@@ -447,7 +450,7 @@ GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、
 
 <p>GAまわりのドキュメントは日本語でたくさんあるのですが、内容が古いものも散見されるため、おかしいなと思ったら公式のドキュメントを参照することをおすすめします。</p>
 
-<h2 id="2-トライアルユーザになってから本登録ユーザになるまで:a22806189072a20136e84a4adca315d5">2. トライアルユーザになってから本登録ユーザになるまで</h2>
+<h2 id="2-トライアルユーザになってから本登録ユーザになるまで">2. トライアルユーザになってから本登録ユーザになるまで</h2>
 
 <p>続いて、トライアルユーザが本ユーザになるまでのデータ収集と活用について説明します。<br />
 このステップでは主に以下の内容でデータを分析しています。</p>
@@ -461,7 +464,7 @@ GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、
 
 <p>ここでは <strong><a href="https://keen.io/">keen.io</a>というログ収集基盤を提供しているSaaS</strong> を、周辺のツールと組み合わせて使用しています。</p>
 
-<h3 id="keen-ioとは:a22806189072a20136e84a4adca315d5">keen.ioとは</h3>
+<h3 id="keen-ioとは">keen.ioとは</h3>
 
 <p><img src="/images/20160419/keenio_logo.png" title="keenio_logo"></p>
 
@@ -479,7 +482,7 @@ keen.ioのサイトからアカウント作成後、<a href="https://github.com/
 <p>また、APIのクライアントも各種言語（CURL / JS / RUBY / PYTHON / PHP / JAVA / .NET）でサポートされているため、自社のRailsアプリからログを記録したり、JavascriptとHTMLで自作のダッシュボードも簡単に作成することができます。<br />
 （APIドキュメントは<a href="https://keen.io/docs/api/#extract-to-csv-file">こちら</a>）</p>
 
-<h3 id="keen-ioを採用した理由:a22806189072a20136e84a4adca315d5">keen.ioを採用した理由</h3>
+<h3 id="keen-ioを採用した理由">keen.ioを採用した理由</h3>
 
 <p>以下の（わがままな）要求や要件をすべてクリアしていたのがkeen.ioを採用した理由です。</p>
 
@@ -503,14 +506,14 @@ keen.ioのサイトからアカウント作成後、<a href="https://github.com/
 
 <p>（TreasureDataは上記をほとんどクリアしていて非常に魅力的なのですが、立ち上げたばかりのサービスで導入するには料金が少々お高いようでしたので今回の採用は見送りました。）</p>
 
-<h3 id="費用について:a22806189072a20136e84a4adca315d5">費用について</h3>
+<h3 id="費用について">費用について</h3>
 
 <p>気になるお値段ですが、一ヶ月あたりに記録するイベント数により料金が決まる仕組みになっており、サポートが無いプランであれば <strong>月間5万イベントまでは無料</strong> で利用できます。</p>
 
 <p>無料枠を超えても10万イベント/月までは月額＄20、100万イベント/月までは月額＄125と安価で、クエリングに対しての課金は発生しないなど、自前でサーバを構えることを考えると導入するコストメリットは十分にあるのではないかと思います。<br />
 （料金について詳しくは<a href="https://keen.io/plans/self-service/">こちら</a>）</p>
 
-<h3 id="sendgrid-メール配信saas-との連携:a22806189072a20136e84a4adca315d5">Sendgrid（メール配信SaaS）との連携</h3>
+<h3 id="sendgrid-メール配信saas-との連携">Sendgrid（メール配信SaaS）との連携</h3>
 
 <p>もう一つおすすめしたい機能は<a href="https://sendgrid.kke.co.jp/">Sendgrid</a>との連携です。<br />
 Sendgridはメールの配信から開封・クリックの計測までを一括して行ってくれるSaaSです。加えてメールがスパム判定されていないかを確認する機能や、ユーザごとのメール配信停止機能を提供しています。</p>
@@ -546,7 +549,7 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
 2016-04-06T09:41:04.784Z        pageview        https://kawlu.com/library
 </code></pre>
 
-<h2 id="まとめ:a22806189072a20136e84a4adca315d5">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 
 <p>今回は立ち上げたばかりのサービスでも導入できるログ分析基盤についてご紹介いたしました。<br />
 新規ユーザ獲得までの分析にはマーケティング方面に強いGoogle Analyticsを、無料ユーザを有料会員化するためのより深い分析にはkeen.ioを導入しています。</p>
@@ -560,7 +563,6 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
 <a href="http://www.turnyourideasintoreality.com/2016/02/kauru/">REALITY - 不動産売買市場をディスラプトするHousmart、不動産を買いたい人が本当にハッピーになるサービス 「カウル」をローンチ。</a></p>
 
 <p><a href="https://kawlu.com/market">【カウル】仲介手数料無料の中古マンション売買サービス</a></p>
-
             </div>
             <div class="hatena_button">
   <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップのための「お金と時間がかからない」ログ分析基盤" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
@@ -621,6 +623,31 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="スタートアップのための「お金と時間がかからない」ログ分析基盤" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -722,31 +749,6 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="スタートアップのための「お金と時間がかからない」ログ分析基盤" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">
-                        operation
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="title">なぜdevelopブランチは必要なの？</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -771,7 +773,7 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
                     design
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -850,7 +852,7 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
                     design
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -952,6 +954,13 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
                     work
                 </a>
@@ -1004,6 +1013,8 @@ Sendgridはメールの配信から開封・クリックの計測までを一括
         <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
         
         <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
         
         <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
         

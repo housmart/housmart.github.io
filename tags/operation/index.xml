@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Operation on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/operation/</link>
-    <description>Recent content in Operation on カウル Tech Blog</description>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/operation/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 28 Mar 2016 10:34:34 +0900</lastBuildDate>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
     <atom:link href="http://techblog.housmart.co.jp/tags/operation/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -15,9 +15,7 @@
       <pubDate>Mon, 28 Mar 2016 10:34:34 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/</guid>
-      <description>
-
-&lt;p&gt;Housmartの松江です。&lt;/p&gt;
+      <description>&lt;p&gt;Housmartの松江です。&lt;/p&gt;
 
 &lt;p&gt;Railsでアプリケーションを開発していると、&lt;strong&gt;管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと&lt;/strong&gt; や、
 &lt;strong&gt;分割したプロジェクト間の管理・同期が煩雑になってしまうこと&lt;/strong&gt; ありますよね。&lt;/p&gt;
@@ -29,7 +27,9 @@
 &lt;li&gt;&lt;strong&gt;分割後はプロジェクト間で必要なロジックを共有したい&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;複数のrailsプロジェクト間でロジックを共有したい状況:186562e261a7107c8b7de063b569e16d&#34;&gt;複数のRailsプロジェクト間でロジックを共有したい状況&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;複数のrailsプロジェクト間でロジックを共有したい状況&#34;&gt;複数のRailsプロジェクト間でロジックを共有したい状況&lt;/h2&gt;
 
 &lt;p&gt;不動産を扱うカウルの裏側では以下のような多種多様なデータを扱っています。&lt;/p&gt;
 
@@ -57,7 +57,7 @@
 
 &lt;p&gt;カウルではこの状況を &lt;strong&gt;Gitのsubmodule&lt;/strong&gt; を用いて改善しています。&lt;/p&gt;
 
-&lt;h2 id=&#34;実際の構成:186562e261a7107c8b7de063b569e16d&#34;&gt;実際の構成&lt;/h2&gt;
+&lt;h2 id=&#34;実際の構成&#34;&gt;実際の構成&lt;/h2&gt;
 
 &lt;p&gt;Gitのsubmoduleとは1つのGitレポジトリの中に、他のGitレポジトリも含めてバージョン管理を行う機能です。&lt;/p&gt;
 
@@ -90,7 +90,7 @@ rails_app_2
 
 &lt;p&gt;また、図では簡単化のためにモデルクラスのみが共有されていますが、実際には他のクラスも共有されています。&lt;/p&gt;
 
-&lt;h3 id=&#34;submoduleの難しさ:186562e261a7107c8b7de063b569e16d&#34;&gt;submoduleの難しさ&lt;/h3&gt;
+&lt;h3 id=&#34;submoduleの難しさ&#34;&gt;submoduleの難しさ&lt;/h3&gt;
 
 &lt;p&gt;submoduleでの運用を開始した当初、以下の部分で使い難さがありました。&lt;/p&gt;
 
@@ -128,7 +128,7 @@ project_dir $ git push
 
 &lt;p&gt;上記のような2つのコミットがプルリクエストに並んでいる状態で片方をマージすると、もう一方で必ずコンフリクトが起きます。後からマージされるコミットの内容は&lt;code&gt;submodule内のコミット&amp;quot;4&amp;quot;から◯◯へ参照を変えるコミット&lt;/code&gt;でなければならないからです。&lt;/p&gt;
 
-&lt;h2 id=&#34;submoduleを簡単に運用するためのbot運用:186562e261a7107c8b7de063b569e16d&#34;&gt;submoduleを簡単に運用するためのbot運用&lt;/h2&gt;
+&lt;h2 id=&#34;submoduleを簡単に運用するためのbot運用&#34;&gt;submoduleを簡単に運用するためのbot運用&lt;/h2&gt;
 
 &lt;p&gt;Railsのmodel層を共有できるようになり当初の悩みを解決できた一方で発生した、Gitでの管理上の不便さを補う仕組みも用意しました。
 submoduleレポジトリへのプルリクエストがマージされた際のwebhookをきっかけに、自動でsubmoduleを含むプロジェクトも更新されます。&lt;/p&gt;
@@ -142,7 +142,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 
 &lt;p&gt;その他にもbotによるアプリケーションのリリース時には、GitのタグをRailsレポジトリ内とsubmoduleレポジトリ内の両方につけることで、使用されていたsubmoduleレポジトリのバージョンを分かりやすくしています。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:186562e261a7107c8b7de063b569e16d&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;今回のご紹介した運用の概要は以下です。&lt;/p&gt;
 
@@ -152,8 +152,7 @@ submoduleレポジトリへのプルリクエストがマージされた際のwe
 &lt;li&gt;&lt;strong&gt;submoduleの運用はbotに任せた&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;では今後もより良い運用を目指して日々改善を行っていきます！&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;では今後もより良い運用を目指して日々改善を行っていきます！&lt;/p&gt;</description>
     </item>
     
   </channel>

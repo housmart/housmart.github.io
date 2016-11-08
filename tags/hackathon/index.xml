@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hackathon on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/hackathon/</link>
-    <description>Recent content in Hackathon on カウル Tech Blog</description>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/hackathon/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 17 Feb 2016 16:57:26 +0900</lastBuildDate>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
     <atom:link href="http://techblog.housmart.co.jp/tags/hackathon/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -15,13 +15,13 @@
       <pubDate>Wed, 17 Feb 2016 16:57:26 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/</guid>
-      <description>
-
-&lt;p&gt;今週からHousmartで働く松江です！&lt;/p&gt;
+      <description>&lt;p&gt;今週からHousmartで働く松江です！&lt;/p&gt;
 
 &lt;p&gt;先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントである&lt;a href=&#34;http://hackday.jp/2016/&#34;&gt;Hack Day 2016&lt;/a&gt;に参加してきたのでこの場を借りてご紹介します。&lt;/p&gt;
 
-&lt;h2 id=&#34;作ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;作ったもの&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;作ったもの&#34;&gt;作ったもの&lt;/h2&gt;
 
 &lt;div class=&#34;embed-video-container&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/ZgpvXK3wfkc&#34; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
 
@@ -41,7 +41,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/0qgHEBRne3GBTsPTkJn5MqAsYdFihI-3LTJSm8P33iOraRoy36An06qGGQo8pC5jKr0afMeqOFA=s800&#34; title=&#34;Demo&#34;/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;使ったもの:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;使ったもの&lt;/h3&gt;
+&lt;h3 id=&#34;使ったもの&#34;&gt;使ったもの&lt;/h3&gt;
 
 &lt;p&gt;主に以下のデバイス・APIを使用して作りました。&lt;/p&gt;
 
@@ -71,7 +71,7 @@
 &lt;li&gt;&lt;a href=&#34;http://newdocs.clarifai.com/guide/info#info&#34;&gt;ClarifaiのAPIドキュメント&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;苦労したところ-工夫したところ:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;苦労したところ・工夫したところ&lt;/h3&gt;
+&lt;h3 id=&#34;苦労したところ-工夫したところ&#34;&gt;苦労したところ・工夫したところ&lt;/h3&gt;
 
 &lt;p&gt;Clarifaiの前は&lt;a href=&#34;https://cloud.google.com/vision/&#34;&gt;Google Cloud Vision&lt;/a&gt;の使用を検討していましたが審査が間に合いませんでした。
 Google Cloud Visionは現在プレビュー版を提供している段階で、使用するには申請が必要です。
@@ -89,7 +89,7 @@ Google Cloud Visionは現在プレビュー版を提供している段階で、�
 &lt;p&gt;また、開発会場内ではWifi使用者が多かったせいか、THETAのWifi転送速度が非常に遅かったため、デモの90秒以内に画像転送できるよう転送するサイズを小さくするといった工夫もしていました。
 TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバイスにはLANケーブルなど別のネットワークが必要なことも注意が必要です。&lt;/p&gt;
 
-&lt;h3 id=&#34;さいごに:3fc30d4efb0f9f17a0ee9ad6f39c20bb&#34;&gt;さいごに&lt;/h3&gt;
+&lt;h3 id=&#34;さいごに&#34;&gt;さいごに&lt;/h3&gt;
 
 &lt;p&gt;今回の作ったものはこちらのレポジトリに置いています。&lt;/p&gt;
 
@@ -101,8 +101,7 @@ TEHTAはWifi接続してAPIを叩く必要があるため、操作するデバ�
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8e8SL2kEUFObnBivBczy_Pa10P5X5Jjfn2VVOc_WydnoSmQeuPyKi179CpDeaS-OVmny_u_rbrs=s800&#34; title=&#34;Hackey&#34;/&gt;&lt;/p&gt;
 
-&lt;p&gt;Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！&lt;/p&gt;
-</description>
+&lt;p&gt;Yahoo! Japanさん、非常に楽しいイベントをありがとうございました！&lt;/p&gt;</description>
     </item>
     
   </channel>

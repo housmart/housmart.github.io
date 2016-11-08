@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編] &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.15" />
+    <meta name="generator" content="Hugo 0.17" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -32,6 +32,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
 そんな時の参考になれば幸いです。
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" />
@@ -64,6 +65,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
 そんな時の参考になれば幸いです。
+
 ">
 
 
@@ -74,7 +76,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 
 
-<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,work," />
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,media,operation,pitch,project,rails,startup,tools,ux,work," />
 
     
 
@@ -96,6 +98,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？
 そんな時の参考になれば幸いです。
+
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
@@ -212,12 +215,12 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        16
+        17
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          17
+          18
         
         <span>
             Tags
@@ -357,9 +360,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 
             <div class="article-entry" itemprop="articleBody">
-                
-
-<p>Housmart高松です。</p>
+                <p>Housmart高松です。</p>
 
 <p>先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。</p>
 
@@ -371,7 +372,9 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 <p>突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？<br />
 そんな時の参考になれば幸いです。</p>
 
-<h2 id="内容:08e118674fea9989bc7c591023d8b196">内容</h2>
+<p></p>
+
+<h2 id="内容">内容</h2>
 
 <ol>
 <li>前提
@@ -394,9 +397,9 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 <hr />
 
-<h2 id="1-前提:08e118674fea9989bc7c591023d8b196">1.前提</h2>
+<h2 id="1-前提">1.前提</h2>
 
-<h3 id="前回の失敗:08e118674fea9989bc7c591023d8b196">前回の失敗</h3>
+<h3 id="前回の失敗">前回の失敗</h3>
 
 <p>つい半月ほど前に別の局で朝の番組にもちらっと社名を出していただいたのですが（5秒くらい）、AWSのSmallインスタンスで冗長化もせず、のんきに構えていたところ、一部のサーバが一瞬でやられてしまいました。</p>
 
@@ -405,7 +408,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 <p><br></p>
 
-<h3 id="フロントエンド-システム構成:08e118674fea9989bc7c591023d8b196">フロントエンド システム構成</h3>
+<h3 id="フロントエンド-システム構成">フロントエンド システム構成</h3>
 
 <p>「カウル」フロントエンドのシステム構成を簡単にご紹介します。<br />
 基本的にはAPI（Rails x MySQL）を、別プロジェクトのフロントエンドRailsアプリケーションから呼び出す構成になっています。また、<a href="https://kawlu.com/journal/">自社メディアであるマンションジャーナル</a>も運営しているため、Wordpressが動くサーバが別にあります。<br />
@@ -417,9 +420,9 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h2 id="2-事前準備:08e118674fea9989bc7c591023d8b196">2.事前準備</h2>
+<h2 id="2-事前準備">2.事前準備</h2>
 
-<h3 id="負荷予測:08e118674fea9989bc7c591023d8b196">負荷予測</h3>
+<h3 id="負荷予測">負荷予測</h3>
 
 <p>負荷予測に関しては以下の記事を参考にさせていただきました。<br />
 <a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">[Qiita]gatling による負荷試験とテレビ露出見積り</a>
@@ -449,7 +452,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h3 id="サーバ台数決定:08e118674fea9989bc7c591023d8b196">サーバ台数決定</h3>
+<h3 id="サーバ台数決定">サーバ台数決定</h3>
 
 <p>こちらも先ほどの<a href="http://qiita.com/chase0213/items/b5ecd4377f60605332e1">Qiita記事</a>を参考にAWSサーバのスペックと台数を決定しました。</p>
 
@@ -460,7 +463,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h3 id="サーバ増強:08e118674fea9989bc7c591023d8b196">サーバ増強</h3>
+<h3 id="サーバ増強">サーバ増強</h3>
 
 <p>深夜からの放送だったので、夕方頃おもむろにインスタンスを増やそうとしたところエラー。もう一度試してもエラー。
 ググってみるとAWSには各リソースごとに上限が決められていて、その上限にぶつかってしまっていました。<br />
@@ -472,7 +475,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p><br></p>
 
-<h3 id="その他:08e118674fea9989bc7c591023d8b196">その他</h3>
+<h3 id="その他">その他</h3>
 
 <p>その他、会社名で検索されることも考慮に入れて、会社紹介ページや旧サービスからも「カウル」のランディングページに導線を貼り対策をしました。<br />
 万が一のことを考えてオフィスにスタンバイ、ピザとコーラを用意して放送を待ちます。</p>
@@ -481,7 +484,6 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
 
 <p>はたしてどの程度アクセスが来たのでしょうか！？
 <a href="/2016/03/10/prepare_for_wbs2/">[後編]</a>に続く</p>
-
             </div>
             <div class="hatena_button">
   <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" class="hatena-bookmark-button" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
@@ -542,6 +544,31 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -643,31 +670,6 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">
-                        operation
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="title">なぜdevelopブランチは必要なの？</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -692,7 +694,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
                     design
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -771,7 +773,7 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
                     design
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -873,6 +875,13 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
                     work
                 </a>
@@ -925,6 +934,8 @@ SEOの観点からサブディレクトリで Web app と自社メディアの�
         <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
         
         <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
         
         <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
         
