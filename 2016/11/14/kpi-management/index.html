@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法 &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.17" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/11/14/kpi-management/" />
+    <meta property="og:title" content="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" />
+<meta property="og:description" content="こんにちは！Housmart 宮永です。
+
+今回は不動産系スタートアップである弊社のKPI管理方法についてお話します。
+
+以前のブログでも紹介致しましたが、弊社ではサイトのトラッキングを徹底し、あらゆるサービス指標を数値化できる状態にしております。
+（過去記事「スタートアップのための「お金と時間がかからない」ログ分析基盤」）
+
+しかし指標は眺めているだけではサービスは改善されません。
+サービス指標の進捗を追って、課題を見つけ改善していく必要があります。（KPI管理）
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/11/14/kpi-management/" />
+
+
+<meta property="og:updated_time" content="2016-11-14T15:40:44&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法">
+<meta itemprop="description" content="こんにちは！Housmart 宮永です。
+
+今回は不動産系スタートアップである弊社のKPI管理方法についてお話します。
+
+以前のブログでも紹介致しましたが、弊社ではサイトのトラッキングを徹底し、あらゆるサービス指標を数値化できる状態にしております。
+（過去記事「スタートアップのための「お金と時間がかからない」ログ分析基盤」）
+
+しかし指標は眺めているだけではサービスは改善されません。
+サービス指標の進捗を追って、課題を見つけ改善していく必要があります。（KPI管理）
+">
+
+
+<meta itemprop="dateModified" content="2016-11-14T15:40:44&#43;09:00" />
+<meta itemprop="wordCount" content="2052">
+
+
+
+<meta itemprop="keywords" content="data-analysis,design,event,infra,ios,kpi,member,operation,project,work,data-analysis,design,development,event,git,hackathon,infra,introduction,ios,kpi,management,media,operation,pitch,project,rails,startup,tools,ux,work," />
+
+    
+
+  <meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:title" content="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法"/>
+<meta name="twitter:description" content="こんにちは！Housmart 宮永です。
+
+今回は不動産系スタートアップである弊社のKPI管理方法についてお話します。
+
+以前のブログでも紹介致しましたが、弊社ではサイトのトラッキングを徹底し、あらゆるサービス指標を数値化できる状態にしております。
+（過去記事「スタートアップのための「お金と時間がかからない」ログ分析基盤」）
+
+しかし指標は眺めているだけではサービスは改善されません。
+サービス指標の進捗を追って、課題を見つけ改善していく必要があります。（KPI管理）
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        18
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          20
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/421DyO-Mngsjvt9_miuoe7AEgYsYwr9w32m5j6Iu0vn3tofqub6rMf6nNPLQtflBnGvPeyDTtjqeApjmXxWL1W0-TbS9EvmX1IIZ7IFAh1gn7DUv_FFLapZs7GLmQJnAYIA-A36tmcMio3sEWM_tzZmcODUp4SbIO_huWfHF8SAA3_tTsQ2ujPKMIIW51eCkJ_H044M7sRjIG-ZyAxpOSf2rac0vMCSAFaJKP_mNw59qsKLy3-60FFjvwQfBJAEX7GRrIYLFiLmc-N5eKTygGEnJf_Ls4oAPyonWCG6Csedv5crqqNGHFZOUdhYNeok8juiIUGanLKwgLcIAbpTg3GMmt6pCnQbvwWbuhkV4pFNwXJsvVZOjpgs0zJu6RB14G7aQ2u6Myp-mf54mYzi1tK0RW0DlYt9pjSaWBOVeDnTGbWcDkZz3_N02K9mEgqrjhrMXUQgAP6a_30_HLJ0S5hC4OFY3d0a6gEKVPMcHWq53kDoC5GN47eTJ2LYKQd-_Ow7S0tFNOiUgqEOe7WWC1Lrs4HV-lCyVrV2anPkywenLqTDNftSdkJNqzyKqyay5_d1ncfrHLWL8xZhawbV8VDkJSAvZlobuyIycmTPcSWqRmgl1=w600" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/11/14/kpi-management/">
+    <h1 class="article-title" itemprop="name">
+        【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-11-14 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-14</time>
+            &middot;
+            2052
+            words
+            &middot;
+            5
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/kpi">kpi</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/kpi">kpi</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/management">management</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/startup">startup</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/11/14/kpi-management/" class="hatena-bookmark-button" data-hatena-bookmark-title="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>こんにちは！Housmart 宮永です。</p>
+
+<p>今回は不動産系スタートアップである弊社のKPI管理方法についてお話します。</p>
+
+<p>以前のブログでも紹介致しましたが、弊社ではサイトのトラッキングを徹底し、あらゆるサービス指標を数値化できる状態にしております。<br />
+（過去記事「<a href="http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/">スタートアップのための「お金と時間がかからない」ログ分析基盤</a>」）</p>
+
+<p>しかし指標は眺めているだけではサービスは改善されません。<br />
+サービス指標の進捗を追って、課題を見つけ改善していく必要があります。（KPI管理）<br />
+</p>
+
+<p>ただ、弊社のようなスタートアップ企業の場合、少人数でサービス運営するとどうなるでしょうか。<br />
+（弊社、社員は7名（2016年11月現在））<br />
+集客コンテンツのPVを上げようとか、会員機能など利用継続時間を長くしたい、ログイン日数を増やしたいとか、新規開発したいとかやりたいこともたくさんあります。<br />
+かといってリソースを理由にKPI管理を放棄して開発するというわけにも行きません。</p>
+
+<p>このように限られたリソースの中で効率よくKPI管理を行いサービス改善を行なうために<br />
+弊社では独自の管理体制「<span style='color:red'>大臣制度</span>」を採用しました。<br />
+今回はこの独自の管理制度について紹介させていただきます。</p>
+
+<h2 id="背景">背景</h2>
+
+<p>まずは管理制度の導入の背景として運営しているプロダクトについて説明いたします。</p>
+
+<h3 id="プロダクト">プロダクト</h3>
+
+<p>弊社では下記プロダクトを運営しております。</p>
+
+<ul>
+<li>不動産に関する自社メディア「<a href="https://kawlu.com/journal">マンションジャーナル</a>」</li>
+<li>関東圏のマンション情報サイト「<a href="https://kawlu.com/library">カウルライブラリー</a>」</li>
+<li>中古マンション売買サービス「<a href="https://kawlu.com">カウル</a>」(メインプロダクト)</li>
+</ul>
+
+<p><img src="https://lh3.googleusercontent.com/2WKWz0X6Sn_jF-9eHABJY_V_p2yiFnfNjwQ2yQYknZFJAQyxbccZHK8gdn0ziME7znf87hup8DUBZ3WmF6XBbbob1XuE9WZgVGL61nFe6JNuK4SmevpjTvCtUmFC0XfbC1-sk8kVZe7-Fcf0eF0e7K3DuZeVADdrMruJ_QsqcmbMf21NaSF_JAvQY8aetkLeYWcA44fTLQc-hDOqKNBEi5op2AoKAu49KZbl8eCTD5B37Bowbv-h_jCK9NLgLYrkO-bLIDf8x9W0q-FNcI--StHBW-HcamIOfhqe5L9BHC9rSGpC6Ewpdiblsm83i9dYuGuKnBl0LwDxPBlb2VZgZazXeuBhR5Q_gIl6OddXubMlPXe1Rwtkxd1TZRshmIovokrsC4_TKMr-7hls_5l-eAtnrpDiGnAiqUz2A0g7pK9iCuUHIrYLTN6Jz0mSQe3VNyab9csTgecWRfjqMw_WFjUgmjg_kK9ao0RQpBBlc4QBeVHaG-hfGzbYmeLo-QlvKvj7zIpnB-3fu_Y_WWAhMSqgsc-zFsXWhJsaQxub5M0SxvpzaOcfi57-IHVqrJ3gD2r7_BsPqQpG4Ks5EQBnQSvLuYEPgsI2yWdpDeEFzZXs_dq2=w600" alt="Housmartが提供しているサービス" /></p>
+
+<p>ユーザはメディアの<a href="https://kawlu.com/journal">マンションジャーナル</a>や<a href="https://kawlu.com/library">カウルライブラリー</a>を入り口に、<a href="https://kawlu.com">カウル</a>を通してマンション売買を行なうといったカスタマージャーニーとなります。</p>
+
+<p>上記サービス構成から弊社ではメディアの集客力やカウルへの会員登録、会員の継続利用状況（リテンション）がポイントになりKPI管理の対象となります。</p>
+
+<h2 id="制度導入前のkpi管理における課題">制度導入前のKPI管理における課題</h2>
+
+<p><span style='color:red'>大臣制度</span>を導入するまではKPI管理について数々の課題を抱えていました。</p>
+
+<ul>
+<li>代表の針山が全数値の管理を行い、他のメンバーは何となく気になっている指標をチェック</li>
+<li>みんな同じ領域の数値ばかり見ていて見落としている指標がたくさんある
+
+<ul>
+<li>集客が問題だ！って騒ぐと気づいたらみんな集客に関するKPIばかり気にしている</li>
+</ul></li>
+<li>見える化した指標は豊富にあるが、返って多すぎて管理を困難なものにしている</li>
+<li>KPI改善のために行った施策も実施後の評価がてきとうになる<br /></li>
+</ul>
+
+<p>などなど</p>
+
+<p>要するに監視しているKPIについてはロジカルに改善を重ねていましたが、<br />
+そもそも監視出来ていないKPIが存在し、最も改善が必要なKPIがそこに埋もれている可能性があったのです。</p>
+
+<h2 id="大臣制度とは">大臣制度とは？</h2>
+
+<p>そこで大臣制度の登場です。<br />
+名前はふざけているように聞こえますが、真剣にこう呼んでます。(笑)</p>
+
+<p>上記課題から解決策の方向性として下記のような観点を軸としました。</p>
+
+<ul>
+<li><span style='color:red'>全指標を管理できるリソースはないため、プロダクトにとってクリティカル、優先度高い課題に対してKPI管理する（現状で一番改善の必要があるKPIの選定）</span></li>
+<li>担当領域を決めて各自担当したKPIに責任を持つ(現状把握→改善の徹底)</li>
+<li>各自負担になりすぎない程度の担当領域にする（他にもやることたくさんあるからこそ）</li>
+<li>毎週MTGにてKPIのレポートと施策の共有、検討を行なう（習慣化）</li>
+</ul>
+
+<p>これらの要件を満たした管理体制が大臣制度です。</p>
+
+<h3 id="大臣制度の概要">大臣制度の概要</h3>
+
+<p>制度概要は下記の通りです。</p>
+
+<ul>
+<li>全体MTGにて優先度付による課題を人数分だけ用意する（①）
+
+<ul>
+<li>＜例＞リテンションの向上、LPからの会員登録数の向上　などなど</li>
+</ul></li>
+<li>用意した課題に対して各自担当者を割り当てる
+
+<ul>
+<li>＜例＞リテンション大臣、LP大臣　みたいなネーミングで</li>
+</ul></li>
+<li>担当者は課題を解決するため2ヶ月後のKPIを設定する（管理するKPIを増やしすぎない）
+
+<ul>
+<li>＜例＞特定のページの表示速度を平均x秒以内にする、月間30万PV 　など</li>
+</ul></li>
+<li>毎週振り返りMTGでKPIをレポーティング、改善施策の検討を実施する</li>
+<li>任期は2ヶ月間。2ヶ月後再度課題出しと担当決めを実施する（①に戻る）</li>
+</ul>
+
+<p>課題の領域を決めた上で監視領域に入ったKPIだけを管理するというスタンスをとります。<br />
+ただ、サービス運営の中で課題はコロコロ変わっていくため、任期を2ヶ月としました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/Y73Upb6t-XHykVo0AnChpZcw6MOU6ZclkTw-3heYa0vnUjUCibY8OJjhlcOFUCG0lck8BCcb9pJ3ScjD1p8_Nj5YnIgXA4GPKKZydeZGzPgN6qmgid780ce6N7CVb4XihrVsdRr6lU10IcHjz3r9P9iff3ABbEhoOfSNlYzsKC7OI45QX_3IIZMPqpZ4eUV10LNX_OIuwVTg2lDlBwianRXHcn2kPL85DBYgqPZxnQ_ZSQN9fJg8DwUNO6i-K4qW-96XOJHM67zP5P5T4jlaV-MKAVPeDoh0sc8NveBK2v4jIo-igvPvXPN-Br3_V87zmgZbOkv75q2e2-MMrnZf-MYqVtAVFpXsNMTxVdwkSuU0uQ0nk4lTAWctgCBZSp7vIL8VhXj48xA4DbnVt4Ia3d37I0mV1G40a_EqyW-_vfMFUmPDD6m6KtzqCAWZRS1V5MHH-5Lwao2ii_sDu6mKvxT8CQY2Qh_w75vBctw-EHZeMgfH2krbVJBpoACdJXy8gFKj4QCzCjvGfI4iveyzO8U7fCc-YixgU7HlCJDuVVZSE8tNf7mt-j5k1-Bt00-wWD8tlRZtjW1QJ7N_S9EghSy_ik7Py-P98SFt_gnhPX5DZbid=w766-h574-no" alt="大臣制度のサイクル" /></p>
+
+<h2 id="大臣制度を通して">大臣制度を通して</h2>
+
+<p>この制度によりプロダクトは大幅な成長につながりました。
+良かった点を列挙すると、</p>
+
+<ul>
+<li>プロダクトの最優先課題を中心に改善ができる</li>
+<li>限られたリソースの中で可能な限り広い領域のKPI管理が可能になった</li>
+<li>2ヶ月ごとに担当が変わるので各自がサービスをあらゆる角度から状態把握できる</li>
+<li>施策評価を行う習慣が身についた</li>
+<li>改善のサイクルが上手く回るようになり、集客、リテンション両面で大幅改良（<span style='color:red'>結果としてサービスの単月黒字化！</span>）</li>
+</ul>
+
+<p>こういった管理体制は会社によって最適解は異なります。<br />
+紹介した制度が万能というわけではありませんが、皆さんの中でKPIの管理体制を検討する際に参考までになればと思います。</p>
+
+<p>ではまた！</p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/11/14/kpi-management/" class="hatena-bookmark-button" data-hatena-bookmark-title="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/11/14/kpi-management/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f14%2fkpi-management%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%80%90%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e5%89%b5%e6%a5%ad%e6%9c%9f%e3%80%91%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%81%ae%ef%bc%90%e2%86%92%ef%bc%91%e3%82%92%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8bKPI%e7%ae%a1%e7%90%86%e6%96%b9%e6%b3%95&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f14%2fkpi-management%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f14%2fkpi-management%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f14%2fkpi-management%2f&amp;description=%e3%80%90%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e5%89%b5%e6%a5%ad%e6%9c%9f%e3%80%91%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%81%ae%ef%bc%90%e2%86%92%ef%bc%91%e3%82%92%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8bKPI%e7%ae%a1%e7%90%86%e6%96%b9%e6%b3%95" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f11%2f14%2fkpi-management%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/14/kpi-management/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/421DyO-Mngsjvt9_miuoe7AEgYsYwr9w32m5j6Iu0vn3tofqub6rMf6nNPLQtflBnGvPeyDTtjqeApjmXxWL1W0-TbS9EvmX1IIZ7IFAh1gn7DUv_FFLapZs7GLmQJnAYIA-A36tmcMio3sEWM_tzZmcODUp4SbIO_huWfHF8SAA3_tTsQ2ujPKMIIW51eCkJ_H044M7sRjIG-ZyAxpOSf2rac0vMCSAFaJKP_mNw59qsKLy3-60FFjvwQfBJAEX7GRrIYLFiLmc-N5eKTygGEnJf_Ls4oAPyonWCG6Csedv5crqqNGHFZOUdhYNeok8juiIUGanLKwgLcIAbpTg3GMmt6pCnQbvwWbuhkV4pFNwXJsvVZOjpgs0zJu6RB14G7aQ2u6Myp-mf54mYzi1tK0RW0DlYt9pjSaWBOVeDnTGbWcDkZz3_N02K9mEgqrjhrMXUQgAP6a_30_HLJ0S5hC4OFY3d0a6gEKVPMcHWq53kDoC5GN47eTJ2LYKQd-_Ow7S0tFNOiUgqEOe7WWC1Lrs4HV-lCyVrV2anPkywenLqTDNftSdkJNqzyKqyay5_d1ncfrHLWL8xZhawbV8VDkJSAvZlobuyIycmTPcSWqRmgl1=w600)" alt="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                        kpi
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/14/kpi-management/" class="title">【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-14 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-14</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/17/ruby-kaigi-2016/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JvArBoA3p6NB1E5aZhZEappII9BeoswwPba3ZApAP3k4hwlG7IOiuDHVZbbn78kxwhOYc1SSR-SZT938RpM59LJMSo7rdNiWT7B6qc2UrZz1R9rtB9-hLkXVkTNYUsWPINE8TEBh3DGYjzt_vkw3Q7Z9QiFSUcAAH9-NrpUzgaQjYzQ4NRh8Fbc-DGpkI9V9VHNFwnfGnBKfBy9arLX-g8jiEZwRs2DHU7z8UX3KjJeqjm6qR9hCqTvD7VMyD26VeeTDNvGoUoqFl12GLFicI7kkFf4FhYyIeVowHq18Jan2ctyDzj6doFbVmCnqQqU67tSJvNKA7L2xjLc6HsBzhUIFEHVOmvV3joQqS5e9bkAyjRmbA93eyb4mJDMjhjnGo2lNfMsoVj8FRBzm9ITGrcgIg3NDIWglzhTpx6Xgv48iDe8OtUZQijmveGcIhZnebAIqRhDrhD2ppdXSpqD_q9k0ImSRYShB0j4jpqU-vdD97aXB4tqJOiaGbqdNPVMTmKyZCF119bvrw5pjQieTTHrulEVFhYDqxFkLZacBK2l4RKy-czFehPq2jw9HJf9ZUaQNSBtt6ufcA8ewWWQPE4OEwbWYRTB61CIEyI1sttld3Hbp=w1007-h446-no)" alt="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/17/ruby-kaigi-2016/" class="title">RubyKaigi2016(@京都)に行ってきました！</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-17 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-09-17</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/2E-oF0qTDFYUs4o_uFmYAo4uFsx2g1NISHg2UfiSvqfMDTxOeblr66t3Ml3xlJcz7_5ah5bZWl7WmZpiv6FmzI2SU2r5WzQKS52QMxyMMhXKdDtoGF1WIZ8Am33DfpLh00Cy9D4wlOAnO7DxNdbjadBonWy5P1W7BD1rCa52utStX1VmIqWSX5j5IK3m3Gx8-vN1Ub_VRk3ifMx2h1AwGlgtk2bpu7NSB3DUzB2rjsrLwh3n_LofmeiRHWPl8lTm5UJBUk6htWOKQCwCBsInMEN5-LnSndPIuGQ93gxP8LBQQy6hJXWX_aruMKL3EioA2kWyZlj0RxLK2AWUP6mVUloYoFJV0udlfd5cSfwpjlSlVAK36n7GGsZViWmN19psQ05ISZV0zqzHjXBLc7EpWDycP5WSHjmqr-N2Hgw7gVGfdPjFPWmLBjW9zDjo3Zz5hsZgT32V4NQWfZqiCuMvt5dxi7_g_TObIUPgm-zrzQwdTdnfVdkn3muNWqcZpLstHKarl73PrVrqAGYiSo5cv6xg6dcWYDciFXOQBccW-YdQ5JNNOwrkS4vrW-bLWtxw1yJqawUQ82V_7oUdgGXdmnClAuZzRCSnoMCfW4nY294QOg_FnQ=s800)" alt="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="title">ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-07 17:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-07</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/mAZo021Zuw_Zp4JraHEVArFU7fsHZRPq1jMm4NsBD8ngJRgAmLHDnEvVvQMK8up4u0mKsO_m_rem7PbvOqqFOK3fTDFik7JizaKkEug2sgIA0G4bUkKTByXAREiqToX5ozEJOAguMKDJhUAnxNhUNVH40EjoNb1J8q7kxWRYZLOItRQlbKm7ggcjOlAxCEI16R4X0_A1XakO4XEpcDbAGrhIdyMA1NWKHHQxuGgGxk6W0JbiR3u3oxpv3yaHjJV5ZBN9HfZ1OpcW6RTodfitUcFhXdjgCm28ghZe1drsVub8JWjjE6CiYAGs4urpJ2tsUI5PrgzD-GXr2RxLekbGBXV7QdOY0ZOfyBLDEHGt1tvD0KZBZAa05ap2VieImvtqxxe3ZIkeNdPMtIE4spLohoGzPV8ZQgpDrGm3epkUm1gXsDFi1-naiDIdvSyXAYZP-e4HWJ8Z5A0UMmjO1yURQ7MmDtVLCvb6QTD_ACW-bb2wneWQovyE6ZTWuA9ghDnYDaxpxEDUzZG2b4d7Xh_7dDIVGGyLTgkyJdZFN5cLIug7LpSK--0CcesoY_GqMbAqXcwkTSFNoAZ1om6XtrI3UjP3E4uN-xWBMEJSYczuYVJ-cf3TGQ=s800)" alt="【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="title">【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-01 15:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-01</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
