@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/tags/management/index.xml</link>
+    <description>Recent content on カウル Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
+    <atom:link href="http://techblog.housmart.co.jp/tags/management/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法</title>
+      <link>http://techblog.housmart.co.jp/2016/11/21/kpi-management/</link>
+      <pubDate>Mon, 21 Nov 2016 15:40:44 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/11/21/kpi-management/</guid>
+      <description>&lt;p&gt;こんにちは！Housmart 宮永です。&lt;/p&gt;
+
+&lt;p&gt;今回は不動産系スタートアップである弊社のKPI管理方法についてお話します。&lt;/p&gt;
+
+&lt;p&gt;以前のブログでも紹介致しましたが、弊社ではサイトのトラッキングを徹底し、あらゆるサービス指標を数値化できる状態にしております。&lt;br /&gt;
+（過去記事「&lt;a href=&#34;http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/&#34;&gt;スタートアップのための「お金と時間がかからない」ログ分析基盤&lt;/a&gt;」）&lt;/p&gt;
+
+&lt;p&gt;しかし指標は眺めているだけではサービスは改善されません。&lt;br /&gt;
+サービス指標の進捗を追って、課題を見つけ改善していく必要があります。（KPI管理）&lt;br /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;ただ、弊社のようなスタートアップ企業の場合、少人数でサービス運営するとどうなるでしょうか。&lt;br /&gt;
+（弊社、社員は7名（2016年11月現在））&lt;br /&gt;
+集客コンテンツのPVを上げようとか、会員機能など利用継続時間を長くしたい、ログイン日数を増やしたいとか、新規開発したいとかやりたいこともたくさんあります。&lt;br /&gt;
+かといってリソースを理由にKPI管理を放棄して開発するというわけにも行きません。&lt;/p&gt;
+
+&lt;p&gt;このように限られたリソースの中で効率よくKPI管理を行いサービス改善を行なうために&lt;br /&gt;
+弊社では独自の管理体制「&lt;span style=&#39;color:red&#39;&gt;大臣制度&lt;/span&gt;」を採用しました。&lt;br /&gt;
+今回はこの独自の管理制度について紹介させていただきます。&lt;/p&gt;
+
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;まずは管理制度の導入の背景として運営しているプロダクトについて説明いたします。&lt;/p&gt;
+
+&lt;h3 id=&#34;プロダクト&#34;&gt;プロダクト&lt;/h3&gt;
+
+&lt;p&gt;弊社では下記プロダクトを運営しております。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不動産に関する自社メディア「&lt;a href=&#34;https://kawlu.com/journal&#34;&gt;マンションジャーナル&lt;/a&gt;」&lt;/li&gt;
+&lt;li&gt;関東圏のマンション情報サイト「&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;」&lt;/li&gt;
+&lt;li&gt;中古マンション売買サービス「&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;」(メインプロダクト)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/2WKWz0X6Sn_jF-9eHABJY_V_p2yiFnfNjwQ2yQYknZFJAQyxbccZHK8gdn0ziME7znf87hup8DUBZ3WmF6XBbbob1XuE9WZgVGL61nFe6JNuK4SmevpjTvCtUmFC0XfbC1-sk8kVZe7-Fcf0eF0e7K3DuZeVADdrMruJ_QsqcmbMf21NaSF_JAvQY8aetkLeYWcA44fTLQc-hDOqKNBEi5op2AoKAu49KZbl8eCTD5B37Bowbv-h_jCK9NLgLYrkO-bLIDf8x9W0q-FNcI--StHBW-HcamIOfhqe5L9BHC9rSGpC6Ewpdiblsm83i9dYuGuKnBl0LwDxPBlb2VZgZazXeuBhR5Q_gIl6OddXubMlPXe1Rwtkxd1TZRshmIovokrsC4_TKMr-7hls_5l-eAtnrpDiGnAiqUz2A0g7pK9iCuUHIrYLTN6Jz0mSQe3VNyab9csTgecWRfjqMw_WFjUgmjg_kK9ao0RQpBBlc4QBeVHaG-hfGzbYmeLo-QlvKvj7zIpnB-3fu_Y_WWAhMSqgsc-zFsXWhJsaQxub5M0SxvpzaOcfi57-IHVqrJ3gD2r7_BsPqQpG4Ks5EQBnQSvLuYEPgsI2yWdpDeEFzZXs_dq2=w600&#34; alt=&#34;Housmartが提供しているサービス&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ユーザはメディアの&lt;a href=&#34;https://kawlu.com/journal&#34;&gt;マンションジャーナル&lt;/a&gt;や&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;を入り口に、&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;を通してマンション売買を行なうといったカスタマージャーニーとなります。&lt;/p&gt;
+
+&lt;p&gt;上記サービス構成から弊社ではメディアの集客力やカウルへの会員登録、会員の継続利用状況（リテンション）がポイントになりKPI管理の対象となります。&lt;/p&gt;
+
+&lt;h2 id=&#34;制度導入前のkpi管理における課題&#34;&gt;制度導入前のKPI管理における課題&lt;/h2&gt;
+
+&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;大臣制度&lt;/span&gt;を導入するまではKPI管理について数々の課題を抱えていました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;代表の針山が全数値の管理を行い、他のメンバーは何となく気になっている指標をチェック&lt;/li&gt;
+&lt;li&gt;みんな同じ領域の数値ばかり見ていて見落としている指標がたくさんある
+
+&lt;ul&gt;
+&lt;li&gt;集客が問題だ！って騒ぐと気づいたらみんな集客に関するKPIばかり気にしている&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;見える化した指標は豊富にあるが、返って多すぎて管理を困難なものにしている&lt;/li&gt;
+&lt;li&gt;KPI改善のために行った施策も実施後の評価がてきとうになる&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;などなど&lt;/p&gt;
+
+&lt;p&gt;要するに監視しているKPIについてはロジカルに改善を重ねていましたが、&lt;br /&gt;
+そもそも監視出来ていないKPIが存在し、最も改善が必要なKPIがそこに埋もれている可能性があったのです。&lt;/p&gt;
+
+&lt;h2 id=&#34;大臣制度とは&#34;&gt;大臣制度とは？&lt;/h2&gt;
+
+&lt;p&gt;そこで大臣制度の登場です。&lt;br /&gt;
+名前はふざけているように聞こえますが、真剣にこう呼んでます。(笑)&lt;/p&gt;
+
+&lt;p&gt;上記課題から解決策の方向性として下記のような観点を軸としました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;span style=&#39;color:red&#39;&gt;全指標を管理できるリソースはないため、プロダクトにとってクリティカル、優先度高い課題に対してKPI管理する（現状で一番改善の必要があるKPIの選定）&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;担当領域を決めて各自担当したKPIに責任を持つ(現状把握→改善の徹底)&lt;/li&gt;
+&lt;li&gt;各自負担になりすぎない程度の担当領域にする（他にもやることたくさんあるからこそ）&lt;/li&gt;
+&lt;li&gt;毎週MTGにてKPIのレポートと施策の共有、検討を行なう（習慣化）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これらの要件を満たした管理体制が大臣制度です。&lt;/p&gt;
+
+&lt;h3 id=&#34;大臣制度の概要&#34;&gt;大臣制度の概要&lt;/h3&gt;
+
+&lt;p&gt;制度概要は下記の通りです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;全体MTGにて優先度付による課題を人数分だけ用意する（①）
+
+&lt;ul&gt;
+&lt;li&gt;＜例＞リテンションの向上、LPからの会員登録数の向上　などなど&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;用意した課題に対して各自担当者を割り当てる
+
+&lt;ul&gt;
+&lt;li&gt;＜例＞リテンション大臣、LP大臣　みたいなネーミングで&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;担当者は課題を解決するため2ヶ月後のKPIを設定する（管理するKPIを増やしすぎない）
+
+&lt;ul&gt;
+&lt;li&gt;＜例＞特定のページの表示速度を平均x秒以内にする、月間30万PV 　など&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;毎週振り返りMTGでKPIをレポーティング、改善施策の検討を実施する&lt;/li&gt;
+&lt;li&gt;任期は2ヶ月間。2ヶ月後再度課題出しと担当決めを実施する（①に戻る）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;課題の領域を決めた上で監視領域に入ったKPIだけを管理するというスタンスをとります。&lt;br /&gt;
+ただ、サービス運営の中で課題はコロコロ変わっていくため、任期を2ヶ月としました。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/Y73Upb6t-XHykVo0AnChpZcw6MOU6ZclkTw-3heYa0vnUjUCibY8OJjhlcOFUCG0lck8BCcb9pJ3ScjD1p8_Nj5YnIgXA4GPKKZydeZGzPgN6qmgid780ce6N7CVb4XihrVsdRr6lU10IcHjz3r9P9iff3ABbEhoOfSNlYzsKC7OI45QX_3IIZMPqpZ4eUV10LNX_OIuwVTg2lDlBwianRXHcn2kPL85DBYgqPZxnQ_ZSQN9fJg8DwUNO6i-K4qW-96XOJHM67zP5P5T4jlaV-MKAVPeDoh0sc8NveBK2v4jIo-igvPvXPN-Br3_V87zmgZbOkv75q2e2-MMrnZf-MYqVtAVFpXsNMTxVdwkSuU0uQ0nk4lTAWctgCBZSp7vIL8VhXj48xA4DbnVt4Ia3d37I0mV1G40a_EqyW-_vfMFUmPDD6m6KtzqCAWZRS1V5MHH-5Lwao2ii_sDu6mKvxT8CQY2Qh_w75vBctw-EHZeMgfH2krbVJBpoACdJXy8gFKj4QCzCjvGfI4iveyzO8U7fCc-YixgU7HlCJDuVVZSE8tNf7mt-j5k1-Bt00-wWD8tlRZtjW1QJ7N_S9EghSy_ik7Py-P98SFt_gnhPX5DZbid=w766-h574-no&#34; alt=&#34;大臣制度のサイクル&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;大臣制度を通して&#34;&gt;大臣制度を通して&lt;/h2&gt;
+
+&lt;p&gt;この制度によりプロダクトは大幅な成長につながりました。
+良かった点を列挙すると、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プロダクトの最優先課題を中心に改善ができる&lt;/li&gt;
+&lt;li&gt;限られたリソースの中で可能な限り広い領域のKPI管理が可能になった&lt;/li&gt;
+&lt;li&gt;2ヶ月ごとに担当が変わるので各自がサービスをあらゆる角度から状態把握できる&lt;/li&gt;
+&lt;li&gt;施策評価を行う習慣が身についた&lt;/li&gt;
+&lt;li&gt;改善のサイクルが上手く回るようになり、集客、リテンション両面で大幅改良（&lt;span style=&#39;color:red&#39;&gt;結果としてサービスの単月黒字化！&lt;/span&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こういった管理体制は会社によって最適解は異なります。&lt;br /&gt;
+紹介した制度が万能というわけではありませんが、皆さんの中でKPIの管理体制を検討する際に参考までになればと思います。&lt;/p&gt;
+
+&lt;p&gt;ではまた！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
