@@ -21,7 +21,14 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <link rel="canonical" href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" />
     <meta property="og:title" content="日本語でのサジェストの難しさとElasticsearchを用いた実装例" />
-<meta property="og:description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。 こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本" />
+<meta property="og:description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。
+
+こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本語でのサジェスト です。
+
+Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。
+
+今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" />
 
@@ -44,11 +51,18 @@
     
     
 <meta itemprop="name" content="日本語でのサジェストの難しさとElasticsearchを用いた実装例">
-<meta itemprop="description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。 こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本">
+<meta itemprop="description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。
+
+こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本語でのサジェスト です。
+
+Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。
+
+今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。
+">
 
 
 <meta itemprop="dateModified" content="2016-12-16T10:23:43&#43;09:00" />
-<meta itemprop="wordCount" content="3353">
+<meta itemprop="wordCount" content="3361">
 
   <meta itemprop="image" content="https://lh3.googleusercontent.com/E5rZPWKml6BJBVwYpnAdp7XcmmN2jp_P00CUF7U7RpCxDvH4ZGsT6CoNA_4T8rGf6CoBRRE8_sjxdA8QMit5QmYx5nX0QMOVzJcyP3fitDWc1vqf-zJi_6i3EEdxcg7r-LRtIyCbANnzzA7f4HmkOHYXvD3bHApZNBBC63DULeRy6ZHiS0ONLNPXpeU-zvESRjjSGgEijbiJwfTzWYpHn6OkfXRoxG8o0V292SaA6Z1D0YcF3UQIvOzjUN0x_oS144SeU-1Nvearms8gaKO0x5hgWWWqiaOf8WeF5Xclq-TcjVp1lb9m1AwKsaWmgO8PrruPsQYMX_3WsXdDjkKHMrtq8sdqWtH377AquJOmrfMGS3n8ppDJNVILkH4k-Na5KUi0n53Uup53CuafPosAGr8yMRBreXP7CJ_fUGgMjv6aQJ7iBXwrsOyaKMG82I-ngjQm4S7AeZUwn-UB3tDgDK_m2P1FVMIEyjRAIE27iN5jcBeasHd6N0Eezd64ZgCbnyK1_GbrK_eLCPt6NTpsYpCLbKm-65loIifPXPYe6vSyUreRv81k6pUNCwaSvm0Pp87AGm3HtSw8s-uJel0wodK4y8RypCxfP0stZ4hjYAJrJYUdKiuRbDUsgsNLz5GDj1W0kBfNnj1YUY3vaNVskGZhMk5MQq4GnML_ifkVkQ=w600">
 
@@ -67,7 +81,14 @@
 
 
 <meta name="twitter:title" content="日本語でのサジェストの難しさとElasticsearchを用いた実装例"/>
-<meta name="twitter:description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。 こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本"/>
+<meta name="twitter:description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。
+
+こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本語でのサジェスト です。
+
+Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。
+
+今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。
+"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 
@@ -281,7 +302,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2016-12-16 10:23:43 &#43;0900 JST" itemprop="datePublished">2016-12-16</time>
             &middot;
-            3353
+            3361
             words
             &middot;
             7
@@ -325,15 +346,14 @@
 
 
             <div class="article-entry" itemprop="articleBody">
-                
-
-<p>このエントリは <a href="http://qiita.com/advent-calendar/2016/elastic">Elastic stack (Elasticsearch) Advent Calendar 2016</a> の17日目の投稿です。</p>
+                <p>このエントリは <a href="http://qiita.com/advent-calendar/2016/elastic">Elastic stack (Elasticsearch) Advent Calendar 2016</a> の17日目の投稿です。</p>
 
 <p>こんにちは。Housmartの高松です。今回のテーマは <strong>Elasticsearchを使った日本語でのサジェスト</strong> です。</p>
 
 <p>Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。</p>
 
-<p>今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。</p>
+<p>今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。
+</p>
 
 <h2 id="今回取り組んだ問題">今回取り組んだ問題</h2>
 
@@ -503,7 +523,6 @@ char_filter: [
 
 <p>Housmartではエンジニアを募集しています。<br />
 <a href="https://www.wantedly.com/projects/69047">今話題のReTech！創業期を支える4人目のエンジニアをWanted！</a></p>
-
             </div>
             <div class="hatena_button">
   <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="hatena-bookmark-button" data-hatena-bookmark-title="日本語でのサジェストの難しさとElasticsearchを用いた実装例" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
