@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例 &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.17" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" />
+    <meta property="og:title" content="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" />
+<meta property="og:description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。 こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/E5rZPWKml6BJBVwYpnAdp7XcmmN2jp_P00CUF7U7RpCxDvH4ZGsT6CoNA_4T8rGf6CoBRRE8_sjxdA8QMit5QmYx5nX0QMOVzJcyP3fitDWc1vqf-zJi_6i3EEdxcg7r-LRtIyCbANnzzA7f4HmkOHYXvD3bHApZNBBC63DULeRy6ZHiS0ONLNPXpeU-zvESRjjSGgEijbiJwfTzWYpHn6OkfXRoxG8o0V292SaA6Z1D0YcF3UQIvOzjUN0x_oS144SeU-1Nvearms8gaKO0x5hgWWWqiaOf8WeF5Xclq-TcjVp1lb9m1AwKsaWmgO8PrruPsQYMX_3WsXdDjkKHMrtq8sdqWtH377AquJOmrfMGS3n8ppDJNVILkH4k-Na5KUi0n53Uup53CuafPosAGr8yMRBreXP7CJ_fUGgMjv6aQJ7iBXwrsOyaKMG82I-ngjQm4S7AeZUwn-UB3tDgDK_m2P1FVMIEyjRAIE27iN5jcBeasHd6N0Eezd64ZgCbnyK1_GbrK_eLCPt6NTpsYpCLbKm-65loIifPXPYe6vSyUreRv81k6pUNCwaSvm0Pp87AGm3HtSw8s-uJel0wodK4y8RypCxfP0stZ4hjYAJrJYUdKiuRbDUsgsNLz5GDj1W0kBfNnj1YUY3vaNVskGZhMk5MQq4GnML_ifkVkQ=w600" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/u_9N0C3qqsnDcNjXxK9eopejjMM-k_fjBkYG2cKMCjnPGcLycAUDiHP_XfGgk9oNo38Qrgzpu2j7ay86tc1y8wzbdPWjjPLIo2hpsdyyhzSkPuygJ70bGmlXlY3spMgbI3wwpjAKur5LcE5tqu0byM-aGoO40qiWxO2Bu3PmTBZWFwwOfMYZczFGU9mJMD-0G0NkQ_PLuuM1xp4U7yPSQrWNp58Jy61NQQS-VO3B334fk_WSxd198zYzPqA_O5lsM1PDvtm86-Pfy0qltby984jY8--hHzJhgKjc4vzVUOEdjqvJBECJvnMo0A8tkFtsMhoxmbofGxG4AQOY9u7LcW3bQI8OLzwR_r93uvzr42adQOZR_rIn-wMubRdCq82QfURhdSOMvslMFCcTRHruQx-yZz4dsR8bJxdpQsYv9RtWcUtB0WtvIKWlCzXm1tGN5IRCqHZXNH_4agVUx442BPGwnDQ5BLX_lxiGnoiYU4E6NKZqoArgcoiSgCWrPnSRJDdnE2BWlMiAl425WdcfndDoM_b4eFt_Fz2jj7ew173cqSoiJxMJrUqX5JME6KkiUAYUxeF4xpZH4X9wSxdI3rbwd4McEyOC_FzFXvu4SrpQ_Vz9EEqQZsmNUhSiKzGMyNRkCYWKlbVlesRB-XL_Zr54c4Q_lZoAUvELtZKu2w=w400" />
+
+
+<meta property="og:updated_time" content="2016-12-16T10:23:43&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例">
+<meta itemprop="description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。 こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本">
+
+
+<meta itemprop="dateModified" content="2016-12-16T10:23:43&#43;09:00" />
+<meta itemprop="wordCount" content="3358">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/E5rZPWKml6BJBVwYpnAdp7XcmmN2jp_P00CUF7U7RpCxDvH4ZGsT6CoNA_4T8rGf6CoBRRE8_sjxdA8QMit5QmYx5nX0QMOVzJcyP3fitDWc1vqf-zJi_6i3EEdxcg7r-LRtIyCbANnzzA7f4HmkOHYXvD3bHApZNBBC63DULeRy6ZHiS0ONLNPXpeU-zvESRjjSGgEijbiJwfTzWYpHn6OkfXRoxG8o0V292SaA6Z1D0YcF3UQIvOzjUN0x_oS144SeU-1Nvearms8gaKO0x5hgWWWqiaOf8WeF5Xclq-TcjVp1lb9m1AwKsaWmgO8PrruPsQYMX_3WsXdDjkKHMrtq8sdqWtH377AquJOmrfMGS3n8ppDJNVILkH4k-Na5KUi0n53Uup53CuafPosAGr8yMRBreXP7CJ_fUGgMjv6aQJ7iBXwrsOyaKMG82I-ngjQm4S7AeZUwn-UB3tDgDK_m2P1FVMIEyjRAIE27iN5jcBeasHd6N0Eezd64ZgCbnyK1_GbrK_eLCPt6NTpsYpCLbKm-65loIifPXPYe6vSyUreRv81k6pUNCwaSvm0Pp87AGm3HtSw8s-uJel0wodK4y8RypCxfP0stZ4hjYAJrJYUdKiuRbDUsgsNLz5GDj1W0kBfNnj1YUY3vaNVskGZhMk5MQq4GnML_ifkVkQ=w600">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/u_9N0C3qqsnDcNjXxK9eopejjMM-k_fjBkYG2cKMCjnPGcLycAUDiHP_XfGgk9oNo38Qrgzpu2j7ay86tc1y8wzbdPWjjPLIo2hpsdyyhzSkPuygJ70bGmlXlY3spMgbI3wwpjAKur5LcE5tqu0byM-aGoO40qiWxO2Bu3PmTBZWFwwOfMYZczFGU9mJMD-0G0NkQ_PLuuM1xp4U7yPSQrWNp58Jy61NQQS-VO3B334fk_WSxd198zYzPqA_O5lsM1PDvtm86-Pfy0qltby984jY8--hHzJhgKjc4vzVUOEdjqvJBECJvnMo0A8tkFtsMhoxmbofGxG4AQOY9u7LcW3bQI8OLzwR_r93uvzr42adQOZR_rIn-wMubRdCq82QfURhdSOMvslMFCcTRHruQx-yZz4dsR8bJxdpQsYv9RtWcUtB0WtvIKWlCzXm1tGN5IRCqHZXNH_4agVUx442BPGwnDQ5BLX_lxiGnoiYU4E6NKZqoArgcoiSgCWrPnSRJDdnE2BWlMiAl425WdcfndDoM_b4eFt_Fz2jj7ew173cqSoiJxMJrUqX5JME6KkiUAYUxeF4xpZH4X9wSxdI3rbwd4McEyOC_FzFXvu4SrpQ_Vz9EEqQZsmNUhSiKzGMyNRkCYWKlbVlesRB-XL_Zr54c4Q_lZoAUvELtZKu2w=w400">
+
+
+
+<meta itemprop="keywords" content="culture,data-analysis,design,development,event,infra,ios,kpi,member,operation,project,work,culture,data-analysis,design,development,elasticsearch,event,git,hackathon,infra,introduction,ios,kpi,lab,management,media,operation,pitch,project,rails,search,startup,tools,ux,work," />
+
+    
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/E5rZPWKml6BJBVwYpnAdp7XcmmN2jp_P00CUF7U7RpCxDvH4ZGsT6CoNA_4T8rGf6CoBRRE8_sjxdA8QMit5QmYx5nX0QMOVzJcyP3fitDWc1vqf-zJi_6i3EEdxcg7r-LRtIyCbANnzzA7f4HmkOHYXvD3bHApZNBBC63DULeRy6ZHiS0ONLNPXpeU-zvESRjjSGgEijbiJwfTzWYpHn6OkfXRoxG8o0V292SaA6Z1D0YcF3UQIvOzjUN0x_oS144SeU-1Nvearms8gaKO0x5hgWWWqiaOf8WeF5Xclq-TcjVp1lb9m1AwKsaWmgO8PrruPsQYMX_3WsXdDjkKHMrtq8sdqWtH377AquJOmrfMGS3n8ppDJNVILkH4k-Na5KUi0n53Uup53CuafPosAGr8yMRBreXP7CJ_fUGgMjv6aQJ7iBXwrsOyaKMG82I-ngjQm4S7AeZUwn-UB3tDgDK_m2P1FVMIEyjRAIE27iN5jcBeasHd6N0Eezd64ZgCbnyK1_GbrK_eLCPt6NTpsYpCLbKm-65loIifPXPYe6vSyUreRv81k6pUNCwaSvm0Pp87AGm3HtSw8s-uJel0wodK4y8RypCxfP0stZ4hjYAJrJYUdKiuRbDUsgsNLz5GDj1W0kBfNnj1YUY3vaNVskGZhMk5MQq4GnML_ifkVkQ=w600"/>
+
+
+
+<meta name="twitter:title" content="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例"/>
+<meta name="twitter:description" content="このエントリは Elastic stack (Elasticsearch) Advent Calendar 2016 の17日目の投稿です。 こんにちは。Housmartの高松です。今回のテーマは Elasticsearchを使った日本"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        20
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          24
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/E5rZPWKml6BJBVwYpnAdp7XcmmN2jp_P00CUF7U7RpCxDvH4ZGsT6CoNA_4T8rGf6CoBRRE8_sjxdA8QMit5QmYx5nX0QMOVzJcyP3fitDWc1vqf-zJi_6i3EEdxcg7r-LRtIyCbANnzzA7f4HmkOHYXvD3bHApZNBBC63DULeRy6ZHiS0ONLNPXpeU-zvESRjjSGgEijbiJwfTzWYpHn6OkfXRoxG8o0V292SaA6Z1D0YcF3UQIvOzjUN0x_oS144SeU-1Nvearms8gaKO0x5hgWWWqiaOf8WeF5Xclq-TcjVp1lb9m1AwKsaWmgO8PrruPsQYMX_3WsXdDjkKHMrtq8sdqWtH377AquJOmrfMGS3n8ppDJNVILkH4k-Na5KUi0n53Uup53CuafPosAGr8yMRBreXP7CJ_fUGgMjv6aQJ7iBXwrsOyaKMG82I-ngjQm4S7AeZUwn-UB3tDgDK_m2P1FVMIEyjRAIE27iN5jcBeasHd6N0Eezd64ZgCbnyK1_GbrK_eLCPt6NTpsYpCLbKm-65loIifPXPYe6vSyUreRv81k6pUNCwaSvm0Pp87AGm3HtSw8s-uJel0wodK4y8RypCxfP0stZ4hjYAJrJYUdKiuRbDUsgsNLz5GDj1W0kBfNnj1YUY3vaNVskGZhMk5MQq4GnML_ifkVkQ=w600" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/">
+    <h1 class="article-title" itemprop="name">
+        日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2016-12-16 10:23:43 &#43;0900 JST" itemprop="datePublished">2016-12-16</time>
+            &middot;
+            3358
+            words
+            &middot;
+            7
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">development</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/search">search</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">elasticsearch</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="hatena-bookmark-button" data-hatena-bookmark-title="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>このエントリは <a href="http://qiita.com/advent-calendar/2016/elastic">Elastic stack (Elasticsearch) Advent Calendar 2016</a> の17日目の投稿です。</p>
+
+<p>こんにちは。Housmartの高松です。今回のテーマは <strong>Elasticsearchを使った日本語での固有名詞のサジェスト</strong> です。</p>
+
+<p>Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。</p>
+
+<p>今回は実務での経験をもとに、なぜ日本語での固有名詞のサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。</p>
+
+<h2 id="今回取り組んだ問題">今回取り組んだ問題</h2>
+
+<p>弊社HousmartはReTech（不動産テック）スタートアップで、<a href="https://kawlu.com/market">中古マンション売買サービス「カウル」</a>をメインのサービスとして運営しています。<br />
+また、メインのサービス以外にも、ユーザがマンションの情報を検索できる<a href="https://kawlu.com/library">カウルライブラリー</a>、マンション購入のノウハウを載せた自社メディアである<a href="https://kawlu.com/journal/">マンションジャーナル</a>の運営をしています。</p>
+
+<p>今回はマンションのデータベースサイトであるカウルライブラリーの検索にサジェスト機能を実装しました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/u_9N0C3qqsnDcNjXxK9eopejjMM-k_fjBkYG2cKMCjnPGcLycAUDiHP_XfGgk9oNo38Qrgzpu2j7ay86tc1y8wzbdPWjjPLIo2hpsdyyhzSkPuygJ70bGmlXlY3spMgbI3wwpjAKur5LcE5tqu0byM-aGoO40qiWxO2Bu3PmTBZWFwwOfMYZczFGU9mJMD-0G0NkQ_PLuuM1xp4U7yPSQrWNp58Jy61NQQS-VO3B334fk_WSxd198zYzPqA_O5lsM1PDvtm86-Pfy0qltby984jY8--hHzJhgKjc4vzVUOEdjqvJBECJvnMo0A8tkFtsMhoxmbofGxG4AQOY9u7LcW3bQI8OLzwR_r93uvzr42adQOZR_rIn-wMubRdCq82QfURhdSOMvslMFCcTRHruQx-yZz4dsR8bJxdpQsYv9RtWcUtB0WtvIKWlCzXm1tGN5IRCqHZXNH_4agVUx442BPGwnDQ5BLX_lxiGnoiYU4E6NKZqoArgcoiSgCWrPnSRJDdnE2BWlMiAl425WdcfndDoM_b4eFt_Fz2jj7ew173cqSoiJxMJrUqX5JME6KkiUAYUxeF4xpZH4X9wSxdI3rbwd4McEyOC_FzFXvu4SrpQ_Vz9EEqQZsmNUhSiKzGMyNRkCYWKlbVlesRB-XL_Zr54c4Q_lZoAUvELtZKu2w=w400" alt="カウルライブラリーのサジェスト" /></p>
+
+<p>マンション名の検索の場合、出て来る固有名詞の種類が多い（マンションブランド名、地名、駅名など）ので、その全てにマスタを作るのが難しい（手間がかかる）という難点があります。これは例えばECサイトなどでも同様の悩みがあるのではないでしょうか。</p>
+
+<h2 id="なぜ日本語のサジェストが難しいのか">なぜ日本語のサジェストが難しいのか</h2>
+
+<p>まず、なぜ日本語のサジェストが難しいのかを整理しておきます。<br />
+もともと検索システム初心者だったため、このあたりの事がWeb上できちんと言語化されていなかったので随分悩みました。<br />
+<a href="http://tech.vasily.jp/entry/solr-suggester">こちらのブログ</a>にこの辺りがまとめられていたので適宜引用しながら、これから取り組む人にとって役立つように、なぜ日本語のサジェストが難しいのかをまとめておきます。</p>
+
+<p>参考）<a href="http://tech.vasily.jp/entry/solr-suggester">Solrを用いて検索のサジェスターを作りました - VASILY Developers Blog</a></p>
+
+<p>一般的なサジェストは、検索対象のドキュメント中の単語リストを保持し、ユーザの入力途中の単語を使って前方一致検索をかけ、出現頻度が高い順に単語のリストを返すという単純な仕組みで成り立っています。<br />
+しかし、日本語の場合はこの過程でいくつかのポイントを特別に考慮する必要があります。</p>
+
+<h3 id="単語の抽出">単語の抽出</h3>
+
+<blockquote>
+<p>英語の文章は単語と単語との間がスペースや記号などで区切られています。 そのため、文章を単語に分解する処理を簡単に書くことができます。<br />
+しかし他方で日本語の文章にはそのような機械的に単語分割できるような目印はありません。 そのため、日本語の文章を単語分割するためには形態素解析という処理を行う必要があります。 - VASILY Developers Blog</p>
+</blockquote>
+
+<p>このため、tokenizerに形態素解析用のプラグインを指定する必要があります。</p>
+
+<p>形態素解析ではどのような辞書を用いて解析をするかが検索精度の観点で重要になります。今回は辞書として新語を定期的にアップデートしてくれている mecab-ipadic-NEologd を使いたいので、analysis-kuromoji-neologdのプラグインを利用しました。</p>
+
+<p><a href="https://github.com/codelibs/elasticsearch-analysis-kuromoji-neologd">Elasticsearch Analysis Kuromoji Neologd - GitHub</a></p>
+
+<h3 id="漢字-英語の読み">漢字・英語の読み</h3>
+
+<blockquote>
+<p>さらに、単語に分割した後には「漢字の読み」の問題もあります。 例えば、「とう」と入力した時に「東京」という単語を返すためには、「東京」という単語の読みが「とうきょう」であるという情報が必要です。 - VASILY Developers Blog</p>
+</blockquote>
+
+<p>この問題に対しても一般語であればanalysis-kuromoji-neologdで読みを取得することが可能です。</p>
+
+<p>また、マンション名では頻繁に英語とカタカナ語の表記ゆれが存在します。例えば、「ブリリア」というマンションブランド名が「Brillia」と表記されていたりします。「Brillia」という入力に対してブリリアシリーズのマンション名一覧を返すにはこれらの読み情報も必要です。この場合は一般語では無いので独自で辞書を追加する必要があります。</p>
+
+<h3 id="打ち途中の単語に対するサジェスト">打ち途中の単語に対するサジェスト</h3>
+
+<blockquote>
+<p>未確定の子音やひらがなにも対応する必要があります。 「とうky」と入力した時には、「東京」や「東急」といった単語を候補として表示する必要があります。 - VASILY Developers Blog</p>
+</blockquote>
+
+<p>こちらの問題に対しては、ローマ字読みのfieldを別で用意してそれに対して前方一致をかけることで解決していきます。</p>
+
+<h3 id="elasticsearch標準のサジェスト機能について">Elasticsearch標準のサジェスト機能について</h3>
+
+<p>ここで、Elasticsearch標準のサジェスト機能について言及しておきます。</p>
+
+<p>ElasticsearchではCompletionSuggesterというサジェスト用の機能が提供されているのですが、この機能は英語のドキュメントに対するサジェストを提供するためには非常に優れた機能です。一方で、 <strong>この機能を使って実用レベルの日本語のサジェストを実現することは難しい</strong> です。</p>
+
+<p>日本語でのサジェストは以上で挙げたように工夫すべきポイントがいくつか存在します。Elasticsearchの標準のサジェスト機能ではここがすべて考慮されているわけではないので、現状では実用的な日本語サジェストには使いにくいという結果になっています。</p>
+
+<h2 id="どうやって実装していくか">どうやって実装していくか</h2>
+
+<p>今回は要件を満たすためにCompletionSuggesterは使うのを諦め、サジェスト用に新しいインデックスを作成していく方針にしました。</p>
+
+<h3 id="サジェスト用インデックスのデータ">サジェスト用インデックスのデータ</h3>
+
+<p>サジェスト用のインデックスに流し込むデータは</p>
+
+<ul>
+<li>なるべく多いマンションが引っかかる検索ワードを優先的に出したい</li>
+<li>マンション名そのものもサジェストしたい</li>
+</ul>
+
+<p>の2点を満たすべく、マンション名をそれぞれ形態素解析し、その結果の組み合わせを下図の様に作成したものを用います。（マンション名そのものは2レコード入れる）</p>
+
+<p><img src="https://lh3.googleusercontent.com/GLQcZ5HRGT1Uj40zgc-4Q_SOIT2xKbm-R9AMqrPmMeze8m4IqARAzZznlpRrpTA21HCBTaZWXEpZD3hvR3mFK8Mq_JnEFWyzeATiwinEwXsqFqRKbtqQMprp0wlwf5cu6Tv_s7zTUq9H6dmxxVyZAg6mUTd_bN2IaUECiKoZQJKkzksHb6-1u9pj4SiIYJIod6delsCXIBvRxX5Kjf51S8nztKpe3Cv_LLMvt_ab-CGYhC3qLRJrb7PYvyghrnLUXsq_QlEwEILLQ3MnDWzk4Hj6SLwpUvqXRT8GRoC4B86akSoju6E57NVRh1yAFxlbVGZULAZbtgSAgUqhY_9mBmX0vG5bHhK3l84VAd0dJRuS7syoFwUVi9gRKqvo9VzLBGPI_Y-5gVlzsSAb8NDeXUJ2XwKirlGxQnqq4MMlkkA1uGkxFYIC_Xp_Nw-OCAToNJ635XqGMxspKgQew2ILarNxYFJo9mXhqW4vct5-LpO42uh63-v49OiF-fbbdG6fE9ofn6gHs8gZJV946EPziYyafVKHsxidK6giJW-ezjXO3HWjy0pX94bwlwk1DZSgKK9_fZ4gITP5_eLkd0V0uRMo46Ma6WCAqtuckKdLz7xil7YcqVWUvrKIrF6iO2hR7OIru7M8djMT8Ka3GQAfFlxwU5aPU2eP592QmRt6JQ=w400" alt="サジェスト用インデックスのレコード作成" /></p>
+
+<p>このデータに対して検索をかけ、group byでカウントが多い順にサジェストの結果とします。また、group byの結果が2件以上のものに限定することで、無意味なワードが引っかかからず、マンション名そのものはサジェストの結果に入れることができます。（マンション名そのものは2レコード入れているため）</p>
+
+<p>本来ならばブランド名や地名のマスタデータを作るのがベストですが、その手間を省くためにこのような実装にしています。データの性質によりますが、この方法でそれなりの精度を実現できています。</p>
+
+<h3 id="analyzerの設定">Analyzerの設定</h3>
+
+<p>続いてインデックスに対してAnalyzerを設定していきます。<br />
+ここの設定に関しては下記のブログが大変参考になりました。</p>
+
+<p>参考）<a href="https://medium.com/hello-elasticsearch/elasticsearch-%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%82%B5%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%A8%AD%E8%A8%88-352a230030dd#.jwa7znssd">Elasticsearch キーワードサジェスト日本語のための設計</a></p>
+
+<p>確定したキーワード用と入力途中のキーワード用に別々のfieldを定義していきます。</p>
+
+<h4 id="確定したキーワード用のanalyzer">確定したキーワード用のAnalyzer</h4>
+
+<p>「六本木」の様に確定したキーワードのための設定です。</p>
+
+<p>データインポート時は、一般的なノーマライズを掛けてEdge-ngramでインデックスを作成しておきます。検索時は、文字列に対してノーマライズを掛けるだけです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/_yAGQ4tjmBDMEuoujBYC1EeghZydPfNS1U5N1UpayexUNxjm-Mx9qSXBGZojtPTQAb3PqT37KOi4syoQ2LMB_c0zI52LQnAujxJ9YUWFcyPxkcgIBFW6Kqo-q_gvkIDw2S-mLpl-KgPUbRgLSF686ytK5jUyzuTWIxXoMEt60aECceCiASQ089It6UvLEF18r_QqiCJc-HoQSutR7nX1EMGPtkT3elwIJt4WOk9k67_6_HQTBpAz0x-y4D3-LZMKKEVU2teufVIpHh2F8hRO7w9jUnw3JFSQvwZEWkRikCkzroWN8fyExC5V9lCthBI9ESWLqst7YhOUInPwZ7RGTbrNv3IVnyXWpKGbAyr7sdviTsgrXXmfxci7aPkZjHMkM5aYpq30tbQylW226VTLYSgPOPNrfK914I9l6OdLUaVG22ldANpiGk9ltNKuezkKKIskMQBgZ1J8Q65o0cQFFL67tmtLnZDma_PwZzY9QvFZzNWXStPiYwbYPV1fuUwXaQ7Zqk-hp-iJ1xZjvri0Uc-_QKuSozEsmUSaKmaur9eiP-NSKuHsvEUHPiw5R7mHsjia9JJs3WPTwkCYfEWnGBjmymMUanPWXChJNkrXYkfxYCwjWXpDVOkGaySc_u-GjrW157PqOVU_JlS_l4JyjdP3ixinmFDCfaTSiZdYeg=w300" alt="確定したキーワード用のAnalyzer" /></p>
+
+<pre><code># インポート時
+char_filter: [
+  'normalize'
+],
+tokenizer: 'keyword',
+filter: [
+  'lowercase',
+  'trim',
+  'engram'
+]
+---
+# 検索時
+char_filter: [
+  'normalize'
+],
+tokenizer: 'keyword',
+filter: [
+  'lowercase',
+  'trim'
+]
+</code></pre>
+
+<h4 id="入力途中のキーワード用のanalyzer">入力途中のキーワード用のAnalyzer</h4>
+
+<p>「roppo」の様に入力途中のキーワードのための設定です。</p>
+
+<p>データインポート時は、一般的なノーマライズを掛けた後、すべてをローマ字に変換してEdge-ngramでインデックスを作成しておきます。検索時も同様に、文字列をノーマライズした後にすべてローマ字に変換します。</p>
+
+<p><img src="https://lh3.googleusercontent.com/DafyI_-4Wt8EcUL3FoMqsrEu51-mRdQrvo96KWfZyX8TdtGYrXXGXsbrGzcwSXefckFonFbc9bSP-4AHsr6JCJNIsfkkatQnMrfqHm7sg1T4AVWpDUqDzOMsDvHpCx-tlbQFaerivqey0-dV8out5b98gd3Y5y7OXdInXQAgp45_paFGSnsJfOjaEKhcT11HFNMpai5G0wReLPrqmHqEC8JOqWu8ESbUiLUodXivY9VoOGQ4tmW4s27qXtFy31GQxXeY1JUWS_9FPNcjQUEt0OdnR4RS5T1zwXaGBcLRqXJ-BaPGCLLo8mABq6LuscOzp82IIha7yEKPMUT2LVgQlQLU_tHGNaOQa9sOkYIUUqN95gBYg_hbwTj92fGEwHHOLGL7N_xjjXEjhdhErClvYBlvL8tvbUVuBMgfUeWkej-mpa7BYTer55wcVSGguM_1z53-2UKFNV9rI99IVCEDmZ4fAsikQALOWtAlt9FZPT-WnLv2BNxkdTh6r1FW0lavpP7eI96Rkq3bT2jnotecnY8Zjt_t-liNeiLYWoucwRf8Lo3PYz7BfGm5q9z2sFMW4_LBv6odBaRLknFGXG8mcMVJS_n-zqdFOSxh-BDItJgNZJ-g0eB2tHCRoYlmni-Sp2UQIvjsSJjJclBRTcBIJLby4eBRsqK4zInK-UgWng=w300" alt="入力途中のキーワード用のAnalyzer" /></p>
+
+<pre><code># インポート時
+char_filter: [
+  'normalize'
+],
+tokenizer: 'ja_normal_neologd',
+filter: [
+  'lowercase',
+  'trim',
+  'readingform_neologd_romaji',
+  'asciifolding',
+  'engram'
+]
+---
+# 検索時
+char_filter: [
+  'normalize',
+  'katakana',
+  'romaji'
+],
+  tokenizer: 'ja_normal_neologd',
+  filter: [
+  'lowercase',
+  'trim',
+  'readingform_neologd_romaji',
+  'asciifolding'
+]
+</code></pre>
+
+<p>Analyzerに関するより詳しい挙動や流れは先程挙げたブログを参照してください。</p>
+
+<h3 id="終わりに">終わりに</h3>
+
+<p>Elasticsearchの設計は見通しが立ってしまえばそこまで難しくはないのですが、一つ一つの事例ごとに特性が違い、データの設計とAnalyzerの設定をそれぞれの特性に合わせて同時に考えなければならない点が難易度が高いと思っています。<br />
+今回はひとつの実装例をご紹介しましたが、これから設計をする人の参考になれば幸いです。</p>
+
+<hr />
+
+<p>Housmartではエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！創業期を支える4人目のエンジニアをWanted！</a></p>
+
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="hatena-bookmark-button" data-hatena-bookmark-title="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%81%a7%e3%81%ae%e5%9b%ba%e6%9c%89%e5%90%8d%e8%a9%9e%e3%82%b5%e3%82%b8%e3%82%a7%e3%82%b9%e3%83%88%e3%81%ae%e9%9b%a3%e3%81%97%e3%81%95%e3%81%a8Elasticsearch%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e5%ae%9f%e8%a3%85%e4%be%8b&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f&amp;description=%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%81%a7%e3%81%ae%e5%9b%ba%e6%9c%89%e5%90%8d%e8%a9%9e%e3%82%b5%e3%82%b8%e3%82%a7%e3%82%b9%e3%83%88%e3%81%ae%e9%9b%a3%e3%81%97%e3%81%95%e3%81%a8Elasticsearch%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e5%ae%9f%e8%a3%85%e4%be%8b" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">エンジニアが自由研究に時間をかけるべき理由</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/E5rZPWKml6BJBVwYpnAdp7XcmmN2jp_P00CUF7U7RpCxDvH4ZGsT6CoNA_4T8rGf6CoBRRE8_sjxdA8QMit5QmYx5nX0QMOVzJcyP3fitDWc1vqf-zJi_6i3EEdxcg7r-LRtIyCbANnzzA7f4HmkOHYXvD3bHApZNBBC63DULeRy6ZHiS0ONLNPXpeU-zvESRjjSGgEijbiJwfTzWYpHn6OkfXRoxG8o0V292SaA6Z1D0YcF3UQIvOzjUN0x_oS144SeU-1Nvearms8gaKO0x5hgWWWqiaOf8WeF5Xclq-TcjVp1lb9m1AwKsaWmgO8PrruPsQYMX_3WsXdDjkKHMrtq8sdqWtH377AquJOmrfMGS3n8ppDJNVILkH4k-Na5KUi0n53Uup53CuafPosAGr8yMRBreXP7CJ_fUGgMjv6aQJ7iBXwrsOyaKMG82I-ngjQm4S7AeZUwn-UB3tDgDK_m2P1FVMIEyjRAIE27iN5jcBeasHd6N0Eezd64ZgCbnyK1_GbrK_eLCPt6NTpsYpCLbKm-65loIifPXPYe6vSyUreRv81k6pUNCwaSvm0Pp87AGm3HtSw8s-uJel0wodK4y8RypCxfP0stZ4hjYAJrJYUdKiuRbDUsgsNLz5GDj1W0kBfNnj1YUY3vaNVskGZhMk5MQq4GnML_ifkVkQ=w600)" alt="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="title">日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-12-16 10:23:43 &#43;0900 JST" itemprop="datePublished">2016-12-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/culture">
+                        culture
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="title">エンジニアが自由研究に時間をかけるべき理由</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-12-07 14:23:37 &#43;0900 JST" itemprop="datePublished">2016-12-07</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/21/kpi-management/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/421DyO-Mngsjvt9_miuoe7AEgYsYwr9w32m5j6Iu0vn3tofqub6rMf6nNPLQtflBnGvPeyDTtjqeApjmXxWL1W0-TbS9EvmX1IIZ7IFAh1gn7DUv_FFLapZs7GLmQJnAYIA-A36tmcMio3sEWM_tzZmcODUp4SbIO_huWfHF8SAA3_tTsQ2ujPKMIIW51eCkJ_H044M7sRjIG-ZyAxpOSf2rac0vMCSAFaJKP_mNw59qsKLy3-60FFjvwQfBJAEX7GRrIYLFiLmc-N5eKTygGEnJf_Ls4oAPyonWCG6Csedv5crqqNGHFZOUdhYNeok8juiIUGanLKwgLcIAbpTg3GMmt6pCnQbvwWbuhkV4pFNwXJsvVZOjpgs0zJu6RB14G7aQ2u6Myp-mf54mYzi1tK0RW0DlYt9pjSaWBOVeDnTGbWcDkZz3_N02K9mEgqrjhrMXUQgAP6a_30_HLJ0S5hC4OFY3d0a6gEKVPMcHWq53kDoC5GN47eTJ2LYKQd-_Ow7S0tFNOiUgqEOe7WWC1Lrs4HV-lCyVrV2anPkywenLqTDNftSdkJNqzyKqyay5_d1ncfrHLWL8xZhawbV8VDkJSAvZlobuyIycmTPcSWqRmgl1=w600)" alt="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                        kpi
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/21/kpi-management/" class="title">【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-21 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-21</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/09/17/ruby-kaigi-2016/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JvArBoA3p6NB1E5aZhZEappII9BeoswwPba3ZApAP3k4hwlG7IOiuDHVZbbn78kxwhOYc1SSR-SZT938RpM59LJMSo7rdNiWT7B6qc2UrZz1R9rtB9-hLkXVkTNYUsWPINE8TEBh3DGYjzt_vkw3Q7Z9QiFSUcAAH9-NrpUzgaQjYzQ4NRh8Fbc-DGpkI9V9VHNFwnfGnBKfBy9arLX-g8jiEZwRs2DHU7z8UX3KjJeqjm6qR9hCqTvD7VMyD26VeeTDNvGoUoqFl12GLFicI7kkFf4FhYyIeVowHq18Jan2ctyDzj6doFbVmCnqQqU67tSJvNKA7L2xjLc6HsBzhUIFEHVOmvV3joQqS5e9bkAyjRmbA93eyb4mJDMjhjnGo2lNfMsoVj8FRBzm9ITGrcgIg3NDIWglzhTpx6Xgv48iDe8OtUZQijmveGcIhZnebAIqRhDrhD2ppdXSpqD_q9k0ImSRYShB0j4jpqU-vdD97aXB4tqJOiaGbqdNPVMTmKyZCF119bvrw5pjQieTTHrulEVFhYDqxFkLZacBK2l4RKy-czFehPq2jw9HJf9ZUaQNSBtt6ufcA8ewWWQPE4OEwbWYRTB61CIEyI1sttld3Hbp=w1007-h446-no)" alt="日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/09/17/ruby-kaigi-2016/" class="title">RubyKaigi2016(@京都)に行ってきました！</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-09-17 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-09-17</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
