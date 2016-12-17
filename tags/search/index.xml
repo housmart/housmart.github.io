@@ -10,7 +10,7 @@
     <atom:link href="http://techblog.housmart.co.jp/tags/search/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例</title>
+      <title>日本語でのサジェストの難しさとElasticsearchを用いた実装例</title>
       <link>http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/</link>
       <pubDate>Fri, 16 Dec 2016 10:23:43 +0900</pubDate>
       
@@ -19,11 +19,11 @@
 
 &lt;p&gt;このエントリは &lt;a href=&#34;http://qiita.com/advent-calendar/2016/elastic&#34;&gt;Elastic stack (Elasticsearch) Advent Calendar 2016&lt;/a&gt; の17日目の投稿です。&lt;/p&gt;
 
-&lt;p&gt;こんにちは。Housmartの高松です。今回のテーマは &lt;strong&gt;Elasticsearchを使った日本語での固有名詞のサジェスト&lt;/strong&gt; です。&lt;/p&gt;
+&lt;p&gt;こんにちは。Housmartの高松です。今回のテーマは &lt;strong&gt;Elasticsearchを使った日本語でのサジェスト&lt;/strong&gt; です。&lt;/p&gt;
 
 &lt;p&gt;Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。&lt;/p&gt;
 
-&lt;p&gt;今回は実務での経験をもとに、なぜ日本語での固有名詞のサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。&lt;/p&gt;
+&lt;p&gt;今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。&lt;/p&gt;
 
 &lt;h2 id=&#34;今回取り組んだ問題&#34;&gt;今回取り組んだ問題&lt;/h2&gt;
 
