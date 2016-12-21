@@ -62,7 +62,7 @@ Elasticsearch便利ですよね。個人的には今から検索関連の機能�
 
 
 <meta itemprop="dateModified" content="2016-12-16T10:23:43&#43;09:00" />
-<meta itemprop="wordCount" content="3361">
+<meta itemprop="wordCount" content="3444">
 
   <meta itemprop="image" content="https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600">
 
@@ -302,7 +302,7 @@ Elasticsearch便利ですよね。個人的には今から検索関連の機能�
             <i class="fa fa-calendar"></i>
             <time datetime="2016-12-16 10:23:43 &#43;0900 JST" itemprop="datePublished">2016-12-16</time>
             &middot;
-            3361
+            3444
             words
             &middot;
             7
@@ -415,6 +415,8 @@ Elasticsearch便利ですよね。個人的には今から検索関連の機能�
 <p>ElasticsearchではCompletionSuggesterというサジェスト用の機能が提供されているのですが、この機能は英語のドキュメントに対するサジェストを提供するためには非常に優れた機能です。一方で、 <strong>この機能を使って実用レベルの日本語のサジェストを実現することは難しい</strong> です。</p>
 
 <p>日本語でのサジェストは以上で挙げたように工夫すべきポイントがいくつか存在します。Elasticsearchの標準のサジェスト機能ではここがすべて考慮されているわけではないので、現状では実用的な日本語サジェストには使いにくいという結果になっています。</p>
+
+<p>更に言うと、私はこの機能でどこまで出来るかを調べだしてしまったため結構ハマりました。 <strong>要件によってはこの機能を使わない</strong> という選択をした方が良い事を知っておいてください。</p>
 
 <h2 id="どうやって実装していくか">どうやって実装していくか</h2>
 
