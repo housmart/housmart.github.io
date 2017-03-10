@@ -66,12 +66,14 @@
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Realmの通知機能 &lt;br&gt;
-プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える&lt;br&gt;
-イベントハンドリング&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える&lt;br&gt;
+・イベントハンドリング&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;アクセス権の管理 &lt;br&gt;
-Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能とのことで、3の内容が特に興味深かったです。&lt;/p&gt;&lt;/li&gt;
+・Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;とのことで、3の内容が特に興味深かったです。&lt;/p&gt;
 
 &lt;h2 id=&#34;②client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223&#34;&gt;②Client-Side Deep Learning &lt;a href=&#34;https://twitter.com/shu223&#34;&gt;by Shuichi Tsutsumi&lt;/a&gt;&lt;/h2&gt;
 
