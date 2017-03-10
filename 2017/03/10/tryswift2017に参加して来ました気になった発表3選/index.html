@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title> try!Swift2017に参加して来ました！気になった発表3選！ &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.19" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/" />
+    <meta property="og:title" content=" try!Swift2017に参加して来ました！気になった発表3選！" />
+<meta property="og:description" content="こんにちは。あすかです。弊社は普段Swiftで開発していることもあり、  try!Swift TOKYOというSwiftのカンファレンスに参加にして来ました！
+
+try!Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。
+
+
+
+参加して感じたこと5つ
+
+① Twitter(@tryswift)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
+(@k_katsumiさん、運営者のみなさんありがとうございます！)
+
+②最前列で聞き起こしをして登壇もしているniwatakoさんのコミュニティへの貢献度がすごいと思いました。(niwatakoさんありがとうございます！)
+
+③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。
+
+④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は@tryswift運営の方へ連絡しましょう。)
+
+⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。
+
+今回参加の目的
+
+
+
+弊社HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。また、メインのサービス以外にも、ユーザがマンションの情報を検索できるカウルライブラリー、マンション購入のノウハウを載せたマンションジャーナルというメディアの運営をしています。
+
+これらのサービスでアプリ開発を行っており、自分達のサービスに活かせるトピックスを探しにカンファレンスに参加しました。
+
+
+
+今回は、カンファレンスにて特にカウルアプリに関係ありそうな内容で気になった発表を3つ紹介させていただきます。
+
+気になった発表3つ
+
+try!Swift全体の構成
+
+まず、全体の構成についてです。カンファレンスは全部で31ほどで、内容は以下のような構成でした。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w2560-h552-no" />
+
+
+
+<meta property="article:published_time" content="2017-03-10T12:00:36&#43;09:00"/>
+<meta property="article:modified_time" content="2017-03-10T12:00:36&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content=" try!Swift2017に参加して来ました！気になった発表3選！">
+<meta itemprop="description" content="こんにちは。あすかです。弊社は普段Swiftで開発していることもあり、  try!Swift TOKYOというSwiftのカンファレンスに参加にして来ました！
+
+try!Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。
+
+
+
+参加して感じたこと5つ
+
+① Twitter(@tryswift)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
+(@k_katsumiさん、運営者のみなさんありがとうございます！)
+
+②最前列で聞き起こしをして登壇もしているniwatakoさんのコミュニティへの貢献度がすごいと思いました。(niwatakoさんありがとうございます！)
+
+③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。
+
+④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は@tryswift運営の方へ連絡しましょう。)
+
+⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。
+
+今回参加の目的
+
+
+
+弊社HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。また、メインのサービス以外にも、ユーザがマンションの情報を検索できるカウルライブラリー、マンション購入のノウハウを載せたマンションジャーナルというメディアの運営をしています。
+
+これらのサービスでアプリ開発を行っており、自分達のサービスに活かせるトピックスを探しにカンファレンスに参加しました。
+
+
+
+今回は、カンファレンスにて特にカウルアプリに関係ありそうな内容で気になった発表を3つ紹介させていただきます。
+
+気になった発表3つ
+
+try!Swift全体の構成
+
+まず、全体の構成についてです。カンファレンスは全部で31ほどで、内容は以下のような構成でした。
+">
+
+
+<meta itemprop="dateModified" content="2017-03-10T12:00:36&#43;09:00" />
+<meta itemprop="wordCount" content="2469">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w2560-h552-no">
+
+
+
+<meta itemprop="keywords" content="culture,data-analysis,design,development,event,infra,ios,kpi,member,operation,project,work,conference,culture,data-analysis,design,development,elasticsearch,event,git,hackathon,infra,introduction,ios,kpi,lab,management,media,operation,pitch,project,rails,search,startup,swift,tools,tryswift,ux,work," />
+
+    
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w2560-h552-no"/>
+
+
+
+<meta name="twitter:text:title" content=" try!Swift2017に参加して来ました！気になった発表3選！"/>
+<meta name="twitter:title" content=" try!Swift2017に参加して来ました！気になった発表3選！"/>
+<meta name="twitter:description" content="こんにちは。あすかです。弊社は普段Swiftで開発していることもあり、  try!Swift TOKYOというSwiftのカンファレンスに参加にして来ました！
+
+try!Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。
+
+
+
+参加して感じたこと5つ
+
+① Twitter(@tryswift)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
+(@k_katsumiさん、運営者のみなさんありがとうございます！)
+
+②最前列で聞き起こしをして登壇もしているniwatakoさんのコミュニティへの貢献度がすごいと思いました。(niwatakoさんありがとうございます！)
+
+③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。
+
+④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は@tryswift運営の方へ連絡しましょう。)
+
+⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。
+
+今回参加の目的
+
+
+
+弊社HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。また、メインのサービス以外にも、ユーザがマンションの情報を検索できるカウルライブラリー、マンション購入のノウハウを載せたマンションジャーナルというメディアの運営をしています。
+
+これらのサービスでアプリ開発を行っており、自分達のサービスに活かせるトピックスを探しにカンファレンスに参加しました。
+
+
+
+今回は、カンファレンスにて特にカウルアプリに関係ありそうな内容で気になった発表を3つ紹介させていただきます。
+
+気になった発表3つ
+
+try!Swift全体の構成
+
+まず、全体の構成についてです。カンファレンスは全部で31ほどで、内容は以下のような構成でした。
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        23
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          27
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/jCSWZstB7M4yMZeQgW_wj-P6NduZOv67R2uy-QCZ4cV-4LuYfvBBSlJWIVMPhUCS_4tg-fcSxwKilpL6wsRKznorTXz60uWbW4so78emvau1jsa_KaL8Xvju6lkmvqWSl3TvyHkVjJmbd5-MwK6dlwkXcGP8CMISIr2jz0sV1F3KgVNipG7wcedNbtOV-BKl7p2KU5dtFUDtORvbTz0VLqpqPV_9oIw885QAcOvvhqsLBedn0GsYXr96b10abRYmD1tlUcOKNZ8ROe1CRbaEK49u_-rKf2rqAm91TpJqkw-k2LeEuTlRArNuVPMPEnegutJN81JSS_incG4XFY4-XE7DN3Ccm71OjcmCP4pWRJ_H9FOnt-owSZF2Rk8rvI8oP-vmHknpZ5WHPKhN50vTAIdPH9t8GMEAzzd4GhrsJPiL8d_1jRHQjZvLQmB3H8dfwT_lSp8-qly7rHJ2RH0VbgquOLU6HUYGShJGgal4lfXskysNzyP8iV2A0-afOXQFa4uBcEZV-IUeVEy8n87r_VTNgcTdT7skSwcRPhBnOHaruZ3k1jGIIhhgz4FpeIEGj1HsZEY2tQtcD4OzLRcB4e15naSMfsSP7Gn241l2lq2uF94vn_cMmZJP13vqQMy4x8kjqVnRmCjBSVo6hSL0TyLoXG00MkarcC-eLW6Liw=w559-h310-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/">
+    <h1 class="article-title" itemprop="name">
+         try!Swift2017に参加して来ました！気になった発表3選！
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-03-10 12:00:36 &#43;0900 JST" itemprop="datePublished">2017-03-10</time>
+            &middot;
+            2469
+            words
+            &middot;
+            5
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">event</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/swift">swift</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/conference">conference</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/tryswift">tryswift</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/" class="hatena-bookmark-button" data-hatena-bookmark-title=" try!Swift2017に参加して来ました！気になった発表3選！" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>こんにちは。あすかです。弊社は普段Swiftで開発していることもあり、 <a href="https://www.tryswift.co/tokyo/jp#"> try!Swift TOKYO</a>というSwiftのカンファレンスに参加にして来ました！</p>
+
+<p>try!Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w2560-h552-no" alt=" try!Swiftの様子 すごい熱気です！" /></p>
+
+<h1 id="参加して感じたこと5つ-br">参加して感じたこと5つ<br></h1>
+
+<p>① Twitter(<a href="https://twitter.com/tryswiftconf">@tryswift</a>)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
+(<a href="https://twitter.com/k_katsumi">@k_katsumi</a>さん、運営者のみなさんありがとうございます！)<br></p>
+
+<p>②最前列で聞き起こしをして登壇もしている<a href="http://niwatako.hatenablog.jp/">niwatako</a>さんのコミュニティへの貢献度がすごいと思いました。(<a href="http://niwatako.hatenablog.jp/">niwatako</a>さんありがとうございます！)<br></p>
+
+<p>③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。<br></p>
+
+<p>④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は<a href="https://twitter.com/tryswiftconf">@tryswift</a>運営の方へ連絡しましょう。)<br></p>
+
+<p>⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。<br></p>
+
+<h1 id="今回参加の目的">今回参加の目的</h1>
+
+<p><img src="https://lh3.googleusercontent.com/jOlDbUCQsCQ8FhCH6QgVfSA450etEXZyi7d9AKV4H7Q5z91t2rStb0jczriLwu_WGWSerVIoF-aUpFNjX9KiVK0egvEoyz805GC7oRNY3oAPiheAi3S5u0KQ0_nkZ1X-x0ZcKjm3loqsneJ5Je4BccWaBTMkiLRuOnWfhy0Ip--ntYqUSMyb9awDIcCoylp8d1mZ5JEa7RJB9WLGj7pNQYVQdQVTheQIyhQnG5mcAkCMoF1XesMPPsvJ3oH3P9QwYYNkEs8KjKD3lsx8Jzfj1zs8hBVB0ANeNcM9IV3tBjuFsq8vMAmuVF59CBoQ7d6RdaLOil0xynIGCC5Yi3dE3MZPw4ftePqFqtgn8cVN43YFNzR-eOlFjryJF9TkLBfvmCyx972jRiwq5IUMwoHS7pMxk3XgwyPrpVAJy92J3c4kuYcIdV_u9mMBsMVO8mD4Z8ysEVwAi4v8SCREDQvXl-WBX2UMHyC2nUOVSaI8f2Z9MwBzkO0SLNldTFwOt3Vru6sFkSdtRfYtLvXgfMg4Cm0rYcSGkpQxkSKRhoD4XbJyQFPC8xzXScBp51W06VTS9p0lRAF9GXMy_2Bt8vkV_a6-QELlGtwDT6Hn2wjp6ti5JPSp8951XChItf_1pFpkg2dzt1Hxu5VZNqzJanzS2N9LZc9ve0VFUXLyIgd_=w2560-h924-no" alt="中古マンション売買サービス「カウル」" /></p>
+
+<p>弊社HousmartはReTech（不動産テック）スタートアップで、<a href="https://kawlu.com/market">中古マンション売買サービス「カウル」</a>をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。また、メインのサービス以外にも、ユーザがマンションの情報を検索できる<a href="https://kawlu.com/library">カウルライブラリー</a>、マンション購入のノウハウを載せた<a href="https://kawlu.com/journal/">マンションジャーナル</a>というメディアの運営をしています。</p>
+
+<p>これらのサービスでアプリ開発を行っており、自分達のサービスに活かせるトピックスを探しにカンファレンスに参加しました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/-oCt1zx9Rr6ZTjKkf-z5sC_pyAlsyxO5QGO-iUY-MQzfpq9FCmODFFNHF1NeqzDHHxr7EpsArFErgAcp1jgwbarbYzbf8wUztbEmkk3ieWGWWz1k6tK5gm3Tc6SLjzx4IMJi4SauhVeG9BMFj3stO0lXRd2D8Mq0pataRjzsFnA9L2IBTkJaaIT4o6xESSVv94jYKerznrOuBx5Tf_kFfTJ3JD42Q5xqPdUzREtIm6hcywcFLaf4KHrqobrdotsnWyUHHw1n3ERB5KSq-XxJ1Cr9OBri68LL93VvxlQw3JB51q1KBZJqeSYv9q2QpF8YeRSEGOO8rlz_bMGVciyG0z3PmsNUG7ryy-q3p7wUtbnZz59lyIpJ11kOKGYolpTwvFTMNY9U1TCrZLaXjlroBnQdD2Pj4EyR4TiuwU5tp-ZWDRnOwxCCVJtCyc7boiESmmO5K2QXDaemC2JjSc9zYm2uk6dqBEVJu2pBn-yykAS9xnYSiIofOG3P3BQdr0aFhLoqiHt3236ehy5CysAq2pSbIWbelWFEABoN7gurMSt852kp5MsYkx9qbmIATuuHAGlUbVBN6PR1B1Y1p4BPQoEPZ067CkuM-J0FIWAZMAc1WOQF7X4yUWMxG4dOOkMR5WHBoWAkxBsvl80bu9XAtmy_Nn-wy20EOaHIlQF2=w1790-h1188-no" alt="カンファレンスのネームプレートが可愛かったです。当日の名前投票で「RIKO」ちゃんに決定" /></p>
+
+<p>今回は、カンファレンスにて特にカウルアプリに関係ありそうな内容で気になった発表を3つ紹介させていただきます。</p>
+
+<h1 id="気になった発表3つ">気になった発表3つ</h1>
+
+<h2 id="try-swift全体の構成">try!Swift全体の構成</h2>
+
+<p>まず、全体の構成についてです。カンファレンスは全部で31ほどで、内容は以下のような構成でした。
+</p>
+
+<p><img src="https://lh3.googleusercontent.com/sAsjM3BtkhaZEDRPWtmAamnXBG2w3-hQe4dASoxu6N_nvZP03p-QIWy8gJ62TO1f16PLcg0kdK6ZC5Rk23MJJzWhAVA_P9dUpOlfERw3Xc5JiCdzXsavcvPe8Wtel3Yk7UfMdW_Zl93ITo5J_SqemIjK8XR1mc7FgvZjByXZmG-q0mdYV9FEP9LjHiBxbFf4ujI9OiZ78d1AaZY_gs8zH6oxWVLzPbdei5VJLJMdQ2JlutfMGEMbxOfCEdRyL4m8mxbicxAd7D6kFuF76yoDokzJNb75Tx8cjCbNdzycedLyIeGHXlLgLM9RVYbnI6f6_XeUln98vLXDsNA9ILMV8Slw5aoa-mlrfWLjGx1m2j2Jaknby8JFtoJ6jiXcyqn6lYt8nX605L9cRxGYeKGq3G_V43WpwIXxkfXE71cHn3IBcXKyOpxbcbOD5gKH99qM2DgR4rR21Q5CGVlwoTDVpOSnIBaDYks7VQK_SBaaTIvXLg3v3oXARaaaoMmM82bkNL4bH5B_WMCN5VJ5_yf6LPgsC2j8boj-wMo28pld7y0aKSxfZy7kK0izUdgNvLZ37hV-r20KSgDe-TeWUNIG5p0EbOtxTqB5lQLBfWbPIZPM64DanLjewcvxDrQ6cFawK_oLBudldbItSIDZlJETijk1iEd083S8TXI2fLC5=w1158-h750-no" alt=" try!Swift2017の講演・ライトニングトークの内容構成図" /></p>
+
+<h2 id="①realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz">①Realmを使ってコラボレーションアプリを作る <a href="https://twitter.com/mrackwitz">by Marius Rackwitz</a></h2>
+
+<p>このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。<br>
+1. Realmの利点<br>
+・オブジェクト思考で書ける点で、クラスを実装するように書ける<br>
+・React NativeやXamarinにも対応しているので、クロスプラットフォーム<br>
+・すべての環境で同じデータを使いまわせるので、バックアップがとれる<br>
+・トランザクション管理をしているので、リアルタイムの共同編集ができる<br>
+・サーバー、モバイルの両方でRealmを採用すれば、アプリからjsonを排除することが可能<br></p>
+
+<ol>
+<li><p>Realmの通知機能 <br>
+プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える<br>
+イベントハンドリング<br></p></li>
+
+<li><p>アクセス権の管理 <br>
+Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能とのことで、3の内容が特に興味深かったです。</p></li>
+</ol>
+
+<h2 id="②client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223">②Client-Side Deep Learning <a href="https://twitter.com/shu223">by Shuichi Tsutsumi</a></h2>
+
+<p>機械学習はクライアントサイドで行う堤(<a href="https://twitter.com/shu223">@Shu223</a>)さんのプレゼンが印象的でした。<br></p>
+
+<p>ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。<br></p>
+
+<p>つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。</p>
+
+<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/2OS20oAt7NLgPx" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/t26v0748/clientside-deep-learning" title="Client-Side Deep Learning" target="_blank">Client-Side Deep Learning</a> </strong> from <strong><a target="_blank" href="//www.slideshare.net/t26v0748">Shuichi Tsutsumi</a></strong> </div>
+　</p>
+
+<h2 id="③クックパッドアプリのテストを味わう-by-kazucocoa-https-twitter-com-kazu-cocoa">③クックパッドアプリのテストを味わう <a href="https://twitter.com/Kazu_cocoa">by KazuCocoa</a></h2>
+
+<p>クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。<br></p>
+
+<ol>
+<li><p>Cookpadアプリの状況<br>
+グローバルアプリと日本アプリの2つがあり、統合はまだしていない<br>
+・UIコンポーネントは複数大きく変えている<br>
+・だいたい10万行ぐらいある<br>
+・以前は2週間、最近は1ヶ月毎にアップデートしている<br></p></li>
+
+<li><p>kano-model という品質モデル<br>
+Attractive – Must-be Qualityの２つのパラメータ<br>
+Diachronic Quality for mobile<br></p></li>
+
+<li><p>UITestのやり方<br>
+・テストを書いてからリファクタリングをする<br>
+・UITestの実際<br>
+・マニュアルテストは簡単に出来る、ユニットテストはめんどくさい<br>
+・でも理想はその逆<br>
+・Cookpadでは2015年〜2017年にかけてUITestを初めてCrash率を下げ続けた<br></p></li>
+
+<li><p>UITestの書き方<br>
+・シナリオを書く<br>
+・シナリオをRubyコードに変換<br>
+・Appiumで実行<br>
+・XPATHはOSのフレームワークにかなり依存している<br>
+・テストをUIレベルからメソッドレベルに移動することが大事<br></p></li>
+</ol>
+
+<p>クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。カウルでもこのような工夫でCrash率の低い安定したサービスを提供していきたいと思いました。</p>
+
+<h2 id="最後に">最後に</h2>
+
+<p>Swiftの盛り上がりを体感し、Swiftディベロッパーの方々と交流を深める良い機会となりました！</p>
+
+<p><img src="https://lh3.googleusercontent.com/fDjqiZIl_WgWToJ0tpZfahPVo7Cgw2X3P0NoOWAs1gdVY4-fDhP44gNs8RHsai89Jk5ey2hel0_w_HdQc3_OM2AFeqBF0KWIycynk2L9Rlb4Q4kOVQy_XOFszgIjUD4KeCVcejIHr51nFPVNXTCYzkMarTACllmlkl5vxZglUc9ljSE2tFlqHceIYsdco-87TisCQkMUUhVGW2hFlJZlLe4ynxuYNS0150JJ8sh-TBpxwxwTTcLu9TPtLasThuT_0j7IU8CqWRV8vYxEtTCFPyhwzUZGvX9gU-qH89zn4__uK_fsO9gWM8Pk_9IwRuY0dNRdd5hzBhDHRiyOwWQfPiKcQdD1Awc479c9HWK0lWr4ekXsmx-Zu87G6nRUIEGbdZSifAUWMuBL7m2xbZs3RNBCd8kENvSV_ntdbmukh-3wNQrbJP-FJGlf4x9412YMDqmW7Ym3c_aOyKAqngwnhnVMguEroc6REqGQLXad5qt93w37CMhpypRskY0Zwy1YEzAqQPBfVGxEshDbAthXiSFyCgnvnZo6MP6k2tZZm7DOwWhYzrA49WRYTNoLjPDr8suFOQaukPxhbDpEKIbjccrwF2kepfJ6o1y51YZBQFy53j6vFIPsGtyXxJojSC0Ee97MnQiOvnmuxYooEgt59x5_4v2US_92qb7XnX4l=w1584-h1188-no" alt="懇親会の様子" /></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/" class="hatena-bookmark-button" data-hatena-bookmark-title=" try!Swift2017に参加して来ました！気になった発表3選！" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title=" try!Swift2017に参加して来ました！気になった発表3選！" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f03%2f10%2ftryswift2017%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E6%259D%25A5%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E7%2599%25BA%25E8%25A1%25A83%25E9%2581%25B8%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%20try%21Swift2017%e3%81%ab%e5%8f%82%e5%8a%a0%e3%81%97%e3%81%a6%e6%9d%a5%e3%81%be%e3%81%97%e3%81%9f%ef%bc%81%e6%b0%97%e3%81%ab%e3%81%aa%e3%81%a3%e3%81%9f%e7%99%ba%e8%a1%a83%e9%81%b8%ef%bc%81&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f03%2f10%2ftryswift2017%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E6%259D%25A5%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E7%2599%25BA%25E8%25A1%25A83%25E9%2581%25B8%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f03%2f10%2ftryswift2017%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E6%259D%25A5%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E7%2599%25BA%25E8%25A1%25A83%25E9%2581%25B8%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f03%2f10%2ftryswift2017%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E6%259D%25A5%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E7%2599%25BA%25E8%25A1%25A83%25E9%2581%25B8%2f&amp;description=%20try%21Swift2017%e3%81%ab%e5%8f%82%e5%8a%a0%e3%81%97%e3%81%a6%e6%9d%a5%e3%81%be%e3%81%97%e3%81%9f%ef%bc%81%e6%b0%97%e3%81%ab%e3%81%aa%e3%81%a3%e3%81%9f%e7%99%ba%e8%a1%a83%e9%81%b8%ef%bc%81" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f03%2f10%2ftryswift2017%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E6%259D%25A5%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E7%2599%25BA%25E8%25A1%25A83%25E9%2581%25B8%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">日本語でのサジェストの難しさとElasticsearchを用いた実装例</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/jCSWZstB7M4yMZeQgW_wj-P6NduZOv67R2uy-QCZ4cV-4LuYfvBBSlJWIVMPhUCS_4tg-fcSxwKilpL6wsRKznorTXz60uWbW4so78emvau1jsa_KaL8Xvju6lkmvqWSl3TvyHkVjJmbd5-MwK6dlwkXcGP8CMISIr2jz0sV1F3KgVNipG7wcedNbtOV-BKl7p2KU5dtFUDtORvbTz0VLqpqPV_9oIw885QAcOvvhqsLBedn0GsYXr96b10abRYmD1tlUcOKNZ8ROe1CRbaEK49u_-rKf2rqAm91TpJqkw-k2LeEuTlRArNuVPMPEnegutJN81JSS_incG4XFY4-XE7DN3Ccm71OjcmCP4pWRJ_H9FOnt-owSZF2Rk8rvI8oP-vmHknpZ5WHPKhN50vTAIdPH9t8GMEAzzd4GhrsJPiL8d_1jRHQjZvLQmB3H8dfwT_lSp8-qly7rHJ2RH0VbgquOLU6HUYGShJGgal4lfXskysNzyP8iV2A0-afOXQFa4uBcEZV-IUeVEy8n87r_VTNgcTdT7skSwcRPhBnOHaruZ3k1jGIIhhgz4FpeIEGj1HsZEY2tQtcD4OzLRcB4e15naSMfsSP7Gn241l2lq2uF94vn_cMmZJP13vqQMy4x8kjqVnRmCjBSVo6hSL0TyLoXG00MkarcC-eLW6Liw=w559-h310-no)" alt=" try!Swift2017に参加して来ました！気になった発表3選！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/" class="title"> try!Swift2017に参加して来ました！気になった発表3選！</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-03-10 12:00:36 &#43;0900 JST" itemprop="datePublished">2017-03-10</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600)" alt=" try!Swift2017に参加して来ました！気になった発表3選！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="title">日本語でのサジェストの難しさとElasticsearchを用いた実装例</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-12-16 10:23:43 &#43;0900 JST" itemprop="datePublished">2016-12-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt=" try!Swift2017に参加して来ました！気になった発表3選！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/culture">
+                        culture
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="title">エンジニアが自由研究に時間をかけるべき理由</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-12-07 14:23:37 &#43;0900 JST" itemprop="datePublished">2016-12-07</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/21/kpi-management/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/421DyO-Mngsjvt9_miuoe7AEgYsYwr9w32m5j6Iu0vn3tofqub6rMf6nNPLQtflBnGvPeyDTtjqeApjmXxWL1W0-TbS9EvmX1IIZ7IFAh1gn7DUv_FFLapZs7GLmQJnAYIA-A36tmcMio3sEWM_tzZmcODUp4SbIO_huWfHF8SAA3_tTsQ2ujPKMIIW51eCkJ_H044M7sRjIG-ZyAxpOSf2rac0vMCSAFaJKP_mNw59qsKLy3-60FFjvwQfBJAEX7GRrIYLFiLmc-N5eKTygGEnJf_Ls4oAPyonWCG6Csedv5crqqNGHFZOUdhYNeok8juiIUGanLKwgLcIAbpTg3GMmt6pCnQbvwWbuhkV4pFNwXJsvVZOjpgs0zJu6RB14G7aQ2u6Myp-mf54mYzi1tK0RW0DlYt9pjSaWBOVeDnTGbWcDkZz3_N02K9mEgqrjhrMXUQgAP6a_30_HLJ0S5hC4OFY3d0a6gEKVPMcHWq53kDoC5GN47eTJ2LYKQd-_Ow7S0tFNOiUgqEOe7WWC1Lrs4HV-lCyVrV2anPkywenLqTDNftSdkJNqzyKqyay5_d1ncfrHLWL8xZhawbV8VDkJSAvZlobuyIycmTPcSWqRmgl1=w600)" alt=" try!Swift2017に参加して来ました！気になった発表3選！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                        kpi
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/21/kpi-management/" class="title">【スタートアップ創業期】プロダクトの０→１を実現するKPI管理方法</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-21 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-21</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt=" try!Swift2017に参加して来ました！気になった発表3選！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
+                    <p class="item-date">
+                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/conference">
+                    conference
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tryswift">
+                    tryswift
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/conference" style="font-size: 12px;">conference</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tryswift" style="font-size: 12px;">tryswift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

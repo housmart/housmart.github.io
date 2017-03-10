@@ -10,190 +10,120 @@
     <atom:link href="http://techblog.housmart.co.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>日本語での固有名詞サジェストの難しさとElasticsearchを用いた実装例</title>
-      <link>http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/</link>
-      <pubDate>Fri, 16 Dec 2016 10:23:43 +0900</pubDate>
+      <title> try!Swift2017に参加して来ました！気になった発表3選！</title>
+      <link>http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/</link>
+      <pubDate>Fri, 10 Mar 2017 12:00:36 +0900</pubDate>
       
-      <guid>http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/</guid>
-      <description>
+      <guid>http://techblog.housmart.co.jp/2017/03/10/tryswift2017%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%A6%E6%9D%A5%E3%81%BE%E3%81%97%E3%81%9F%E6%B0%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E7%99%BA%E8%A1%A83%E9%81%B8/</guid>
+      <description>&lt;p&gt;こんにちは。あすかです。弊社は普段Swiftで開発していることもあり、 &lt;a href=&#34;https://www.tryswift.co/tokyo/jp#&#34;&gt; try!Swift TOKYO&lt;/a&gt;というSwiftのカンファレンスに参加にして来ました！&lt;/p&gt;
 
-&lt;p&gt;このエントリは &lt;a href=&#34;http://qiita.com/advent-calendar/2016/elastic&#34;&gt;Elastic stack (Elasticsearch) Advent Calendar 2016&lt;/a&gt; の17日目の投稿です。&lt;/p&gt;
+&lt;p&gt;try!Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。&lt;/p&gt;
 
-&lt;p&gt;こんにちは。Housmartの高松です。今回のテーマは &lt;strong&gt;Elasticsearchを使った日本語での固有名詞のサジェスト&lt;/strong&gt; です。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w2560-h552-no&#34; alt=&#34; try!Swiftの様子 すごい熱気です！&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。&lt;/p&gt;
+&lt;h1 id=&#34;参加して感じたこと5つ-br&#34;&gt;参加して感じたこと5つ&lt;br&gt;&lt;/h1&gt;
 
-&lt;p&gt;今回は実務での経験をもとに、なぜ日本語での固有名詞のサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。&lt;/p&gt;
+&lt;p&gt;① Twitter(&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
+(&lt;a href=&#34;https://twitter.com/k_katsumi&#34;&gt;@k_katsumi&lt;/a&gt;さん、運営者のみなさんありがとうございます！)&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;今回取り組んだ問題&#34;&gt;今回取り組んだ問題&lt;/h2&gt;
+&lt;p&gt;②最前列で聞き起こしをして登壇もしている&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんのコミュニティへの貢献度がすごいと思いました。(&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんありがとうございます！)&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;弊社HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。&lt;br /&gt;
-また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた自社メディアである&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;の運営をしています。&lt;/p&gt;
+&lt;p&gt;③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;今回はマンションのデータベースサイトであるカウルライブラリーの検索にサジェスト機能を実装しました。&lt;/p&gt;
+&lt;p&gt;④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;運営の方へ連絡しましょう。)&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/u_9N0C3qqsnDcNjXxK9eopejjMM-k_fjBkYG2cKMCjnPGcLycAUDiHP_XfGgk9oNo38Qrgzpu2j7ay86tc1y8wzbdPWjjPLIo2hpsdyyhzSkPuygJ70bGmlXlY3spMgbI3wwpjAKur5LcE5tqu0byM-aGoO40qiWxO2Bu3PmTBZWFwwOfMYZczFGU9mJMD-0G0NkQ_PLuuM1xp4U7yPSQrWNp58Jy61NQQS-VO3B334fk_WSxd198zYzPqA_O5lsM1PDvtm86-Pfy0qltby984jY8--hHzJhgKjc4vzVUOEdjqvJBECJvnMo0A8tkFtsMhoxmbofGxG4AQOY9u7LcW3bQI8OLzwR_r93uvzr42adQOZR_rIn-wMubRdCq82QfURhdSOMvslMFCcTRHruQx-yZz4dsR8bJxdpQsYv9RtWcUtB0WtvIKWlCzXm1tGN5IRCqHZXNH_4agVUx442BPGwnDQ5BLX_lxiGnoiYU4E6NKZqoArgcoiSgCWrPnSRJDdnE2BWlMiAl425WdcfndDoM_b4eFt_Fz2jj7ew173cqSoiJxMJrUqX5JME6KkiUAYUxeF4xpZH4X9wSxdI3rbwd4McEyOC_FzFXvu4SrpQ_Vz9EEqQZsmNUhSiKzGMyNRkCYWKlbVlesRB-XL_Zr54c4Q_lZoAUvELtZKu2w=w400&#34; alt=&#34;カウルライブラリーのサジェスト&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;マンション名の検索の場合、出て来る固有名詞の種類が多い（マンションブランド名、地名、駅名など）ので、その全てにマスタを作るのが難しい（手間がかかる）という難点があります。これは例えばECサイトなどでも同様の悩みがあるのではないでしょうか。&lt;/p&gt;
+&lt;h1 id=&#34;今回参加の目的&#34;&gt;今回参加の目的&lt;/h1&gt;
 
-&lt;h2 id=&#34;なぜ日本語のサジェストが難しいのか&#34;&gt;なぜ日本語のサジェストが難しいのか&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/jOlDbUCQsCQ8FhCH6QgVfSA450etEXZyi7d9AKV4H7Q5z91t2rStb0jczriLwu_WGWSerVIoF-aUpFNjX9KiVK0egvEoyz805GC7oRNY3oAPiheAi3S5u0KQ0_nkZ1X-x0ZcKjm3loqsneJ5Je4BccWaBTMkiLRuOnWfhy0Ip--ntYqUSMyb9awDIcCoylp8d1mZ5JEa7RJB9WLGj7pNQYVQdQVTheQIyhQnG5mcAkCMoF1XesMPPsvJ3oH3P9QwYYNkEs8KjKD3lsx8Jzfj1zs8hBVB0ANeNcM9IV3tBjuFsq8vMAmuVF59CBoQ7d6RdaLOil0xynIGCC5Yi3dE3MZPw4ftePqFqtgn8cVN43YFNzR-eOlFjryJF9TkLBfvmCyx972jRiwq5IUMwoHS7pMxk3XgwyPrpVAJy92J3c4kuYcIdV_u9mMBsMVO8mD4Z8ysEVwAi4v8SCREDQvXl-WBX2UMHyC2nUOVSaI8f2Z9MwBzkO0SLNldTFwOt3Vru6sFkSdtRfYtLvXgfMg4Cm0rYcSGkpQxkSKRhoD4XbJyQFPC8xzXScBp51W06VTS9p0lRAF9GXMy_2Bt8vkV_a6-QELlGtwDT6Hn2wjp6ti5JPSp8951XChItf_1pFpkg2dzt1Hxu5VZNqzJanzS2N9LZc9ve0VFUXLyIgd_=w2560-h924-no&#34; alt=&#34;中古マンション売買サービス「カウル」&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;まず、なぜ日本語のサジェストが難しいのかを整理しておきます。&lt;br /&gt;
-もともと検索システム初心者だったため、このあたりの事がWeb上できちんと言語化されていなかったので随分悩みました。&lt;br /&gt;
-&lt;a href=&#34;http://tech.vasily.jp/entry/solr-suggester&#34;&gt;こちらのブログ&lt;/a&gt;にこの辺りがまとめられていたので適宜引用しながら、これから取り組む人にとって役立つように、なぜ日本語のサジェストが難しいのかをまとめておきます。&lt;/p&gt;
+&lt;p&gt;弊社HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;というメディアの運営をしています。&lt;/p&gt;
 
-&lt;p&gt;参考）&lt;a href=&#34;http://tech.vasily.jp/entry/solr-suggester&#34;&gt;Solrを用いて検索のサジェスターを作りました - VASILY Developers Blog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;これらのサービスでアプリ開発を行っており、自分達のサービスに活かせるトピックスを探しにカンファレンスに参加しました。&lt;/p&gt;
 
-&lt;p&gt;一般的なサジェストは、検索対象のドキュメント中の単語リストを保持し、ユーザの入力途中の単語を使って前方一致検索をかけ、出現頻度が高い順に単語のリストを返すという単純な仕組みで成り立っています。&lt;br /&gt;
-しかし、日本語の場合はこの過程でいくつかのポイントを特別に考慮する必要があります。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-oCt1zx9Rr6ZTjKkf-z5sC_pyAlsyxO5QGO-iUY-MQzfpq9FCmODFFNHF1NeqzDHHxr7EpsArFErgAcp1jgwbarbYzbf8wUztbEmkk3ieWGWWz1k6tK5gm3Tc6SLjzx4IMJi4SauhVeG9BMFj3stO0lXRd2D8Mq0pataRjzsFnA9L2IBTkJaaIT4o6xESSVv94jYKerznrOuBx5Tf_kFfTJ3JD42Q5xqPdUzREtIm6hcywcFLaf4KHrqobrdotsnWyUHHw1n3ERB5KSq-XxJ1Cr9OBri68LL93VvxlQw3JB51q1KBZJqeSYv9q2QpF8YeRSEGOO8rlz_bMGVciyG0z3PmsNUG7ryy-q3p7wUtbnZz59lyIpJ11kOKGYolpTwvFTMNY9U1TCrZLaXjlroBnQdD2Pj4EyR4TiuwU5tp-ZWDRnOwxCCVJtCyc7boiESmmO5K2QXDaemC2JjSc9zYm2uk6dqBEVJu2pBn-yykAS9xnYSiIofOG3P3BQdr0aFhLoqiHt3236ehy5CysAq2pSbIWbelWFEABoN7gurMSt852kp5MsYkx9qbmIATuuHAGlUbVBN6PR1B1Y1p4BPQoEPZ067CkuM-J0FIWAZMAc1WOQF7X4yUWMxG4dOOkMR5WHBoWAkxBsvl80bu9XAtmy_Nn-wy20EOaHIlQF2=w1790-h1188-no&#34; alt=&#34;カンファレンスのネームプレートが可愛かったです。当日の名前投票で「RIKO」ちゃんに決定&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;単語の抽出&#34;&gt;単語の抽出&lt;/h3&gt;
+&lt;p&gt;今回は、カンファレンスにて特にカウルアプリに関係ありそうな内容で気になった発表を3つ紹介させていただきます。&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;英語の文章は単語と単語との間がスペースや記号などで区切られています。 そのため、文章を単語に分解する処理を簡単に書くことができます。&lt;br /&gt;
-しかし他方で日本語の文章にはそのような機械的に単語分割できるような目印はありません。 そのため、日本語の文章を単語分割するためには形態素解析という処理を行う必要があります。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;h1 id=&#34;気になった発表3つ&#34;&gt;気になった発表3つ&lt;/h1&gt;
 
-&lt;p&gt;このため、tokenizerに形態素解析用のプラグインを指定する必要があります。&lt;/p&gt;
+&lt;h2 id=&#34;try-swift全体の構成&#34;&gt;try!Swift全体の構成&lt;/h2&gt;
 
-&lt;p&gt;形態素解析ではどのような辞書を用いて解析をするかが検索精度の観点で重要になります。今回は辞書として新語を定期的にアップデートしてくれている mecab-ipadic-NEologd を使いたいので、analysis-kuromoji-neologdのプラグインを利用しました。&lt;/p&gt;
+&lt;p&gt;まず、全体の構成についてです。カンファレンスは全部で31ほどで、内容は以下のような構成でした。
+&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://github.com/codelibs/elasticsearch-analysis-kuromoji-neologd&#34;&gt;Elasticsearch Analysis Kuromoji Neologd - GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/sAsjM3BtkhaZEDRPWtmAamnXBG2w3-hQe4dASoxu6N_nvZP03p-QIWy8gJ62TO1f16PLcg0kdK6ZC5Rk23MJJzWhAVA_P9dUpOlfERw3Xc5JiCdzXsavcvPe8Wtel3Yk7UfMdW_Zl93ITo5J_SqemIjK8XR1mc7FgvZjByXZmG-q0mdYV9FEP9LjHiBxbFf4ujI9OiZ78d1AaZY_gs8zH6oxWVLzPbdei5VJLJMdQ2JlutfMGEMbxOfCEdRyL4m8mxbicxAd7D6kFuF76yoDokzJNb75Tx8cjCbNdzycedLyIeGHXlLgLM9RVYbnI6f6_XeUln98vLXDsNA9ILMV8Slw5aoa-mlrfWLjGx1m2j2Jaknby8JFtoJ6jiXcyqn6lYt8nX605L9cRxGYeKGq3G_V43WpwIXxkfXE71cHn3IBcXKyOpxbcbOD5gKH99qM2DgR4rR21Q5CGVlwoTDVpOSnIBaDYks7VQK_SBaaTIvXLg3v3oXARaaaoMmM82bkNL4bH5B_WMCN5VJ5_yf6LPgsC2j8boj-wMo28pld7y0aKSxfZy7kK0izUdgNvLZ37hV-r20KSgDe-TeWUNIG5p0EbOtxTqB5lQLBfWbPIZPM64DanLjewcvxDrQ6cFawK_oLBudldbItSIDZlJETijk1iEd083S8TXI2fLC5=w1158-h750-no&#34; alt=&#34; try!Swift2017の講演・ライトニングトークの内容構成図&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;漢字-英語の読み&#34;&gt;漢字・英語の読み&lt;/h3&gt;
+&lt;h2 id=&#34;①realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz&#34;&gt;①Realmを使ってコラボレーションアプリを作る &lt;a href=&#34;https://twitter.com/mrackwitz&#34;&gt;by Marius Rackwitz&lt;/a&gt;&lt;/h2&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;さらに、単語に分割した後には「漢字の読み」の問題もあります。 例えば、「とう」と入力した時に「東京」という単語を返すためには、「東京」という単語の読みが「とうきょう」であるという情報が必要です。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。&lt;br&gt;
+1. Realmの利点&lt;br&gt;
+・オブジェクト思考で書ける点で、クラスを実装するように書ける&lt;br&gt;
+・React NariveやXamarinにも対応しているので、クロスプラットフォーム&lt;br&gt;
+・すべての環境で同じデータを使いまわせるので、バックアップがとれる&lt;br&gt;
+・トランザクション管理をしているので、リアルタイムの共同編集ができる&lt;br&gt;
+・サーバー、モバイルの両方でRealmを採用すれば、アプリからjsonを排除することが可能&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;この問題に対しても一般語であればanalysis-kuromoji-neologdで読みを取得することが可能です。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Realmの通知機能 &lt;br&gt;
+プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える&lt;br&gt;
+イベントハンドリング&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;また、マンション名では頻繁に英語とカタカナ語の表記ゆれが存在します。例えば、「ブリリア」というマンションブランド名が「Brillia」と表記されていたりします。「Brillia」という入力に対してブリリアシリーズのマンション名一覧を返すにはこれらの読み情報も必要です。この場合は一般語では無いので独自で辞書を追加する必要があります。&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;アクセス権の管理 &lt;br&gt;
+Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能とのことで、3の内容が特に興味深かったです。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;h3 id=&#34;打ち途中の単語に対するサジェスト&#34;&gt;打ち途中の単語に対するサジェスト&lt;/h3&gt;
+&lt;h2 id=&#34;②client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223&#34;&gt;②Client-Side Deep Learning &lt;a href=&#34;https://twitter.com/shu223&#34;&gt;by Shuichi Tsutsumi&lt;/a&gt;&lt;/h2&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;未確定の子音やひらがなにも対応する必要があります。 「とうky」と入力した時には、「東京」や「東急」といった単語を候補として表示する必要があります。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;機械学習はクライアントサイドで行う堤(&lt;a href=&#34;https://twitter.com/shu223&#34;&gt;@Shu223&lt;/a&gt;)さんのプレゼンが印象的でした。&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;こちらの問題に対しては、ローマ字読みのfieldを別で用意してそれに対して前方一致をかけることで解決していきます。&lt;/p&gt;
+&lt;p&gt;ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。&lt;br&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;elasticsearch標準のサジェスト機能について&#34;&gt;Elasticsearch標準のサジェスト機能について&lt;/h3&gt;
+&lt;p&gt;つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。&lt;/p&gt;
 
-&lt;p&gt;ここで、Elasticsearch標準のサジェスト機能について言及しておきます。&lt;/p&gt;
+&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2OS20oAt7NLgPx&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/t26v0748/clientside-deep-learning&#34; title=&#34;Client-Side Deep Learning&#34; target=&#34;_blank&#34;&gt;Client-Side Deep Learning&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&#34;_blank&#34; href=&#34;//www.slideshare.net/t26v0748&#34;&gt;Shuichi Tsutsumi&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+　&lt;/p&gt;
 
-&lt;p&gt;ElasticsearchではCompletionSuggesterというサジェスト用の機能が提供されているのですが、この機能は英語のドキュメントに対するサジェストを提供するためには非常に優れた機能です。一方で、 &lt;strong&gt;この機能を使って実用レベルの日本語のサジェストを実現することは難しい&lt;/strong&gt; です。&lt;/p&gt;
+&lt;h2 id=&#34;③クックパッドアプリのテストを味わう-by-kazucocoa-https-twitter-com-kazu-cocoa&#34;&gt;③クックパッドアプリのテストを味わう &lt;a href=&#34;https://twitter.com/Kazu_cocoa&#34;&gt;by KazuCocoa&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;日本語でのサジェストは以上で挙げたように工夫すべきポイントがいくつか存在します。Elasticsearchの標準のサジェスト機能ではここがすべて考慮されているわけではないので、現状では実用的な日本語サジェストには使いにくいという結果になっています。&lt;/p&gt;
+&lt;p&gt;クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。&lt;br&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;どうやって実装していくか&#34;&gt;どうやって実装していくか&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Cookpadアプリの状況&lt;br&gt;
+グローバルアプリと日本アプリの2つがあり、統合はまだしていない&lt;br&gt;
+・UIコンポーネントは複数大きく変えている&lt;br&gt;
+・だいたい10万行ぐらいある&lt;br&gt;
+・以前は2週間、最近は1ヶ月毎にアップデートしている&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;今回は要件を満たすためにCompletionSuggesterは使うのを諦め、サジェスト用に新しいインデックスを作成していく方針にしました。&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;kano-model という品質モデル&lt;br&gt;
+Attractive – Must-be Qualityの２つのパラメータ&lt;br&gt;
+Diachronic Quality for mobile&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;h3 id=&#34;サジェスト用インデックスのデータ&#34;&gt;サジェスト用インデックスのデータ&lt;/h3&gt;
+&lt;li&gt;&lt;p&gt;UITestのやり方&lt;br&gt;
+・テストを書いてからリファクタリングをする&lt;br&gt;
+・UITestの実際&lt;br&gt;
+・マニュアルテストは簡単に出来る、ユニットテストはめんどくさい&lt;br&gt;
+・でも理想はその逆&lt;br&gt;
+・Cookpadでは2015年〜2017年にかけてUITestを初めてCrash率を下げ続けた&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;サジェスト用のインデックスに流し込むデータは&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;UITestの書き方&lt;br&gt;
+・シナリオを書く&lt;br&gt;
+・シナリオをRubyコードに変換&lt;br&gt;
+・Appiumで実行&lt;br&gt;
+・Appium&lt;br&gt;
+・XPATHはOSのフレームワークにかなり依存している&lt;br&gt;
+・テストをUIレベルからメソッドレベルに移動することが大事&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;ul&gt;
-&lt;li&gt;なるべく多いマンションが引っかかる検索ワードを優先的に出したい&lt;/li&gt;
-&lt;li&gt;マンション名そのものもサジェストしたい&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。カウルでもこのような工夫でCrash率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
 
-&lt;p&gt;の2点を満たすべく、マンション名をそれぞれ形態素解析し、その結果の組み合わせを下図の様に作成したものを用います。（マンション名そのものは2レコード入れる）&lt;/p&gt;
+&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/GLQcZ5HRGT1Uj40zgc-4Q_SOIT2xKbm-R9AMqrPmMeze8m4IqARAzZznlpRrpTA21HCBTaZWXEpZD3hvR3mFK8Mq_JnEFWyzeATiwinEwXsqFqRKbtqQMprp0wlwf5cu6Tv_s7zTUq9H6dmxxVyZAg6mUTd_bN2IaUECiKoZQJKkzksHb6-1u9pj4SiIYJIod6delsCXIBvRxX5Kjf51S8nztKpe3Cv_LLMvt_ab-CGYhC3qLRJrb7PYvyghrnLUXsq_QlEwEILLQ3MnDWzk4Hj6SLwpUvqXRT8GRoC4B86akSoju6E57NVRh1yAFxlbVGZULAZbtgSAgUqhY_9mBmX0vG5bHhK3l84VAd0dJRuS7syoFwUVi9gRKqvo9VzLBGPI_Y-5gVlzsSAb8NDeXUJ2XwKirlGxQnqq4MMlkkA1uGkxFYIC_Xp_Nw-OCAToNJ635XqGMxspKgQew2ILarNxYFJo9mXhqW4vct5-LpO42uh63-v49OiF-fbbdG6fE9ofn6gHs8gZJV946EPziYyafVKHsxidK6giJW-ezjXO3HWjy0pX94bwlwk1DZSgKK9_fZ4gITP5_eLkd0V0uRMo46Ma6WCAqtuckKdLz7xil7YcqVWUvrKIrF6iO2hR7OIru7M8djMT8Ka3GQAfFlxwU5aPU2eP592QmRt6JQ=w400&#34; alt=&#34;サジェスト用インデックスのレコード作成&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Swiftの盛り上がりを体感し、Swiftディベロッパーの方々と交流を深める良い機会となりました。
+運営者の皆さん、参加者の皆さんお疲れ様です！ありがとうございました！&lt;/p&gt;
 
-&lt;p&gt;このデータに対して検索をかけ、group byでカウントが多い順にサジェストの結果とします。また、group byの結果が2件以上のものに限定することで、無意味なワードが引っかかからず、マンション名そのものはサジェストの結果に入れることができます。（マンション名そのものは2レコード入れているため）&lt;/p&gt;
-
-&lt;p&gt;本来ならばブランド名や地名のマスタデータを作るのがベストですが、その手間を省くためにこのような実装にしています。データの性質によりますが、この方法でそれなりの精度を実現できています。&lt;/p&gt;
-
-&lt;h3 id=&#34;analyzerの設定&#34;&gt;Analyzerの設定&lt;/h3&gt;
-
-&lt;p&gt;続いてインデックスに対してAnalyzerを設定していきます。&lt;br /&gt;
-ここの設定に関しては下記のブログが大変参考になりました。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;a href=&#34;https://medium.com/hello-elasticsearch/elasticsearch-%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%82%B5%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%A8%AD%E8%A8%88-352a230030dd#.jwa7znssd&#34;&gt;Elasticsearch キーワードサジェスト日本語のための設計&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;確定したキーワード用と入力途中のキーワード用に別々のfieldを定義していきます。&lt;/p&gt;
-
-&lt;h4 id=&#34;確定したキーワード用のanalyzer&#34;&gt;確定したキーワード用のAnalyzer&lt;/h4&gt;
-
-&lt;p&gt;「六本木」の様に確定したキーワードのための設定です。&lt;/p&gt;
-
-&lt;p&gt;データインポート時は、一般的なノーマライズを掛けてEdge-ngramでインデックスを作成しておきます。検索時は、文字列に対してノーマライズを掛けるだけです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/_yAGQ4tjmBDMEuoujBYC1EeghZydPfNS1U5N1UpayexUNxjm-Mx9qSXBGZojtPTQAb3PqT37KOi4syoQ2LMB_c0zI52LQnAujxJ9YUWFcyPxkcgIBFW6Kqo-q_gvkIDw2S-mLpl-KgPUbRgLSF686ytK5jUyzuTWIxXoMEt60aECceCiASQ089It6UvLEF18r_QqiCJc-HoQSutR7nX1EMGPtkT3elwIJt4WOk9k67_6_HQTBpAz0x-y4D3-LZMKKEVU2teufVIpHh2F8hRO7w9jUnw3JFSQvwZEWkRikCkzroWN8fyExC5V9lCthBI9ESWLqst7YhOUInPwZ7RGTbrNv3IVnyXWpKGbAyr7sdviTsgrXXmfxci7aPkZjHMkM5aYpq30tbQylW226VTLYSgPOPNrfK914I9l6OdLUaVG22ldANpiGk9ltNKuezkKKIskMQBgZ1J8Q65o0cQFFL67tmtLnZDma_PwZzY9QvFZzNWXStPiYwbYPV1fuUwXaQ7Zqk-hp-iJ1xZjvri0Uc-_QKuSozEsmUSaKmaur9eiP-NSKuHsvEUHPiw5R7mHsjia9JJs3WPTwkCYfEWnGBjmymMUanPWXChJNkrXYkfxYCwjWXpDVOkGaySc_u-GjrW157PqOVU_JlS_l4JyjdP3ixinmFDCfaTSiZdYeg=w300&#34; alt=&#34;確定したキーワード用のAnalyzer&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# インポート時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;engram&#39;
-]
----
-# 検索時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;入力途中のキーワード用のanalyzer&#34;&gt;入力途中のキーワード用のAnalyzer&lt;/h4&gt;
-
-&lt;p&gt;「roppo」の様に入力途中のキーワードのための設定です。&lt;/p&gt;
-
-&lt;p&gt;データインポート時は、一般的なノーマライズを掛けた後、すべてをローマ字に変換してEdge-ngramでインデックスを作成しておきます。検索時も同様に、文字列をノーマライズした後にすべてローマ字に変換します。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/DafyI_-4Wt8EcUL3FoMqsrEu51-mRdQrvo96KWfZyX8TdtGYrXXGXsbrGzcwSXefckFonFbc9bSP-4AHsr6JCJNIsfkkatQnMrfqHm7sg1T4AVWpDUqDzOMsDvHpCx-tlbQFaerivqey0-dV8out5b98gd3Y5y7OXdInXQAgp45_paFGSnsJfOjaEKhcT11HFNMpai5G0wReLPrqmHqEC8JOqWu8ESbUiLUodXivY9VoOGQ4tmW4s27qXtFy31GQxXeY1JUWS_9FPNcjQUEt0OdnR4RS5T1zwXaGBcLRqXJ-BaPGCLLo8mABq6LuscOzp82IIha7yEKPMUT2LVgQlQLU_tHGNaOQa9sOkYIUUqN95gBYg_hbwTj92fGEwHHOLGL7N_xjjXEjhdhErClvYBlvL8tvbUVuBMgfUeWkej-mpa7BYTer55wcVSGguM_1z53-2UKFNV9rI99IVCEDmZ4fAsikQALOWtAlt9FZPT-WnLv2BNxkdTh6r1FW0lavpP7eI96Rkq3bT2jnotecnY8Zjt_t-liNeiLYWoucwRf8Lo3PYz7BfGm5q9z2sFMW4_LBv6odBaRLknFGXG8mcMVJS_n-zqdFOSxh-BDItJgNZJ-g0eB2tHCRoYlmni-Sp2UQIvjsSJjJclBRTcBIJLby4eBRsqK4zInK-UgWng=w300&#34; alt=&#34;入力途中のキーワード用のAnalyzer&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# インポート時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;ja_normal_neologd&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;readingform_neologd_romaji&#39;,
-  &#39;asciifolding&#39;,
-  &#39;engram&#39;
-]
----
-# 検索時
-char_filter: [
-  &#39;normalize&#39;,
-  &#39;katakana&#39;,
-  &#39;romaji&#39;
-],
-  tokenizer: &#39;ja_normal_neologd&#39;,
-  filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;readingform_neologd_romaji&#39;,
-  &#39;asciifolding&#39;
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Analyzerに関するより詳しい挙動や流れは先程挙げたブログを参照してください。&lt;/p&gt;
-
-&lt;h3 id=&#34;終わりに&#34;&gt;終わりに&lt;/h3&gt;
-
-&lt;p&gt;Elasticsearchの設計は見通しが立ってしまえばそこまで難しくはないのですが、一つ一つの事例ごとに特性が違い、データの設計とAnalyzerの設定をそれぞれの特性に合わせて同時に考えなければならない点が難易度が高いと思っています。&lt;br /&gt;
-今回はひとつの実装例をご紹介しましたが、これから設計をする人の参考になれば幸いです。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Housmartではエンジニアを募集しています。&lt;br /&gt;
-&lt;a href=&#34;https://www.wantedly.com/projects/69047&#34;&gt;今話題のReTech！創業期を支える4人目のエンジニアをWanted！&lt;/a&gt;&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/fDjqiZIl_WgWToJ0tpZfahPVo7Cgw2X3P0NoOWAs1gdVY4-fDhP44gNs8RHsai89Jk5ey2hel0_w_HdQc3_OM2AFeqBF0KWIycynk2L9Rlb4Q4kOVQy_XOFszgIjUD4KeCVcejIHr51nFPVNXTCYzkMarTACllmlkl5vxZglUc9ljSE2tFlqHceIYsdco-87TisCQkMUUhVGW2hFlJZlLe4ynxuYNS0150JJ8sh-TBpxwxwTTcLu9TPtLasThuT_0j7IU8CqWRV8vYxEtTCFPyhwzUZGvX9gU-qH89zn4__uK_fsO9gWM8Pk_9IwRuY0dNRdd5hzBhDHRiyOwWQfPiKcQdD1Awc479c9HWK0lWr4ekXsmx-Zu87G6nRUIEGbdZSifAUWMuBL7m2xbZs3RNBCd8kENvSV_ntdbmukh-3wNQrbJP-FJGlf4x9412YMDqmW7Ym3c_aOyKAqngwnhnVMguEroc6REqGQLXad5qt93w37CMhpypRskY0Zwy1YEzAqQPBfVGxEshDbAthXiSFyCgnvnZo6MP6k2tZZm7DOwWhYzrA49WRYTNoLjPDr8suFOQaukPxhbDpEKIbjccrwF2kepfJ6o1y51YZBQFy53j6vFIPsGtyXxJojSC0Ee97MnQiOvnmuxYooEgt59x5_4v2US_92qb7XnX4l=w1584-h1188-no&#34; alt=&#34;懇親会の様子&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
