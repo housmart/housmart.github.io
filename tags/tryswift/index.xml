@@ -92,21 +92,17 @@
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Cookpadアプリの状況&lt;br&gt;
-グローバルアプリと日本アプリの2つがあり、統合はまだしていない&lt;br&gt;
-・UIコンポーネントは複数大きく変えている&lt;br&gt;
-・だいたい10万行ぐらいある&lt;br&gt;
-・以前は2週間、最近は1ヶ月毎にアップデートしている&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+グローバルアプリと日本アプリの2つがあり、統合はまだしておらず、UIコンポーネントは複数大きく変えているそうで、だいたい10万行ぐらい。以前は2週間、最近は1ヶ月毎にアップデートしている状況。&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;kano-model という品質モデル&lt;br&gt;
-Attractive – Must-be Qualityの２つのパラメータ&lt;br&gt;
-Diachronic Quality for mobile&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+・Attractive – Must-be Qualityの２つのパラメータ&lt;br&gt;
+・Diachronic Quality for mobile&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;UITestのやり方&lt;br&gt;
 ・テストを書いてからリファクタリングをする&lt;br&gt;
-・UITestの実際&lt;br&gt;
 ・マニュアルテストは簡単に出来る、ユニットテストはめんどくさい&lt;br&gt;
 ・でも理想はその逆&lt;br&gt;
-・Cookpadでは2015年〜2017年にかけてUITestを初めてCrash率を下げ続けた&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+・Cookpadでは2015年〜2017年にかけてUITestを行い、Crash率を下げ続けた&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;UITestの書き方&lt;br&gt;
 ・シナリオを書く&lt;br&gt;
