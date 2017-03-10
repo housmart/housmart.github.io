@@ -99,18 +99,16 @@
 ・Diachronic Quality for mobile&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;UITestのやり方&lt;br&gt;
-・テストを書いてからリファクタリングをする&lt;br&gt;
-・マニュアルテストは簡単に出来る、ユニットテストはめんどくさい&lt;br&gt;
-・でも理想はその逆&lt;br&gt;
-・Cookpadでは2015年〜2017年にかけてUITestを行い、Crash率を下げ続けた&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
+そこで、Cookpadでは2015年〜2017年にかけてUIテストの自動化を行い、Crash率を下げ続けたそうです。&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;UITestの書き方&lt;br&gt;
-・シナリオを書く&lt;br&gt;
-・シナリオをRubyコードに変換&lt;br&gt;
-・Appiumで実行&lt;br&gt;
-・XPathはOSのフレームワークにかなり依存している&lt;br&gt;
-・テストをUIレベルからメソッドレベルに移動することが大事&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;UIテストの書き方&lt;br&gt;
+①シナリオを書く&lt;br&gt;
+②シナリオをRubyコードに変換&lt;br&gt;
+③Appiumで実行&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。&lt;br&gt;&lt;/p&gt;
 
 &lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。カウルでもこのような工夫でCrash率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
 
