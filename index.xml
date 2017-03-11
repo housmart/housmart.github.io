@@ -16,37 +16,25 @@
       <pubDate>Fri, 10 Mar 2017 12:00:36 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2017/03/10/tryswift2017/</guid>
-      <description>&lt;p&gt;こんにちは。あすかです。弊社は普段Swiftで開発していることもあり、 &lt;a href=&#34;https://www.tryswift.co/tokyo/jp#&#34;&gt; try! Swift TOKYO&lt;/a&gt;というSwiftのカンファレンスに参加して来ました！&lt;/p&gt;
+      <description>&lt;p&gt;こんにちは。あすかです。Housmartでは普段Swiftで開発していることもあり、 &lt;a href=&#34;https://www.tryswift.co/tokyo/jp#&#34;&gt; try! Swift TOKYO&lt;/a&gt;というSwiftのカンファレンスに参加して来ました！&lt;/p&gt;
 
-&lt;p&gt;try!Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。&lt;/p&gt;
+&lt;p&gt;try! Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w600&#34; alt=&#34; try! Swiftの様子 すごい熱気です！&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;参加して感じたこと5つ-br&#34;&gt;参加して感じたこと5つ&lt;br&gt;&lt;/h1&gt;
-
-&lt;p&gt;① Twitter(&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
-(&lt;a href=&#34;https://twitter.com/k_katsumi&#34;&gt;@k_katsumi&lt;/a&gt;さん、運営者のみなさんありがとうございます！)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;②最前列で聞き起こしをして登壇もしている&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんのコミュニティへの貢献度がすごいと思いました。(&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんありがとうございます！)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;
-③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;運営の方へ連絡しましょう。)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。&lt;br&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;今回参加の目的&#34;&gt;今回参加の目的&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/jOlDbUCQsCQ8FhCH6QgVfSA450etEXZyi7d9AKV4H7Q5z91t2rStb0jczriLwu_WGWSerVIoF-aUpFNjX9KiVK0egvEoyz805GC7oRNY3oAPiheAi3S5u0KQ0_nkZ1X-x0ZcKjm3loqsneJ5Je4BccWaBTMkiLRuOnWfhy0Ip--ntYqUSMyb9awDIcCoylp8d1mZ5JEa7RJB9WLGj7pNQYVQdQVTheQIyhQnG5mcAkCMoF1XesMPPsvJ3oH3P9QwYYNkEs8KjKD3lsx8Jzfj1zs8hBVB0ANeNcM9IV3tBjuFsq8vMAmuVF59CBoQ7d6RdaLOil0xynIGCC5Yi3dE3MZPw4ftePqFqtgn8cVN43YFNzR-eOlFjryJF9TkLBfvmCyx972jRiwq5IUMwoHS7pMxk3XgwyPrpVAJy92J3c4kuYcIdV_u9mMBsMVO8mD4Z8ysEVwAi4v8SCREDQvXl-WBX2UMHyC2nUOVSaI8f2Z9MwBzkO0SLNldTFwOt3Vru6sFkSdtRfYtLvXgfMg4Cm0rYcSGkpQxkSKRhoD4XbJyQFPC8xzXScBp51W06VTS9p0lRAF9GXMy_2Bt8vkV_a6-QELlGtwDT6Hn2wjp6ti5JPSp8951XChItf_1pFpkg2dzt1Hxu5VZNqzJanzS2N9LZc9ve0VFUXLyIgd_=w600&#34; alt=&#34;中古マンション売買サービス「カウル」&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;弊社HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;というメディアの運営をしています。&lt;/p&gt;
+&lt;p&gt;HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。&lt;/p&gt;
 
-&lt;p&gt;これらのサービスでアプリ開発を行っており、自分達のサービスに活かせるトピックスを探しにカンファレンスに参加しました。&lt;/p&gt;
+&lt;p&gt;また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;というメディアの運営をしています。&lt;/p&gt;
+
+&lt;p&gt;これらのサービスでアプリ開発を行っており、①開発で使っている言語のトレンドを知りたい、②面白い発表から学びたいと思いカンファレンスに参加しました。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-oCt1zx9Rr6ZTjKkf-z5sC_pyAlsyxO5QGO-iUY-MQzfpq9FCmODFFNHF1NeqzDHHxr7EpsArFErgAcp1jgwbarbYzbf8wUztbEmkk3ieWGWWz1k6tK5gm3Tc6SLjzx4IMJi4SauhVeG9BMFj3stO0lXRd2D8Mq0pataRjzsFnA9L2IBTkJaaIT4o6xESSVv94jYKerznrOuBx5Tf_kFfTJ3JD42Q5xqPdUzREtIm6hcywcFLaf4KHrqobrdotsnWyUHHw1n3ERB5KSq-XxJ1Cr9OBri68LL93VvxlQw3JB51q1KBZJqeSYv9q2QpF8YeRSEGOO8rlz_bMGVciyG0z3PmsNUG7ryy-q3p7wUtbnZz59lyIpJ11kOKGYolpTwvFTMNY9U1TCrZLaXjlroBnQdD2Pj4EyR4TiuwU5tp-ZWDRnOwxCCVJtCyc7boiESmmO5K2QXDaemC2JjSc9zYm2uk6dqBEVJu2pBn-yykAS9xnYSiIofOG3P3BQdr0aFhLoqiHt3236ehy5CysAq2pSbIWbelWFEABoN7gurMSt852kp5MsYkx9qbmIATuuHAGlUbVBN6PR1B1Y1p4BPQoEPZ067CkuM-J0FIWAZMAc1WOQF7X4yUWMxG4dOOkMR5WHBoWAkxBsvl80bu9XAtmy_Nn-wy20EOaHIlQF2=w600&#34; alt=&#34;カンファレンスのネームプレートが可愛かったです。当日の名前投票で「RIKO」ちゃんに決定&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;今回は、カンファレンスにて特にカウルアプリに関係ありそうな内容で気になった発表を3つ紹介させていただきます。&lt;/p&gt;
+&lt;p&gt;今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。&lt;/p&gt;
 
 &lt;h1 id=&#34;気になった発表3つ&#34;&gt;気になった発表3つ&lt;/h1&gt;
 
@@ -56,17 +44,20 @@
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/sAsjM3BtkhaZEDRPWtmAamnXBG2w3-hQe4dASoxu6N_nvZP03p-QIWy8gJ62TO1f16PLcg0kdK6ZC5Rk23MJJzWhAVA_P9dUpOlfERw3Xc5JiCdzXsavcvPe8Wtel3Yk7UfMdW_Zl93ITo5J_SqemIjK8XR1mc7FgvZjByXZmG-q0mdYV9FEP9LjHiBxbFf4ujI9OiZ78d1AaZY_gs8zH6oxWVLzPbdei5VJLJMdQ2JlutfMGEMbxOfCEdRyL4m8mxbicxAd7D6kFuF76yoDokzJNb75Tx8cjCbNdzycedLyIeGHXlLgLM9RVYbnI6f6_XeUln98vLXDsNA9ILMV8Slw5aoa-mlrfWLjGx1m2j2Jaknby8JFtoJ6jiXcyqn6lYt8nX605L9cRxGYeKGq3G_V43WpwIXxkfXE71cHn3IBcXKyOpxbcbOD5gKH99qM2DgR4rR21Q5CGVlwoTDVpOSnIBaDYks7VQK_SBaaTIvXLg3v3oXARaaaoMmM82bkNL4bH5B_WMCN5VJ5_yf6LPgsC2j8boj-wMo28pld7y0aKSxfZy7kK0izUdgNvLZ37hV-r20KSgDe-TeWUNIG5p0EbOtxTqB5lQLBfWbPIZPM64DanLjewcvxDrQ6cFawK_oLBudldbItSIDZlJETijk1iEd083S8TXI2fLC5=w600&#34; alt=&#34; try! Swift2017の講演・ライトニングトークの内容構成図&#34; /&gt;&lt;/p&gt;
 
+&lt;p&gt;サーバーサイドSwiftや機械学習の話が結構でてきた印象でした。個人的には、プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較の話、Swiftをより効率的に書く話も面白かったです。&lt;/p&gt;
+
 &lt;h2 id=&#34;①realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz&#34;&gt;①Realmを使ってコラボレーションアプリを作る &lt;a href=&#34;https://twitter.com/mrackwitz&#34;&gt;by Marius Rackwitz&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。&lt;br&gt;
-1. Realmの利点&lt;br&gt;
+&lt;p&gt;このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。&lt;br&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Realmの利点&lt;br&gt;
 ・オブジェクト思考で書ける点で、クラスを実装するように書ける&lt;br&gt;
 ・React NativeやXamarinにも対応しているので、クロスプラットフォーム&lt;br&gt;
 ・すべての環境で同じデータを使いまわせるので、バックアップがとれる&lt;br&gt;
 ・トランザクション管理をしているので、リアルタイムの共同編集ができる&lt;br&gt;
-・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能&lt;br&gt;&lt;/p&gt;
+・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Realmの通知機能 &lt;br&gt;
 ・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える&lt;br&gt;
 ・イベントハンドリング&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
@@ -100,9 +91,9 @@
 ・Attractive – Must-be Qualityの２つのパラメータ&lt;br&gt;
 ・Diachronic Quality for mobile&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;UITestのやり方&lt;br&gt;
+&lt;li&gt;&lt;p&gt;UIテストのやり方&lt;br&gt;
 まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
-そこで、Cookpadでは2015年〜2017年にかけてUIテストの自動化を行い、Crash率を下げ続けたそうです。&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+そこで、Cookpadでは2015年-2017年にかけてUIテストの自動化を行い、クラッシュ率を下げ続けたそうです。&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;UIテストの書き方&lt;br&gt;
 ①シナリオを書く&lt;br&gt;
@@ -112,9 +103,23 @@
 
 &lt;p&gt;XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。カウルでもこのような工夫でCrash率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
+&lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でCrash率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
 
-&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
+&lt;h1 id=&#34;参加して感じたこと-br&#34;&gt;参加して感じたこと&lt;br&gt;&lt;/h1&gt;
+
+&lt;p&gt;① Twitter(&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
+(&lt;a href=&#34;https://twitter.com/k_katsumi&#34;&gt;@k_katsumi&lt;/a&gt;さん、運営者のみなさんありがとうございます！)&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;②最前列で聞き起こしをして登壇もしている&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんのコミュニティへの貢献度がすごいと思いました。(&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんありがとうございます！)&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;
+③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;運営の方へ連絡しましょう。)&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。&lt;br&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
 
 &lt;p&gt;Swiftの盛り上がりを体感し、Swiftディベロッパーの方々と交流を深める良い機会となりました！参加者の皆さん、運営の皆さんありがとうございました！&lt;/p&gt;
 
