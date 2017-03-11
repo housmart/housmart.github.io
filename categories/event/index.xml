@@ -45,7 +45,17 @@
 
 &lt;p&gt;サーバーサイドSwiftや機械学習の話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。&lt;/p&gt;
 
-&lt;h2 id=&#34;①realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz&#34;&gt;①Realmを使ってコラボレーションアプリを作る &lt;a href=&#34;https://twitter.com/mrackwitz&#34;&gt;by Marius Rackwitz&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;①client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223&#34;&gt;①Client-Side Deep Learning &lt;a href=&#34;https://twitter.com/shu223&#34;&gt;by Shuichi Tsutsumi&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;堤(&lt;a href=&#34;https://twitter.com/shu223&#34;&gt;@Shu223&lt;/a&gt;)さんのクライアントサイドで行うディープラーニングのプレゼンが印象的でした。&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2OS20oAt7NLgPx&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/t26v0748/clientside-deep-learning&#34; title=&#34;Client-Side Deep Learning&#34; target=&#34;_blank&#34;&gt;Client-Side Deep Learning&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&#34;_blank&#34; href=&#34;//www.slideshare.net/t26v0748&#34;&gt;Shuichi Tsutsumi&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;②realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz&#34;&gt;②Realmを使ってコラボレーションアプリを作る &lt;a href=&#34;https://twitter.com/mrackwitz&#34;&gt;by Marius Rackwitz&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。&lt;br&gt;&lt;/p&gt;
 
@@ -67,16 +77,7 @@
 
 &lt;p&gt;とのことで、3の内容が特に興味深かったです。&lt;/p&gt;
 
-&lt;h2 id=&#34;②client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223&#34;&gt;②Client-Side Deep Learning &lt;a href=&#34;https://twitter.com/shu223&#34;&gt;by Shuichi Tsutsumi&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;機械学習はクライアントサイドで行う堤(&lt;a href=&#34;https://twitter.com/shu223&#34;&gt;@Shu223&lt;/a&gt;)さんのプレゼンが印象的でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2OS20oAt7NLgPx&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/t26v0748/clientside-deep-learning&#34; title=&#34;Client-Side Deep Learning&#34; target=&#34;_blank&#34;&gt;Client-Side Deep Learning&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&#34;_blank&#34; href=&#34;//www.slideshare.net/t26v0748&#34;&gt;Shuichi Tsutsumi&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
-　&lt;/p&gt;
+&lt;p&gt;　&lt;/p&gt;
 
 &lt;h2 id=&#34;③クックパッドアプリのテストを味わう-by-kazucocoa-https-twitter-com-kazu-cocoa&#34;&gt;③クックパッドアプリのテストを味わう &lt;a href=&#34;https://twitter.com/Kazu_cocoa&#34;&gt;by KazuCocoa&lt;/a&gt;&lt;/h2&gt;
 
@@ -120,9 +121,7 @@
 
 &lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
 
-&lt;p&gt;Swiftの盛り上がりを体感し、Swiftディベロッパーの方々と交流を深める良い機会となりました！参加者の皆さん、運営の皆さんありがとうございました！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/fDjqiZIl_WgWToJ0tpZfahPVo7Cgw2X3P0NoOWAs1gdVY4-fDhP44gNs8RHsai89Jk5ey2hel0_w_HdQc3_OM2AFeqBF0KWIycynk2L9Rlb4Q4kOVQy_XOFszgIjUD4KeCVcejIHr51nFPVNXTCYzkMarTACllmlkl5vxZglUc9ljSE2tFlqHceIYsdco-87TisCQkMUUhVGW2hFlJZlLe4ynxuYNS0150JJ8sh-TBpxwxwTTcLu9TPtLasThuT_0j7IU8CqWRV8vYxEtTCFPyhwzUZGvX9gU-qH89zn4__uK_fsO9gWM8Pk_9IwRuY0dNRdd5hzBhDHRiyOwWQfPiKcQdD1Awc479c9HWK0lWr4ekXsmx-Zu87G6nRUIEGbdZSifAUWMuBL7m2xbZs3RNBCd8kENvSV_ntdbmukh-3wNQrbJP-FJGlf4x9412YMDqmW7Ym3c_aOyKAqngwnhnVMguEroc6REqGQLXad5qt93w37CMhpypRskY0Zwy1YEzAqQPBfVGxEshDbAthXiSFyCgnvnZo6MP6k2tZZm7DOwWhYzrA49WRYTNoLjPDr8suFOQaukPxhbDpEKIbjccrwF2kepfJ6o1y51YZBQFy53j6vFIPsGtyXxJojSC0Ee97MnQiOvnmuxYooEgt59x5_4v2US_92qb7XnX4l=w600&#34; alt=&#34;懇親会の様子&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;Swiftの盛り上がりを体感し、Swiftディベロッパーの方々と交流を深める良い機会となりました！参加者の皆さん、運営の皆さんありがとうございました！&lt;/p&gt;</description>
     </item>
     
     <item>
