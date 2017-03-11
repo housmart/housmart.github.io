@@ -35,15 +35,15 @@
 
 &lt;p&gt;今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。&lt;/p&gt;
 
-&lt;h1 id=&#34;気になった発表3つ&#34;&gt;気になった発表3つ&lt;/h1&gt;
-
-&lt;h2 id=&#34;try-swift全体の構成&#34;&gt;try!Swift全体の構成&lt;/h2&gt;
+&lt;h1 id=&#34;try-swift全体の構成&#34;&gt;try! Swift全体の構成&lt;/h1&gt;
 
 &lt;p&gt;まず、全体の構成についてです。カンファレンスでの発表は全部で約32個で、内容は以下のような構成でした。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/1OCOR_a4Y-VnJnjDRvD6Bxiz5gjwASFws3KoHF_0ZAq1ytcxcgxHlElKLZigTuj71vQFm_wFwfKGFpyWal7-qsJZzxjl6NTXCa6PwkSf9sdZ7dUsxhHEzqbrp4oozgtziH5EVdkpbaZhchKe-ISAL0noLpqfukO6-1Yo9lhY8hHOxgdrU35_9H_Ecvc9jsiomxa10SGrEETmCE5lcFfUgs7KQPlj_36kmRTwERb6AsYalli1Rp1jA9dQGHxwlEjHbrecv3kmM9K8s9GxMejmvE4Puos4MjzbAmSVVXbYKiNaqakM1EISvAekVFfFZNQttYAN-IoavhKpd9UdFimRuhPQKn3Km9t9WjZAjrLzBQA-L9LVemuuoZgwJgdQnsc0jOSubcj0J-dlu7gRRgPA4wusHDmfBC1UOV133VIo4WdqL84QVr8RuKkiAmeb7OZ_KA9aVDOa2zTxhM8x4BqgetK5gFUu1VC8BZtYb9UG6ggo3VoqBIvoetMFrjtumzz1-lrCDQLTKTwBhIq_6ahFH3QYX4Bfv28x9YbyUwCzrqbyn0BsAbOwIxopTY3wScqFl1vVCmbN_YfCo_dBWzNQVKWmFai9ycfF8yFLn_rT7vd5jvKXWSZaGeE_vvjz02OEk7obl-aRvD_YDtIxHNKLFeVGQxq8whq5nmK0GfuC4Q=w600&#34; alt=&#34; try! Swift2017の講演・ライトニングトークの内容構成図&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;サーバーサイドSwiftや機械学習・DeepLearningの話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。&lt;/p&gt;
+
+&lt;h1 id=&#34;気になった発表3つ&#34;&gt;気になった発表3つ&lt;/h1&gt;
 
 &lt;h2 id=&#34;①client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223&#34;&gt;①Client-Side Deep Learning &lt;a href=&#34;https://twitter.com/shu223&#34;&gt;by Shuichi Tsutsumi&lt;/a&gt;&lt;/h2&gt;
 
@@ -61,7 +61,7 @@
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Realmの利点&lt;br&gt;
-・オブジェクト思考で書ける点で、クラスを実装するように書ける&lt;br&gt;
+・オブジェクト思考で書け、クラスを実装するように書ける&lt;br&gt;
 ・React NativeやXamarinにも対応しているので、クロスプラットフォーム&lt;br&gt;
 ・すべての環境で同じデータを使いまわせるので、バックアップがとれる&lt;br&gt;
 ・トランザクション管理をしているので、リアルタイムの共同編集ができる&lt;br&gt;
