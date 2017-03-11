@@ -44,7 +44,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/sAsjM3BtkhaZEDRPWtmAamnXBG2w3-hQe4dASoxu6N_nvZP03p-QIWy8gJ62TO1f16PLcg0kdK6ZC5Rk23MJJzWhAVA_P9dUpOlfERw3Xc5JiCdzXsavcvPe8Wtel3Yk7UfMdW_Zl93ITo5J_SqemIjK8XR1mc7FgvZjByXZmG-q0mdYV9FEP9LjHiBxbFf4ujI9OiZ78d1AaZY_gs8zH6oxWVLzPbdei5VJLJMdQ2JlutfMGEMbxOfCEdRyL4m8mxbicxAd7D6kFuF76yoDokzJNb75Tx8cjCbNdzycedLyIeGHXlLgLM9RVYbnI6f6_XeUln98vLXDsNA9ILMV8Slw5aoa-mlrfWLjGx1m2j2Jaknby8JFtoJ6jiXcyqn6lYt8nX605L9cRxGYeKGq3G_V43WpwIXxkfXE71cHn3IBcXKyOpxbcbOD5gKH99qM2DgR4rR21Q5CGVlwoTDVpOSnIBaDYks7VQK_SBaaTIvXLg3v3oXARaaaoMmM82bkNL4bH5B_WMCN5VJ5_yf6LPgsC2j8boj-wMo28pld7y0aKSxfZy7kK0izUdgNvLZ37hV-r20KSgDe-TeWUNIG5p0EbOtxTqB5lQLBfWbPIZPM64DanLjewcvxDrQ6cFawK_oLBudldbItSIDZlJETijk1iEd083S8TXI2fLC5=w600&#34; alt=&#34; try! Swift2017の講演・ライトニングトークの内容構成図&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;サーバーサイドSwiftや機械学習の話が結構でてきた印象でした。個人的には、プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較の話、Swiftをより効率的に書く話も面白かったです。&lt;/p&gt;
+&lt;p&gt;サーバーサイドSwiftや機械学習の話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。&lt;/p&gt;
 
 &lt;h2 id=&#34;①realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz&#34;&gt;①Realmを使ってコラボレーションアプリを作る &lt;a href=&#34;https://twitter.com/mrackwitz&#34;&gt;by Marius Rackwitz&lt;/a&gt;&lt;/h2&gt;
 
@@ -103,7 +103,7 @@
 
 &lt;p&gt;XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でCrash率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
+&lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でクラッシュ率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
 
 &lt;h1 id=&#34;参加して感じたこと-br&#34;&gt;参加して感じたこと&lt;br&gt;&lt;/h1&gt;
 
