@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ux on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/ux/index.xml</link>
+    <link>http://techblog.housmart.co.jp/tags/ux/</link>
     <description>Recent content in Ux on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <atom:link href="http://techblog.housmart.co.jp/tags/ux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Nov 2016 15:40:44 +0900</lastBuildDate>
+    
+	<atom:link href="http://techblog.housmart.co.jp/tags/ux/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</title>
@@ -23,126 +26,7 @@
 今回はその一部として行ったペルソナの定義、カスタマージャーニーマップの作成などを具体例をもとにご紹介します。&lt;/p&gt;
 
 &lt;p&gt;実際のサービス設計では結構抜けてしまいがちなUX設計のフェーズ。ペルソナやカスタマージャーニーマップなど知識としては知っているけど、自分のサービスで実践をしたことがない！という方も多いのではないでしょうか。
-&lt;/p&gt;
-
-&lt;h2 id=&#34;カウルのサービス&#34;&gt;カウルのサービス&lt;/h2&gt;
-
-&lt;p&gt;カウルはスマホで簡単にマンション探しが出来るサービスをWebとiOSで提供しています。&lt;br /&gt;
-ユーザは会員登録後、欲しいマンションの条件を登録するとおすすめのお部屋の提案を受けられます。おすすめのお部屋を見てお気に入りに入れたり、実際に見学の予約をすることもできます。&lt;/p&gt;
-
-&lt;p&gt;その他にも購入にかかる費用のシミュレーション機能やマンション購入に関するノウハウも見ることができ、購入の際の契約も一貫してサポートしています。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/lfVgkgCfdYbIBJSUyplcUu1vxAJqAmc9_u0MtcUOYR_kI76TgY2zc3rOfjxoGnCVaBdVgsJ0kCakvbztEwDy3fvlxVpWl89Z7TLTaGC9KhnKeyWiCGCE4ns-h4yO5CCmPP0zsJZCMTgqcJWJzXQ1XraC8jPmr2o4eQXDQkGeomfbimYwnWQYLGb53wPBSe3UaO_ldjGlejteJX0OTKRPXvr7JsWh3wnwk6RbB2Ehr13MAVBVmoAs7FyXrgj7SHeM84wpRdq2M5DDzvz-IbCwyHgsctvtKI7FDHOSnElryGaQspYGobivMDP9N2CcU2vBkiBnTWZqXmHTqEj7HFqK8wvnn0Z-7EWFQ4NlKKB7qnBmi0WylmgqdSlZl99hD4GOKD9q7ygdHNgBwKyIk6CeJfd07ZnxU5_7H6pANEsunKUZ_WRGRgHzuOadCMsyz-sqzhFtAu4f1mBrru0a4B8mIoqyIhOaD2PZyhOj8jfpXvUH8-WfNQj_ERinoj7NZIZrhvgaT_7JG3-FYfnyF__HxmiEhoyaxqXO1OjsSIT3WTkwpgmdg3Bi-p8WGhVBNdku6_SgEAszfZDF1moPpozbCYxFz76bRvrj8vt1iW6iaTYpZkDk=h600&#34; alt=&#34;希望条件の入力→お部屋の提案→お気に入り&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;また、従来の不動産売買では、過去いくらで売られていた部屋なのか、現在の相場価格はいくらなのかの価格情報を消費者が見ることができなかったのですが、これらの情報を積極的に開示していくことで透明性の高い不動産取引を実現しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/pWFAV-8AjYXayhdmLa4qsfWfqFPkEshGIpFniIWgBc4tP4RWnY9dlO73MftBnLmzCt-GKc1zMBOFaLrVqN3intU_m2x8IyEIyrdZhSCPwejD-AtuMxBQ0AW2Ax3lcvZgjonhWWs6NIWDRE4qVMydm5JLVJseR9RmwWtk6Q4iOemPgM-mbij9UTHYVtkICAeboLTJuQIUFqEI9BMossrovA9qfDYVtLQ5JyR-maM0CisLVOz64wKBPvwZ7LpTsgcI_TuAa6XWxBkcFeyKnIEdzsy1JpvDoKYW8hJPtYJjWRKBHKGK13J7ZuRqGPEtZpIBya65NGWVoGQqjXsBKldwQt8yPegwqN6JOnX-9GBnhnUuAFVA4iHWNLjVkfWoRceh1fByjMNXKu3s93hCllVlsBPlSdl5G0gBfMajpm9tdFMnsIo8WOrIPrH4ytDJroRQ3aiKI4Mcgkls6FxohJY9-TM7IjJAoLS-Jfx_kD7EpuqrJox7pdWWxBu4Z44iIQNdpy4r_eJWb4NK79DmN1yX_9WofXMnTGKgs1yC8TpHXbeMldKoihnoKhGTubbZSTfhwM0AUWVu2DqXkQNZbArEZlKfdIfpFgILplUB0jtJQy8ymxTx=h600&#34; alt=&#34;お部屋の情報と相場&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;なぜ今ux再設計をするのか&#34;&gt;なぜ今UX再設計をするのか？&lt;/h2&gt;
-
-&lt;p&gt;カウルは既にサービスを開始して10ヶ月経ち、ビジネスとしては利益も出るようになってきたため、今の段階で改めてユーザビリティに関するアンケートを取ってみました。その結果、一部のユーザがアプリを使いにくいと感じていること、また希望通りの物件の提案を受け取れていないなどの課題が明確になりました。&lt;/p&gt;
-
-&lt;p&gt;10ヶ月のサービス運用によりオペレーションやユーザの課題も見えてきており整理するには良いタイミングだということで、これらの課題を解決してユーザビリティを上げるべく、しっかりと時間をかけてUXの再設計を行うことにしました。&lt;/p&gt;
-
-&lt;h2 id=&#34;今回やったこと&#34;&gt;今回やったこと&lt;/h2&gt;
-
-&lt;p&gt;カウル開発チームでは3ヶ月に1度、1週間泊まり込みで開発合宿を行っています。今回は10月最終週に沖縄での開催だったのですが、メインテーマの1つをUXの再設計と決めてディスカッションを行いました。&lt;br /&gt;
-エンジニア陣に加えて、遅めの夏休みを取っていたデザイナーのみさと先生を招いて全体の進行をお願いしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/KOm3Gcx_e7Egl-GcHF4jmIddjUQ3PD1-8bZdRRy0CBRKWbJmJtEioqxFvMBC7P-ZVdkWrQi9LN-5rUEf9k29QIu2gxdBiUQx99b4x3Vr-0NLtg9g4B-Aic4tP3iTafb6SisXaHRLG-I3I0QV6NXIYn0-QRbIQdamh1XV3OuSH7eno94etKBwg3OhcUA2Xj8PWWCk-eHUgQJm2LeyjmlODGV5_QMO_sWU0SczLKIx3m2cWftkft_bhkYqHCZAOgJQBFtYeNiZo4dFu0h_9053AFYvNgYEK8ZV89jqmdxqt2Dzf8c-dYrttron-HZVtE7avPGx9apjeNC_mZcaAWYp2cQaqeovsfMVLkzNA7H0zz17LH3gl-AcYhPT1P1qqm0AsydSsytDJqadAX_eqcApbCC481qe1mGEajx9zl94QTBJVJf1Xqr9erheuM4ezM9Lp_z6Z4OCbET8-mXLQegPoYOu1v0Oqtsvu86LFk0tt466gAEbfGcXgZFDXDNmFYyjMzT7sOcIg8p-m7zrX6NZpFBtK64SRbT0W0o90vedeRWcRvesv5irlo2EGgoJ_d7rkDG8vFoiNnVOAuHeldyKw23tz1ZOj1mdSco6_Yu-AJwfzaDh=h300&#34; alt=&#34;アドバイザとして参加してくれたデザイナーのみさと先生&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ディスカッションに費やした時間は合計10時間程度、具体的な内容は以下です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ペルソナの定義&lt;/li&gt;
-&lt;li&gt;カスタマージャーニーマップの作成&lt;/li&gt;
-&lt;li&gt;カスタマージャーニーマップに沿った機能の洗い出し&lt;/li&gt;
-&lt;li&gt;メニュー構成の検討&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;ペルソナの定義&#34;&gt;ペルソナの定義&lt;/h2&gt;
-
-&lt;p&gt;UX設計の際にペルソナを定めることで、&lt;strong&gt;ユーザ目線でUXを考えることが出来るようになる、具体的なユーザの目線で考えることでチーム内で共通の判断基準が出来る&lt;/strong&gt; などのメリットがあります。&lt;/p&gt;
-
-&lt;p&gt;既にあるサービスの場合、ユーザへのアンケートを通してよくアプリを利用しているユーザの属性を抽出していくことが望ましいのですが、今回は事前アンケートを実施しなかったので、過去にカウルのサービスを利用してマンションを購入したユーザの属性からペルソナの作成を行いました。&lt;/p&gt;
-
-&lt;p&gt;各々が過去のユーザを思い出しながら属性情報（性別、年代、職業、年収など）や生活習慣、どんなことに課題をもっているかなどをポストイットに書き出していきます。そこで挙がった要素を元にユーザ像を作り上げていきます。&lt;/p&gt;
-
-&lt;p&gt;今回は全部で5人のペルソナが候補として挙がりましたが、実際のユーザに多そうな属性のペルソナを中心にメインのペルソナ1人とサブのペルソナ2人を最終的に定義しました。&lt;/p&gt;
-
-&lt;p&gt;対象となるユーザが狭くなりすぎないよう複数のペルソナを決めましたが、今後の議論での判断がぶれないよう、ペルソナの優先順位を決めておくことが重要です。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/mmJqPb-u0d60KhXhW2pGOpEBqEPzo0ApDsIwDbMToLxI77eHpylIxiIdZf-YTzMJ-8cQsMNnIqyGkLgzfqrUtwjS8DL5WLOnfM3cKncZiRP1dWOHYBhUMWsYVXkESgxT5YOnYps56WbuXYUm26hYCdbU9epaXwbP9APylmgtsAcik4Av1-2Sf3uGlJxpVEya4AFjOKjSDy7XJcebgUPYHlNifrXvVQI3itZ_5qjZrxsnGOT_m0hiqzvzPHKDnORwaf9Tid0sQBSGR3XC5WVhqTbp2MRD-zXwGLn33AwG6FO1B1fgkUExFhIORLEXWRRtBasEtIGO3CDBKYWIeZ0lEag3u7UHKHRvf9_taP4AxNf_g3AyskRxdmnnmABttJ_GZKVgFGUlUg7KDUG02PV-Q5NNJKCllGPIyzkJeq62-9W0m7vNnHijvicwTAtGrw4N34NXCemxBo6xA7M-qilnpvYlCmURo_vmV4Zm6R1ypfOr_47tNOUSJIVQPJ5zJO39lOVYLUIVDQIsPuGtcssdBLWtFdnlJ4jLMI2VJDBQH5fAUR1fTzrKW9ncGzsF7-_C-JUpE_mgWNfsvvmTb5tv1kkp8_IFrNxMWpbO4WSbvetbjyVo=w600&#34; alt=&#34;ペルソナ作成&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;実際にできたペルソナはこんな感じです。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;★花輪誠一郎さん
-・属性情報
-   30代前半既婚男性
-   共働き
-   結婚2年目
-   IT系企業勤務
-   年収600-800万円
-   子供が1人産まれた
-・生活習慣
-   10時-22時で働いている
-   電車通勤
-   夜は友人と飲みに行く
-・ゴールや課題、チャレンジ
-   今住んでる家が手狭になって家探し中
-   生活に安定を求める
-・情報との接し方
-   通勤時間や昼休み、寝る前にスマホで情報収集
-   SmartNews、NewsPicksで情報収集
-・製品やサービスの選び方
-   友人やブロガーがおすすめする商品を買う
-・性格
-   めんどくさがり
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;カスタマージャーニーマップの作成&#34;&gt;カスタマージャーニーマップの作成&lt;/h2&gt;
-
-&lt;p&gt;続いて、考えたペルソナがサービスを通して体験する項目を洗い出していきます。&lt;/p&gt;
-
-&lt;p&gt;カウルは中古マンション購入アプリなので、&lt;br /&gt;
-&lt;strong&gt;ユーザがカウルを認知する→会員登録→マンション購入のノウハウの学習→実際にマンションを探す→現地の見学→購入の契約&lt;/strong&gt;&lt;br /&gt;
-の流れを細かく分け、ポストイットに書いていきます。具体的には「お部屋の提案を受ける」、「購入にかかる費用を把握する」くらいの粒度にまとめました。&lt;/p&gt;
-
-&lt;p&gt;ここで大事なのは、既に実装されている機能にとらわれずに必要なステップを洗い出すことです。そうすることで現状で足りていない機能を明確にすることができます。&lt;/p&gt;
-
-&lt;p&gt;書き出した後はポストイットを時系列に並べ、それぞれのイベント間の遷移を書き出しそれぞれを繋いでいきます。&lt;br /&gt;
-今回は通常の遷移を青、ネガティブな要素を含む遷移をオレンジ（見ようとした部屋が既に売れていたのでまた探し直すなど）、離脱の可能性がある部分はピンクで色分けしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/OR86Zt2xYvKaRiHbeJeLfjyCg3tmGGJoI_6br12l0XksFDZStiQYSCQCV5gGfx3a5Xg0FfeHNmRofbPGHZJd5D_0jDsJWjW-o6a9W-A-RHfZzgEcem_q582vuw4BwCFO1gMJHe9_kOc-lCy0unI10RNxHPeASjHkkUERK1laxKEKoNXryfv6nuVuv1IyOsilbwKSE1Mq3vsY_iT54rZyTjXblUQOA6dRXvNCSY-aQzhYNlkiCASo8PlVEXn5_wysDaR_W6C7Kw4kAjKnN0OVA2-8PTLJ_5FnIrGEGkxy-FHb5Dod9jdhIhrdOzYP66HvpSFCR05CvxHgBaYL9iJRTdOLRaAwKg17YkiXpZnoKU4jH42X8Y3EtApW3sSqz5MUVwTFelvxfAprS5w1OiUtvfdwXnYUeb7d3pX8yyO9ykVpUlnFckGRcF40ZOPmjFHyRb-cU7lxxQbfl9ehuGnfvZybgLOVMtzZSay-KK384xRMRyPhHKWIHhGObYLhOwz6Xx1pQTgAsPvnbivULhbMnW5G1w7KbrFtQSRvT4Y2wMpJW2IOzmqbiUajSoJ64ahndQOh5TQW7BMSy6QgGA_zXW3g_fApTx3IOSgH6Yt4chl2YIsU=w600&#34; alt=&#34;カスタマージャーニーマップ&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;機能の洗い出しとメニュー構成の検討&#34;&gt;機能の洗い出しとメニュー構成の検討&lt;/h2&gt;
-
-&lt;p&gt;ここまで来たら具体的な機能に落とし込む作業に入ります。&lt;/p&gt;
-
-&lt;p&gt;書き出したイベントに対応するページを書き出していきます。先程の例で言うと「お部屋の提案を受ける」というイベントは「物件提案ページ」、「購入にかかる費用を把握する」というイベントは「購入費用シミュレータページ」に対応します。&lt;/p&gt;
-
-&lt;p&gt;その後似たページをカテゴライズしていき、下タブやグローバルメニューの中にどう配置していくかを話し合いながら、具体的なメニュー構成のアイデアを3つほど考えました。
-カウルのアプリの場合かなり機能数が多いため、ユーザが違和感なく機能を理解して使える構成を意識しました。また、よりユーザ目線を取り入れられるよう、複数のアイデアを出して今後ユーザヒアリングを通して絞り込んでいくというアプローチを取ることにしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-gDzsC_es0awgNit_3itly2IF7C_LFY2kfgZKICGi5ljrh1G3CNM-hszM9y-DCtBPCXzxFQi_sXUsY_gqvlg5SxKZpn0kkVVp2KqaTFTTo_hgy_jjI9PxHggZGED_w5FCCvMSK4gjj5kH7RDgmo-r7F6bt0IeHK7q2K_c4TyyKeD9YlJmeugQY1blMvqAmG420O0nVOskEtP4u_ZgtseusYLj_1X9nvu8VZNb_AS363U11bVhfCml8aMXkUHhiTsynBV0OnnG_4zQveuaM0sKKHRtOIrD9BL9wvK65O1gXhfvZnVRZdHSZ5RZl6UOtD1hjDGzTReZMOcRXOoSQ2U17UKO-wrjhAsm-QZOYNCRXCQc1riqDzt3FA6ATA1lW9bK_Bza1FkkhdKMoTRG5VzCHHhsnlNCqwugdYTMjD_wKa3HsHhg_nM-AYw4S3cAEhIviwXvMf-RysKaQKYhaVDk4fM295bJjWi0SnPF3gQXpS5xB8DAR2hvsUu9G8abcQiieioWAKke5LHM-V5j0Qto-1tG5t3IwpZXknsb3D_mA-BWaSgR_hx74f8KshzelOpANTYY3RLdVuvd531WNmuBfh2S-nIjlQi97OOlavIO9jxC-1Y5A=h600&#34; alt=&#34;メニュー構成案①&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回の開発合宿ではペルソナの定義、カスタマージャーニーマップの作成からメニュー構成のアイデア出しまでを行いました。&lt;/p&gt;
-
-&lt;p&gt;今後は以下のようなステップでさらにUX設計を進めていく予定です。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;メニュー構成、メニュー文言に関するユーザヒアリング&lt;/li&gt;
-&lt;li&gt;メニュー構成の決定&lt;/li&gt;
-&lt;li&gt;UIモックの作成&lt;/li&gt;
-&lt;li&gt;UIモックを使ったユーザヒアリング&lt;/li&gt;
-&lt;li&gt;モックの改善&amp;amp;ユーザへの再ヒアリング&lt;/li&gt;
-&lt;li&gt;設計&amp;amp;実装&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;これから先のステップに関しても進捗がありましたら書いていこうと思います。&lt;br /&gt;
-今後カウルのユーザビリティがどう改善されていくかお楽しみに！&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

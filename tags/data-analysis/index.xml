@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Analysis on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/data-analysis/index.xml</link>
+    <link>http://techblog.housmart.co.jp/tags/data-analysis/</link>
     <description>Recent content in Data Analysis on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <atom:link href="http://techblog.housmart.co.jp/tags/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Apr 2016 22:39:26 +0900</lastBuildDate>
+    
+	<atom:link href="http://techblog.housmart.co.jp/tags/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>スタートアップのための「お金と時間がかからない」ログ分析基盤</title>
@@ -22,220 +25,7 @@
 
 &lt;p&gt;そこで今回は、まだユーザが少ないフェーズでも &lt;strong&gt;「お金と時間をあまりかけずに」&lt;/strong&gt; 導入できるログ分析基盤について、カウルでの事例をご紹介いたします。&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;小規模のサービスであってもログをしっかりと収集・分析してサービスの改善に役立てていくことは非常に大切なことです。&lt;br /&gt;
-一方で、データ収集のためのJavascriptの開発やWebサーバの構築と管理、データストアやデータ処理基盤の選定や設定などに専属で人を割くことができないのもスタートアップの実情ではないでしょうか。&lt;/p&gt;
-
-&lt;p&gt;そこでカウルでは &lt;strong&gt;安価に利用できるSaaSをいくつか組み合わせることで、簡単に始められて、かつ要求を十分にみたせる環境を構築&lt;/strong&gt; しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;は中古マンションをお得に購入・売却できるWeb不動産サービスを運営しています。&lt;br /&gt;
-現状としては、サービス開始から3ヶ月で登録ユーザ数が1000人弱、日々&amp;lt;100ユーザがアクティブにサイトに訪れています。&lt;/p&gt;
-
-&lt;p&gt;また、今回の選定にあたっては前職での知見をもとにデータの具体的な利用用途やシステムの運用コストまで考慮に入れるよう心がけました。&lt;br /&gt;
-（前職では国内大手のECサイトでログデータの広告利用を主な業務としていました。過去データを使った広告クリック率の予測、レコメンドロジックを用いたパーソナライズド広告、その他データマーケティング活動の支援など）&lt;/p&gt;
-
-&lt;h2 id=&#34;全体概要&#34;&gt;全体概要&lt;/h2&gt;
-
-&lt;p&gt;カウルではユーザ獲得の流れとして&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;自社メディア or 広告経由でランディングページに集客する&lt;/li&gt;
-&lt;li&gt;ランディングページからトライアルユーザになってもらい&lt;/li&gt;
-&lt;li&gt;2週間の無料トライアル期間を提供し&lt;/li&gt;
-&lt;li&gt;トライアル期間後、料金プランを選択してもらい本登録ユーザになってもらう&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;というステップを作っています。&lt;/p&gt;
-
-&lt;p&gt;なのでログ分析基盤もそれに合わせて&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;集客からトライアルユーザになるまで&lt;/li&gt;
-&lt;li&gt;トライアルユーザになってから本登録ユーザになるまで&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;の大きく2つに分けて別々のサービスを利用しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;1-集客からトライアルユーザになるまで&#34;&gt;1. 集客からトライアルユーザになるまで&lt;/h2&gt;
-
-&lt;p&gt;このステップでは主に以下の切り口でデータを見ています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;日々のアクセス数とコンバージョン数のトラッキング&lt;/li&gt;
-&lt;li&gt;検索からの流入数とコンバージョンの計測&lt;/li&gt;
-&lt;li&gt;ランディングページの改善（ユーザの滞在時間、ランディングページがどこまで読まれているか、コンバージョン率の計測）&lt;/li&gt;
-&lt;li&gt;自社メディア（&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;、&lt;a href=&#34;https://kawlu.com/library/&#34;&gt;カウルライブラリー&lt;/a&gt;）からの流入とコンバージョンの計測&lt;/li&gt;
-&lt;li&gt;広告施策の効果測定&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ここではツールとして &lt;strong&gt;Google Analytics（GA）&lt;/strong&gt; を用いています。&lt;/p&gt;
-
-&lt;p&gt;検索や広告からの流入の効果計測を網羅的かつ簡単に計測するという点でやはりGAは優れたツールなので、カウルでも積極的に活用しています。&lt;br /&gt;
-基本的に &lt;strong&gt;すべて無料で利用できる&lt;/strong&gt; 点、画面から &lt;strong&gt;アカウント設定をしてページにタグを埋めるだけで利用開始できる&lt;/strong&gt; 点も利用者としては非常に嬉しいです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160419/google_analytics_logo.png&#34; title=&#34;google_analytics_logo&#34; width=&#34;60%&#34;&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;GAは利用している方も多いと思うので詳細な説明は割愛しますが、中でもおすすめしたい設定をいくつか挙げてみます。&lt;/p&gt;
-
-&lt;h3 id=&#34;google-tag-manager-gtm-の利用&#34;&gt;Google Tag Manager（GTM)の利用&lt;/h3&gt;
-
-&lt;p&gt;GTMはGoogleが提供する無料のタグコンテナツール（タグを一元管理でき、色々な条件に合わせてタグを出し分けてくれるツール）です。&lt;br /&gt;
-無料にもかかわらずタグのプレビュー機能やバージョン管理もついており、頻繁にコードを書き換えるスタートアップの環境においてアプリケーションと各種トラッキングタグを非同期にメンテナンスできることは大きなメリットだといえるでしょう。&lt;br /&gt;
-GAのタグに変数を渡す際に「data layer」という層を経由するなど、若干特殊な知識が必要になりますが、広告も含めたトラッキングタグ管理全体としての見通しも良くなるので是非導入をおすすめします。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;https://support.google.com/tagmanager/answer/6102821?hl=ja&#34;&gt;Google タグマネージャヘルプ - Google タグマネージャの概要&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://analyze.siraberu.info/post-521/&#34;&gt;GoogleタグマネージャでGoogleアナリティクスのタグを管理する方法！&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;カスタムキャンペーンパラメータの利用&#34;&gt;カスタムキャンペーンパラメータの利用&lt;/h3&gt;
-
-&lt;p&gt;各種広告の効果測定をキャンペーンごとに切り分けるためにGoogle Analyticsが公式でサポートしているパラメータです。&lt;br /&gt;
-通常は広告キャンペーンの効果測定に使うように説明されていますが、カウルでは自社メディアからの流入の切り分けにもこのパラメータを使用しています。&lt;br /&gt;
-公式でサポートされているパラメータなので、遷移元のURLに一度設定しておくと、特にレポートのカスタムをすることなくPV数やコンバージョン数を流入元ごとに切り分けることができます。&lt;br /&gt;
-この機能を用いて自社メディアのどんな記事がコンバージョンにつながりやすいかなど、記事ごとの分析に役立てています。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;https://support.google.com/analytics/answer/1033863?hl=ja&amp;amp;ref_topic=1032998&#34;&gt;Google アナリティクスヘルプ - カスタム キャンペーン&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;https://www.techloco.co.jp/blog/content/41&#34;&gt;Google アナリティクスで広告からのアクセスを計測する方法&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;ランディングページのスクロールの計測&#34;&gt;ランディングページのスクロールの計測&lt;/h3&gt;
-
-&lt;p&gt;カウルでは扱う商品が高額であるということもあり、ランディングページでより多くの情報を提供して安心してトライアルユーザになってもらうために、かなり縦長のランディングページを用意しています。&lt;br /&gt;
-縦長のランディングページの効果測定と改善においては、どのセクションにどのくらいユーザが滞在したか、どこまでスクロールして見てもらえたかが重要な指標となってきます。&lt;br /&gt;
-そこでカウルではscrolldepthというJavascriptライブラリをGA/GTMと組み合わせて利用しています。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;http://scrolldepth.parsnip.io/&#34;&gt;http://scrolldepth.parsnip.io/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=UoOh58pvqG4&#34;&gt;How to install Scroll Depth Tracking with Google Tag Manager [動画]&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;クロスデバイスビューの設定&#34;&gt;クロスデバイスビューの設定&lt;/h3&gt;
-
-&lt;p&gt;トライアル期間中のユーザに対する深い分析は、後半で記載する別のSaaSを利用して行っているのですが、大まかな傾向を見るのにはGoogle Analyticsのクロスデバイスビューも有効です。&lt;br /&gt;
-GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、クロスデバイスでのユーザトラッキングを可能にします（同一のユーザがPCとスマホでアクセスした場合にも同一ユーザとみなしてレポートが見られます）。&lt;br /&gt;
-また、私自身はまだ試せていないのですが、ユーザIDごとに時系列でユーザの行動を見れる「ユーザエクスプローラ」という機能が2016年春からβ版で公開されており、こちらの機能も期待できそうです。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;https://support.google.com/analytics/answer/3123662?hl=ja&amp;amp;ref_topic=3123660&#34;&gt;Google アナリティクスヘルプ - User ID 機能について&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://strobolights.xyz/web/2016/04/03/google/&#34;&gt;【Googleアナリティクス】ユーザーエクスプローラーの使い方&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;GAまわりのドキュメントは日本語でたくさんあるのですが、内容が古いものも散見されるため、おかしいなと思ったら公式のドキュメントを参照することをおすすめします。&lt;/p&gt;
-
-&lt;h2 id=&#34;2-トライアルユーザになってから本登録ユーザになるまで&#34;&gt;2. トライアルユーザになってから本登録ユーザになるまで&lt;/h2&gt;
-
-&lt;p&gt;続いて、トライアルユーザが本ユーザになるまでのデータ収集と活用について説明します。&lt;br /&gt;
-このステップでは主に以下の内容でデータを分析しています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ユーザ一人ひとりのサイト上での行動の定性的・定量的な評価&lt;/li&gt;
-&lt;li&gt;サイトからの通知（メール、メッセンジャー）に対する反応の評価&lt;/li&gt;
-&lt;li&gt;有料会員化したユーザの行動パターン分析&lt;/li&gt;
-&lt;li&gt;ユーザがどこでサイトの利用をやめてしまうかの分析&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ここでは &lt;strong&gt;&lt;a href=&#34;https://keen.io/&#34;&gt;keen.io&lt;/a&gt;というログ収集基盤を提供しているSaaS&lt;/strong&gt; を、周辺のツールと組み合わせて使用しています。&lt;/p&gt;
-
-&lt;h3 id=&#34;keen-ioとは&#34;&gt;keen.ioとは&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160419/keenio_logo.png&#34; title=&#34;keenio_logo&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;2011年に創業されたシリコンバレーにある企業のプロダクトで、UnityやAdobe、O&amp;rsquo;REILLYなど有名企業も複数使っているようです。&lt;/p&gt;
-
-&lt;p&gt;使い方は簡単で、keen.ioが公開しているAPIにログの書き込みリクエストを送るだけで、データの記録とストアを行ってくれます。自社でのWebサーバやストレージの管理は不要です。&lt;br /&gt;
-keen.ioのサイトからアカウント作成後、&lt;a href=&#34;https://github.com/keen/common-web&#34;&gt;CommonWeb&lt;/a&gt;というkeen.io公式のログ収集用Javascriptライブラリをサイトに導入し（このときバックエンドにkeen.ioのSaaSを指定します）、APIキーを設定するだけで導入は完了です。&lt;/p&gt;
-
-&lt;p&gt;CommonWebの基本的な機能として、PageView・Click・FormSubmissionをすべて記録できるので、サイト内の行動トラッキングとしては一旦はこれで十分かと思います。&lt;/p&gt;
-
-&lt;p&gt;貯まったデータに対して専用のUIからクエリングができるほか、API経由でもクエリングや生ログのCSVダウンロード・S3へのロードをサポートしています。&lt;br /&gt;
-手元のPythonなどで処理する場合はCSVダウンロードしたものを処理するようにしています。&lt;br /&gt;
-将来的にデータが大きくなったとしてもkeen.io→S3→EMR（もしくはBigQuery）の流れで処理できると予想しています。&lt;/p&gt;
-
-&lt;p&gt;また、APIのクライアントも各種言語（CURL / JS / RUBY / PYTHON / PHP / JAVA / .NET）でサポートされているため、自社のRailsアプリからログを記録したり、JavascriptとHTMLで自作のダッシュボードも簡単に作成することができます。&lt;br /&gt;
-（APIドキュメントは&lt;a href=&#34;https://keen.io/docs/api/#extract-to-csv-file&#34;&gt;こちら&lt;/a&gt;）&lt;/p&gt;
-
-&lt;h3 id=&#34;keen-ioを採用した理由&#34;&gt;keen.ioを採用した理由&lt;/h3&gt;
-
-&lt;p&gt;以下の（わがままな）要求や要件をすべてクリアしていたのがkeen.ioを採用した理由です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;サイト上のユーザ行動をすべてトラッキングしたい&lt;/li&gt;
-&lt;li&gt;サイト上のユーザ行動だけでなく、サイトからの通知（メール、メッセンジャー、プッシュ通知）のログも一元管理したい&lt;/li&gt;
-&lt;li&gt;溜まったデータに対して簡単な集計クエリを投げたい（KPIダッシュボードのデータストアとしても使いたい）&lt;/li&gt;
-&lt;li&gt;整形された生データをダウンロードしてきて機械学習などの入力としたい&lt;/li&gt;
-&lt;li&gt;サイト上のユーザ行動データ収集用のJavascriptを書くのが面倒&lt;/li&gt;
-&lt;li&gt;ログを記録するためのWebサーバの構築・管理もやりたくない&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;とにかく楽に作りたい&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;とはいえお金はあまり掛けられない&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;他にも代替案はあるかと思いますが、基本的には、&lt;br /&gt;
-&amp;ndash; タグを入れるだけで導入が簡単にできる一方で、生ログへのクエリングやダウンロードには対応していない「マーケター」用のツール（Mixpanelなど）を採用するか&lt;br /&gt;
-&amp;ndash; fluentdなどのOSSを利用しつつ足りないツールやコードを内製で作りながらBigQueryやS3にデータを流し込むか&lt;br /&gt;
-の2択になるかと思います。&lt;/p&gt;
-
-&lt;p&gt;前者だと要件が満たせず、後者だと構築や運用に手間がかかってしまうという点が懸念となり、今回はkeen.ioを採用しました。&lt;/p&gt;
-
-&lt;p&gt;（TreasureDataは上記をほとんどクリアしていて非常に魅力的なのですが、立ち上げたばかりのサービスで導入するには料金が少々お高いようでしたので今回の採用は見送りました。）&lt;/p&gt;
-
-&lt;h3 id=&#34;費用について&#34;&gt;費用について&lt;/h3&gt;
-
-&lt;p&gt;気になるお値段ですが、一ヶ月あたりに記録するイベント数により料金が決まる仕組みになっており、サポートが無いプランであれば &lt;strong&gt;月間5万イベントまでは無料&lt;/strong&gt; で利用できます。&lt;/p&gt;
-
-&lt;p&gt;無料枠を超えても10万イベント/月までは月額＄20、100万イベント/月までは月額＄125と安価で、クエリングに対しての課金は発生しないなど、自前でサーバを構えることを考えると導入するコストメリットは十分にあるのではないかと思います。&lt;br /&gt;
-（料金について詳しくは&lt;a href=&#34;https://keen.io/plans/self-service/&#34;&gt;こちら&lt;/a&gt;）&lt;/p&gt;
-
-&lt;h3 id=&#34;sendgrid-メール配信saas-との連携&#34;&gt;Sendgrid（メール配信SaaS）との連携&lt;/h3&gt;
-
-&lt;p&gt;もう一つおすすめしたい機能は&lt;a href=&#34;https://sendgrid.kke.co.jp/&#34;&gt;Sendgrid&lt;/a&gt;との連携です。&lt;br /&gt;
-Sendgridはメールの配信から開封・クリックの計測までを一括して行ってくれるSaaSです。加えてメールがスパム判定されていないかを確認する機能や、ユーザごとのメール配信停止機能を提供しています。&lt;/p&gt;
-
-&lt;p&gt;カウルでもメール配信にSendgridを使用しているのですが、keen.ioとSendgridは効果測定の機能がインテグレーションされているため、 &lt;strong&gt;設定を一つ入れるだけでメール関連のイベントもすべてkeen.ioのデータストアに集約することができます&lt;/strong&gt; 。&lt;br /&gt;
-参考）&lt;a href=&#34;https://keen.io/docs/integrations/sendgrid/&#34;&gt;SendGrid Integration&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;この機能のおかげで、&lt;strong&gt;どのユーザにいつどんな内容のメールを送って、その結果ユーザがどのような行動を取ったか&lt;/strong&gt; を簡単なシェルコマンド一つで抽出することが可能になっています。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;USER_ID=123 &amp;amp;&amp;amp; sort \
-  &amp;lt;(jq -r &#39;.result[] | [.keen.timestamp, &amp;quot;pageview&amp;quot;, .page_url] | @tsv&#39; \
-    &amp;lt;(curl &amp;quot;https://api.keen.io/3.0/projects/${PRJ_ID}/queries/extraction&amp;quot; -H &amp;quot;Authorization:${API_KEY}&amp;quot; -H &#39;Content-Type: application/json&#39; -d &amp;quot;{\&amp;quot;event_collection\&amp;quot;:\&amp;quot;pageviews\&amp;quot;,\&amp;quot;timeframe\&amp;quot;:\&amp;quot;this_14_days\&amp;quot;,\&amp;quot;filters\&amp;quot;:[{\&amp;quot;property_name\&amp;quot;:\&amp;quot;user_id\&amp;quot;,\&amp;quot;operator\&amp;quot;:\&amp;quot;eq\&amp;quot;,\&amp;quot;property_value\&amp;quot;:${USER_ID}}]}&amp;quot;)) \
-  &amp;lt;(jq -r &#39;.result[] | [.keen.timestamp, .event, .category] | @tsv&#39; \
-    &amp;lt;(curl &amp;quot;https://api.keen.io/3.0/projects/${PRJ_ID}/queries/extraction&amp;quot; -H &amp;quot;Authorization:${API_KEY}&amp;quot; -H &#39;Content-Type: application/json&#39; -d &amp;quot;{\&amp;quot;event_collection\&amp;quot;:\&amp;quot;Sendgrid Email Events\&amp;quot;,\&amp;quot;timeframe\&amp;quot;:\&amp;quot;this_14_days\&amp;quot;,\&amp;quot;filters\&amp;quot;:[{\&amp;quot;property_name\&amp;quot;:\&amp;quot;user_id\&amp;quot;,\&amp;quot;operator\&amp;quot;:\&amp;quot;eq\&amp;quot;,\&amp;quot;property_value\&amp;quot;:${USER_ID}}]}&amp;quot;))
-
-# 出力結果サンプル
-2016-04-06T09:37:34.000Z        processed       【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:39.000Z        delivered       【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:46.000Z        open    【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:49.000Z        click   【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:52.287Z        pageview        https://kawlu.com/market/profile/new
-2016-04-06T09:38:16.594Z        pageview        https://kawlu.com/market/requirements/new
-2016-04-06T09:38:28.107Z        pageview        https://kawlu.com/market/subscription/thankyou?course_id=2
-2016-04-06T09:39:35.410Z        pageview        https://kawlu.com/market
-2016-04-06T09:39:47.010Z        pageview        https://kawlu.com/market/messages
-2016-04-06T09:39:51.971Z        pageview        https://kawlu.com/market/conds/manage
-2016-04-06T09:39:53.867Z        pageview        https://kawlu.com/market/conds/new
-2016-04-06T09:40:17.000Z        processed       【カウル】新しいマンションの紹介があります
-2016-04-06T09:40:20.000Z        delivered       【カウル】新しいマンションの紹介があります
-2016-04-06T09:40:54.000Z        pageview        https://kawlu.com/market/messages
-2016-04-06T09:40:57.619Z        pageview        https://kawlu.com/market
-2016-04-06T09:40:59.388Z        pageview        https://kawlu.com/market/wishlists
-2016-04-06T09:41:04.784Z        pageview        https://kawlu.com/library
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回は立ち上げたばかりのサービスでも導入できるログ分析基盤についてご紹介いたしました。&lt;br /&gt;
-新規ユーザ獲得までの分析にはマーケティング方面に強いGoogle Analyticsを、無料ユーザを有料会員化するためのより深い分析にはkeen.ioを導入しています。&lt;/p&gt;
-
-&lt;p&gt;実際の導入には実働で丸4日程度（上記の調査も全て含めた稼働日数）、利用料金は今のところGoogle Analytics・keen.ioともに無料で使えています。&lt;/p&gt;
-
-&lt;p&gt;実際に導入してからまだ2ヶ月弱なのですが、現時点ではかなり快適に使えています。&lt;br /&gt;
-運用していく中での知見などあればまた書きます。&lt;/p&gt;
-
-&lt;p&gt;&lt;br&gt;
-&lt;a href=&#34;http://www.turnyourideasintoreality.com/2016/02/kauru/&#34;&gt;REALITY - 不動産売買市場をディスラプトするHousmart、不動産を買いたい人が本当にハッピーになるサービス 「カウル」をローンチ。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;【カウル】仲介手数料無料の中古マンション売買サービス&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

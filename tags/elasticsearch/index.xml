@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Elasticsearch on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/elasticsearch/index.xml</link>
+    <link>http://techblog.housmart.co.jp/tags/elasticsearch/</link>
     <description>Recent content in Elasticsearch on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <atom:link href="http://techblog.housmart.co.jp/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Dec 2016 10:23:43 +0900</lastBuildDate>
+    
+	<atom:link href="http://techblog.housmart.co.jp/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>日本語でのサジェストの難しさとElasticsearchを用いた実装例</title>
@@ -22,178 +25,7 @@
 &lt;p&gt;Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。&lt;/p&gt;
 
 &lt;p&gt;今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。
-&lt;/p&gt;
-
-&lt;h2 id=&#34;今回取り組んだ問題&#34;&gt;今回取り組んだ問題&lt;/h2&gt;
-
-&lt;p&gt;弊社HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。&lt;br /&gt;
-また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた自社メディアである&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;の運営をしています。&lt;/p&gt;
-
-&lt;p&gt;今回はマンションのデータベースサイトであるカウルライブラリーの検索にサジェスト機能を実装しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/u_9N0C3qqsnDcNjXxK9eopejjMM-k_fjBkYG2cKMCjnPGcLycAUDiHP_XfGgk9oNo38Qrgzpu2j7ay86tc1y8wzbdPWjjPLIo2hpsdyyhzSkPuygJ70bGmlXlY3spMgbI3wwpjAKur5LcE5tqu0byM-aGoO40qiWxO2Bu3PmTBZWFwwOfMYZczFGU9mJMD-0G0NkQ_PLuuM1xp4U7yPSQrWNp58Jy61NQQS-VO3B334fk_WSxd198zYzPqA_O5lsM1PDvtm86-Pfy0qltby984jY8--hHzJhgKjc4vzVUOEdjqvJBECJvnMo0A8tkFtsMhoxmbofGxG4AQOY9u7LcW3bQI8OLzwR_r93uvzr42adQOZR_rIn-wMubRdCq82QfURhdSOMvslMFCcTRHruQx-yZz4dsR8bJxdpQsYv9RtWcUtB0WtvIKWlCzXm1tGN5IRCqHZXNH_4agVUx442BPGwnDQ5BLX_lxiGnoiYU4E6NKZqoArgcoiSgCWrPnSRJDdnE2BWlMiAl425WdcfndDoM_b4eFt_Fz2jj7ew173cqSoiJxMJrUqX5JME6KkiUAYUxeF4xpZH4X9wSxdI3rbwd4McEyOC_FzFXvu4SrpQ_Vz9EEqQZsmNUhSiKzGMyNRkCYWKlbVlesRB-XL_Zr54c4Q_lZoAUvELtZKu2w=w400&#34; alt=&#34;カウルライブラリーのサジェスト&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;マンション名の検索の場合、出て来る固有名詞の種類が多い（マンションブランド名、地名、駅名など）ので、その全てにマスタを作るのが難しい（手間がかかる）という難点があります。これは例えばECサイトなどでも同様の悩みがあるのではないでしょうか。&lt;/p&gt;
-
-&lt;h2 id=&#34;なぜ日本語のサジェストが難しいのか&#34;&gt;なぜ日本語のサジェストが難しいのか&lt;/h2&gt;
-
-&lt;p&gt;まず、なぜ日本語のサジェストが難しいのかを整理しておきます。&lt;br /&gt;
-もともと検索システム初心者だったため、このあたりの事がWeb上できちんと言語化されていなかったので随分悩みました。&lt;br /&gt;
-&lt;a href=&#34;http://tech.vasily.jp/entry/solr-suggester&#34;&gt;こちらのブログ&lt;/a&gt;にこの辺りがまとめられていたので適宜引用しながら、これから取り組む人にとって役立つように、なぜ日本語のサジェストが難しいのかをまとめておきます。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;a href=&#34;http://tech.vasily.jp/entry/solr-suggester&#34;&gt;Solrを用いて検索のサジェスターを作りました - VASILY Developers Blog&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;一般的なサジェストは、検索対象のドキュメント中の単語リストを保持し、ユーザの入力途中の単語を使って前方一致検索をかけ、出現頻度が高い順に単語のリストを返すという単純な仕組みで成り立っています。&lt;br /&gt;
-しかし、日本語の場合はこの過程でいくつかのポイントを特別に考慮する必要があります。&lt;/p&gt;
-
-&lt;h3 id=&#34;単語の抽出&#34;&gt;単語の抽出&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;英語の文章は単語と単語との間がスペースや記号などで区切られています。 そのため、文章を単語に分解する処理を簡単に書くことができます。&lt;br /&gt;
-しかし他方で日本語の文章にはそのような機械的に単語分割できるような目印はありません。 そのため、日本語の文章を単語分割するためには形態素解析という処理を行う必要があります。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;このため、tokenizerに形態素解析用のプラグインを指定する必要があります。&lt;/p&gt;
-
-&lt;p&gt;形態素解析ではどのような辞書を用いて解析をするかが検索精度の観点で重要になります。今回は辞書として新語を定期的にアップデートしてくれている mecab-ipadic-NEologd を使いたいので、analysis-kuromoji-neologdのプラグインを利用しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/codelibs/elasticsearch-analysis-kuromoji-neologd&#34;&gt;Elasticsearch Analysis Kuromoji Neologd - GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;漢字-英語の読み&#34;&gt;漢字・英語の読み&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;さらに、単語に分割した後には「漢字の読み」の問題もあります。 例えば、「とう」と入力した時に「東京」という単語を返すためには、「東京」という単語の読みが「とうきょう」であるという情報が必要です。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;この問題に対しても一般語であればanalysis-kuromoji-neologdで読みを取得することが可能です。&lt;/p&gt;
-
-&lt;p&gt;また、マンション名では頻繁に英語とカタカナ語の表記ゆれが存在します。例えば、「ブリリア」というマンションブランド名が「Brillia」と表記されていたりします。「Brillia」という入力に対してブリリアシリーズのマンション名一覧を返すにはこれらの読み情報も必要です。この場合は一般語では無いので独自で辞書を追加する必要があります。&lt;/p&gt;
-
-&lt;h3 id=&#34;打ち途中の単語に対するサジェスト&#34;&gt;打ち途中の単語に対するサジェスト&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;未確定の子音やひらがなにも対応する必要があります。 「とうky」と入力した時には、「東京」や「東急」といった単語を候補として表示する必要があります。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;こちらの問題に対しては、ローマ字読みのfieldを別で用意してそれに対して前方一致をかけることで解決していきます。&lt;/p&gt;
-
-&lt;h3 id=&#34;elasticsearch標準のサジェスト機能について&#34;&gt;Elasticsearch標準のサジェスト機能について&lt;/h3&gt;
-
-&lt;p&gt;ここで、Elasticsearch標準のサジェスト機能について言及しておきます。&lt;/p&gt;
-
-&lt;p&gt;ElasticsearchではCompletionSuggesterというサジェスト用の機能が提供されているのですが、この機能は英語のドキュメントに対するサジェストを提供するためには非常に優れた機能です。一方で、 &lt;strong&gt;この機能を使って実用レベルの日本語のサジェストを実現することは難しい&lt;/strong&gt; です。&lt;/p&gt;
-
-&lt;p&gt;日本語でのサジェストは以上で挙げたように工夫すべきポイントがいくつか存在します。Elasticsearchの標準のサジェスト機能ではここがすべて考慮されているわけではないので、現状では実用的な日本語サジェストには使いにくいという結果になっています。&lt;/p&gt;
-
-&lt;p&gt;更に言うと、私はこの機能でどこまで出来るかを調べだしてしまったため結構ハマりました。 &lt;strong&gt;要件によってはこの機能を使わない&lt;/strong&gt; という選択をした方が良い事を知っておいてください。&lt;/p&gt;
-
-&lt;h2 id=&#34;どうやって実装していくか&#34;&gt;どうやって実装していくか&lt;/h2&gt;
-
-&lt;p&gt;今回は要件を満たすためにCompletionSuggesterは使うのを諦め、サジェスト用に新しいインデックスを作成していく方針にしました。&lt;/p&gt;
-
-&lt;h3 id=&#34;サジェスト用インデックスのデータ&#34;&gt;サジェスト用インデックスのデータ&lt;/h3&gt;
-
-&lt;p&gt;サジェスト用のインデックスに流し込むデータは&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;なるべく多いマンションが引っかかる検索ワードを優先的に出したい&lt;/li&gt;
-&lt;li&gt;マンション名そのものもサジェストしたい&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;の2点を満たすべく、マンション名をそれぞれ形態素解析し、その結果の組み合わせを下図の様に作成したものを用います。（マンション名そのものは2レコード入れる）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/GLQcZ5HRGT1Uj40zgc-4Q_SOIT2xKbm-R9AMqrPmMeze8m4IqARAzZznlpRrpTA21HCBTaZWXEpZD3hvR3mFK8Mq_JnEFWyzeATiwinEwXsqFqRKbtqQMprp0wlwf5cu6Tv_s7zTUq9H6dmxxVyZAg6mUTd_bN2IaUECiKoZQJKkzksHb6-1u9pj4SiIYJIod6delsCXIBvRxX5Kjf51S8nztKpe3Cv_LLMvt_ab-CGYhC3qLRJrb7PYvyghrnLUXsq_QlEwEILLQ3MnDWzk4Hj6SLwpUvqXRT8GRoC4B86akSoju6E57NVRh1yAFxlbVGZULAZbtgSAgUqhY_9mBmX0vG5bHhK3l84VAd0dJRuS7syoFwUVi9gRKqvo9VzLBGPI_Y-5gVlzsSAb8NDeXUJ2XwKirlGxQnqq4MMlkkA1uGkxFYIC_Xp_Nw-OCAToNJ635XqGMxspKgQew2ILarNxYFJo9mXhqW4vct5-LpO42uh63-v49OiF-fbbdG6fE9ofn6gHs8gZJV946EPziYyafVKHsxidK6giJW-ezjXO3HWjy0pX94bwlwk1DZSgKK9_fZ4gITP5_eLkd0V0uRMo46Ma6WCAqtuckKdLz7xil7YcqVWUvrKIrF6iO2hR7OIru7M8djMT8Ka3GQAfFlxwU5aPU2eP592QmRt6JQ=w400&#34; alt=&#34;サジェスト用インデックスのレコード作成&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;このデータに対して検索をかけ、group byでカウントが多い順にサジェストの結果とします。また、group byの結果が2件以上のものに限定することで、無意味なワードが引っかかからず、マンション名そのものはサジェストの結果に入れることができます。（マンション名そのものは2レコード入れているため）&lt;/p&gt;
-
-&lt;p&gt;本来ならばブランド名や地名のマスタデータを作るのがベストですが、その手間を省くためにこのような実装にしています。データの性質によりますが、この方法でそれなりの精度を実現できています。&lt;/p&gt;
-
-&lt;h3 id=&#34;analyzerの設定&#34;&gt;Analyzerの設定&lt;/h3&gt;
-
-&lt;p&gt;続いてインデックスに対してAnalyzerを設定していきます。&lt;br /&gt;
-ここの設定に関しては下記のブログが大変参考になりました。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;a href=&#34;https://medium.com/hello-elasticsearch/elasticsearch-%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%82%B5%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%A8%AD%E8%A8%88-352a230030dd#.jwa7znssd&#34;&gt;Elasticsearch キーワードサジェスト日本語のための設計&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;確定したキーワード用と入力途中のキーワード用に別々のfieldを定義していきます。&lt;/p&gt;
-
-&lt;h4 id=&#34;確定したキーワード用のanalyzer&#34;&gt;確定したキーワード用のAnalyzer&lt;/h4&gt;
-
-&lt;p&gt;「六本木」の様に確定したキーワードのための設定です。&lt;/p&gt;
-
-&lt;p&gt;データインポート時は、一般的なノーマライズを掛けてEdge-ngramでインデックスを作成しておきます。検索時は、文字列に対してノーマライズを掛けるだけです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/_yAGQ4tjmBDMEuoujBYC1EeghZydPfNS1U5N1UpayexUNxjm-Mx9qSXBGZojtPTQAb3PqT37KOi4syoQ2LMB_c0zI52LQnAujxJ9YUWFcyPxkcgIBFW6Kqo-q_gvkIDw2S-mLpl-KgPUbRgLSF686ytK5jUyzuTWIxXoMEt60aECceCiASQ089It6UvLEF18r_QqiCJc-HoQSutR7nX1EMGPtkT3elwIJt4WOk9k67_6_HQTBpAz0x-y4D3-LZMKKEVU2teufVIpHh2F8hRO7w9jUnw3JFSQvwZEWkRikCkzroWN8fyExC5V9lCthBI9ESWLqst7YhOUInPwZ7RGTbrNv3IVnyXWpKGbAyr7sdviTsgrXXmfxci7aPkZjHMkM5aYpq30tbQylW226VTLYSgPOPNrfK914I9l6OdLUaVG22ldANpiGk9ltNKuezkKKIskMQBgZ1J8Q65o0cQFFL67tmtLnZDma_PwZzY9QvFZzNWXStPiYwbYPV1fuUwXaQ7Zqk-hp-iJ1xZjvri0Uc-_QKuSozEsmUSaKmaur9eiP-NSKuHsvEUHPiw5R7mHsjia9JJs3WPTwkCYfEWnGBjmymMUanPWXChJNkrXYkfxYCwjWXpDVOkGaySc_u-GjrW157PqOVU_JlS_l4JyjdP3ixinmFDCfaTSiZdYeg=w300&#34; alt=&#34;確定したキーワード用のAnalyzer&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# インポート時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;engram&#39;
-]
----
-# 検索時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;入力途中のキーワード用のanalyzer&#34;&gt;入力途中のキーワード用のAnalyzer&lt;/h4&gt;
-
-&lt;p&gt;「roppo」の様に入力途中のキーワードのための設定です。&lt;/p&gt;
-
-&lt;p&gt;データインポート時は、一般的なノーマライズを掛けた後、すべてをローマ字に変換してEdge-ngramでインデックスを作成しておきます。検索時も同様に、文字列をノーマライズした後にすべてローマ字に変換します。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/DafyI_-4Wt8EcUL3FoMqsrEu51-mRdQrvo96KWfZyX8TdtGYrXXGXsbrGzcwSXefckFonFbc9bSP-4AHsr6JCJNIsfkkatQnMrfqHm7sg1T4AVWpDUqDzOMsDvHpCx-tlbQFaerivqey0-dV8out5b98gd3Y5y7OXdInXQAgp45_paFGSnsJfOjaEKhcT11HFNMpai5G0wReLPrqmHqEC8JOqWu8ESbUiLUodXivY9VoOGQ4tmW4s27qXtFy31GQxXeY1JUWS_9FPNcjQUEt0OdnR4RS5T1zwXaGBcLRqXJ-BaPGCLLo8mABq6LuscOzp82IIha7yEKPMUT2LVgQlQLU_tHGNaOQa9sOkYIUUqN95gBYg_hbwTj92fGEwHHOLGL7N_xjjXEjhdhErClvYBlvL8tvbUVuBMgfUeWkej-mpa7BYTer55wcVSGguM_1z53-2UKFNV9rI99IVCEDmZ4fAsikQALOWtAlt9FZPT-WnLv2BNxkdTh6r1FW0lavpP7eI96Rkq3bT2jnotecnY8Zjt_t-liNeiLYWoucwRf8Lo3PYz7BfGm5q9z2sFMW4_LBv6odBaRLknFGXG8mcMVJS_n-zqdFOSxh-BDItJgNZJ-g0eB2tHCRoYlmni-Sp2UQIvjsSJjJclBRTcBIJLby4eBRsqK4zInK-UgWng=w300&#34; alt=&#34;入力途中のキーワード用のAnalyzer&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# インポート時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;readingform_neologd_romaji&#39;,
-  &#39;asciifolding&#39;,
-  &#39;engram&#39;
-]
----
-# 検索時
-char_filter: [
-  &#39;normalize&#39;,
-  &#39;katakana&#39;,
-  &#39;romaji&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;readingform_neologd_romaji&#39;,
-  &#39;asciifolding&#39;
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Analyzerに関するより詳しい挙動や流れは先程挙げたブログを参照してください。&lt;/p&gt;
-
-&lt;h3 id=&#34;終わりに&#34;&gt;終わりに&lt;/h3&gt;
-
-&lt;p&gt;Elasticsearchの設計は見通しが立ってしまえばそこまで難しくはないのですが、一つ一つの事例ごとに特性が違い、データの設計とAnalyzerの設定をそれぞれの特性に合わせて同時に考えなければならない点が難易度が高いと思っています。&lt;br /&gt;
-今回はひとつの実装例をご紹介しましたが、これから設計をする人の参考になれば幸いです。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Housmartではエンジニアを募集しています。&lt;br /&gt;
-&lt;a href=&#34;https://www.wantedly.com/projects/69047&#34;&gt;今話題のReTech！創業期を支える4人目のエンジニアをWanted！&lt;/a&gt;&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/</loc>
+    <lastmod>2017-08-20T00:00:00+00:00</lastmod>
+  </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/2017/03/10/tryswift2017/</loc>
@@ -122,20 +128,14 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/culture/</loc>
-    <lastmod>2016-12-07T14:23:37+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://techblog.housmart.co.jp/categories/culture/</loc>
     <lastmod>2016-12-07T14:23:37+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/data-analysis/</loc>
-    <lastmod>2016-04-17T22:39:26+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/tags/culture/</loc>
+    <lastmod>2016-12-07T14:23:37+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -146,8 +146,8 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/design/</loc>
-    <lastmod>2016-11-08T15:40:44+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/tags/data-analysis/</loc>
+    <lastmod>2016-04-17T22:39:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -158,14 +158,20 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/development/</loc>
-    <lastmod>2016-09-07T17:54:20+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/tags/design/</loc>
+    <lastmod>2016-11-08T15:40:44+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/development/</loc>
-    <lastmod>2016-12-16T10:23:43+09:00</lastmod>
+    <lastmod>2017-08-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/development/</loc>
+    <lastmod>2016-09-07T17:54:20+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -176,14 +182,14 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/event/</loc>
-    <lastmod>2016-09-17T21:25:46+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/categories/event/</loc>
+    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/categories/event/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/tags/event/</loc>
+    <lastmod>2016-09-17T21:25:46+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -200,14 +206,14 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/infra/</loc>
-    <lastmod>2016-04-17T22:39:26+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/categories/infra/</loc>
+    <lastmod>2016-03-10T16:57:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/categories/infra/</loc>
-    <lastmod>2016-03-10T16:57:26+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/tags/infra/</loc>
+    <lastmod>2016-04-17T22:39:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -218,25 +224,25 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/ios/</loc>
-    <lastmod>2016-09-07T17:54:20+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://techblog.housmart.co.jp/categories/ios/</loc>
     <lastmod>2016-09-07T17:54:20+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/kpi/</loc>
-    <lastmod>2016-11-21T15:40:44+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/tags/ios/</loc>
+    <lastmod>2016-09-07T17:54:20+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/kpi/</loc>
+    <lastmod>2016-11-21T15:40:44+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/kpi/</loc>
     <lastmod>2016-11-21T15:40:44+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -266,14 +272,14 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/operation/</loc>
-    <lastmod>2016-03-28T10:34:34+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/categories/operation/</loc>
+    <lastmod>2016-06-22T21:25:46+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/categories/operation/</loc>
-    <lastmod>2016-06-22T21:25:46+09:00</lastmod>
+    <loc>http://techblog.housmart.co.jp/tags/operation/</loc>
+    <lastmod>2016-03-28T10:34:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -285,19 +291,19 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://techblog.housmart.co.jp/tags/project/</loc>
-    <lastmod>2016-06-15T22:48:09+09:00</lastmod>
+    <lastmod>2017-08-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/project/</loc>
     <lastmod>2016-08-24T21:25:46+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/project/</loc>
+    <lastmod>2016-06-15T22:48:09+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -321,12 +327,13 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/swift/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
+    <lastmod>2017-08-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/</loc>
+    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -349,20 +356,20 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/work/</loc>
-    <lastmod>2016-08-24T21:25:46+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://techblog.housmart.co.jp/categories/work/</loc>
     <lastmod>2016-04-26T08:04:13+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>http://techblog.housmart.co.jp/tags/work/</loc>
+    <lastmod>2016-08-24T21:25:46+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
+    <lastmod>2017-08-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

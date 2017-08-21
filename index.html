@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>カウル Tech Blog &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.19" />
+    <meta name="generator" content="Hugo 0.26" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:updated_time" content="2017-03-10T19:00:36&#43;09:00"/>
+<meta property="og:updated_time" content="2017-08-20T00:00:00&#43;00:00"/>
 
 
 
@@ -47,7 +47,10 @@
 <meta itemprop="description" content="">
 
 
-    
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="カウル Tech Blog"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
 </head>
 <body>
 <div class="container">
@@ -160,7 +163,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        23
+        24
         <span>Posts</span>
       </div>
       <div class="article-info-block">
@@ -244,6 +247,103 @@
     <article class="article article-type-post" itemscope="" itemprop="blogPost">
         <div class="article-inner">
             
+            <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" itemprop="url">
+                
+                <img src="https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no" class="article-banner">
+                
+            
+            </a>
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/">
+    <h1 class="article-title" itemprop="name">
+        SwiftのOSSライブラリに機能を追加したときに心がけたこと
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-08-20 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-08-20</time>
+            &middot;
+            2011
+            words
+            &middot;
+            5
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">DEVELOPMENT</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/swift">SWIFT</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="hatena-bookmark-button" data-hatena-bookmark-title="SwiftのOSSライブラリに機能を追加したときに心がけたこと" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>
+                    アプリケーションエンジニアの田中です。今年6月に入社して、初めてのTech Blogへの投稿になります。最近の大きな出来事は、スプラトゥーン購入をしたこと、Housmarへのjoin、そして結婚したことです。</p>
+
+<p>先日、何となく目標にしていた「お仕事でお世話になったOSSに機能追加する」を達成できました。今回は、私がReactiveSwiftに機能を追加した際の事前準備、背中を押してくれたものなどについて書いてみます。</p>
+
+<p>
+                    <br>
+                </p>
+                <p class="article-more-link">
+                    <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/">
+                        Read more
+                    </a>
+                </p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="hatena-bookmark-button" data-hatena-bookmark-title="SwiftのOSSライブラリに機能を追加したときに心がけたこと" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="SwiftのOSSライブラリに機能を追加したときに心がけたこと" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f20%2fcontribute-to-reactive-swift%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=Swift%e3%81%aeOSS%e3%83%a9%e3%82%a4%e3%83%96%e3%83%a9%e3%83%aa%e3%81%ab%e6%a9%9f%e8%83%bd%e3%82%92%e8%bf%bd%e5%8a%a0%e3%81%97%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%ab%e5%bf%83%e3%81%8c%e3%81%91%e3%81%9f%e3%81%93%e3%81%a8&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f20%2fcontribute-to-reactive-swift%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f20%2fcontribute-to-reactive-swift%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f20%2fcontribute-to-reactive-swift%2f&amp;description=Swift%e3%81%aeOSS%e3%83%a9%e3%82%a4%e3%83%96%e3%83%a9%e3%83%aa%e3%81%ab%e6%a9%9f%e8%83%bd%e3%82%92%e8%bf%bd%e5%8a%a0%e3%81%97%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%ab%e5%bf%83%e3%81%8c%e3%81%91%e3%81%9f%e3%81%93%e3%81%a8" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f20%2fcontribute-to-reactive-swift%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+    </article>
+    
+    <article class="article article-type-post" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
             <a href="http://techblog.housmart.co.jp/2017/03/10/tryswift2017/" itemprop="url">
                 
                 <img src="https://lh3.googleusercontent.com/kOm4wkBe20oME4XCv2qm2A1u5Q2nc622ujF0juQP7JEbjmqiuZoYcqLl7b0fmJFb_atHsHNLv8PvtPGB-6gkryBOd4i7i9ulH7HLW64kVw0aIBo53HwdIdBoA6C-e1ocrTobH7xCvSGb2_SFDhFlWmKIBNu750opZC8QF4lo2D9oz1r0o6VlqW7AnNyf-OhXCuSz7cHJ_FrRzxVSQm61VCQt50M2lIBxzM2h8HHRYXZ45LmJP2s-qM25I-FzJ2EHnHZ4CxOaI-RfYd7ynnNzHjzpx5t3OS_TyEUV-y1Jw7aWD1vsfSdJVq3K38sa1v9tjEY3n9vctZraPGRw_UJrYh32hyCwp3xf2f8qkqZpaYaoYloh4BfUJvdrWxMVQQ7KmiOMNJD66_uDcGF3R6bOhXqk_yRz4ia_NLtD4V8mF8doeeDdRiicjoCQgUYlrPUModwY382eaEAdzvaExg5aEaJJFGittZntzpmjz7ngX_cgk2lu-2Ek3PaUMT2b_qdVRtNyVum2adTRHI2fDieDHED2zKEbRDEgTXRZ3_E6qYhegtHVGZ8_06x4EkM77WHDBMHt8wgg6f0v3P08HsSjemoUW4CkAr0PRiuKyTtAdXmJot3gtdKTgaUBNPwN2MDWGHcve5I8_wpU_Ob9mo6bMkh5LuQGGuGSJtSW1EFdMQ=w621-h245-no" class="article-banner">
@@ -318,94 +418,9 @@
 
 <h1 id="今回参加の目的">今回参加の目的</h1>
 
-<p><img src="https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600" alt="中古マンション売買サービス「カウル」" /></p>
+<p><img src="https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600" alt="中古マンション売買サービス「カウル」" />
 
-<p>HousmartはReTech（不動産テック）スタートアップで、<a href="https://kawlu.com/market">中古マンション売買サービス「カウル」</a>をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。</p>
-
-<p>また、メインのサービス以外にも、ユーザがマンションの情報を検索できる<a href="https://kawlu.com/library">カウルライブラリー</a>、マンション購入のノウハウを載せた<a href="https://kawlu.com/journal/">マンションジャーナル</a>というメディアの運営をしています。</p>
-
-<p>これらのサービスでアプリ開発を行っており、①開発で使っている言語のトレンドを知りたい、②面白い発表から学びたいと思いカンファレンスに参加しました。</p>
-
-<p><img src="https://lh3.googleusercontent.com/-oCt1zx9Rr6ZTjKkf-z5sC_pyAlsyxO5QGO-iUY-MQzfpq9FCmODFFNHF1NeqzDHHxr7EpsArFErgAcp1jgwbarbYzbf8wUztbEmkk3ieWGWWz1k6tK5gm3Tc6SLjzx4IMJi4SauhVeG9BMFj3stO0lXRd2D8Mq0pataRjzsFnA9L2IBTkJaaIT4o6xESSVv94jYKerznrOuBx5Tf_kFfTJ3JD42Q5xqPdUzREtIm6hcywcFLaf4KHrqobrdotsnWyUHHw1n3ERB5KSq-XxJ1Cr9OBri68LL93VvxlQw3JB51q1KBZJqeSYv9q2QpF8YeRSEGOO8rlz_bMGVciyG0z3PmsNUG7ryy-q3p7wUtbnZz59lyIpJ11kOKGYolpTwvFTMNY9U1TCrZLaXjlroBnQdD2Pj4EyR4TiuwU5tp-ZWDRnOwxCCVJtCyc7boiESmmO5K2QXDaemC2JjSc9zYm2uk6dqBEVJu2pBn-yykAS9xnYSiIofOG3P3BQdr0aFhLoqiHt3236ehy5CysAq2pSbIWbelWFEABoN7gurMSt852kp5MsYkx9qbmIATuuHAGlUbVBN6PR1B1Y1p4BPQoEPZ067CkuM-J0FIWAZMAc1WOQF7X4yUWMxG4dOOkMR5WHBoWAkxBsvl80bu9XAtmy_Nn-wy20EOaHIlQF2=w600" alt="カンファレンスのネームプレートが可愛かったです。当日の名前投票で「RIKO」ちゃんに決定" /></p>
-
-<p>今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。</p>
-
-<h1 id="try-swift全体の構成">try! Swift全体の構成</h1>
-
-<p>まず、全体の構成についてです。カンファレンスでの発表は全部で約32個で、内容は以下のような構成でした。</p>
-
-<p><img src="https://lh3.googleusercontent.com/1OCOR_a4Y-VnJnjDRvD6Bxiz5gjwASFws3KoHF_0ZAq1ytcxcgxHlElKLZigTuj71vQFm_wFwfKGFpyWal7-qsJZzxjl6NTXCa6PwkSf9sdZ7dUsxhHEzqbrp4oozgtziH5EVdkpbaZhchKe-ISAL0noLpqfukO6-1Yo9lhY8hHOxgdrU35_9H_Ecvc9jsiomxa10SGrEETmCE5lcFfUgs7KQPlj_36kmRTwERb6AsYalli1Rp1jA9dQGHxwlEjHbrecv3kmM9K8s9GxMejmvE4Puos4MjzbAmSVVXbYKiNaqakM1EISvAekVFfFZNQttYAN-IoavhKpd9UdFimRuhPQKn3Km9t9WjZAjrLzBQA-L9LVemuuoZgwJgdQnsc0jOSubcj0J-dlu7gRRgPA4wusHDmfBC1UOV133VIo4WdqL84QVr8RuKkiAmeb7OZ_KA9aVDOa2zTxhM8x4BqgetK5gFUu1VC8BZtYb9UG6ggo3VoqBIvoetMFrjtumzz1-lrCDQLTKTwBhIq_6ahFH3QYX4Bfv28x9YbyUwCzrqbyn0BsAbOwIxopTY3wScqFl1vVCmbN_YfCo_dBWzNQVKWmFai9ycfF8yFLn_rT7vd5jvKXWSZaGeE_vvjz02OEk7obl-aRvD_YDtIxHNKLFeVGQxq8whq5nmK0GfuC4Q=w600" alt=" try! Swift2017の講演・ライトニングトークの内容構成図" /></p>
-
-<p>サーバーサイドSwiftや機械学習・DeepLearningの話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。</p>
-
-<h1 id="気になった発表3つ">気になった発表3つ</h1>
-
-<h2 id="①client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223">①Client-Side Deep Learning <a href="https://twitter.com/shu223">by Shuichi Tsutsumi</a></h2>
-
-<p>堤(<a href="https://twitter.com/shu223">@Shu223</a>)さんのクライアントサイドで行うディープラーニングのプレゼンが印象的でした。<br></p>
-
-<p>ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。<br></p>
-
-<p>つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。</p>
-
-<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/2OS20oAt7NLgPx" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/t26v0748/clientside-deep-learning" title="Client-Side Deep Learning" target="_blank">Client-Side Deep Learning</a> </strong> from <strong><a target="_blank" href="//www.slideshare.net/t26v0748">Shuichi Tsutsumi</a></strong> </div></p>
-
-<h2 id="②realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz">②Realmを使ってコラボレーションアプリを作る <a href="https://twitter.com/mrackwitz">by Marius Rackwitz</a></h2>
-
-<p>このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。<br></p>
-
-<ol>
-<li><p>Realmの利点<br>
-・オブジェクト思考で書け、クラスを実装するように書ける<br>
-・React NativeやXamarinにも対応しているので、クロスプラットフォーム<br>
-・すべての環境で同じデータを使いまわせるので、バックアップがとれる<br>
-・トランザクション管理をしているので、リアルタイムの共同編集ができる<br>
-・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能<br></p></li>
-
-<li><p>Realmの通知機能 <br>
-・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える<br>
-・イベントハンドリング<br></p></li>
-
-<li><p>アクセス権の管理 <br>
-・Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能</p></li>
-</ol>
-
-<p>とのことで、3の内容が特に興味深かったです。</p>
-
-<p>　</p>
-
-<h2 id="③クックパッドアプリのテストを味わう-by-kazucocoa-https-twitter-com-kazu-cocoa">③クックパッドアプリのテストを味わう <a href="https://twitter.com/Kazu_cocoa">by KazuCocoa</a></h2>
-
-<p>クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。<br></p>
-
-<ol>
-<li><p>Cookpadアプリの状況<br>
-グローバルアプリと日本アプリの2つがあり、統合はまだしておらず、UIコンポーネントは複数大きく変えているそうで、だいたい10万行ぐらい。以前は2週間、最近は1ヶ月毎にアップデートしている状況。</p></li>
-
-<li><p>kano-model という品質モデル<br>
-・Attractive – Must-be Qualityの２つのパラメータ<br>
-・Diachronic Quality for mobile<br></p></li>
-
-<li><p>UIテストのやり方<br>
-まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
-そこで、Cookpadでは2015年-2017年にかけてUIテストの自動化を行い、クラッシュ率を下げ続けたそうです。<br></p></li>
-
-<li><p>UIテストの書き方<br>
-①シナリオを書く<br>
-②シナリオをRubyコードに変換<br>
-③Appiumで実行<br></p></li>
-</ol>
-
-<p>XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。<br></p>
-
-<p>クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でクラッシュ率の低い安定したサービスを提供していきたいと思いました。</p>
-
-<h1 id="参加して感じたこと-br">参加して感じたこと<br></h1>
-
-<p>① Twitter(<a href="https://twitter.com/tryswiftconf">@tryswift</a>)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
-(<a href="https://twitter.com/k_katsumi">@k_katsumi</a>さん、運営者のみなさんありがとうございます！)<br></p>
-
-<p>②最前列で聞き起こしをして登壇もしている<a href="http://niwatako.hatenablog.jp/">niwatako</a>さんのコミュニティへの貢献度がすごいと思いました。(<a href="http://niwatako.hatenablog.jp/">niwatako</a>さんありがとうございます！)<br>
+HousmartはReTech（不動産テック）スタートアップで、<a href="https://kawlu.com/market">中古マンション売買サービス「カウル」</a>をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -1284,108 +1299,6 @@ Housmartの宮永です。</p>
         </div>
     </article>
     
-    <article class="article article-type-post" itemscope="" itemprop="blogPost">
-        <div class="article-inner">
-            
-            <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" itemprop="url">
-                
-                <img src="https://lh3.googleusercontent.com/8or4yRjTxTzz7S62KI9tOd6UCFRGZuQfXPmXZctFUa-L0sb21OSLolo08X-R7Aqx5Ewy6mtN429pjhqxPQc1Ro6kP3Y59wPoYqTmrRj9odQuWiXzRGWGkOgd6PWVzUNlmmOAjOYIsC8-QuXdOKVB7l2HiGk6dyWHO3xjoGZ9ZeL49nmRDIIsFbrs9JpKVB8_VlfLXFD47S_0TuVgv_dnBpOhy1r-ZIHyPtOVSJzOUHlpwQGSeyzbeIx4fcjDQHrxeN51koMmk44CpZgUl03pYA5kGvrFQQ9S-50gA0aRxa8HMWRoytw_BTrWpBjErZJp_dyoNnHy7wOhyVw5qPolVlN7J8HGR5CgET0cHdWY8pCfnG4BIiXf2_lJ45ICfFhgW6iBTDM4ER11keIKksoUDbMbBfWWsLpH1cxauQeSvnjac6L36fvWvLdtMmI7RZN1CLxPKWi86Kt11md4-ZPOJDybeZD18fT8CXZLU1qXYa9Vl_jTfiOd9_pV0TtFCkKzrygI3owWdgypaG08-9B83M9rEv4Nm1KDQ8s4ucNRDkdRqMicF7Fvn8o-H7erQ7WlIHf1NgB_uCGWPa5_YLIt5-nsyxz_CnCg=s800" class="article-banner">
-                
-            
-            </a>
-
-            <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/">
-    <h1 class="article-title" itemprop="name">
-        なぜdevelopブランチは必要なの？
-    </h1>
-    </a>
-    <div class="article-meta">
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2016-06-22 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-06-22</time>
-            &middot;
-            1691
-            words
-            &middot;
-            4
-            minute read
-        </div>
-
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/operation">operation</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/git">git</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-<div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="hatena-bookmark-button" data-hatena-bookmark-title="なぜdevelopブランチは必要なの？" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-
-            <div class="article-entry" itemprop="articleBody">
-                <p>
-                    「Gitのブランチ構成どうしましょうか？」<br />
-「とりあえずdevelop切ってやっていきますね。」</p>
-
-<p>そのdevelopブランチ本当に必要でしょうか。<br />
-developブランチだけ使われていて、masterが全く使われていなかったりしないでしょうか。</p>
-
-<p>
-                    <br>
-                </p>
-                <p class="article-more-link">
-                    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/">
-                        Read more
-                    </a>
-                </p>
-            </div>
-            <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="hatena-bookmark-button" data-hatena-bookmark-title="なぜdevelopブランチは必要なの？" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-<footer class="article-footer">
-    <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/06/22/git-workflow/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="なぜdevelopブランチは必要なの？" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%81%aa%e3%81%9cdevelop%e3%83%96%e3%83%a9%e3%83%b3%e3%83%81%e3%81%af%e5%bf%85%e8%a6%81%e3%81%aa%e3%81%ae%ef%bc%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f&amp;description=%e3%81%aa%e3%81%9cdevelop%e3%83%96%e3%83%a9%e3%83%b3%e3%83%81%e3%81%af%e5%bf%85%e8%a6%81%e3%81%aa%e3%81%ae%ef%bc%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f06%2f22%2fgit-workflow%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
-    </a>
-</div>
-
-    
-</footer>
-
-        </div>
-    </article>
-    
 
     <nav id="page-nav">
 
@@ -1409,6 +1322,31 @@ developブランチだけ使われていて、masterが全く使われていな�
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="カウル Tech Blog" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        DEVELOPMENT
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="title">SwiftのOSSライブラリに機能を追加したときに心がけたこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-08-20 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-08-20</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -1510,31 +1448,6 @@ developブランチだけ使われていて、masterが全く使われていな�
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="カウル Tech Blog" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
-                        design
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -1573,7 +1486,7 @@ developブランチだけ使われていて、masterが全く使われていな�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
                     development
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -1806,7 +1719,7 @@ developブランチだけ使われていて、masterが全く使われていな�
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
                     swift
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">

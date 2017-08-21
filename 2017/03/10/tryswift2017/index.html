@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>try! Swift2017に参加しました！気になった発表3選！ &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.19" />
+    <meta name="generator" content="Hugo 0.26" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -31,92 +31,7 @@ try! Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに
 
 
 
-HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。
-
-また、メインのサービス以外にも、ユーザがマンションの情報を検索できるカウルライブラリー、マンション購入のノウハウを載せたマンションジャーナルというメディアの運営をしています。
-
-これらのサービスでアプリ開発を行っており、①開発で使っている言語のトレンドを知りたい、②面白い発表から学びたいと思いカンファレンスに参加しました。
-
-
-
-今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。
-
-try! Swift全体の構成
-
-まず、全体の構成についてです。カンファレンスでの発表は全部で約32個で、内容は以下のような構成でした。
-
-
-
-サーバーサイドSwiftや機械学習・DeepLearningの話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。
-
-気になった発表3つ
-
-①Client-Side Deep Learning by Shuichi Tsutsumi
-
-堤(@Shu223)さんのクライアントサイドで行うディープラーニングのプレゼンが印象的でした。
-
-ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。
-
-つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。
-
-    Client-Side Deep Learning  from Shuichi Tsutsumi 
-
-②Realmを使ってコラボレーションアプリを作る by Marius Rackwitz
-
-このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。
-
-
-Realmの利点
-・オブジェクト思考で書け、クラスを実装するように書ける
-・React NativeやXamarinにも対応しているので、クロスプラットフォーム
-・すべての環境で同じデータを使いまわせるので、バックアップがとれる
-・トランザクション管理をしているので、リアルタイムの共同編集ができる
-・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能
-
-Realmの通知機能 
-・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える
-・イベントハンドリング
-
-アクセス権の管理 
-・Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能
-
-
-とのことで、3の内容が特に興味深かったです。
-
-　
-
-③クックパッドアプリのテストを味わう by KazuCocoa
-
-クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。
-
-
-Cookpadアプリの状況
-グローバルアプリと日本アプリの2つがあり、統合はまだしておらず、UIコンポーネントは複数大きく変えているそうで、だいたい10万行ぐらい。以前は2週間、最近は1ヶ月毎にアップデートしている状況。
-
-kano-model という品質モデル
-・Attractive – Must-be Qualityの２つのパラメータ
-・Diachronic Quality for mobile
-
-UIテストのやり方
-まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
-そこで、Cookpadでは2015年-2017年にかけてUIテストの自動化を行い、クラッシュ率を下げ続けたそうです。
-
-UIテストの書き方
-①シナリオを書く
-②シナリオをRubyコードに変換
-③Appiumで実行
-
-
-XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。
-
-クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でクラッシュ率の低い安定したサービスを提供していきたいと思いました。
-
-参加して感じたこと
-
-① Twitter(@tryswift)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
-(@k_katsumiさん、運営者のみなさんありがとうございます！)
-
-②最前列で聞き起こしをして登壇もしているniwatakoさんのコミュニティへの貢献度がすごいと思いました。(niwatakoさんありがとうございます！)" />
+HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://techblog.housmart.co.jp/2017/03/10/tryswift2017/" />
 
@@ -150,92 +65,7 @@ try! Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに
 
 
 
-HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。
-
-また、メインのサービス以外にも、ユーザがマンションの情報を検索できるカウルライブラリー、マンション購入のノウハウを載せたマンションジャーナルというメディアの運営をしています。
-
-これらのサービスでアプリ開発を行っており、①開発で使っている言語のトレンドを知りたい、②面白い発表から学びたいと思いカンファレンスに参加しました。
-
-
-
-今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。
-
-try! Swift全体の構成
-
-まず、全体の構成についてです。カンファレンスでの発表は全部で約32個で、内容は以下のような構成でした。
-
-
-
-サーバーサイドSwiftや機械学習・DeepLearningの話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。
-
-気になった発表3つ
-
-①Client-Side Deep Learning by Shuichi Tsutsumi
-
-堤(@Shu223)さんのクライアントサイドで行うディープラーニングのプレゼンが印象的でした。
-
-ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。
-
-つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。
-
-    Client-Side Deep Learning  from Shuichi Tsutsumi 
-
-②Realmを使ってコラボレーションアプリを作る by Marius Rackwitz
-
-このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。
-
-
-Realmの利点
-・オブジェクト思考で書け、クラスを実装するように書ける
-・React NativeやXamarinにも対応しているので、クロスプラットフォーム
-・すべての環境で同じデータを使いまわせるので、バックアップがとれる
-・トランザクション管理をしているので、リアルタイムの共同編集ができる
-・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能
-
-Realmの通知機能 
-・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える
-・イベントハンドリング
-
-アクセス権の管理 
-・Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能
-
-
-とのことで、3の内容が特に興味深かったです。
-
-　
-
-③クックパッドアプリのテストを味わう by KazuCocoa
-
-クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。
-
-
-Cookpadアプリの状況
-グローバルアプリと日本アプリの2つがあり、統合はまだしておらず、UIコンポーネントは複数大きく変えているそうで、だいたい10万行ぐらい。以前は2週間、最近は1ヶ月毎にアップデートしている状況。
-
-kano-model という品質モデル
-・Attractive – Must-be Qualityの２つのパラメータ
-・Diachronic Quality for mobile
-
-UIテストのやり方
-まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
-そこで、Cookpadでは2015年-2017年にかけてUIテストの自動化を行い、クラッシュ率を下げ続けたそうです。
-
-UIテストの書き方
-①シナリオを書く
-②シナリオをRubyコードに変換
-③Appiumで実行
-
-
-XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。
-
-クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でクラッシュ率の低い安定したサービスを提供していきたいと思いました。
-
-参加して感じたこと
-
-① Twitter(@tryswift)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
-(@k_katsumiさん、運営者のみなさんありがとうございます！)
-
-②最前列で聞き起こしをして登壇もしているniwatakoさんのコミュニティへの貢献度がすごいと思いました。(niwatakoさんありがとうございます！)">
+HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。">
 
 
 <meta itemprop="dateModified" content="2017-03-10T19:00:36&#43;09:00" />
@@ -245,17 +75,10 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
 
 
 
-<meta itemprop="keywords" content="culture,data-analysis,design,development,event,infra,ios,kpi,member,operation,project,work,conference,culture,data-analysis,design,development,elasticsearch,event,git,hackathon,infra,introduction,ios,kpi,lab,management,media,operation,pitch,project,rails,search,startup,swift,tools,tryswift,ux,work," />
+<meta itemprop="keywords" content="swift,conference,tryswift," />
 
-    
-
-
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w2560-h552-no"/>
-
-
-
-<meta name="twitter:text:title" content="try! Swift2017に参加しました！気になった発表3選！"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w2560-h552-no"/>
 <meta name="twitter:title" content="try! Swift2017に参加しました！気になった発表3選！"/>
 <meta name="twitter:description" content="こんにちは。あすかです。Housmartでは普段Swiftで開発していることもあり、  try! Swift TOKYOというSwiftのカンファレンスに参加して来ました！
 
@@ -267,92 +90,7 @@ try! Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに
 
 
 
-HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。
-
-また、メインのサービス以外にも、ユーザがマンションの情報を検索できるカウルライブラリー、マンション購入のノウハウを載せたマンションジャーナルというメディアの運営をしています。
-
-これらのサービスでアプリ開発を行っており、①開発で使っている言語のトレンドを知りたい、②面白い発表から学びたいと思いカンファレンスに参加しました。
-
-
-
-今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。
-
-try! Swift全体の構成
-
-まず、全体の構成についてです。カンファレンスでの発表は全部で約32個で、内容は以下のような構成でした。
-
-
-
-サーバーサイドSwiftや機械学習・DeepLearningの話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。
-
-気になった発表3つ
-
-①Client-Side Deep Learning by Shuichi Tsutsumi
-
-堤(@Shu223)さんのクライアントサイドで行うディープラーニングのプレゼンが印象的でした。
-
-ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。
-
-つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。
-
-    Client-Side Deep Learning  from Shuichi Tsutsumi 
-
-②Realmを使ってコラボレーションアプリを作る by Marius Rackwitz
-
-このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。
-
-
-Realmの利点
-・オブジェクト思考で書け、クラスを実装するように書ける
-・React NativeやXamarinにも対応しているので、クロスプラットフォーム
-・すべての環境で同じデータを使いまわせるので、バックアップがとれる
-・トランザクション管理をしているので、リアルタイムの共同編集ができる
-・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能
-
-Realmの通知機能 
-・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える
-・イベントハンドリング
-
-アクセス権の管理 
-・Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能
-
-
-とのことで、3の内容が特に興味深かったです。
-
-　
-
-③クックパッドアプリのテストを味わう by KazuCocoa
-
-クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。
-
-
-Cookpadアプリの状況
-グローバルアプリと日本アプリの2つがあり、統合はまだしておらず、UIコンポーネントは複数大きく変えているそうで、だいたい10万行ぐらい。以前は2週間、最近は1ヶ月毎にアップデートしている状況。
-
-kano-model という品質モデル
-・Attractive – Must-be Qualityの２つのパラメータ
-・Diachronic Quality for mobile
-
-UIテストのやり方
-まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
-そこで、Cookpadでは2015年-2017年にかけてUIテストの自動化を行い、クラッシュ率を下げ続けたそうです。
-
-UIテストの書き方
-①シナリオを書く
-②シナリオをRubyコードに変換
-③Appiumで実行
-
-
-XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。
-
-クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でクラッシュ率の低い安定したサービスを提供していきたいと思いました。
-
-参加して感じたこと
-
-① Twitter(@tryswift)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
-(@k_katsumiさん、運営者のみなさんありがとうございます！)
-
-②最前列で聞き起こしをして登壇もしているniwatakoさんのコミュニティへの貢献度がすごいと思いました。(niwatakoさんありがとうございます！)"/>
+HousmartはReTech（不動産テック）スタートアップで、中古マンション売買サービス「カウル」をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 </head>
@@ -467,7 +205,7 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        23
+        24
         <span>Posts</span>
       </div>
       <div class="article-info-block">
@@ -620,9 +358,9 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
 
 <h1 id="今回参加の目的">今回参加の目的</h1>
 
-<p><img src="https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600" alt="中古マンション売買サービス「カウル」" /></p>
+<p><img src="https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600" alt="中古マンション売買サービス「カウル」" />
 
-<p>HousmartはReTech（不動産テック）スタートアップで、<a href="https://kawlu.com/market">中古マンション売買サービス「カウル」</a>をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。</p>
+HousmartはReTech（不動産テック）スタートアップで、<a href="https://kawlu.com/market">中古マンション売買サービス「カウル」</a>をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。</p>
 
 <p>また、メインのサービス以外にも、ユーザがマンションの情報を検索できる<a href="https://kawlu.com/library">カウルライブラリー</a>、マンション購入のノウハウを載せた<a href="https://kawlu.com/journal/">マンションジャーナル</a>というメディアの運営をしています。</p>
 
@@ -709,8 +447,7 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
 
 <p>②最前列で聞き起こしをして登壇もしている<a href="http://niwatako.hatenablog.jp/">niwatako</a>さんのコミュニティへの貢献度がすごいと思いました。(<a href="http://niwatako.hatenablog.jp/">niwatako</a>さんありがとうございます！)<br></p>
 
-<p>
-③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。<br></p>
+<p>③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。<br></p>
 
 <p>④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は<a href="https://twitter.com/tryswiftconf">@tryswift</a>運営の方へ連絡しましょう。)<br></p>
 
@@ -752,6 +489,13 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
     
 
     
+    <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Newer
+      </strong>
+      <div class="article-nav-title">SwiftのOSSライブラリに機能を追加したときに心がけたこと</div>
+    </a>
+    
 </nav>
 
 
@@ -772,6 +516,31 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="try! Swift2017に参加しました！気になった発表3選！" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        DEVELOPMENT
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="title">SwiftのOSSライブラリに機能を追加したときに心がけたこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-08-20 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-08-20</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -873,31 +642,6 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="try! Swift2017に参加しました！気になった発表3選！" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
-                        design
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="title">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a></p>
-                    <p class="item-date">
-                        <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -936,7 +680,7 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
                     development
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -1169,7 +913,7 @@ XPathはOSのフレームワークにかなり依存していて、テストをU
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
                     swift
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">

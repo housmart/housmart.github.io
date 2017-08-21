@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Culture on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/culture/index.xml</link>
+    <link>http://techblog.housmart.co.jp/tags/culture/</link>
     <description>Recent content in Culture on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <atom:link href="http://techblog.housmart.co.jp/tags/culture/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Dec 2016 14:23:37 +0900</lastBuildDate>
+    
+	<atom:link href="http://techblog.housmart.co.jp/tags/culture/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>エンジニアが自由研究に時間をかけるべき理由</title>
@@ -22,78 +25,7 @@
 
 &lt;p&gt;5年半前、私が新卒で就職した時はまだ、エンジニアでも長時間労働はあたりまえで、エンジニアはビジネスサイドが考えた要件に従ってサービスを実装する人だ、という認識が強かったように思う。&lt;br /&gt;
 一緒に大学院を卒業した優秀な友人たちはみんなメーカーか大手SIerに就職し、それこそWeb企業を就職の選択肢に入れている人はめずらしかった。
-&lt;/p&gt;
-
-&lt;p&gt;その後、リーンスタートアップやアジャイルの導入によって、エンジニアがサービスを考えて、実装・リリースし、データを取り、そのデータを元にまたサービスを改善していくことが当然となり、エンジニアという仕事はよりクリエイティブなものとなった。&lt;br /&gt;
-また、オープンソースのプロダクトは当然のように色々なサービスに使われていき、どのWeb企業も似た技術を採用していることが多い。だから、明日からちょっと別の企業で働くとなっても、ある程度のスキルを持っている人なら難なく適応して、すぐ活躍できてしまう。&lt;br /&gt;
-日本のWeb系企業の頑張りなのか、シリコンバレーの Start Up のかっこいいストーリーが決め手だったのかはわからないけれど、優秀な学生が新卒での就職先としてWeb系の企業を選ぶことは当然になったし、むしろ優秀な学生ほどチャレンジを求めてこの業界に入ってきているように感じる。&lt;/p&gt;
-
-&lt;p&gt;もちろん人や立ち位置によって見え方は違うと思うが、少なくとも私の視野の中ではこんな変化がここ数年で確実におこってきた。&lt;/p&gt;
-
-&lt;p&gt;たぶん2016年の日本においてWebエンジニアは最も恵まれた仕事の一つだと思う。&lt;br /&gt;
-なぜなら、それはとてもクリエイティブで、とても必要とされていて、ある程度の実力があれば仕事を自分の好きに選ぶことが出来るから。&lt;/p&gt;
-
-&lt;p&gt;裏を返すと、今の世の中、退屈で我慢して耐え忍ぶような仕事をエンジニアにさせてしまえば、すぐに居なくなってしまう。&lt;/p&gt;
-
-&lt;p&gt;エンジニアに選ばれる組織になるにはどうしたらいいだろう、エンジニアが力を発揮できる環境はどんなところだろう、そんな想いでHousmartではいくつかの取り組みを行っている。&lt;/p&gt;
-
-&lt;p&gt;ここではその中の１つである「自由研究」を紹介したいと思う。&lt;/p&gt;
-
-&lt;h2 id=&#34;will-can-must-のマネジメント&#34;&gt;Will Can Must のマネジメント&lt;/h2&gt;
-
-&lt;p&gt;みなさんは will can must のマネジメントをご存知だろうか？&lt;/p&gt;
-
-&lt;p&gt;人材開発やキャリアの世界で使われているフレームワークで、will - やりたいこと、can - 出来ること、must - やらなければならないこと、の3つをコントロールすることでモチベーションとアウトプットを最大化しようというものだ。&lt;/p&gt;
-
-&lt;p&gt;ここでは will ＝ 試してみたい技術 or チャレンジしてみたい課題、can ＝ 自分が使える技術、must ＝ 会社の事業を進めるために解決すべき課題、くらいのイメージで受け取って欲しい。&lt;/p&gt;
-
-&lt;p&gt;この3つを円で表して、そのすべてが重なる領域の仕事をすることがモチベーションとアウトプットを最大化することにつながるらしい。&lt;br /&gt;
-想像してみて欲しい。自分がチャレンジしてみたい課題に対して自分のスキルを最大限駆使して挑戦する。それが事業の成長に直結する。うん。とてもいい状態だ。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/LPZxpdcWlmqB1CDXyGCvoYLkhXOPZLwQrEQIDozhd_IhKYNRvk-tk-IQBjqcBHfN_ApsAOTKoTAqCDztzepWID6ctchPbg0mzZLGWILko4RRWXkFQ9xN2AGOkDrrs4XPHbQAbDIFrk2PL7oZheMeGR3IZihfxhYlV4bWL8_Vd5cONDhPG7jLLu0Dip5Ovmie1Xn_PvEpwDu9YDaJHmbAHQYAf82YU05Rf_5129f8TePlX1z-ID-sfWkYOOWCvQNwKgMtHIevsMMGiHroWbZpx17dwWm0wLAxKlC9YCDHQp_uadISSusvHWmXNROQqN-naABRkBcL7LsytNfnvHJdkIA9e517DN3kmoO4I3EkGWzu-P6R381DFUwiLbswa6R686rdOCK4yynHLzaVmEIlwvWn44WMNVspcTZHT4GBcMrCCNlHfyl9uYd8CmQkR92DjCySI5_XnC0_x0BbMpet0WrNS9N6_4LvFfVrmG0y_3ORVL6yCtdKQuXePx_oj73kQz4hbbhASRN1FRywV7yKMf3_nn8Gi4O538K3Zo1uxJ4vEqHjyKWgth5g6YSuzLD6d33ey_ydCSIUGxjUqFs6U_ZzOM_IHU6dRppae_GHSEPor1sgvBw04dyR1HSCw4eynizst-CD5H0lt82awIeyx-CtXehucY7fgwLYlT6ARw=w757-h504-no&#34; alt=&#34;will can must のマネジメント&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;このフレームワークを知ったとき妙に納得がいったのを覚えている。&lt;br /&gt;
-私は今の職場でもそうだし、転職する前に新卒で入った会社でも、ものすごく仕事を楽しんでいた。だれに聞かれても即答できるレベルで本気で楽しいと思っていた。&lt;/p&gt;
-
-&lt;p&gt;なぜなのか、今冷静に振り返ってみると自分はこの3つを揃えるのが得意だったのだ。もともとの興味の範囲が広い上に、なんとなくプロダクトの課題とやってみたいことを結びつけて、それとなく周りを説得してしまう。チームも寛容で、どんどんチャレンジできた。そりゃあ楽しいはずだ、と今なら思う。&lt;/p&gt;
-
-&lt;p&gt;ただ、残念なことに周りを説得するのが得意ではないエンジニアもたくさんいる。それが実現しにくい職場もある。&lt;br /&gt;
-そしてもっと残念なことに、この3つのバランスを自力で整える能力と、エンジニアとして活躍できるかどうかは無関係だ。&lt;/p&gt;
-
-&lt;h2 id=&#34;だから自由研究の時間を作った&#34;&gt;だから自由研究の時間を作った&lt;/h2&gt;
-
-&lt;p&gt;楽しく仕事できる状況は見えている。ただ、誰もがその状況を作り出すのが得意ではない。&lt;/p&gt;
-
-&lt;p&gt;だったらそれを最初から組み込んだ働き方を作ったらどうか？&lt;br /&gt;
-そうして思いついたのが自由研究の時間を明示的に持つことだった。今は労働時間の15%の時間をそれに当てることにしている。（2週間スプリントで、10営業日中の1.5日だ）&lt;/p&gt;
-
-&lt;p&gt;Housmartでの自由研究の時間はwillとcanとmustのバランスを調整するための時間だ。&lt;/p&gt;
-
-&lt;p&gt;やりたいことを選んで新しい技術を使えるように手を動かしてもいい、自分が使える技術を実務に役立てるためのテスト実装をしてみてもいい。&lt;br /&gt;
-とにかくこの時間はアウトプットに縛られること無く、自分なりの3つのバランスを整えるのに使って欲しい。&lt;/p&gt;
-
-&lt;p&gt;私個人で言えば、ここ半年の間にElasticSearchを習得し、サイトの検索や名寄せに応用した。&lt;br /&gt;
-Dockerをゼロから勉強して一部の本番環境に適用した。GPUマシンを組み立ててディープラーニングの研究をしたりしている。&lt;br /&gt;
-他にも、この時間を使ってAR（拡張現実）のSDKを用いて面白いiOSアプリのプロトタイプを作ってしまったメンバーも居る。&lt;/p&gt;
-
-&lt;p&gt;少しずつだが成果は出ている。そして、今すごく仕事を楽しめている。&lt;/p&gt;
-
-&lt;p&gt;もちろん、ボツになったチャレンジもいくつもある。でも、そのことに対する責任を取る必要はないのだ。そんなことは一切気にせず好きなことをやっていい。&lt;/p&gt;
-
-&lt;p&gt;あなたの知的好奇心を最大限発揮して、クリエイティブに仕事することを追求して欲しい。&lt;/p&gt;
-
-&lt;h2 id=&#34;エンジニアが理想的に働ける環境を一緒につくろう&#34;&gt;エンジニアが理想的に働ける環境を一緒につくろう&lt;/h2&gt;
-
-&lt;p&gt;今Housmartは外部で手伝ってくれている人を入れてもまだそんなに大きな組織ではない。&lt;br /&gt;
-だけど、ここに書いたようにエンジニアが理想的に働ける環境を真面目に考えている。&lt;br /&gt;
-他にもいろんな取り組みをしているし、その取り組み自体も定期的に振り返って改善するようにしている。&lt;/p&gt;
-
-&lt;p&gt;ここにあなたのアイデアを足して、より良い、エンジニアが理想的に働く環境をいっしょに作っていきたいと思っている。&lt;br /&gt;
-もしこれを読んで少しでもわくわくしたなら、是非一度話を聞きに来て欲しい。&lt;/p&gt;
-
-&lt;p&gt;Housmart 高松智明&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.wantedly.com/projects/69047&#34;&gt;今話題のReTech！創業期を支える4人目のエンジニアをWanted！&lt;/a&gt;&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

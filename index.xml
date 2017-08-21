@@ -2,13 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/index.xml</link>
+    <link>http://techblog.housmart.co.jp/</link>
     <description>Recent content on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Fri, 10 Mar 2017 19:00:36 +0900</lastBuildDate>
-    <atom:link href="http://techblog.housmart.co.jp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://techblog.housmart.co.jp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SwiftのOSSライブラリに機能を追加したときに心がけたこと</title>
+      <link>http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/</link>
+      <pubDate>Sun, 20 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/</guid>
+      <description>&lt;p&gt;アプリケーションエンジニアの田中です。今年6月に入社して、初めてのTech Blogへの投稿になります。最近の大きな出来事は、スプラトゥーン購入をしたこと、Housmarへのjoin、そして結婚したことです。&lt;/p&gt;
+
+&lt;p&gt;先日、何となく目標にしていた「お仕事でお世話になったOSSに機能追加する」を達成できました。今回は、私がReactiveSwiftに機能を追加した際の事前準備、背中を押してくれたものなどについて書いてみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>try! Swift2017に参加しました！気になった発表3選！</title>
@@ -24,105 +39,9 @@
 
 &lt;h1 id=&#34;今回参加の目的&#34;&gt;今回参加の目的&lt;/h1&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600&#34; alt=&#34;中古マンション売買サービス「カウル」&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600&#34; alt=&#34;中古マンション売買サービス「カウル」&#34; /&gt;
 
-&lt;p&gt;HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。&lt;/p&gt;
-
-&lt;p&gt;また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;というメディアの運営をしています。&lt;/p&gt;
-
-&lt;p&gt;これらのサービスでアプリ開発を行っており、①開発で使っている言語のトレンドを知りたい、②面白い発表から学びたいと思いカンファレンスに参加しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-oCt1zx9Rr6ZTjKkf-z5sC_pyAlsyxO5QGO-iUY-MQzfpq9FCmODFFNHF1NeqzDHHxr7EpsArFErgAcp1jgwbarbYzbf8wUztbEmkk3ieWGWWz1k6tK5gm3Tc6SLjzx4IMJi4SauhVeG9BMFj3stO0lXRd2D8Mq0pataRjzsFnA9L2IBTkJaaIT4o6xESSVv94jYKerznrOuBx5Tf_kFfTJ3JD42Q5xqPdUzREtIm6hcywcFLaf4KHrqobrdotsnWyUHHw1n3ERB5KSq-XxJ1Cr9OBri68LL93VvxlQw3JB51q1KBZJqeSYv9q2QpF8YeRSEGOO8rlz_bMGVciyG0z3PmsNUG7ryy-q3p7wUtbnZz59lyIpJ11kOKGYolpTwvFTMNY9U1TCrZLaXjlroBnQdD2Pj4EyR4TiuwU5tp-ZWDRnOwxCCVJtCyc7boiESmmO5K2QXDaemC2JjSc9zYm2uk6dqBEVJu2pBn-yykAS9xnYSiIofOG3P3BQdr0aFhLoqiHt3236ehy5CysAq2pSbIWbelWFEABoN7gurMSt852kp5MsYkx9qbmIATuuHAGlUbVBN6PR1B1Y1p4BPQoEPZ067CkuM-J0FIWAZMAc1WOQF7X4yUWMxG4dOOkMR5WHBoWAkxBsvl80bu9XAtmy_Nn-wy20EOaHIlQF2=w600&#34; alt=&#34;カンファレンスのネームプレートが可愛かったです。当日の名前投票で「RIKO」ちゃんに決定&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。&lt;/p&gt;
-
-&lt;h1 id=&#34;try-swift全体の構成&#34;&gt;try! Swift全体の構成&lt;/h1&gt;
-
-&lt;p&gt;まず、全体の構成についてです。カンファレンスでの発表は全部で約32個で、内容は以下のような構成でした。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/1OCOR_a4Y-VnJnjDRvD6Bxiz5gjwASFws3KoHF_0ZAq1ytcxcgxHlElKLZigTuj71vQFm_wFwfKGFpyWal7-qsJZzxjl6NTXCa6PwkSf9sdZ7dUsxhHEzqbrp4oozgtziH5EVdkpbaZhchKe-ISAL0noLpqfukO6-1Yo9lhY8hHOxgdrU35_9H_Ecvc9jsiomxa10SGrEETmCE5lcFfUgs7KQPlj_36kmRTwERb6AsYalli1Rp1jA9dQGHxwlEjHbrecv3kmM9K8s9GxMejmvE4Puos4MjzbAmSVVXbYKiNaqakM1EISvAekVFfFZNQttYAN-IoavhKpd9UdFimRuhPQKn3Km9t9WjZAjrLzBQA-L9LVemuuoZgwJgdQnsc0jOSubcj0J-dlu7gRRgPA4wusHDmfBC1UOV133VIo4WdqL84QVr8RuKkiAmeb7OZ_KA9aVDOa2zTxhM8x4BqgetK5gFUu1VC8BZtYb9UG6ggo3VoqBIvoetMFrjtumzz1-lrCDQLTKTwBhIq_6ahFH3QYX4Bfv28x9YbyUwCzrqbyn0BsAbOwIxopTY3wScqFl1vVCmbN_YfCo_dBWzNQVKWmFai9ycfF8yFLn_rT7vd5jvKXWSZaGeE_vvjz02OEk7obl-aRvD_YDtIxHNKLFeVGQxq8whq5nmK0GfuC4Q=w600&#34; alt=&#34; try! Swift2017の講演・ライトニングトークの内容構成図&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;サーバーサイドSwiftや機械学習・DeepLearningの話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。&lt;/p&gt;
-
-&lt;h1 id=&#34;気になった発表3つ&#34;&gt;気になった発表3つ&lt;/h1&gt;
-
-&lt;h2 id=&#34;①client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223&#34;&gt;①Client-Side Deep Learning &lt;a href=&#34;https://twitter.com/shu223&#34;&gt;by Shuichi Tsutsumi&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;堤(&lt;a href=&#34;https://twitter.com/shu223&#34;&gt;@Shu223&lt;/a&gt;)さんのクライアントサイドで行うディープラーニングのプレゼンが印象的でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2OS20oAt7NLgPx&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/t26v0748/clientside-deep-learning&#34; title=&#34;Client-Side Deep Learning&#34; target=&#34;_blank&#34;&gt;Client-Side Deep Learning&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&#34;_blank&#34; href=&#34;//www.slideshare.net/t26v0748&#34;&gt;Shuichi Tsutsumi&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;②realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz&#34;&gt;②Realmを使ってコラボレーションアプリを作る &lt;a href=&#34;https://twitter.com/mrackwitz&#34;&gt;by Marius Rackwitz&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。&lt;br&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Realmの利点&lt;br&gt;
-・オブジェクト思考で書け、クラスを実装するように書ける&lt;br&gt;
-・React NativeやXamarinにも対応しているので、クロスプラットフォーム&lt;br&gt;
-・すべての環境で同じデータを使いまわせるので、バックアップがとれる&lt;br&gt;
-・トランザクション管理をしているので、リアルタイムの共同編集ができる&lt;br&gt;
-・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Realmの通知機能 &lt;br&gt;
-・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える&lt;br&gt;
-・イベントハンドリング&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;アクセス権の管理 &lt;br&gt;
-・Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;とのことで、3の内容が特に興味深かったです。&lt;/p&gt;
-
-&lt;p&gt;　&lt;/p&gt;
-
-&lt;h2 id=&#34;③クックパッドアプリのテストを味わう-by-kazucocoa-https-twitter-com-kazu-cocoa&#34;&gt;③クックパッドアプリのテストを味わう &lt;a href=&#34;https://twitter.com/Kazu_cocoa&#34;&gt;by KazuCocoa&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。&lt;br&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Cookpadアプリの状況&lt;br&gt;
-グローバルアプリと日本アプリの2つがあり、統合はまだしておらず、UIコンポーネントは複数大きく変えているそうで、だいたい10万行ぐらい。以前は2週間、最近は1ヶ月毎にアップデートしている状況。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;kano-model という品質モデル&lt;br&gt;
-・Attractive – Must-be Qualityの２つのパラメータ&lt;br&gt;
-・Diachronic Quality for mobile&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;UIテストのやり方&lt;br&gt;
-まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
-そこで、Cookpadでは2015年-2017年にかけてUIテストの自動化を行い、クラッシュ率を下げ続けたそうです。&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;UIテストの書き方&lt;br&gt;
-①シナリオを書く&lt;br&gt;
-②シナリオをRubyコードに変換&lt;br&gt;
-③Appiumで実行&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でクラッシュ率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
-
-&lt;h1 id=&#34;参加して感じたこと-br&#34;&gt;参加して感じたこと&lt;br&gt;&lt;/h1&gt;
-
-&lt;p&gt;① Twitter(&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
-(&lt;a href=&#34;https://twitter.com/k_katsumi&#34;&gt;@k_katsumi&lt;/a&gt;さん、運営者のみなさんありがとうございます！)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;②最前列で聞き起こしをして登壇もしている&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんのコミュニティへの貢献度がすごいと思いました。(&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんありがとうございます！)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;
-③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;運営の方へ連絡しましょう。)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
-
-&lt;p&gt;Swiftの盛り上がりを体感し、Swiftディベロッパーの方々と交流を深める良い機会となりました！参加者の皆さん、運営の皆さんありがとうございました！&lt;/p&gt;</description>
+HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -138,178 +57,7 @@
 &lt;p&gt;Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。&lt;/p&gt;
 
 &lt;p&gt;今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。
-&lt;/p&gt;
-
-&lt;h2 id=&#34;今回取り組んだ問題&#34;&gt;今回取り組んだ問題&lt;/h2&gt;
-
-&lt;p&gt;弊社HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。&lt;br /&gt;
-また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた自社メディアである&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;の運営をしています。&lt;/p&gt;
-
-&lt;p&gt;今回はマンションのデータベースサイトであるカウルライブラリーの検索にサジェスト機能を実装しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/u_9N0C3qqsnDcNjXxK9eopejjMM-k_fjBkYG2cKMCjnPGcLycAUDiHP_XfGgk9oNo38Qrgzpu2j7ay86tc1y8wzbdPWjjPLIo2hpsdyyhzSkPuygJ70bGmlXlY3spMgbI3wwpjAKur5LcE5tqu0byM-aGoO40qiWxO2Bu3PmTBZWFwwOfMYZczFGU9mJMD-0G0NkQ_PLuuM1xp4U7yPSQrWNp58Jy61NQQS-VO3B334fk_WSxd198zYzPqA_O5lsM1PDvtm86-Pfy0qltby984jY8--hHzJhgKjc4vzVUOEdjqvJBECJvnMo0A8tkFtsMhoxmbofGxG4AQOY9u7LcW3bQI8OLzwR_r93uvzr42adQOZR_rIn-wMubRdCq82QfURhdSOMvslMFCcTRHruQx-yZz4dsR8bJxdpQsYv9RtWcUtB0WtvIKWlCzXm1tGN5IRCqHZXNH_4agVUx442BPGwnDQ5BLX_lxiGnoiYU4E6NKZqoArgcoiSgCWrPnSRJDdnE2BWlMiAl425WdcfndDoM_b4eFt_Fz2jj7ew173cqSoiJxMJrUqX5JME6KkiUAYUxeF4xpZH4X9wSxdI3rbwd4McEyOC_FzFXvu4SrpQ_Vz9EEqQZsmNUhSiKzGMyNRkCYWKlbVlesRB-XL_Zr54c4Q_lZoAUvELtZKu2w=w400&#34; alt=&#34;カウルライブラリーのサジェスト&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;マンション名の検索の場合、出て来る固有名詞の種類が多い（マンションブランド名、地名、駅名など）ので、その全てにマスタを作るのが難しい（手間がかかる）という難点があります。これは例えばECサイトなどでも同様の悩みがあるのではないでしょうか。&lt;/p&gt;
-
-&lt;h2 id=&#34;なぜ日本語のサジェストが難しいのか&#34;&gt;なぜ日本語のサジェストが難しいのか&lt;/h2&gt;
-
-&lt;p&gt;まず、なぜ日本語のサジェストが難しいのかを整理しておきます。&lt;br /&gt;
-もともと検索システム初心者だったため、このあたりの事がWeb上できちんと言語化されていなかったので随分悩みました。&lt;br /&gt;
-&lt;a href=&#34;http://tech.vasily.jp/entry/solr-suggester&#34;&gt;こちらのブログ&lt;/a&gt;にこの辺りがまとめられていたので適宜引用しながら、これから取り組む人にとって役立つように、なぜ日本語のサジェストが難しいのかをまとめておきます。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;a href=&#34;http://tech.vasily.jp/entry/solr-suggester&#34;&gt;Solrを用いて検索のサジェスターを作りました - VASILY Developers Blog&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;一般的なサジェストは、検索対象のドキュメント中の単語リストを保持し、ユーザの入力途中の単語を使って前方一致検索をかけ、出現頻度が高い順に単語のリストを返すという単純な仕組みで成り立っています。&lt;br /&gt;
-しかし、日本語の場合はこの過程でいくつかのポイントを特別に考慮する必要があります。&lt;/p&gt;
-
-&lt;h3 id=&#34;単語の抽出&#34;&gt;単語の抽出&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;英語の文章は単語と単語との間がスペースや記号などで区切られています。 そのため、文章を単語に分解する処理を簡単に書くことができます。&lt;br /&gt;
-しかし他方で日本語の文章にはそのような機械的に単語分割できるような目印はありません。 そのため、日本語の文章を単語分割するためには形態素解析という処理を行う必要があります。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;このため、tokenizerに形態素解析用のプラグインを指定する必要があります。&lt;/p&gt;
-
-&lt;p&gt;形態素解析ではどのような辞書を用いて解析をするかが検索精度の観点で重要になります。今回は辞書として新語を定期的にアップデートしてくれている mecab-ipadic-NEologd を使いたいので、analysis-kuromoji-neologdのプラグインを利用しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/codelibs/elasticsearch-analysis-kuromoji-neologd&#34;&gt;Elasticsearch Analysis Kuromoji Neologd - GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;漢字-英語の読み&#34;&gt;漢字・英語の読み&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;さらに、単語に分割した後には「漢字の読み」の問題もあります。 例えば、「とう」と入力した時に「東京」という単語を返すためには、「東京」という単語の読みが「とうきょう」であるという情報が必要です。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;この問題に対しても一般語であればanalysis-kuromoji-neologdで読みを取得することが可能です。&lt;/p&gt;
-
-&lt;p&gt;また、マンション名では頻繁に英語とカタカナ語の表記ゆれが存在します。例えば、「ブリリア」というマンションブランド名が「Brillia」と表記されていたりします。「Brillia」という入力に対してブリリアシリーズのマンション名一覧を返すにはこれらの読み情報も必要です。この場合は一般語では無いので独自で辞書を追加する必要があります。&lt;/p&gt;
-
-&lt;h3 id=&#34;打ち途中の単語に対するサジェスト&#34;&gt;打ち途中の単語に対するサジェスト&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;未確定の子音やひらがなにも対応する必要があります。 「とうky」と入力した時には、「東京」や「東急」といった単語を候補として表示する必要があります。 - VASILY Developers Blog&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;こちらの問題に対しては、ローマ字読みのfieldを別で用意してそれに対して前方一致をかけることで解決していきます。&lt;/p&gt;
-
-&lt;h3 id=&#34;elasticsearch標準のサジェスト機能について&#34;&gt;Elasticsearch標準のサジェスト機能について&lt;/h3&gt;
-
-&lt;p&gt;ここで、Elasticsearch標準のサジェスト機能について言及しておきます。&lt;/p&gt;
-
-&lt;p&gt;ElasticsearchではCompletionSuggesterというサジェスト用の機能が提供されているのですが、この機能は英語のドキュメントに対するサジェストを提供するためには非常に優れた機能です。一方で、 &lt;strong&gt;この機能を使って実用レベルの日本語のサジェストを実現することは難しい&lt;/strong&gt; です。&lt;/p&gt;
-
-&lt;p&gt;日本語でのサジェストは以上で挙げたように工夫すべきポイントがいくつか存在します。Elasticsearchの標準のサジェスト機能ではここがすべて考慮されているわけではないので、現状では実用的な日本語サジェストには使いにくいという結果になっています。&lt;/p&gt;
-
-&lt;p&gt;更に言うと、私はこの機能でどこまで出来るかを調べだしてしまったため結構ハマりました。 &lt;strong&gt;要件によってはこの機能を使わない&lt;/strong&gt; という選択をした方が良い事を知っておいてください。&lt;/p&gt;
-
-&lt;h2 id=&#34;どうやって実装していくか&#34;&gt;どうやって実装していくか&lt;/h2&gt;
-
-&lt;p&gt;今回は要件を満たすためにCompletionSuggesterは使うのを諦め、サジェスト用に新しいインデックスを作成していく方針にしました。&lt;/p&gt;
-
-&lt;h3 id=&#34;サジェスト用インデックスのデータ&#34;&gt;サジェスト用インデックスのデータ&lt;/h3&gt;
-
-&lt;p&gt;サジェスト用のインデックスに流し込むデータは&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;なるべく多いマンションが引っかかる検索ワードを優先的に出したい&lt;/li&gt;
-&lt;li&gt;マンション名そのものもサジェストしたい&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;の2点を満たすべく、マンション名をそれぞれ形態素解析し、その結果の組み合わせを下図の様に作成したものを用います。（マンション名そのものは2レコード入れる）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/GLQcZ5HRGT1Uj40zgc-4Q_SOIT2xKbm-R9AMqrPmMeze8m4IqARAzZznlpRrpTA21HCBTaZWXEpZD3hvR3mFK8Mq_JnEFWyzeATiwinEwXsqFqRKbtqQMprp0wlwf5cu6Tv_s7zTUq9H6dmxxVyZAg6mUTd_bN2IaUECiKoZQJKkzksHb6-1u9pj4SiIYJIod6delsCXIBvRxX5Kjf51S8nztKpe3Cv_LLMvt_ab-CGYhC3qLRJrb7PYvyghrnLUXsq_QlEwEILLQ3MnDWzk4Hj6SLwpUvqXRT8GRoC4B86akSoju6E57NVRh1yAFxlbVGZULAZbtgSAgUqhY_9mBmX0vG5bHhK3l84VAd0dJRuS7syoFwUVi9gRKqvo9VzLBGPI_Y-5gVlzsSAb8NDeXUJ2XwKirlGxQnqq4MMlkkA1uGkxFYIC_Xp_Nw-OCAToNJ635XqGMxspKgQew2ILarNxYFJo9mXhqW4vct5-LpO42uh63-v49OiF-fbbdG6fE9ofn6gHs8gZJV946EPziYyafVKHsxidK6giJW-ezjXO3HWjy0pX94bwlwk1DZSgKK9_fZ4gITP5_eLkd0V0uRMo46Ma6WCAqtuckKdLz7xil7YcqVWUvrKIrF6iO2hR7OIru7M8djMT8Ka3GQAfFlxwU5aPU2eP592QmRt6JQ=w400&#34; alt=&#34;サジェスト用インデックスのレコード作成&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;このデータに対して検索をかけ、group byでカウントが多い順にサジェストの結果とします。また、group byの結果が2件以上のものに限定することで、無意味なワードが引っかかからず、マンション名そのものはサジェストの結果に入れることができます。（マンション名そのものは2レコード入れているため）&lt;/p&gt;
-
-&lt;p&gt;本来ならばブランド名や地名のマスタデータを作るのがベストですが、その手間を省くためにこのような実装にしています。データの性質によりますが、この方法でそれなりの精度を実現できています。&lt;/p&gt;
-
-&lt;h3 id=&#34;analyzerの設定&#34;&gt;Analyzerの設定&lt;/h3&gt;
-
-&lt;p&gt;続いてインデックスに対してAnalyzerを設定していきます。&lt;br /&gt;
-ここの設定に関しては下記のブログが大変参考になりました。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;a href=&#34;https://medium.com/hello-elasticsearch/elasticsearch-%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%82%B5%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%A8%AD%E8%A8%88-352a230030dd#.jwa7znssd&#34;&gt;Elasticsearch キーワードサジェスト日本語のための設計&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;確定したキーワード用と入力途中のキーワード用に別々のfieldを定義していきます。&lt;/p&gt;
-
-&lt;h4 id=&#34;確定したキーワード用のanalyzer&#34;&gt;確定したキーワード用のAnalyzer&lt;/h4&gt;
-
-&lt;p&gt;「六本木」の様に確定したキーワードのための設定です。&lt;/p&gt;
-
-&lt;p&gt;データインポート時は、一般的なノーマライズを掛けてEdge-ngramでインデックスを作成しておきます。検索時は、文字列に対してノーマライズを掛けるだけです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/_yAGQ4tjmBDMEuoujBYC1EeghZydPfNS1U5N1UpayexUNxjm-Mx9qSXBGZojtPTQAb3PqT37KOi4syoQ2LMB_c0zI52LQnAujxJ9YUWFcyPxkcgIBFW6Kqo-q_gvkIDw2S-mLpl-KgPUbRgLSF686ytK5jUyzuTWIxXoMEt60aECceCiASQ089It6UvLEF18r_QqiCJc-HoQSutR7nX1EMGPtkT3elwIJt4WOk9k67_6_HQTBpAz0x-y4D3-LZMKKEVU2teufVIpHh2F8hRO7w9jUnw3JFSQvwZEWkRikCkzroWN8fyExC5V9lCthBI9ESWLqst7YhOUInPwZ7RGTbrNv3IVnyXWpKGbAyr7sdviTsgrXXmfxci7aPkZjHMkM5aYpq30tbQylW226VTLYSgPOPNrfK914I9l6OdLUaVG22ldANpiGk9ltNKuezkKKIskMQBgZ1J8Q65o0cQFFL67tmtLnZDma_PwZzY9QvFZzNWXStPiYwbYPV1fuUwXaQ7Zqk-hp-iJ1xZjvri0Uc-_QKuSozEsmUSaKmaur9eiP-NSKuHsvEUHPiw5R7mHsjia9JJs3WPTwkCYfEWnGBjmymMUanPWXChJNkrXYkfxYCwjWXpDVOkGaySc_u-GjrW157PqOVU_JlS_l4JyjdP3ixinmFDCfaTSiZdYeg=w300&#34; alt=&#34;確定したキーワード用のAnalyzer&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# インポート時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;engram&#39;
-]
----
-# 検索時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;入力途中のキーワード用のanalyzer&#34;&gt;入力途中のキーワード用のAnalyzer&lt;/h4&gt;
-
-&lt;p&gt;「roppo」の様に入力途中のキーワードのための設定です。&lt;/p&gt;
-
-&lt;p&gt;データインポート時は、一般的なノーマライズを掛けた後、すべてをローマ字に変換してEdge-ngramでインデックスを作成しておきます。検索時も同様に、文字列をノーマライズした後にすべてローマ字に変換します。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/DafyI_-4Wt8EcUL3FoMqsrEu51-mRdQrvo96KWfZyX8TdtGYrXXGXsbrGzcwSXefckFonFbc9bSP-4AHsr6JCJNIsfkkatQnMrfqHm7sg1T4AVWpDUqDzOMsDvHpCx-tlbQFaerivqey0-dV8out5b98gd3Y5y7OXdInXQAgp45_paFGSnsJfOjaEKhcT11HFNMpai5G0wReLPrqmHqEC8JOqWu8ESbUiLUodXivY9VoOGQ4tmW4s27qXtFy31GQxXeY1JUWS_9FPNcjQUEt0OdnR4RS5T1zwXaGBcLRqXJ-BaPGCLLo8mABq6LuscOzp82IIha7yEKPMUT2LVgQlQLU_tHGNaOQa9sOkYIUUqN95gBYg_hbwTj92fGEwHHOLGL7N_xjjXEjhdhErClvYBlvL8tvbUVuBMgfUeWkej-mpa7BYTer55wcVSGguM_1z53-2UKFNV9rI99IVCEDmZ4fAsikQALOWtAlt9FZPT-WnLv2BNxkdTh6r1FW0lavpP7eI96Rkq3bT2jnotecnY8Zjt_t-liNeiLYWoucwRf8Lo3PYz7BfGm5q9z2sFMW4_LBv6odBaRLknFGXG8mcMVJS_n-zqdFOSxh-BDItJgNZJ-g0eB2tHCRoYlmni-Sp2UQIvjsSJjJclBRTcBIJLby4eBRsqK4zInK-UgWng=w300&#34; alt=&#34;入力途中のキーワード用のAnalyzer&#34; /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# インポート時
-char_filter: [
-  &#39;normalize&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;readingform_neologd_romaji&#39;,
-  &#39;asciifolding&#39;,
-  &#39;engram&#39;
-]
----
-# 検索時
-char_filter: [
-  &#39;normalize&#39;,
-  &#39;katakana&#39;,
-  &#39;romaji&#39;
-],
-tokenizer: &#39;keyword&#39;,
-filter: [
-  &#39;lowercase&#39;,
-  &#39;trim&#39;,
-  &#39;readingform_neologd_romaji&#39;,
-  &#39;asciifolding&#39;
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Analyzerに関するより詳しい挙動や流れは先程挙げたブログを参照してください。&lt;/p&gt;
-
-&lt;h3 id=&#34;終わりに&#34;&gt;終わりに&lt;/h3&gt;
-
-&lt;p&gt;Elasticsearchの設計は見通しが立ってしまえばそこまで難しくはないのですが、一つ一つの事例ごとに特性が違い、データの設計とAnalyzerの設定をそれぞれの特性に合わせて同時に考えなければならない点が難易度が高いと思っています。&lt;br /&gt;
-今回はひとつの実装例をご紹介しましたが、これから設計をする人の参考になれば幸いです。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Housmartではエンジニアを募集しています。&lt;br /&gt;
-&lt;a href=&#34;https://www.wantedly.com/projects/69047&#34;&gt;今話題のReTech！創業期を支える4人目のエンジニアをWanted！&lt;/a&gt;&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -325,78 +73,7 @@ filter: [
 
 &lt;p&gt;5年半前、私が新卒で就職した時はまだ、エンジニアでも長時間労働はあたりまえで、エンジニアはビジネスサイドが考えた要件に従ってサービスを実装する人だ、という認識が強かったように思う。&lt;br /&gt;
 一緒に大学院を卒業した優秀な友人たちはみんなメーカーか大手SIerに就職し、それこそWeb企業を就職の選択肢に入れている人はめずらしかった。
-&lt;/p&gt;
-
-&lt;p&gt;その後、リーンスタートアップやアジャイルの導入によって、エンジニアがサービスを考えて、実装・リリースし、データを取り、そのデータを元にまたサービスを改善していくことが当然となり、エンジニアという仕事はよりクリエイティブなものとなった。&lt;br /&gt;
-また、オープンソースのプロダクトは当然のように色々なサービスに使われていき、どのWeb企業も似た技術を採用していることが多い。だから、明日からちょっと別の企業で働くとなっても、ある程度のスキルを持っている人なら難なく適応して、すぐ活躍できてしまう。&lt;br /&gt;
-日本のWeb系企業の頑張りなのか、シリコンバレーの Start Up のかっこいいストーリーが決め手だったのかはわからないけれど、優秀な学生が新卒での就職先としてWeb系の企業を選ぶことは当然になったし、むしろ優秀な学生ほどチャレンジを求めてこの業界に入ってきているように感じる。&lt;/p&gt;
-
-&lt;p&gt;もちろん人や立ち位置によって見え方は違うと思うが、少なくとも私の視野の中ではこんな変化がここ数年で確実におこってきた。&lt;/p&gt;
-
-&lt;p&gt;たぶん2016年の日本においてWebエンジニアは最も恵まれた仕事の一つだと思う。&lt;br /&gt;
-なぜなら、それはとてもクリエイティブで、とても必要とされていて、ある程度の実力があれば仕事を自分の好きに選ぶことが出来るから。&lt;/p&gt;
-
-&lt;p&gt;裏を返すと、今の世の中、退屈で我慢して耐え忍ぶような仕事をエンジニアにさせてしまえば、すぐに居なくなってしまう。&lt;/p&gt;
-
-&lt;p&gt;エンジニアに選ばれる組織になるにはどうしたらいいだろう、エンジニアが力を発揮できる環境はどんなところだろう、そんな想いでHousmartではいくつかの取り組みを行っている。&lt;/p&gt;
-
-&lt;p&gt;ここではその中の１つである「自由研究」を紹介したいと思う。&lt;/p&gt;
-
-&lt;h2 id=&#34;will-can-must-のマネジメント&#34;&gt;Will Can Must のマネジメント&lt;/h2&gt;
-
-&lt;p&gt;みなさんは will can must のマネジメントをご存知だろうか？&lt;/p&gt;
-
-&lt;p&gt;人材開発やキャリアの世界で使われているフレームワークで、will - やりたいこと、can - 出来ること、must - やらなければならないこと、の3つをコントロールすることでモチベーションとアウトプットを最大化しようというものだ。&lt;/p&gt;
-
-&lt;p&gt;ここでは will ＝ 試してみたい技術 or チャレンジしてみたい課題、can ＝ 自分が使える技術、must ＝ 会社の事業を進めるために解決すべき課題、くらいのイメージで受け取って欲しい。&lt;/p&gt;
-
-&lt;p&gt;この3つを円で表して、そのすべてが重なる領域の仕事をすることがモチベーションとアウトプットを最大化することにつながるらしい。&lt;br /&gt;
-想像してみて欲しい。自分がチャレンジしてみたい課題に対して自分のスキルを最大限駆使して挑戦する。それが事業の成長に直結する。うん。とてもいい状態だ。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/LPZxpdcWlmqB1CDXyGCvoYLkhXOPZLwQrEQIDozhd_IhKYNRvk-tk-IQBjqcBHfN_ApsAOTKoTAqCDztzepWID6ctchPbg0mzZLGWILko4RRWXkFQ9xN2AGOkDrrs4XPHbQAbDIFrk2PL7oZheMeGR3IZihfxhYlV4bWL8_Vd5cONDhPG7jLLu0Dip5Ovmie1Xn_PvEpwDu9YDaJHmbAHQYAf82YU05Rf_5129f8TePlX1z-ID-sfWkYOOWCvQNwKgMtHIevsMMGiHroWbZpx17dwWm0wLAxKlC9YCDHQp_uadISSusvHWmXNROQqN-naABRkBcL7LsytNfnvHJdkIA9e517DN3kmoO4I3EkGWzu-P6R381DFUwiLbswa6R686rdOCK4yynHLzaVmEIlwvWn44WMNVspcTZHT4GBcMrCCNlHfyl9uYd8CmQkR92DjCySI5_XnC0_x0BbMpet0WrNS9N6_4LvFfVrmG0y_3ORVL6yCtdKQuXePx_oj73kQz4hbbhASRN1FRywV7yKMf3_nn8Gi4O538K3Zo1uxJ4vEqHjyKWgth5g6YSuzLD6d33ey_ydCSIUGxjUqFs6U_ZzOM_IHU6dRppae_GHSEPor1sgvBw04dyR1HSCw4eynizst-CD5H0lt82awIeyx-CtXehucY7fgwLYlT6ARw=w757-h504-no&#34; alt=&#34;will can must のマネジメント&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;このフレームワークを知ったとき妙に納得がいったのを覚えている。&lt;br /&gt;
-私は今の職場でもそうだし、転職する前に新卒で入った会社でも、ものすごく仕事を楽しんでいた。だれに聞かれても即答できるレベルで本気で楽しいと思っていた。&lt;/p&gt;
-
-&lt;p&gt;なぜなのか、今冷静に振り返ってみると自分はこの3つを揃えるのが得意だったのだ。もともとの興味の範囲が広い上に、なんとなくプロダクトの課題とやってみたいことを結びつけて、それとなく周りを説得してしまう。チームも寛容で、どんどんチャレンジできた。そりゃあ楽しいはずだ、と今なら思う。&lt;/p&gt;
-
-&lt;p&gt;ただ、残念なことに周りを説得するのが得意ではないエンジニアもたくさんいる。それが実現しにくい職場もある。&lt;br /&gt;
-そしてもっと残念なことに、この3つのバランスを自力で整える能力と、エンジニアとして活躍できるかどうかは無関係だ。&lt;/p&gt;
-
-&lt;h2 id=&#34;だから自由研究の時間を作った&#34;&gt;だから自由研究の時間を作った&lt;/h2&gt;
-
-&lt;p&gt;楽しく仕事できる状況は見えている。ただ、誰もがその状況を作り出すのが得意ではない。&lt;/p&gt;
-
-&lt;p&gt;だったらそれを最初から組み込んだ働き方を作ったらどうか？&lt;br /&gt;
-そうして思いついたのが自由研究の時間を明示的に持つことだった。今は労働時間の15%の時間をそれに当てることにしている。（2週間スプリントで、10営業日中の1.5日だ）&lt;/p&gt;
-
-&lt;p&gt;Housmartでの自由研究の時間はwillとcanとmustのバランスを調整するための時間だ。&lt;/p&gt;
-
-&lt;p&gt;やりたいことを選んで新しい技術を使えるように手を動かしてもいい、自分が使える技術を実務に役立てるためのテスト実装をしてみてもいい。&lt;br /&gt;
-とにかくこの時間はアウトプットに縛られること無く、自分なりの3つのバランスを整えるのに使って欲しい。&lt;/p&gt;
-
-&lt;p&gt;私個人で言えば、ここ半年の間にElasticSearchを習得し、サイトの検索や名寄せに応用した。&lt;br /&gt;
-Dockerをゼロから勉強して一部の本番環境に適用した。GPUマシンを組み立ててディープラーニングの研究をしたりしている。&lt;br /&gt;
-他にも、この時間を使ってAR（拡張現実）のSDKを用いて面白いiOSアプリのプロトタイプを作ってしまったメンバーも居る。&lt;/p&gt;
-
-&lt;p&gt;少しずつだが成果は出ている。そして、今すごく仕事を楽しめている。&lt;/p&gt;
-
-&lt;p&gt;もちろん、ボツになったチャレンジもいくつもある。でも、そのことに対する責任を取る必要はないのだ。そんなことは一切気にせず好きなことをやっていい。&lt;/p&gt;
-
-&lt;p&gt;あなたの知的好奇心を最大限発揮して、クリエイティブに仕事することを追求して欲しい。&lt;/p&gt;
-
-&lt;h2 id=&#34;エンジニアが理想的に働ける環境を一緒につくろう&#34;&gt;エンジニアが理想的に働ける環境を一緒につくろう&lt;/h2&gt;
-
-&lt;p&gt;今Housmartは外部で手伝ってくれている人を入れてもまだそんなに大きな組織ではない。&lt;br /&gt;
-だけど、ここに書いたようにエンジニアが理想的に働ける環境を真面目に考えている。&lt;br /&gt;
-他にもいろんな取り組みをしているし、その取り組み自体も定期的に振り返って改善するようにしている。&lt;/p&gt;
-
-&lt;p&gt;ここにあなたのアイデアを足して、より良い、エンジニアが理想的に働く環境をいっしょに作っていきたいと思っている。&lt;br /&gt;
-もしこれを読んで少しでもわくわくしたなら、是非一度話を聞きに来て欲しい。&lt;/p&gt;
-
-&lt;p&gt;Housmart 高松智明&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.wantedly.com/projects/69047&#34;&gt;今話題のReTech！創業期を支える4人目のエンジニアをWanted！&lt;/a&gt;&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -414,119 +91,7 @@ Dockerをゼロから勉強して一部の本番環境に適用した。GPUマ�
 
 &lt;p&gt;しかし指標は眺めているだけではサービスは改善されません。&lt;br /&gt;
 サービス指標の進捗を追って、課題を見つけ改善していく必要があります。（KPI管理）&lt;br /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;ただ、弊社のようなスタートアップ企業の場合、少人数でサービス運営するとどうなるでしょうか。&lt;br /&gt;
-（弊社、社員は7名（2016年11月現在））&lt;br /&gt;
-集客コンテンツのPVを上げようとか、会員機能など利用継続時間を長くしたい、ログイン日数を増やしたいとか、新規開発したいとかやりたいこともたくさんあります。&lt;br /&gt;
-かといってリソースを理由にKPI管理を放棄して開発するというわけにも行きません。&lt;/p&gt;
-
-&lt;p&gt;このように限られたリソースの中で効率よくKPI管理を行いサービス改善を行なうために&lt;br /&gt;
-弊社では独自の管理体制「&lt;span style=&#39;color:red&#39;&gt;大臣制度&lt;/span&gt;」を採用しました。&lt;br /&gt;
-今回はこの独自の管理制度について紹介させていただきます。&lt;/p&gt;
-
-&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;まずは管理制度の導入の背景として運営しているプロダクトについて説明いたします。&lt;/p&gt;
-
-&lt;h3 id=&#34;プロダクト&#34;&gt;プロダクト&lt;/h3&gt;
-
-&lt;p&gt;弊社では下記プロダクトを運営しております。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;不動産に関する自社メディア「&lt;a href=&#34;https://kawlu.com/journal&#34;&gt;マンションジャーナル&lt;/a&gt;」&lt;/li&gt;
-&lt;li&gt;関東圏のマンション情報サイト「&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;」&lt;/li&gt;
-&lt;li&gt;中古マンション売買サービス「&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;」(メインプロダクト)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/2WKWz0X6Sn_jF-9eHABJY_V_p2yiFnfNjwQ2yQYknZFJAQyxbccZHK8gdn0ziME7znf87hup8DUBZ3WmF6XBbbob1XuE9WZgVGL61nFe6JNuK4SmevpjTvCtUmFC0XfbC1-sk8kVZe7-Fcf0eF0e7K3DuZeVADdrMruJ_QsqcmbMf21NaSF_JAvQY8aetkLeYWcA44fTLQc-hDOqKNBEi5op2AoKAu49KZbl8eCTD5B37Bowbv-h_jCK9NLgLYrkO-bLIDf8x9W0q-FNcI--StHBW-HcamIOfhqe5L9BHC9rSGpC6Ewpdiblsm83i9dYuGuKnBl0LwDxPBlb2VZgZazXeuBhR5Q_gIl6OddXubMlPXe1Rwtkxd1TZRshmIovokrsC4_TKMr-7hls_5l-eAtnrpDiGnAiqUz2A0g7pK9iCuUHIrYLTN6Jz0mSQe3VNyab9csTgecWRfjqMw_WFjUgmjg_kK9ao0RQpBBlc4QBeVHaG-hfGzbYmeLo-QlvKvj7zIpnB-3fu_Y_WWAhMSqgsc-zFsXWhJsaQxub5M0SxvpzaOcfi57-IHVqrJ3gD2r7_BsPqQpG4Ks5EQBnQSvLuYEPgsI2yWdpDeEFzZXs_dq2=w600&#34; alt=&#34;Housmartが提供しているサービス&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ユーザはメディアの&lt;a href=&#34;https://kawlu.com/journal&#34;&gt;マンションジャーナル&lt;/a&gt;や&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;を入り口に、&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;を通してマンション売買を行なうといったカスタマージャーニーとなります。&lt;/p&gt;
-
-&lt;p&gt;上記サービス構成から弊社ではメディアの集客力やカウルへの会員登録、会員の継続利用状況（リテンション）がポイントになりKPI管理の対象となります。&lt;/p&gt;
-
-&lt;h2 id=&#34;制度導入前のkpi管理における課題&#34;&gt;制度導入前のKPI管理における課題&lt;/h2&gt;
-
-&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;大臣制度&lt;/span&gt;を導入するまではKPI管理について数々の課題を抱えていました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;代表の針山が全数値の管理を行い、他のメンバーは何となく気になっている指標をチェック&lt;/li&gt;
-&lt;li&gt;みんな同じ領域の数値ばかり見ていて見落としている指標がたくさんある
-
-&lt;ul&gt;
-&lt;li&gt;集客が問題だ！って騒ぐと気づいたらみんな集客に関するKPIばかり気にしている&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;見える化した指標は豊富にあるが、返って多すぎて管理を困難なものにしている&lt;/li&gt;
-&lt;li&gt;KPI改善のために行った施策も実施後の評価がてきとうになる&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;などなど&lt;/p&gt;
-
-&lt;p&gt;要するに監視しているKPIについてはロジカルに改善を重ねていましたが、&lt;br /&gt;
-そもそも監視出来ていないKPIが存在し、最も改善が必要なKPIがそこに埋もれている可能性があったのです。&lt;/p&gt;
-
-&lt;h2 id=&#34;大臣制度とは&#34;&gt;大臣制度とは？&lt;/h2&gt;
-
-&lt;p&gt;そこで大臣制度の登場です。&lt;br /&gt;
-名前はふざけているように聞こえますが、真剣にこう呼んでます。(笑)&lt;/p&gt;
-
-&lt;p&gt;上記課題から解決策の方向性として下記のような観点を軸としました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;span style=&#39;color:red&#39;&gt;全指標を管理できるリソースはないため、プロダクトにとってクリティカル、優先度高い課題に対してKPI管理する（現状で一番改善の必要があるKPIの選定）&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;担当領域を決めて各自担当したKPIに責任を持つ(現状把握→改善の徹底)&lt;/li&gt;
-&lt;li&gt;各自負担になりすぎない程度の担当領域にする（他にもやることたくさんあるからこそ）&lt;/li&gt;
-&lt;li&gt;毎週MTGにてKPIのレポートと施策の共有、検討を行なう（習慣化）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;これらの要件を満たした管理体制が大臣制度です。&lt;/p&gt;
-
-&lt;h3 id=&#34;大臣制度の概要&#34;&gt;大臣制度の概要&lt;/h3&gt;
-
-&lt;p&gt;制度概要は下記の通りです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;全体MTGにて優先度付による課題を人数分だけ用意する（①）
-
-&lt;ul&gt;
-&lt;li&gt;＜例＞リテンションの向上、LPからの会員登録数の向上　などなど&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;用意した課題に対して各自担当者を割り当てる
-
-&lt;ul&gt;
-&lt;li&gt;＜例＞リテンション大臣、LP大臣　みたいなネーミングで&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;担当者は課題を解決するため2ヶ月後のKPIを設定する（管理するKPIを増やしすぎない）
-
-&lt;ul&gt;
-&lt;li&gt;＜例＞特定のページの表示速度を平均x秒以内にする、月間30万PV 　など&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;毎週振り返りMTGでKPIをレポーティング、改善施策の検討を実施する&lt;/li&gt;
-&lt;li&gt;任期は2ヶ月間。2ヶ月後再度課題出しと担当決めを実施する（①に戻る）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;課題の領域を決めた上で監視領域に入ったKPIだけを管理するというスタンスをとります。&lt;br /&gt;
-ただ、サービス運営の中で課題はコロコロ変わっていくため、任期を2ヶ月としました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/Y73Upb6t-XHykVo0AnChpZcw6MOU6ZclkTw-3heYa0vnUjUCibY8OJjhlcOFUCG0lck8BCcb9pJ3ScjD1p8_Nj5YnIgXA4GPKKZydeZGzPgN6qmgid780ce6N7CVb4XihrVsdRr6lU10IcHjz3r9P9iff3ABbEhoOfSNlYzsKC7OI45QX_3IIZMPqpZ4eUV10LNX_OIuwVTg2lDlBwianRXHcn2kPL85DBYgqPZxnQ_ZSQN9fJg8DwUNO6i-K4qW-96XOJHM67zP5P5T4jlaV-MKAVPeDoh0sc8NveBK2v4jIo-igvPvXPN-Br3_V87zmgZbOkv75q2e2-MMrnZf-MYqVtAVFpXsNMTxVdwkSuU0uQ0nk4lTAWctgCBZSp7vIL8VhXj48xA4DbnVt4Ia3d37I0mV1G40a_EqyW-_vfMFUmPDD6m6KtzqCAWZRS1V5MHH-5Lwao2ii_sDu6mKvxT8CQY2Qh_w75vBctw-EHZeMgfH2krbVJBpoACdJXy8gFKj4QCzCjvGfI4iveyzO8U7fCc-YixgU7HlCJDuVVZSE8tNf7mt-j5k1-Bt00-wWD8tlRZtjW1QJ7N_S9EghSy_ik7Py-P98SFt_gnhPX5DZbid=w766-h574-no&#34; alt=&#34;大臣制度のサイクル&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;大臣制度を通して&#34;&gt;大臣制度を通して&lt;/h2&gt;
-
-&lt;p&gt;この制度によりプロダクトは大幅な成長につながりました。
-良かった点を列挙すると、&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;プロダクトの最優先課題を中心に改善ができる&lt;/li&gt;
-&lt;li&gt;限られたリソースの中で可能な限り広い領域のKPI管理が可能になった&lt;/li&gt;
-&lt;li&gt;2ヶ月ごとに担当が変わるので各自がサービスをあらゆる角度から状態把握できる&lt;/li&gt;
-&lt;li&gt;施策評価を行う習慣が身についた&lt;/li&gt;
-&lt;li&gt;改善のサイクルが上手く回るようになり、集客、リテンション両面で大幅改良（&lt;span style=&#39;color:red&#39;&gt;結果としてサービスの単月黒字化！&lt;/span&gt;）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;こういった管理体制は会社によって最適解は異なります。&lt;br /&gt;
-紹介した制度が万能というわけではありませんが、皆さんの中でKPIの管理体制を検討する際に参考までになればと思います。&lt;/p&gt;
-
-&lt;p&gt;ではまた！&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -543,126 +108,7 @@ Dockerをゼロから勉強して一部の本番環境に適用した。GPUマ�
 今回はその一部として行ったペルソナの定義、カスタマージャーニーマップの作成などを具体例をもとにご紹介します。&lt;/p&gt;
 
 &lt;p&gt;実際のサービス設計では結構抜けてしまいがちなUX設計のフェーズ。ペルソナやカスタマージャーニーマップなど知識としては知っているけど、自分のサービスで実践をしたことがない！という方も多いのではないでしょうか。
-&lt;/p&gt;
-
-&lt;h2 id=&#34;カウルのサービス&#34;&gt;カウルのサービス&lt;/h2&gt;
-
-&lt;p&gt;カウルはスマホで簡単にマンション探しが出来るサービスをWebとiOSで提供しています。&lt;br /&gt;
-ユーザは会員登録後、欲しいマンションの条件を登録するとおすすめのお部屋の提案を受けられます。おすすめのお部屋を見てお気に入りに入れたり、実際に見学の予約をすることもできます。&lt;/p&gt;
-
-&lt;p&gt;その他にも購入にかかる費用のシミュレーション機能やマンション購入に関するノウハウも見ることができ、購入の際の契約も一貫してサポートしています。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/lfVgkgCfdYbIBJSUyplcUu1vxAJqAmc9_u0MtcUOYR_kI76TgY2zc3rOfjxoGnCVaBdVgsJ0kCakvbztEwDy3fvlxVpWl89Z7TLTaGC9KhnKeyWiCGCE4ns-h4yO5CCmPP0zsJZCMTgqcJWJzXQ1XraC8jPmr2o4eQXDQkGeomfbimYwnWQYLGb53wPBSe3UaO_ldjGlejteJX0OTKRPXvr7JsWh3wnwk6RbB2Ehr13MAVBVmoAs7FyXrgj7SHeM84wpRdq2M5DDzvz-IbCwyHgsctvtKI7FDHOSnElryGaQspYGobivMDP9N2CcU2vBkiBnTWZqXmHTqEj7HFqK8wvnn0Z-7EWFQ4NlKKB7qnBmi0WylmgqdSlZl99hD4GOKD9q7ygdHNgBwKyIk6CeJfd07ZnxU5_7H6pANEsunKUZ_WRGRgHzuOadCMsyz-sqzhFtAu4f1mBrru0a4B8mIoqyIhOaD2PZyhOj8jfpXvUH8-WfNQj_ERinoj7NZIZrhvgaT_7JG3-FYfnyF__HxmiEhoyaxqXO1OjsSIT3WTkwpgmdg3Bi-p8WGhVBNdku6_SgEAszfZDF1moPpozbCYxFz76bRvrj8vt1iW6iaTYpZkDk=h600&#34; alt=&#34;希望条件の入力→お部屋の提案→お気に入り&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;また、従来の不動産売買では、過去いくらで売られていた部屋なのか、現在の相場価格はいくらなのかの価格情報を消費者が見ることができなかったのですが、これらの情報を積極的に開示していくことで透明性の高い不動産取引を実現しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/pWFAV-8AjYXayhdmLa4qsfWfqFPkEshGIpFniIWgBc4tP4RWnY9dlO73MftBnLmzCt-GKc1zMBOFaLrVqN3intU_m2x8IyEIyrdZhSCPwejD-AtuMxBQ0AW2Ax3lcvZgjonhWWs6NIWDRE4qVMydm5JLVJseR9RmwWtk6Q4iOemPgM-mbij9UTHYVtkICAeboLTJuQIUFqEI9BMossrovA9qfDYVtLQ5JyR-maM0CisLVOz64wKBPvwZ7LpTsgcI_TuAa6XWxBkcFeyKnIEdzsy1JpvDoKYW8hJPtYJjWRKBHKGK13J7ZuRqGPEtZpIBya65NGWVoGQqjXsBKldwQt8yPegwqN6JOnX-9GBnhnUuAFVA4iHWNLjVkfWoRceh1fByjMNXKu3s93hCllVlsBPlSdl5G0gBfMajpm9tdFMnsIo8WOrIPrH4ytDJroRQ3aiKI4Mcgkls6FxohJY9-TM7IjJAoLS-Jfx_kD7EpuqrJox7pdWWxBu4Z44iIQNdpy4r_eJWb4NK79DmN1yX_9WofXMnTGKgs1yC8TpHXbeMldKoihnoKhGTubbZSTfhwM0AUWVu2DqXkQNZbArEZlKfdIfpFgILplUB0jtJQy8ymxTx=h600&#34; alt=&#34;お部屋の情報と相場&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;なぜ今ux再設計をするのか&#34;&gt;なぜ今UX再設計をするのか？&lt;/h2&gt;
-
-&lt;p&gt;カウルは既にサービスを開始して10ヶ月経ち、ビジネスとしては利益も出るようになってきたため、今の段階で改めてユーザビリティに関するアンケートを取ってみました。その結果、一部のユーザがアプリを使いにくいと感じていること、また希望通りの物件の提案を受け取れていないなどの課題が明確になりました。&lt;/p&gt;
-
-&lt;p&gt;10ヶ月のサービス運用によりオペレーションやユーザの課題も見えてきており整理するには良いタイミングだということで、これらの課題を解決してユーザビリティを上げるべく、しっかりと時間をかけてUXの再設計を行うことにしました。&lt;/p&gt;
-
-&lt;h2 id=&#34;今回やったこと&#34;&gt;今回やったこと&lt;/h2&gt;
-
-&lt;p&gt;カウル開発チームでは3ヶ月に1度、1週間泊まり込みで開発合宿を行っています。今回は10月最終週に沖縄での開催だったのですが、メインテーマの1つをUXの再設計と決めてディスカッションを行いました。&lt;br /&gt;
-エンジニア陣に加えて、遅めの夏休みを取っていたデザイナーのみさと先生を招いて全体の進行をお願いしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/KOm3Gcx_e7Egl-GcHF4jmIddjUQ3PD1-8bZdRRy0CBRKWbJmJtEioqxFvMBC7P-ZVdkWrQi9LN-5rUEf9k29QIu2gxdBiUQx99b4x3Vr-0NLtg9g4B-Aic4tP3iTafb6SisXaHRLG-I3I0QV6NXIYn0-QRbIQdamh1XV3OuSH7eno94etKBwg3OhcUA2Xj8PWWCk-eHUgQJm2LeyjmlODGV5_QMO_sWU0SczLKIx3m2cWftkft_bhkYqHCZAOgJQBFtYeNiZo4dFu0h_9053AFYvNgYEK8ZV89jqmdxqt2Dzf8c-dYrttron-HZVtE7avPGx9apjeNC_mZcaAWYp2cQaqeovsfMVLkzNA7H0zz17LH3gl-AcYhPT1P1qqm0AsydSsytDJqadAX_eqcApbCC481qe1mGEajx9zl94QTBJVJf1Xqr9erheuM4ezM9Lp_z6Z4OCbET8-mXLQegPoYOu1v0Oqtsvu86LFk0tt466gAEbfGcXgZFDXDNmFYyjMzT7sOcIg8p-m7zrX6NZpFBtK64SRbT0W0o90vedeRWcRvesv5irlo2EGgoJ_d7rkDG8vFoiNnVOAuHeldyKw23tz1ZOj1mdSco6_Yu-AJwfzaDh=h300&#34; alt=&#34;アドバイザとして参加してくれたデザイナーのみさと先生&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ディスカッションに費やした時間は合計10時間程度、具体的な内容は以下です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ペルソナの定義&lt;/li&gt;
-&lt;li&gt;カスタマージャーニーマップの作成&lt;/li&gt;
-&lt;li&gt;カスタマージャーニーマップに沿った機能の洗い出し&lt;/li&gt;
-&lt;li&gt;メニュー構成の検討&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;ペルソナの定義&#34;&gt;ペルソナの定義&lt;/h2&gt;
-
-&lt;p&gt;UX設計の際にペルソナを定めることで、&lt;strong&gt;ユーザ目線でUXを考えることが出来るようになる、具体的なユーザの目線で考えることでチーム内で共通の判断基準が出来る&lt;/strong&gt; などのメリットがあります。&lt;/p&gt;
-
-&lt;p&gt;既にあるサービスの場合、ユーザへのアンケートを通してよくアプリを利用しているユーザの属性を抽出していくことが望ましいのですが、今回は事前アンケートを実施しなかったので、過去にカウルのサービスを利用してマンションを購入したユーザの属性からペルソナの作成を行いました。&lt;/p&gt;
-
-&lt;p&gt;各々が過去のユーザを思い出しながら属性情報（性別、年代、職業、年収など）や生活習慣、どんなことに課題をもっているかなどをポストイットに書き出していきます。そこで挙がった要素を元にユーザ像を作り上げていきます。&lt;/p&gt;
-
-&lt;p&gt;今回は全部で5人のペルソナが候補として挙がりましたが、実際のユーザに多そうな属性のペルソナを中心にメインのペルソナ1人とサブのペルソナ2人を最終的に定義しました。&lt;/p&gt;
-
-&lt;p&gt;対象となるユーザが狭くなりすぎないよう複数のペルソナを決めましたが、今後の議論での判断がぶれないよう、ペルソナの優先順位を決めておくことが重要です。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/mmJqPb-u0d60KhXhW2pGOpEBqEPzo0ApDsIwDbMToLxI77eHpylIxiIdZf-YTzMJ-8cQsMNnIqyGkLgzfqrUtwjS8DL5WLOnfM3cKncZiRP1dWOHYBhUMWsYVXkESgxT5YOnYps56WbuXYUm26hYCdbU9epaXwbP9APylmgtsAcik4Av1-2Sf3uGlJxpVEya4AFjOKjSDy7XJcebgUPYHlNifrXvVQI3itZ_5qjZrxsnGOT_m0hiqzvzPHKDnORwaf9Tid0sQBSGR3XC5WVhqTbp2MRD-zXwGLn33AwG6FO1B1fgkUExFhIORLEXWRRtBasEtIGO3CDBKYWIeZ0lEag3u7UHKHRvf9_taP4AxNf_g3AyskRxdmnnmABttJ_GZKVgFGUlUg7KDUG02PV-Q5NNJKCllGPIyzkJeq62-9W0m7vNnHijvicwTAtGrw4N34NXCemxBo6xA7M-qilnpvYlCmURo_vmV4Zm6R1ypfOr_47tNOUSJIVQPJ5zJO39lOVYLUIVDQIsPuGtcssdBLWtFdnlJ4jLMI2VJDBQH5fAUR1fTzrKW9ncGzsF7-_C-JUpE_mgWNfsvvmTb5tv1kkp8_IFrNxMWpbO4WSbvetbjyVo=w600&#34; alt=&#34;ペルソナ作成&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;実際にできたペルソナはこんな感じです。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;★花輪誠一郎さん
-・属性情報
-   30代前半既婚男性
-   共働き
-   結婚2年目
-   IT系企業勤務
-   年収600-800万円
-   子供が1人産まれた
-・生活習慣
-   10時-22時で働いている
-   電車通勤
-   夜は友人と飲みに行く
-・ゴールや課題、チャレンジ
-   今住んでる家が手狭になって家探し中
-   生活に安定を求める
-・情報との接し方
-   通勤時間や昼休み、寝る前にスマホで情報収集
-   SmartNews、NewsPicksで情報収集
-・製品やサービスの選び方
-   友人やブロガーがおすすめする商品を買う
-・性格
-   めんどくさがり
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;カスタマージャーニーマップの作成&#34;&gt;カスタマージャーニーマップの作成&lt;/h2&gt;
-
-&lt;p&gt;続いて、考えたペルソナがサービスを通して体験する項目を洗い出していきます。&lt;/p&gt;
-
-&lt;p&gt;カウルは中古マンション購入アプリなので、&lt;br /&gt;
-&lt;strong&gt;ユーザがカウルを認知する→会員登録→マンション購入のノウハウの学習→実際にマンションを探す→現地の見学→購入の契約&lt;/strong&gt;&lt;br /&gt;
-の流れを細かく分け、ポストイットに書いていきます。具体的には「お部屋の提案を受ける」、「購入にかかる費用を把握する」くらいの粒度にまとめました。&lt;/p&gt;
-
-&lt;p&gt;ここで大事なのは、既に実装されている機能にとらわれずに必要なステップを洗い出すことです。そうすることで現状で足りていない機能を明確にすることができます。&lt;/p&gt;
-
-&lt;p&gt;書き出した後はポストイットを時系列に並べ、それぞれのイベント間の遷移を書き出しそれぞれを繋いでいきます。&lt;br /&gt;
-今回は通常の遷移を青、ネガティブな要素を含む遷移をオレンジ（見ようとした部屋が既に売れていたのでまた探し直すなど）、離脱の可能性がある部分はピンクで色分けしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/OR86Zt2xYvKaRiHbeJeLfjyCg3tmGGJoI_6br12l0XksFDZStiQYSCQCV5gGfx3a5Xg0FfeHNmRofbPGHZJd5D_0jDsJWjW-o6a9W-A-RHfZzgEcem_q582vuw4BwCFO1gMJHe9_kOc-lCy0unI10RNxHPeASjHkkUERK1laxKEKoNXryfv6nuVuv1IyOsilbwKSE1Mq3vsY_iT54rZyTjXblUQOA6dRXvNCSY-aQzhYNlkiCASo8PlVEXn5_wysDaR_W6C7Kw4kAjKnN0OVA2-8PTLJ_5FnIrGEGkxy-FHb5Dod9jdhIhrdOzYP66HvpSFCR05CvxHgBaYL9iJRTdOLRaAwKg17YkiXpZnoKU4jH42X8Y3EtApW3sSqz5MUVwTFelvxfAprS5w1OiUtvfdwXnYUeb7d3pX8yyO9ykVpUlnFckGRcF40ZOPmjFHyRb-cU7lxxQbfl9ehuGnfvZybgLOVMtzZSay-KK384xRMRyPhHKWIHhGObYLhOwz6Xx1pQTgAsPvnbivULhbMnW5G1w7KbrFtQSRvT4Y2wMpJW2IOzmqbiUajSoJ64ahndQOh5TQW7BMSy6QgGA_zXW3g_fApTx3IOSgH6Yt4chl2YIsU=w600&#34; alt=&#34;カスタマージャーニーマップ&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;機能の洗い出しとメニュー構成の検討&#34;&gt;機能の洗い出しとメニュー構成の検討&lt;/h2&gt;
-
-&lt;p&gt;ここまで来たら具体的な機能に落とし込む作業に入ります。&lt;/p&gt;
-
-&lt;p&gt;書き出したイベントに対応するページを書き出していきます。先程の例で言うと「お部屋の提案を受ける」というイベントは「物件提案ページ」、「購入にかかる費用を把握する」というイベントは「購入費用シミュレータページ」に対応します。&lt;/p&gt;
-
-&lt;p&gt;その後似たページをカテゴライズしていき、下タブやグローバルメニューの中にどう配置していくかを話し合いながら、具体的なメニュー構成のアイデアを3つほど考えました。
-カウルのアプリの場合かなり機能数が多いため、ユーザが違和感なく機能を理解して使える構成を意識しました。また、よりユーザ目線を取り入れられるよう、複数のアイデアを出して今後ユーザヒアリングを通して絞り込んでいくというアプローチを取ることにしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-gDzsC_es0awgNit_3itly2IF7C_LFY2kfgZKICGi5ljrh1G3CNM-hszM9y-DCtBPCXzxFQi_sXUsY_gqvlg5SxKZpn0kkVVp2KqaTFTTo_hgy_jjI9PxHggZGED_w5FCCvMSK4gjj5kH7RDgmo-r7F6bt0IeHK7q2K_c4TyyKeD9YlJmeugQY1blMvqAmG420O0nVOskEtP4u_ZgtseusYLj_1X9nvu8VZNb_AS363U11bVhfCml8aMXkUHhiTsynBV0OnnG_4zQveuaM0sKKHRtOIrD9BL9wvK65O1gXhfvZnVRZdHSZ5RZl6UOtD1hjDGzTReZMOcRXOoSQ2U17UKO-wrjhAsm-QZOYNCRXCQc1riqDzt3FA6ATA1lW9bK_Bza1FkkhdKMoTRG5VzCHHhsnlNCqwugdYTMjD_wKa3HsHhg_nM-AYw4S3cAEhIviwXvMf-RysKaQKYhaVDk4fM295bJjWi0SnPF3gQXpS5xB8DAR2hvsUu9G8abcQiieioWAKke5LHM-V5j0Qto-1tG5t3IwpZXknsb3D_mA-BWaSgR_hx74f8KshzelOpANTYY3RLdVuvd531WNmuBfh2S-nIjlQi97OOlavIO9jxC-1Y5A=h600&#34; alt=&#34;メニュー構成案①&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回の開発合宿ではペルソナの定義、カスタマージャーニーマップの作成からメニュー構成のアイデア出しまでを行いました。&lt;/p&gt;
-
-&lt;p&gt;今後は以下のようなステップでさらにUX設計を進めていく予定です。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;メニュー構成、メニュー文言に関するユーザヒアリング&lt;/li&gt;
-&lt;li&gt;メニュー構成の決定&lt;/li&gt;
-&lt;li&gt;UIモックの作成&lt;/li&gt;
-&lt;li&gt;UIモックを使ったユーザヒアリング&lt;/li&gt;
-&lt;li&gt;モックの改善&amp;amp;ユーザへの再ヒアリング&lt;/li&gt;
-&lt;li&gt;設計&amp;amp;実装&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;これから先のステップに関しても進捗がありましたら書いていこうと思います。&lt;br /&gt;
-今後カウルのユーザビリティがどう改善されていくかお楽しみに！&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -675,72 +121,7 @@ Dockerをゼロから勉強して一部の本番環境に適用した。GPUマ�
 
 &lt;p&gt;弊社は普段Rubyで開発していることもあり、&lt;br /&gt;
 9 / 8 - 9 / 10の3日間、京都で開催された&lt;a href=&#34;http://rubykaigi.org/2016&#34;&gt;RubyKaigi2016&lt;/a&gt;に参加してきました！&lt;br /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;京都での開催ということで前日入りして少しだけ観光もしちゃいました。(笑)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/_53BZbTgGdRHtd_u2HSDgQvW1vctmrrbu2tkJLd_AXYmcv6afsy3OvhcHEVhcq4Mwy1gF5w3dqiMR0akJhOGGXvLyUNwg-0Kj104yvS1HKZVsY4VsA7ma_ivD36gkoodEBrku2NLUDRIg2BXrDW01Ly2RZe9NWVlJIL8szBB9g3h7p9c1IixgFGVGy-Ns4O6shcdOGz6i5qXFfTcNNgjocGwxmcoDrcQiHi2YLQ7F5_9JgfnES7xFZ7dZ5n9Xu-orI4CH7hFXcw910K-dcSaRa2WcbAUNTNLtPqUL9np58sZkiVEeVeKXPaWDUdtLaoxRlLdNwZ1BwC-ZB7lsBmy2fAJZGridZp5rsxy5vnwfwQYCEeadPkMoNYJGspgYl_sVKq0pXbF5tPeLvStnh7WtwTpXoi3nh9eYua5tWumfEeW0g-GfQYjC8LjzN6WkSV7i2RLDL9Xcxz1DWg-Y6wYadgrqY37loOZXTbpgP5vhnc03ahLDuIxr8R05zQLNO8Rt67aLwQuV0J6sIfzql6kA2L1XojVd1H9zd02hr0VpC3ZVEXGF38CyE1FyyjEtmkquGGZ_cuGEakduAO12Fbm7fu1dGmvtdxl9kMMGnMlvwDVqTz5=w650-h623-no&#39; alt=&#39;京都駅はシックでかっこいい&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/LTtv8rPScZ3AhOjOqdHciwKKRKTw9yTGpF_Y82oMZYAefh2vSIaFBwJvjZgTFW8qFr5jjs0FbWSABGGrJ661_xLEsAqcEPuYIgW9dmkUr7GCJ9a3Z9Umk0E7svKWX9ZLY4fTkyibjpYYivkwzZiLb1pNLWOw_FiB1EXZbvHcE7XTc5e8UH7NxaOgV87LFgOymgTlT4dZXaDsG0w5l7021Zjdp5myYnC8dhzkcZr7TRG2KCExPbkv5nRKzZidEwri_-miqnS2Bf09YpdQc6IxxCiW_WNQR4hbUJ9s4QPR18o2qHi4pdeaD5qVme_2PZA5ZXKO2O0V5goPSx2h7uYwAnluClLX1w4iV1wIztdSufPE5EyJIup8H0cFeE2wo4k2jR9gMq0cvgbaP-Gj8A5ServWMwAuT6AmxqmV3llOnjSU0xQrXuyE6I5TSHDwTW3hLLqJ-SrUYPwmJlijOGiUChdl1iw8wyemb_b6spJd3lP4sjNvOm4o8eqbrC4RfQTpg-_4k0rTcphhth12cqsPzfY0SHRIPFX1a3CrA8jlCygmk_8Dw8q1SmXEpCOkxk61aBAmAzmfEvMExHfa5lnU7wVtw6Q4W1-vHCpGjvP74I5dB-Zz=w650-h623-no&#39; alt=&#39;まだ暑かったのでかき氷をいただきました&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/VqT1ek8taF6Uv7d1OKWzUgKd1JchvRHZ95vsn-jOgEDm6FhOOa9dD88gQUvkFZC8FK0pxPUrL0TwXg1gSavMh91c55cHF2pmsL9KVEsTuDWkuDZ5gtcMsvBGZ5oIiWyP2_o0sKGUtcapgnU9Kjbpz2ReO3rjlfTPL37eMDCh5uGONIiPn_XdEWDMl-WNpOPVPjbNDrAJx2gaXQs-1Gs26txixCoJzQ-QKJ_81-B-0Edp7SMT6nlOZF1AxQN1eFmXpbfhJvaXkArJbNEY9tXxdo5pdDU7kl7AYWjWDnvj1wnASaU9D7PFY4zDbftELqm0g4p54O0Oyz15gaak1KX-7jOCjgyYeRZiL6uckwH-UfomlOzgBmAeLvGgFSoNtasDj7VsXKtRiQ6zaLzp9v3Uzma9iMtBeC1FubT-nFXEjlu1PO1nrM6bBNXE-mg4vosbkJuba9mFyMeMcbr169PnrfplqlbVF_8xFi4sUAuONFnKN6bVW42EMCOXhJtwHgR4G_VOnRPzOJvb5cWYCk38qaVn7y2i6SUXX8B2biJ_ZIbhW0m-0PbiVJfWVo06gkjJwVml21BJE4pT7RnIks9w54sGRWiIQ31rCeR1e9-QcI5J4enK=w650-h623-no&#39; alt=&#39;先斗町も京都らしさ満点で楽しい&#39;&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;rubykaigiセッションについて&#34;&gt;RubyKaigiセッションについて&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/T1gUGIOISZw5dXA5AcRLf3SI7A9FOAGO8qxVl-t4h43W1Uf8b5js5dz6yR1Mo_sRKTqTvc_aQlGIhjWdKx9F3V4jKkat1QIWlMPVXLG76sBLVdqVO4kpiBd3yRWzm2VBrLNK0m_8oHLTo9q-z-RHkPDj_7lxTFXoOXekToXUPltidLWI_MwxvUWb7tVxOt2sGntBWmE3oHjixZSTGfqVrmtJX5sO2N9q1_jz5RNElAQ1tFfPsSWvF6D_vuJExEI4hdq89k0ohn5EfUcl-ilmHc87gW22Q_IK5p5QtoRn3oUGSyTG__IDQXIoQkFX2JZzBj5qF8tgPswsNAqVOnhjuidwND61uiwF-0xTqA55pkllvklWjzCV489lmGKdv4MdJpIbDDqN6RV0CoEIifR-1ELmHzn7X64cqOihaR5yHFy2D6zpe9cf6_4bfGLaRx_Dx8sv33hgvhMXgVEDnFTd4gxW-MO_R1IkvYuthZ2WZjJ_7UMa-smIB1GjZ-f3XaBzJIxWN2lCcTuaCDDITwma97jZOqQcyCmknohAkeE4LANcb7K7RudFe5_6EuqvDYXz65Wmh8PoeYcTWxOyk_jIxqYxK5ngbqZeY81UP2fAQKKeVEZ_sQ=w650-h623-no&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;本題のRubyKaigiに話を戻します。&lt;br /&gt;
-RubyKaigiで気になったセッションについて概要と参加したエンジニア3人の所感をつらつらと述べていきます。&lt;/p&gt;
-
-&lt;h3 id=&#34;isomorphic-web-programming-in-ruby&#34;&gt;Isomorphic web programming in Ruby&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rubykaigi.youchan.org/&#34;&gt;発表スライド&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Rubyベースの文法でJavaScriptにコンパイルできるOpalを使ったReactライクな仮想DOM実装を紹介されていました。&lt;br /&gt;
-* &lt;a href=&#34;https://github.com/youchan/hyalite&#34;&gt;Hyalite&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;set_state, component_did_mountなどReactに慣れている人であればお馴染みのcomponentライフサイクルで実装でき、
-私も&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;でReactを結構触っていたので容易に理解でき書きやすい印象を受けました。&lt;/p&gt;
-
-&lt;p&gt;強みとしてクライアントサイド、サーバサイド間でモデルが共有できる点を挙げられていました。&lt;br /&gt;
-この点についてはDRYになって単純に便利ってだけでなく、クライアントサイドからのアクセスに部分的制御をかけられるといったような、productionに出すWebアプリケーションとしての配慮がかなり丁寧になされている印象を受けました。&lt;/p&gt;
-
-&lt;h3 id=&#34;sciruby-machine-learning-current-status-and-future&#34;&gt;SciRuby Machine Learning Current Status and Future&lt;/h3&gt;
-
-&lt;p&gt;発表スライド
-&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;99d3e8a4011542e0bbea092db7650ee5&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;現状では機械学習に関する作業はほとんどRubyで出来ないようです。（弊社でもPythonを使用）
-Rubyで機械学習に関する一連の作業（前処理〜学習〜利用）が出来るようにSciRubyとしてどうやって行くかという発表でした。
-PythonのScikit-learnをRubyから呼び出せるようにしていくのが良いのではないか、と考えているようです。&lt;/p&gt;
-
-&lt;p&gt;質疑応答ではRubyの強みを使ってRubyならではのアプローチが出来ないか、という質問が多かったのですが、
-私はScikit-learnを呼び出せるようにしていく方向性に賛成します。
-機械学習自体の書き方はPythonと同じでも、前後の処理をRubyで書けるのはうれしいです。
-また、機械学習系だと新しいアルゴリズムがどれだけ早くライブラリに実装されるかが重要ですので既存のコミュニティに乗れるのはメリットだと思います。&lt;/p&gt;
-
-&lt;h3 id=&#34;recent-advances-in-http-and-controlling-them-using-ruby&#34;&gt;Recent Advances in HTTP and Controlling them using ruby&lt;/h3&gt;
-
-&lt;p&gt;発表スライド
-&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/3uztRoYgtZJDJ2&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/kazuho/recent-advances-in-http-controlling-them-using-ruby&#34; title=&#34;Recent Advances in HTTP, controlling them using ruby&#34; target=&#34;_blank&#34;&gt;Recent Advances in HTTP, controlling them using ruby&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/kazuho&#34; target=&#34;_blank&#34;&gt;Kazuho Oku&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;現状のHTTPが抱える問題と、それをHTTP/2ではどう解決しようとしているのか、またどこまで利用可能なのかといった動向についての発表でした。
-発表では1つのセッションで複数のリクエストを返す「プッシュ」機能について多くの解説がありました。
-HTTP/2をサポートするHTTPサーバのH2Oではmrubyを用いた拡張が可能で、アクセス制御やIPアドレスフィルタの実装例の紹介もありました。&lt;/p&gt;
-
-&lt;p&gt;プッシュを使うと、応答順の優先度付けをしたり、1つのセッション中に複数のリクエストを送り返すことができ表示速度を上げられるケースもあるとのことで是非試してみたいです。
-プッシュは特定のロードバランサ配下では使えない(HTTPステータスの100に対応していない？)とのことでしたが、最近リリースされたAWSのALBではHTTP/2がサポートされているようなのでプッシュが使えることを期待。
-HTTPサーバの拡張はC等の言語を使う必要あり敷居が高く感じていたので、H2Oのmrubyでの拡張もできるというのは魅力的な機能だと思いました。&lt;/p&gt;
-
-&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
-
-&lt;p&gt;京都という観光場所にかかわらず、ほとんど観光しなかったくらい(笑)イベントも参加者との交流も楽しかったので、次回もエンジニアのみんなで参加しようと思います。&lt;/p&gt;
-
-&lt;p&gt;デカ外人最高！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/IDMzTT7AcorlVzUK1u9qbj-9mTTJ3b_3_NuU_I7izCsvnaw44dhXrh-InImk6HllVtB0cl1t8vkFmSn6AuHpf6aeIjNsdpuu7vHSUzu697SuOI68uMx-qJ5gNTonPkYVaB3mIqF2xFDirgnaI7gErYvOvjaWvf-fTZ3rKnWS8Llq6fqb-5hWFOux7DOdAhz2nUC4HC2-SY1jk9zebV0LLutREcIQOnenxobQNmL0Kp5_lPGeFi5pS1HV67SOwEMSg0I2Uu1s56ZQINYuXZrXgRmHvPQzJdNerqB2vks5sher0s_ZZIbCN6qV9193CqPDqNh2WMP406eyqYQ8MVRG9ZbhNmZTSTu4whsQBixoY127tc4LrkVkPSNtyLry21rQsajJYglrzA6MWPR3cDAbGg16CANtavvxe6B7I-MbbTiFEleouA1Oa5koKsAZq7atPqeylXEYJf6tHuGigVuh9XEFh-2D52ZinnfvZr07rdxWcD5jH-9T2NO-XV6CPDe1MRjr_1GW4_RMwNBJL_blLcwOhEIFxWb7vSWWQ60Zg5Y5DG9CWDohnPwu_5YUH96Ui_GXZ40yNeD-yun1-p9PNLW95PooH0is2_0l22LgcL7_nIH0=w650-h623-no&#39; alt=&#39;&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;おわり&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -758,155 +139,7 @@ HTTPサーバの拡張はC等の言語を使う必要あり敷居が高く感じ
 &lt;p&gt;「サービス・システム設計」の観点から新規アプリ開発において意識すべきポイントはこちらの記事にまとめています。&lt;br /&gt;
 &lt;a href=&#34;http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/&#34;&gt;「iPhoneアプリを作り始める前に考えておきたい5つのこと」&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#coding&#34;&gt;コーディング&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#coding1&#34;&gt;1.Storyboardを積極的に利用する&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#coding2&#34;&gt;2.SchemeとPreprocessor Macrosを使って環境を切り分ける&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#coding3&#34;&gt;3.UIWebViewは使わずにWKWebViewやSFSafariViewを使う&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#coding4&#34;&gt;4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#coding5&#34;&gt;5.こまめにプルリクエストをマージする&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#coding6&#34;&gt;6.ベータ版を定期的に社内配信する&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#design&#34;&gt;デザイン&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#design1&#34;&gt;1.滑らかにアニメーションさせる&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#design2&#34;&gt;2.UI要素のレイアウトを揃える&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#design3&#34;&gt;3.web処理を意識させない&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;div id=&#34;coding&#34;/&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;コーディング&#34;&gt;コーディング&lt;/h2&gt;
-
-&lt;p&gt;&lt;div id=&#34;coding1&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;1-storyboardを積極的に利用する&#34;&gt;1.Storyboardを積極的に利用する&lt;/h3&gt;
-
-&lt;p&gt;UI要素はコードだけで生成することもできますが、Storyboardを積極的に使って実装すると、実行時の画面の状態がプレビューできるので新しくプロジェクトに関わる人がいても理解がしやすくなります。&lt;/p&gt;
-
-&lt;p&gt;一方でデメリットは、AutoLayoutとConstraintsの挙動を覚える必要があること、複数人で同じStoryboardを編集する際にGit上でコンフリクトすることが挙げられます。&lt;br /&gt;
-Storyboardを分割しておくことでコンフリクトは極力減らせます。&lt;/p&gt;
-
-&lt;p&gt;またStoryboardから変更できないようなUI要素については、&lt;code&gt;IBDesignable&lt;/code&gt;を使って拡張します。&lt;br /&gt;
-例えばカウルでは&lt;code&gt;IBDesignable&lt;/code&gt;を使ってStoryboardからボタンの角丸を変更できるようにしつつ、各種ボタンに一定の丸みを持たせるようにしています。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;coding2&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;2-schemeとpreprocessor-macrosを使って環境を切り分ける&#34;&gt;2.SchemeとPreprocessor Macrosを使って環境を切り分ける&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;Debug&lt;/code&gt;、&lt;code&gt;Release&lt;/code&gt;以外にも&lt;code&gt;Staging&lt;/code&gt;のようなスキームも定義して、プリプロセッサマクロで以下のような処理をビルド毎に切り分けます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;APIの接続先&lt;/li&gt;
-&lt;li&gt;クラッシュトラッキングやアナリティクスのON/OFF&lt;/li&gt;
-&lt;li&gt;データのキャッシュ時間&lt;/li&gt;
-&lt;li&gt;・・などなど&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;本番(または開発中)のバージョンにだけ出したい機能・設定の切り分けに使いましょう。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;coding3&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;3-uiwebviewよりwkwebviewやsfsafariviewを使う&#34;&gt;3.UIWebViewよりWKWebViewやSFSafariViewを使う&lt;/h3&gt;
-
-&lt;p&gt;UIWebViewよりWKWebViewの方が、描画が速く、クラッシュも少なく安定します。&lt;br /&gt;
-SFSafariViewはカスタマイズできる部分が少なくなりますが、SafariアプリとCookie等が共有されるので自分のサービス外のURLを開く際などに使うとユーザにとって便利です。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;coding4&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;4-custom-url-schemeやuniversal-links-wkscriptmessagehandlerでwebとネイティブを繋ぐ&#34;&gt;4.Custom URL schemeやUniversal Links、WKScriptMessageHandlerでwebとネイティブを繋ぐ&lt;/h3&gt;
-
-&lt;p&gt;3つを主に以下のような用途で使い分けて、webとネイティブを繋ぎます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;カスタムURLスキーム: Safari等からアプリへの遷移。&lt;code&gt;kawlu://&lt;/code&gt;のようなURLでアプリを起動してくれます。&lt;/li&gt;
-&lt;li&gt;ユニバーサルリンク: Safari等からアプリへの遷移。&lt;code&gt;https://kawlu.com&lt;/code&gt;のようなURLでアプリを直接起動してくれます。&lt;/li&gt;
-&lt;li&gt;WKScriptMessageHandler: アプリ内のWebViewからアプリへの情報渡し。JavaScriptからWebView内に処理を渡してくれます。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;カウルではユニバーサルリンク中心に利用する予定でしたが、このブログを書いている時点では &lt;strong&gt;Safari以外のアプリでリダイレクトリンクを踏んだ際は作動しない&lt;/strong&gt; という挙動があったためカスタムURLスキームも利用しています。&lt;br /&gt;
-以下が具体的にユニバーサルリンクが作動しない事例です。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;トラッキングのためSendgrid経由でメールを送る&lt;/li&gt;
-&lt;li&gt;ユーザがGmailアプリでメール開いてリンクをクリックする&lt;/li&gt;
-&lt;li&gt;リンクはSendgridドメインを経由するリダイレクトになっており、ユニバーサルリンクが作動しない&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;div id=&#34;coding5&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;5-こまめにプルリクエストをマージする&#34;&gt;5.こまめにプルリクエストをマージする&lt;/h3&gt;
-
-&lt;p&gt;複数人で開発を行っているとpbxprojファイルやStoryboardが、コンフリクトして解消に時間を取られるので、プルリクエストを長い間放置しないようしてコンフリクトを減らします。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;coding6&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;6-ベータ版を定期的に社内配信する&#34;&gt;6.ベータ版を定期的に社内配信する&lt;/h3&gt;
-
-&lt;p&gt;動作確認をしたり、認識を合わせる上で一番良いのは実際にアプリをデバイスにインストールして使ってもらうことです。&lt;br /&gt;
-インストールしたくなる度にMacにiPhoneをUSB接続するのでは効率が悪いため、&lt;a href=&#34;http://try.crashlytics.com/beta/&#34;&gt;Crashlytics Beta&lt;/a&gt;等のツールからいつでも関係者がインストールできるようにします。&lt;/p&gt;
-
-&lt;p&gt;カウルの開発では帰宅時に最新版のビルドを配信するようにしていました。&lt;br /&gt;
-今後は&lt;a href=&#34;https://fastlane.tools/&#34;&gt;fastlane&lt;/a&gt;などを利用して、新しいコミットがある度に自動配信できるようにしようと検討中です。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;design&#34;/&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;デザイン&#34;&gt;デザイン&lt;/h2&gt;
-
-&lt;p&gt;基本的には、標準的なiOSのUI要素を使いつつ、アプリ内での一貫性を重視するようにします。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;design1&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;1-滑らかにアニメーションさせる&#34;&gt;1.滑らかにアニメーションさせる&lt;/h3&gt;
-
-&lt;p&gt;要素が現れたり消えたり、移動する際に滑らかにアニメーションするようにします。&lt;br /&gt;
-また、時間がかかる処理をしている間はユーザに「読み込みしている」ということを分かるようにします。&lt;/p&gt;
-
-&lt;p&gt;見た目のカッコ良さだけでなく、直前のタップやスクロールという動作から次のアクションへの繋がりが見えるようアニメーションを利用することを心がけます。&lt;/p&gt;
-
-&lt;p&gt;画面描画が重たくなる場合、ユーザに見えていない部分の要素の描画がされてることもあるので&lt;a href=&#34;https://developer.apple.com/library/ios/documentation/ToolsLanguages/Conceptual/Xcode_Overview/ExaminingtheViewHierarchy.html&#34;&gt;描画中のビューを見てデバッグする&lt;/a&gt;のが有効です。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;design2&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;2-ui要素のレイアウトを揃える&#34;&gt;2.UI要素のレイアウトを揃える&lt;/h3&gt;
-
-&lt;p&gt;UI要素のサイズには、標準的なiOSのUI要素がもともと持っているサイズを使うか、サービス内で定義したサイズを使うことで、iOSやサービスの一部として馴染むようにします。&lt;/p&gt;
-
-&lt;p&gt;例えば、ボタン等のタッチ領域は&lt;a href=&#34;https://developer.apple.com/ios/human-interface-guidelines/visual-design/layout/&#34;&gt;44pt以上&lt;/a&gt;にするようにしたり、サービス内で独自に定義するサイズは&lt;a href=&#34;https://material.google.com/layout/metrics-keylines.html&#34;&gt;8の倍数&lt;/a&gt;を使います。&lt;/p&gt;
-
-&lt;p&gt;他にも角丸を統一したり、色についても&lt;a href=&#34;http://qiita.com/furuyan/items/1144b99e4c01c6a6ae27&#34;&gt;サービス用のパレットを追加&lt;/a&gt;したり、定数化して統一化します。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;design3&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;3-web処理を意識させない&#34;&gt;3.web処理を意識させない&lt;/h3&gt;
-
-&lt;p&gt;アプリ内で同一サービスのwebページを開く際、それがwebビューであるかどうかユーザが認識する必要はありません。&lt;/p&gt;
-
-&lt;p&gt;具体的にカウルでは、「戻る」ボタンをタップした際や、画面左からのスワイプをした際に、一貫して「直前まで見ていたものに戻る」ために以下のような処理をしています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;webViewであれば、1ページ前に戻る&lt;/li&gt;
-&lt;li&gt;webViewでなければ、1つ前のviewに戻る&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;ここに書いてあることはカウルの開発で実施していることの一部です。是非みなさんの意見や、やり方も教えていただけると幸いです！&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;のアプリは&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;こちら&lt;/a&gt;です。基本料無料で使えますので、是非ご利用ください！&lt;br /&gt;
-&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;https://itunes.apple.com/app/id1143903849&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;by まっくす&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -926,150 +159,7 @@ SFSafariViewはカスタマイズできる部分が少なくなりますが、Sa
 &lt;p&gt;エンジニア視点でのスムーズなiOSアプリ開発のためのポイントはこちらにまとめています。&lt;br /&gt;
 &lt;a href=&#34;http://techblog.housmart.co.jp/2016/09/06/ios-tips-for-developer/&#34;&gt;ちょっとの工夫でスムーズになるiOSアプリ開発のコツ9つ(コーディング・デザイン編)&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#service&#34;&gt;サービス・システム設計で考えておきたい5つのこと&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#service2&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#service3&#34;&gt;2.webからアプリへのインストールの導線&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#service1&#34;&gt;3.対応デバイス選定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#service4&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#other1&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#other&#34;&gt;カウルアプリの中の話&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#other2&#34;&gt;今回のリリースに含めなかった対応&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#other3&#34;&gt;開発にかかったコスト&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;div id=&#34;service&#34;/&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;サービス-システム設計で意識しておきたい5つのこと&#34;&gt;サービス・システム設計で意識しておきたい5つのこと&lt;/h2&gt;
-
-&lt;p&gt;web開発と異なる部分として、プッシュ通知などアプリならではの考慮しておくと良いことがあります。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;service2&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;1-ユーザにアプリアップデートを促す仕組み&#34;&gt;1.ユーザにアプリアップデートを促す仕組み&lt;/h3&gt;
-
-&lt;p&gt;APIのバージョンを上げる際、バージョンアップ前のAPIに合わせて実装されていたアプリが動かなくなる可能性があります。&lt;br /&gt;
-旧バージョンのAPIを使うアプリが残っていると、複数バージョンのAPIを運用していく必要がありますが、運用コストやセキュリティ等の理由で旧バージョンのAPIを閉じる必要も出てくるでしょう。&lt;br /&gt;
-ですので、特定バージョンのアプリにアップデートを促す仕組みを導入できていると将来的な運用コストを抑えることができます。&lt;/p&gt;
-
-&lt;p&gt;カウルでは&lt;a href=&#34;https://firebase.google.com/docs/remote-config/&#34;&gt;Firebase Remote Config&lt;/a&gt;を使用して、通知が必要なバージョンのアプリを管理するようにしています。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;service3&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;2-webからアプリへのインストールの導線&#34;&gt;2.webからアプリへのインストールの導線&lt;/h3&gt;
-
-&lt;p&gt;アプリをリリースした後の、webからのアプリをインストールさせるための導線についても考えておきます。&lt;/p&gt;
-
-&lt;p&gt;カウルではランディングページへアクセスした際に&lt;a href=&#34;https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html&#34;&gt;Smart App Banners&lt;/a&gt;を出すようにしつつ、web版への登録ステップも残すことにしました。&lt;br /&gt;
-また、未対応のiOSバージョンの端末にはSmart App Bannersのメタタグを出さないようにしています。&lt;br /&gt;
-ユーザの使用状況に応じて、インストールの導線を追加していくことも検討しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;service1&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;3-対応デバイス選定&#34;&gt;3.対応デバイス選定&lt;/h3&gt;
-
-&lt;p&gt;対応デバイスとOSのバージョンを決めます。&lt;br /&gt;
-カウルでは開発コストを抑えるため以下に絞りました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;iPhoneのみ対応(ローテーションの対応は無し)&lt;/li&gt;
-&lt;li&gt;iOS9以降対応&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;最新のiOS2バージョンをサポートすることが推奨です。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;service4&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;4-appleの審査でリジェクトされることも想定した締切&#34;&gt;4.Appleの審査でリジェクトされることも想定した締切&lt;/h3&gt;
-
-&lt;p&gt;初回の審査ではリジェクトされる可能性が十分にあるので、余裕をもって審査に出します。&lt;/p&gt;
-
-&lt;p&gt;これまで &lt;strong&gt;1週間程度かかっていたレビューが短縮されて、現在は1日程度になっている&lt;/strong&gt; ようです。&lt;/p&gt;
-
-&lt;p&gt;カウルではメッセージのやりとり・指摘箇所の修正時間も見込んで2週間程のバッファを用意しました。&lt;br /&gt;
-実際、カウルアプリの審査においても決済周りの説明や確認のやりとりに時間を使いました。&lt;/p&gt;
-
-&lt;p&gt;&lt;div id=&#34;other1&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;5-クラッシュのトラッキング等に使うプラットフォームの選定&#34;&gt;5.クラッシュのトラッキング等に使うプラットフォームの選定&lt;/h3&gt;
-
-&lt;p&gt;リリース後のクラッシュの検知や、プッシュ通知を送るためのプラットフォームを選びます。&lt;br /&gt;
-特にクラッシュ検知ツールはお金もかからず、実装に時間もかからないので何かしらいれておきましょう。&lt;/p&gt;
-
-&lt;p&gt;カウルの開発では以下のツール群を導入して、クラッシュ検知やプッシュ通知を実装しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://get.fabric.io/&#34;&gt;Fabric&lt;/a&gt;関連のツール&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://fabric.io/kits/ios/answers&#34;&gt;Answers&lt;/a&gt;&lt;br /&gt;
-アプリ起動状態のトラッキングをするツール&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://try.crashlytics.com/beta/&#34;&gt;Beta&lt;/a&gt;&lt;br /&gt;
-開発途中のアプリを関係者に配信してテストするためのツール&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://fabric.io/kits/ios/crashlytics&#34;&gt;Crashlytics&lt;/a&gt;&lt;br /&gt;
-アプリのクラッシュを検知するツール&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://firebase.google.com/&#34;&gt;Firebase&lt;/a&gt;関連のツール&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/analytics/&#34;&gt;Analytics&lt;/a&gt;&lt;br /&gt;
-アプリ起動状態のトラッキングをするツール&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/notifications/&#34;&gt;Notifications&lt;/a&gt;&lt;br /&gt;
-プッシュ通知を送るためのツール&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://firebase.google.com/docs/remote-config/&#34;&gt;Remote Config&lt;/a&gt;&lt;br /&gt;
-設定をリモートから配信するためのツール(A/Bテスト等に使える)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;div id=&#34;other&#34;/&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;カウルアプリの中の話&#34;&gt;カウルアプリの中の話&lt;/h2&gt;
-
-&lt;p&gt;&lt;div id=&#34;other2&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;今回のリリースに含めなかった対応&#34;&gt;今回のリリースに含めなかった対応&lt;/h3&gt;
-
-&lt;p&gt;我々は以下のタスクを次のリリースに見送りましたが、スケジュール次第では可能な限り先に対応しておけると素敵です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;アナリティクスや既存のログ分析基盤との統合(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/04/17/log-platform-for-startup/&#34;&gt;カウルのログ分析基盤について&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;自動テストの拡充&lt;/li&gt;
-&lt;li&gt;CI・自動デプロイの環境拡充&lt;/li&gt;
-&lt;li&gt;ASO(App Store Optimization)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;div id=&#34;other3&#34;/&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;開発にかかったコスト&#34;&gt;開発にかかったコスト&lt;/h3&gt;
-
-&lt;p&gt;JIRAの記録(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/08/24/startup-dev/&#34;&gt;カウルの作業時間記録について&lt;/a&gt;)によると、1.5人月(240時間)ほどの作業時間を使いました。作業内容としては以下の様なタスクを含みます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;アプリ実装&lt;/li&gt;
-&lt;li&gt;API修正(プッシュ通知の組み込みなど)&lt;/li&gt;
-&lt;li&gt;モバイルwebのUI修正&lt;/li&gt;
-&lt;li&gt;ミーティングやアップル審査の調整&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;ここに書いてあることはカウルの開発で実施していることの一部です。是非みなさんの意見や、やり方も教えていただけると幸いです！&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;のアプリは&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;こちら&lt;/a&gt;です。基本料無料で使えますので、是非ご利用ください！&lt;br /&gt;
-&lt;a href=&#34;https://itunes.apple.com/app/id1143903849&#34;&gt;https://itunes.apple.com/app/id1143903849&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;by まっくす&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1092,95 +182,7 @@ Housmartの宮永です。&lt;/p&gt;
 &lt;p&gt;ということで、&lt;span style=&#39;color:red&#39;&gt;実作業を全て記録している&lt;/span&gt;という弊社の特徴を活かして
 今回は&lt;span style=&#39;color:red&#39;&gt;実作業時間&lt;/span&gt;をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;背景-組織の話&#34;&gt;＜背景＞組織の話&lt;/h2&gt;
-
-&lt;p&gt;弊社エンジニアは3人。&lt;br /&gt;
-メインプロダクトは中古マンション売買サービスの&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;で、皆で大事に大事に育てています。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/ZsJUQC8OIl5SdHBfqsVCo5lUzThyq309hg2-JW4QrOJBd0c6nNNo6lQb_vFxZJm3e5sFmlKnwvc6dg6Xq7EeZ0ckukTOlu9ZftuL0jK4nyoNlRY5Qi6VB1aEiiE95o_0MYxdT46aSkofHv3Zyuh24LPfP4ehNdFiQ93rIUAisDslti11qOtecqOKdwyHHraMXERJ-cqKhc7PVyPUDx7KIlS0QemwoKEMU5kC_mns0Y9snp5wIEL56rhQ6z-1XBLOd4wjPnMvsp5A3IsF_4DAmlCuKW0lDyxNX4gTmXVTKBj2gj-oZU3X8Xl_kIhLnDFSXpk69M7q6uc1Xu6F6V7Qj_QLu2F1FuwIv7XQgMxJpIpx55pm0eXRNfyxkQnX2rnmVYeGM_82mKmjPtVuxvjzGbNQV1-lnsRAYUBium_uWQ90JeKPX9IGZk8m9uCeODsWpqyDTNoJliz_wv6P_wBUxu5peyyiQjUhUtMSUwHWZKGhs-FV7MNgARrot0v5Y0SZ2GKFa_vAgB8-N1QAxRqo6igXMRuMK31HQQqm_WwYRnKMVB5Zy935AjZzVipPLZiQd8VZRQdoXF5hRcj9hMwaiEf48wQDYTYdYPh-9NLVZ5fInAkY=w650-h912-no&#39; alt=&#39;カウル&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;エンジニア3人はプロジェクトのプランニングからリリースまで幅広く業務を行います。&lt;br /&gt;
-（これがいわゆる「何でもやる」）&lt;/p&gt;
-
-&lt;h4 id=&#34;主なタスク&#34;&gt;主なタスク&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;プロジェクトプランニング&lt;/li&gt;
-&lt;li&gt;プロジェクト管理&lt;/li&gt;
-&lt;li&gt;設計&lt;/li&gt;
-&lt;li&gt;開発&lt;/li&gt;
-&lt;li&gt;テスト&lt;/li&gt;
-&lt;li&gt;運用（トラブル対応、データ抽出など）&lt;/li&gt;
-&lt;li&gt;KPI管理&lt;/li&gt;
-&lt;li&gt;MTG&lt;/li&gt;
-&lt;li&gt;自由研究&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;これだけ色々なことをやっているので、&lt;br /&gt;
-何にどれだけ使っているのかは&lt;span style=&#39;color:red&#39;&gt;記録でもしないかぎり&lt;/span&gt;把握しきれません。&lt;/p&gt;
-
-&lt;h2 id=&#34;作業の記録&#34;&gt;作業の記録&lt;/h2&gt;
-
-&lt;p&gt;前述のとおり、弊社エンジニアは入社以来、全作業に対して実作業時間を記録しています。&lt;br /&gt;
-例えば「weekly MTGの参加」や「xxのbug fix」もそれぞれチケット化して記録します。&lt;br /&gt;
-※&lt;a href=&#34;https://ja.atlassian.com/software/jira&#34;&gt;JIRA&lt;/a&gt;で全て管理しています。&lt;br /&gt;
-※ご飯、筋トレ、昼寝は記録対象外。&lt;/p&gt;
-
-&lt;h2 id=&#34;エンジニアの作業実績-2016-01-2016-08&#34;&gt;エンジニアの作業実績(2016 / 01 - 2016 / 08)&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/cd4pAvEbM3NfTrcX1DELrhfF9oXpTP2z_Fob_Kovbw_yr4JUTAIfKmAzpcvT9l7GCVTgrYR66rhZxbe22JINTgdKsdkyf6PbJMroX4FN5y-4vJkgJDBTlnailOLBN7_k4Wp09qVW54DSLZ9mCj0HQMIGQAjwKLflaBNbkwmBOR21KSeLo0QLgFedHRosmc7NQzenmDRCmIYAO7-31Igor64cmaX0fsEwXGikzdjVu91jf-21IZrAcw4XjGDIqfeoG99WrsZQVcfjxvyEQzJ2iPPafYI1rc5D7APjwpJpoKaLmvUn4Ce9TGgpaAzxA3FUsuyli2NCXEcbcVYkApgl8SsCGvMr7I2LsNjk4_VYwIWy7apT7X-QmMf5OO0AoPkIdZ_LFBG0zk77jRhH-rCOMCtFg54fMPUA-r_BPMwn2sAP55fE_-M-i5MC3kaTv7-E8K4vA7O3d3-_RN3Kt46xDqCn4uyGM_dd2gSRPC3nElCXaIheA_ZhUQ_a9G1ue38sOWFbMpDR3qrwaRAaSfnBKk1dbFtDL9L9k7amHNHgbaCbEd6K8Klbna9I1M76FRIgop0hoUW9QB4NixszMVCz8QzGfPSa32E=w650-h669-no&#34;&gt;
-&lt;div style=&#34;font-size:12px;margin-top: -25px&#34;&gt;
-  &lt;ul&gt;
-&lt;li&gt;development : 開発、テスト&lt;/li&gt;
-&lt;li&gt;bug : 本番で発生したバグの修正作業&lt;/li&gt;
-&lt;li&gt;operation : 運用（トラブル対応、データ抽出など）&lt;/li&gt;
-&lt;li&gt;dev-improvement : 開発環境改善に関する作業&lt;/li&gt;
-&lt;li&gt;planning : MTG、プランニング、要件定義、設計、外部との調整作業&lt;/li&gt;
-&lt;li&gt;lab : 自由研究 ※毎週水曜日は1日自由研究時間に充てている&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;br&gt;
-上図は入社した2016/01より約8ヶ月間記録してきた全作業実績です。&lt;br /&gt;
-development(開発)やplanning(MTG、企画)にかける時間は少しずつ上昇していることがわかります。&lt;br /&gt;
-これは案件規模が少しずつ大きくなり企画時間が増えたり、システム自体が少しずつ複雑化していることで開発の時間が増えたりしていることが背景にあります。&lt;/p&gt;
-
-&lt;p&gt;operation(運用), bug(本番で発生したバグの修正作業)は毎月全体の10%程度の工数です。&lt;br /&gt;
-スピード感のある開発を行っているので、多少のバグはしょうがない面もありますが、&lt;br /&gt;
-バグの対応が増えてしまえば他の作業にはねてしまうので、スピードを保ったまま1-5%くらいまでに落とせればと思ってます。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/GiCPVq13nhO7yk31s9STFNxBlX19KXlidRnVD2hxBzeb-7AQZMrQa2pzy0cW6oSSm_51e-klLHddSoRNQES8KfvCMNZjPfuqg7SqMlBtSEQen--yKE-4-Al0pMDZJky8yo0VRU2OzZnIYqFNiLWxAC_T2sPnd9m7HxR_ZSVt7KNfaq8cgTHG2hlONZTBgdCH3cgTApXiOUOUAgHzlR_3OQpqDD_c1C4d5Ddf0C9TKTiY7PjQa9gVnYWUyOlFNTLtdwBCW-KlCCmCKjTjKr5IiC6n_CjlF3YavLRaZIkQEVdLUJJd1PRB-dt8S70D2CbHeN1Ev6C1rMpDfze51_UPtpaTqFcPIEEUTNtY-Fh5NVy5jJKyxiu6ogZJicmLJLqZjCbpAHpkoIs4agWihpFe_Z11Awz9jjZAcwY3x7KKsw-xybDwDnmexdyVy1oi6DUGlSBZdc2HJ9_LETi0WC5hknW6J6aWEGrtx4CnVRM5qDRYQTVU0W50THJwZ2QH9VciocJ9D0-xpTLw_9lVUJll3K7U7MA4fvAuv_V13tBhVlvPc3sg8m5UF-kce0OGKbic_qTGgI21W9FOr-v8qndavgk_Dn4upyU=w650-h658-no&#34;&gt;
-&lt;div style=&#34;font-size:12px;margin-top: -25px&#34;&gt;
-  &lt;ul&gt;
-&lt;li&gt;development : 開発、テスト&lt;/li&gt;
-&lt;li&gt;bug : 本番で発生したバグの修正作業&lt;/li&gt;
-&lt;li&gt;operation : 運用（トラブル対応、データ抽出など）&lt;/li&gt;
-&lt;li&gt;dev-improvement : 開発環境改善に関する作業&lt;/li&gt;
-&lt;li&gt;planning : MTG、プランニング、要件定義、設計、外部との調整作業&lt;/li&gt;
-&lt;li&gt;lab : 自由研究 ※毎週水曜日は1日自由研究時間に充てている&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;上図は作業時間の各種作業の割合を示します。&lt;br /&gt;
-ここ数ヶ月はlab(自由研究)やdev-improvement(開発環境改善)の時間を&lt;br /&gt;
-開発にあてているのが現状です。&lt;/p&gt;
-
-&lt;p&gt;lab（環境改善、自由研究）は弊社にとって投資にあたり&lt;br /&gt;
-会社やプロダクトの成長に欠かせない大事な要素です。&lt;br /&gt;
-時期を見てかける時間も増やしていきたいと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;結論-housmartエンジニアの業務とは&#34;&gt;結論（Housmartエンジニアの業務とは？）&lt;/h2&gt;
-
-&lt;p&gt;ということで作業時間から見たHousmartエンジニアの働き方は下図のようになります。&lt;br /&gt;
-&lt;img src=&#39;https://lh3.googleusercontent.com/FzBf0xEm9MHzaCuVlu8d9ALcMcrLnyZ3ktJPI3FFNS48iV1pCH6GcQ691ztwQZ_OyymkgzKxQn3dePYTmWf1ClG2Lnas1CehUdrjPEL9EaShXkDE19qBSw2B90fKXe4NpyBgXeiQreaauPfFoUT-rZArCmw7UPF3kMg0EaIADoO9VbEwBSQdvXHVyHjg9-6mIrZ0FqA1ENysOsY89c3N7XA6vIeOeI3TWW3mku6lDTJzxHvX-ceNvpd7ZA_JHmrSxA4bBDKaMpdY4JQWVs56TQlh62oOewKJ1YlYk2HUV_qJ8HLvSUxx4wVvARyGF7qFthsNrzhykNowNFz4r7kkL-PJdXHabZFnT_T7LkVB4QeBkkx8WJ10TSIEV2b7SIPbzO1UGIGLa4Q7Uhz3YibwX9fhss11ryOo8O3yAREN5baklINwq9ET-zGPhcB6lj30oHej3EMs7jb_w9kZHETz0P_ZFEE3AqhQH413e09vboqJpSuROc2oMaCAJ9IIg0bkLYhSQR3B_FkCOeGan9a0HfnFaVU1qYXAXJSBNZWZ8uKn2onAZ76vCptynJ90C63_YXNkpDZu5LjElaWKTU2C8_AJ5dm6eXo=w592-h310-no&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;このような働き方や&lt;span style=&#39;color:red&#39;&gt;ReTech(不動産テック)&lt;/span&gt;に興味のあるエンジニアの方は
-ぜひご連絡ください！&lt;br /&gt;
-お待ちしております。&lt;/p&gt;
-
-&lt;p&gt;akihisa.miyanaga@housmart.com&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1195,95 +197,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
 &lt;p&gt;そのdevelopブランチ本当に必要でしょうか。&lt;br /&gt;
 developブランチだけ使われていて、masterが全く使われていなかったりしないでしょうか。&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;よく聞かれるブランチ戦略としては&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;git-flow&lt;/a&gt;や&lt;a href=&#34;http://scottchacon.com/2011/08/31/github-flow.html&#34;&gt;GitHub Flow&lt;/a&gt;、、&lt;a href=&#34;http://docs.gitlab.com/ee/workflow/gitlab_flow.html&#34;&gt;GitLab Flow&lt;/a&gt;等があります。&lt;br /&gt;
-git-flowにおいてはdevelopやhotfix、releaseといったブランチがありますが、GitHub Flowにはmasterブランチと機能開発ブランチの2つしかありません。GitLab Flowはmasterを中心に開発を行い、productionブランチを安定させていくスタイルです。&lt;/p&gt;
-
-&lt;p&gt;実際に新しいプロジェクトを始めるとしたら、どの構成が良いのでしょうか。&lt;br /&gt;
-今回はカウルを開発するにあたり採用したブランチの構成とその背景について紹介します。&lt;/p&gt;
-
-&lt;h2 id=&#34;望んでいたこと&#34;&gt;望んでいたこと&lt;/h2&gt;
-
-&lt;p&gt;前提としてカウルのプロジェクトを始めるにあたって望んだことは以下の3つです。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;ロールバックによるバージョン戻しが容易であること&lt;/li&gt;
-&lt;li&gt;問題が起きた場合にバージョン間の問題の切り分けが容易であること&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;時間のかかる機能開発中にもバグ修正コミットを差し込めること&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;1と2については、リリース時にタグをつけておくことで容易に&lt;code&gt;git reset&lt;/code&gt;や&lt;code&gt;git diff&lt;/code&gt;が出来ます。&lt;/p&gt;
-
-&lt;p&gt;3つ目の要件については、developブランチがあるとよいと考えました。&lt;/p&gt;
-
-&lt;h2 id=&#34;実際のブランチ構成&#34;&gt;実際のブランチ構成&lt;/h2&gt;
-
-&lt;p&gt;上記を踏まえると、タグづけとdevelopブランチはあると良さそうです。&lt;br /&gt;
-よってカウルでは以下の構成をとりました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;master&lt;/strong&gt;
-
-&lt;ul&gt;
-&lt;li&gt;テストで確認されたdevelopだけが&lt;code&gt;git merge --no-ff&lt;/code&gt;コマンドでマージされる&lt;/li&gt;
-&lt;li&gt;急ぎのバグ修正(hotfix)は、確認された後developブランチを経由しない&lt;/li&gt;
-&lt;li&gt;リリース時に自動で&amp;rdquo;日付_インデックス&amp;rdquo;tagを付ける(たとえば&amp;rdquo;20160622_01&amp;rdquo;)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;develop&lt;/strong&gt;
-
-&lt;ul&gt;
-&lt;li&gt;masterから派生したブランチ、featureブランチの派生元&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;(feature/)チケット番号&lt;/strong&gt;
-
-&lt;ul&gt;
-&lt;li&gt;developから派生した機能開発全般のブランチ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;(hotifix/)チケット番号&lt;/strong&gt;
-
-&lt;ul&gt;
-&lt;li&gt;masterから派生したバグ修正用のブランチ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;現状、featureやhotixといった修飾は特につけておらず、概念だけメンバー間で共有しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;実際の開発フロー&#34;&gt;実際の開発フロー&lt;/h2&gt;
-
-&lt;p&gt;考えた構成を基に以下のような流れで開発を行っています。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;最新のdevelopからチケット番号でブランチを切る&lt;/li&gt;
-&lt;li&gt;チケット番号ブランチで開発した機能をコミット、プッシュする&lt;/li&gt;
-&lt;li&gt;終わったらdevelopにプルリクエストを送り、レビューの後マージされる&lt;/li&gt;
-&lt;li&gt;ステージング環境に最新のdevelopを出して確認する&lt;/li&gt;
-&lt;li&gt;問題なければdevelopをmasterにマージしタグ付け、 本番に最新のタグをデプロイする&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;カウルの構成でもdevelopは必要なのか&#34;&gt;カウルの構成でもdevelopは必要なのか&lt;/h2&gt;
-
-&lt;p&gt;1ヶ月程度かかるような&lt;a href=&#34;http://techblog.housmart.co.jp/2016/06/15/card-ui-prj/&#34;&gt;大きめプロジェクト&lt;/a&gt;があり、
-他の機能開発も行っているので今のところはあるとよいと考えています。&lt;/p&gt;
-
-&lt;p&gt;また一方で以下の変化を踏まえて、よりgithub-flowに近い構成でも問題ない状況になりつつあると考えています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;コードはすぐにリリースできる状態になっており、日に何度かリリースされることもあり、masterとdevelopの間で違いが少なくなっている&lt;/li&gt;
-&lt;li&gt;開発初期に比べてコードのベースはできていて、小中規模機能や他の箇所への影響が少ない開発が多くなっている&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;いつdevelopブランチは必要なの&#34;&gt;いつdevelopブランチは必要なの？&lt;/h2&gt;
-
-&lt;p&gt;数日~1週間でブランチがマージされていく状況であればdevelopはなくても問題ないでしょう。シンプルな構成の方がGitの操作も少なくて済みます。&lt;br /&gt;
-数週間を越えてブランチがマージされないような状況を開発をしているときはdevelopやreleaseがあると安定したプロダクトを出荷できると考えます。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;今回はカウルのGitブランチ管理について紹介致しました。&lt;br /&gt;
-ユーザに素早く安定した価値を届けらる、開発者にも優しい運用にするべく今後も取り組んでいきます！&lt;/p&gt;
-
-&lt;p&gt;by まっくす&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1295,111 +209,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
       <description>&lt;p&gt;こんにちは！Housmartの宮永です。&lt;/p&gt;
 
 &lt;p&gt;過去に弊社のスクラム開発について概要をご紹介(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/14/dev_cycle/&#34;&gt;スタートアップのCTOになって2ヶ月で作った開発サイクル&lt;/a&gt;)させていただきました。
-今回はより実践的な話を説明します。&lt;/p&gt;
-
-&lt;p&gt;
-以前紹介しました通り、カウル開発チームは1週間／スプリントと短めに取ってますが、&lt;br /&gt;
-1週間じゃ収まらないようなサイズのプロジェクトの時はどう管理するの？って話になりますよね。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/teOBN1hx88WnjkLmj5IAQQdUWSp8w-A_8pyaqW3TG0_1yCLJoQuIX3BqfeXAMAJA-m9fIQJHZ4SRT1DH-K64Zglma9TvzHSxjda0dKX9RNpn6HtvY8PnccXVzZkt7UZqgYkFyy4UYj0WD-vyMZ08WC68JPUf-HlKXM8lvSHzk_6BAjwPDmlwX5kuDBBwT82uq3fTfEZCZY6gIEmT9RCsphAcVHNJCfbVYE3xXENZN0svE5FhouUc97KK5dkNMUAGOJdCjhnK92ROUoKg3ijB8J-hDB6KgsIV9iWz5nWgZNL6PEeXORn3mFp2uR8vKoKM3pr0BsbrW5IG2QJHzdWwx_ZAddKt4DsDGsseRgh6T32hydccuX8wp4AS2fsHM9sTllEqCXIL50UBJVM5X6wMAIWgV3P6ra9JtuNqvXquO_kvaBtDdTJOUaQNOqMnB1HWwGo5LwTxF2p_p00azVBWFF8qkvWpAS6XACj8WaI8H0PBq2Ii9UfL607CRCf-Ai7kztOpwrdwb4eRQK-7RdKKCigMH6XEwkjfu57VHyBiKekNguxe5faEswIvTo2cL4HB375F0pBBXs9na-Ji70AEwfiGI9V-l2w=w650&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;アジャイルの考え方では、要件を細分化することで1スプリント内に収め、
-あくまでスプリント終了時には新機能をお客様に提供しないといけません。&lt;br /&gt;
-しかし、モノによってはそうもいかないケースも有ります（と思ってます）。
-（特に弊社は1週間スプリントですのでザラにあります）&lt;/p&gt;
-
-&lt;p&gt;そういった複数スプリントを要する規模のプロジェクトに対してスクラムをどう適用させるか弊社の事例とともに紹介します。&lt;/p&gt;
-
-&lt;h2 id=&#34;プロジェクト背景&#34;&gt;プロジェクト背景&lt;/h2&gt;
-
-&lt;p&gt;まずはプロジェクト背景について。&lt;br /&gt;
-プロジェクト開始時期は2016/04下旬で、&lt;br /&gt;
-この時弊社サービス（&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;）が抱えていた課題は下記の通りです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;リテンションが悪い（既存顧客が離脱しがち）&lt;/li&gt;
-&lt;li&gt;特にスマホデバイスでの&lt;a href=&#34;https://kawlu.com&#34;&gt;カウル&lt;/a&gt;利用者の離脱が目立つ&lt;/li&gt;
-&lt;li&gt;希望条件を入力して提案された物件を見るというサービスを楽しむフローに乗れないユーザが存在（自身の希望条件が何かもわからない）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;この課題に対してカウル開発チームは下記解決方針でプロジェクトを進めていきました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;スマホファーストなUIに変更する(スマホベースで要件を決める)&lt;/li&gt;
-&lt;li&gt;不動産購入に関する学習コンテンツの配置&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;スマホファーストについては何を今更感があるかもしれませんが、&lt;br /&gt;
-スマホファーストにシフトするかについてはモバイル利用率を考慮して判断したい方針でもあったので、
-十分にスマホでのサイト利用を実感した今回のタイミングで踏み切りました。&lt;/p&gt;
-
-&lt;p&gt;要は&lt;strong&gt;「スマホユーザを中心にリテンションを改善しましょう」&lt;/strong&gt;というプロジェクトでした。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/b5osB9bYumjeJH7ryNbZWxG1a8Ig34ZYgYo4VEVQhkh4Uv0EWDgxRyeqXhHmMnI8591_Ndk6BpHUeU-PZQHHsDTpauVeKJLyrv7efneYdfq0v5sERMtsSoKYIgXXDXaNyaL2S0LmdYB5TqEd9c3Fj7GMyW0T_m5yBPZDcGHuYYWeA66VZDi39jn-SXmTmhkfQVonUOVNhksxadRPZISBBOZ3RATsrtGbiRK6KDku7p8zhhJ0UG7rpwNXUYXP4iNCSO-YiNI9Etg4MH2Wj3mN88gMaS0S-3zS4I_tjr5C4cvq8S5Iv8zfc0grNECIAJJePTQX4YmIhxWCyQW0q_OAg0YTlaNKEgPypSE6u3jPqkGX4PFqnZf4GoOisRcv-Unbwp3SEvzAAyzw9u736HV5EC5lgUcasc8Vi7uzDAVFYdm-SGvS9TPJkgq_JJ2ftTmba0Juup7aF2hl84ntOC-pfWga5C-i_uW0H4UyTzUKn19Gjd5Kj-K-BIGiH9jgmT-uf-wEqXguJoxkacO4NHRd7laXdjeyCj6dItl_tXhYAWL9zQg-GNw4uE3UkTEYKKwiZk3tnHLo1s1ozPJjmFb5TFw8_2Ao6-w=w650&#39; alt=&#39;スマホユーザの継続利用がテーマでした。&#39;/&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;プロジェクト-要件概要&#34;&gt;プロジェクト・要件概要&lt;/h2&gt;
-
-&lt;h3 id=&#34;要件概要&#34;&gt;要件概要&lt;/h3&gt;
-
-&lt;p&gt;要件（概要）は下記の通りです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;提案に対するリアクション（気になるか興味なし）を慣習化させるため、表示する提案物件を1枚に限定し、リアクションを取ると次の提案が表示されるUIに改修。&lt;/li&gt;
-&lt;li&gt;リアクションについてはトランプカードを操作するような触ってて楽しい操作感に変更。&lt;/li&gt;
-&lt;li&gt;そもそも購入知識がないユーザに対しては不動産購入に関する記事を提供。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/TlCkqLDvGxIndTzx8maika1m6wwU0NuMakePoNaoTqZFUXlpWCQ8OigOslyIoZeZjAKvFE1K8Q-sjodxIHxnIQqxOH-UVN2BBtH4MZBLNkngVVHcyYzilvULauukUL94yHvFdXCUbLxrj4J7nrgOEJ4SLLfLboFWfVz_UgAF2erRBnJod8AUAIngdr7cBtSvkTJI3LdoxzhrbeIkMa6qcjUkUQKOQENF8ymxCoa3iOtpqD92RIgxDxThuUsuuwWgJdaeDftN3wFqxjb8baIRXYwwcj6K0U9uTH21xdkgkuz_tsT4sP6CEgqc5UcpIMPDz0uiUuT7jEKOA_vmRNR44cwXiYG2OJu4FplOUQxLr-qECZy7y8VtBZikMquJsIi1ZoMZmqmIx0AYH1Zmp6osZlJKkFruB39m0cG1cXlWXFflICcV0bQHtJ_Xl7gIAXMzCLv35OLUdrA2p2Uf2kKUTrZ2pB0p1YphOnO4IwXfBqoMzqDtQchKlerTGvR_iHRrFqo-TkL1u18qVavJJz3CJEG8oXHO1ZY1oUz5GZtK0vPzf4_qXCdOi0Ndq8vM_YXsXWXSg1ZEcFbWfiJjJ_9Fikz2UezS0Yo=w300&#39; alt=&#39;気になる時は右にスワイプ、興味なしの時は左にスワイプ&#39; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ちなみに技術的なチャレンジとしては今回、リアクションのたびに状態を更新する仕様のため、&lt;a href=&#34;https://facebook.github.io/react/&#34;&gt;React&lt;/a&gt;を本格的に導入しました。
-また提案カードを右に左にさばくUIに関しては&lt;a href=&#34;https://github.com/gajus/swing&#34;&gt;swing.js&lt;/a&gt;を導入しました。&lt;/p&gt;
-
-&lt;h3 id=&#34;スクラムによる管理-スプリントの適用&#34;&gt;スクラムによる管理（スプリントの適用）&lt;/h3&gt;
-
-&lt;p&gt;ここからが本題です。結論から申し上げますと、本プロジェクトは4スプリント消費する結果となりました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/bOhDmdJ8YH43fX5RnWZHdDCWMfBXLd59SC1DsoQPZ9gCmWK0j_lge9872lCZDen7sm7H7hqF6Ye6r4DL8cN-Rv636B3G_8tiB2_mFdyXbx5f52xAgu3pudMIIW1oO9sRmfcmm6CHNlNPwTwjqBrNTURLgz5JWgOIOGim0tfhG8Ar0y9HQo3bdXuOhdmdt4EcRMj2592cuaUDWWGh9ZEykdd8Mz5Ezx1l2JYpxlpXRZVvd_FCtVYsxb-5IJ2RdihyBgPKG3FE0emHiBmBEJXcj6trjPUYWC8YOH_8fgEMeFEIREsn8zcSsbRlL7YAfJjorwUVtmj4GRKCK_7Mubm-0qgTDP0m5Z0yjK3RFRfp4YGlOTx4nCyK7OHTHTghiwk6mQjwWe0aoOdCZZ4m-cc9rYlFH2V0IuzXwkgxDcJHoWeWSZGq2hOjHdISNbZy3LLgDGV-k5emE4x5AenF0D25xFLe-3T4EmxJ2KtaJe2YPrVkdUog3_XDyaTOpIOnVmHF0RYmfpLXYZ8obZ7gt-dnmZEHSj9lrq9hrN85z5M6EpEKHDBxhdUWNPX_3R7rauEV8nd2DWic023p2TjkF3-HlAb5fVHKaN8=w650&#39; alt=&#39;※GWのため途中空きがあります。&#39;/&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;第1スプリント&#34;&gt;第1スプリント&lt;/h4&gt;
-
-&lt;p&gt;技術的検証、UI検証、ユーザヒアリングなどを行いながら&lt;br /&gt;
-そもそもニーズあるの？やるとしてできるの？UIとして要件を満たせそう？など&lt;br /&gt;
-手戻りが許されないissueから潰していくようなスプリントにしました。&lt;/p&gt;
-
-&lt;h4 id=&#34;第2スプリント&#34;&gt;第2スプリント&lt;/h4&gt;
-
-&lt;p&gt;2スプリント目では（より詳細な）要件定義、デザイナー調整（外部）、設計に充てました。&lt;br /&gt;
-スプリント全て消化するほどのタスク量はないため、スプリントの後半は別案件の開発をしていました。&lt;/p&gt;
-
-&lt;h4 id=&#34;第3-4スプリント&#34;&gt;第3, 4スプリント&lt;/h4&gt;
-
-&lt;p&gt;本スプリントでは前半で外部デザイナーさんに2日程度来社してもらい、がっつりデザイン。&lt;br /&gt;
-その後、開発、テスト、そしてリリースという流れでした。
-当初は第3スプリント内でリリースを目指していましたが、開発ボリュームが想定以上に膨らんでしまったため、&lt;br /&gt;
-第3スプリント内でのリリースは間に合わず次のスプリントでのリリースとなりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;プロジェクト-スクラムの振り返り&#34;&gt;プロジェクト、スクラムの振り返り&lt;/h2&gt;
-
-&lt;h3 id=&#34;良かった点&#34;&gt;良かった点&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;プロトタイプのスプリントを設けたことで技術、UI検証に十分な時間を割くことが出来た。&lt;/li&gt;
-&lt;li&gt;幸運にも優秀なデザイナーさんご協力頂けて、早期リリースが実現できた。（※完全にデザインありきだったので、&lt;a href=&#34;https://dribbble.com/noga419&#34;&gt;野上さん&lt;/a&gt;に今回ご協力いただけたことに本当に感謝しております！）&lt;/li&gt;
-&lt;li&gt;当初の目的であるリテンションについては如実に改善の傾向が見られる&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/Ww8hew5x3tqBeN4PV-fixXAssyYbWh48t9Y7NiUpszShShPTcLJt0YxtEYtOJLezr4mmlT0LLy8ZleCBf8V4rDliZbVfNEuIOglZnpTAohnYgcMNWqzMjYdOWWiNuotnBRB1b0aV_R1u5-P61wTEvsrOS7aQxx0q4cmWqOPURzKXKwR4wvxD115O9SwSes1RgG2VJUOGJWrdwPrXdza34-3kD945v7prVcZTjZIJToCYx9ES8P4GBlrsm9lzUAj5pYpWa-ix1TBHtbV8cEznvFA5b62WpCbUOuOVJj-KUQFy8j_n1iC484nw4vcDh-xwhV2bVj47xZM1Fc2uhntfhV1Uq1adzd4zjI7LPjGHBgi7u1YfjX51MT489fqkFUTeSN3FctPvDoSZrlX4IKN0REGtQ7qlOUll9qDy_n9Q6vB7e5OTjzg7PcFQhP-ge0axsXo-gqazP3kZ-VmteG1GVVDe_Y63YhI2N80F1j4oE5OuQBwodbMfs6LWtxbWd9PfnLzJdhVY5s5TnxBxGId_98GrFjUDJS3L62XvSzo4iYON2yZnfXkgFRmvba6yU2-XDKQ-iB4XLz4iREFuDpB2sSWGujTY8Ws=w650&#39; alt=&#39;改善したリテンションに関する指数&#39;&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;改善点&#34;&gt;改善点&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;結果として良かったものの事前のユーザヒアリングが不足していた。（ユーザが求めていないモノを作ってしまわないかというリスクへの対処）&lt;/li&gt;
-&lt;li&gt;デザイナー調整の開始が遅すぎて普通だったらありえないようなギリギリのスケジュールで進めてしまった。(&lt;a href=&#34;https://dribbble.com/noga419&#34;&gt;野上さん&lt;/a&gt;がスーパーデザイナーで助かった。。。)
-&lt;strong&gt;ああ、専属デザイナー欲しいよ！（絶賛募集中です）&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ということで今回は大規模プロジェクトとスクラム開発の適用をテーマに紹介させていただきました。
-ありがとうございました！&lt;/p&gt;</description>
+今回はより実践的な話を説明します。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1415,163 +225,7 @@ git-flowにおいてはdevelopやhotfix、releaseといったブランチがあ�
 &lt;p&gt;5/17に品川の Microsoft のオフィスでシリコンバレーのデザイン会社である btrax 主催のイベント &lt;strong&gt;「Design for Innovation 2016」&lt;/strong&gt; が開催されました。&lt;br /&gt;
 今回このイベントに参加してきたので、簡単な参加レポートと雑感をまとめます。&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;design-design&#34;&gt;「DESIGN ≠ Design」&lt;/h2&gt;
-
-&lt;p&gt;btrax の Brandon CEO のオープニングでの言葉です。&lt;/p&gt;
-
-&lt;p&gt;日本でデザインというと、見た目を美しくする仕事、きれいなチラシを作ったりWebページのHTMLやCSSを作ってくれるいわゆる「デザイナーさん」のことをイメージしがちです。それは狭義の意味での小文字の&amp;rdquo;Design&amp;rdquo;。&lt;br /&gt;
-一方で、 &lt;strong&gt;世の中の様々な事柄をデザイン的な感性とアプローチで改善していこう&lt;/strong&gt; というのがより広義な意味での &lt;strong&gt;大文字の&amp;rdquo;DESIGN&amp;rdquo;&lt;/strong&gt; 。&lt;/p&gt;
-
-&lt;p&gt;この２つの意味は明確に違います。&lt;br /&gt;
-そして、この大文字のDESIGNの重要度がシリコンバレーでも急速に高まってきているそうです。&lt;/p&gt;
-
-&lt;p&gt;この背景を受けて、アメリカ西海岸でのケーススタディと体験型ワークショップを通してデザインの重要性を体感しようというのが今回のイベントの趣旨でした。&lt;/p&gt;
-
-&lt;h3 id=&#34;イベントの流れ&#34;&gt;イベントの流れ&lt;/h3&gt;
-
-&lt;p&gt;午前中は最近のデザインの盛り上がりの中でもキーワードとしてよく取り上げられている &lt;strong&gt;&amp;ldquo;Design Thinking&amp;rdquo;を体験するワークショップ&lt;/strong&gt; があり、&lt;br /&gt;
-午後は &lt;strong&gt;シリコンバレーのスタートアップやデザインを積極的に取り入れている日本企業を招いてのトークセッション&lt;/strong&gt; という二部構成でした。&lt;/p&gt;
-
-&lt;p&gt;午前中のワークショップは50名程度、午後のトークセッションは200名程度が参加し立ち見が出るほどの大盛況でした。(午前午後ともにキャンセル待ちの方もたくさん居たようです)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/LtKoIc5RyMHF2G7NBzf4UebbXTQ-Gcgms6bqXHNdevajqpjhwY5QfS_L4N1g12oo7g6n8eGBghnAncmbg-BC4Jk2KybJU1egg9swx_iKnL2t6ZMZvYatlYFFC0cReochRbz8ySxxn1AgdeMUqk1zKrb1Xs027Vsa7K6qF2uh0-Il4hLzqO8qKJZT5YxU41k3zZFk4ZoECzrGz_722fURgbGFKe6tMG3cCTCFfq9_NcdgyQArfKF_UYaaz4BwE9zwODZaxtTPlGdqowVzPsAiBxUc5-57xkoJyhF-iSLMWV54sr9B79V3KWW0AXbPxhoyXOBbtelVPskfPcUia6uq7HvRbMnEgbpUUSk68Ow9zL9Lpy91x7hGnqUISmhx7Br2wXVs7DV7SfszhuHQMqzBJUzaT_wR7SKBufPX8E3EzuOTi2t4N4hy-GwUs1lpn6ypLRtgqL8iNytX6ckxO9Eh9L5EBtTMH8ZEjSQBHbT6Y2TFMtyT5ozel_doqVItDfJ42huGtBzWGw9wUat7Yf9Tjt7jsf5t6G-KYmpEXjqmaaq3B0xve8zgWOGqPFlBXibLNCZxIvqnNwtgY6rocTkLgdjBcwDbAUs=w1068-h801-no&#34; title=&#34;design_for_innovation_room&#34; width=&#34;60%&#34;&#34;&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;design-thinking-とは&#34;&gt;Design Thinking とは？&lt;/h2&gt;
-
-&lt;p&gt;「Design Thinking（デザイン思考）」とは、 &lt;strong&gt;デザイナーがデザインする時に用いるアプローチ&lt;/strong&gt; のことです。&lt;br /&gt;
-ヒアリングや調査などを通して課題の本質を見極め、その課題を元にアイデアをたくさん出し（発散させ）、その中から良いアイデアを選びつつ、それらを磨いていくというプロセスをたどります。&lt;/p&gt;
-
-&lt;p&gt;このプロセスの中心にユーザを置き、課題を定義したりアイデアをブラッシュアップする段階でユーザインタビューなどを通してフィードバックを行うことを &lt;strong&gt;HCD（ヒューマン・センタード・デザイン）&lt;/strong&gt; などと呼ぶようです。&lt;/p&gt;
-
-&lt;p&gt;この一般的にデザイナーが行っているプロセスを、ビジネスやサービスの立ち上げ・改善に応用していくことでよりよいモノを作れるのではないか、というのが近年デザイン思考が取り上げられている背景です。&lt;/p&gt;
-
-&lt;p&gt;ただ、このあたりの言葉の定義はまだ曖昧なので、より正確な情報を求める人は以下のブログや書籍などを参照されると良いかと思います。&lt;/p&gt;
-
-&lt;p&gt;(ブログ) &lt;a href=&#34;http://blog.btrax.com/jp/2013/06/02/d-thinking/&#34;&gt;btrax - 【やっぱりよくわからない】デザイン思考ってなに？&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;(書籍) 誰のためのデザイン？&lt;br /&gt;
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=housmart-22&amp;o=9&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=478850362X&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;1000-songs-in-your-pocket&#34;&gt;1000 SONGS IN YOUR POCKET&lt;/h3&gt;
-
-&lt;p&gt;新しいサービスやプロダクトは、「事柄・物事」を「何か新しい方法」で提供することで「価値」を生み出しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;WHAT + HOW = VALUE&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;たとえばmp3プレーヤーの例でいうと、&lt;br /&gt;
-よりエンジニア的な視点から価値の定義で言うと、「小型化」「大容量化」の様なワードが並ぶことが多いかと思います。&lt;/p&gt;
-
-&lt;p&gt;そこでデザイン思考的なアプローチでmp3プレーヤーが提供する価値を再定義してみます。&lt;br /&gt;
-ユーザが本当に求めていることはなんだろう、本当に提供しなければいけない価値はなんだろうという視点で価値を定義し直すと「もっと自由に音楽を楽しめること」という、より抽象的な言葉に置き換えることができます。&lt;/p&gt;
-
-&lt;p&gt;その定義の上でHOWを考えなおす、そんなアプローチでかの有名なiPodは生まれました。&lt;br /&gt;
-mp3の機能的な向上だけを追い求めるのではなく、iTunesという音楽を自由にとり込んだり管理することができるプラットフォームとともに提供する、というHOWにたどり着きました。&lt;/p&gt;
-
-&lt;p&gt;その結果、iPodの価値を表すためのコピーは &amp;ldquo;STORAGE FOR 1GB OF MP3s&amp;rdquo; ではなく&lt;br /&gt;
-&lt;strong&gt;&amp;ldquo;1000 SONGS IN YOUR POCKET&amp;rdquo;&lt;/strong&gt;&lt;br /&gt;
-となります。&lt;/p&gt;
-
-&lt;p&gt;どちらの方がユーザにとって良い価値を提供してくれそうでしょうか？&lt;/p&gt;
-
-&lt;h3 id=&#34;design-thinking-ワークショップ&#34;&gt;Design Thinking ワークショップ&lt;/h3&gt;
-
-&lt;p&gt;午前中のセッションではこの &amp;ldquo;Design Thinking&amp;rdquo; をコーチのもとで実際に体験することができました。
-今回のお題は「プレゼントをあげる体験をリデザインする」。隣の方とペアになって Design Thinking の実際のプロセスを体験しました。&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;Design Thinking&amp;rdquo; という言葉自体は以前から知ってはいたのですが、実際にやってみることでかなり具体的なイメージを手に入れることができました。&lt;/p&gt;
-
-&lt;p&gt;実際の業務でも、たとえば &lt;strong&gt;Webサイトの新機能の企画や設計に大いに使えるフレームワーク&lt;/strong&gt; だと感じました。&lt;/p&gt;
-
-&lt;p&gt;かの有名なデザイン会社 IDEO の Tim Brown も &lt;strong&gt;「デザイン思考は実践が大事だ」&lt;/strong&gt; と言っているように、やってみることで威力を体感できるのではないかと思います。（btraxさんは定常的にデザイン思考を体験できるセミナーをサンフランシスコのオフィスで開催しているそうです。）&lt;/p&gt;
-
-&lt;h2 id=&#34;トークセッション&#34;&gt;トークセッション&lt;/h2&gt;
-
-&lt;p&gt;午後のトークセッションでは、国内外から13名のスピーカーが招待され、全部で6セッション計5時間という濃密なものでした。&lt;/p&gt;
-
-&lt;p&gt;各参加者ともそれぞれの立場から「何の目的で」「どうやって」デザイン（もしくはデザイナー）をプロダクトの開発・改善プロセスに組み込んでいるかをお話されていました。&lt;/p&gt;
-
-&lt;p&gt;中でも気になったトピックについていくつかまとめていきます。&lt;/p&gt;
-
-&lt;h3 id=&#34;airbnb-のリブランディング&#34;&gt;Airbnb のリブランディング&lt;/h3&gt;
-
-&lt;p&gt;Startups and Designのセッションで、Design Studio のプリンシパルである　John Creson 氏が Airbnb のリブランディングを行った事例を紹介していました。&lt;/p&gt;
-
-&lt;p&gt;最近では &amp;ldquo;良いサービス&amp;rdquo; の代表格としてあげられる Airbnb。いつも見慣れたロゴが生まれた背景を聞けてとても勉強になりました。&lt;/p&gt;
-
-&lt;p&gt;リブランディングの過程で、デザインチームが Airbnb を実際に利用して世界各国でホストに会う経験を通してリブランディング作業にあたったことや、Humanize というコンセプトを大事にしていたことなどを語ってくれていました。&lt;/p&gt;
-
-&lt;p&gt;中でも、リブランディングにあたって作成したムービーを一般公開前に Airbnb の社員に見てもらうことで、 &lt;strong&gt;組織の中に対するブランディングにも貢献した&lt;/strong&gt; 、という話が印象的でした。&lt;br /&gt;
-急速に成長して人員も増えていくスタートアップにとって、シンボル的な役割を果たすロゴ、またそのロゴが生まれた背景をこのような方法で浸透させていくことは、会社独自の文化を醸成していくうえで非常に効果的な方法だと思いました。&lt;br /&gt;
-良い文化が良いブランドをつくる (Good culture creates good brand) と、会社の文化の重要性についても触れていました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=nMITXMrrVQU&#34;&gt;&lt;img src=&#34;http://img.youtube.com/vi/nMITXMrrVQU/0.jpg&#34; alt=&#34;Airbnb introduces the Bélo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;※Airbnbのリブランディングについて&lt;a href=&#34;http://nature-dot.com/journal/design/174&#34;&gt;こちら&lt;/a&gt;の記事が参考になったのでご興味ある方はどうぞ&lt;/p&gt;
-
-&lt;h3 id=&#34;大手金融機関のデザイン会社買収&#34;&gt;大手金融機関のデザイン会社買収&lt;/h3&gt;
-
-&lt;p&gt;同じセッションでアメリカの大手金融会社の Capital One からもデザインマネージャの方が参加されていました。&lt;/p&gt;
-
-&lt;p&gt;Capital One は大手金融会社であるにも関わらず、2014年に Adaptive Path という超名門のデザイン会社を買収したことで知られています。日本ではなかなか想像できないですよね。&lt;/p&gt;
-
-&lt;p&gt;これが象徴するのは、もはやUXの良さがビジネスの良し悪しに直結することは欧米では当然のこととして受け入れられているということだと思います。&lt;br /&gt;
-経営においてのデザインの価値が認知されると、次は優秀なデザイナーをいかにして確保するかという話になるのは自然な流れです。&lt;/p&gt;
-
-&lt;p&gt;そんな中でも超一流のデザイン会社を会社ごと買収するという、金額的にも大きな決断をしたことで、どれほどデザインを重要視しているかが伝わってくる象徴的な出来事だと思いました。&lt;/p&gt;
-
-&lt;h3 id=&#34;the-future-of-agency-services&#34;&gt;The Future of Agency Services&lt;/h3&gt;
-
-&lt;p&gt;もう一つ印象に残ったのは、経営の中でデザインの重要性が上がってくる中で、コンサル会社・広告代理店・デザイン会社の事業領域がぶつかってきているというトピックです。&lt;br /&gt;
-btrax の Brandon CEO、dentsuの森氏、デザイン会社INFOBAHNの井登氏が登壇されていました。&lt;/p&gt;
-
-&lt;p&gt;このトピックでも象徴的な出来事が今年2016年にありました。博報堂DYホールディングスによるシリコンバレーのデザイン会社 IDEO の買収です。&lt;br /&gt;
-IDEO はデザイン会社の中でもリーディングカンパニーと言われる会社です。広告系の会社がデザイン会社最大手を買収するというインパクトはとてつもないものだったようです。&lt;/p&gt;
-
-&lt;p&gt;btrax の Brandon CEO もこのセッションの中で「ここ2-3年で日本の企業からのリクエストの質も量も格段に上がってきた。課題の理解からアイデア出し、アイデアの実行をして改善のサイクルを回していくような包括的なリクエストが増えてきた」と言っていました。&lt;br /&gt;
-このように事業戦略の中でデザイン会社の存在感が増していくことで、現場でもお互いに相手を意識するタイミングが増えてきたと語っていました。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめと雑感&#34;&gt;まとめと雑感&lt;/h2&gt;
-
-&lt;p&gt;ビジネスを創っていくプロセス、とりわけアイデアを形にするSeedのフェーズにDESIGNを取り込んでいく必要があることはもはや動かしがたい事実であると、今回のイベントを通して強く再認識しました。&lt;/p&gt;
-
-&lt;p&gt;私達がDESIGNをビジネスに取り込んでいくためには大きく2つのアプローチがあるかと思います。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;非デザイナーがデザイン思考を身につける&lt;/li&gt;
-&lt;li&gt;デザイナーをビジネスプロセスの中に巻き込んでいく&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;そして、これらはどちらか一方というわけではなく、組織の状況に応じて両方のアプローチから達成する必要があると今回の様々な事例を聞いて感じました。&lt;/p&gt;
-
-&lt;h3 id=&#34;アジャイルがエンジニアにもたらした意味&#34;&gt;アジャイルがエンジニアにもたらした意味&lt;/h3&gt;
-
-&lt;p&gt;突然話が飛ぶのですが、この&amp;rdquo;DESIGN&amp;rdquo;の流れはアジャイルがエンジニアにもたらした意味と似ている気がしています。&lt;br /&gt;
-&lt;strong&gt;エンジニアとビジネス上の意思決定を近づけたこと&lt;/strong&gt; がアジャイルの貢献のうちの一つだと思います。&lt;/p&gt;
-
-&lt;p&gt;弊社ではエンジニアもビジネス上の意思決定にしっかり入り込んでアジャイルを回しています。(そして、今のところとてもうまく行っています)&lt;br /&gt;
-弊社以外でも、ことスタートアップ界隈ではエンジニア上がりのプロダクトマネージャーがKPIを元にビジネス上の意思決定をしている例をたくさん耳にするようになってきました。&lt;br /&gt;
-このシナジーがどれほど素晴らしいものかは私が今ここで言う必要もないほど語り尽くされていると思います。みなさんも耳にしたことがあるはずです。&lt;/p&gt;
-
-&lt;p&gt;一方で、ことデザイナーという仕事に関してはまだまだ「デザイナーさん」として扱っている組織のほうが多いのが現状ではないでしょうか？&lt;/p&gt;
-
-&lt;h3 id=&#34;デザイナーをチームに加える&#34;&gt;デザイナーをチームに加える&lt;/h3&gt;
-
-&lt;p&gt;自分のチームにデザイナーを加えるメリットは、ぱっと思いつくだけでもいくつもあります。プロトタイピングツールを用いたより早いユーザヒアリングのサイクル、コンテクストに沿ったデザイン、意思決定へのユーザ目線、広告クリエイティブの改善、などなど。&lt;/p&gt;
-
-&lt;p&gt;エンジニアが意思決定に参加するようになった結果、より良いプロダクトが生み出せるようになりました。&lt;br /&gt;
-デザイナーがチームに加わることでより良いシナジーが生まれることは明白です。&lt;br /&gt;
-エンジニアがビジネスチームと一緒にプロダクトを作る過程に、初期からデザイナーに参加してもらいましょう。&lt;br /&gt;
-それぞれの分野の専門家が集まり小さなチームとなり、コンテクストを共有し、頭で考え課題を解決していく。そんな世界が待っています。&lt;/p&gt;
-
-&lt;p&gt;&lt;br&gt;
-&lt;a href=&#34;http://www.turnyourideasintoreality.com/2016/02/kauru/&#34;&gt;REALITY - 不動産売買市場をディスラプトするHousmart、不動産を買いたい人が本当にハッピーになるサービス 「カウル」をローンチ。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;【カウル】仲介手数料無料の中古マンション売買サービス&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;※Housmartは &lt;strong&gt;デザインの知識を武器に、ビジネス・エンジニアと共に不動産業界の課題を解決してくれるデザイナーを募集しています。&lt;/strong&gt;&lt;br /&gt;
-ご興味ある方は tomoaki.takamatsu@housmart.com までご連絡ください。お話しましょう！&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1593,181 +247,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 &lt;li&gt;振り返ってみて&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;1-申込と書類審査-開催1ヶ月前&#34;&gt;1. 申込と書類審査(開催1ヶ月前)&lt;/h2&gt;
-
-&lt;p&gt;まずスタートアップとしてSlush Asiaにイベント登録すると、以下の情報を登録するフォームを渡されます。
-&lt;strong&gt;入力は全て英語ですので「参加費を払えば登録完了かな？」と思っていると締切直前で焦るので早めに入力しましょう！&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;会社・プロダクト概要&lt;/li&gt;
-&lt;li&gt;収益&lt;/li&gt;
-&lt;li&gt;投資状況&lt;/li&gt;
-&lt;li&gt;市場&lt;/li&gt;
-&lt;li&gt;競合&lt;/li&gt;
-&lt;li&gt;直近12/18ヶ月の成長&lt;/li&gt;
-&lt;li&gt;etc&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;発表に申し込んでいる場合は上記の情報で発表者の選定があり、選ばれると担当者からメールにて連絡があります。&lt;/p&gt;
-
-&lt;h2 id=&#34;2-pitching-perfect-開催1-2-3週間前&#34;&gt;2. Pitching Perfect(開催1,2,3週間前)&lt;/h2&gt;
-
-&lt;p&gt;選定後は発表練習の場である「Pitching Perfect」に関する案内が届き、土日で構成された計5セッション(3日間)のうち好きな日程を選び参加することができます。
-英語での発表が初めての場合は2回の参加が推奨されていたため、私達も2回分を申し込みました。&lt;/p&gt;
-
-&lt;p&gt;参加した練習はAccentureさんとPwCさんのオフィスで行われました。
-普段入ることのない素敵な高層ビルのオフィスでテンションも上がります！&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;本番想定で3分発表する&lt;/li&gt;
-&lt;li&gt;フィードバックを貰う&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;練習の内容はシンプルで上記の流れを2回、各社が行います。
-発表に対して &lt;strong&gt;投資家、外資コンサルタント、教授、Google社員といったネイティブ・経験豊富な方々からフィードバックをもらえます&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;今思い返すと、Pitching Perfectは最も落ち着いて他のスタートアップの方々やスタッフと話をできたタイミングでもあります。&lt;/p&gt;
-
-&lt;h2 id=&#34;3-前日リハーサルとmedia-day-開催1日前&#34;&gt;3. 前日リハーサルとMedia Day(開催1日前)&lt;/h2&gt;
-
-&lt;p&gt;イベント前日には、幕張メッセで設営したての舞台上でリハーサルを行います。
-&lt;strong&gt;発表に使うスライドは開催1週間前に提出締切で、リハーサル後の変更はできません。&lt;/strong&gt;
-予選に使う3分用と、それ以降で使う5分用のスライドを提出します。
-舞台上での立ち位置の確認や、舞台下の発表者用スクリーンや残り時間の見え方を確認します。
-幕張メッセでの平日開催であったためかリハーサルへの参加企業は少なめです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/tXB_SkACqaJZLXdIHJOc6TnST9SXrUKB6-euSzKKvS7UznXzGeDXxisHdgS9aE0PPGtvq9sX5T6WBmIGhBW67S8GGg7dqCyDnFUJzNAVB9Z59EVkS3vSpSuBKKT58cS_y8jt3NHQnONOBxXbBqk3PFnm20lcfKWZJ3RLiSxK7LGPKmJjf1SwOYI-3qGzvqeu5WDKqCSLdeYYsTHem8hQo7OvD58Ftuy-2mtL-O_N7xlbJcq2cRQ1aV8vR8CnZa4reQJYXg-33NJdHWMXHR-m6nTBlldfOseP3d-vmWHiXH0UuxrLS-SKxUOhyqFvPdedvQuOKLP-IRQzt70DG1unqAlxgBjdkzbvtyVqvLUv6HbhVpWHwR3whXqIdvEaEco0Hr4ub_Af6aV6vbA5-ScoEBfnPO3hUSnWSB0ID1j1J8pcwathRaS2_sYy5pGpNCRwzaXaaf5-qDxDHI7Q4IBpgVT4TJXCK3zcI6trXW6d6suWuLOVD40JZMkqpU4JAjxU3hSMzozTmzQmqqIZw5DQYTlcwm_gduy5daXfoxSgeamXGbfk69JAShHBLUPDqUV1dsURFtVTMfHci-v7VFqj4EEYOFnqAa0=w650&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;会場も前日に全て設営を実施するようで、会場は大忙しで設営中。学生の頃の文化祭を思い出しました。&lt;/p&gt;
-
-&lt;p&gt;「Media Day」はイベント前日にスタートアップとメディアが交流できるクローズドな場です。
-ここでは選考で選ばれた2組だけ5分のプロダクト発表時間を与えられていました。&lt;/p&gt;
-
-&lt;h2 id=&#34;4-発表当日&#34;&gt;4. 発表当日&lt;/h2&gt;
-
-&lt;h3 id=&#34;予選-準決勝-決勝&#34;&gt;予選・準決勝・決勝&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/0eN3NGCIiNC_zB72X1soXMIsYSBaBP_7VsALLlXJRBio4YQ7nd8xZ7aa4zKWt-5OTQmkGikolJzPyRxjkz-0Qr-CAIRa9RqwRgGj8qu7tiz0UZV88YTh-CiReyzevL4PGYR6pifVm5DSU96jhRtRwN1xdhKWKPqV_FWEq3dn7kItu9QVjV-fe9trduV6s4RW5coI9PJUT7pmdfVQ85CkyACb_qI7_I4ocuB_HhSEe8ej470IquvxxtpxihZeNhqnN6QBDzKrMFBPM3Fvc-H1lRzxhAGeAgz9pclhBx03kVbi3aI91jMVd6uZ6bvahu8a9SFNvNpY5zi8FLcNpYrMqKioZAWZc11PPMsf_nt7KfadM4z_pDmdK4CxRT26BsPmf1okA_07eLNC00Uzer35WDYyJmVXEKf6CHrwAh7BeAB9Y3o7RbJRVC454S8DxcQFJtEnV1rtdI5f_0-XyQdss_7x2PO2Rk8z_IrFnJVh6rnfAOTq6ghLmcOtkglzjOzt9l8ahf2CtVJdr3gJ5WwxfNqpMDPXhgLfpVk_BRBPSXDg62v2jdAFoaqhjoPKeb0S2j0yM-b8l6bjMMMK3gU4t2lA5xdhhBY=w650&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;発表は予選・準決勝・決勝の3回戦から成り、予選は60社、準決勝に18社、決勝に5社のスタートアップが進みます。
-予選はEコマース、コミュニケーション、VRという具合にグループ分けされており、審査員もグループごとに異なります。
-発表前は最終練習で他のスタートアップのブースに行く余裕はありませんでした。
-発表と展示スペースの双方に申し込む場合は、発表者と展示担当者を分けましょう。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/Xuxu0lYAbZisqFBA6gQSurgAhL4kRMliQkpEss-hVPr8_JEIQMqiChkpnbFgDXQajrhxt0y1AlW25UFU5t1QoEBGJ5goxsqJ7yxocNhDmDGldgzpOrHxzTDb9J92NmkUDLvvE6h7uolY4fufnEI7ecLViFZ1YRNMnZ-PkXXMgIeZT_e-dqpbO69_QoN04ZyWQy6YjcXf48yf5_KTCPICHTBxd4zh7QaPvUJ_-GObhgApKvm9tlhrPBAneHPtqq5-aZe-EAAk3DCSScnxXNEyLTwuDqLL2otg4Pe03Q25oWMvEPXhZrY9aXyLjMHgRkqgi0kMIzg54_nkR0zZae583nWIY4TjIsqxa-luFouDiQ3_fBeiEII3mBwk6rOEALWjBzvpck40qvZD5ieRPLW3iSzWYxDdnXW37cCbaBnLjJ0mTq95BzClL2pavivGoGB5t6-_B5FlaHJZcZzxboadf45XxU6Fd4yUCFf5F3Qf9kJdm1UqL1vB2dUg8C9R2d7R8EAR5sElReYtTbfqAOScEmjgcIPFENorcpg9BqhxMU6zfiUx1ynYtY4-cY5iAWE52xQ0JyESqkTTJ12JBXwLxdez3KXTdBc=w650&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;発表時間の30分前になると、担当者電話で呼び出しがありピッチの舞台裏へ向かいます。
-舞台裏では発表の確認・練習に勤しむ人もいれば、発表者同士やスタッフの方々との会話もあります。
-自分の発表順になると5秒間のカウントダウンムービーが流れ、その間に壇上に上がります。&lt;/p&gt;
-
-&lt;p&gt;5秒前、カウントダウンが始まる&lt;br /&gt;
-4秒前、舞台裏から出る&lt;br /&gt;
-3秒前、壇上手前でマイクを右手に取る&lt;br /&gt;
-2秒前、壇上のクリッカーを左手に取る&lt;br /&gt;
-1秒前、オーディエンスを見る&lt;br /&gt;
-そして、ピッチ開始&lt;/p&gt;
-
-&lt;p&gt;あとは全力で発表です！&lt;/p&gt;
-
-&lt;div class=&#34;embed-video-container&#34;&gt;&lt;iframe src=&#34;https://www.youtube.com/embed/AeKwO0r680M&#34; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a class=&#34;twitter-timeline&#34; href=&#34;https://twitter.com/search?q=%23slushasia16%20kawlu&#34; data-widget-id=&#34;732416082519068672&#34; data-tweet-limit=&#34;2&#34;&gt;#slushasia16 kawluに関するツイート&lt;/a&gt;
-&lt;script src=&#34;http://techblog.housmart.co.jp/js/twitter-widget-20160514.js&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://speakerdeck.com/housmart/kawlu-at-slush-asia-2016&#34;&gt;Slide&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;https://kawlu.com/market&#34;&gt;kawlu.com&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;必死だったので写真はどれも顔つきが真剣です・・。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;審査員からの質問は基本的にマネタイズやサービスの仕組み、事業拡大の戦略を聞かれます。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;ピッチの結果、私達は予選・&lt;a href=&#34;http://www.slush.org/announcing-slush-60-semifinalists/&#34;&gt;準決勝&lt;/a&gt;で計2回の発表をすることができ、何名かの投資家の方々とも会うことができました。&lt;/p&gt;
-
-&lt;h3 id=&#34;メインステージ-展示ブース&#34;&gt;メインステージ・展示ブース&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/vWNQI2BAXDhwU_foMqeDhpu90EhTLr-HDVM9yaZgNY_BdiDCWfnD-8JD1-dMMLHSpt9WIL_dRZfswJz1K3Q8rvMLvCmFg3Yh9401OSu1-x4NxjO1C21J3qKcKxbC37w3nASvUyfBbQhc1fnkifSsjVGozFSJUkyie_tQIwdOsmM2S0XwwKKi-pab9DAVNLAsTmXQaMJGr3ZU5mo6KyDDRrJxG7cp1NImUOCQmWyeq18ks8TW9LtoWTHXirUr6HdK-_QgHzCwmQE2J2NAZJD1MjP4VQ8_ZEN3QE_ZeS1JTuN6NojKtHeoe541HUPrFJAxhNGVw3dSrEjFK3plT11oIdU-JsHtRoaDj3OQB3rPdPWXjoM5VckmlEAnP-INV4W_gR-5i7uGWKf8Eh5dYxC5_ut6BRPkiwTseEwDnfYXw-4y0RBb5ABF2DV_Qb12XqU_mu9p130GiUbU7UbSX5roISTkwXqlSdK4kSCAb2w5Nn6tIKeE613b0OcUOfMAUgcLE1QOn6oamqPlNA7CXm7jwtgTuzc4dtBShzvnUZNlNoFeiQHQauhbFGJiuhl7ZDi7ZIi6a2vTYSFNvA8EDtsMxigX6qtNn40=w650&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;発表後の時間には、他のスタートアップが出店しているブースを見て回ったり、メインステージで著名な方々の講演を聞くこともできます。
-個人的にはモバイル用のアナリティクス系ツールのブースが気になって話を聞いてきました。
-展示の紹介は色々なメディアで紹介されているのでこちらでは割愛します。&lt;/p&gt;
-
-&lt;h3 id=&#34;matchmaking&#34;&gt;Matchmaking&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/rythxH9XAYSV6lSr9bXnnwNrDuy9C_35CfNvp1p9Zj_8j9_PVlk1PFHVBmMCLlpeArr2vh_LktXqe8dpJpKUDGbf1uG0qr5AJwpsV4lbco0WzEz7FCqZs8TK2b9A8yxTwbrFj_jHDoNoh1jIkGinmysr7PfnRGbGpafjkHc76jDeydjvfAiClFPIj-714lvoFqB7Vks16trccSujXX5t13T66QHGbylW_bfu2GvbvnkkgVxn2pz4hLxbRlfgPI2Vc3e26CA2baDmVL-MlUKG5KqPfJoezXM4U8nWPCgikq-FD3bls-mMyBqoKuj1LtXAR9r6Q3-3bjj8hQ89SGgA5lkzc49AA7BylX6CVi7NNmyDse7xT5ooVqq1yAcUWfUHgIAkSsfbUjqp7mjRXvcwjzI7qIv42AGGokX9_rc9ybPO2J1qy04wA0brbOn8n27IAxxhUuZ4VJNcAxWWiSz4wpO40TqBT7tt-H16SN3ws0VXtDlkSG97w7pRKCiEWXVYRwIzs2Xp4bLvriFffwIm6DS9zcTZEmBpMF6CrHJsltdvvWMpFYII9AbVH5cL6aXl5DB0PSUbnatP4CI5gChAN8nMhjLl-Fw=w800&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;「Matchmaking」という投資家にイベント会期中の時間でミーティングを依頼できるツールがあります。
-ミーティングできる時間枠は限られているので早めに積極的に利用しましょう。
-私達も投資家の中にいた「厚切りジェイソン」さんにミーティング申請しましたが既に予定が埋まっていました・・。&lt;/p&gt;
-
-&lt;h2 id=&#34;5-振り返ってみて&#34;&gt;5. 振り返ってみて&lt;/h2&gt;
-
-&lt;h3 id=&#34;フィードバックと変遷&#34;&gt;フィードバックと変遷&lt;/h3&gt;
-
-&lt;p&gt;Pitching Perfectではたくさんの貴重なフィードバックをいただいたので一部をここで紹介します。&lt;/p&gt;
-
-&lt;p&gt;内容について言われた点:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;語る対象を投資家やユーザに具体的に絞る。&lt;/li&gt;
-&lt;li&gt;投資家を探しているのであれば、どのシード期なのか、いくら欲しいのかを明確にする。&lt;/li&gt;
-&lt;li&gt;競合サービスや類似サービスとの差別化を明確にする。&lt;/li&gt;
-&lt;li&gt;チームを紹介するなら、チームが優れていることを示す実績や背景を添える。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ピッチのテクニックや表現方法に関わる部分:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;プロダクト名やお金の表記の英語表記を忘れない。&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Today we introduce about&amp;hellip;&amp;ldquo;というような始め方いらない。誰が何を発表しようとしているか分かっている。&lt;/li&gt;
-&lt;li&gt;会社名とプロダクト名を両方は出さず、プロダクト名だけを繰り返す。2つ覚えるのは難しい。&lt;/li&gt;
-&lt;li&gt;同じ問題・キーワードについて繰り返すとストーリー性が出る。コンセプトとなるフレーズは早めのスライドで言う。&lt;/li&gt;
-&lt;li&gt;文字を減らす。例えば文章になってなくても、&amp;rdquo;460 million yen / 4 months&amp;rdquo;で分かる。スライドはピッチをサポートするものであるべき。&lt;/li&gt;
-&lt;li&gt;問題提起、解決策、実際の結果、未来というような明確でシンプルな流れを作る。周りは本人ほど理解が深くない。複雑な問題を「簡潔に説明できる能力」も投資家は評価するだろう。&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;so&amp;rdquo;や&amp;rdquo;and&amp;rdquo;といった繋ぎの言葉を入れながらスライドをめくらない。文章毎に強く切っていく。&lt;/li&gt;
-&lt;li&gt;スライドを見ない。スライドや中身の切り替わりのタイミングで目を見るオーディエンスを1人ずつ変えていく。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;CEOらしさを感じない&lt;/strong&gt; (※まっくすはCEOではありませんが、オーディエンスには関係ありません)。情熱、インパクト、エキサイティングが欲しい。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;練習ごとにかなりの数のフィードバックをもらい、それらを踏まえて何度も内容を修正をしました。&lt;/p&gt;
-
-&lt;h3 id=&#34;使った時間&#34;&gt;使った時間&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;ピッチパーフェクト: 5時間 * 2日
-前日リハーサル: 4.5時間
-自主発表練習: 6時間
-当日: 10時間 * 2日
-資料作成: 14.5時間
----
-合計: 35時間
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;改めて振り返るとそれなりの時間を使いました。
-資料作成の時間が長いのはフィードバックを貰う度に大きく作りなおしていた結果です。&lt;/p&gt;
-
-&lt;h3 id=&#34;雑感&#34;&gt;雑感&lt;/h3&gt;
-
-&lt;p&gt;今回賞を取ったピッチはどれも、発表クオリティが高く、事業の実績や成長性が示されていて、Slush Asia 2016にふさわしいプロダクトが選ばれています。
-そういったプロダクトと比較されることを考えると、ピッチではシード期に近い企業の場合であっても、出せるだけの実績・将来性やデモもしくは動いた場合のイメージをしっかり見せる必要があります。&lt;/p&gt;
-
-&lt;p&gt;Matchmakingでお会いした海外の投資家の方にピッチに使った資料を使って説明をしたのですが、やはり別の資料を用意した方がよいです。
-ピッチの数分では言えなかった細かい部分のデータが必要です。&lt;/p&gt;
-
-&lt;p&gt;ピッチの予選ではスライドが3枚目から始まったり、準決勝の5分ピッチでは提出していたものとは異なる3分用スライドが表示されてしまうというトラブルもあったので、動じないように練習や事前確認は入念に行いましょう。
-ただ、イベント中のトラブルらしいものは他にはなく、分からないことや明確でないことはスタッフの方々に聞けば丁寧に教えてくれます。&lt;/p&gt;
-
-&lt;p&gt;Pitching Perfectでは、他の参加者達の流暢な英語とプロダクトの先進性に驚かされ、そしてフィードバックでもらった「CEOらしさを感じない」でものすごく焦りを感じていました。
-たしかにCEOではないですが、聞き手がそう感じてしまうピッチは大問題です。
-より多くの回数のピッチを獲得するには、誰も見たことのないVRの世界観やデバイスや宇宙にまつわる壮大な製品を持ち、会社を起こすほどのパッションを持ったCEO達を突破していく必要があるのですから、プレッシャーもありました。
-なんとか2日目も登壇するという目標は越えられたものの、決勝に行けなかったのはやはり非常に悔しい。&lt;/p&gt;
-
-&lt;p&gt;最後に、Slush Asiaは多くの学生ボランティアで成り立つイベントです。
-イベントのために何日もAirbnbを使って海外から日本に滞在する学生たちの、情熱やフットワークの軽さ、投資家や起業家になりたいというビジョンは本当に凄いです。
-そんな方々が企画、ピッチへのフィードバック、舞台裏での気遣いと、全力でサポートをしてくれたことに本当に感謝しています。
-スタッフの皆様、ありがとうございました！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/O5fkqHOtYeqmubHd2GsNIQEjPxCgZ7h6pCpgsEtdx7oXT_kJ4_3Jnd24FMzyP4hNi4ROXrlKEDlwcWeo-2hhuxlUDjFBbBV-1j63m1WeYeQYU-6J1NL7qx7p3oSSvyTpHJnl7KsfRs2QV-C3r_Zc2tTbanZk7QpLDKw3D08cY2RwjuIxmYXymfJX4NS93qQouGHwE5V47UAE4znElH4BEOszJR2NQBR0tD_HIX768MgtCyc3vqSf3_U11sLsnYg2HHGHss__vKnIGwNn6AzituNrN4dU_TLuJAk0tqx81anvk613HOpis6SvJ6mFiqn5dgzt_tHwl5a1eFrqLiL4BV8HQL6K3ckCZCZwPqeS0A9du4JU5mFE1O5tDxZoGIw3qV6LcsDbco31wk2UJP4N0Bv-UPl3n9jnYRSJlU-hkfuYE8nEyoZVg8pY7VMRCfvq4UpEfi5KfiZ9IQSEHV_v1hM0-RbsLo69XaEEiGh5WnAY0ylI_J8q6X2_PW1BnZ4WzglI5Zom3UPGzB4pCTL1672VO4pQaFp7kxj6c7eS_0DCDufl1n67mMb6zaV5xEY-YJabvfjSs_0elc3MQwvtwMoA7Ms62EE=w650&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1776,98 +256,7 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
       <pubDate>Tue, 26 Apr 2016 08:04:13 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2016/04/26/atami_de_sprint/</guid>
-      <description>
-
-&lt;p&gt;Housmartの宮永です！&lt;/p&gt;
-
-&lt;p&gt;先週（4/18 - 4/22）は熱海で開発合宿（スプリント）を開催しましたので、&lt;br /&gt;
-そのことについて書きたいと思います。&lt;/p&gt;
-
-&lt;p&gt;どんなに素晴らしいオフィスでもずっと同じ場所で作業をしていると&lt;br /&gt;
-何となく集中力がなくなったり、生産性や創造性を劣化させていたり、というか根本的に飽きてきますよね（笑）&lt;br /&gt;
-ってことで試しに今回は環境を変えて熱海でスプリントをしてきました。&lt;br /&gt;
-&lt;br&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;合宿スケジュール&#34;&gt;合宿スケジュール&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#39;https://lh3.googleusercontent.com/8kmxKjIRDUCCHAgmF-3MWOq8VzEcZzw2Z1kD_4BE2H6R0OD8no8_UFnT6uHwdLvXkcA_OL4qtDHcXCWzateKftT0SsWp2z1SlpRPh4b9rq4_te4qDtOCnVlVqT59rA77-fLDZ8GrVXaXCIx72lsHCkEMTQkkg_-Y5ZJX6sINA0t8znSfvkIhPvqYUq7LBiubXM6SFu0R5KYIpPYWIrXYB1OVr0ro_HjOgUFrU451Dap4Q_YNMzel1v35XzQ0toNOuzGl2Goc0G04-8Whr66ibdtt9WSPyIym_HGXoD9UarIB0Jth2jGdPkk_84D8hm4i48xcc5QjVRY8ggpUikHLLZGXMBPkZDMoeKRO8_7xQvlD8ELmgjcG614UFS9aILPdfD-WD5Xk2L6_6dAs9WgEwGTVV2dC0MXbgSumasl5Y6xn1B2CNUkTSO-BApkerqcA5xIPK46d8yg6YzqO55bAiscEAEKMtYd7clTS_f5q_ObT-mRFOww9U6S06aBtH8KLv_dF2lT0MLEbkcqYWsP8zDDv-eQDLwegH7rAVGLQtaPZnbjSWano7ddeNssSqOpjnIN4=w650-h453-no&#39; title=&#39;スプリントスケジュール&#39; alt=&#39;１週間の流れ&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;過去ブログ(&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/14/dev_cycle/&#34;&gt;スタートアップのCTOになって2ヶ月で作った開発サイクル&lt;/a&gt;)でもご紹介させていただきました通り、弊社は1weekスプリントを採用しております。&lt;br /&gt;
-事業サイドのメンバーはオフィスを離れられない事情もあったので、&lt;br /&gt;
-スプリント計画だけ（月曜日）オフィスで過ごし、火曜ー金曜を&lt;span style=&#34;color:red&#34;&gt;男３人で&lt;/span&gt;熱海で過ごしました。&lt;br /&gt;
-※開発チームの自由な行動をいつも許容してくれる針山さん、三瓶さんにはいつも感謝ですm(__)m&lt;br /&gt;
-※TOP写真に出てくる女の子は出てきません。&lt;/p&gt;
-
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;仕事場としての熱海&#34;&gt;仕事場としての熱海&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/xm08OMtE9OqAOhCo8m0gjzUSnweeANNMt7ulP0DyrQoVQbeNZplB9zurd3LKLR-7S7O0NmuSjXuYwA-NFEkDXn064YtDGHpnSCsXn8fVSyuXER2hFWGKwBis7x5N4aYikyrfqFZFkEwixRYq56VKU1ISQMbIXqVHhZDv-4XoC5fnws5OoBXG3vqhda34JGBg8a2EcA0Lyi3uXyFF8P4zLwxcpCi_JdwN4WevyDlejzM8RTF5Wvll3MXeWkzawJqiE-SRvWqRhP0LfvY5wEyDHT9rUQS7sNn7zKnuzY0Ah53rTAjWOreo17Wm5tSlUOFqFIc48xmQrxM2_t9n9g4qkDdFPO0LSIKL0BGeuvdeTZ4lam8pnW9e98aMsF64N6GGp5m-hqGOe_NVcM6ifcW9DY7OMMijHmsq3TOMmh15vjqk2HglmGqgNgmf5VMjLioxr-1ihHq3mc9WmmM1tUcBZpeXESl5nQ7QwfESuqOUO2vcweOzuvvdnRs-sf62homk7etSewN12LV68QxpcGT9JKGcV_7E_vtWTp-wsRT7diNb3Y7eh6_7h8XUHiECPBRRHenl=w650-h958-no&#34; title=&#34;atami_sea&#34; alt=&#34;熱海は景色が最高でした。&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;観光場所としての熱海はこの時期温泉を軸に、釣りに行くもよし、名所を回って楽しみもよし、海を散歩するもよしといった感じになるかと思います。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/e-x0IpMplf5xWgc3M4BTMwExsTXdjK3fv4dffI62wJeK5ZclYQL5Fbz5HqZq9cIOP_p2mVPc6HGmK3e51LTJJwIfQkT6uSLejzJ0XeyIUNzbYoA58QqhJ4BHktP527SSNtlAG25khnikK-uBWuUQC5a3-by_lp3zMnk6-8LCcQ4XFNSA86CVGkwjqHB5K83NurdxzXCVjP9Hp4N22YzResO5gR465PmHygeyXUY9sh2Ho6xPBkIfDruVutuj1NQufKyuAJdYOOcYoYzrHK2-Rpv3uJuH1D1ojcRIfG_zFDNyMK1Mt7MO1Q31hYQ38-4oq4mCyindZKxU1ranXnCbA2lzTMD_gWHGsf1aCLB4HKcOCr7KZ1N0-2GjmexxWhrwZ57JvL8FcCjxG9pgZDxYeQgq3gS1GY6PNygaKqeUdcqxHA-WjZvyRBL7Rr7-h8R0IaRqMbAjmPHxgGv5iFH6mfNapjpfICB9GjwAJu-i3UP-aRTHIAW2dJ6cbNQvwKV7T1KNrvFcKKE58BH4DYtv_9UkNWc4BndQMkdaEmA5zMUr2Lup_MTuKNK-hi62W_oA-BZz=w941-h720-no&#34; title=&#34;働く、休む、働く・・が永遠と繰り返されます。&#34; alt=&#39;働く、休む、働く・・が永遠と繰り返されます。&#39;&gt;&lt;/p&gt;
-
-&lt;p&gt;仕事場として熱海を見ると、釣りをする以外は長時間遊んでしまうような誘惑が少なく、&lt;br /&gt;
-温泉や食事など短時間でリラックスできる娯楽が多いので、こまめに休憩を挟み、緩急つけたリズムの良い活動が出来ます。&lt;br /&gt;
-開発して、美味しいご飯食べて、開発して、温泉つかってのような半恒久的サイクルで、１週間過ごせたかと思います。&lt;/p&gt;
-
-&lt;p&gt;日中のネット環境については何も考えずに行きましたが、たまたまWi-Fiが利用できるカフェを見つけられたので
-大変お世話になりました。（&lt;a href=&#34;http://caferoca.jp/&#34;&gt;CAFERoCA&lt;/a&gt;さん連日ありがとうございました。）&lt;/p&gt;
-
-&lt;h2 id=&#34;所感&#34;&gt;所感&lt;/h2&gt;
-
-&lt;p&gt;そんな熱海スプリントを振り返ると、&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;東京から近いため移動疲れなし&lt;/li&gt;
-&lt;li&gt;（先述した通り）熱海には遊びの誘惑が少なかったので開発にガッツリ集中できた&lt;/li&gt;
-&lt;li&gt;気分転換が適度にできたので作業も捗った&lt;/li&gt;
-&lt;li&gt;美味しいものを食べて幸せになった&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;反省点としては&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;タスク管理（主に記録）が結構雑になってしまった。。。(非日常が日常的作業を忘却させる)&lt;/li&gt;
-&lt;li&gt;ディスプレイがないと結構辛い（普段使っている大きめなディスプレイの有り難みが分かった）&lt;/li&gt;
-&lt;li&gt;話しあいになるとホワイトボードが欲しくなる&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;などなど勢いで出発したため、準備不足を露呈した結果に。。&lt;/p&gt;
-
-&lt;h2 id=&#34;special-thanks&#34;&gt;Special thanks&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#39;http://caferoca.jp/wp-content/themes/roca/imgs/RoCA_img.jpg&#39; width=650&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://caferoca.jp/&#34;&gt;CAFERoCA&lt;/a&gt;さん&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;日中の作業場所として連日お世話になりました！&lt;br /&gt;
-個人的にはここのぐり茶が美味しくて毎日飲んでました。&lt;/p&gt;
-
-&lt;p&gt;静かで落ち着いた雰囲気を醸し出す素敵なカフェでした。&lt;br /&gt;
-&lt;hr&gt;
-&lt;div class=&#34;airbnb-embed-frame&#34; data-city-link-index=&#34;1&#34; data-eb=&#34;1460550563_3fq5NvEuvlW/2RAS&#34; data-eu=&#34;bqBUVANHr9EOkihHlErqNJ3WctOp9xGaehbtddxBJYox7oIRpje/fxuJk0kx lq0X8EdvvVl+aTxfu0ygWYeGPmcPI6rRuYpB4fcO0O0ybM5Bkvg4JPx8GWdb +hX0k1WUHyZRfDFxmUDfyHeV+ZsOq/0yKIqhN/zN96iRjGYkqdu/QvGw0ezM R1uMBtj9+5JCFd5TRzdSymjOwgnb8Hgl2me+0/iBdE3ytNfQ4ANIiCJXn8dY M28xtwUokhoBMBpPfjXV6SeLFDpRjzj58YAPHn1L4N2I9g4Eq3isow2aEnhk +j8JIVvN6dwVsMXQClg1iGKWKsfNad5WR5A2iw/yJQ== &#34; data-embed-source-type=&#34;p3&#34; data-trigger-source-type=&#34;p3&#34; data-listing-id=&#34;4248292&#34; data-photo-url=&#34;https://a0.muscache.com/im/pictures/67373651/f24cd987_original.jpg?aki_policy=x_large&#34; data-view=&#34;listing_frame&#34; style=&#34;max-width:600px;margin:auto;transition:height .2s;&#34;&gt;&lt;img src=&#34;https://a0.muscache.com/im/pictures/67373651/f24cd987_original.jpg?aki_policy=x_large&#34; style=&#34;max-width:100%;&#34; alt=&#34;&#34;/&gt;&lt;div&gt;&lt;a href=&#34;https://www.airbnb.jp/rooms/4248292&#34; rel=&#34;nofollow&#34;&gt;&lt;h4&gt;熱海の24時間温泉＆オーシャンビュー&lt;/h4&gt;&lt;/a&gt;&lt;div&gt;熱海市, 静岡県, 日本&lt;/div&gt;&lt;blockquote&gt;熱海駅から徒歩20分､ﾊﾞｽで10分｡快適な1部屋ﾏﾝｼｮﾝ｡理想は2人､最大4人まで泊まることができます｡ 部屋からは熱海の海と山と街を一望できます｡花火大会は圧巻の一言です｡ 温泉､ｷｯﾁﾝ､冷蔵庫､ｴｱｺﾝ､ﾄｲﾚ､ﾃﾚﾋﾞなどご用意しております｡ 2人でも4人でも宿泊可ですが2人が最も快適な広さです｡ This room is only for Japanese people.&lt;/blockquote&gt;&lt;/div&gt;&lt;script async=&#34;&#34; src=&#34;https://www.airbnb.jp/embeddable/airbnb_jssdk&#34;&gt;&lt;/script&gt;&lt;/div&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;宿について&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;知人のお家ということで今回は利用させていただきました！&lt;br /&gt;
-３人で利用しましたが広さ的にも十分でした。&lt;br /&gt;
-またこのマンションには温泉が付いているんですがこれがまた素晴らしい。&lt;br /&gt;
-海を見ながら温泉につかってと贅沢な場所でした。&lt;/p&gt;
-
-&lt;p&gt;Airbnbにも出ているらしいのでぜひ興味のある方はご利用くださいm(__)m&lt;br /&gt;
-&lt;a href=&#34;https://www.airbnb.jp/rooms/4248292&#34;&gt;https://www.airbnb.jp/rooms/4248292&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;最後に&#34;&gt;最後に&lt;/h2&gt;
-
-&lt;p&gt;今回はカウル開発チームの開発合宿について紹介させていただきました。&lt;br /&gt;
-カウルでの働き方としても新たな試みとなり、とてもよかったので、これからも定期的に実施したいと思います！&lt;/p&gt;
-</description>
+      <description>Housmartの宮永です！ 先週（4/18 - 4/22）は熱海で開発合宿（スプリント）を開催しましたので、 そのことについて書きたいと思います。</description>
     </item>
     
     <item>
@@ -1883,220 +272,123 @@ IDEO はデザイン会社の中でもリーディングカンパニーと言わ
 
 &lt;p&gt;そこで今回は、まだユーザが少ないフェーズでも &lt;strong&gt;「お金と時間をあまりかけずに」&lt;/strong&gt; 導入できるログ分析基盤について、カウルでの事例をご紹介いたします。&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>脱・巨大なモノリシックアプリ！DRYなRails分割方法</title>
+      <link>http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/</link>
+      <pubDate>Mon, 28 Mar 2016 10:34:34 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/03/28/git-submodule-for-dry-rails/</guid>
+      <description>&lt;p&gt;Housmartの松江です。&lt;/p&gt;
 
-&lt;p&gt;小規模のサービスであってもログをしっかりと収集・分析してサービスの改善に役立てていくことは非常に大切なことです。&lt;br /&gt;
-一方で、データ収集のためのJavascriptの開発やWebサーバの構築と管理、データストアやデータ処理基盤の選定や設定などに専属で人を割くことができないのもスタートアップの実情ではないでしょうか。&lt;/p&gt;
+&lt;p&gt;Railsでアプリケーションを開発していると、&lt;strong&gt;管理者機能や周辺機能も含んだ巨大なプロジェクトになってしまうこと&lt;/strong&gt; や、
+&lt;strong&gt;分割したプロジェクト間の管理・同期が煩雑になってしまうこと&lt;/strong&gt; ありますよね。&lt;/p&gt;
 
-&lt;p&gt;そこでカウルでは &lt;strong&gt;安価に利用できるSaaSをいくつか組み合わせることで、簡単に始められて、かつ要求を十分にみたせる環境を構築&lt;/strong&gt; しています。&lt;/p&gt;
-
-&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;カウル&lt;/a&gt;は中古マンションをお得に購入・売却できるWeb不動産サービスを運営しています。&lt;br /&gt;
-現状としては、サービス開始から3ヶ月で登録ユーザ数が1000人弱、日々&amp;lt;100ユーザがアクティブにサイトに訪れています。&lt;/p&gt;
-
-&lt;p&gt;また、今回の選定にあたっては前職での知見をもとにデータの具体的な利用用途やシステムの運用コストまで考慮に入れるよう心がけました。&lt;br /&gt;
-（前職では国内大手のECサイトでログデータの広告利用を主な業務としていました。過去データを使った広告クリック率の予測、レコメンドロジックを用いたパーソナライズド広告、その他データマーケティング活動の支援など）&lt;/p&gt;
-
-&lt;h2 id=&#34;全体概要&#34;&gt;全体概要&lt;/h2&gt;
-
-&lt;p&gt;カウルではユーザ獲得の流れとして&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;自社メディア or 広告経由でランディングページに集客する&lt;/li&gt;
-&lt;li&gt;ランディングページからトライアルユーザになってもらい&lt;/li&gt;
-&lt;li&gt;2週間の無料トライアル期間を提供し&lt;/li&gt;
-&lt;li&gt;トライアル期間後、料金プランを選択してもらい本登録ユーザになってもらう&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;というステップを作っています。&lt;/p&gt;
-
-&lt;p&gt;なのでログ分析基盤もそれに合わせて&lt;/p&gt;
+&lt;p&gt;今回は以下の要望に応えるべくカウルの開発現場で実施した、Railsプロジェクトの分割と運用をご紹介します。&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;集客からトライアルユーザになるまで&lt;/li&gt;
-&lt;li&gt;トライアルユーザになってから本登録ユーザになるまで&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;巨大な1つのRailsプロジェクトにせず、管理機能部分を分けたい&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分割後はプロジェクト間で必要なロジックを共有したい&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;の大きく2つに分けて別々のサービスを利用しています。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>スタートアップのCTOになって2ヶ月で作った開発サイクル</title>
+      <link>http://techblog.housmart.co.jp/2016/03/14/dev_cycle/</link>
+      <pubDate>Mon, 14 Mar 2016 10:43:07 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/03/14/dev_cycle/</guid>
+      <description>Housmartの宮永です！ 今回はカウル開発チームの開発サイクルを紹介させていただきます。 好ましい開発サイクルはサービスや企業、組織規模など</description>
+    </item>
+    
+    <item>
+      <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]</title>
+      <link>http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/</link>
+      <pubDate>Thu, 10 Mar 2016 16:57:26 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/</guid>
+      <description>&lt;p&gt;Housmart高松です。&lt;/p&gt;
 
-&lt;h2 id=&#34;1-集客からトライアルユーザになるまで&#34;&gt;1. 集客からトライアルユーザになるまで&lt;/h2&gt;
+&lt;p&gt;先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。&lt;br /&gt;
+前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。&lt;/p&gt;
 
-&lt;p&gt;このステップでは主に以下の切り口でデータを見ています。&lt;/p&gt;
+&lt;p&gt;※前編をご覧になっていない方は&lt;a href=&#34;http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/&#34;&gt;こちら&lt;/a&gt;を先にご覧ください。&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;日々のアクセス数とコンバージョン数のトラッキング&lt;/li&gt;
-&lt;li&gt;検索からの流入数とコンバージョンの計測&lt;/li&gt;
-&lt;li&gt;ランディングページの改善（ユーザの滞在時間、ランディングページがどこまで読まれているか、コンバージョン率の計測）&lt;/li&gt;
-&lt;li&gt;自社メディア（&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;、&lt;a href=&#34;https://kawlu.com/library/&#34;&gt;カウルライブラリー&lt;/a&gt;）からの流入とコンバージョンの計測&lt;/li&gt;
-&lt;li&gt;広告施策の効果測定&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WBSサイト(不動産流通に革新は起こるか): &lt;a href=&#34;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&#34;&gt;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&lt;/a&gt;&lt;br /&gt;
+仲介手数料無料の不動産サイト「カウル」: &lt;a href=&#34;https://kawlu.com/&#34;&gt;https://kawlu.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;ここではツールとして &lt;strong&gt;Google Analytics（GA）&lt;/strong&gt; を用いています。&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</title>
+      <link>http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/</link>
+      <pubDate>Thu, 03 Mar 2016 16:57:26 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/</guid>
+      <description>&lt;p&gt;Housmart高松です。&lt;/p&gt;
 
-&lt;p&gt;検索や広告からの流入の効果計測を網羅的かつ簡単に計測するという点でやはりGAは優れたツールなので、カウルでも積極的に活用しています。&lt;br /&gt;
-基本的に &lt;strong&gt;すべて無料で利用できる&lt;/strong&gt; 点、画面から &lt;strong&gt;アカウント設定をしてページにタグを埋めるだけで利用開始できる&lt;/strong&gt; 点も利用者としては非常に嬉しいです。&lt;/p&gt;
+&lt;p&gt;先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。今回は、その前後でシステムの準備として実施したこと、当日の実際のアクセス数などをご紹介します。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160419/google_analytics_logo.png&#34; title=&#34;google_analytics_logo&#34; width=&#34;60%&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WBSサイト(不動産流通に革新は起こるか): &lt;a href=&#34;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&#34;&gt;http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/&lt;/a&gt;&lt;br /&gt;
+仲介手数料無料の不動産サイト「カウル」: &lt;a href=&#34;https://kawlu.com/&#34;&gt;https://kawlu.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;GAは利用している方も多いと思うので詳細な説明は割愛しますが、中でもおすすめしたい設定をいくつか挙げてみます。&lt;/p&gt;
+&lt;p&gt;突然のテレビ取材！テレビに出るとどのくらいアクセスが来るの？サーバは何台増やしたらいいの？&lt;br /&gt;
+そんな時の参考になれば幸いです。&lt;/p&gt;
 
-&lt;h3 id=&#34;google-tag-manager-gtm-の利用&#34;&gt;Google Tag Manager（GTM)の利用&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hack Day 2016ハッカソンに参加しました！</title>
+      <link>http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/</link>
+      <pubDate>Wed, 17 Feb 2016 16:57:26 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/02/17/hack-day-2016%E3%83%8F%E3%83%83%E3%82%AB%E3%82%BD%E3%83%B3%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F/</guid>
+      <description>&lt;p&gt;今週からHousmartで働く松江です！&lt;/p&gt;
 
-&lt;p&gt;GTMはGoogleが提供する無料のタグコンテナツール（タグを一元管理でき、色々な条件に合わせてタグを出し分けてくれるツール）です。&lt;br /&gt;
-無料にもかかわらずタグのプレビュー機能やバージョン管理もついており、頻繁にコードを書き換えるスタートアップの環境においてアプリケーションと各種トラッキングタグを非同期にメンテナンスできることは大きなメリットだといえるでしょう。&lt;br /&gt;
-GAのタグに変数を渡す際に「data layer」という層を経由するなど、若干特殊な知識が必要になりますが、広告も含めたトラッキングタグ管理全体としての見通しも良くなるので是非導入をおすすめします。&lt;/p&gt;
+&lt;p&gt;先日、Yahoo! Japanさんが主催する日本最大級のハッカソンイベントである&lt;a href=&#34;http://hackday.jp/2016/&#34;&gt;Hack Day 2016&lt;/a&gt;に参加してきたのでこの場を借りてご紹介します。&lt;/p&gt;
 
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;https://support.google.com/tagmanager/answer/6102821?hl=ja&#34;&gt;Google タグマネージャヘルプ - Google タグマネージャの概要&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://analyze.siraberu.info/post-521/&#34;&gt;GoogleタグマネージャでGoogleアナリティクスのタグを管理する方法！&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>カウルTech Blog開始！</title>
+      <link>http://techblog.housmart.co.jp/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B/</link>
+      <pubDate>Mon, 08 Feb 2016 17:45:55 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2016/02/08/%E3%82%AB%E3%82%A6%E3%83%ABtech-blog%E9%96%8B%E5%A7%8B/</guid>
+      <description>&lt;h2 id=&#34;ブログ始めました&#34;&gt;ブログ始めました。&lt;/h2&gt;
 
-&lt;h3 id=&#34;カスタムキャンペーンパラメータの利用&#34;&gt;カスタムキャンペーンパラメータの利用&lt;/h3&gt;
+&lt;p&gt;はじめまして！カウル開発チームの宮永と申します。&lt;/p&gt;
 
-&lt;p&gt;各種広告の効果測定をキャンペーンごとに切り分けるためにGoogle Analyticsが公式でサポートしているパラメータです。&lt;br /&gt;
-通常は広告キャンペーンの効果測定に使うように説明されていますが、カウルでは自社メディアからの流入の切り分けにもこのパラメータを使用しています。&lt;br /&gt;
-公式でサポートされているパラメータなので、遷移元のURLに一度設定しておくと、特にレポートのカスタムをすることなくPV数やコンバージョン数を流入元ごとに切り分けることができます。&lt;br /&gt;
-この機能を用いて自社メディアのどんな記事がコンバージョンにつながりやすいかなど、記事ごとの分析に役立てています。&lt;/p&gt;
+&lt;p&gt;本日よりカウルTech Blogを開始いたしました。&lt;/p&gt;
 
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;https://support.google.com/analytics/answer/1033863?hl=ja&amp;amp;ref_topic=1032998&#34;&gt;Google アナリティクスヘルプ - カスタム キャンペーン&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;https://www.techloco.co.jp/blog/content/41&#34;&gt;Google アナリティクスで広告からのアクセスを計測する方法&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;サービスの裏側やシステムに関する技術的トピック、開発チームの雰囲気など&lt;br&gt;
+カウル開発の「空気」のようなモノが伝わればよいかなと思っております。&lt;/p&gt;
 
-&lt;h3 id=&#34;ランディングページのスクロールの計測&#34;&gt;ランディングページのスクロールの計測&lt;/h3&gt;
+&lt;p&gt;※Tech Blogとありますが、Techなことに特化しない回もあると思いますがあしからず。&lt;/p&gt;
 
-&lt;p&gt;カウルでは扱う商品が高額であるということもあり、ランディングページでより多くの情報を提供して安心してトライアルユーザになってもらうために、かなり縦長のランディングページを用意しています。&lt;br /&gt;
-縦長のランディングページの効果測定と改善においては、どのセクションにどのくらいユーザが滞在したか、どこまでスクロールして見てもらえたかが重要な指標となってきます。&lt;br /&gt;
-そこでカウルではscrolldepthというJavascriptライブラリをGA/GTMと組み合わせて利用しています。&lt;/p&gt;
+&lt;p&gt;今回は第１回ということで自己紹介を。&lt;/p&gt;
 
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;http://scrolldepth.parsnip.io/&#34;&gt;http://scrolldepth.parsnip.io/&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;https://www.youtube.com/watch?v=UoOh58pvqG4&#34;&gt;How to install Scroll Depth Tracking with Google Tag Manager [動画]&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;クロスデバイスビューの設定&#34;&gt;クロスデバイスビューの設定&lt;/h3&gt;
-
-&lt;p&gt;トライアル期間中のユーザに対する深い分析は、後半で記載する別のSaaSを利用して行っているのですが、大まかな傾向を見るのにはGoogle Analyticsのクロスデバイスビューも有効です。&lt;br /&gt;
-GTMのdata layerを経由してGAにシステム内のユーザIDを連携し、クロスデバイスでのユーザトラッキングを可能にします（同一のユーザがPCとスマホでアクセスした場合にも同一ユーザとみなしてレポートが見られます）。&lt;br /&gt;
-また、私自身はまだ試せていないのですが、ユーザIDごとに時系列でユーザの行動を見れる「ユーザエクスプローラ」という機能が2016年春からβ版で公開されており、こちらの機能も期待できそうです。&lt;/p&gt;
-
-&lt;p&gt;参考）&lt;br /&gt;
-&lt;a href=&#34;https://support.google.com/analytics/answer/3123662?hl=ja&amp;amp;ref_topic=3123660&#34;&gt;Google アナリティクスヘルプ - User ID 機能について&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://strobolights.xyz/web/2016/04/03/google/&#34;&gt;【Googleアナリティクス】ユーザーエクスプローラーの使い方&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;GAまわりのドキュメントは日本語でたくさんあるのですが、内容が古いものも散見されるため、おかしいなと思ったら公式のドキュメントを参照することをおすすめします。&lt;/p&gt;
-
-&lt;h2 id=&#34;2-トライアルユーザになってから本登録ユーザになるまで&#34;&gt;2. トライアルユーザになってから本登録ユーザになるまで&lt;/h2&gt;
-
-&lt;p&gt;続いて、トライアルユーザが本ユーザになるまでのデータ収集と活用について説明します。&lt;br /&gt;
-このステップでは主に以下の内容でデータを分析しています。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ユーザ一人ひとりのサイト上での行動の定性的・定量的な評価&lt;/li&gt;
-&lt;li&gt;サイトからの通知（メール、メッセンジャー）に対する反応の評価&lt;/li&gt;
-&lt;li&gt;有料会員化したユーザの行動パターン分析&lt;/li&gt;
-&lt;li&gt;ユーザがどこでサイトの利用をやめてしまうかの分析&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ここでは &lt;strong&gt;&lt;a href=&#34;https://keen.io/&#34;&gt;keen.io&lt;/a&gt;というログ収集基盤を提供しているSaaS&lt;/strong&gt; を、周辺のツールと組み合わせて使用しています。&lt;/p&gt;
-
-&lt;h3 id=&#34;keen-ioとは&#34;&gt;keen.ioとは&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://techblog.housmart.co.jp/images/20160419/keenio_logo.png&#34; title=&#34;keenio_logo&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;2011年に創業されたシリコンバレーにある企業のプロダクトで、UnityやAdobe、O&amp;rsquo;REILLYなど有名企業も複数使っているようです。&lt;/p&gt;
-
-&lt;p&gt;使い方は簡単で、keen.ioが公開しているAPIにログの書き込みリクエストを送るだけで、データの記録とストアを行ってくれます。自社でのWebサーバやストレージの管理は不要です。&lt;br /&gt;
-keen.ioのサイトからアカウント作成後、&lt;a href=&#34;https://github.com/keen/common-web&#34;&gt;CommonWeb&lt;/a&gt;というkeen.io公式のログ収集用Javascriptライブラリをサイトに導入し（このときバックエンドにkeen.ioのSaaSを指定します）、APIキーを設定するだけで導入は完了です。&lt;/p&gt;
-
-&lt;p&gt;CommonWebの基本的な機能として、PageView・Click・FormSubmissionをすべて記録できるので、サイト内の行動トラッキングとしては一旦はこれで十分かと思います。&lt;/p&gt;
-
-&lt;p&gt;貯まったデータに対して専用のUIからクエリングができるほか、API経由でもクエリングや生ログのCSVダウンロード・S3へのロードをサポートしています。&lt;br /&gt;
-手元のPythonなどで処理する場合はCSVダウンロードしたものを処理するようにしています。&lt;br /&gt;
-将来的にデータが大きくなったとしてもkeen.io→S3→EMR（もしくはBigQuery）の流れで処理できると予想しています。&lt;/p&gt;
-
-&lt;p&gt;また、APIのクライアントも各種言語（CURL / JS / RUBY / PYTHON / PHP / JAVA / .NET）でサポートされているため、自社のRailsアプリからログを記録したり、JavascriptとHTMLで自作のダッシュボードも簡単に作成することができます。&lt;br /&gt;
-（APIドキュメントは&lt;a href=&#34;https://keen.io/docs/api/#extract-to-csv-file&#34;&gt;こちら&lt;/a&gt;）&lt;/p&gt;
-
-&lt;h3 id=&#34;keen-ioを採用した理由&#34;&gt;keen.ioを採用した理由&lt;/h3&gt;
-
-&lt;p&gt;以下の（わがままな）要求や要件をすべてクリアしていたのがkeen.ioを採用した理由です。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;サイト上のユーザ行動をすべてトラッキングしたい&lt;/li&gt;
-&lt;li&gt;サイト上のユーザ行動だけでなく、サイトからの通知（メール、メッセンジャー、プッシュ通知）のログも一元管理したい&lt;/li&gt;
-&lt;li&gt;溜まったデータに対して簡単な集計クエリを投げたい（KPIダッシュボードのデータストアとしても使いたい）&lt;/li&gt;
-&lt;li&gt;整形された生データをダウンロードしてきて機械学習などの入力としたい&lt;/li&gt;
-&lt;li&gt;サイト上のユーザ行動データ収集用のJavascriptを書くのが面倒&lt;/li&gt;
-&lt;li&gt;ログを記録するためのWebサーバの構築・管理もやりたくない&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;とにかく楽に作りたい&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;とはいえお金はあまり掛けられない&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;他にも代替案はあるかと思いますが、基本的には、&lt;br /&gt;
-&amp;ndash; タグを入れるだけで導入が簡単にできる一方で、生ログへのクエリングやダウンロードには対応していない「マーケター」用のツール（Mixpanelなど）を採用するか&lt;br /&gt;
-&amp;ndash; fluentdなどのOSSを利用しつつ足りないツールやコードを内製で作りながらBigQueryやS3にデータを流し込むか&lt;br /&gt;
-の2択になるかと思います。&lt;/p&gt;
-
-&lt;p&gt;前者だと要件が満たせず、後者だと構築や運用に手間がかかってしまうという点が懸念となり、今回はkeen.ioを採用しました。&lt;/p&gt;
-
-&lt;p&gt;（TreasureDataは上記をほとんどクリアしていて非常に魅力的なのですが、立ち上げたばかりのサービスで導入するには料金が少々お高いようでしたので今回の採用は見送りました。）&lt;/p&gt;
-
-&lt;h3 id=&#34;費用について&#34;&gt;費用について&lt;/h3&gt;
-
-&lt;p&gt;気になるお値段ですが、一ヶ月あたりに記録するイベント数により料金が決まる仕組みになっており、サポートが無いプランであれば &lt;strong&gt;月間5万イベントまでは無料&lt;/strong&gt; で利用できます。&lt;/p&gt;
-
-&lt;p&gt;無料枠を超えても10万イベント/月までは月額＄20、100万イベント/月までは月額＄125と安価で、クエリングに対しての課金は発生しないなど、自前でサーバを構えることを考えると導入するコストメリットは十分にあるのではないかと思います。&lt;br /&gt;
-（料金について詳しくは&lt;a href=&#34;https://keen.io/plans/self-service/&#34;&gt;こちら&lt;/a&gt;）&lt;/p&gt;
-
-&lt;h3 id=&#34;sendgrid-メール配信saas-との連携&#34;&gt;Sendgrid（メール配信SaaS）との連携&lt;/h3&gt;
-
-&lt;p&gt;もう一つおすすめしたい機能は&lt;a href=&#34;https://sendgrid.kke.co.jp/&#34;&gt;Sendgrid&lt;/a&gt;との連携です。&lt;br /&gt;
-Sendgridはメールの配信から開封・クリックの計測までを一括して行ってくれるSaaSです。加えてメールがスパム判定されていないかを確認する機能や、ユーザごとのメール配信停止機能を提供しています。&lt;/p&gt;
-
-&lt;p&gt;カウルでもメール配信にSendgridを使用しているのですが、keen.ioとSendgridは効果測定の機能がインテグレーションされているため、 &lt;strong&gt;設定を一つ入れるだけでメール関連のイベントもすべてkeen.ioのデータストアに集約することができます&lt;/strong&gt; 。&lt;br /&gt;
-参考）&lt;a href=&#34;https://keen.io/docs/integrations/sendgrid/&#34;&gt;SendGrid Integration&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;この機能のおかげで、&lt;strong&gt;どのユーザにいつどんな内容のメールを送って、その結果ユーザがどのような行動を取ったか&lt;/strong&gt; を簡単なシェルコマンド一つで抽出することが可能になっています。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;USER_ID=123 &amp;amp;&amp;amp; sort \
-  &amp;lt;(jq -r &#39;.result[] | [.keen.timestamp, &amp;quot;pageview&amp;quot;, .page_url] | @tsv&#39; \
-    &amp;lt;(curl &amp;quot;https://api.keen.io/3.0/projects/${PRJ_ID}/queries/extraction&amp;quot; -H &amp;quot;Authorization:${API_KEY}&amp;quot; -H &#39;Content-Type: application/json&#39; -d &amp;quot;{\&amp;quot;event_collection\&amp;quot;:\&amp;quot;pageviews\&amp;quot;,\&amp;quot;timeframe\&amp;quot;:\&amp;quot;this_14_days\&amp;quot;,\&amp;quot;filters\&amp;quot;:[{\&amp;quot;property_name\&amp;quot;:\&amp;quot;user_id\&amp;quot;,\&amp;quot;operator\&amp;quot;:\&amp;quot;eq\&amp;quot;,\&amp;quot;property_value\&amp;quot;:${USER_ID}}]}&amp;quot;)) \
-  &amp;lt;(jq -r &#39;.result[] | [.keen.timestamp, .event, .category] | @tsv&#39; \
-    &amp;lt;(curl &amp;quot;https://api.keen.io/3.0/projects/${PRJ_ID}/queries/extraction&amp;quot; -H &amp;quot;Authorization:${API_KEY}&amp;quot; -H &#39;Content-Type: application/json&#39; -d &amp;quot;{\&amp;quot;event_collection\&amp;quot;:\&amp;quot;Sendgrid Email Events\&amp;quot;,\&amp;quot;timeframe\&amp;quot;:\&amp;quot;this_14_days\&amp;quot;,\&amp;quot;filters\&amp;quot;:[{\&amp;quot;property_name\&amp;quot;:\&amp;quot;user_id\&amp;quot;,\&amp;quot;operator\&amp;quot;:\&amp;quot;eq\&amp;quot;,\&amp;quot;property_value\&amp;quot;:${USER_ID}}]}&amp;quot;))
-
-# 出力結果サンプル
-2016-04-06T09:37:34.000Z        processed       【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:39.000Z        delivered       【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:46.000Z        open    【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:49.000Z        click   【カウル】メールアドレスの認証を行ってください
-2016-04-06T09:37:52.287Z        pageview        https://kawlu.com/market/profile/new
-2016-04-06T09:38:16.594Z        pageview        https://kawlu.com/market/requirements/new
-2016-04-06T09:38:28.107Z        pageview        https://kawlu.com/market/subscription/thankyou?course_id=2
-2016-04-06T09:39:35.410Z        pageview        https://kawlu.com/market
-2016-04-06T09:39:47.010Z        pageview        https://kawlu.com/market/messages
-2016-04-06T09:39:51.971Z        pageview        https://kawlu.com/market/conds/manage
-2016-04-06T09:39:53.867Z        pageview        https://kawlu.com/market/conds/new
-2016-04-06T09:40:17.000Z        processed       【カウル】新しいマンションの紹介があります
-2016-04-06T09:40:20.000Z        delivered       【カウル】新しいマンションの紹介があります
-2016-04-06T09:40:54.000Z        pageview        https://kawlu.com/market/messages
-2016-04-06T09:40:57.619Z        pageview        https://kawlu.com/market
-2016-04-06T09:40:59.388Z        pageview        https://kawlu.com/market/wishlists
-2016-04-06T09:41:04.784Z        pageview        https://kawlu.com/library
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回は立ち上げたばかりのサービスでも導入できるログ分析基盤についてご紹介いたしました。&lt;br /&gt;
-新規ユーザ獲得までの分析にはマーケティング方面に強いGoogle Analyticsを、無料ユーザを有料会員化するためのより深い分析にはkeen.ioを導入しています。&lt;/p&gt;
-
-&lt;p&gt;実際の導入には実働で丸4日程度（上記の調査も全て含めた稼働日数）、利用料金は今のところGoogle Analytics・keen.ioともに無料で使えています。&lt;/p&gt;
-
-&lt;p&gt;実際に導入してからまだ2ヶ月弱なのですが、現時点ではかなり快適に使えています。&lt;br /&gt;
-運用していく中での知見などあればまた書きます。&lt;/p&gt;
-
-&lt;p&gt;&lt;br&gt;
-&lt;a href=&#34;http://www.turnyourideasintoreality.com/2016/02/kauru/&#34;&gt;REALITY - 不動産売買市場をディスラプトするHousmart、不動産を買いたい人が本当にハッピーになるサービス 「カウル」をローンチ。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://kawlu.com/market&#34;&gt;【カウル】仲介手数料無料の中古マンション売買サービス&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://techblog.housmart.co.jp/1/01/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/1/01/01/</guid>
+      <description></description>
     </item>
     
   </channel>

@@ -2,12 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Swift on カウル Tech Blog</title>
-    <link>http://techblog.housmart.co.jp/tags/swift/index.xml</link>
+    <link>http://techblog.housmart.co.jp/tags/swift/</link>
     <description>Recent content in Swift on カウル Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <atom:link href="http://techblog.housmart.co.jp/tags/swift/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://techblog.housmart.co.jp/tags/swift/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SwiftのOSSライブラリに機能を追加したときに心がけたこと</title>
+      <link>http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/</link>
+      <pubDate>Sun, 20 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/</guid>
+      <description>&lt;p&gt;アプリケーションエンジニアの田中です。今年6月に入社して、初めてのTech Blogへの投稿になります。最近の大きな出来事は、スプラトゥーン購入をしたこと、Housmarへのjoin、そして結婚したことです。&lt;/p&gt;
+
+&lt;p&gt;先日、何となく目標にしていた「お仕事でお世話になったOSSに機能追加する」を達成できました。今回は、私がReactiveSwiftに機能を追加した際の事前準備、背中を押してくれたものなどについて書いてみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>try! Swift2017に参加しました！気になった発表3選！</title>
@@ -23,105 +39,9 @@
 
 &lt;h1 id=&#34;今回参加の目的&#34;&gt;今回参加の目的&lt;/h1&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600&#34; alt=&#34;中古マンション売買サービス「カウル」&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600&#34; alt=&#34;中古マンション売買サービス「カウル」&#34; /&gt;
 
-&lt;p&gt;HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。&lt;/p&gt;
-
-&lt;p&gt;また、メインのサービス以外にも、ユーザがマンションの情報を検索できる&lt;a href=&#34;https://kawlu.com/library&#34;&gt;カウルライブラリー&lt;/a&gt;、マンション購入のノウハウを載せた&lt;a href=&#34;https://kawlu.com/journal/&#34;&gt;マンションジャーナル&lt;/a&gt;というメディアの運営をしています。&lt;/p&gt;
-
-&lt;p&gt;これらのサービスでアプリ開発を行っており、①開発で使っている言語のトレンドを知りたい、②面白い発表から学びたいと思いカンファレンスに参加しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-oCt1zx9Rr6ZTjKkf-z5sC_pyAlsyxO5QGO-iUY-MQzfpq9FCmODFFNHF1NeqzDHHxr7EpsArFErgAcp1jgwbarbYzbf8wUztbEmkk3ieWGWWz1k6tK5gm3Tc6SLjzx4IMJi4SauhVeG9BMFj3stO0lXRd2D8Mq0pataRjzsFnA9L2IBTkJaaIT4o6xESSVv94jYKerznrOuBx5Tf_kFfTJ3JD42Q5xqPdUzREtIm6hcywcFLaf4KHrqobrdotsnWyUHHw1n3ERB5KSq-XxJ1Cr9OBri68LL93VvxlQw3JB51q1KBZJqeSYv9q2QpF8YeRSEGOO8rlz_bMGVciyG0z3PmsNUG7ryy-q3p7wUtbnZz59lyIpJ11kOKGYolpTwvFTMNY9U1TCrZLaXjlroBnQdD2Pj4EyR4TiuwU5tp-ZWDRnOwxCCVJtCyc7boiESmmO5K2QXDaemC2JjSc9zYm2uk6dqBEVJu2pBn-yykAS9xnYSiIofOG3P3BQdr0aFhLoqiHt3236ehy5CysAq2pSbIWbelWFEABoN7gurMSt852kp5MsYkx9qbmIATuuHAGlUbVBN6PR1B1Y1p4BPQoEPZ067CkuM-J0FIWAZMAc1WOQF7X4yUWMxG4dOOkMR5WHBoWAkxBsvl80bu9XAtmy_Nn-wy20EOaHIlQF2=w600&#34; alt=&#34;カンファレンスのネームプレートが可愛かったです。当日の名前投票で「RIKO」ちゃんに決定&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;今回は、カンファレンスにて気になった発表を3つ紹介させていただきます。&lt;/p&gt;
-
-&lt;h1 id=&#34;try-swift全体の構成&#34;&gt;try! Swift全体の構成&lt;/h1&gt;
-
-&lt;p&gt;まず、全体の構成についてです。カンファレンスでの発表は全部で約32個で、内容は以下のような構成でした。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/1OCOR_a4Y-VnJnjDRvD6Bxiz5gjwASFws3KoHF_0ZAq1ytcxcgxHlElKLZigTuj71vQFm_wFwfKGFpyWal7-qsJZzxjl6NTXCa6PwkSf9sdZ7dUsxhHEzqbrp4oozgtziH5EVdkpbaZhchKe-ISAL0noLpqfukO6-1Yo9lhY8hHOxgdrU35_9H_Ecvc9jsiomxa10SGrEETmCE5lcFfUgs7KQPlj_36kmRTwERb6AsYalli1Rp1jA9dQGHxwlEjHbrecv3kmM9K8s9GxMejmvE4Puos4MjzbAmSVVXbYKiNaqakM1EISvAekVFfFZNQttYAN-IoavhKpd9UdFimRuhPQKn3Km9t9WjZAjrLzBQA-L9LVemuuoZgwJgdQnsc0jOSubcj0J-dlu7gRRgPA4wusHDmfBC1UOV133VIo4WdqL84QVr8RuKkiAmeb7OZ_KA9aVDOa2zTxhM8x4BqgetK5gFUu1VC8BZtYb9UG6ggo3VoqBIvoetMFrjtumzz1-lrCDQLTKTwBhIq_6ahFH3QYX4Bfv28x9YbyUwCzrqbyn0BsAbOwIxopTY3wScqFl1vVCmbN_YfCo_dBWzNQVKWmFai9ycfF8yFLn_rT7vd5jvKXWSZaGeE_vvjz02OEk7obl-aRvD_YDtIxHNKLFeVGQxq8whq5nmK0GfuC4Q=w600&#34; alt=&#34; try! Swift2017の講演・ライトニングトークの内容構成図&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;サーバーサイドSwiftや機械学習・DeepLearningの話が結構でてきた印象でした。プロダクト作り全体のドラマティックな話、ReactNative開発のメリット・デメリット比較、Swift on Android話などもあり、Swiftだけでない話題も豊富でした。&lt;/p&gt;
-
-&lt;h1 id=&#34;気になった発表3つ&#34;&gt;気になった発表3つ&lt;/h1&gt;
-
-&lt;h2 id=&#34;①client-side-deep-learning-by-shuichi-tsutsumi-https-twitter-com-shu223&#34;&gt;①Client-Side Deep Learning &lt;a href=&#34;https://twitter.com/shu223&#34;&gt;by Shuichi Tsutsumi&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;堤(&lt;a href=&#34;https://twitter.com/shu223&#34;&gt;@Shu223&lt;/a&gt;)さんのクライアントサイドで行うディープラーニングのプレゼンが印象的でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;ディープラーニングは強力なコンピューティングパワーが必要なので、従来はモバイルデバイスでやるものではなかったのですが、iOS 10でMetal Performance Shadersフレームワークに追加された畳み込みニューラルネットワーク（CNN）のAPIにより、クライアントサイドのGPUで学習済みCNNの計算を行えるようになったというお話でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;つまり「ユーザの手元で」「オフラインでも」昨今の進化がめざましいディープラーニングの成果を利用できるようになったということでカウルアプリでも使えると面白いなと思いピックアップさせていただきました。堤さんのLTでは実装のオーバービューと、デモを見せていただきました。&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2OS20oAt7NLgPx&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/t26v0748/clientside-deep-learning&#34; title=&#34;Client-Side Deep Learning&#34; target=&#34;_blank&#34;&gt;Client-Side Deep Learning&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&#34;_blank&#34; href=&#34;//www.slideshare.net/t26v0748&#34;&gt;Shuichi Tsutsumi&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;②realmを使ってコラボレーションアプリを作る-by-marius-rackwitz-https-twitter-com-mrackwitz&#34;&gt;②Realmを使ってコラボレーションアプリを作る &lt;a href=&#34;https://twitter.com/mrackwitz&#34;&gt;by Marius Rackwitz&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;このプレゼンでいうコラボレーションアプリというのは、Google Docs/Slack/JIRA等の複数のユーザーが同時進行で作業をすることができるアプリのことでした。&lt;br&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Realmの利点&lt;br&gt;
-・オブジェクト思考で書け、クラスを実装するように書ける&lt;br&gt;
-・React NativeやXamarinにも対応しているので、クロスプラットフォーム&lt;br&gt;
-・すべての環境で同じデータを使いまわせるので、バックアップがとれる&lt;br&gt;
-・トランザクション管理をしているので、リアルタイムの共同編集ができる&lt;br&gt;
-・サーバー、モバイルの両方でRealmを採用すれば、アプリからJSONを排除することが可能&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Realmの通知機能 &lt;br&gt;
-・プロパティの変更、オブジェクトの変更、コレクションの変更、ファイルの変更など、様々な変更に対して通知を行える&lt;br&gt;
-・イベントハンドリング&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;アクセス権の管理 &lt;br&gt;
-・Admin Realm, Management Realm, Permission Realmなどの特別なRealmを使えば、アクセス権の管理が可能&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;とのことで、3の内容が特に興味深かったです。&lt;/p&gt;
-
-&lt;p&gt;　&lt;/p&gt;
-
-&lt;h2 id=&#34;③クックパッドアプリのテストを味わう-by-kazucocoa-https-twitter-com-kazu-cocoa&#34;&gt;③クックパッドアプリのテストを味わう &lt;a href=&#34;https://twitter.com/Kazu_cocoa&#34;&gt;by KazuCocoa&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;クックパッドでは、テストの項目でUIテストが一番多くなってしまうらしく、UIテストを自動化することでクラッシュレート減少に成功したという事例について紹介いただき大変参考になりました。&lt;br&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Cookpadアプリの状況&lt;br&gt;
-グローバルアプリと日本アプリの2つがあり、統合はまだしておらず、UIコンポーネントは複数大きく変えているそうで、だいたい10万行ぐらい。以前は2週間、最近は1ヶ月毎にアップデートしている状況。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;kano-model という品質モデル&lt;br&gt;
-・Attractive – Must-be Qualityの２つのパラメータ&lt;br&gt;
-・Diachronic Quality for mobile&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;UIテストのやり方&lt;br&gt;
-まず、テストを書いてからリファクタリングを行うそうです。マニュアルテストは簡単に出来ますが、ユニットテストは時間がかかります。しかし、理想はその逆です。
-そこで、Cookpadでは2015年-2017年にかけてUIテストの自動化を行い、クラッシュ率を下げ続けたそうです。&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;UIテストの書き方&lt;br&gt;
-①シナリオを書く&lt;br&gt;
-②シナリオをRubyコードに変換&lt;br&gt;
-③Appiumで実行&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;XPathはOSのフレームワークにかなり依存していて、テストをUIレベルからメソッドレベルに移動することが大事とのことでした。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;クックパッドでは、数ヶ月前にSwiftを実装し始めたらしく、テストがあるので安心してSwiftの実装出来るようになったそうです。このような工夫でクラッシュ率の低い安定したサービスを提供していきたいと思いました。&lt;/p&gt;
-
-&lt;h1 id=&#34;参加して感じたこと-br&#34;&gt;参加して感じたこと&lt;br&gt;&lt;/h1&gt;
-
-&lt;p&gt;① Twitter(&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;)投稿やSlackが活発で、発表の後に会場外でも登壇者へのQAコーナが用意されていて、とても交流しやすい雰囲気でした。
-(&lt;a href=&#34;https://twitter.com/k_katsumi&#34;&gt;@k_katsumi&lt;/a&gt;さん、運営者のみなさんありがとうございます！)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;②最前列で聞き起こしをして登壇もしている&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんのコミュニティへの貢献度がすごいと思いました。(&lt;a href=&#34;http://niwatako.hatenablog.jp/&#34;&gt;niwatako&lt;/a&gt;さんありがとうございます！)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;
-③電源が各テーブルになく、バッテリーが必要だったので常に電源が気になりました。&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;④同時通訳の方の熱がこもっていて応援したくなりました。(トランシーバーが2台戻っていないそうなので、間違えて持って帰ってしまった方は&lt;a href=&#34;https://twitter.com/tryswiftconf&#34;&gt;@tryswift&lt;/a&gt;運営の方へ連絡しましょう。)&lt;br&gt;&lt;/p&gt;
-
-&lt;p&gt;⑤お弁当の種類を選べ、コーヒーやジュースがいつでも飲めて快適でした。&lt;br&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;最後に&#34;&gt;最後に&lt;/h1&gt;
-
-&lt;p&gt;Swiftの盛り上がりを体感し、Swiftディベロッパーの方々と交流を深める良い機会となりました！参加者の皆さん、運営の皆さんありがとうございました！&lt;/p&gt;</description>
+HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。&lt;/p&gt;</description>
     </item>
     
   </channel>
