@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編] &middot; カウル Tech Blog</title>
+    <title>これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~ &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.26" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,30 +19,22 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" />
-    <meta property="og:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" />
-<meta property="og:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" />
+    <meta property="og:title" content="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" />
+<meta property="og:description" content="アプリケーションエンジニアの西辻です。2017年4月からHousmartで主にAndroidアプリ開発を担当しています。今回のブログでは、弊社のCI環境としてメインで利用している Bitbucket Pipelines についての活用事例についてご紹介したいと思います。
 
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" />
 
-  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160310_top.jpg" />
+  <meta property="og:image" content="http://techblog.housmart.co.jp/" />
+
+  <meta property="og:image" content="http://techblog.housmart.co.jp/" />
 
 
 
-<meta property="article:published_time" content="2016-03-10T16:57:26&#43;09:00"/>
-<meta property="article:modified_time" content="2016-03-10T16:57:26&#43;09:00"/>
+<meta property="article:published_time" content="2017-08-30T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2017-08-30T00:00:00&#43;00:00"/>
 
 
 
@@ -56,45 +48,27 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
     
     
-<meta itemprop="name" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]">
-<meta itemprop="description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
+<meta itemprop="name" content="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~">
+<meta itemprop="description" content="アプリケーションエンジニアの西辻です。2017年4月からHousmartで主にAndroidアプリ開発を担当しています。今回のブログでは、弊社のCI環境としてメインで利用している Bitbucket Pipelines についての活用事例についてご紹介したいと思います。
 
 ">
 
 
-<meta itemprop="dateModified" content="2016-03-10T16:57:26&#43;09:00" />
-<meta itemprop="wordCount" content="2528">
+<meta itemprop="dateModified" content="2017-08-30T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2358">
 
-  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160310_top.jpg">
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/">
+
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/">
 
 
 
-<meta itemprop="keywords" content="event,infra,media," />
+<meta itemprop="keywords" content="CI," />
 
     <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160310_top.jpg"/>
-<meta name="twitter:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]"/>
-<meta name="twitter:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
+<meta name="twitter:image:src" content="http://techblog.housmart.co.jp/"/>
+<meta name="twitter:title" content="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~"/>
+<meta name="twitter:description" content="アプリケーションエンジニアの西辻です。2017年4月からHousmartで主にAndroidアプリ開発を担当しています。今回のブログでは、弊社のCI環境としてメインで利用している Bitbucket Pipelines についての活用事例についてご紹介したいと思います。
 
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
@@ -294,25 +268,25 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
         <div class="article-inner">
             
                 
-                <img src="http://techblog.housmart.co.jp//images/20160310_top.jpg" class="article-banner">
+                <img src="https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no" class="article-banner">
                 
             
 
             <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/">
+    <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/">
     <h1 class="article-title" itemprop="name">
-        テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]
+        これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~
     </h1>
     </a>
     <div class="article-meta">
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2016-03-10 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-10</time>
+            <time datetime="2017-08-30 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-08-30</time>
             &middot;
-            2528
+            2358
             words
             &middot;
-            6
+            5
             minute read
         </div>
 
@@ -323,7 +297,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">DEVELOPMENT</a>
                 
                 
             </div>
@@ -336,13 +310,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
             <div class="article-category">
                 <i class="fa fa-tags"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/media">media</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ci">CI</a>
                 
                 
             </div>
@@ -351,200 +319,195 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
     </div>
 </header>
 <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="hatena-bookmark-button" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="hatena-bookmark-button" data-hatena-bookmark-title="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 </div>
 
 
             <div class="article-entry" itemprop="articleBody">
-                <p>Housmart高松です。</p>
-
-<p>先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。<br />
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。</p>
-
-<p>※前編をご覧になっていない方は<a href="/2016/03/03/prepare_for_wbs/">こちら</a>を先にご覧ください。</p>
-
-<blockquote>
-<p>WBSサイト(不動産流通に革新は起こるか): <a href="http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/">http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/</a><br />
-仲介手数料無料の不動産サイト「カウル」: <a href="https://kawlu.com/">https://kawlu.com/</a></p>
-</blockquote>
+                <p>アプリケーションエンジニアの西辻です。2017年4月からHousmartで主にAndroidアプリ開発を担当しています。今回のブログでは、弊社のCI環境としてメインで利用している Bitbucket Pipelines についての活用事例についてご紹介したいと思います。</p>
 
 <p></p>
 
-<h2 id="内容">内容</h2>
+<h2 id="overview">Overview</h2>
 
-<ol>
-<li>前提 [前編]</li>
-<li>事前準備 [前編]</li>
-<li>放送当日
+<p>元々<code>CI</code>としては<code>Wercker</code>を利用していたのですが、社内でソースコードを管理している<code>Bitbucket</code>内でも<code>CI</code>を利用できることがわかったので<br />
+利用するプラットフォームを減らす目的で<code>Bitbucket Pipelines</code>を導入してみようという流れになりました<br />
+利用してみて特に問題なく運用できているのでこの記事では、<code>Bitbucket Pipelines</code>で何ができるのかと<br />
+実際の運用方法について書いていこうと思います</p>
+
+<h2 id="公式ドキュメント">公式ドキュメント</h2>
+
+<p><a href="https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html">https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html</a></p>
+
+<h2 id="bitbucket-pipelines-の基本的な知識">Bitbucket Pipelines の基本的な知識</h2>
 
 <ul>
-<li>直前の放送時間変更</li>
-<li>放送内容</li>
-<li>アクセス数まとめ</li>
-</ul></li>
-<li>振り返りとまとめ
+<li><code>docker image</code>を利用できるので各プロジェクトに適した環境で<code>CI</code>をスタートできる</li>
+<li><code>docker-compose</code>のような利用ができる(<code>redis</code>, <code>mysql</code>などを別コンテナとして起動できる)</li>
+<li>指定された<code>yml</code>ファイルを<code>Repository</code>の直下に配置だけで動作する</li>
+<li><code>Bitbucket</code>内のプルリクに<code>CI</code>の結果が表示できる</li>
+<li>指定したディレクトリを<code>cache</code>にできる(<code>bundle install</code>の高速化などに利用)</li>
+<li>制限はあるが<code>docker</code>コマンドを利用できる(<code>ECS</code>へ<code>image</code>を<code>push</code>できる)</li>
+<li><code>CI</code>で利用できる環境変数が豊富</li>
+<li>課金は利用した<code>Pipelines</code>の時間に応じて使ったぶんだけ請求される(ちょっと試すくらいであれば無料でできます)</li>
+</ul>
+
+<h2 id="bitbucket-pipelines-で実現できていること">Bitbucket Pipelines で実現できていること</h2>
+
+<p>正直なんでもできます<br />
+現在の運用では以下のことを<code>Bitbucket Pipelines</code>で実行しています</p>
+
+<h3 id="ruby-project">Ruby project</h3>
 
 <ul>
-<li>アクセス予想振り返り</li>
-<li>まとめ</li>
-</ul></li>
-</ol>
+<li><code>rspec</code>の実行</li>
+<li><code>rubocop</code>でのsyntaxチェック</li>
+<li><code>ECS</code>への<code>image push</code></li>
+<li><code>submodule</code>を利用している<code>Repository</code>の依存解決</li>
+</ul>
+
+<h3 id="android-project">Android project</h3>
+
+<ul>
+<li><code>JUnit</code>の実行</li>
+<li><code>Fabric Beta</code>へ<code>apk</code>ファイルのアップロード</li>
+<li><code>master</code>ブランチにマージする際に<code>Beta</code>版として<code>Google Play Console</code>に配信</li>
+</ul>
+
+<h2 id="bitbucket-pipelines-を使ってみる">Bitbucket Pipelines を使ってみる</h2>
+
+<p>左のサイドバーに<code>Pipelines</code>のアイコンがあるのでそこから設定をすることができます<br />
+チュートリアルがかなり充実しているので実際にやってみた方が早いでしょう</p>
+
+<p>仕組みとしては以下の<code>bitbucket-pipelines.yml</code>を<code>Repository</code>の直下に配置するだけで動きます</p>
+
+<pre><code class="language-yml">image: ruby:2.4.0
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - bundler
+        script:
+          - bundle install
+
+definitions:
+  caches:
+    bundler: ./vendor
+</code></pre>
+
+<p>これは新規作成で作成されるサンプルをそのまま貼り付けただけなのですが、簡単に何をしているか説明します</p>
+
+<p><code>image:</code> で利用したい<code>image</code>を指定します<br />
+<code>dockerhub</code>に上がっている<code>public image</code>であれば基本なんでも利用できると思います<br />
+また、以下のように記載することで<code>private image</code>も利用可能です<br />
+自分で作成した<code>image</code>内に公開してはいけない情報を持つ場合は<code>dockerhub</code>で<code>private image</code>にして利用するのがいいでしょう<br />
+<code>$DOCKER_HUB_USERNAME</code>などは<code>Bitbucket</code>の<code>Project</code>の設定で<code>Pipelines</code>に対してセットできる環境変数になります</p>
+
+<pre><code class="language-yml">image:
+  name: housmart/kawlu-pipeline:latest
+  username: $DOCKER_HUB_USERNAME
+  password: $DOCKER_HUB_PASSWORD
+</code></pre>
+
+<p><code>default:</code>セクション以下に記載すると<code>git push</code>されたタイミングでどのブランチに対しても<code>Pipelines</code>が実行されます<br />
+特定のブランチに対する処理を分けることも可能です<br />
+現在の運用では<code>master</code>, <code>develop</code>, <code>KAW-*</code> ブランチに対してそれぞれ異なる処理になるように設定しています<br />
+利用はしていないですが、<code>tag</code>でも指定できます</p>
+
+<pre><code class="language-yml">pipelines:
+  branches:
+    master:
+      - step:
+          script:
+            - 省略
+    develop:
+      - step:
+          script:
+            - 省略
+    KAW-*:
+      - step:
+          script:
+            - 省略
+</code></pre>
+
+<p><code>definitions:</code>ではキャッシュしたいディレクトリの指定や別コンテナで起動したいサービスなどを指定します<br />
+以下の例では<code>redis</code>を別コンテナで起動しています</p>
+
+<pre><code class="language-yml">definitions:
+  caches:
+    bundler: /usr/local/bundle
+  services:
+    redis:
+      image: redis
+</code></pre>
+
+<h2 id="価格について">価格について</h2>
+
+<p>これから導入を考えてる方へ<br />
+参考までに社内で現在どれくらい利用していくらかかっているか興味があると思うので共有しておきます</p>
+
+<h3 id="ruby">Ruby</h3>
+
+<p>Repository : 6</p>
+
+<h3 id="android">Android</h3>
+
+<p>Repository : 1</p>
+
+<p>Pull Requestは全体で1日平均3~4くらいになります
+ちょうど月半ばくらいで2,788 minutes 利用しているので1ヶ月だと5,000 minutes くらいになりそうです<br />
+金額としては現在の Plan が500 build minutes 含めているので $50/month のコストで運用しています</p>
+
+<p><img src="https://lh3.googleusercontent.com/Bu7fffSrrQ0-umw_d_CiCTCScBepFboDN1j6qpSinWqNSVOvfqk3jmm7TzUCRlO9zsG7uT0gzF2ggNcgo2qgHuTXe9O5Mdi6ahzZVFodzdBh5F00bBeDvWTnP_4mHOdYIiaKQfdVmgMpYUTRArs3MClIoEhPmcXxwJdSxM7OsJLXZCpIy0o_13wlqDJSDnzQhFSJjz1gFmNjvDGE9eqV-VTKHPGLm11wNlcd2dRTwSnke7mV6Kdvfaea0ELynQLfxd47jg00Y4zlPUjEyxY90C8NeXGsOs2WYQiI5jtHRbvlprYHz0xB7cfQu4F73E6M152kusejbebBenvu2ootgAvGz-jjetAtNNmJXDMChap_PSSQbHcWwukf0EeGIJa5QPgjt5UNRXvL6TBnJaWVgHxs3CXv2MA5x8pKUWaNP6CQPi7c-TaAy8OAtvzI9KeBblCR0UuRGMXErvr-t08IDHwDZ7ausNHBcj7vUrn2cazyliafxI3TibhDl-FiBFMjeCWr-8pnWMGIFo-yG2L2StDWTa9Jzc7GkyXAbAPkrtOdrD5G_s7cINzNAsQLdHuEYIhNNwz5bjDs1_AhPaIteLxK_loVKn3HGcSr8tPTetJ44yq_IHSX7UfM_VVsyLU0rmhQ1Iuys3m0eav8Fs_sIimAJxgs0tBHKAlM1FjEcAE1fg=w773-h194-no" title="Pipelines pricing sample"></p>
+
+<h2 id="その他-tips">その他 Tips</h2>
+
+<h3 id="bitbucket-pipelines-yml-の-syntax-check-tool">bitbucket-pipelines.yml の syntax check tool</h3>
+
+<p>書いた<code>yml</code>ファイルが正しいかどうかオンラインでチェックするツールがあります<br />
+<a href="https://bitbucket-pipelines.atlassian.io/validator">https://bitbucket-pipelines.atlassian.io/validator</a></p>
+
+<h3 id="rubocop-の運用について">rubocop の運用について</h3>
+
+<p>今回のメインの記事である<code>Pipelines</code>の話からは少しずれますが<br />
+既存の<code>rails</code>プロジェクトに<code>rubocop</code>を導入したのですが、いきなり全てを対象にするととんでもないことになったので<br />
+現在の運用では<code>develop</code>ブランチと差分ファイルがあるものだけを<code>rubocop</code>の対象にしています<br />
+こうすることで今後の修正で少しずつ改善していけるサイクルができあがりました</p>
+
+<h3 id="ecs-への-image-push-について">ECS への image push について</h3>
+
+<p>ECSへの認証は12時間でリフレッシュされるので<code>CI</code>を導入する上で以下の設定を導入しました<br />
+<a href="https://aws.amazon.com/blogs/compute/authenticating-amazon-ecr-repositories-for-docker-cli-with-credential-helper/">https://aws.amazon.com/blogs/compute/authenticating-amazon-ecr-repositories-for-docker-cli-with-credential-helper/</a></p>
+
+<h2 id="終わりに">終わりに</h2>
+
+<p>今回の記事では<code>Bitbucket Pipelines</code>に関する設定や運用方法について書いてみました<br />
+世の中的には Github ユーザの方が多いかと思いますが<br />
+個人で private repository を無料で作れたりと<code>Bitbucket</code>を利用するメリットはあるので<br />
+<code>Pipelines</code>、是非活用してみてください</p>
+
+<p><code>docker</code>ベースの<code>CI</code>ツールなのでカスタマイズしてやれることはかなり多いのも魅力的ですね</p>
+
+<p>個人的には<code>Android</code>のビルド時間がおよそ5分で終わったりと<code>Pipelines</code>の動作するマシンの性能の良さに非常に満足しています</p>
 
 <hr />
 
-<h2 id="3-放送当日">3.放送当日</h2>
-
-<h3 id="直前の放送時間変更">直前の放送時間変更</h3>
-
-<p>WBSは通常23時からの放送なのですが、この日は前の番組が世界卓球の日本vsドイツ戦でした。最終ゲームまでもつれ込む白熱の試合だったため放送時間がぎりぎりまで伸びて、放送開始が0時30分に変更になりました。</p>
-
-<p>以前とくダネで紹介していただいた時も他の大きいニュースの影響で放送日が2度延期されたという経験もあり、テレビは本当に放映されるまでは気を抜けないなという印象です。</p>
-
-<p>会社のメンバーで真剣に卓球を応援していたのですが、残念ながら日本が2-3で負けてしまいました。<br />
-この放送時間の変更がどの程度視聴率に影響するかはわかりませんが、気を取り直していざ放送に望みます。</p>
-
-<p><br></p>
-
-<h3 id="放送内容">放送内容</h3>
-
-<p>放送が始まり15分、いよいよ特集のコーナーです。<br />
-今回は不動産ベンチャーの新しい取り組みという切り口で、大家さんと直接やりとりをすることで仲介手数料を無料にする賃貸サービスの <strong>ウチコミ！</strong> さんと共に弊社を取り上げていただきました。</p>
-
-<p>大江アナウンサーが従来の中古不動産売買の仲介手数料をフリップを使って説明します。
-<img src="/images/20160310_00.png" title="seen0"></p>
-
-<p>間にウチコミさんの紹介をはさみ、<br />
-会社名とともにオフィスが映りました。
-<img src="/images/20160310_01.png" title="seen1"></p>
-
-<p>「今年一月、売買の仲介手数料を無料にするカウルというサービスを始めました」<br />
-のナレーションと共にサービス名、TOPページのアップが映ります。
-<img src="/images/20160310_02.png" title="seen2"></p>
-
-<p>サービスの説明が続きます。どのくらい経費を抑えられるか、月額１万円の会員サービスの説明など。<br />
-このあたりでピンと来てくれた方は検索を始めてくれるのではないでしょうか。
-<img src="/images/20160310_03.png" title="seen3"></p>
-
-<p>弊社代表針山が熱い思いを語ります。このシーンも社名が入っています。
-<img src="/images/20160310_04.png" title="seen4"></p>
-
-<p>最後は実際にカウルで物件を購入していただいた方のインタビューが流れます。
-<img src="/images/20160310_05.png" title="access graph"></p>
-
-<p><br>
-今回は全体で2分ほどの紹介でした。そのうち3分の1程度はサービス名もしくは社名が画面に写っていました。<br />
-ナレーションでもサービス名を3回・社名を1回読み上げてもらえたので、検索のためのキーワードは十分に視聴者の方の頭に残ったのではないかと思います。</p>
-
-<p><br></p>
-
-<h3 id="アクセス数まとめ">アクセス数まとめ</h3>
-
-<p>実際のアクセス数を見てみましょう。</p>
-
-<p>AWSのCloudWatchで見たバランサへのアクセス数のグラフです。<br />
-一分間単位の合計値が見れて便利ですね。これはバランサへのすべてのアクセスの合計なので画像やJavascript、CSSの読み込みもカウントされることに注意してください。
-<img src="/images/20160310_06.png" title="access graph"></p>
-
-<p>カウルの場合、画像などを合計するとTOPページの読み込みで30回程度バランサへのアクセスが発生します。
-それを考慮にいれて計算すると、最大で分間 <strong>450アクセス</strong> が来ており、アクセスが増えてから落ち着くまでにトータルで <strong>2千件</strong> ほどのアクセスが来ていました。</p>
-
-<p>また、実際にサーバ上のログを集計したところ、 <strong>30QPS（秒間アクセス）</strong> が今回の最大値でした。<br />
-前編で予想した667QPSとは程遠い結果となってしまいました。</p>
-
-<p><br></p>
-
-<h2 id="4-振り返りとまとめ">4.振り返りとまとめ</h2>
-
-<h3 id="アクセス予想振り返り">アクセス予想振り返り</h3>
-
-<p>実際の結果を持って事前の予想を振り返ってみましょう。<br />
-テレビ出演に舞い上がってテンション高めに予想していた部分を冷静に下方修正してみると、以下の様な数値が妥当では無いかと思いました。</p>
-
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">事前予想</th>
-<th align="center">結果からの推測</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="center">テレビ局のリーチ人数</td>
-<td align="center">4,000万</td>
-<td align="center">4,000万</td>
-</tr>
-
-<tr>
-<td align="center">視聴率</td>
-<td align="center">5%</td>
-<td align="center"><font color="red">2%</font></td>
-</tr>
-
-<tr>
-<td align="center">Web検索する人の割合</td>
-<td align="center">5%</td>
-<td align="center"><font color="red">0.25%</font></td>
-</tr>
-
-<tr>
-<td align="center">一人あたりの閲覧ページ数</td>
-<td align="center">2</td>
-<td align="center"><font color="red">1</font></td>
-</tr>
-
-<tr>
-<td align="center">総アクセス数</td>
-<td align="center">20万</td>
-<td align="center">2千</td>
-</tr>
-</tbody>
-</table>
-
-<p>放映時間が深夜1時近くになってしまったことを考慮に入れて視聴率は2%、<br />
-Web検索する人の割合は400人に一人だと仮定して0.25%（この数字はサービスの内容や紹介のされ方によって大きく変わるとは思いますが、冷静に考えるとテレビを見ていて5%の確率で検索はしないですよね）<br />
-また、カウルの場合はTOPページに情報をたくさん盛り込んでいるので、興味を持ってもらえた人はTOPページの滞在時間が長くなる傾向があります。なので、放送前後数分間における一人あたりの閲覧ページ数を1と仮定しなおしました。</p>
-
-<p>その上で再度総アクセス数を計算してみると、今回のテレビ放映の前後で来てもらえたユーザ数とほぼイコールの2千件となりました。</p>
-
-<p>また、最大QPSの試算に関しては、2千件の総アクセスに対して最大30QPS、つまり総アクセス数の <strong>1.5%</strong> のアクセスがピークの1秒間に来たという数字が一つの指標になるのでは無いでしょうか。<br />
-（上記のアクセスグラフを見ても分かる通り、紹介が終わった次の1分間にアクセスが集中しているなど、一定の傾向があるような気がしました）</p>
-
-<p><br></p>
-
-<h3 id="まとめ">まとめ</h3>
-
-<p>今回の事例の振り返りの内容も含めて、テレビ出演時の負荷見積もりの式を再度掲載しておきます。</p>
-
-<pre><code>総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合(≒0.25%) (=総アクセス人数)
-                      × 一人あたりの平均閲覧ページ数
-
-最大QPS = 総アクセス数 × 1.5%(※実測値から算出した割合)
-</code></pre>
-
-<p>これにある程度バッファを設ければ妥当な見積もりとなりそうです。
-今回は事前の予想がつかなかったことで見積もりを大きく外してしまいましたが、AWSコストとしては数ドル程度の損失だったので助かりました。AWSさまさまです。</p>
-
-<p>後日談ですが、WBSは<a href="http://txbiz.tv-tokyo.co.jp/">オンデマンド</a>で見ている方も結構多いようで、翌日以降も数日間アクセスが増えていました。</p>
-
-<p>夢の20万アクセスには遠く及びませんでしたが、まだローンチして1ヶ月半のカウルにとっては認知してもらう大変よい機会になりました。<br />
-また、ビジネスモデル的にも信用が大事になってくる領域なので、その点でも大きくプラスになったと思います。</p>
-
-<p>今後の皆さんの参考になれば幸いです。</p>
+<p>Housmartではエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
             </div>
             <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="hatena-bookmark-button" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="hatena-bookmark-button" data-hatena-bookmark-title="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 </div>
 
 <footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%be%8c%e7%b7%a8%5d&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f&amp;description=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%be%8c%e7%b7%a8%5d" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%81%93%e3%82%8c%e3%81%8b%e3%82%89CI%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%9f%e3%81%84%e3%81%9d%e3%81%93%e3%81%ae%e3%81%82%e3%81%aa%e3%81%9f%21%20Bitbucket%20Pipelines%20%e3%81%af%e3%81%84%e3%81%8b%e3%81%8c%3f%20%20~Bitbucket%20Pipelines%20%e3%81%ae%e6%b4%bb%e7%94%a8%e4%ba%8b%e4%be%8b~&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f&amp;description=%e3%81%93%e3%82%8c%e3%81%8b%e3%82%89CI%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%9f%e3%81%84%e3%81%9d%e3%81%93%e3%81%ae%e3%81%82%e3%81%aa%e3%81%9f%21%20Bitbucket%20Pipelines%20%e3%81%af%e3%81%84%e3%81%8b%e3%81%8c%3f%20%20~Bitbucket%20Pipelines%20%e3%81%ae%e6%b4%bb%e7%94%a8%e4%ba%8b%e4%be%8b~" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -556,21 +519,14 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
         
 <nav id="article-nav">
     
-    <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</div>
+      <div class="article-nav-title">SwiftのOSSライブラリに機能を追加したときに心がけたこと</div>
     </a>
     
 
-    
-    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">スタートアップのCTOになって2ヶ月で作った開発サイクル</div>
-    </a>
     
 </nav>
 
@@ -598,7 +554,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -623,7 +579,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -648,7 +604,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2017/03/10/tryswift2017/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/kOm4wkBe20oME4XCv2qm2A1u5Q2nc622ujF0juQP7JEbjmqiuZoYcqLl7b0fmJFb_atHsHNLv8PvtPGB-6gkryBOd4i7i9ulH7HLW64kVw0aIBo53HwdIdBoA6C-e1ocrTobH7xCvSGb2_SFDhFlWmKIBNu750opZC8QF4lo2D9oz1r0o6VlqW7AnNyf-OhXCuSz7cHJ_FrRzxVSQm61VCQt50M2lIBxzM2h8HHRYXZ45LmJP2s-qM25I-FzJ2EHnHZ4CxOaI-RfYd7ynnNzHjzpx5t3OS_TyEUV-y1Jw7aWD1vsfSdJVq3K38sa1v9tjEY3n9vctZraPGRw_UJrYh32hyCwp3xf2f8qkqZpaYaoYloh4BfUJvdrWxMVQQ7KmiOMNJD66_uDcGF3R6bOhXqk_yRz4ia_NLtD4V8mF8doeeDdRiicjoCQgUYlrPUModwY382eaEAdzvaExg5aEaJJFGittZntzpmjz7ngX_cgk2lu-2Ek3PaUMT2b_qdVRtNyVum2adTRHI2fDieDHED2zKEbRDEgTXRZ3_E6qYhegtHVGZ8_06x4EkM77WHDBMHt8wgg6f0v3P08HsSjemoUW4CkAr0PRiuKyTtAdXmJot3gtdKTgaUBNPwN2MDWGHcve5I8_wpU_Ob9mo6bMkh5LuQGGuGSJtSW1EFdMQ=w621-h245-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/kOm4wkBe20oME4XCv2qm2A1u5Q2nc622ujF0juQP7JEbjmqiuZoYcqLl7b0fmJFb_atHsHNLv8PvtPGB-6gkryBOd4i7i9ulH7HLW64kVw0aIBo53HwdIdBoA6C-e1ocrTobH7xCvSGb2_SFDhFlWmKIBNu750opZC8QF4lo2D9oz1r0o6VlqW7AnNyf-OhXCuSz7cHJ_FrRzxVSQm61VCQt50M2lIBxzM2h8HHRYXZ45LmJP2s-qM25I-FzJ2EHnHZ4CxOaI-RfYd7ynnNzHjzpx5t3OS_TyEUV-y1Jw7aWD1vsfSdJVq3K38sa1v9tjEY3n9vctZraPGRw_UJrYh32hyCwp3xf2f8qkqZpaYaoYloh4BfUJvdrWxMVQQ7KmiOMNJD66_uDcGF3R6bOhXqk_yRz4ia_NLtD4V8mF8doeeDdRiicjoCQgUYlrPUModwY382eaEAdzvaExg5aEaJJFGittZntzpmjz7ngX_cgk2lu-2Ek3PaUMT2b_qdVRtNyVum2adTRHI2fDieDHED2zKEbRDEgTXRZ3_E6qYhegtHVGZ8_06x4EkM77WHDBMHt8wgg6f0v3P08HsSjemoUW4CkAr0PRiuKyTtAdXmJot3gtdKTgaUBNPwN2MDWGHcve5I8_wpU_Ob9mo6bMkh5LuQGGuGSJtSW1EFdMQ=w621-h245-no)" alt="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -673,7 +629,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600)" alt="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -698,7 +654,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" class="thumbnail-image"></span>
                         
                     
                     </a>

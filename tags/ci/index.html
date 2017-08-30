@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編] &middot; カウル Tech Blog</title>
+    <title>Ci &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.26" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -9,6 +9,9 @@
     
       <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
     
+    
+      <link href="http://techblog.housmart.co.jp/tags/ci/index.xml" rel="alternate" type="application/rss+xml" title="カウル Tech Blog" />
+      <link href="http://techblog.housmart.co.jp/tags/ci/index.xml" rel="feed" type="application/rss+xml" title="カウル Tech Blog" />
     
     <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
     <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
@@ -19,31 +22,15 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" />
-    <meta property="og:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" />
-<meta property="og:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
-
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" />
-
-  <meta property="og:image" content="http://techblog.housmart.co.jp/images/20160310_top.jpg" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/tags/ci/" />
+    <meta property="og:title" content="Ci" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/tags/ci/" />
 
 
 
-<meta property="article:published_time" content="2016-03-10T16:57:26&#43;09:00"/>
-<meta property="article:modified_time" content="2016-03-10T16:57:26&#43;09:00"/>
-
+<meta property="og:updated_time" content="2017-08-30T00:00:00&#43;00:00"/>
 
 
 
@@ -56,47 +43,12 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
     
     
-<meta itemprop="name" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]">
-<meta itemprop="description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
+<meta itemprop="name" content="Ci">
+<meta itemprop="description" content="">
 
 
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
-
-">
-
-
-<meta itemprop="dateModified" content="2016-03-10T16:57:26&#43;09:00" />
-<meta itemprop="wordCount" content="2528">
-
-  <meta itemprop="image" content="http://techblog.housmart.co.jp/images/20160310_top.jpg">
-
-
-
-<meta itemprop="keywords" content="event,infra,media," />
-
-    <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image:src" content="http://techblog.housmart.co.jp/images/20160310_top.jpg"/>
-<meta name="twitter:title" content="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]"/>
-<meta name="twitter:description" content="Housmart高松です。
-
-先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。
-
-※前編をご覧になっていない方はこちらを先にご覧ください。
-
-
-WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/
-仲介手数料無料の不動産サイト「カウル」: https://kawlu.com/
-
-
-"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Ci"/>
+<meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 </head>
@@ -105,7 +57,7 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
 
 
 <div id="container">
-	
+    
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -198,9 +150,8 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
   </div>
 </header>
 
-   	
-   	<div class="outer">
-	    <aside id="profile">
+    <div class="outer">
+        <aside id="profile">
   <div class="inner profile-inner">
     <div class="base-info profile-block">
       <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
@@ -289,302 +240,45 @@ WBSサイト(不動産流通に革新は起こるか): http://txbiz.tv-tokyo.co.
   </div>
 </aside>
 
-	    <section id="main">
-    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
-        <div class="article-inner">
+        <section id="main">
+            <section class="archives-wrap">
+                <div class="archive-category-wrap">
+                    <span class="archive-category">Ci</span>
+                </div>
+                <div class="archives">
+                    
+                    
+                        <article class="archive-article archive-type-post">
+    <div class="archive-article-inner">
+        <div class="archive-article-thumbnail">
             
+            <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="thumbnail">
                 
-                <img src="http://techblog.housmart.co.jp//images/20160310_top.jpg" class="article-banner">
+                <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" class="thumbnail-image"></span>
                 
+            </a>
             
-
-            <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/">
-    <h1 class="article-title" itemprop="name">
-        テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]
-    </h1>
-    </a>
-    <div class="article-meta">
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2016-03-10 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-10</time>
-            &middot;
-            2528
-            words
-            &middot;
-            6
-            minute read
         </div>
-
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
-                
-                
+        <header class="archive-article-header">
+            <h1 itemprop="name">
+            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/">これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~</a>
+            </h1>
+            <div class="archive-article-date">
+                <i class="fa fa-calendar"></i>
+                <time datetime="2017-08-30 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-08-30</time>
             </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/media">media</a>
-                
-                
-            </div>
-            
-        
+        </header>
     </div>
-</header>
-<div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="hatena-bookmark-button" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
+</article> 
+                    
+                </div>
+            </section>
+            <nav id="page-nav">
 
-
-            <div class="article-entry" itemprop="articleBody">
-                <p>Housmart高松です。</p>
-
-<p>先日、テレビ東京のWBS（ワールドビジネスサテライト）で弊社サービス「カウル」をご紹介いただきました。<br />
-前編ではテレビ放送に向けたAWS上のシステムの事前準備について説明しました。後編では放送当日と事後の振り返りについて書いていこうと思います。</p>
-
-<p>※前編をご覧になっていない方は<a href="/2016/03/03/prepare_for_wbs/">こちら</a>を先にご覧ください。</p>
-
-<blockquote>
-<p>WBSサイト(不動産流通に革新は起こるか): <a href="http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/">http://txbiz.tv-tokyo.co.jp/wbs/feature/post_107290/</a><br />
-仲介手数料無料の不動産サイト「カウル」: <a href="https://kawlu.com/">https://kawlu.com/</a></p>
-</blockquote>
-
-<p></p>
-
-<h2 id="内容">内容</h2>
-
-<ol>
-<li>前提 [前編]</li>
-<li>事前準備 [前編]</li>
-<li>放送当日
-
-<ul>
-<li>直前の放送時間変更</li>
-<li>放送内容</li>
-<li>アクセス数まとめ</li>
-</ul></li>
-<li>振り返りとまとめ
-
-<ul>
-<li>アクセス予想振り返り</li>
-<li>まとめ</li>
-</ul></li>
-</ol>
-
-<hr />
-
-<h2 id="3-放送当日">3.放送当日</h2>
-
-<h3 id="直前の放送時間変更">直前の放送時間変更</h3>
-
-<p>WBSは通常23時からの放送なのですが、この日は前の番組が世界卓球の日本vsドイツ戦でした。最終ゲームまでもつれ込む白熱の試合だったため放送時間がぎりぎりまで伸びて、放送開始が0時30分に変更になりました。</p>
-
-<p>以前とくダネで紹介していただいた時も他の大きいニュースの影響で放送日が2度延期されたという経験もあり、テレビは本当に放映されるまでは気を抜けないなという印象です。</p>
-
-<p>会社のメンバーで真剣に卓球を応援していたのですが、残念ながら日本が2-3で負けてしまいました。<br />
-この放送時間の変更がどの程度視聴率に影響するかはわかりませんが、気を取り直していざ放送に望みます。</p>
-
-<p><br></p>
-
-<h3 id="放送内容">放送内容</h3>
-
-<p>放送が始まり15分、いよいよ特集のコーナーです。<br />
-今回は不動産ベンチャーの新しい取り組みという切り口で、大家さんと直接やりとりをすることで仲介手数料を無料にする賃貸サービスの <strong>ウチコミ！</strong> さんと共に弊社を取り上げていただきました。</p>
-
-<p>大江アナウンサーが従来の中古不動産売買の仲介手数料をフリップを使って説明します。
-<img src="/images/20160310_00.png" title="seen0"></p>
-
-<p>間にウチコミさんの紹介をはさみ、<br />
-会社名とともにオフィスが映りました。
-<img src="/images/20160310_01.png" title="seen1"></p>
-
-<p>「今年一月、売買の仲介手数料を無料にするカウルというサービスを始めました」<br />
-のナレーションと共にサービス名、TOPページのアップが映ります。
-<img src="/images/20160310_02.png" title="seen2"></p>
-
-<p>サービスの説明が続きます。どのくらい経費を抑えられるか、月額１万円の会員サービスの説明など。<br />
-このあたりでピンと来てくれた方は検索を始めてくれるのではないでしょうか。
-<img src="/images/20160310_03.png" title="seen3"></p>
-
-<p>弊社代表針山が熱い思いを語ります。このシーンも社名が入っています。
-<img src="/images/20160310_04.png" title="seen4"></p>
-
-<p>最後は実際にカウルで物件を購入していただいた方のインタビューが流れます。
-<img src="/images/20160310_05.png" title="access graph"></p>
-
-<p><br>
-今回は全体で2分ほどの紹介でした。そのうち3分の1程度はサービス名もしくは社名が画面に写っていました。<br />
-ナレーションでもサービス名を3回・社名を1回読み上げてもらえたので、検索のためのキーワードは十分に視聴者の方の頭に残ったのではないかと思います。</p>
-
-<p><br></p>
-
-<h3 id="アクセス数まとめ">アクセス数まとめ</h3>
-
-<p>実際のアクセス数を見てみましょう。</p>
-
-<p>AWSのCloudWatchで見たバランサへのアクセス数のグラフです。<br />
-一分間単位の合計値が見れて便利ですね。これはバランサへのすべてのアクセスの合計なので画像やJavascript、CSSの読み込みもカウントされることに注意してください。
-<img src="/images/20160310_06.png" title="access graph"></p>
-
-<p>カウルの場合、画像などを合計するとTOPページの読み込みで30回程度バランサへのアクセスが発生します。
-それを考慮にいれて計算すると、最大で分間 <strong>450アクセス</strong> が来ており、アクセスが増えてから落ち着くまでにトータルで <strong>2千件</strong> ほどのアクセスが来ていました。</p>
-
-<p>また、実際にサーバ上のログを集計したところ、 <strong>30QPS（秒間アクセス）</strong> が今回の最大値でした。<br />
-前編で予想した667QPSとは程遠い結果となってしまいました。</p>
-
-<p><br></p>
-
-<h2 id="4-振り返りとまとめ">4.振り返りとまとめ</h2>
-
-<h3 id="アクセス予想振り返り">アクセス予想振り返り</h3>
-
-<p>実際の結果を持って事前の予想を振り返ってみましょう。<br />
-テレビ出演に舞い上がってテンション高めに予想していた部分を冷静に下方修正してみると、以下の様な数値が妥当では無いかと思いました。</p>
-
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">事前予想</th>
-<th align="center">結果からの推測</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="center">テレビ局のリーチ人数</td>
-<td align="center">4,000万</td>
-<td align="center">4,000万</td>
-</tr>
-
-<tr>
-<td align="center">視聴率</td>
-<td align="center">5%</td>
-<td align="center"><font color="red">2%</font></td>
-</tr>
-
-<tr>
-<td align="center">Web検索する人の割合</td>
-<td align="center">5%</td>
-<td align="center"><font color="red">0.25%</font></td>
-</tr>
-
-<tr>
-<td align="center">一人あたりの閲覧ページ数</td>
-<td align="center">2</td>
-<td align="center"><font color="red">1</font></td>
-</tr>
-
-<tr>
-<td align="center">総アクセス数</td>
-<td align="center">20万</td>
-<td align="center">2千</td>
-</tr>
-</tbody>
-</table>
-
-<p>放映時間が深夜1時近くになってしまったことを考慮に入れて視聴率は2%、<br />
-Web検索する人の割合は400人に一人だと仮定して0.25%（この数字はサービスの内容や紹介のされ方によって大きく変わるとは思いますが、冷静に考えるとテレビを見ていて5%の確率で検索はしないですよね）<br />
-また、カウルの場合はTOPページに情報をたくさん盛り込んでいるので、興味を持ってもらえた人はTOPページの滞在時間が長くなる傾向があります。なので、放送前後数分間における一人あたりの閲覧ページ数を1と仮定しなおしました。</p>
-
-<p>その上で再度総アクセス数を計算してみると、今回のテレビ放映の前後で来てもらえたユーザ数とほぼイコールの2千件となりました。</p>
-
-<p>また、最大QPSの試算に関しては、2千件の総アクセスに対して最大30QPS、つまり総アクセス数の <strong>1.5%</strong> のアクセスがピークの1秒間に来たという数字が一つの指標になるのでは無いでしょうか。<br />
-（上記のアクセスグラフを見ても分かる通り、紹介が終わった次の1分間にアクセスが集中しているなど、一定の傾向があるような気がしました）</p>
-
-<p><br></p>
-
-<h3 id="まとめ">まとめ</h3>
-
-<p>今回の事例の振り返りの内容も含めて、テレビ出演時の負荷見積もりの式を再度掲載しておきます。</p>
-
-<pre><code>総アクセス数 = テレビ局のリーチ人数 × 視聴率 × Web検索する人の割合(≒0.25%) (=総アクセス人数)
-                      × 一人あたりの平均閲覧ページ数
-
-最大QPS = 総アクセス数 × 1.5%(※実測値から算出した割合)
-</code></pre>
-
-<p>これにある程度バッファを設ければ妥当な見積もりとなりそうです。
-今回は事前の予想がつかなかったことで見積もりを大きく外してしまいましたが、AWSコストとしては数ドル程度の損失だったので助かりました。AWSさまさまです。</p>
-
-<p>後日談ですが、WBSは<a href="http://txbiz.tv-tokyo.co.jp/">オンデマンド</a>で見ている方も結構多いようで、翌日以降も数日間アクセスが増えていました。</p>
-
-<p>夢の20万アクセスには遠く及びませんでしたが、まだローンチして1ヶ月半のカウルにとっては認知してもらう大変よい機会になりました。<br />
-また、ビジネスモデル的にも信用が大事になってくる領域なので、その点でも大きくプラスになったと思います。</p>
-
-<p>今後の皆さんの参考になれば幸いです。</p>
-            </div>
-            <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="hatena-bookmark-button" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-<footer class="article-footer">
-    <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%be%8c%e7%b7%a8%5d&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f&amp;description=%e3%83%86%e3%83%ac%e3%83%93%e6%94%be%e9%80%81%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%e3%81%ae%e8%b2%a0%e8%8d%b7%e5%af%be%e7%ad%96%28AWS%20x%20Rails%20%e3%81%ae%e5%a0%b4%e5%90%88%29%5b%e5%be%8c%e7%b7%a8%5d" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f03%2f10%2fprepare_for_wbs2%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
-    </a>
-</div>
-
-    
-</footer>
-
-        </div>
-
-        
-<nav id="article-nav">
-    
-    <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Older
-      </strong>
-      <div class="article-nav-title">テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</div>
-    </a>
-    
-
-    
-    <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">スタートアップのCTOになって2ヶ月で作った開発サイクル</div>
-    </a>
-    
 </nav>
 
-
-    </article>
-    <section id="comments">
-        <div id="disqus_thread">
-            
-        </div>
-    </section>
-
-</section>
-
-	    <aside id="sidebar">
+        </section>
+        <aside id="sidebar">
     
 <div class="widget-wrap">
     <h3 class="widget-title">
@@ -598,7 +292,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="Ci" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -623,7 +317,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="Ci" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -648,7 +342,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2017/03/10/tryswift2017/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/kOm4wkBe20oME4XCv2qm2A1u5Q2nc622ujF0juQP7JEbjmqiuZoYcqLl7b0fmJFb_atHsHNLv8PvtPGB-6gkryBOd4i7i9ulH7HLW64kVw0aIBo53HwdIdBoA6C-e1ocrTobH7xCvSGb2_SFDhFlWmKIBNu750opZC8QF4lo2D9oz1r0o6VlqW7AnNyf-OhXCuSz7cHJ_FrRzxVSQm61VCQt50M2lIBxzM2h8HHRYXZ45LmJP2s-qM25I-FzJ2EHnHZ4CxOaI-RfYd7ynnNzHjzpx5t3OS_TyEUV-y1Jw7aWD1vsfSdJVq3K38sa1v9tjEY3n9vctZraPGRw_UJrYh32hyCwp3xf2f8qkqZpaYaoYloh4BfUJvdrWxMVQQ7KmiOMNJD66_uDcGF3R6bOhXqk_yRz4ia_NLtD4V8mF8doeeDdRiicjoCQgUYlrPUModwY382eaEAdzvaExg5aEaJJFGittZntzpmjz7ngX_cgk2lu-2Ek3PaUMT2b_qdVRtNyVum2adTRHI2fDieDHED2zKEbRDEgTXRZ3_E6qYhegtHVGZ8_06x4EkM77WHDBMHt8wgg6f0v3P08HsSjemoUW4CkAr0PRiuKyTtAdXmJot3gtdKTgaUBNPwN2MDWGHcve5I8_wpU_Ob9mo6bMkh5LuQGGuGSJtSW1EFdMQ=w621-h245-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/kOm4wkBe20oME4XCv2qm2A1u5Q2nc622ujF0juQP7JEbjmqiuZoYcqLl7b0fmJFb_atHsHNLv8PvtPGB-6gkryBOd4i7i9ulH7HLW64kVw0aIBo53HwdIdBoA6C-e1ocrTobH7xCvSGb2_SFDhFlWmKIBNu750opZC8QF4lo2D9oz1r0o6VlqW7AnNyf-OhXCuSz7cHJ_FrRzxVSQm61VCQt50M2lIBxzM2h8HHRYXZ45LmJP2s-qM25I-FzJ2EHnHZ4CxOaI-RfYd7ynnNzHjzpx5t3OS_TyEUV-y1Jw7aWD1vsfSdJVq3K38sa1v9tjEY3n9vctZraPGRw_UJrYh32hyCwp3xf2f8qkqZpaYaoYloh4BfUJvdrWxMVQQ7KmiOMNJD66_uDcGF3R6bOhXqk_yRz4ia_NLtD4V8mF8doeeDdRiicjoCQgUYlrPUModwY382eaEAdzvaExg5aEaJJFGittZntzpmjz7ngX_cgk2lu-2Ek3PaUMT2b_qdVRtNyVum2adTRHI2fDieDHED2zKEbRDEgTXRZ3_E6qYhegtHVGZ8_06x4EkM77WHDBMHt8wgg6f0v3P08HsSjemoUW4CkAr0PRiuKyTtAdXmJot3gtdKTgaUBNPwN2MDWGHcve5I8_wpU_Ob9mo6bMkh5LuQGGuGSJtSW1EFdMQ=w621-h245-no)" alt="Ci" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -673,7 +367,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600)" alt="Ci" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -698,7 +392,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
                     <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt="Ci" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -1107,7 +801,7 @@ Web検索する人の割合は400人に一人だと仮定して0.25%（この数
     <div id="toTop" class="fa fa-chevron-up"></div>
 </aside>
 
-	</div>
+    </div>
 </div>
 
 <footer id="footer">
