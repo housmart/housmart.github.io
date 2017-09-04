@@ -37,25 +37,6 @@
     </item>
     
     <item>
-      <title>try! Swift2017に参加しました！気になった発表3選！</title>
-      <link>http://techblog.housmart.co.jp/2017/03/10/tryswift2017/</link>
-      <pubDate>Fri, 10 Mar 2017 19:00:36 +0900</pubDate>
-      
-      <guid>http://techblog.housmart.co.jp/2017/03/10/tryswift2017/</guid>
-      <description>&lt;p&gt;こんにちは。あすかです。Housmartでは普段Swiftで開発していることもあり、 &lt;a href=&#34;https://www.tryswift.co/tokyo/jp#&#34;&gt; try! Swift TOKYO&lt;/a&gt;というSwiftのカンファレンスに参加して来ました！&lt;/p&gt;
-
-&lt;p&gt;try! Swiftは世界中のSwiftディベロッパーが一堂に会し、Swiftに関する知見を共有するカンファレンスです。参加人数は、昨年の約1.5倍の733人だったそうですごい熱気に包まれていました！会期は2017年3月2日-4日の3日間、うち2日、3日は招待講演とライトニングトーク、4日はハッカソンが開催されました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/M_MNbjEtPuLq7HoVbmbX5W3q5qqQ4xiWYfj48fBkSMd5mFzLbegUlxyoC06i7fvNAZMCko_Pq9ehL14RDRnGSCwm_SuFboLuHVlk36dvOFNYtHS6WzfMc_K90DfN2FiD7dQ2xe0uki5hJhgAF2qg6LPylO3XaMRZI1GkVt0dmAb1dHohVyQRgYk4zK1oXC9-eyJ0UOsoKf1TVxZ3iOnZjSbU0LzU3betGdMouekGH-cXw7ToTOLu-6s7LqDa3sTDS2xLfoGKrtzzz2o_dKV4_YX_glpwXeuW-ZZeqNs3XhJediy_sbxQtGHu_MfNgEOOgzoyjKy9Xr1hl86TXZ3shJUVPzxh274rxolPCOUfwlF3iaYssVsn7IGr1FrLLEmvVREw-O-tKkmPWuD204sZc4Xv6Q935u4V6DlR0pVhg0YM49jskD9t_lbFmXTCwYJSx_RdKy-zepmTPQMkBNjWst-sE7jMao1Hxpghp9-T2JO4HvXpH33YwojlBZ0mfhl4Ehw0oUaVaOnsU_Br8EP3yfeipPvm-xXnAAAyobn--FEzwHGU6fRotMBH0e0NiSBkOvuXSGVaNoz7Lb92tIohVDWgZ5ejKOojSSPqZ4b6skSPh-_NMdEeTCD9Qpdc1BY2jyWlWhkp99ktBHuqr2AqaUtIrj2qJLJook7hHKSh=w600&#34; alt=&#34; try! Swiftの様子 すごい熱気です！&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;今回参加の目的&#34;&gt;今回参加の目的&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/8mgGwGI3OZl9GGH4aeC24Do-qwROcIUhz0BP_Sv7jqV4y8Mc7ctzCi13SY15kPvmnGnWJJFppI_WgzUwB971r-GFdqnrRENUXFu256cd5XFyWh9Km2-SnXQqRMBn3VHt3-REE-V_hcmDse-ceTM-1sg65xd6r4Xn1I-_-GzH6iaEacVKk4CkqmcohOLBpmtAzz7pRZwmwMUNxKZomwtvkbtYhP9vHxgPgKEWluL6YW6ghulkr761RtDvqqpa389zBrobJuOvxorlAADrHIt_wI6QHyU9mpZwKsBF6qNybVhd6g7hxZ8KrbN_TJZEgc5vugbgWcV67JE7R4fmhiUriig_koW25cFa8XUFofSUwes5-DvJiAh30YKzkRLt0C7d_qW8g20mSnS09KUENAHVxXWq_CUYUUGlLF-qBLogoyTc8PsAfT2dTGEcOULrRU7Wv5TALqp5JdQk9nyQS1T6PVt60ud0vyqdec7WYq_zLd2DSvLOqAgGVNd_udYKGejVUvnSyJcm1VAJpDbn4tOy-QxnafLEME4Rf-it7b0pmiTwm91DQ4_SxAsSI0srADmeJZ2EJAHHzYXi5vujfORYveHK2qy4pJTNOKF6xhOPQmmmIebVJSRhYYqmC2-SnBqSDPlQ3zhUBVwjpLsLGQ3sCX1ktnO2fEnL707ORPZFEg=w600&#34; alt=&#34;中古マンション売買サービス「カウル」&#34; /&gt;
-
-HousmartはReTech（不動産テック）スタートアップで、&lt;a href=&#34;https://kawlu.com/market&#34;&gt;中古マンション売買サービス「カウル」&lt;/a&gt;をメインのサービスとして運営しています。このサービスを使うことで中古マンション売買の際、ユーザーの方が自分でマンションデータベースから中古マンション物件情報、相場、新築価格、売買事例、間取りを確認し、見学に行くことができます。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>日本語でのサジェストの難しさとElasticsearchを用いた実装例</title>
       <link>http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/</link>
       <pubDate>Fri, 16 Dec 2016 10:23:43 +0900</pubDate>

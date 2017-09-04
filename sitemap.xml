@@ -13,11 +13,6 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/2017/03/10/tryswift2017/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/</loc>
     <lastmod>2016-12-16T10:23:43+09:00</lastmod>
   </url>
@@ -129,12 +124,6 @@
   </url>
   
   <url>
-    <loc>http://techblog.housmart.co.jp/tags/conference/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://techblog.housmart.co.jp/tags/culture/</loc>
     <lastmod>2016-12-07T14:23:37+09:00</lastmod>
     <priority>0</priority>
@@ -196,7 +185,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/event/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
+    <lastmod>2016-09-17T21:25:46+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -347,12 +336,6 @@
   <url>
     <loc>http://techblog.housmart.co.jp/tags/tools/</loc>
     <lastmod>2016-09-01T15:54:20+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://techblog.housmart.co.jp/tags/tryswift/</loc>
-    <lastmod>2017-03-10T19:00:36+09:00</lastmod>
     <priority>0</priority>
   </url>
   
