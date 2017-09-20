@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/</loc>
+    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/</loc>
     <lastmod>2017-08-30T00:00:00+00:00</lastmod>
   </url>
@@ -137,7 +142,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/data-analysis/</loc>
-    <lastmod>2016-04-17T22:39:26+09:00</lastmod>
+    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -179,13 +184,13 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/event/</loc>
-    <lastmod>2016-09-17T21:25:46+09:00</lastmod>
+    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/event/</loc>
-    <lastmod>2016-09-17T21:25:46+09:00</lastmod>
+    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -287,7 +292,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2017-08-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -359,7 +364,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2017-08-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   

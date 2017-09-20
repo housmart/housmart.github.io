@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>Categories &middot; カウル Tech Blog</title>
+    <title>【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？ &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.27.1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -9,9 +9,6 @@
     
       <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
     
-    
-      <link href="http://techblog.housmart.co.jp/categories/index.xml" rel="alternate" type="application/rss+xml" title="カウル Tech Blog" />
-      <link href="http://techblog.housmart.co.jp/categories/index.xml" rel="feed" type="application/rss+xml" title="カウル Tech Blog" />
     
     <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
     <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
@@ -22,14 +19,23 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/categories/" />
-    <meta property="og:title" content="Categories" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/categories/" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" />
+    <meta property="og:title" content="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" />
+<meta property="og:description" content="Housmart高松です。
+
+2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。
+今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである &ldquo;Ruby x データサイエンス&rdquo; の観点からRuby Kaigiの参加レポートをします。
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no" />
 
 
 
+<meta property="article:published_time" content="2017-09-20T15:31:47&#43;09:00"/>
+<meta property="article:modified_time" content="2017-09-20T15:31:47&#43;09:00"/>
 
 
 
@@ -43,21 +49,42 @@
 
     
     
-<meta itemprop="name" content="Categories">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？">
+<meta itemprop="description" content="Housmart高松です。
+
+2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。
+今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである &ldquo;Ruby x データサイエンス&rdquo; の観点からRuby Kaigiの参加レポートをします。
+
+">
 
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Categories"/>
-<meta name="twitter:description" content=""/>
+<meta itemprop="dateModified" content="2017-09-20T15:31:47&#43;09:00" />
+<meta itemprop="wordCount" content="2930">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no">
+
+
+
+<meta itemprop="keywords" content="data-analysis,event," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no"/>
+<meta name="twitter:title" content="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？"/>
+<meta name="twitter:description" content="Housmart高松です。
+
+2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。
+今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである &ldquo;Ruby x データサイエンス&rdquo; の観点からRuby Kaigiの参加レポートをします。
+
+"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 </head>
 <body>
 <div class="container">
- 
+
 
 <div id="container">
-    
+	
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -150,8 +177,9 @@
   </div>
 </header>
 
-    <div class="outer">
-        <aside id="profile">
+   	
+   	<div class="outer">
+	    <aside id="profile">
   <div class="inner profile-inner">
     <div class="base-info profile-block">
       <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
@@ -240,79 +268,197 @@
   </div>
 </aside>
 
-        <section id="main">
-            <section class="layout-wrap">
-                <div class="layout-title">
-                    <span>Categories</span>
-                </div>
-                <div class="layout-wrap-inner list-categories">
-                    <ul class="category-list">
-                         
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="event">event</a>
-                            <span class="category-list-count">4</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="development">development</a>
-                            <span class="category-list-count">3</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="design">design</a>
-                            <span class="category-list-count">2</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="infra">infra</a>
-                            <span class="category-list-count">2</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="ios">ios</a>
-                            <span class="category-list-count">2</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="operation">operation</a>
-                            <span class="category-list-count">2</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="project">project</a>
-                            <span class="category-list-count">2</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="work">work</a>
-                            <span class="category-list-count">2</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="culture">culture</a>
-                            <span class="category-list-count">1</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="data-analysis">data-analysis</a>
-                            <span class="category-list-count">1</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="kpi">kpi</a>
-                            <span class="category-list-count">1</span>
-                        </li>
-                        
-                        <li class="category-list-item">
-                            <a class="category-list-link" href="member">member</a>
-                            <span class="category-list-count">1</span>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </section>
-        </section>
-        <aside id="sidebar">
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/">
+    <h1 class="article-title" itemprop="name">
+        【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-09-20 15:31:47 &#43;0900 JST" itemprop="datePublished">2017-09-20</time>
+            &middot;
+            2930
+            words
+            &middot;
+            6
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">event</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/data-analysis">data-analysis</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="hatena-bookmark-button" data-hatena-bookmark-title="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>Housmart高松です。</p>
+
+<p>2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。<br />
+今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである <strong>&ldquo;Ruby x データサイエンス&rdquo;</strong> の観点からRuby Kaigiの参加レポートをします。</p>
+
+<p></p>
+
+<h1 id="rubyコミュニティのデータサイエンスへの取り組み">Rubyコミュニティのデータサイエンスへの取り組み</h1>
+
+<p>ここ2-3年で機械学習・ディープラーニングやデータサイエンスを業務で使うことはどんどん普通のことになってきています。<br />
+この領域はほとんどがPython/R/Scalaなどで行われており、最近までRubyでデータサイエンスをやるのは実質不可能な状態でした。<br />
+ですが、Rubyが言語としてこれらの領域をサポートするかは、Rubyのこれからを考える意味でもとても重要になります。<br />
+これらの現状を踏まえた上で、Rubyをデータサイエンスに活用できるようにしようという活動がここ最近Rubyコミュニティ内でも行われてきています。</p>
+
+<p>弊社が提供しているマンション売買サービスのカウルもWebサーバやAPIなど、基本的なコンポーネントはRuby on Railsで作られているのですが、マンションの価格推定機能や画像処理・データ処理の部分に機械学習を導入しており、その部分はPythonでの実装になっています。</p>
+
+<p>Rubyで動いているサービスから機械学習を利用する場合、以前は2つの選択肢がありました。</p>
+
+<ol>
+<li>Rubyで頑張って実装する</li>
+<li>他言語(Pythonなど)でAPIを実装してRubyから呼び出す</li>
+</ol>
+
+<p>Rubyで機械学習のアルゴリズムを実装しようとする場合、現状ではPythonに匹敵する機械学習ライブラリは存在せず、全てを自前で実装していくのは現実的ではありません。</p>
+
+<p>なので、カウルでは2. のパターンでPythonを用いて実装しています。<br />
+しかし、同一のDBを複数言語から参照すると双方でスキーマ変更などに追従する必要があったり、別でAPI用のサーバを管理コストが生じるなどの課題を感じています。</p>
+
+<h1 id="pycallという選択肢">PyCallという選択肢</h1>
+
+<p>そこで、Rubyコミッターであるむらけんさん<a href="https://twitter.com/mrkn">@mrkn</a>が2016年のRuby Kaigiで、 <strong>Pythonの資産(scikit-learn,pandas,numpyなどのライブラリ)をRubyから利用できるようにするプロジェクト&rdquo;PyCall&rdquo;</strong> の開発を打ち出しました。<br />
+<a href="https://github.com/mrkn/pycall.rb">PyCall</a>はRubyからPythonのライブラリを直接呼び出せるようにするためのgemとして開発されています。</p>
+
+<p>機械学習やディープラーニングの領域では日々新しいアルゴリズムが論文として発表され、すぐに実装がオープンソースとして公開されるようなスピード感での開発が常識になっています。<br />
+この事情を考えると、これらの研究開発に近い分野のエンジニアが突然Rubyで新規のアルゴリズムを実装しだすことは考えにくいため、既存のPythonの資産をRubyから利用するアプローチには納得感が高く、期待を持って見ていました。</p>
+
+<p>そして、1年後である今回のRuby KaigiでPyCallの安定版である1.0のリリースが<a href="http://tech.speee.jp/entry/2017/09/17/005431">むらけんさんのトーク</a>の中で発表されました。</p>
+
+<p>デモではpandasでのデータ処理やmatplotlibでのグラフ描画、ディープラーニング用ライブラリであるKerasを使った画像検出などを実際に見せてくれました。<br />
+pandasやmatplotlib、numpyなどの使用頻度の高いライブラリはPyCallをさらにwrapしてインターフェースが整えられたgemとして提供されており、KerasはPyCallを直接使ってライブラリを呼び出すような実装になっていました。</p>
+
+<p>セッション後実際に触ってみた感じでは、Pythonのライブラリを直接呼び出せることもあり本当にRubyでデータサイエンスができるようになった、と言うのに十分な完成度だと感じました。<br />
+以下のリンクを参考にDockerイメージを利用して簡単に試すことができるので、興味があれば触ってみてください。</p>
+
+<ul>
+<li><a href="https://github.com/rubydata/rubykaigi2017">https://github.com/rubydata/rubykaigi2017</a></li>
+<li><a href="https://github.com/RubyData/rubykaigi2017/blob/master/pycall_lecture.ipynb">https://github.com/RubyData/rubykaigi2017/blob/master/pycall_lecture.ipynb</a></li>
+</ul>
+
+<h1 id="ruby-x-データサイエンスのこれから">Ruby x データサイエンスのこれから</h1>
+
+<p>ですが、セッションの中でむらけんさんがPycallは一時的なソリューションだとも語っていました。<br />
+実際にPyCall以外に、Rubyで頑張って実装すると言うアプローチでも色々なプロジェクトが進行しています。</p>
+
+<h2 id="numoプロジェクト">Numoプロジェクト</h2>
+
+<p>そのうちの一つが、Rubyで科学計算を実現しようと言う<a href="https://github.com/ruby-numo/numo/blob/master/README.md">Numoプロジェクト</a>です。<br />
+こちらは筑波大学の田中昌宏<a href="https://twitter.com/masa16tanaka">@masa16tanaka</a>さんがプライベートでやっているプロジェクトで、Numpyと同等の機能を志向する行列計算ライブラリのNumo::NArrayや、データビジュアライズのためのgnuplot、GNU scientific library、フーリエ変換のwrapperライブラリなどが存在します。<br />
+完全にプライベートプロジェクトであり、一人で開発しているため急速に実装が進んでいくことはなさそうですが、行列計算のための良いライブラリ(Numo::NArray)が提供されていることはデータサイエンスをRubyでやる、と言う観点からも非常に大きい貢献だと思います。</p>
+
+<h2 id="red-data-toolsプロジェクト">red-data-toolsプロジェクト</h2>
+
+<p>また、PyCallの作者でもあるむらけんさんも参加する、red-data-toolsと言うプロジェクトもあります。<br />
+red-data-toolsはRuby用のデータ処理ツールを提供するプロジェクトです。中でも、複数の言語のデータ処理のために共通で開発されているApache Arrowのフォーマットをサポートするためのライブラリが充実している点が特徴だと言えます。</p>
+
+<p>Apache Arrowは大規模なデータ処理のために作られた仕様で、異なる言語からなるプラットフォーム間のデータ交換コストを下げることが目的で開発が進んでいます。PythonのpandasやScalaで書かれているSparkなどのメジャーどころも採用しているものになります。</p>
+
+<p>業界標準となりつつあるApache Arrowに対応していくことで、今後Rubyがよりデータサイエンスの分野で使われるようになる可能性を模索していくようです。</p>
+
+<p>これ以外にも今回のRuby Kaigiでは発表がなかった科学技術計算のSciRubyプロジェクトや、機械学習・ディープラーニングに関連する取り組みも存在します。<br />
+参考）
+<a href="https://sciruby-jp.github.io/">SciRuby</a>
+<a href="https://github.com/arbox/machine-learning-with-ruby">Awesome Machine Learning with Ruby</a></p>
+
+<h1 id="まとめ">まとめ</h1>
+
+<p>今回のPyCallの安定版の発表により、Rubyでのデータサイエンスが可能な環境になったと私は感じています。<br />
+また、今後の展望も打ち出されており、今後ますますRubyでデータサイエンスをやる環境は整っていくと思います。</p>
+
+<p>一方で、（周りを見ている限り）データサイエンスを得意とするエンジニアで、かつRubyを使う人はあまり多くはないと感じています。<br />
+今後、データサイエンスや機械学習・ディープラーニングのコモディティ化が進んでいき、Rubyエンジニアが通常の業務の延長でそれらを使うようになると、これらの取り組みはもっともっと盛り上がっていくのではないかと思いました。</p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="hatena-bookmark-button" data-hatena-bookmark-title="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%80%90Ruby%20Kaigi%202017%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e3%80%91Ruby%e3%81%a7%e3%83%87%e3%83%bc%e3%82%bf%e3%82%b5%e3%82%a4%e3%82%a8%e3%83%b3%e3%82%b9%e3%81%af%e5%87%ba%e6%9d%a5%e3%82%8b%e3%81%ae%e3%81%8b%ef%bc%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f&amp;description=%e3%80%90Ruby%20Kaigi%202017%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e3%80%91Ruby%e3%81%a7%e3%83%87%e3%83%bc%e3%82%bf%e3%82%b5%e3%82%a4%e3%82%a8%e3%83%b3%e3%82%b9%e3%81%af%e5%87%ba%e6%9d%a5%e3%82%8b%e3%81%ae%e3%81%8b%ef%bc%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
     
 <div class="widget-wrap">
     <h3 class="widget-title">
@@ -326,7 +472,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no)" alt="Categories" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -351,7 +497,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="Categories" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -376,7 +522,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/08/20/contribute-to-reactive-swift/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="Categories" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/scttBk5x2si82OVK5rG07fE3aA9rzMfCV4JPVDd-Ijaos29JMgitA82dBWg3LCr3vIxvISHhdAAp0uXyr53vyNIwSEpPpiHlIxYR_KhQyV_L867o08rw15hTGXVIXtDnBLGU6DUzzEt11r57bf438uHoqut_jDSBaPB0Pb-95hW9LLlIW-H59UlyuKftgbyaiO9A5YmXFg9noUT1vDUAGNJdJz-spLH9gELkhWIEMmgh-8VND9Q05qYvscQLGdq7UKoTzUXQ1TfqhN5sOzf4C1PtvWgrJo1hxAlSqfx9qd11uECIEFkl7H9W0bq4mJB62O7Y6PeDw2FEYppvkTDU7fVYZrS-JdWnEbZRMED2IXI0Az1Hq4Z0e8VYd_unD1foURa6-_69W9j01y2V_HlCy9zK39x_axJnDTvXqL7ho_2LnB9aBMamo-0aAUwTSsyuzxo0O2JyfjPCxq1DkWftHzE-jiixxTVDbOQ4gFpLDP97hp7l66nmfqWs8_GSkGl7ZU7hPshS3H8-0qPyArIRCWNQ7dJ5G1Y4dUtUL_GtL4pqFIpwPXpgmk9DOoHNfvEEmJEKpP8oms81Sw8BteUKt8_SZrKQ5cgLFy6uAVmusxVqQ113xKXhfBslgVr7eKNiUMz-lMQOyUH9Q99Wd6OBa07NtMSrAsOPpncB6LhzBgv0vA=w400-h321-no)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -401,7 +547,7 @@
                     <a href="http://techblog.housmart.co.jp/2016/12/16/suggester-for-japanese/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600)" alt="Categories" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/fJKMfZ1DJQaQkNsB319WvBBUkX7hYLC4wkWgfNUHzilxUBEl3ExxHFdS0i2ejsbWUQ781eUi2_U4gv72ryJ4l1PBIMBMayU71YXak4B4j9cdcb_-Qyzx1PX0WqNFFe6tPpHSTaIN_LWan9J1zcK1VDipHOwFcLpU3-W69J94xUe4MbcvqN3l-xhAlFfmCqBREuGy8CJREjvuXx4xQZpXWamLxBfitt7Ra_O3_JmyqAekZmVkNi4SQ_tB2YISa98vvDQ0FTj3nUz2-35R6LmXIjk-s0hDUU4HmymX-WfksvQxQ3A6dcWj1Rl3-W55Sq5X2WPD_hGhdzOfZJrwm0drCojb2fjVuYJhftETMC0QvO-ydohbdXqz1FDQ5qgd0D2yTyhqv9fCMdSZpiCsdf9tB1arC8VmJOoSWSjWK9T3SddRT9BuiLURmTB04a28n9akxdx6X7tFFQOaH6s9IXCKTiFzZ4VaV_rsGt8zQd8BNxarJYbysQ0JoxFwLXHQlb7LPxuDENqK1ebQnvdjCC1cyDX1dieQ2X-RUEXMEg6-Q0eYcoBq6UNl7lOsAF1is6DIg14sOB0lcktOB-7WVJBrocOx6jpOcDXkPyPW0cUJnYT--12nDSx2vFiUJKv_7JsogftEmJsr_3TzAyxuFmhUr88T28WPqFNtyarv95K6Vw=w600)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -426,7 +572,7 @@
                     <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt="Categories" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -817,7 +963,7 @@
     <div id="toTop" class="fa fa-chevron-up"></div>
 </aside>
 
-    </div>
+	</div>
 </div>
 
 <footer id="footer">
@@ -846,5 +992,4 @@ MathJax.Hub.Config({
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
-
 </html>

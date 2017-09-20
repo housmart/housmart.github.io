@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Sat, 17 Sep 2016 21:25:46 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 20 Sep 2017 15:31:47 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/categories/event/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？</title>
+      <link>http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/</link>
+      <pubDate>Wed, 20 Sep 2017 15:31:47 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/</guid>
+      <description>&lt;p&gt;Housmart高松です。&lt;/p&gt;
+
+&lt;p&gt;2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。&lt;br /&gt;
+今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである &lt;strong&gt;&amp;ldquo;Ruby x データサイエンス&amp;rdquo;&lt;/strong&gt; の観点からRuby Kaigiの参加レポートをします。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>RubyKaigi2016(@京都)に行ってきました！</title>
