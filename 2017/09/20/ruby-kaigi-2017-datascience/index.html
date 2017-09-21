@@ -59,7 +59,7 @@
 
 
 <meta itemprop="dateModified" content="2017-09-20T15:31:47&#43;09:00" />
-<meta itemprop="wordCount" content="2930">
+<meta itemprop="wordCount" content="2963">
 
   <meta itemprop="image" content="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no">
 
@@ -288,7 +288,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2017-09-20 15:31:47 &#43;0900 JST" itemprop="datePublished">2017-09-20</time>
             &middot;
-            2930
+            2963
             words
             &middot;
             6
@@ -362,13 +362,13 @@
 
 <h1 id="pycallという選択肢">PyCallという選択肢</h1>
 
-<p>そこで、Rubyコミッターであるむらけんさん<a href="https://twitter.com/mrkn">@mrkn</a>が2016年のRuby Kaigiで、 <strong>Pythonの資産(scikit-learn,pandas,numpyなどのライブラリ)をRubyから利用できるようにするプロジェクト&rdquo;PyCall&rdquo;</strong> の開発を打ち出しました。<br />
+<p>そこで、Rubyコミッターであるむらけんさん（<a href="https://twitter.com/mrkn">@mrkn</a>）が2016年のRuby Kaigiで、 <strong>Pythonの資産(scikit-learn,pandas,numpyなどのライブラリ)をRubyから利用できるようにするプロジェクト&rdquo;PyCall&rdquo;</strong> の開発を打ち出しました。<br />
 <a href="https://github.com/mrkn/pycall.rb">PyCall</a>はRubyからPythonのライブラリを直接呼び出せるようにするためのgemとして開発されています。</p>
 
 <p>機械学習やディープラーニングの領域では日々新しいアルゴリズムが論文として発表され、すぐに実装がオープンソースとして公開されるようなスピード感での開発が常識になっています。<br />
 この事情を考えると、これらの研究開発に近い分野のエンジニアが突然Rubyで新規のアルゴリズムを実装しだすことは考えにくいため、既存のPythonの資産をRubyから利用するアプローチには納得感が高く、期待を持って見ていました。</p>
 
-<p>そして、1年後である今回のRuby KaigiでPyCallの安定版である1.0のリリースが<a href="http://tech.speee.jp/entry/2017/09/17/005431">むらけんさんのトーク</a>の中で発表されました。</p>
+<p>そして、1年後である今回のRuby KaigiでPyCallの安定版である1.0のリリースが<a href="http://rubykaigi.org/2017/presentations/mrkn.html">むらけんさんのトーク</a>の中で発表されました。</p>
 
 <p>デモではpandasでのデータ処理やmatplotlibでのグラフ描画、ディープラーニング用ライブラリであるKerasを使った画像検出などを実際に見せてくれました。<br />
 pandasやmatplotlib、numpyなどの使用頻度の高いライブラリはPyCallをさらにwrapしてインターフェースが整えられたgemとして提供されており、KerasはPyCallを直接使ってライブラリを呼び出すような実装になっていました。</p>
@@ -389,12 +389,14 @@ pandasやmatplotlib、numpyなどの使用頻度の高いライブラリはPyCal
 <h2 id="numoプロジェクト">Numoプロジェクト</h2>
 
 <p>そのうちの一つが、Rubyで科学計算を実現しようと言う<a href="https://github.com/ruby-numo/numo/blob/master/README.md">Numoプロジェクト</a>です。<br />
-こちらは筑波大学の田中昌宏<a href="https://twitter.com/masa16tanaka">@masa16tanaka</a>さんがプライベートでやっているプロジェクトで、Numpyと同等の機能を志向する行列計算ライブラリのNumo::NArrayや、データビジュアライズのためのgnuplot、GNU scientific library、フーリエ変換のwrapperライブラリなどが存在します。<br />
+<a href="http://rubykaigi.org/2017/presentations/masa16tanaka.html">Numoに関する発表</a>も2日目の午後にありました。</p>
+
+<p>このプロジェクトは筑波大学の田中昌宏さん（<a href="https://twitter.com/masa16tanaka">@masa16tanaka</a>）がプライベートでやっているプロジェクトで、Numpyと同等の機能を志向する行列計算ライブラリのNumo::NArrayや、データビジュアライズのためのgnuplot、GNU scientific library、フーリエ変換のwrapperライブラリなどが存在します。<br />
 完全にプライベートプロジェクトであり、一人で開発しているため急速に実装が進んでいくことはなさそうですが、行列計算のための良いライブラリ(Numo::NArray)が提供されていることはデータサイエンスをRubyでやる、と言う観点からも非常に大きい貢献だと思います。</p>
 
 <h2 id="red-data-toolsプロジェクト">red-data-toolsプロジェクト</h2>
 
-<p>また、PyCallの作者でもあるむらけんさんも参加する、red-data-toolsと言うプロジェクトもあります。<br />
+<p>また、PyCallの作者でもあるむらけんさんも参加する、<a href="https://red-data-tools.github.io/">red-data-tools</a>と言うプロジェクトもあります。<br />
 red-data-toolsはRuby用のデータ処理ツールを提供するプロジェクトです。中でも、複数の言語のデータ処理のために共通で開発されているApache Arrowのフォーマットをサポートするためのライブラリが充実している点が特徴だと言えます。</p>
 
 <p>Apache Arrowは大規模なデータ処理のために作られた仕様で、異なる言語からなるプラットフォーム間のデータ交換コストを下げることが目的で開発が進んでいます。PythonのpandasやScalaで書かれているSparkなどのメジャーどころも採用しているものになります。</p>
@@ -402,8 +404,8 @@ red-data-toolsはRuby用のデータ処理ツールを提供するプロジェ�
 <p>業界標準となりつつあるApache Arrowに対応していくことで、今後Rubyがよりデータサイエンスの分野で使われるようになる可能性を模索していくようです。</p>
 
 <p>これ以外にも今回のRuby Kaigiでは発表がなかった科学技術計算のSciRubyプロジェクトや、機械学習・ディープラーニングに関連する取り組みも存在します。<br />
-参考）
-<a href="https://sciruby-jp.github.io/">SciRuby</a>
+参考）<br />
+<a href="https://sciruby-jp.github.io/">SciRuby</a><br />
 <a href="https://github.com/arbox/machine-learning-with-ruby">Awesome Machine Learning with Ruby</a></p>
 
 <h1 id="まとめ">まとめ</h1>
