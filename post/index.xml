@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Wed, 20 Sep 2017 15:31:47 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 23 Oct 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる</title>
+      <link>http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/</guid>
+      <description>&lt;p&gt;アプリケーションエンジニアの西辻です。&lt;br /&gt;
+今回のブログでは、弊社のローカル開発環境を &lt;code&gt;Docker&lt;/code&gt; 化した話をご紹介したいと思います。
+このブログでは、なぜローカル開発環境を &lt;code&gt;Docker&lt;/code&gt; 化する考えに至ったのかに始まり、&lt;br /&gt;
+具体的にどのような方法で &lt;code&gt;Docker&lt;/code&gt; 化を進めていったかを振り返りながら書いていきます。&lt;br /&gt;
+また、&lt;code&gt;Docker&lt;/code&gt; 化したことで受けた恩恵などを最後に書いて終わります。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？</title>
