@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>スタートアップエンジニアって何に時間を使っているの？ &middot; カウル Tech Blog</title>
+    <title>会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.26" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,32 +19,23 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/2016/08/24/startup-dev/" />
-    <meta property="og:title" content="スタートアップエンジニアって何に時間を使っているの？" />
-<meta property="og:description" content="こんにちは！
-Housmartの宮永です。
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" />
+    <meta property="og:title" content="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" />
+<meta property="og:description" content="エンジニアの@macs_6です。
+このブログでは社内のAWS EC2上で運用しているアプリケーション群をECS移行したプロジェクトについて紹介します。
 
-スタートアップのエンジニアはリソースの都合もあるので
-「何でもやる」というのが一般的認識かと思います。
-弊社エンジニアもその一般的認識に違わず、何でもやる集団です。
-
-
-
-でも「何でもやるんです。」では曖昧すぎて、どういう仕事をしているか全然イメージわきませんよね。
-
-ということで、実作業を全て記録しているという弊社の特徴を活かして
-今回は実作業時間をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。
+ローカルの開発環境をDockerした話は以前の記事(複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる)で西辻が紹介しているので、そちらを参照して下さい。
 
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2016/08/24/startup-dev/" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" />
 
-  <meta property="og:image" content="https://lh3.googleusercontent.com/WkSw8U1JBcAZj4gMZ9FPrY1RoNaJo7K4W0hLtW6C1OU3IblfDnXawuGG63JugLLdDd-5SbGpuw8HOtb1vnc8mD-oqMB3J3qtac7a-IuYsqrULBlh2QCcTBbcjARyxzzLqXba7kn0myaXeiwScgW2WLdk8qnI0ppLMNM11kTpIgL4YtF62pu61DUGCxOcnZ70KTEg-6L7umixchtx4xId6TA3gqJyqGDfHEg8KHVaxeRXgY7UnJQqs0VC0V-ZU94niOEPvH5ZjNpenRIIycULl-cgaVL1Pjgji31GbBRgHfVcoy3Q8UiYF1Y_RNWEGafKJQowK5CbN8il1RFTvN7ncqnqgo5ehcrMOah5NZmcV3d6ff9-lBNz8W1awacc5NzU9vMXceZXInVPmVwtgo2sKTt0x184zxsRDHfFn9j-6ng3WnXugG-cS-ylChxoM6xF-v8Gnc6S7jyGVZXbN437VMhpqObrOcl5LIWUSL2PCgRy_SBV44a2Lcu9APPh85eDmn7trT-sQVqtdCQ1mdBPP3Yk5G3GYX0adF_20dsKlkiFSPckgLI5LRqd7UdPKvGT_dlQ2NwaCarZ7en36fgR1FRXDe3dxSw=w640-h480-no" />
+  <meta property="og:image" content="https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600" />
 
 
 
-<meta property="article:published_time" content="2016-08-24T21:25:46&#43;09:00"/>
-<meta property="article:modified_time" content="2016-08-24T21:25:46&#43;09:00"/>
+<meta property="article:published_time" content="2017-11-06T19:30:00&#43;09:00"/>
+<meta property="article:modified_time" content="2017-11-06T19:30:00&#43;09:00"/>
 
 
 
@@ -58,49 +49,31 @@ Housmartの宮永です。
 
     
     
-<meta itemprop="name" content="スタートアップエンジニアって何に時間を使っているの？">
-<meta itemprop="description" content="こんにちは！
-Housmartの宮永です。
+<meta itemprop="name" content="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと">
+<meta itemprop="description" content="エンジニアの@macs_6です。
+このブログでは社内のAWS EC2上で運用しているアプリケーション群をECS移行したプロジェクトについて紹介します。
 
-スタートアップのエンジニアはリソースの都合もあるので
-「何でもやる」というのが一般的認識かと思います。
-弊社エンジニアもその一般的認識に違わず、何でもやる集団です。
-
-
-
-でも「何でもやるんです。」では曖昧すぎて、どういう仕事をしているか全然イメージわきませんよね。
-
-ということで、実作業を全て記録しているという弊社の特徴を活かして
-今回は実作業時間をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。
+ローカルの開発環境をDockerした話は以前の記事(複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる)で西辻が紹介しているので、そちらを参照して下さい。
 
 ">
 
 
-<meta itemprop="dateModified" content="2016-08-24T21:25:46&#43;09:00" />
-<meta itemprop="wordCount" content="1424">
+<meta itemprop="dateModified" content="2017-11-06T19:30:00&#43;09:00" />
+<meta itemprop="wordCount" content="3541">
 
-  <meta itemprop="image" content="https://lh3.googleusercontent.com/WkSw8U1JBcAZj4gMZ9FPrY1RoNaJo7K4W0hLtW6C1OU3IblfDnXawuGG63JugLLdDd-5SbGpuw8HOtb1vnc8mD-oqMB3J3qtac7a-IuYsqrULBlh2QCcTBbcjARyxzzLqXba7kn0myaXeiwScgW2WLdk8qnI0ppLMNM11kTpIgL4YtF62pu61DUGCxOcnZ70KTEg-6L7umixchtx4xId6TA3gqJyqGDfHEg8KHVaxeRXgY7UnJQqs0VC0V-ZU94niOEPvH5ZjNpenRIIycULl-cgaVL1Pjgji31GbBRgHfVcoy3Q8UiYF1Y_RNWEGafKJQowK5CbN8il1RFTvN7ncqnqgo5ehcrMOah5NZmcV3d6ff9-lBNz8W1awacc5NzU9vMXceZXInVPmVwtgo2sKTt0x184zxsRDHfFn9j-6ng3WnXugG-cS-ylChxoM6xF-v8Gnc6S7jyGVZXbN437VMhpqObrOcl5LIWUSL2PCgRy_SBV44a2Lcu9APPh85eDmn7trT-sQVqtdCQ1mdBPP3Yk5G3GYX0adF_20dsKlkiFSPckgLI5LRqd7UdPKvGT_dlQ2NwaCarZ7en36fgR1FRXDe3dxSw=w640-h480-no">
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600">
 
 
 
-<meta itemprop="keywords" content="startup,development,work," />
+<meta itemprop="keywords" content="development,docker,infra," />
 
     <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/WkSw8U1JBcAZj4gMZ9FPrY1RoNaJo7K4W0hLtW6C1OU3IblfDnXawuGG63JugLLdDd-5SbGpuw8HOtb1vnc8mD-oqMB3J3qtac7a-IuYsqrULBlh2QCcTBbcjARyxzzLqXba7kn0myaXeiwScgW2WLdk8qnI0ppLMNM11kTpIgL4YtF62pu61DUGCxOcnZ70KTEg-6L7umixchtx4xId6TA3gqJyqGDfHEg8KHVaxeRXgY7UnJQqs0VC0V-ZU94niOEPvH5ZjNpenRIIycULl-cgaVL1Pjgji31GbBRgHfVcoy3Q8UiYF1Y_RNWEGafKJQowK5CbN8il1RFTvN7ncqnqgo5ehcrMOah5NZmcV3d6ff9-lBNz8W1awacc5NzU9vMXceZXInVPmVwtgo2sKTt0x184zxsRDHfFn9j-6ng3WnXugG-cS-ylChxoM6xF-v8Gnc6S7jyGVZXbN437VMhpqObrOcl5LIWUSL2PCgRy_SBV44a2Lcu9APPh85eDmn7trT-sQVqtdCQ1mdBPP3Yk5G3GYX0adF_20dsKlkiFSPckgLI5LRqd7UdPKvGT_dlQ2NwaCarZ7en36fgR1FRXDe3dxSw=w640-h480-no"/>
-<meta name="twitter:title" content="スタートアップエンジニアって何に時間を使っているの？"/>
-<meta name="twitter:description" content="こんにちは！
-Housmartの宮永です。
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600"/>
+<meta name="twitter:title" content="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと"/>
+<meta name="twitter:description" content="エンジニアの@macs_6です。
+このブログでは社内のAWS EC2上で運用しているアプリケーション群をECS移行したプロジェクトについて紹介します。
 
-スタートアップのエンジニアはリソースの都合もあるので
-「何でもやる」というのが一般的認識かと思います。
-弊社エンジニアもその一般的認識に違わず、何でもやる集団です。
-
-
-
-でも「何でもやるんです。」では曖昧すぎて、どういう仕事をしているか全然イメージわきませんよね。
-
-ということで、実作業を全て記録しているという弊社の特徴を活かして
-今回は実作業時間をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。
+ローカルの開発環境をDockerした話は以前の記事(複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる)で西辻が紹介しているので、そちらを参照して下さい。
 
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
@@ -303,25 +276,25 @@ Housmartの宮永です。
         <div class="article-inner">
             
                 
-                <img src="https://lh3.googleusercontent.com/WkSw8U1JBcAZj4gMZ9FPrY1RoNaJo7K4W0hLtW6C1OU3IblfDnXawuGG63JugLLdDd-5SbGpuw8HOtb1vnc8mD-oqMB3J3qtac7a-IuYsqrULBlh2QCcTBbcjARyxzzLqXba7kn0myaXeiwScgW2WLdk8qnI0ppLMNM11kTpIgL4YtF62pu61DUGCxOcnZ70KTEg-6L7umixchtx4xId6TA3gqJyqGDfHEg8KHVaxeRXgY7UnJQqs0VC0V-ZU94niOEPvH5ZjNpenRIIycULl-cgaVL1Pjgji31GbBRgHfVcoy3Q8UiYF1Y_RNWEGafKJQowK5CbN8il1RFTvN7ncqnqgo5ehcrMOah5NZmcV3d6ff9-lBNz8W1awacc5NzU9vMXceZXInVPmVwtgo2sKTt0x184zxsRDHfFn9j-6ng3WnXugG-cS-ylChxoM6xF-v8Gnc6S7jyGVZXbN437VMhpqObrOcl5LIWUSL2PCgRy_SBV44a2Lcu9APPh85eDmn7trT-sQVqtdCQ1mdBPP3Yk5G3GYX0adF_20dsKlkiFSPckgLI5LRqd7UdPKvGT_dlQ2NwaCarZ7en36fgR1FRXDe3dxSw=w640-h480-no" class="article-banner">
+                <img src="https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600" class="article-banner">
                 
             
 
             <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/08/24/startup-dev/">
+    <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/">
     <h1 class="article-title" itemprop="name">
-        スタートアップエンジニアって何に時間を使っているの？
+        会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと
     </h1>
     </a>
     <div class="article-meta">
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2016-08-24 21:25:46 &#43;0900 JST" itemprop="datePublished">2016-08-24</time>
+            <time datetime="2017-11-06 19:30:00 &#43;0900 JST" itemprop="datePublished">2017-11-06</time>
             &middot;
-            1424
+            3541
             words
             &middot;
-            3
+            8
             minute read
         </div>
 
@@ -332,7 +305,7 @@ Housmartの宮永です。
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">project</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
                 
                 
             </div>
@@ -345,13 +318,13 @@ Housmartの宮永です。
             <div class="article-category">
                 <i class="fa fa-tags"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/startup">startup</a>
-                &middot;
-                
                 <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/development">development</a>
                 &middot;
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/work">work</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/docker">docker</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
                 
                 
             </div>
@@ -360,127 +333,283 @@ Housmartの宮永です。
     </div>
 </header>
 <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/08/24/startup-dev/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップエンジニアって何に時間を使っているの？" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="hatena-bookmark-button" data-hatena-bookmark-title="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 </div>
 
 
             <div class="article-entry" itemprop="articleBody">
-                <p>こんにちは！<br />
-Housmartの宮永です。</p>
+                <p>エンジニアの<a href="https://twitter.com/macs_6">@macs_6</a>です。
+このブログでは社内の<strong>AWS EC2上で運用しているアプリケーション群をECS移行したプロジェクト</strong>について紹介します。</p>
 
-<p>スタートアップのエンジニアはリソースの都合もあるので
-「何でもやる」というのが一般的認識かと思います。<br />
-弊社エンジニアもその一般的認識に違わず、何でもやる集団です。</p>
-
-<p><img src='https://lh3.googleusercontent.com/cI7onjqojgOuX_hNREK4r7DiDNdDUeUWz4WXfO1ZkP4JD9y7sVrBCkFJuzGGnil-Z8mV90d3RvMHJGAHgRAR0mnOSQRRLf7GCRfNQ6AIAQHh8m4FWRfGnslGAsO71UEgRaDd5azasHFdCi7Auv4x-hQER9RLRR_WJXxK9cHy_DNGuLfh3e50iCnmTtdKQo2tEkSDsyFbs098p3TQpXSsDfcOO_4itNG-NWRVmxR4raGlBs-9TnTqzo_g0VahyZk5W_t2_VFcd5ArSaMAbyMSHeuHSR7cq9T7M2PGgcGfeKKaWy4LevlHtvBnJux_LzLkcp4bLaou-9t9aqmLaMOBYgEEx-J3_O3VOWukaUXHmvuYvXo3tT6vScIDevxzq2FF1aBXkrleOTf-vtjRuSpZoW0x_zZBMw1ArFn2pjjB3RY0psquNnoHWM5XwLdL0XTcv3WQwVzPIMBlgQNBzRyt37JQlS5XbWxrx9WxctOhVFa2sSe4AQovJmFR_YXodvTLSUtM1uw8eWuW5clcsqptFhVqE-XBHF0-AluN401UPybcC0hGoqZf-9IGfnAFFzpji61ePv7Mi0H1kdsag9IG246jq0fNoO8=w800-h912-no' alt='何でもやるエンジニアの3人です。左から松江、宮永、高松'></p>
-
-<p>でも「何でもやるんです。」では曖昧すぎて、どういう仕事をしているか全然イメージわきませんよね。</p>
-
-<p>ということで、<span style='color:red'>実作業を全て記録している</span>という弊社の特徴を活かして
-今回は<span style='color:red'>実作業時間</span>をベースに弊社エンジニアがどんな業務をどういう割合で行っているのか紹介します。</p>
+<p>ローカルの開発環境をDockerした話は以前の記事(<a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/">複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる</a>)で西辻が紹介しているので、そちらを参照して下さい。</p>
 
 <p></p>
 
-<h2 id="背景-組織の話">＜背景＞組織の話</h2>
+<h2 id="概要">概要</h2>
 
-<p>弊社エンジニアは3人。<br />
-メインプロダクトは中古マンション売買サービスの<a href="https://kawlu.com">カウル</a>で、皆で大事に大事に育てています。</p>
+<ol>
+<li><a href="#anchor0">プロジェクトを始める前に感じていた課題</a></li>
+<li><a href="#anchor1">目指す状態</a></li>
+<li><a href="#anchor2">ECSを選択する理由</a></li>
+<li><a href="#anchor3">設計</a></li>
+<li><a href="#anchor4">移行のために必要な作業</a></li>
+<li><a href="#anchor5">Digdagによるスケジューリングについて</a></li>
+<li><a href="#anchor6">ECSを使って見て気づいたこと</a></li>
+<li><a href="#anchor7">今後やりたいこと</a></li>
+</ol>
 
-<p><img src='https://lh3.googleusercontent.com/ZsJUQC8OIl5SdHBfqsVCo5lUzThyq309hg2-JW4QrOJBd0c6nNNo6lQb_vFxZJm3e5sFmlKnwvc6dg6Xq7EeZ0ckukTOlu9ZftuL0jK4nyoNlRY5Qi6VB1aEiiE95o_0MYxdT46aSkofHv3Zyuh24LPfP4ehNdFiQ93rIUAisDslti11qOtecqOKdwyHHraMXERJ-cqKhc7PVyPUDx7KIlS0QemwoKEMU5kC_mns0Y9snp5wIEL56rhQ6z-1XBLOd4wjPnMvsp5A3IsF_4DAmlCuKW0lDyxNX4gTmXVTKBj2gj-oZU3X8Xl_kIhLnDFSXpk69M7q6uc1Xu6F6V7Qj_QLu2F1FuwIv7XQgMxJpIpx55pm0eXRNfyxkQnX2rnmVYeGM_82mKmjPtVuxvjzGbNQV1-lnsRAYUBium_uWQ90JeKPX9IGZk8m9uCeODsWpqyDTNoJliz_wv6P_wBUxu5peyyiQjUhUtMSUwHWZKGhs-FV7MNgARrot0v5Y0SZ2GKFa_vAgB8-N1QAxRqo6igXMRuMK31HQQqm_WwYRnKMVB5Zy935AjZzVipPLZiQd8VZRQdoXF5hRcj9hMwaiEf48wQDYTYdYPh-9NLVZ5fInAkY=w650-h912-no' alt='カウル'></p>
+<p><div id="anchor0"/></p>
 
-<p>エンジニア3人はプロジェクトのプランニングからリリースまで幅広く業務を行います。<br />
-（これがいわゆる「何でもやる」）</p>
+<h2 id="プロジェクトを始める前に感じていた課題">プロジェクトを始める前に感じていた課題</h2>
 
-<h4 id="主なタスク">主なタスク</h4>
+<ol>
+<li>ローカル・本番で再現性のある環境を簡単に作れるようにしたい</li>
+<li>簡単にスケールできるようにしたい</li>
+<li>コストを抑えたい</li>
+</ol>
+
+<p>ECS移行プロジェクトを始める前にはこれらの3つの事に課題感を持っていました。</p>
+
+<blockquote>
+<p>1.ローカル・本番で再現性のある環境を簡単に作れるようにしたい</p>
+</blockquote>
+
+<p><a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/">以前の記事</a>にあるように、ローカルの開発環境構築に多くの時間を割いてきました。
+新しいメンバーが入ってきた際、使っているミドルウェアの設定やバージョン変更があった際には「あれ、設定変わった？」という会話と共に環境を揃えるために大変労力をかけていました。</p>
+
+<blockquote>
+<p>2.簡単にスケールできるようにしたい</p>
+</blockquote>
+
+<p>サービスがテレビ等のメディアに掲載いただけると、目に見えてアクセスが急増します。
+実際にサービス開始当初には<strong>5秒のテレビ出演でサービスが応答出来なくなったこと</strong>もありました。(<a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/">テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</a>)</p>
+
+<p>直前にメディア露出タイミングが分かっていればアクセス増加を予測が出来ますが、関連キーワードがテレビで紹介されることで不意にトラフィックが増えることもあります。理想的には「自動スケールする状態」、少なくとも「同じ横にサーバを並べれば動く状態」にはしたいと考えていました。</p>
+
+<blockquote>
+<p>3.コストを抑えたい</p>
+</blockquote>
+
+<p>API、キューイング、管理用アプリケーション、本番環境、検証環境・・・と必要なEC2インスタンスが増えてコストが増えていました。
+特に定期的なスクリプト実行のためのリソースや、冗長化のために2台になっているアプリケーションついては、明らかにリソースが余っている状況も見受けられるため、それらが相互に余ったリソースを使えるような状態になっていると望ましいです。</p>
+
+<p><div id="anchor1"/></p>
+
+<h2 id="目指す状態">目指す状態</h2>
+
+<p>上記のような課題を踏まえて、目指したのは以下の状態です。</p>
+
+<ol>
+<li>容易にスケールできる状態</li>
+<li>システム稼働率の向上
 
 <ul>
-<li>プロジェクトプランニング</li>
-<li>プロジェクト管理</li>
-<li>設計</li>
-<li>開発</li>
-<li>テスト</li>
-<li>運用（トラブル対応、データ抽出など）</li>
-<li>KPI管理</li>
-<li>MTG</li>
-<li>自由研究</li>
+<li>基本的な作業時にダウンタイムが発生しないこと(デプロイ時、スケールアウト・イン時など)</li>
+</ul></li>
+<li>インフラ構築・運用時間の短縮</li>
+<li>現状よりもエラーが追いやすく、かつ検知できる状態</li>
+<li>インフラコストの削減</li>
+</ol>
+
+<p>この状態を目指すべくECS移行プロジェクトは始まりました。</p>
+
+<p><div id="anchor2"/></p>
+
+<h2 id="ecsを選択する理由">ECSを選択する理由</h2>
+
+<ul>
+<li>Nginxやミドルウェアの設定変更をしたい</li>
+<li><a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/">ローカルの開発環境をすでにDockerで構築済み</a></li>
+<li>現状のシステムはAWS上で稼働中</li>
 </ul>
 
-<p>これだけ色々なことをやっているので、<br />
-何にどれだけ使っているのかは<span style='color:red'>記録でもしないかぎり</span>把握しきれません。</p>
+<p>ローカルの開発環境はDocker化されており、エンジニアもデザイナーも使っている状態なので、学習コストや心理的な不安は少ない状態で移行できる状態です。
+上記に挙げた状況を踏まえた上で、一番時間をかけずに移行できるのはECSだと判断しました。</p>
 
-<h2 id="作業の記録">作業の記録</h2>
+<p>ちなみに、ユーザ向けの機能開発がある中で、システム可用性を上げるタスクの優先度はなかなか上げられないのですが、今はスプリント中に確保されている<strong>改善デー</strong>を使って作業を進めています。(参考: <a href="http://techblog.housmart.co.jp/2016/03/14/dev_cycle/">スタートアップのCTOになって2ヶ月で作った開発サイクル</a>)</p>
 
-<p>前述のとおり、弊社エンジニアは入社以来、全作業に対して実作業時間を記録しています。<br />
-例えば「weekly MTGの参加」や「xxのbug fix」もそれぞれチケット化して記録します。<br />
-※<a href="https://ja.atlassian.com/software/jira">JIRA</a>で全て管理しています。<br />
-※ご飯、筋トレ、昼寝は記録対象外。</p>
+<p><div id="anchor3"/></p>
 
-<h2 id="エンジニアの作業実績-2016-01-2016-08">エンジニアの作業実績(2016 / 01 - 2016 / 08)</h2>
+<h2 id="設計">設計</h2>
 
-<p><img src="https://lh3.googleusercontent.com/cd4pAvEbM3NfTrcX1DELrhfF9oXpTP2z_Fob_Kovbw_yr4JUTAIfKmAzpcvT9l7GCVTgrYR66rhZxbe22JINTgdKsdkyf6PbJMroX4FN5y-4vJkgJDBTlnailOLBN7_k4Wp09qVW54DSLZ9mCj0HQMIGQAjwKLflaBNbkwmBOR21KSeLo0QLgFedHRosmc7NQzenmDRCmIYAO7-31Igor64cmaX0fsEwXGikzdjVu91jf-21IZrAcw4XjGDIqfeoG99WrsZQVcfjxvyEQzJ2iPPafYI1rc5D7APjwpJpoKaLmvUn4Ce9TGgpaAzxA3FUsuyli2NCXEcbcVYkApgl8SsCGvMr7I2LsNjk4_VYwIWy7apT7X-QmMf5OO0AoPkIdZ_LFBG0zk77jRhH-rCOMCtFg54fMPUA-r_BPMwn2sAP55fE_-M-i5MC3kaTv7-E8K4vA7O3d3-_RN3Kt46xDqCn4uyGM_dd2gSRPC3nElCXaIheA_ZhUQ_a9G1ue38sOWFbMpDR3qrwaRAaSfnBKk1dbFtDL9L9k7amHNHgbaCbEd6K8Klbna9I1M76FRIgop0hoUW9QB4NixszMVCz8QzGfPSa32E=w650-h669-no">
-<div style="font-size:12px;margin-top: -25px">
-  <ul>
-<li>development : 開発、テスト</li>
-<li>bug : 本番で発生したバグの修正作業</li>
-<li>operation : 運用（トラブル対応、データ抽出など）</li>
-<li>dev-improvement : 開発環境改善に関する作業</li>
-<li>planning : MTG、プランニング、要件定義、設計、外部との調整作業</li>
-<li>lab : 自由研究 ※毎週水曜日は1日自由研究時間に充てている</li>
-  </ul>
-</div>
-<br>
-上図は入社した2016/01より約8ヶ月間記録してきた全作業実績です。<br />
-development(開発)やplanning(MTG、企画)にかける時間は少しずつ上昇していることがわかります。<br />
-これは案件規模が少しずつ大きくなり企画時間が増えたり、システム自体が少しずつ複雑化していることで開発の時間が増えたりしていることが背景にあります。</p>
+<p><img src="https://lh3.googleusercontent.com/teniBFgRAX0i66h3apT0xRJu46CP0HXWbkCCBjmSTNBWllsvfCbOkz5xpvlIB_HsOe_gH2klSQ6RQ4RBGYcXMTdgpSdoqGR9KsUv74EYUiCLuhgD3YFO_saX2zXvQTOmXOnP_FxTv6JNh6dtQ-CdUtXii6TCaA_VMB0KMpqPUAyTHbq5qD41ostTmsVhUsqadyeaMMNh6KiUfqP9j4PlLkCpR3o-mS0ow1d5sBQZ6X8YZxp_tmwhMH-TaK-A-EPnPnougF3-mJ-RBFG2meAsFBVGxGY_y0ciugWl8EMuTVBUW6wJ6l-wVfaHhXloLwr-CkFr1XQUdFJFeuwLCFVBPepkNhfc6pZJWuRg-8XKuHgRXh9CSixsJAT4A97psRkIgE5tcbaxPFtDFU8R63AWmYgtvVHXLQlh-tMg1aKl_08Tf-vhHEiim_nKr17-FJLjXUinMDbDEPJfZdYhfx1F2g9N5bk6kwIhyJ3629j1W5G59mhIHFb5e768sWGB6RCQOlK7HYX97kcjBpXYQ8C8SfFzVIR_2qp-knQc102G5DI-ExOmsLe-bZTRUMPV229UQcXLX-p4y3a883rpcs-PEgvCeMwuFBR9SGCmmmCf0G8zc8XYdGjGTEpOcqmpTDYVFy1t5N2JZOKrGN5kGleTQxYGUfxE7nH1WWI=w800" alt="移行前の図" /></p>
 
-<p>operation(運用), bug(本番で発生したバグの修正作業)は毎月全体の10%程度の工数です。<br />
-スピード感のある開発を行っているので、多少のバグはしょうがない面もありますが、<br />
-バグの対応が増えてしまえば他の作業にはねてしまうので、スピードを保ったまま1-5%くらいまでに落とせればと思ってます。</p>
+<p><img src="https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600" alt="移行後の図" /></p>
 
-<p><img src="https://lh3.googleusercontent.com/GiCPVq13nhO7yk31s9STFNxBlX19KXlidRnVD2hxBzeb-7AQZMrQa2pzy0cW6oSSm_51e-klLHddSoRNQES8KfvCMNZjPfuqg7SqMlBtSEQen--yKE-4-Al0pMDZJky8yo0VRU2OzZnIYqFNiLWxAC_T2sPnd9m7HxR_ZSVt7KNfaq8cgTHG2hlONZTBgdCH3cgTApXiOUOUAgHzlR_3OQpqDD_c1C4d5Ddf0C9TKTiY7PjQa9gVnYWUyOlFNTLtdwBCW-KlCCmCKjTjKr5IiC6n_CjlF3YavLRaZIkQEVdLUJJd1PRB-dt8S70D2CbHeN1Ev6C1rMpDfze51_UPtpaTqFcPIEEUTNtY-Fh5NVy5jJKyxiu6ogZJicmLJLqZjCbpAHpkoIs4agWihpFe_Z11Awz9jjZAcwY3x7KKsw-xybDwDnmexdyVy1oi6DUGlSBZdc2HJ9_LETi0WC5hknW6J6aWEGrtx4CnVRM5qDRYQTVU0W50THJwZ2QH9VciocJ9D0-xpTLw_9lVUJll3K7U7MA4fvAuv_V13tBhVlvPc3sg8m5UF-kce0OGKbic_qTGgI21W9FOr-v8qndavgk_Dn4upyU=w650-h658-no">
-<div style="font-size:12px;margin-top: -25px">
-  <ul>
-<li>development : 開発、テスト</li>
-<li>bug : 本番で発生したバグの修正作業</li>
-<li>operation : 運用（トラブル対応、データ抽出など）</li>
-<li>dev-improvement : 開発環境改善に関する作業</li>
-<li>planning : MTG、プランニング、要件定義、設計、外部との調整作業</li>
-<li>lab : 自由研究 ※毎週水曜日は1日自由研究時間に充てている</li>
-  </ul>
-</div>
-<br></p>
+<p>移行前後で基本的にシステムの概要は同じです。以下のことを考えて作っています。</p>
 
-<p>上図は作業時間の各種作業の割合を示します。<br />
-ここ数ヶ月はlab(自由研究)やdev-improvement(開発環境改善)の時間を<br />
-開発にあてているのが現状です。</p>
+<ul>
+<li>クラスタ
 
-<p>lab（環境改善、自由研究）は弊社にとって投資にあたり<br />
-会社やプロダクトの成長に欠かせない大事な要素です。<br />
-時期を見てかける時間も増やしていきたいと思います。</p>
+<ul>
+<li>本番環境と検証環境の2つを作成
 
-<h2 id="結論-housmartエンジニアの業務とは">結論（Housmartエンジニアの業務とは？）</h2>
+<ul>
+<li>運用が安定するまでは色々試したいので分離</li>
+</ul></li>
+<li>基本的にm4.largeを使ってクラスタを構成
 
-<p>ということで作業時間から見たHousmartエンジニアの働き方は下図のようになります。<br />
-<img src='https://lh3.googleusercontent.com/FzBf0xEm9MHzaCuVlu8d9ALcMcrLnyZ3ktJPI3FFNS48iV1pCH6GcQ691ztwQZ_OyymkgzKxQn3dePYTmWf1ClG2Lnas1CehUdrjPEL9EaShXkDE19qBSw2B90fKXe4NpyBgXeiQreaauPfFoUT-rZArCmw7UPF3kMg0EaIADoO9VbEwBSQdvXHVyHjg9-6mIrZ0FqA1ENysOsY89c3N7XA6vIeOeI3TWW3mku6lDTJzxHvX-ceNvpd7ZA_JHmrSxA4bBDKaMpdY4JQWVs56TQlh62oOewKJ1YlYk2HUV_qJ8HLvSUxx4wVvARyGF7qFthsNrzhykNowNFz4r7kkL-PJdXHabZFnT_T7LkVB4QeBkkx8WJ10TSIEV2b7SIPbzO1UGIGLa4Q7Uhz3YibwX9fhss11ryOo8O3yAREN5baklINwq9ET-zGPhcB6lj30oHej3EMs7jb_w9kZHETz0P_ZFEE3AqhQH413e09vboqJpSuROc2oMaCAJ9IIg0bkLYhSQR3B_FkCOeGan9a0HfnFaVU1qYXAXJSBNZWZ8uKn2onAZ76vCptynJ90C63_YXNkpDZu5LjElaWKTU2C8_AJ5dm6eXo=w592-h310-no'></p>
+<ul>
+<li>現在m4.largeはt2.largeとほぼ同じ価格</li>
+<li>スポットインスタンスは運用が安定したら検討、それまではReserved Instancesを適用</li>
+<li>CPUよりメモリが足りないといったことがあれば検討</li>
+</ul></li>
+</ul></li>
+<li>タスク
 
-<p>このような働き方や<span style='color:red'>ReTech(不動産テック)</span>に興味のあるエンジニアの方は
-ぜひご連絡ください！<br />
-お待ちしております。</p>
+<ul>
+<li>cronで管理していたBatchの実行をDigdagを使ったスケジューラに移行</li>
+<li>ポートが動的に変わるため各種アプリケーション向けにバランサを追加
 
-<p>akihisa.miyanaga@housmart.com</p>
+<ul>
+<li>このタイミングで管理ツール系のバランサを切り分け &amp; まとめる</li>
+</ul></li>
+</ul></li>
+<li>永続的なデータ
+
+<ul>
+<li>ストレージ系のプロセスはECS上で動かさない</li>
+</ul></li>
+</ul>
+
+<p><div id="anchor4"/></p>
+
+<h2 id="移行のために必要な作業">移行のために必要な作業</h2>
+
+<p>実際に移行をするにあたっては以下の作業が必要になりました。</p>
+
+<ul>
+<li>ステートレスなアプリケーション設計の徹底(<a href="https://12factor.net/ja/">The Twelve-Factor App</a>)
+
+<ul>
+<li>ログのwatchlogsへの移行</li>
+<li>システムログ</li>
+<li>アプリケーションログ</li>
+</ul></li>
+<li>ECS向けのContinious Deployment(CD)の構築</li>
+<li>ECS向けのリソース監視 &amp; アラートの仕組みの構築</li>
+<li>Auto Scaling Groupsの設計</li>
+</ul>
+
+<p>「ステートレスなアプリケーション設計」における環境変数、画像、キャッシュ等々はすでに分離されていたため、今回は作業が発生しませんでした。</p>
+
+<p><div id="anchor5"/></p>
+
+<h2 id="digdagによるスケジューリングについて">Digdagによるスケジューリングについて</h2>
+
+<p>cronで動いていたスクリプトはECS上のスケジューラに移行しています。
+スケジューラにはTreasure Data製OSSの<a href="https://www.digdag.io/">Digdag</a>を使用しています。
+シンプルなスクリプト実行であればcronやECSのScheduled Tasksでも十分ですが、Digdagを使うことで簡単な記法で処理間の依存を解決できるようにしています。</p>
+
+<p>また、実行したいスクリプト毎にDockerイメージを作成してECSのタスク定義を作っていると、タスク数が膨大になり管理が大変になります。
+それを避けるために<strong><code>docker run</code>に渡す引数を以下のようにスケジューラから適宜渡す</strong>ようにしています。これによりスクリプト群の入ったレポジトリ一つを含むDockerイメージを使うタスク定義で済むようになります。</p>
+
+<pre><code>timezone: Asia/Tokyo
+
+_export:
+  rb:
+    require: 'util'
+
+schedule:
+  daily&gt;: 02:00:00
+
++setup:
+  rb&gt;: Environment.setup
+
++do_something:
+  _export:
+    entry_point: Something.execute
+    error_template: batch_error.txt
+  rb&gt;: ECS.run_batch
+  _error:
+    call&gt;: error_slack_for_ecs.dig
+
++import_to_db:
+  _export:
+    entry_point: ResultImporter.execute
+    argv: ${s3_output_path}/result.csv
+    error_template: batch_error.txt
+  rb&gt;: ECS.run_batch
+  _error:
+    call&gt;: error_slack_for_ecs.dig
+
++report:
+  echo&gt;: done!
+</code></pre>
+
+<p>詳細は公式ドキュメントを見ていただけると良いのですが、上記の定義では<code>+setup</code>、<code>+do_something</code>、<code>+import_to_db</code>、<code>+report</code>は依存があるため、失敗した場合は移行の処理が実行されないようになっています。
+<code>_export</code>で変数の設定を行い、変数に定義されたエントリーポイントに向けて<code>ECS.run_batch</code>を実行するようにしています。</p>
+
+<p>この構成を取ることの良いところは依存を張れるだけでなく、</p>
+
+<ul>
+<li><strong>ジョブの追加はエントリーポイントと<code>schedule</code>の部分だけを書き換えて追加するだけなので簡単</strong></li>
+<li><strong>エラーが起きた場合は該当のAmazon CloudWatch LogsへのリンクをSlackに飛ぶのでログへのアクセスが容易</strong></li>
+</ul>
+
+<p>といったことが挙げられます。エラーログへのリンクについてはスケジューラに処理を追加して実行中のコンテナIDからURLを生成しています。</p>
+
+<p><div id="anchor6"/></p>
+
+<h2 id="ecsを使って見て気づいたこと">ECSを使って見て気づいたこと</h2>
+
+<p>まだ移行作業中ではありますが、これまでで以下のことを学びました。</p>
+
+<ul>
+<li>タスク定義でハードリミットを使うとメモリが足りない場合に実行が失敗する。
+
+<ul>
+<li>対策としては十分に大きなインスタンス、または十分な数のインスタンスをクラスタに入れておく。</li>
+<li>または、ソフトリミットで上限を指定しない運用にする。=&gt; 現在はこれで大きな問題になっていません。</li>
+</ul></li>
+<li>ECS用AMIのDockerエージェントが固まっていたことがある。
+
+<ul>
+<li><code>docker ps</code>で見ると認識されていないプロセスが残っていた。EC2の再起動で解決。Dockerエージェントのバージョンをアップデートしてからは起きていない。心当たりがあるのはクラスタのリソース不足や頻繁にタスクを停止したこと。再発したらテクニカルサポートに問い合わせるしかなさそう。</li>
+</ul></li>
+<li>Docker化を進めることでアプリケーションのステートレス化が徹底される。</li>
+<li>Ruby以外にも、JRubyやPython等々が必要な環境があるが、依存をDockerイメージごとに分離しておける。</li>
+</ul>
+
+<p><div id="anchor7"/></p>
+
+<h2 id="今後やりたいこと">今後やりたいこと</h2>
+
+<ul>
+<li>残りのコードの移行
+
+<ul>
+<li>docker-composeでまとめてる各種RailsアプリをECS上に再現します</li>
+</ul></li>
+<li>KMSを使った環境変数のセキュアかつ容易な管理(<a href="https://aws.amazon.com/jp/blogs/news/managing-secrets-for-amazon-ecs-applications-using-parameter-store-and-iam-roles-for-tasks/">参考: タスクIAMロールとパラメータストアを利用したAmazon ECSアプリケーションの秘密情報管理</a>)</li>
+<li>CodeStarを使ったプル型かつ容易なContinious Deploymentの構築
+
+<ul>
+<li>現在はAWS CLIを使って更新しています。</li>
+</ul></li>
+</ul>
+
+<p>また移行作業が進んだ際には、その結果共有したいと思います！</p>
+
+<p>まっくす</p>
+
+<hr />
+
+<p>Housmartでは不動産業界を変えるカウルを支えるエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
             </div>
             <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/08/24/startup-dev/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップエンジニアって何に時間を使っているの？" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="hatena-bookmark-button" data-hatena-bookmark-title="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 </div>
 
 <footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/08/24/startup-dev/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="スタートアップエンジニアって何に時間を使っているの？" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f08%2f24%2fstartup-dev%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%82%a8%e3%83%b3%e3%82%b8%e3%83%8b%e3%82%a2%e3%81%a3%e3%81%a6%e4%bd%95%e3%81%ab%e6%99%82%e9%96%93%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%ef%bc%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f08%2f24%2fstartup-dev%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f08%2f24%2fstartup-dev%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f08%2f24%2fstartup-dev%2f&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%82%a8%e3%83%b3%e3%82%b8%e3%83%8b%e3%82%a2%e3%81%a3%e3%81%a6%e4%bd%95%e3%81%ab%e6%99%82%e9%96%93%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%ef%bc%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f08%2f24%2fstartup-dev%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f06%2fecs-migration-project%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e4%bc%9a%e7%a4%be%e3%81%ae%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%82%92Docker%28ECS%29%e3%81%ab%e7%bd%ae%e3%81%8d%e6%8f%9b%e3%81%88%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ab%e6%ba%96%e5%82%99%e3%81%97%e3%81%9f%e3%81%93%e3%81%a8%e6%b0%97%e3%81%a5%e3%81%84%e3%81%9f%e3%81%93%e3%81%a8&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f06%2fecs-migration-project%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f06%2fecs-migration-project%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f06%2fecs-migration-project%2f&amp;description=%e4%bc%9a%e7%a4%be%e3%81%ae%e6%9c%ac%e7%95%aa%e7%92%b0%e5%a2%83%e3%82%92Docker%28ECS%29%e3%81%ab%e7%bd%ae%e3%81%8d%e6%8f%9b%e3%81%88%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ab%e6%ba%96%e5%82%99%e3%81%97%e3%81%9f%e3%81%93%e3%81%a8%e6%b0%97%e3%81%a5%e3%81%84%e3%81%9f%e3%81%93%e3%81%a8" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f06%2fecs-migration-project%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -492,21 +621,14 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
         
 <nav id="article-nav">
     
-    <a href="http://techblog.housmart.co.jp/2016/06/22/git-workflow/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">なぜdevelopブランチは必要なの？</div>
+      <div class="article-nav-title">不動産テック スタートアップのHousmartに転職して3ヶ月が経ったので振り返る</div>
     </a>
     
 
-    
-    <a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</div>
-    </a>
     
 </nav>
 
@@ -534,7 +656,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
                     <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600)" alt="スタートアップエンジニアって何に時間を使っているの？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600)" alt="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -559,7 +681,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
                     <a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/DuP11u4pzjSGcVta0BqHmg93LdLPpGDltsZfs48w-A87Y3kOSeClhqHvovIRxSUZMkFOQdC8DVtEJlqrVDr0VZhsLcqE-vbmT44LgmkHOFvbW0x8_USOXSjka-BhXiwO_li8jBdkfqORVNlrVUTHv6Pu-JR0U71betBSt-NwTW2jyy2GCcZ3ELBJEQjyS5Y4tQ8hw38q91AevVjV49KTQwr28CAHmI0CzHo4gkji6cK1ypeEo40EBwMzo6tpiUrMH7l28uktrg395DSaMtQ8YYc_TFXmhWfueUbhoCuns1p_TedQ7n0eN6feql4RXKh_Dl8B458zqLIsE-oFoJAN9Ezv8EM1CknMmWNO6Ou1yzAxCXX62EG6XOTLgOZy_RIdOocwaGD1TiJvyyOwzgDLoTkTYTi8JEGFpo2K6GblBZy8q-5-aRSetSZA7FLx4Xa5a23c3aIhXFii0OaqzKN9Ow5gi6QqAW5ClmQ3YZfgbv9h2w2xDIqUjkJJ62BcNX3RlXSHy6MeOqjDQ-OTYYtW3KAJtfAoCdVgh_vYbwFg0HC390jkoLuZeoEZwa36ATl2b_GMSRyOF10sxET962QOWpRoBMFWipxu-IdBI5agmsd8IZU-leGbfyPnHrA8_gHp2M_suBXXzZ-JyeSH7Cm91v58vv_hiEJlbw=w1409-h939-no)" alt="スタートアップエンジニアって何に時間を使っているの？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/DuP11u4pzjSGcVta0BqHmg93LdLPpGDltsZfs48w-A87Y3kOSeClhqHvovIRxSUZMkFOQdC8DVtEJlqrVDr0VZhsLcqE-vbmT44LgmkHOFvbW0x8_USOXSjka-BhXiwO_li8jBdkfqORVNlrVUTHv6Pu-JR0U71betBSt-NwTW2jyy2GCcZ3ELBJEQjyS5Y4tQ8hw38q91AevVjV49KTQwr28CAHmI0CzHo4gkji6cK1ypeEo40EBwMzo6tpiUrMH7l28uktrg395DSaMtQ8YYc_TFXmhWfueUbhoCuns1p_TedQ7n0eN6feql4RXKh_Dl8B458zqLIsE-oFoJAN9Ezv8EM1CknMmWNO6Ou1yzAxCXX62EG6XOTLgOZy_RIdOocwaGD1TiJvyyOwzgDLoTkTYTi8JEGFpo2K6GblBZy8q-5-aRSetSZA7FLx4Xa5a23c3aIhXFii0OaqzKN9Ow5gi6QqAW5ClmQ3YZfgbv9h2w2xDIqUjkJJ62BcNX3RlXSHy6MeOqjDQ-OTYYtW3KAJtfAoCdVgh_vYbwFg0HC390jkoLuZeoEZwa36ATl2b_GMSRyOF10sxET962QOWpRoBMFWipxu-IdBI5agmsd8IZU-leGbfyPnHrA8_gHp2M_suBXXzZ-JyeSH7Cm91v58vv_hiEJlbw=w1409-h939-no)" alt="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -584,7 +706,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
                     <a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/8rCg2SAjkW6okr9UPQ1pWQAllXyu7eZz12SNfyNh3hXKgw7WEKJ2zJRray0Srz64jvt4kT9fuFx6TTeOhwseSH-2ZoFFF6WgXbrQ9jUlkk2Pn2d_IIIiU5P55-z2lDr-mpzcR5Mob81gLWC4HJQlDApE-7MpJ1k9MKhWvOIyMikJdMJ3ZVkLx8dU8F7fgxCkoYvti5c9f091j3bcPT2CnNA2O_f4ns-erXO74EC96qZYpNJtqZb3nNcXwC9NAVsxgNbsH-zzWQLMPwrp9YMt___rlkP3YOhZ8IfSrAT5wWHGznQVDdC9nSK2ccptBpf0L1wCXp-drNRhEWCyCxsp8ufgyWIEGZ8bQjsuhM4jHe6U53KWUTMReRKvMfvIr87X27bctTRE5oQqsdxoBBnP_2Psbtc3Wi35x7JdiLQ65ArTvhDOWpCFo1m8V6ECZP9scqeQHEmoSUasE6XMKZclyZVYl2uOZd7SRdFNwucTMYID4mtX4umUR1HCtUOQaWboCEBdiVbdTqiTBemOj4gX04NsdZrthSUqrNvelNs4hhEqX18C4oEb9DzWhZk4RtCUgf4i9FGaImelLEwZfOPKPF6b3jlGE9BKHthP8G7_v6M0z1mo5o3QkaqBZQ3RPhIwGG4Cb_DxJvhGLL7s8Cj0sTNaASwjZMhH348=w1019-h909-no)" alt="スタートアップエンジニアって何に時間を使っているの？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/8rCg2SAjkW6okr9UPQ1pWQAllXyu7eZz12SNfyNh3hXKgw7WEKJ2zJRray0Srz64jvt4kT9fuFx6TTeOhwseSH-2ZoFFF6WgXbrQ9jUlkk2Pn2d_IIIiU5P55-z2lDr-mpzcR5Mob81gLWC4HJQlDApE-7MpJ1k9MKhWvOIyMikJdMJ3ZVkLx8dU8F7fgxCkoYvti5c9f091j3bcPT2CnNA2O_f4ns-erXO74EC96qZYpNJtqZb3nNcXwC9NAVsxgNbsH-zzWQLMPwrp9YMt___rlkP3YOhZ8IfSrAT5wWHGznQVDdC9nSK2ccptBpf0L1wCXp-drNRhEWCyCxsp8ufgyWIEGZ8bQjsuhM4jHe6U53KWUTMReRKvMfvIr87X27bctTRE5oQqsdxoBBnP_2Psbtc3Wi35x7JdiLQ65ArTvhDOWpCFo1m8V6ECZP9scqeQHEmoSUasE6XMKZclyZVYl2uOZd7SRdFNwucTMYID4mtX4umUR1HCtUOQaWboCEBdiVbdTqiTBemOj4gX04NsdZrthSUqrNvelNs4hhEqX18C4oEb9DzWhZk4RtCUgf4i9FGaImelLEwZfOPKPF6b3jlGE9BKHthP8G7_v6M0z1mo5o3QkaqBZQ3RPhIwGG4Cb_DxJvhGLL7s8Cj0sTNaASwjZMhH348=w1019-h909-no)" alt="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -609,7 +731,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
                     <a href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no)" alt="スタートアップエンジニアって何に時間を使っているの？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no)" alt="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -634,7 +756,7 @@ development(開発)やplanning(MTG、企画)にかける時間は少しずつ上
                     <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="スタートアップエンジニアって何に時間を使っているの？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no)" alt="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" class="thumbnail-image"></span>
                         
                     
                     </a>

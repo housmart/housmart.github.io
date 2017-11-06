@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Thu, 26 Oct 2017 15:31:47 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 06 Nov 2017 19:30:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと</title>
+      <link>http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/</link>
+      <pubDate>Mon, 06 Nov 2017 19:30:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/</guid>
+      <description>&lt;p&gt;エンジニアの&lt;a href=&#34;https://twitter.com/macs_6&#34;&gt;@macs_6&lt;/a&gt;です。
+このブログでは社内の&lt;strong&gt;AWS EC2上で運用しているアプリケーション群をECS移行したプロジェクト&lt;/strong&gt;について紹介します。&lt;/p&gt;
+
+&lt;p&gt;ローカルの開発環境をDockerした話は以前の記事(&lt;a href=&#34;http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/&#34;&gt;複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる&lt;/a&gt;)で西辻が紹介しているので、そちらを参照して下さい。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>不動産テック スタートアップのHousmartに転職して3ヶ月が経ったので振り返る</title>
