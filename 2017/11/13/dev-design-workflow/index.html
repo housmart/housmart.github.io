@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>デザイナー不在のチームのデザインフローを整えた話 &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.26" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" />
+    <meta property="og:title" content="デザイナー不在のチームのデザインフローを整えた話" />
+<meta property="og:description" content="カウルTech Blogをご覧のみなさまこんにちは。
+2017年の3月にHousmartにジョインしたデザイナーの稲井です。
+食う寝る遊ぶが大好きなので色々と回り道してますが、よろしくお願いします。
+
+さて今回はテックブログへの初投稿ということで、デザイナー不在の開発チームにジョインしてからの半年間を振り返って、チーム内でのデザインフローをどのように整えていったか？といった内容で送りしたいと思います。
+
+スタートアップ企業でのインハウスデザイナーの役割や、デザインワークフローの改善に興味のある方は参考にしていただければと思います。
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no" />
+
+
+
+<meta property="article:published_time" content="2017-11-13T19:45:00&#43;09:00"/>
+<meta property="article:modified_time" content="2017-11-13T19:45:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="デザイナー不在のチームのデザインフローを整えた話">
+<meta itemprop="description" content="カウルTech Blogをご覧のみなさまこんにちは。
+2017年の3月にHousmartにジョインしたデザイナーの稲井です。
+食う寝る遊ぶが大好きなので色々と回り道してますが、よろしくお願いします。
+
+さて今回はテックブログへの初投稿ということで、デザイナー不在の開発チームにジョインしてからの半年間を振り返って、チーム内でのデザインフローをどのように整えていったか？といった内容で送りしたいと思います。
+
+スタートアップ企業でのインハウスデザイナーの役割や、デザインワークフローの改善に興味のある方は参考にしていただければと思います。
+
+">
+
+
+<meta itemprop="dateModified" content="2017-11-13T19:45:00&#43;09:00" />
+<meta itemprop="wordCount" content="5032">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no">
+
+
+
+<meta itemprop="keywords" content="design," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no"/>
+<meta name="twitter:title" content="デザイナー不在のチームのデザインフローを整えた話"/>
+<meta name="twitter:description" content="カウルTech Blogをご覧のみなさまこんにちは。
+2017年の3月にHousmartにジョインしたデザイナーの稲井です。
+食う寝る遊ぶが大好きなので色々と回り道してますが、よろしくお願いします。
+
+さて今回はテックブログへの初投稿ということで、デザイナー不在の開発チームにジョインしてからの半年間を振り返って、チーム内でのデザインフローをどのように整えていったか？といった内容で送りしたいと思います。
+
+スタートアップ企業でのインハウスデザイナーの役割や、デザインワークフローの改善に興味のある方は参考にしていただければと思います。
+
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        28
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          27
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/">
+    <h1 class="article-title" itemprop="name">
+        デザイナー不在のチームのデザインフローを整えた話
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-11-13 19:45:00 &#43;0900 JST" itemprop="datePublished">2017-11-13</time>
+            &middot;
+            5032
+            words
+            &middot;
+            11
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">design</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/design">design</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="hatena-bookmark-button" data-hatena-bookmark-title="デザイナー不在のチームのデザインフローを整えた話" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>カウルTech Blogをご覧のみなさまこんにちは。<br />
+2017年の3月にHousmartにジョインしたデザイナーの稲井です。<br />
+食う寝る遊ぶが大好きなので<a href="https://kawlu.com/journal/member/page-28800/">色々と回り道</a>してますが、よろしくお願いします。</p>
+
+<p>さて今回はテックブログへの初投稿ということで、デザイナー不在の開発チームにジョインしてからの半年間を振り返って、チーム内でのデザインフローをどのように整えていったか？といった内容で送りしたいと思います。</p>
+
+<p>スタートアップ企業でのインハウスデザイナーの役割や、デザインワークフローの改善に興味のある方は参考にしていただければと思います。</p>
+
+<p></p>
+
+<h2 id="ジョインする前の状況の確認">ジョインする前の状況の確認</h2>
+
+<p>基本的にエンジニア3人（iOS,Android,WEB,サーバーサイド）の体制で開発をしており、デザインに関しては外部から手伝ってくれるデザイナーさんやフリーランスの方に機能ごとにスポットで依頼しているという状況でした。<br />
+サービスとしては徐々に売り上げが上がってきている時期で、さらなる拡大に向けて大幅なUIのリニューアルを控えたタイミングでインハウスデザイナーとして参画することになりました。</p>
+
+<h3 id="インハウスデザイナー不在のチームに入ってまず感じた課題">インハウスデザイナー不在のチームに入ってまず感じた課題</h3>
+
+<ul>
+<li>アプリとWEB集客用のポータルサイト、Appstoreのキャプチャなどお客様が使い始めるまでに目にするイメージがバラバラで同じサービスだとわかりにくかった。</li>
+<li>アプリ内の説明イラストやUIの表現など、機能ごとにデザインが異なる。</li>
+<li>アプリ内部のテキストレイアウト・ボタンなど細かい部分が統一されておらず使いにくい。</li>
+<li>画面内に情報が多すぎて見辛い。</li>
+<li>単発での依頼が多いためデザイナーとエンジニアの作業フローの改善などが行われず、作業効率が頭打ちになっていた。</li>
+</ul>
+
+<p>開発力自体はあり、優れたデザイナーさんも外部から手伝ってくれていたのですが、時系列を経るごとに様々なデザインが重なってしまいわかりにくくなっているなというのが第一印象でした。<br />
+単発でのデザイン依頼が多く作業フローなどの整理もあまり行われていなかったため作業効率的にも改善点が残った状態でした。</p>
+
+<h2 id="改善方針">改善方針</h2>
+
+<p>スタートアップ企業にとってリリースの順延はダメージが大きいため開発スピードを落とさず、走りながら整備するためにはどうすればいいか悩みました。</p>
+
+<p>色々と資料を漁る中でLancersのチーフデザイナーの方のスライドを思い出し、参考にさせていただくことにしました。<br />
+<a href="https://www.slideshare.net/TakeBo/money-fowerd?ref=https://moneyforward.com/engineers_blog/2015/08/13/designers-meeting-201508/">https://www.slideshare.net/TakeBo/money-fowerd?ref=https://moneyforward.com/engineers_blog/2015/08/13/designers-meeting-201508/</a></p>
+
+<p>参考になった点
+* エンジニアとゴールの目線を合わせるために最初にデザインレビューをしまくった。
+* 実装時に他の人（ディレクタ）に実装を任せた結果失敗した。
+* デザイナーがやれるところは自分でやりきることで完成度上がる。</p>
+
+<p>ハウスマートの開発チームではディレクターのみをやっている人間はいないので
+レビューにチームを巻き込みつつ、できるところは全部自分でやるみたいなスタンスが噛み合うなと思いました。<br />
+デザインのスピードを上げつつ、ディレクションもHTMLコーディングもやるという形がいいだろうと。</p>
+
+<p>具体的には下記のような流れでデザインフローを整えていきました。</p>
+
+<ol>
+<li>素材ファイルの一元化</li>
+<li>デザイン共有&amp;プロトタイピングフロー整備</li>
+<li>デザイン実装時の作業フロー整備</li>
+<li>運用フェーズでのフロー整備</li>
+</ol>
+
+<h2 id="step1-素材ファイルの一元化">STEP1 素材ファイルの一元化</h2>
+
+<p>まずはメインとなるSketchファイルを一つのマスターファイルに絞りすべての画面を素早く参照できるようにしました。</p>
+
+<p>バージョン管理の手間を省きコンポーネントの再利用性を高めるためと、
+デザインの責任者が知らないところでSketchファイル変更や実装が行われないようにするためです。
+Sketchの学習コストはとても低くてエンジニアでも軽い変更などができますが、アプリケーション全体を見渡しながら作業しないと、この画面だけ使われてるボタンカラーが違うとか、平気で出てきてしまうので。。</p>
+
+<p><img src="https://lh3.googleusercontent.com/x9DwH7iN1DkQ9dKeATtVoKxlxvLMdBXoEFQjYOCLsvOAsRqrAvd2GwECANlB5eMgYCdOBgcFKFPzwwCiUAGc_tYsSSTxTIdtNpguvLuOb86fRVHTtLyga-BZiA4bJ5pc8B02MO0SzMQXtVwBkhvNCQrPv_IbaRsacwciHsK0--MnHTkmT4aSOguh7OYpjxkggrGmymVF06Y8ghJvP7obfvzWbAuf_nj9nPCoohNPij1rPZxjXKP81rVQrI7e3ohsu0EhVTmG4AvHa0wbIOBe2E8G8qCSNG20GWnnsIXfVItzI9fUM_spDtMEyNoD8AHu6d11rT7btJSZ5UysruEA6K_msl2C99cr_14Ayeux2h7tBx5-tf949dmJMN3jKyTfM7ZK3uMphUbnBfzmgO_ImBMLI1I28by1WZ-mv6NSvCVk9T2p-w8gW2F57SMshq58qtv4_yu5rtwgz0IsJrBQO4Zk9TIbTtCmbuDIHdwldX5IJvcCWXyaVz-Qobk6j58vw-ktSkAqbcK7hj1lBkaTgLROoE5mJ06XDdYrUwLtpMxkk4MDkg6iXkYjlmdSV1sV6xWsWvGvgD1XgTpccjBszkBjpkDFRUvzn_-h_OPHYxNkCCrtIV6PKOT_vLdD_ps9ckbqrDJcmS6XYSwscWxAgenP_trUVESfSMA=w1340-h900-no" alt="アプリに関連するデザインファイルが散逸しないように１ファイル内にまとめて、デザイン責任者の目が届くようにする。" /></p>
+
+<p>外部のデザイナーさんにはブランチとなるデザインファイルを別途作成してもらい、後でマスターファイルに取り込む形をとっていきました。</p>
+
+<p>シンボルファイルはInVisionのCraftというプラグインを利用して共有化しました。<br />
+マスターとなるSketchファイルのシンボルをシンボルオーガナイザーによって整理し、利用可能なコンポーネントを一覧化しました。ここら辺のSketchファイルの細かい使い方についてはまた別の機会に詳しく書きたいと思います。</p>
+
+<h2 id="step2-デザイン共有-プロトタイピングフロー整備">STEP2 デザイン共有&amp;プロトタイピングフロー整備</h2>
+
+<p>作成したデザインはInVisionというプロトタイプツールを用いて共有化しました。
+エンジニアとデザイナーの目線（ゴール）をユーザの目線に合わせるのが目的です。</p>
+
+<p>画面仕様を固める際にお互いのこだわりがぶつかっていいのですが、それが本当にユーザーのためになってるのかわからなくなることがあります。
+画面内の表示項目の並びが分かりにくかったり、文言が専門的になりすぎていないか、などプロトタイプでの検証を挟むことで平和的に仕様が収斂されていきます。</p>
+
+<p><a href="https://webkikaku.co.jp/blog/webservices/invison/">InVisionについて</a></p>
+
+<p>社内メンバーと外部のデザイナーさんにInVision上で共有しコメントをもらうようにしました。<br />
+修正が必要な場合はデザインを調整して再度レビューを繰り返しプロトタイプを作っていきました。<br />
+多角的にレビューが入ることでわかりやすいUIになっていきました。</p>
+
+<p>デザインができると早い段階で積極的にユーザーテストを行いました。<br />
+デザインバージョンごとに5名ほどユーザーを募ってテストしました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/xJrYbWJ09EdG-kx1dTzBnCf0S0fLTn1cBF_sAkG96VLdP9OVpuog4v9FZiJ5ydND2_kTn527sK6ltRcShvGvIsMnq_cssLV36KgnXOgxPTY1e6ofodH5EjdCZmdCX_tWmKUVu9ySmY7z98hgMVVM6uxVnFGbTPwF8glLbw_LBEgD1gZ0Ggv532hn1yW_p1aeDmpkCNM7xiuWrpNN_91GN4rOcIqlWvJasl42XrZhnZUzhbQ9eT07nbIjzehLNcyWmyQyHBcuAz8jZV8K7QjmdEv6fYvDVvLVelkEJaw84VeEzWK2SkCvi45BquwKoMSt38Y0kV869vlFWZeiyRiWIyDsYpD_xRXPGPt6I6ACpNRcpF2DNyrFfJDwwTnhN-6SIV5f7fq3CxzMR5nCX9STNuzfx8KqmxV_TTGzhe2o4DVv6Q5YQ1FetJ3YWeFhD2ZZFCgjHcUEJEX2FuZuzMCiRF6drAN7OKUlXBo1Fts1X1MeuAH_sz5exK9i2l1W91j3sAfl8_45yqYSZj7gNUubKi6NN-vZoM58uz8qzlHfzAllGkNJCPRSry2lZUG_vL-13SqXjqcCTDAfOf-QVcb5qvbjH_GPQWSFpFg4FV60vXI2oCZFB7Yk0D8u3KG3aTDtXScH3R2wwqzXIZ8Rjk6GD5LvROnt8MvgQGw=w1440-h960-no" alt="ユーザーテスト時の風景、操作中の手元を動画撮影" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/T3_ZEvFvyyUjdUYJicUg9orhSZSjGlVl8fZYy6UrAB9SuDbrlwjLW-5XUXQ3mRg_IHeLb2H2QKpgFJ1yWFwQzhkraQcAL6sNqNjVvdadiwo9INFCxi_qiF9UL-WUuCB6MW7vFfZIKPltgtQGO9yB6Rv12JQqAIMUPB1_ziIXeg--9aXpro7mmjAWt5xNnGayBemLRm01hLmFkt895MxdIW4C9x3sLDSSFpnM_WjKqNDLH5Mail0rNmQ1eAeBFpuMhYJl1YgVLj2KLJGWljVAq-0UP9iw4qJ-DRXkizGNM_rQI8liBr2MIbX0NjbufZgUDKQmEyNAYRMuYG5JWp3hWzpsDT7sK-PP6uhOnxarOHfZ4cnYWXv9uhhIHsyVgHl2OPtKw_fpZT-4vYXwQOlKxrWgo35hrsCTY2XYsiPShVRFJuZs8Me4c4iHY7mMsKjlID_v0K8tKcvcdSKVZDuUchRdYxygZAmzsMvnXUMDPAsgOlZ_SquVUzEx7XvYw4ttzLIux_HD_8a3mhSSCQyFnZJWxtjoeG7cdk2yFfGyirYkkLwf6nGcFdFVcL9HSCjf0hs-1wD420lKT9sWJCH3TMyABzbyN6mZcFd-6qmthKyGHPiYjAFYrsbFw3PMhap8dR0X8K8Fc8BXbvTuZML3v6eIrmARLdzcrwo=w1718-h1460-no" alt="ユーザーテストの動画の内容を確認し、問題点をリストアップして共有" /></p>
+
+<p>ユーザーテストで気づいた点はデザイン責任者としてまとめ、メンバーに共有しました。</p>
+
+<p>チーム内でもいくつか意見が別れるような場面もありましたが、ユーザーテストを行うことで主観のぶつかり合いを避けることができ、客観的にUIの改善点が洗い出されてくるので早い段階でユーザーテストを行うことはチームをまとめていく上で非常に有効だと思います。</p>
+
+<h2 id="step3-デザイン実装時の作業フロー整備">STEP3 デザイン実装時の作業フロー整備</h2>
+
+<p>実装時に必要な情報をまとめて共有しやすくするためにデザインの実装の段階ではスタイルガイドを作成し、Zeplinにて情報共有を行いました。
+スタイルガイドはとても有効ですが精緻にすればするほど維持管理コストも高いのでなるべくコンパクトにすることも同時に考えました。</p>
+
+<p><a href="https://zeplin.io/">Zeplinについて</a></p>
+
+<p><img src="https://lh3.googleusercontent.com/G4Tt-9QGGlnLxxmkFVrlb8vFTldMsaOM3DKrWdBbmkcf842V47cdvlSZTENrtp6HrWMPEEkGOtY-uNZ5j0-qsKfWltEnYZ58NW9lgGCucuPX4ShS7gplA7emFE-QQZ2kE5IdFzXc8dQxU-suuTEqauUd4QtW7wHK6r6Vpn1N9fGS6sBk_nGOpytS1r6n0_KbObB6bvlMxzCin6AnGtu61ECk8Vh5XX-QpkITGjFWO-7oyflDptuBqMEJVNWSGmlgzbfdK3KnJ3BWSdsTJfovuwW6RS6MuMyXB5SBcbW2HHxSfq_PdkVjCLcdTRguEYr8Lh32g10IFmxk5MXys5pRyf3woQDLb8-c5wPRswP7NcGfFBM6qfLNhfXX5RAlo0dR6-Fe3HOUcki_QoGUqkD-GtTQ4sFSUvu4kXVJ6hMvouCNy-9HTKusy_NpOwOCT_PXhUZUiXlVqkcr5r2eLkGF5mlwSLHvrmcERMFQuWTCys-qBTHZnLJ57F6vt8UxRxPhijiA8QS3GbokrDBRMSC77ySy8zBWpUV3x5EnnKes7Voz0ruRfgkj5xuM7osiU6I99B_EIMkIZi_Rb5RZWnRDVQv2OjnEpRhvB4S-JbKRnovl6N5C_ltU31Gqc882KIDeAhPhCjaeZfHQ7Yq-IHrhh9OVAVHZDkLz_8I=w1920-h997-no" alt="Zeplinでのスタイルガイドの共有" /></p>
+
+<p>フォントサイズやカラーやなどの基本的なものの説明にとどめ、Zeplinの機能でオーバレイでのデザイン確認機能を活用していただくことにしました。</p>
+
+<p>カウルのアプリエンジニアチームはSketchも使えるので、コンポーネントのリストを作成する代わりにSketchファイルをそのまま開いてデザイン情報の確認ができるようにしました。
+シンボルオーガナイザーというSketchのプラグインを使うことでシンボルをカテゴリごとに整理して表示しコンポーネントリストの代わりとしました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/vnVaYkOCQ8wd1wnU19gvXXDnI5SAZCrCrSBlWHfYJ04wC2Mkf3NzTVDKpG4iJw8uziwrSLOU50i2SAvxljQu8PWhrtJ3iop1PmDGqVSlKw-QJEiMd2eOKP5VW1npc2HZgFZFGdjKbzM6hz5ZR12j-wMMsH-Tpx6f88jHg8ez6i6df1BHSMy6t8eEpHYACenmYG7rQ_MwurmpziDHbW3KVOlX4gZC8LP1BlQ84Yc5WAFaBouftMdp17UEbOPAhYMXA__RFOjo4j8LS0RcycZI6NK21MRtjG9RTtuqUtDt1yjVgw44-Mi2U9gLdyCCKahk9G7TAd_IznPu__GEGnDRxuXP3Wf6tMjNFpfR6eFBcL8OxbMjGYC6YixFmr360RIfTug9fkad8TqKMdA4Fzzt3Ef-cOEaV19kVK2Hqnbg92-aoYoc0gd6-kp9e1sDKBFPgJ-M5XQOrHHq-BH7LxRMLDCpIBsQO--SST8iJZB8L-6__5xDohI1QsbN9MLjBXeLxCEBybx4yx5wI49f19-pqJ1CXH5oDDTa0wY37FnXDexPcKChGVxeyWaq5b3O1ISB1e3xefbamf1NxdRUrFlZQe5P1Ba1PwjYM6dgjwdrD0stHI-fNNNZoaqWi5YbaAWnlgoZAulCY7EeHtX8tmiSW7EcZdhY2LGutm0=w1920-h1164-no" alt="Sketchファイルのシンボルページをシンボルオーガナイザーでコンポーネントリスト化" /></p>
+
+<p>アプリだけでなく、PCの操作画面のデザインもリニューアルしなければなりませんでしたが、
+チームで相談した結果、CSS力は自分が一番高いようだったので自分でHTMLコーディングすることにしました。</p>
+
+<p>チーム内のエンジニアが今まで開発してきたアプリを見せてもらいデザイン力などを確認した上で、自分が行うべきロールの調整をすることでスムーズな実装に繋がると感じました。</p>
+
+<h2 id="step4-運用改善フェーズでのフロー整備">STEP4 運用改善フェーズでのフロー整備</h2>
+
+<p>運用改善フェーズでは細かい修正や改善をスプリントごとにリリースしています。</p>
+
+<p>まだ試行錯誤の段階ですが大切なのはデザイナー、エンジニアの技術領域とデザインプロセスの共有、
+そして定期的な振り返りではないかと思います。</p>
+
+<h3 id="デザイナー-エンジニアの技術領域を共有する">デザイナー、エンジニアの技術領域を共有する</h3>
+
+<p>デザイナーとエンジニアお互いに何が困っているのか？を話し合い必要な打ち手を見つけていきました。
+まず説明用ドキュメントありきで進めるよりも、お互いの技術領域を共有しながら解決策を見つけていくのが効果的だったと思います。</p>
+
+<p>WEBフロントエンドの領域を例にすると、
+デザイナーはHTMLモックアップを組んでエンジニアにRails環境に組み込んでもらうというやり方を取っていましたが、非常に効率が悪かったのでRails環境内でデザイナーがStaticなHTMLを組めるように一緒に改善していきました。</p>
+
+<p>デザイナーはDockerの使い方を教えてもらい、エンジニアはscssのファイルの分割構成や記法を覚えるなどお互いの技術領域を活かしながら作業フローを改善していきました。初期のラーニングコストはあれどもこういった作業によりお互いの理解が深まり、作業効率は高くなっていきました。</p>
+
+<p>カウルでは2週間のスプリント内に1日、生産性を高めるための改善デーを設けています。<br />
+今後はデザイナーやエンジニアが増えた時の運用を考慮してコンポーネントやドキュメントなどの整備にも力を入れていく予定です。</p>
+
+<p><img src="https://lh3.googleusercontent.com/h2ZrZn1fBTK-0foWDtorJqrhGYOQ3JRQI1ifIWsEInY_zUBpma4TwrsBjVbmm4DQ1rKYwQEglVO48gAJU77_6XdZOTgY8yS5EVoBbO-9O6emACtOj0u1Hi_V_fpn--e7E5C_L8YF6FbtBdNM7OM0RaBYBQF7Mz0qJguZ5R0AmFAzCJHoJB44S30bAE6g4AS0iwFxJDOQMQ-oLVCYgnmxVDt4WLlvARfBFkPfjg9Cu7eAct0eSog64GE0EmBQCnoumZkUjHyuXrBNCRtkm2lpSbcgFIk071XEbpNYCqGVo_67clCRNMZ01f_n5TcREnynNhGamJK17AD3EAUL6Bg7F868akMLGAVgjdLWYH0ThDBZrInSemP0xyIkQ7Aau1X1HlX0hNqc9dqGyFnukNufnAMZfcT85dEoadYNK-CzRyu4sc0RftAm3sPlC6sn7alPpA6d5ehYSHNs2ivf5-taFVXnSM_VkL5_QUDK8qW9yzfHWCIVGPP6p8X8lpEt4V4GAZYyS2PBFMt1j3VPhsYIIYWBElxTzmsb2NVIR2MNyTO4btGmMdcMd-yAz8lak3qK6tipU0ZRL3Bz9TvXhKz61QQL-oORXQVS6aLj7zvC8Bchg6KBNHDSnXoEpZbVvwBgZuZLimKvHWG5nkDak6ooswZ_aDVCv0CviDY=w1920-h1227-no" alt="Rails環境内でのSCSS利用環境をエンジニアと共に構築、Atomicデザインの手法に基づいたscssファイルのパーシャル化を実施、共通パーツのオブジェクト化を行うと同時にBEM記法の使い方などの知識共有も行なった。" /></p>
+
+<h3 id="新機能追加時はデザインプロセスを共有する">新機能追加時はデザインプロセスを共有する</h3>
+
+<p>ハウスマートではデザイナーは単にデザインを作るだけではなく、ディレクションも行います。<br />
+新機能や改善を行う場合は下記のようなフローを利用しています。</p>
+
+<ol>
+<li>ユーザーの稼動状況データと、定性的なユーザーヒアリングを行い問題点を定義</li>
+<li>問題点を解決するための機能の mini spec（プロジェクトの要件を簡潔にまとめたドキュメント）を書く、ここでユーザーストーリーも合わせて定義する</li>
+<li>デザイナーがデザインを作成</li>
+<li>チーム内でUI/UXの観点からレビューを実施</li>
+<li>エンジニアがシステム設計と実装</li>
+<li>デザイン面でのチェックが必要な場合はデザイナーが最終チェック</li>
+<li>リリース</li>
+<li>実装後にKPT(Keep/Problem/Tryの洗い出し)を行い作業フローについて見直し、エンジニアからやりづらかった点があれば次回からやり方を変えていく</li>
+</ol>
+
+<p>特徴的なのは、デザイナーであってもエンジニアであっても全員が mini spec を書くことができることです。<br />
+基本的には問題の解決に対して一番理解が深い人が担当することになっています。<br />
+例えば、デザイン面での変更・追加であればデザイナー。バックエンドの速度改善などの場合はエンジニアが担当することが多いです。<br />
+この段階でユーザーストーリーを定義しておくことで、UXの質を高めています。</p>
+
+<p>特にKPTに関しては毎回非常に有用な意見が出てくるのでデザインに限らず、ワークフローを改善したいチームにはオススメです。
+大事なことなので２回言いますが振り返りは本当に大事です。</p>
+
+<p><img src="https://lh3.googleusercontent.com/dNVK4IrZYbkfgj2Bh8hVb9vGtK9BBEYFk6gQAiwg-YuTur1iktcok94cTBknOw4Vdy-V4G2N_maqOUnh3DmOgNMaTFgacYOnj-HLFrJXf6iteBS3h9BKzw9PkI4FBgzlLMBiMI5o3kUtHTBetwuOmrWx-yPLoLiKJIfxmf3aDCWJ55t_flqs3kRIICnNe1k2rKr-lcXuYPD9Og5dIii7dv0kIUALIcqvGnI0wD8BgE3UQmh2_ul2J41GVDSViUIwFOZ05jlUBPCoizUybvcqhg27NbBu4j_U6TRvsOCbX_XlG2xn6rU06IjOJ16kjjt6u8f1GUWeuKZHZwc3RbnXA8fOyWR3aseuWy7JN1ZPlzCHAw3ezhNmMvuaPKcetwzl3jbgCm_aWPxruSfH7tjuXeuee-J7HwWWH01OjLcPHfJ5H6aO1fxk4W4bjNd0Hs-veT52xlLaGThjUiRM9vZITd3Ak7oyZ0VVZ3omRb7JnoVwlYeVhbEsRvM8sBA43XN4DQkKIf-5pXlK1udkjBOAxRjP6I5o3JC2u2DmEsmLxYIeF_Rrd451knEuhkYWP1nLTvdTInDB-Wtlzi6HI-yvETqJAkZiK6Ch_qZLkDaq5jYvrilhVNhA_ImQCNCwvQXcU1a6-acCdNTaGIiQucqO-Xt3PK2-oCcZPxQ=w690-h518-no" alt="スプリントごとのKPT風景" /></p>
+
+<h2 id="デザインフローの改善結果">デザインフローの改善結果</h2>
+
+<p>デザイナーへの単発外注体制からインハウスでのデザイン体制に切り替わったことでデザインの方向性が一つにまとまってきました。<br />
+また作業の効率化も認められます。KPTでの洗い出された問題点は毎回スプリントで問題解決を行なっており、前回のスプリントでは１週間かかっていた作業を3日で終わらせることができ、浮いた時間を他のクリエイティブな作業に回すことができるなど好循環が生まれつつあります。<br />
+今後はアプリケーションのUIからWEBサイトや集客用のサイトまで、より強固なブランディングイメージの統一などを行なっていく予定です。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<ul>
+<li>チームメンバーの数とスキルセットをちゃんと確かめてそれに合わせたデザインフローを作ることが重要。</li>
+<li>スタイルガイドはデザイナーからエンジニアへの一方的な指示書ではなくコミュニケーションのツール。エンジニアが実装に必要な情報量を確認し、まずは最低限必要なものを用意して一緒に補強していくのが吉。</li>
+<li>プロトタイプでユーザーテストを行う。UIの方向性で意見がまとまらなかったりする場合はユーザーにとっても使いにくいものしかできないので、早い段階でテストして観察しプロダクトチームの意見をまとめるのが良い。</li>
+<li>運用段階では高速で施策が回っていくため、UIがブレやすくなる。デザイナーとエンジニアの知識を共有しながら、最適な解決策（共同作業環境構築やスタイルガイドなど）を見つける。</li>
+<li>作業フローは定期的に振り返り、常にメンテナンスする。</li>
+</ul>
+
+<p>メンバーの増加や新技術が出てくれば、デザインワークフローも大きく変化していくので
+定期的に振り返りながらメンテナンスする意識が大切だと思いました。</p>
+
+<p>今後ハウスマートはデザインチーム体制を強化していく予定です。<br />
+プロダクトだけでなく、マーケティング・ブランディングもデザインしたい
+欲張りなデザイナーの方、応募をお待ちしております。</p>
+
+<p><a href="https://www.wantedly.com/projects/69347">ハウスマートUI/UXデザイナー採用ページへ</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="hatena-bookmark-button" data-hatena-bookmark-title="デザイナー不在のチームのデザインフローを整えた話" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="デザイナー不在のチームのデザインフローを整えた話" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f13%2fdev-design-workflow%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%83%87%e3%82%b6%e3%82%a4%e3%83%8a%e3%83%bc%e4%b8%8d%e5%9c%a8%e3%81%ae%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%83%95%e3%83%ad%e3%83%bc%e3%82%92%e6%95%b4%e3%81%88%e3%81%9f%e8%a9%b1&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f13%2fdev-design-workflow%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f13%2fdev-design-workflow%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f13%2fdev-design-workflow%2f&amp;description=%e3%83%87%e3%82%b6%e3%82%a4%e3%83%8a%e3%83%bc%e4%b8%8d%e5%9c%a8%e3%81%ae%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%83%95%e3%83%ad%e3%83%bc%e3%82%92%e6%95%b4%e3%81%88%e3%81%9f%e8%a9%b1" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f13%2fdev-design-workflow%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="デザイナー不在のチームのデザインフローを整えた話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="title">デザイナー不在のチームのデザインフローを整えた話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-13 19:45:00 &#43;0900 JST" itemprop="datePublished">2017-11-13</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600)" alt="デザイナー不在のチームのデザインフローを整えた話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="title">会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-06 19:30:00 &#43;0900 JST" itemprop="datePublished">2017-11-06</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/DuP11u4pzjSGcVta0BqHmg93LdLPpGDltsZfs48w-A87Y3kOSeClhqHvovIRxSUZMkFOQdC8DVtEJlqrVDr0VZhsLcqE-vbmT44LgmkHOFvbW0x8_USOXSjka-BhXiwO_li8jBdkfqORVNlrVUTHv6Pu-JR0U71betBSt-NwTW2jyy2GCcZ3ELBJEQjyS5Y4tQ8hw38q91AevVjV49KTQwr28CAHmI0CzHo4gkji6cK1ypeEo40EBwMzo6tpiUrMH7l28uktrg395DSaMtQ8YYc_TFXmhWfueUbhoCuns1p_TedQ7n0eN6feql4RXKh_Dl8B458zqLIsE-oFoJAN9Ezv8EM1CknMmWNO6Ou1yzAxCXX62EG6XOTLgOZy_RIdOocwaGD1TiJvyyOwzgDLoTkTYTi8JEGFpo2K6GblBZy8q-5-aRSetSZA7FLx4Xa5a23c3aIhXFii0OaqzKN9Ow5gi6QqAW5ClmQ3YZfgbv9h2w2xDIqUjkJJ62BcNX3RlXSHy6MeOqjDQ-OTYYtW3KAJtfAoCdVgh_vYbwFg0HC390jkoLuZeoEZwa36ATl2b_GMSRyOF10sxET962QOWpRoBMFWipxu-IdBI5agmsd8IZU-leGbfyPnHrA8_gHp2M_suBXXzZ-JyeSH7Cm91v58vv_hiEJlbw=w1409-h939-no)" alt="デザイナー不在のチームのデザインフローを整えた話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/work">
+                        work
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" class="title">不動産テック スタートアップのHousmartに転職して3ヶ月が経ったので振り返る</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-10-26 15:31:47 &#43;0900 JST" itemprop="datePublished">2017-10-26</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/8rCg2SAjkW6okr9UPQ1pWQAllXyu7eZz12SNfyNh3hXKgw7WEKJ2zJRray0Srz64jvt4kT9fuFx6TTeOhwseSH-2ZoFFF6WgXbrQ9jUlkk2Pn2d_IIIiU5P55-z2lDr-mpzcR5Mob81gLWC4HJQlDApE-7MpJ1k9MKhWvOIyMikJdMJ3ZVkLx8dU8F7fgxCkoYvti5c9f091j3bcPT2CnNA2O_f4ns-erXO74EC96qZYpNJtqZb3nNcXwC9NAVsxgNbsH-zzWQLMPwrp9YMt___rlkP3YOhZ8IfSrAT5wWHGznQVDdC9nSK2ccptBpf0L1wCXp-drNRhEWCyCxsp8ufgyWIEGZ8bQjsuhM4jHe6U53KWUTMReRKvMfvIr87X27bctTRE5oQqsdxoBBnP_2Psbtc3Wi35x7JdiLQ65ArTvhDOWpCFo1m8V6ECZP9scqeQHEmoSUasE6XMKZclyZVYl2uOZd7SRdFNwucTMYID4mtX4umUR1HCtUOQaWboCEBdiVbdTqiTBemOj4gX04NsdZrthSUqrNvelNs4hhEqX18C4oEb9DzWhZk4RtCUgf4i9FGaImelLEwZfOPKPF6b3jlGE9BKHthP8G7_v6M0z1mo5o3QkaqBZQ3RPhIwGG4Cb_DxJvhGLL7s8Cj0sTNaASwjZMhH348=w1019-h909-no)" alt="デザイナー不在のチームのデザインフローを整えた話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" class="title">複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-10-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-10-23</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no)" alt="デザイナー不在のチームのデザインフローを整えた話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="title">【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-09-20 15:31:47 &#43;0900 JST" itemprop="datePublished">2017-09-20</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/</loc>
+    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/</loc>
     <lastmod>2017-11-06T19:30:00+09:00</lastmod>
   </url>
@@ -169,13 +174,13 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/design/</loc>
-    <lastmod>2016-11-08T15:40:44+09:00</lastmod>
+    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/design/</loc>
-    <lastmod>2016-11-08T15:40:44+09:00</lastmod>
+    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -313,7 +318,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2017-11-06T19:30:00+09:00</lastmod>
+    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -385,7 +390,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2017-11-06T19:30:00+09:00</lastmod>
+    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

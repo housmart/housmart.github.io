@@ -7,10 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Tue, 08 Nov 2016 15:40:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 13 Nov 2017 19:45:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/tags/design/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>デザイナー不在のチームのデザインフローを整えた話</title>
+      <link>http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/</link>
+      <pubDate>Mon, 13 Nov 2017 19:45:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/</guid>
+      <description>&lt;p&gt;カウルTech Blogをご覧のみなさまこんにちは。&lt;br /&gt;
+2017年の3月にHousmartにジョインしたデザイナーの稲井です。&lt;br /&gt;
+食う寝る遊ぶが大好きなので&lt;a href=&#34;https://kawlu.com/journal/member/page-28800/&#34;&gt;色々と回り道&lt;/a&gt;してますが、よろしくお願いします。&lt;/p&gt;
+
+&lt;p&gt;さて今回はテックブログへの初投稿ということで、デザイナー不在の開発チームにジョインしてからの半年間を振り返って、チーム内でのデザインフローをどのように整えていったか？といった内容で送りしたいと思います。&lt;/p&gt;
+
+&lt;p&gt;スタートアップ企業でのインハウスデザイナーの役割や、デザインワークフローの改善に興味のある方は参考にしていただければと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</title>
