@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/</loc>
+    <lastmod>2017-11-16T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/</loc>
     <lastmod>2017-11-13T19:45:00+09:00</lastmod>
   </url>
@@ -210,13 +215,13 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/event/</loc>
-    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
+    <lastmod>2017-11-16T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/event/</loc>
-    <lastmod>2017-09-20T15:31:47+09:00</lastmod>
+    <lastmod>2017-11-16T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -318,7 +323,19 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
+    <lastmod>2017-11-16T18:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/presentation/</loc>
+    <lastmod>2017-11-16T18:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/product/</loc>
+    <lastmod>2017-11-16T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -390,7 +407,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
+    <lastmod>2017-11-16T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

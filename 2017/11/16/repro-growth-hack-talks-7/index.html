@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.26" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" />
+    <meta property="og:title" content="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" />
+<meta property="og:description" content="「Growth Hack Talks #7 不動産テック×アプリ特集」にて発表しました🎉
+
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600" />
+
+
+
+<meta property="article:published_time" content="2017-11-16T18:00:00&#43;09:00"/>
+<meta property="article:modified_time" content="2017-11-16T18:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました">
+<meta itemprop="description" content="「Growth Hack Talks #7 不動産テック×アプリ特集」にて発表しました🎉
+
+
+
+">
+
+
+<meta itemprop="dateModified" content="2017-11-16T18:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="583">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600">
+
+
+
+<meta itemprop="keywords" content="event,presentation,product," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600"/>
+<meta name="twitter:title" content="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました"/>
+<meta name="twitter:description" content="「Growth Hack Talks #7 不動産テック×アプリ特集」にて発表しました🎉
+
+
+
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        29
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          29
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/">
+    <h1 class="article-title" itemprop="name">
+        「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-11-16 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-11-16</time>
+            &middot;
+            583
+            words
+            &middot;
+            2
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">event</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/presentation">presentation</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/product">product</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="hatena-bookmark-button" data-hatena-bookmark-title="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>「<a href="https://repro.connpass.com/event/70387/">Growth Hack Talks #7 不動産テック×アプリ特集</a>」にて発表しました🎉</p>
+
+<script async class="speakerdeck-embed" data-id="868f54fafa964d5a9910af41a1bcb7c0" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p></p>
+
+<p>今回は<strong>どのような視点でグロースハックのプロセスを回しているか</strong>にフォーカスして発表をさせていただきました。<br />
+日々行っている具体的な施策についてはビジネスによっても異なるので、一つ一つの施策の詳細については話していません。<br />
+発表に含めた、どのような視点で数値を選び、ユーザのセグメントを切って、コミュニケーションしていくかということは、他のケースでも適用できると思っています。</p>
+
+<p>15分の発表とパネルディスカッションでしたが、<a href="https://kawlu.com/market">カウル</a>の日々の改善視点をお伝えできていると嬉しいです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/T6zHK_nqABtBAssmnuveuaB4rf7o8CJvQByHzYoFusW_g2EF_tLv2Mt1BNEx_tqL8YEvOo_m_IsUo4z17leO1iLBCwe_5nts6MP-IIUOZVblMEiJTrookuZJz0UA647vAptpug_EtM3aXNWRyxbzSsT7SVsYlybUlBRosOlpUWXL4QfYffT91CkgHcJnUv2s2LcBZX-dGAjdWLFZHXBUHeK3DEKLJ4l3jPb63yq_RcZBVZekrQ4B90fqvwUzLzcfd0_RA5uEo6SRC2qaGwlyrXucYB7Ep-9DSoDb-rH3jbdN-3CIZcMRN2JJ3er9-HMnIMcznx6iOmkRVDYrZR8mdLQGzrIG-ns5MPhFLHmRPGmF8ZSYlfG-G85RuZfulaUlyXRpa3sJiMWdc-LtlR9e_S_YB5Seb8Ewmo3B9Sib1F_KFTJuTzDecKbu4NfNB6ryDQIKEYZXfbYu_7e68hGzFWwtYLw1QGara2hZPI_YPMyoKBQf_B4yD3VwjAgAYwX7ivZDj5wweKpgzED25N3heRRUA26d_tQ_Uw3hsuqh2Lozb_ZK0XcwnCsDpwG96Axj9dCmbgGsjq1FUCXxGCtLVN4WvzuYGAg2ykJV5-N4yw22L_TLmrC_EV5rCk3dlUezfTZ86Wvk8FSYbyOGyPquHsUJnSkeZTILauM=w800" alt="会場の様子" /></p>
+
+<p>発表で触れていないReproについては高松が「<a href="https://growthhackjournal.com/housmart-growth/">導入3ヶ月で問い合わせ数2倍! Reproを使いこなしてグロースハックするために必要なこと</a>」をGROWTH HACK JOURNALに寄稿しています。</p>
+
+<blockquote>
+<p>Reproがサポートしてくれる3つのこと<br />
+・定量と定性両方の分析環境が簡単に手に入る<br />
+・アプリ内マーケティングのためのプッシュ通知基盤が使える<br />
+・グロースハックに必要なノウハウの提供</p>
+</blockquote>
+
+<p>Reproの詳細については上記の記事を見ていただければと思います。</p>
+
+<p>企画・運営のみなさま、ありがとうございました！</p>
+
+<p>まっくす</p>
+
+<hr />
+
+<p>Housmartでは不動産業界を変えるカウルを支えるエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="hatena-bookmark-button" data-hatena-bookmark-title="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f16%2frepro-growth-hack-talks-7%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%80%8c%e3%83%aa%e3%83%86%e3%83%b3%e3%82%b7%e3%83%a7%e3%83%b3%e7%8e%87%e3%82%922%e5%80%8d%e3%81%ab%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae2%e3%81%a4%e3%81%ae%e8%a6%96%e7%82%b9%e3%80%8d%e3%82%92Growth%20Hack%20Talks%e3%81%a7%e7%99%ba%e8%a1%a8%e3%81%97%e3%81%be%e3%81%97%e3%81%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f16%2frepro-growth-hack-talks-7%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f16%2frepro-growth-hack-talks-7%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f16%2frepro-growth-hack-talks-7%2f&amp;description=%e3%80%8c%e3%83%aa%e3%83%86%e3%83%b3%e3%82%b7%e3%83%a7%e3%83%b3%e7%8e%87%e3%82%922%e5%80%8d%e3%81%ab%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae2%e3%81%a4%e3%81%ae%e8%a6%96%e7%82%b9%e3%80%8d%e3%82%92Growth%20Hack%20Talks%e3%81%a7%e7%99%ba%e8%a1%a8%e3%81%97%e3%81%be%e3%81%97%e3%81%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f16%2frepro-growth-hack-talks-7%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">デザイナー不在のチームのデザインフローを整えた話</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600)" alt="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="title">「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-16 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-11-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="title">デザイナー不在のチームのデザインフローを整えた話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-13 19:45:00 &#43;0900 JST" itemprop="datePublished">2017-11-13</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600)" alt="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="title">会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-06 19:30:00 &#43;0900 JST" itemprop="datePublished">2017-11-06</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/DuP11u4pzjSGcVta0BqHmg93LdLPpGDltsZfs48w-A87Y3kOSeClhqHvovIRxSUZMkFOQdC8DVtEJlqrVDr0VZhsLcqE-vbmT44LgmkHOFvbW0x8_USOXSjka-BhXiwO_li8jBdkfqORVNlrVUTHv6Pu-JR0U71betBSt-NwTW2jyy2GCcZ3ELBJEQjyS5Y4tQ8hw38q91AevVjV49KTQwr28CAHmI0CzHo4gkji6cK1ypeEo40EBwMzo6tpiUrMH7l28uktrg395DSaMtQ8YYc_TFXmhWfueUbhoCuns1p_TedQ7n0eN6feql4RXKh_Dl8B458zqLIsE-oFoJAN9Ezv8EM1CknMmWNO6Ou1yzAxCXX62EG6XOTLgOZy_RIdOocwaGD1TiJvyyOwzgDLoTkTYTi8JEGFpo2K6GblBZy8q-5-aRSetSZA7FLx4Xa5a23c3aIhXFii0OaqzKN9Ow5gi6QqAW5ClmQ3YZfgbv9h2w2xDIqUjkJJ62BcNX3RlXSHy6MeOqjDQ-OTYYtW3KAJtfAoCdVgh_vYbwFg0HC390jkoLuZeoEZwa36ATl2b_GMSRyOF10sxET962QOWpRoBMFWipxu-IdBI5agmsd8IZU-leGbfyPnHrA8_gHp2M_suBXXzZ-JyeSH7Cm91v58vv_hiEJlbw=w1409-h939-no)" alt="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/work">
+                        work
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" class="title">不動産テック スタートアップのHousmartに転職して3ヶ月が経ったので振り返る</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-10-26 15:31:47 &#43;0900 JST" itemprop="datePublished">2017-10-26</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/8rCg2SAjkW6okr9UPQ1pWQAllXyu7eZz12SNfyNh3hXKgw7WEKJ2zJRray0Srz64jvt4kT9fuFx6TTeOhwseSH-2ZoFFF6WgXbrQ9jUlkk2Pn2d_IIIiU5P55-z2lDr-mpzcR5Mob81gLWC4HJQlDApE-7MpJ1k9MKhWvOIyMikJdMJ3ZVkLx8dU8F7fgxCkoYvti5c9f091j3bcPT2CnNA2O_f4ns-erXO74EC96qZYpNJtqZb3nNcXwC9NAVsxgNbsH-zzWQLMPwrp9YMt___rlkP3YOhZ8IfSrAT5wWHGznQVDdC9nSK2ccptBpf0L1wCXp-drNRhEWCyCxsp8ufgyWIEGZ8bQjsuhM4jHe6U53KWUTMReRKvMfvIr87X27bctTRE5oQqsdxoBBnP_2Psbtc3Wi35x7JdiLQ65ArTvhDOWpCFo1m8V6ECZP9scqeQHEmoSUasE6XMKZclyZVYl2uOZd7SRdFNwucTMYID4mtX4umUR1HCtUOQaWboCEBdiVbdTqiTBemOj4gX04NsdZrthSUqrNvelNs4hhEqX18C4oEb9DzWhZk4RtCUgf4i9FGaImelLEwZfOPKPF6b3jlGE9BKHthP8G7_v6M0z1mo5o3QkaqBZQ3RPhIwGG4Cb_DxJvhGLL7s8Cj0sTNaASwjZMhH348=w1019-h909-no)" alt="「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" class="title">複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-10-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-10-23</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

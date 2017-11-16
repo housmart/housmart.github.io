@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Wed, 20 Sep 2017 15:31:47 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 16 Nov 2017 18:00:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/tags/event/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました</title>
+      <link>http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/</link>
+      <pubDate>Thu, 16 Nov 2017 18:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/</guid>
+      <description>&lt;p&gt;「&lt;a href=&#34;https://repro.connpass.com/event/70387/&#34;&gt;Growth Hack Talks #7 不動産テック×アプリ特集&lt;/a&gt;」にて発表しました🎉&lt;/p&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;868f54fafa964d5a9910af41a1bcb7c0&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？</title>
