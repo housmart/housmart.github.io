@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話 &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.30.2" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" />
+    <meta property="og:title" content="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" />
+<meta property="og:description" content="Housmartの宮永です。
+
+みなさんはプロジェクト管理ツールに何をお使いでしょうか。ハウスマートではJiraを採用しています。レポート機能という視点で見ると、Jiraには標準機能としてBurndown Chart, Verocity Chartなどスプリント運営周りをサポートするあらゆるカテゴリでレポートが用意されています。ただTimesheet（作業時間管理）に関しては運用上、弊社では少し物足りなさ（特にレイアウトの柔軟性への物足りなさ）を感じていました。
+誰が何をやっているかは把握出来ているが、誰が（もしくはどのチームが）どのタスク（もしくはどのプロジェクト）にどれだけ時間をかけているか上手く可視化出来ていない状態でした。
+この課題に対して、JiraプラグインのTempoを導入することで解決し、全作業時間を可視化することで上手く運用できているため、今回はこのTempoを紹介したいと思います。
+
+こんな方に適した内容です。
+
+
+Tempo導入を検討の方
+複数プロジェクトが並行していて誰が何やっているかわからないチームの作業時間を可視化したい
+Jiraを導入してタスク管理はしているけど、レポート機能(特に作業時間管理)を上手く使いこなせていない
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no" />
+
+
+
+<meta property="article:published_time" content="2017-11-20T14:31:47&#43;09:00"/>
+
+<meta property="article:modified_time" content="2017-11-20T14:31:47&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話">
+<meta itemprop="description" content="Housmartの宮永です。
+
+みなさんはプロジェクト管理ツールに何をお使いでしょうか。ハウスマートではJiraを採用しています。レポート機能という視点で見ると、Jiraには標準機能としてBurndown Chart, Verocity Chartなどスプリント運営周りをサポートするあらゆるカテゴリでレポートが用意されています。ただTimesheet（作業時間管理）に関しては運用上、弊社では少し物足りなさ（特にレイアウトの柔軟性への物足りなさ）を感じていました。
+誰が何をやっているかは把握出来ているが、誰が（もしくはどのチームが）どのタスク（もしくはどのプロジェクト）にどれだけ時間をかけているか上手く可視化出来ていない状態でした。
+この課題に対して、JiraプラグインのTempoを導入することで解決し、全作業時間を可視化することで上手く運用できているため、今回はこのTempoを紹介したいと思います。
+
+こんな方に適した内容です。
+
+
+Tempo導入を検討の方
+複数プロジェクトが並行していて誰が何やっているかわからないチームの作業時間を可視化したい
+Jiraを導入してタスク管理はしているけど、レポート機能(特に作業時間管理)を上手く使いこなせていない
+
+
+">
+
+
+<meta itemprop="datePublished" content="2017-11-20T14:31:47&#43;09:00" />
+<meta itemprop="dateModified" content="2017-11-20T14:31:47&#43;09:00" />
+<meta itemprop="wordCount" content="2543">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no">
+
+
+
+<meta itemprop="keywords" content="management,jira," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no"/>
+<meta name="twitter:title" content="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話"/>
+<meta name="twitter:description" content="Housmartの宮永です。
+
+みなさんはプロジェクト管理ツールに何をお使いでしょうか。ハウスマートではJiraを採用しています。レポート機能という視点で見ると、Jiraには標準機能としてBurndown Chart, Verocity Chartなどスプリント運営周りをサポートするあらゆるカテゴリでレポートが用意されています。ただTimesheet（作業時間管理）に関しては運用上、弊社では少し物足りなさ（特にレイアウトの柔軟性への物足りなさ）を感じていました。
+誰が何をやっているかは把握出来ているが、誰が（もしくはどのチームが）どのタスク（もしくはどのプロジェクト）にどれだけ時間をかけているか上手く可視化出来ていない状態でした。
+この課題に対して、JiraプラグインのTempoを導入することで解決し、全作業時間を可視化することで上手く運用できているため、今回はこのTempoを紹介したいと思います。
+
+こんな方に適した内容です。
+
+
+Tempo導入を検討の方
+複数プロジェクトが並行していて誰が何やっているかわからないチームの作業時間を可視化したい
+Jiraを導入してタスク管理はしているけど、レポート機能(特に作業時間管理)を上手く使いこなせていない
+
+
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        30
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          30
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/">
+    <h1 class="article-title" itemprop="name">
+        Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-11-20 14:31:47 &#43;0900 JST" itemprop="datePublished">2017-11-20</time>
+            &middot;
+            2543
+            words
+            &middot;
+            6
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/management">management</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/management">management</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/jira">jira</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="hatena-bookmark-button" data-hatena-bookmark-title="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>Housmartの宮永です。</p>
+
+<p>みなさんはプロジェクト管理ツールに何をお使いでしょうか。ハウスマートでは<a href="https://ja.atlassian.com/software/jira">Jira</a>を採用しています。レポート機能という視点で見ると、<a href="https://ja.atlassian.com/software/jira">Jira</a>には標準機能としてBurndown Chart, Verocity Chartなどスプリント運営周りをサポートするあらゆるカテゴリでレポートが用意されています。ただTimesheet（作業時間管理）に関しては運用上、弊社では少し物足りなさ（特にレイアウトの柔軟性への物足りなさ）を感じていました。<br />
+誰が何をやっているかは把握出来ているが、誰が（もしくはどのチームが）どのタスク（もしくはどのプロジェクト）にどれだけ時間をかけているか上手く可視化出来ていない状態でした。<br />
+この課題に対して、Jiraプラグインの<a href="https://tempo.io/">Tempo</a>を導入することで解決し、全作業時間を可視化することで上手く運用できているため、今回はこの<a href="https://tempo.io/">Tempo</a>を紹介したいと思います。</p>
+
+<p>こんな方に適した内容です。</p>
+
+<ul>
+<li><a href="https://tempo.io/">Tempo</a>導入を検討の方</li>
+<li>複数プロジェクトが並行していて誰が何やっているかわからないチームの作業時間を可視化したい</li>
+<li>Jiraを導入してタスク管理はしているけど、レポート機能(特に作業時間管理)を上手く使いこなせていない</li>
+</ul>
+
+<p></p>
+
+<h3 id="tempo-https-tempo-io-導入前のtimesheet運用"><a href="https://tempo.io/">Tempo</a>導入前のTimesheet運用</h3>
+
+<p>以前はプロジェクトやチームの振り返り時にその場に応じたレポートを自作で用意していました。データエクスポートしてエクセルで自前で用意したり、Google Data Studio上で表現したりしたこともありました。</p>
+
+<p><img src="https://lh3.googleusercontent.com/GiCPVq13nhO7yk31s9STFNxBlX19KXlidRnVD2hxBzeb-7AQZMrQa2pzy0cW6oSSm_51e-klLHddSoRNQES8KfvCMNZjPfuqg7SqMlBtSEQen--yKE-4-Al0pMDZJky8yo0VRU2OzZnIYqFNiLWxAC_T2sPnd9m7HxR_ZSVt7KNfaq8cgTHG2hlONZTBgdCH3cgTApXiOUOUAgHzlR_3OQpqDD_c1C4d5Ddf0C9TKTiY7PjQa9gVnYWUyOlFNTLtdwBCW-KlCCmCKjTjKr5IiC6n_CjlF3YavLRaZIkQEVdLUJJd1PRB-dt8S70D2CbHeN1Ev6C1rMpDfze51_UPtpaTqFcPIEEUTNtY-Fh5NVy5jJKyxiu6ogZJicmLJLqZjCbpAHpkoIs4agWihpFe_Z11Awz9jjZAcwY3x7KKsw-xybDwDnmexdyVy1oi6DUGlSBZdc2HJ9_LETi0WC5hknW6J6aWEGrtx4CnVRM5qDRYQTVU0W50THJwZ2QH9VciocJ9D0-xpTLw_9lVUJll3K7U7MA4fvAuv_V13tBhVlvPc3sg8m5UF-kce0OGKbic_qTGgI21W9FOr-v8qndavgk_Dn4upyU=w650-h658-no" alt="jira report" />
+(自作レポートの例)</p>
+
+<p>こういった運用では毎回用意する時間も手間ですし、レイアウト変更に弱く、多角的な視点で分析ができません。</p>
+
+<h2 id="プラグインの選定基準">プラグインの選定基準</h2>
+
+<p>上記課題に対し、ハウスマートではTimesheetプラグイン導入を検討しました。Jira Cloud Server上で使えるTimesheet系プラグインはいくつか用意されています。
+この中で、「Tempo Timesheets」と「Timesheet Reports and Gadgets for Jira」で導入の選定を行いました。
+選定基準は下記4つです。</p>
+
+<ol>
+<li>お値段</li>
+<li>インストール数
+
+<ul>
+<li>多く使われていると安心</li>
+</ul></li>
+<li>メンテナンスされているプラグインであるか
+
+<ul>
+<li>特にJira Cloudは頻繁にアップデートが入るため、更新に追いつけず使えなくなるといったリスクは避けたい</li>
+<li>プラグイン管理者</li>
+</ul></li>
+<li>レポート機能の充実度
+
+<ul>
+<li>グルーピング(group by)に柔軟性があるか(組み合わせたり、入れ替えたり)</li>
+<li>レポート出力に時間がかからない(ディスカッションしながらコロコロ変えられる)</li>
+<li>出力レポート自体が見やすいか(理解コストを下げる)</li>
+</ul></li>
+</ol>
+
+<p>ちなみにJira Cloudを運用されている場合は頻繁にJira Cloud自体に更新が入るため、定期的にアップデートが入り、メンテナンスされているプラグインを利用することをオススメします。</p>
+
+<p><img src="https://d32cx7or6mhlek.cloudfront.net/atl-vertigo--shard-jira-prod-us-4--2--jres.atlassian.net/s/hpkl6i/b/5/1001.0.58-D20170905T211306/_/download/resources/com.atlassian.upm.atlassian-universal-plugin-manager-plugin:upm-web-resources/images-svg/verified-badge.svg" alt="Atlassian Verified" />また上記Atlassian Verifiedラベルがついていれば、Atlassian側で認定されたプラグインなので、サポートもしっかりしているのでこのラベルで持って選定するのもアリかと思われます。<br />
+（今回挙げている2つのプラグインはいずれもAtlassian Verifiedのものです。）</p>
+
+<p>色々と触った結果はこんな感じです。
+<img src="https://lh3.googleusercontent.com/st5G9HXH7hyXpd9OeN_u6fzR-3kd4HrVR-RySySewjsZYF8Fmt068yAGLYFb6DtAVRk7kTFHhVGXV1OClZ05hMUUFr20wQvBiH9r8QDYaDrT4i_j_SnWcxMIvTN0x7dDkG3S_pXtuBmM0K7Gp9WiPgUdsYp2Pl-hJsfcBEOhUWEO4xYSS73pfrVDy9hUiRoCEuADRg2iGEP7oIlJmMlpyTJJZqGeszP4-LZiKxZhC8LX06I6v1UO7W6CYJSmmdhB8k-uxO2AWNz5w8OQhK9jEGjPG4YdKLtYIy9Ck73UmWxrVDE6YI77f4E22hMqjbRRPpwDQXMuO0shKAk7zQtQeCCiSf-1bL-q02B5DGS3M8cu9lfdon-kXvVz-awFTUJT_dE4wniu_zNFyrqStBvBec2kZiA_Wq1RMfV5L528TgSO8ZSOxr2xnlGaT8aOaWqDoDiCku7niUPYhzOvIakI64h9SS0JU2OA-w6-Ht1HwdnlvCEGKY2ZBsQZTGyWWFByGmsiBchWffHXkLMQdps57ZwzX1I0zNGvSL3N1kvnMOm5QSxxeg9k1RyNRFzG40ySQyi-mbIh8Gi4GM_YSdDej7eop5a_WIuCHM3aQUK28zjriQABdnmxuKY49tZR9vQrA8eTMAKyxV47_V57zyvy3O7IFKCE5XnAT-E=w885-h447-no" alt="比較表" /></p>
+
+<h3 id="timesheet-reports-and-gadgets-for-jira-https-www-jiratimesheet-com-cloud"><a href="https://www.jiratimesheet.com/cloud/">Timesheet Reports and Gadgets for Jira</a></h3>
+
+<p><a href="https://www.jiratimesheet.com/cloud/">Timesheet Reports and Gadgets for Jira</a>はお財布に優しく一定の評価を得ているTimesheet用プラグインです。<br />
+ただレイアウトの設定が限定的で、グルーピングについては組み合わせることはできません。また、少し長めの期間で出力すると結構HTMLが崩れて見づらさがあるため、不採用としました。
+とは言っても、レポートの出力、更新はさくさくできますし、少ない人数でJiraを利用されているチームであったり簡単なレポート機能を求めている場合はオススメです。<br />
+またREST APIも用意されているみたいです。<br />
+<img src="https://lh3.googleusercontent.com/JACpX3eGwncKzfk3QVudN38_g3zO-059kcRcaThypKLY5JPcXqwy90YpJqqzrhZkYzx2-OvZfTUxu8koUjcVGluQh5ubhg6kGYTvNecgEsHLme2xfoS43g-eAS85XDNo8kuatTcEgkmDi_m5djK39UJ-PsYa8pCzKbVl3_PuQ0Pi_FQEHI4BbeDuODPwbWn9yfAszJ0wTzqplVk7aEXHUGco0O_SMXsVFT50_SOpjKZCBW8RPKdUJ4X4xSxrRlKZXL3loLxRqIR2IbSniU9M2393WhfWooWJBLas9I9jA1FfywOoMiO2skKk93ZRrSyXrBQZkRrIOUwi3NA0mZudRvRVGMKAnkrBPS9RZkyCtShu_Z9onzcBe05KwQit_8E_2FVVA-FSEUAxtkjvmRtQ0SdIjbg5VZ-TesNLltCD23EuMxbe6HohGSx0l8n5qA7nUx3V09EcY1kfUxz7-JHnTEBZVpy9_he2VNzg-L297byL9O6UeW3EcsWSVdRIKWT7Lj0V0URk9TEsKXuB0m7gU7hFAnBqt75qQKqtdQhAbKRXCMxnNAp55bB0hN-DSjdvkQq_gTTlJCyPO4kOkqIHq8wJ353Kqn2gEFqcJRHIowWTt9DT-t1KhSItjUZ9T_LUetVbGsabhFvUvZmL2yGWBDlDuQEtX_kRVtE=w873-h284-no" alt="timesheet" /><br />
+（期間を絞ってチケット単位で作業時間をレポートするといったような簡単なレポートには十分な機能が備わっている）</p>
+
+<h3 id="tempo-https-tempo-io"><a href="https://tempo.io/">Tempo</a></h3>
+
+<p>月々の利用料はTimesheet Reports and Gadgets for Jiraに比べると多少かかります。（10名までは10ドル/月, 11名以上は1名追加につき2.5ドル加算される）<br />
+Timesheet関連では最もインストールされているプラグインで、今も頻繁にUpdateされています。導入実績は今回ブログ書く時に気づいたのですが名だたる有名企業が導入しているようです。<br />
+<img src="https://lh3.googleusercontent.com/_QzvoiFy3WgcgFwQ9Ms7s7PPAHfu012-WqHQKs38551I6R3ncRzo0jRb8e9sluvd6cA_rH9m0ix-RJiAn3gtG3WW8eRQ7GQkDoFlrFTEm8yxgwWEJMcMfctfH5yXe2VfgzCWs988t5Kf4btQw7ZYfy9Cf5yTjc7-R19OhMmcAgK2gRbU98QjjgLuH4ZQ3zm4DbEv1fYDYWsRsbPs_kPvD7zMRdLqzn2sNhVctyZIN-VnkG2EZmJ2tfWk3-RYz9nw2D7pp9qZYldeRCjw2jvO0AYBFkDYO9oGeJ5caB8y-OiEU7rC11TuYdxCXApDiEySc9Ts5VSbGas4zVEuu3DWp4AEvQPPWo4oHiRgcKu0PkB2-Zci5KGSnSg7CZbbKJTg2yZ4RVp8ahULkwtHIucWvkiw4pGnE4sjIA7kHCEtMvAkrynJXNA_xJCcd3N1dg_FkgOFypqH5ejbtCjthJk2C2owNKl0QIQWqo7R_JfMgqaJhx2j0Omtc8gttOg-s0pf03xEiX-SqjjGxTnNiiA1ujF8dWRHtlq36de3SK7VjgSbEJHC7gg1tS-tDkTVjvtHiPWqlLa3q2yVW-7K6wA4vP_YxCK4NkWk08javhLvgtH_-JYspXwSEw-roQ3VWWv0ie6Ul4TNZyIPDZkcbGCnTKX4UyGXWnoLZhA=w600" alt="導入実績" /></p>
+
+<p>直感的UIが特徴で、レイアウト操作が容易かつスピーディにできます。フィルターにはJQLが使えたり、グルーピングについてもProject, Component, Fix version, User, Issueなどを好きなように組み合わせて必要な情報だけ出力できる柔軟性を持っています。</p>
+
+<p><img src="https://d9hhrg4mnvzow.cloudfront.net/tempo.io/products/tempo-timesheets/5b085549-tempo-reports_0g109d0g109d000000.gif" alt="report" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/j74CTNLi5Ka1Si1IChp3ij0NIiqkEnEGHR9uyowddB7cOYPI3pAo0Yp1ytNP8UcDTB8cE8QrtpNn6JOUK1Zz6hgFRN8tLy8VkZFVx0AS3icA0TXytzl1W3F881BBSmblIM2c3yRQwwakVKE2K4w1erz9B7LikBwvxQQu_eADJ2P5MwEMWneTxYI606JNTfPAW7xMnGn3bUVPS5NeoZCzhTHb5J5eDzLhlCIPgzmAFUxR2fqVBGETAc8PBV484NfqepufQ6e3NHerQkHhbG9PtFklmUVladr72LBEkoPYn42GNrY1vR2AYlY3Yd49IDKvXExbYPsM8v46_FR90A1cXUfaJM5xQHOuH9p1YwQC6FhYMW0c84BLOuLImSFVvOPc87g_BfJUt51XjfxcZs6Hm5cyvLiu0skXZNDAeNvumvaxkT5praQmhOUBPETVFfzKmOkqliUvkw47ylxyIOOhHbXnpPVs69pA6TgJWCHqBxoOldVBblfknMWNqbA6IFQapoAUiueZLsJG3tPY3Zr8aHBimpG89UOdAVNqDUJL4xLAG9D4wHItCDmfs7EJo4KpmvuZk4GdPG2WGGUu8_OykVMqPKbHGTOOkv5rocg8M5erqxyczv4VjPJK5ojVsew7DqcG5JzQ_Tx7aF88HX6UxT-rJ9bmuCboWFs=w600" alt="image" />
+(チーム x プロジェクト別で振り返ったり)</p>
+
+<p><img src="https://lh3.googleusercontent.com/4bVqdtG5KVWp1P6E62-XKuqO34isdcMeXdlWVmYhNNdi4Gq1Mzlhe4oLlXCr2KVm3ZkNpeVHxK3csi1Irvb2Q_DQMroIo4ZatwWd7GXc5pq5sMq0ZFyET_d57RprCC7gTTrP2xyCP4Uc49O0joKcuODsXIVByHqQh9eiJny38J9_F_VHTV9DTPf9GCJOC-l1uHwHYupwkB1H8_JN5ipLOXEVYPQ5BvOQQlKKUM7kzMGpNQ-NcUNZJTrg3nE7zQlY3ovd_CxK7EKMm2wR7vjyuU2OeKGIY7WKky67x8HfnwTDXrT2vFQ0yLKgvSYlHKZBhMeDlpzQJW3P-ly26cN4gcDoufZDGd9Ihc5HY-LJ2fpauF2mJI036WYGy2U7iXz9Qr5C8sUt0ZvsQsd4HuwyZfxe1bQzU5H73kt_KszeACJAAIjqHO6xSIH3K_iYlQC7Y0VvC1x_M_4C1n5F53Hdz3ZPyDcfcakmfozxAbyhGY6233jT4e3IAOTnH5XNkE-rpEOYwljSwlyrpBlAa2p2zNMVfcLwtL1XaqPoLAUEPeijVp4kPQHu-f6JCIhmYRkevLANbmwJjZG2CnR-0McUbnPUeTAMXak0XBTwiDmNIYNv841nDiPnEysE4lPV7zu0oPoDH5RXGQVs9Is4tguhuZVP2FsJDMxKeeY=w600" alt="image2" />
+(個人で振り返ったり)</p>
+
+<p>デザインが洗練されており、見やすさも◯です。</p>
+
+<h3 id="レポートだけじゃない-作業時間記録も楽になるtempo">レポートだけじゃない！作業時間記録も楽になるTempo</h3>
+
+<p>これは導入した後に気づいた副次的メリットだったのですが、Tempo上のインターフェースの中では時間記録を随分と楽にしてくれるインターフェースがたくさん用意されています。</p>
+
+<p>例えばカレンダーUIの中でドラッグ&amp;ドロップを使ってタスクの記録をしたり、カレンダー上をドラッグすると使った時間から設定してチケットを紐付けることもできます。</p>
+
+<p><img src="https://lh3.googleusercontent.com/Zu_Vd5Td3QkaOZfA2HcdL0IAuWT9AV8udCJaVKXYWK9zi_9-zPJ4Dzo9RRKIJvoPnqMYa69fUxQQIcuOEB3eAJQCxLJ-4xo7Bi8vYtdoYwLTQFw0Hmh84K55cWKTmgyfrr8uh7G8SnD5fF3ZV7scf6f2KLkOoCT0lFHzrOUqIkB2e3aakc1p1W7x-a6_d7ZptTj0wFXfaeVIiHYA21vh3oXE_FQhMx1UOr1spLLx22fI5Rh2FMC39od1Y8AOkPdwnFmHuKBHGrDg9WBy-7mFN9YZ6rdPROzDKfjHl2ROCfY5Prsn8D0RwRm1WeMLCstR5xLJSs4x2vTaWoPb06xz7I1BcRcU8YSsRIPG31HTlzJKzaaPRpVaBZjBlDKnVJVrtbWrE3K0FhVvV6ygj_6LZxEYKtpy_6ajS8jMmdJJ8LjzoVu5ZAWGQ0g0SJFBYKvxWF3Z2rZkHjrk0VBVRQaXLBBdcKkTWeC7-WOCBK07ghX92TzAXwZ8bqAvNVYo4KBjeffwEnUArcJWrW02W-5iJV7S9DrNgbjB2N7C4F0d7ti7G-3eS7jY1j5Xxh_AMDdk-h0Klj-O4SlzqiPuuBDuH_4QPI7GCxZ6Kp7cZkP4vuRTWuB-g5FcN4Bz3M-LwWR8xSZUDtmCFBeCRquFHrqxoRbkBuZJKt8Tsxg=w600" alt="tempo ui" /></p>
+
+<p>またSlackから時間を付けることもできます。（これはどれだけ有用なのかは正直定かではありませんがw）</p>
+
+<p><img src="https://lh3.googleusercontent.com/bqNuWXaMNtS9CpVQrfLAdFCi-HI3y5mTEB53xP7tQf3kGPsxnnLG1uAOPNPn05olySFs5yXYm2aHGot6wuFR6h3PuUs9fZRz73h73Ik51SQsV_JQIXzQ1fNxo9V6sY0dDCqDg2jIce-qo_f7Q-RZsZ2r5uDQ4T8d22dPDNs0-VQ4EUpUIlDVU1h5cb3DCCe-CWQZEpY-n9BDJ4P4_7-N3ET_XGZq_Zqsaw47TN10v3num7mW0peL1e_Ei9DZ1hoiz-wK4wb5ecwNDxaTzu_q2LLiRV5mC2WticLSKJk7nHMfTyaLvSKKrPQ9bjExPxVVT931cKO_W5DyZbYy_pEk-mefTdwM9Ap6qTBqI9D0KUPzzI0xNz2oxO32Fp7mbvcLqWyqeYu6ATTnUJjoUz4x11Bf_Mvr0hP8WY-ZYfdYup1znntfrUg3AbF37GNl6_15bRAFsPV6HtwbmAbUogkG-Z3XbDkbutxAmEagt5lVVRC8j52jnInfzorCKayk2h525TmRi-BsvOSTm3cxHwUIbPP2KbfPQTaqcIkJzWehNUJ9jkKMzp8VVXpdu3aKG3LBHTc7zx9l45iwa7rhpRjhYyJKlrQ61Sr5ovRqBbMn4LTXj6wVyPoYXG37jESLL8aqIJVjKqXKr2AINpJaqMSAi2v-Vs5QvLCjva4=w600" alt="slack log work" /></p>
+
+<p>話は少しそれてしまいましたが、Timesheetプラグインである<a href="https://tempo.io/">Tempo</a>のご紹介でした。<br />
+<a href="https://tempo.io/">Tempo</a>導入により、地味にかかるレポートの準備時間もほぼなくなり、その場でレイアウトを修正しながらディスカッションすることで会議内容も濃くなりと一石二鳥の状態になりました。</p>
+
+<p>私たちはスタートアップで人数も少ないため、各々の時間は極力プロダクト開発に割きたいものです。<br />
+一方少ない人数だからこそこういったリソース管理もないがしろにできないということもあります。<br />
+Jira x Tempoという素晴らしいツールの力を借りつつプロダクトチーム一丸となって引き続き、最高のパフォーマンスを求めていければと思います。</p>
+
+<hr />
+
+<p>Housmartではエンジニアを募集しています。
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="hatena-bookmark-button" data-hatena-bookmark-title="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=Jira%e3%81%ae%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e6%a9%9f%e8%83%bd%e3%81%8c%e7%89%a9%e8%b6%b3%e3%82%8a%e3%81%aa%e3%81%84%e3%81%ae%e3%81%a7Tempo%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%a6%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e5%85%a8%e4%bd%9c%e6%a5%ad%e6%99%82%e9%96%93%e3%82%92%e5%8f%af%e8%a6%96%e5%8c%96%e3%81%97%e3%81%9f%e8%a9%b1&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f&amp;description=Jira%e3%81%ae%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e6%a9%9f%e8%83%bd%e3%81%8c%e7%89%a9%e8%b6%b3%e3%82%8a%e3%81%aa%e3%81%84%e3%81%ae%e3%81%a7Tempo%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%a6%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e5%85%a8%e4%bd%9c%e6%a5%ad%e6%99%82%e9%96%93%e3%82%92%e5%8f%af%e8%a6%96%e5%8c%96%e3%81%97%e3%81%9f%e8%a9%b1" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no)" alt="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/management">
+                        management
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="title">Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-20 14:31:47 &#43;0900 JST" itemprop="datePublished">2017-11-20</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600)" alt="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="title">「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-16 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-11-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="title">デザイナー不在のチームのデザインフローを整えた話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-13 19:45:00 &#43;0900 JST" itemprop="datePublished">2017-11-13</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600)" alt="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="title">会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-06 19:30:00 &#43;0900 JST" itemprop="datePublished">2017-11-06</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/DuP11u4pzjSGcVta0BqHmg93LdLPpGDltsZfs48w-A87Y3kOSeClhqHvovIRxSUZMkFOQdC8DVtEJlqrVDr0VZhsLcqE-vbmT44LgmkHOFvbW0x8_USOXSjka-BhXiwO_li8jBdkfqORVNlrVUTHv6Pu-JR0U71betBSt-NwTW2jyy2GCcZ3ELBJEQjyS5Y4tQ8hw38q91AevVjV49KTQwr28CAHmI0CzHo4gkji6cK1ypeEo40EBwMzo6tpiUrMH7l28uktrg395DSaMtQ8YYc_TFXmhWfueUbhoCuns1p_TedQ7n0eN6feql4RXKh_Dl8B458zqLIsE-oFoJAN9Ezv8EM1CknMmWNO6Ou1yzAxCXX62EG6XOTLgOZy_RIdOocwaGD1TiJvyyOwzgDLoTkTYTi8JEGFpo2K6GblBZy8q-5-aRSetSZA7FLx4Xa5a23c3aIhXFii0OaqzKN9Ow5gi6QqAW5ClmQ3YZfgbv9h2w2xDIqUjkJJ62BcNX3RlXSHy6MeOqjDQ-OTYYtW3KAJtfAoCdVgh_vYbwFg0HC390jkoLuZeoEZwa36ATl2b_GMSRyOF10sxET962QOWpRoBMFWipxu-IdBI5agmsd8IZU-leGbfyPnHrA8_gHp2M_suBXXzZ-JyeSH7Cm91v58vv_hiEJlbw=w1409-h939-no)" alt="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/work">
+                        work
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/10/26/experience_within_3_month/" class="title">不動産テック スタートアップのHousmartに転職して3ヶ月が経ったので振り返る</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-10-26 15:31:47 &#43;0900 JST" itemprop="datePublished">2017-10-26</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

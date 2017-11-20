@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <title>カウル Tech Blog &middot; カウル Tech Blog</title>
-    <meta name="generator" content="Hugo 0.26" />
+    <meta name="generator" content="Hugo 0.30.2" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="カウル開発チーム">
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:updated_time" content="2017-11-16T18:00:00&#43;09:00"/>
+<meta property="og:updated_time" content="2017-11-20T14:31:47&#43;09:00"/>
 
 
 
@@ -166,12 +166,12 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        29
+        30
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          29
+          30
         
         <span>
             Tags
@@ -250,6 +250,117 @@
     <article class="article article-type-post" itemscope="" itemprop="blogPost">
         <div class="article-inner">
             
+            <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" itemprop="url">
+                
+                <img src="https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no" class="article-banner">
+                
+            
+            </a>
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/">
+    <h1 class="article-title" itemprop="name">
+        Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-11-20 14:31:47 &#43;0900 JST" itemprop="datePublished">2017-11-20</time>
+            &middot;
+            2543
+            words
+            &middot;
+            6
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/management">management</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/management">management</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/jira">jira</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="hatena-bookmark-button" data-hatena-bookmark-title="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>
+                    <p>Housmartの宮永です。</p>
+
+<p>みなさんはプロジェクト管理ツールに何をお使いでしょうか。ハウスマートでは<a href="https://ja.atlassian.com/software/jira">Jira</a>を採用しています。レポート機能という視点で見ると、<a href="https://ja.atlassian.com/software/jira">Jira</a>には標準機能としてBurndown Chart, Verocity Chartなどスプリント運営周りをサポートするあらゆるカテゴリでレポートが用意されています。ただTimesheet（作業時間管理）に関しては運用上、弊社では少し物足りなさ（特にレイアウトの柔軟性への物足りなさ）を感じていました。<br />
+誰が何をやっているかは把握出来ているが、誰が（もしくはどのチームが）どのタスク（もしくはどのプロジェクト）にどれだけ時間をかけているか上手く可視化出来ていない状態でした。<br />
+この課題に対して、Jiraプラグインの<a href="https://tempo.io/">Tempo</a>を導入することで解決し、全作業時間を可視化することで上手く運用できているため、今回はこの<a href="https://tempo.io/">Tempo</a>を紹介したいと思います。</p>
+
+<p>こんな方に適した内容です。</p>
+
+<ul>
+<li><a href="https://tempo.io/">Tempo</a>導入を検討の方</li>
+<li>複数プロジェクトが並行していて誰が何やっているかわからないチームの作業時間を可視化したい</li>
+<li>Jiraを導入してタスク管理はしているけど、レポート機能(特に作業時間管理)を上手く使いこなせていない</li>
+</ul>
+
+<p></p>
+
+                    <br>
+                </p>
+                <p class="article-more-link">
+                    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/">
+                        Read more
+                    </a>
+                </p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="hatena-bookmark-button" data-hatena-bookmark-title="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=Jira%e3%81%ae%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e6%a9%9f%e8%83%bd%e3%81%8c%e7%89%a9%e8%b6%b3%e3%82%8a%e3%81%aa%e3%81%84%e3%81%ae%e3%81%a7Tempo%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%a6%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e5%85%a8%e4%bd%9c%e6%a5%ad%e6%99%82%e9%96%93%e3%82%92%e5%8f%af%e8%a6%96%e5%8c%96%e3%81%97%e3%81%9f%e8%a9%b1&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f&amp;description=Jira%e3%81%ae%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e6%a9%9f%e8%83%bd%e3%81%8c%e7%89%a9%e8%b6%b3%e3%82%8a%e3%81%aa%e3%81%84%e3%81%ae%e3%81%a7Tempo%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%a6%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e5%85%a8%e4%bd%9c%e6%a5%ad%e6%99%82%e9%96%93%e3%82%92%e5%8f%af%e8%a6%96%e5%8c%96%e3%81%97%e3%81%9f%e8%a9%b1" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f11%2f20%2fjira-tempo-plugin%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+    </article>
+    
+    <article class="article article-type-post" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
             <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" itemprop="url">
                 
                 <img src="https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600" class="article-banner">
@@ -316,11 +427,12 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    「<a href="https://repro.connpass.com/event/70387/">Growth Hack Talks #7 不動産テック×アプリ特集</a>」にて発表しました🎉</p>
+                    <p>「<a href="https://repro.connpass.com/event/70387/">Growth Hack Talks #7 不動産テック×アプリ特集</a>」にて発表しました🎉</p>
 
 <script async class="speakerdeck-embed" data-id="868f54fafa964d5a9910af41a1bcb7c0" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -413,7 +525,7 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    カウルTech Blogをご覧のみなさまこんにちは。<br />
+                    <p>カウルTech Blogをご覧のみなさまこんにちは。<br />
 2017年の3月にHousmartにジョインしたデザイナーの稲井です。<br />
 食う寝る遊ぶが大好きなので<a href="https://kawlu.com/journal/member/page-28800/">色々と回り道</a>してますが、よろしくお願いします。</p>
 
@@ -421,7 +533,8 @@
 
 <p>スタートアップ企業でのインハウスデザイナーの役割や、デザインワークフローの改善に興味のある方は参考にしていただければと思います。</p>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -520,12 +633,13 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    エンジニアの<a href="https://twitter.com/macs_6">@macs_6</a>です。
+                    <p>エンジニアの<a href="https://twitter.com/macs_6">@macs_6</a>です。
 このブログでは社内の<strong>AWS EC2上で運用しているアプリケーション群をECS移行したプロジェクト</strong>について紹介します。</p>
 
 <p>ローカルの開発環境をDockerした話は以前の記事(<a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/">複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる</a>)で西辻が紹介しているので、そちらを参照して下さい。</p>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -618,13 +732,14 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    エンジニアの田中です。そういえば、もう3ヶ月経ったので、これまでにやったことを振り返ってみます。</p>
+                    <p>エンジニアの田中です。そういえば、もう3ヶ月経ったので、これまでにやったことを振り返ってみます。</p>
 
 <p>今はまだ前職での記憶も鮮明に残っている一方で、入社してから色々と見えてきたものもあるので、割りと冷静な視点で書けるかなと思っています。実は、これくらいのフェーズのスタートアップにJOINするのは2度目です。経験を活かして先回りしてつぶせた部分もあれば、全然通用しなかった部分もあり、学びの多い3ヶ月となりました。</p>
 
 <p>今、スタートアップ・不動産テックといったキーワードやtoC向けのサービス開発などに興味をお持ちの方に、少しでも現場の雰囲気が伝われば幸いです。</p>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -720,13 +835,14 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    アプリケーションエンジニアの西辻です。<br />
+                    <p>アプリケーションエンジニアの西辻です。<br />
 今回のブログでは、弊社のローカル開発環境を <code>Docker</code> 化した話をご紹介したいと思います。
 このブログでは、なぜローカル開発環境を <code>Docker</code> 化する考えに至ったのかに始まり、<br />
 具体的にどのような方法で <code>Docker</code> 化を進めていったかを振り返りながら書いていきます。<br />
 また、<code>Docker</code> 化したことで受けた恩恵などを最後に書いて終わります。</p>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -822,12 +938,13 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    Housmart高松です。</p>
+                    <p>Housmart高松です。</p>
 
 <p>2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。<br />
 今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである <strong>&ldquo;Ruby x データサイエンス&rdquo;</strong> の観点からRuby Kaigiの参加レポートをします。</p>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -920,9 +1037,10 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    アプリケーションエンジニアの西辻です。2017年4月からHousmartで主にAndroidアプリ開発を担当しています。今回のブログでは、弊社のCI環境としてメインで利用している Bitbucket Pipelines についての活用事例についてご紹介したいと思います。</p>
+                    <p>アプリケーションエンジニアの西辻です。2017年4月からHousmartで主にAndroidアプリ開発を担当しています。今回のブログでは、弊社のCI環境としてメインで利用している Bitbucket Pipelines についての活用事例についてご紹介したいと思います。</p>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -1015,11 +1133,12 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    アプリケーションエンジニアの田中です。今年6月に入社して、初めてのTech Blogへの投稿になります。最近の大きな出来事は、スプラトゥーン購入をしたこと、Housmartへのjoin、そして結婚したことです。</p>
+                    <p>アプリケーションエンジニアの田中です。今年6月に入社して、初めてのTech Blogへの投稿になります。最近の大きな出来事は、スプラトゥーン購入をしたこと、Housmartへのjoin、そして結婚したことです。</p>
 
 <p>先日、何となく目標にしていた「お仕事でお世話になったOSSに機能追加する」を達成できました。今回は、私がReactiveSwiftに機能を追加した際の事前準備、背中を押してくれたものなどについて書いてみます。</p>
 
-<p>
+<p></p>
+
                     <br>
                 </p>
                 <p class="article-more-link">
@@ -1115,13 +1234,14 @@
 
             <div class="article-entry" itemprop="articleBody">
                 <p>
-                    このエントリは <a href="http://qiita.com/advent-calendar/2016/elastic">Elastic stack (Elasticsearch) Advent Calendar 2016</a> の17日目の投稿です。</p>
+                    <p>このエントリは <a href="http://qiita.com/advent-calendar/2016/elastic">Elastic stack (Elasticsearch) Advent Calendar 2016</a> の17日目の投稿です。</p>
 
 <p>こんにちは。Housmartの高松です。今回のテーマは <strong>Elasticsearchを使った日本語でのサジェスト</strong> です。</p>
 
 <p>Elasticsearch便利ですよね。個人的には今から検索関連の機能を作るならElasticsearch一択だと思っているのですが、こんな便利なElasticsearchを使っても、実用レベルの日本語のサジェスト機能を実装するのはちょっと難易度が高いです。</p>
 
 <p>今回は実務での経験をもとに、なぜ日本語でのサジェストが難しいのか、Elasticsearchを用いた実装はどうすれば良いのかについて書いていこうと思います。
+</p>
 
                     <br>
                 </p>
@@ -1143,109 +1263,6 @@
     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
     <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f&amp;description=%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%81%a7%e3%81%ae%e3%82%b5%e3%82%b8%e3%82%a7%e3%82%b9%e3%83%88%e3%81%ae%e9%9b%a3%e3%81%97%e3%81%95%e3%81%a8Elasticsearch%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e5%ae%9f%e8%a3%85%e4%be%8b" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
     <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f16%2fsuggester-for-japanese%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
-    </a>
-</div>
-
-    
-</footer>
-
-        </div>
-    </article>
-    
-    <article class="article article-type-post" itemscope="" itemprop="blogPost">
-        <div class="article-inner">
-            
-            <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" itemprop="url">
-                
-                <img src="https://lh3.googleusercontent.com/wWJmyslaC0uTz0vGk-y1UuB5RyQdJMnxFFXfW6IAs7WDzLwLcMcW0LVtP_s5koMn5RZkxhrZcW-5QZch8Rk1OLuaUt4RCgEp9QfAraAQ7CeitGcD1feJYDtmWD5bHSVLtpj50BQ-YDc8M6dfBPkaaf52WT55tc2n9hkp95w4pjIjHE-dxFsfXxwpUduJcvFily81hMpEBcPva0ggbxMzkivO1ByKRG3_1jE63StrTmGsfhNpwz1ELXiJfTjLOJxJM57hAuct7jqrLUGCWveOjBP0GS4Nldi4RuUB9suKcjaZUaLp25PTDOe3eKki7hh4aiLB-qbiXnsEf6Qge9faAuysCvdCPv9_gp-Cszot8a4RVidiAi0LZjUUikhKBpymiT3C8ueU22CAuX7jMDyUqOyAuY_ZqZN2oFiC2iNOFoh8C3kM3tkd9g6ZR1GGxqjxbxzJ7ApR16oPMECLDgNj0Mkzqj9w3zkyuqBxEJ3V7qEwGwc54on_qmIsALRBh492WvBQMPNdHDl682wsic6Wwprk3sEOhSsyCpU3GJsXxdI7KsVE0_7ld9b5yYKXvWbSRX3sYXZ0eg75V0u1Ai3TwplTyVTxOf8wU7LdlbYL2iZmBNrXEjvIMzx7rpv8fkckVLz5Pfb2UV8_CFqPb1hWg7DS5OYaouvp-eONOCB7Xw=w1419-h621-no" class="article-banner">
-                
-            
-            </a>
-
-            <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/">
-    <h1 class="article-title" itemprop="name">
-        エンジニアが自由研究に時間をかけるべき理由
-    </h1>
-    </a>
-    <div class="article-meta">
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2016-12-07 14:23:37 &#43;0900 JST" itemprop="datePublished">2016-12-07</time>
-            &middot;
-            2603
-            words
-            &middot;
-            6
-            minute read
-        </div>
-
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/culture">culture</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/culture">culture</a>
-                &middot;
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/lab">lab</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-<div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="hatena-bookmark-button" data-hatena-bookmark-title="エンジニアが自由研究に時間をかけるべき理由" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-
-            <div class="article-entry" itemprop="articleBody">
-                <p>
-                    ここ数年でWebエンジニアを取り巻く環境は劇的に変わったと思う。<br />
-具体的に言うと、知的好奇心とやりがいを求めて仕事を選ぶことが当然になったように感じる。</p>
-
-<h2 id="webエンジニアを取り巻く変化">Webエンジニアを取り巻く変化</h2>
-
-<p>5年半前、私が新卒で就職した時はまだ、エンジニアでも長時間労働はあたりまえで、エンジニアはビジネスサイドが考えた要件に従ってサービスを実装する人だ、という認識が強かったように思う。<br />
-一緒に大学院を卒業した優秀な友人たちはみんなメーカーか大手SIerに就職し、それこそWeb企業を就職の選択肢に入れている人はめずらしかった。
-
-                    <br>
-                </p>
-                <p class="article-more-link">
-                    <a href="http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/">
-                        Read more
-                    </a>
-                </p>
-            </div>
-            <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="hatena-bookmark-button" data-hatena-bookmark-title="エンジニアが自由研究に時間をかけるべき理由" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-<footer class="article-footer">
-    <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2016/12/07/the-reason-for-lab-day/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="エンジニアが自由研究に時間をかけるべき理由" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f07%2fthe-reason-for-lab-day%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%82%a8%e3%83%b3%e3%82%b8%e3%83%8b%e3%82%a2%e3%81%8c%e8%87%aa%e7%94%b1%e7%a0%94%e7%a9%b6%e3%81%ab%e6%99%82%e9%96%93%e3%82%92%e3%81%8b%e3%81%91%e3%82%8b%e3%81%b9%e3%81%8d%e7%90%86%e7%94%b1&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f07%2fthe-reason-for-lab-day%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f07%2fthe-reason-for-lab-day%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f07%2fthe-reason-for-lab-day%2f&amp;description=%e3%82%a8%e3%83%b3%e3%82%b8%e3%83%8b%e3%82%a2%e3%81%8c%e8%87%aa%e7%94%b1%e7%a0%94%e7%a9%b6%e3%81%ab%e6%99%82%e9%96%93%e3%82%92%e3%81%8b%e3%81%91%e3%82%8b%e3%81%b9%e3%81%8d%e7%90%86%e7%94%b1" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2016%2f12%2f07%2fthe-reason-for-lab-day%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -1278,6 +1295,31 @@
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no)" alt="カウル Tech Blog" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/management">
+                        management
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="title">Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-20 14:31:47 &#43;0900 JST" itemprop="datePublished">2017-11-20</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -1379,31 +1421,6 @@
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/8rCg2SAjkW6okr9UPQ1pWQAllXyu7eZz12SNfyNh3hXKgw7WEKJ2zJRray0Srz64jvt4kT9fuFx6TTeOhwseSH-2ZoFFF6WgXbrQ9jUlkk2Pn2d_IIIiU5P55-z2lDr-mpzcR5Mob81gLWC4HJQlDApE-7MpJ1k9MKhWvOIyMikJdMJ3ZVkLx8dU8F7fgxCkoYvti5c9f091j3bcPT2CnNA2O_f4ns-erXO74EC96qZYpNJtqZb3nNcXwC9NAVsxgNbsH-zzWQLMPwrp9YMt___rlkP3YOhZ8IfSrAT5wWHGznQVDdC9nSK2ccptBpf0L1wCXp-drNRhEWCyCxsp8ufgyWIEGZ8bQjsuhM4jHe6U53KWUTMReRKvMfvIr87X27bctTRE5oQqsdxoBBnP_2Psbtc3Wi35x7JdiLQ65ArTvhDOWpCFo1m8V6ECZP9scqeQHEmoSUasE6XMKZclyZVYl2uOZd7SRdFNwucTMYID4mtX4umUR1HCtUOQaWboCEBdiVbdTqiTBemOj4gX04NsdZrthSUqrNvelNs4hhEqX18C4oEb9DzWhZk4RtCUgf4i9FGaImelLEwZfOPKPF6b3jlGE9BKHthP8G7_v6M0z1mo5o3QkaqBZQ3RPhIwGG4Cb_DxJvhGLL7s8Cj0sTNaASwjZMhH348=w1019-h909-no)" alt="カウル Tech Blog" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
-                        development
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" class="title">複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる</a></p>
-                    <p class="item-date">
-                        <time datetime="2017-10-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-10-23</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -1469,6 +1486,13 @@
             <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
                     kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1609,6 +1633,13 @@
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
                     kpi
                 </a>
@@ -1626,7 +1657,7 @@
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
                     management
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -1760,6 +1791,8 @@
         <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
         
         <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
         
         <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
         
