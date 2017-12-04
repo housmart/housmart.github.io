@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Android アプリを master ブランチマージで Play Store Beta に公開する &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.31" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" />
+    <meta property="og:title" content="Android アプリを master ブランチマージで Play Store Beta に公開する" />
+<meta property="og:description" content="アプリケーションエンジニアの西辻です。
+今回の記事では、弊社内で開発している Android アプリを master ブランチマージで Play Store Beta に公開するまでの方法についてご紹介したいと思います。
+また、今回の記事は Qiita Android その2 Advent Calendar 2017 5日目に参加しています。
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no" />
+
+
+
+<meta property="article:published_time" content="2017-12-04T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2017-12-04T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="Android アプリを master ブランチマージで Play Store Beta に公開する">
+<meta itemprop="description" content="アプリケーションエンジニアの西辻です。
+今回の記事では、弊社内で開発している Android アプリを master ブランチマージで Play Store Beta に公開するまでの方法についてご紹介したいと思います。
+また、今回の記事は Qiita Android その2 Advent Calendar 2017 5日目に参加しています。
+
+">
+
+
+<meta itemprop="datePublished" content="2017-12-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-12-04T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3605">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no">
+
+
+
+<meta itemprop="keywords" content="android,ci," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no"/>
+<meta name="twitter:title" content="Android アプリを master ブランチマージで Play Store Beta に公開する"/>
+<meta name="twitter:description" content="アプリケーションエンジニアの西辻です。
+今回の記事では、弊社内で開発している Android アプリを master ブランチマージで Play Store Beta に公開するまでの方法についてご紹介したいと思います。
+また、今回の記事は Qiita Android その2 Advent Calendar 2017 5日目に参加しています。
+
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        31
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          31
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/">
+    <h1 class="article-title" itemprop="name">
+        Android アプリを master ブランチマージで Play Store Beta に公開する
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-12-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-04</time>
+            &middot;
+            3605
+            words
+            &middot;
+            8
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">development</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/android">android</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ci">ci</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="hatena-bookmark-button" data-hatena-bookmark-title="Android アプリを master ブランチマージで Play Store Beta に公開する" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>アプリケーションエンジニアの西辻です。<br />
+今回の記事では、弊社内で開発している Android アプリを master ブランチマージで Play Store Beta に公開するまでの方法についてご紹介したいと思います。<br />
+また、今回の記事は <a href="https://qiita.com/advent-calendar/2017/android_second">Qiita Android その2 Advent Calendar 2017</a> 5日目に参加しています。</p>
+
+<p></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>大きく以下の項目について書いていこうと思います。</p>
+
+<ul>
+<li>はじめに</li>
+<li>Play Store 公開までの全体の流れ</li>
+<li>CI 環境の設定方法</li>
+<li>Play Store Beta に配信するまでの時間について</li>
+<li>apk ファイルを Play Store に公開するライブラリの設定方法</li>
+<li>Play Store での公開方法について</li>
+<li>半年運用して分かったこと
+
+<ul>
+<li>間違えて apk ファイルを Play Store Beta にあげた時の対応</li>
+<li>Proguard を有効にした時にアプリがクラッシュする</li>
+<li>アプリの強制アップデートに関して</li>
+</ul></li>
+<li>おわりに</li>
+</ul>
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>Android アプリを開発、運用し始めて半年くらい経ちました。<br />
+最初の頃は apk ファイルを手元のマシンでビルドしていたのですが、<br />
+ローカルの状態に依存してしまうので、何か設定ファイル間違えてないかとか<br />
+ちゃんと master ブランチに移動してから・・・などと<br />
+いつもドキドキしながら最後に<br />
+Play Store 上でアプリをインストールして確認をしていました。</p>
+
+<p>上記の心配事を解消するために色々組み合わせて<br />
+master ブランチにマージしたタイミングで<br />
+Play Store Beta まで apk ファイルを公開して Beta テストを行い、<br />
+万全を期して Play Store まで公開できるような仕組みができたので<br />
+備忘録とチームメンバーへの情報共有を兼ねてこの場で情報をまとめていきます。</p>
+
+<h2 id="play-store-公開までの全体の流れ">Play Store 公開までの全体の流れ</h2>
+
+<p>下記に Play Store 公開までの全体の流れを図にしています。<br />
+<img src="https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no" alt="Play Store 公開までの全体の流れ" /></p>
+
+<p>説明用に 1. から 4. の番号を振っています</p>
+
+<h3 id="1-git-push-origin-master">1. git push origin master</h3>
+
+<p>Play Store Beta まで upload するトリガーとなるコマンドです。<br />
+実際には develop ブランチから maser ブランチへの Pull Request を作成し、<br />
+JIRA チケットに記載のある改修内容を確認します。<br />
+<img src="https://lh3.googleusercontent.com/4f7pmpmtXqfmh30r9AsO2qtTSns_ONx3SV0zjs0bbtzmYkABZlk9R7oV6uQNW0cmhKOqydH35hSNZo7WmrRjDdjycnGTKVp1liPJiUyegWpNlhxA75Yf8d8c1PwaXJSzMbUrf7D4dy3xn4lS2EkJtlXJTtUdSAZCf1Nlmb29i1LqrltjKYA5ckt5BanElIqwC2mJU_zRyAGKFbEIpYKr1c5NAB0ouk4y-S90OQDDPCoE-DfV08qtneoSF2fMTe1PG3BgMb7ZTigz5oslP3A3b5rfDfhTUbufurItLbIJEd-H4tRYEk2jd11hQhWtT6WvWbFUdE3ZQmPd7_MgptFedOJN7Eb6Bne7okPh0sIEH8k4a1g5Z7m0sZqyaXVxhMrzPo0BUAIlsM4-dhehXqEqRiEZHSGQ6kS5bZfVxI40Fde5BUuBOtZptCCQ0lzDdVYcGxXe1f90tDLYZWZNdv1Rh4_Nu8yr38joGo6qSc7CQPr_V63cUCH8L3vpPEDj3rT4-YkEUGO0nI_fLx5KUOBQ71l7iPB56H2-JaZOk7x0OQfcCdF6d8DiMfUd6NqvA29FbqT9MaScK2omijXUMlwaKxFeJfEcOEdNSJzG6klPmwgT0-t5MK86CjETebdq8dRS7dwN35vUuWT2COhAE-MJbHsuiWspbuzB07k=w673-h290-no" alt="develop ブランチから maser ブランチへの Pull Request の作成と改修内容の確認" /></p>
+
+<h3 id="2-bitbucket-pipelines-上で-test-の実施と-apk-file-のビルドを行います">2. Bitbucket Pipelines 上で test の実施と apk file のビルドを行います</h3>
+
+<p>Bitbucket Pipelines の設定方法については<br />
+後述の 「CI 環境の設定方法」で詳細に設定方法などを記述します。</p>
+
+<p>流れとしては Bitbucket 上で管理されている Dockerfile を元にして<br />
+Docker Hub から automated builds の設定を入れておきます。<br />
+Dockerfile には Android アプリをビルドするために必要なものをあらかじめ<br />
+入れておく感じになっています。<br />
+実際に利用している Dockerfile は以下になります。<br />
+注意点としては docker image に Android SDK を含めて再配布はライセンス違反になるので<br />
+Docker Hub 上では private image にする必要があります。<br />
+参考: <a href="http://gfx.hatenablog.com/entry/2016/06/21/112404">http://gfx.hatenablog.com/entry/2016/06/21/112404</a></p>
+
+<pre><code>FROM snowdream/gradle:latest
+
+# Install dependencies
+RUN dpkg --add-architecture i386 &amp;&amp; \
+    apt-get -qq update &amp;&amp; \
+    apt-get -qqy install libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 tar git --no-install-recommends &amp;&amp; \
+    rm -rf /var/lib/apt/lists/*
+
+# Download and untar Android SDK
+ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+RUN curl -sSL &quot;${ANDROID_SDK_URL}&quot; | tar --no-same-owner -xz -C ${SDK_HOME}
+ENV ANDROID_HOME ${SDK_HOME}/android-sdk-linux
+ENV ANDROID_SDK ${SDK_HOME}/android-sdk-linux
+ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
+
+# Install Android SDK components
+ENV ANDROID_COMPONENTS platform-tools,build-tools-25.0.0,build-tools-24.0.0,build-tools-24.0.1,build-tools-24.0.2,build-tools-23.0.3,android-24,android-23
+ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository,174
+RUN echo y | android update sdk --no-ui --all --filter &quot;${ANDROID_COMPONENTS}&quot; ; \
+    echo y | android update sdk --no-ui --all --filter &quot;${GOOGLE_COMPONENTS}&quot;
+</code></pre>
+
+<p>Certificates 情報は Android App Repository とは別 Repository で管理しています。<br />
+Certificates Repository は Android App Repository よりも更に権限を厳しく設定してあります。</p>
+
+<p>Bitbucket Pipelines で apk をビルドする際に<br />
+Certificates Repository を clone してアプリの署名情報や Play Store への認証情報などを取得します。</p>
+
+<p>実際に Certificates Repository が所持しているファイルは以下です。</p>
+
+<table>
+<thead>
+<tr>
+<th>file name</th>
+<th>description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>release-key.jks</td>
+<td>keystore file</td>
+</tr>
+
+<tr>
+<td>key.json</td>
+<td>Play Store への認証情報が管理されています。</td>
+</tr>
+
+<tr>
+<td>keystore.properties</td>
+<td>keystore file のパスワードやエイリアスなどを保存するシンプルなファイルです。</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="3-docker-hub-上で-automated-builds-の設定を入れる">3. Docker Hub 上で automated builds の設定を入れる</h3>
+
+<p><code>2.</code> でほとんど書いてしまいましたが、master ブランチに push されると<br />
+Docker Hub 上で docker image が build されます。<br />
+この docker image を利用して Bitbucket Pipelines 上で apk ファイルを作成しています。</p>
+
+<h3 id="4-play-store-beta-上で最終動作確認とアプリ公開">4. Play Store Beta 上で最終動作確認とアプリ公開</h3>
+
+<p>Bitbucket Pipelines が完了すると Play Store Beta 上にアプリがアップロードされています。<br />
+<img src="https://lh3.googleusercontent.com/qipgKUSZ60QmNuf5X7Q6ZvsyNwQ4HY_QYzaAC4Om5wdMpQE1kGNow-NSRuuiq2VOpcTZ3XzOiYgB4kmpyUa1hl2q37fbgFa94b3FsIKqDzE419MAfZRpaZSZkLJHUHnPAp-aI4pmFmuzhy17lv_UO3gdXuKOYIl_UJK5OzNOadX0-le9qeRdTN2Ylv39EIt2ni3SOjWQOIiM452TKUMH9pnqh1Mubla8ULHYCeqZsY1RjlLogwYnUSQRg_nz0_kuQMieTN3njxndKvWhiBN3KKicA8l0LBL4XFh7Q0oPeREuXoO3vH87KjrIJj2HNhp-bpxBGtpeKrm5z5kClSWrfSf6O4_J2KxE-n3jSjb1XPYdU2458tK0sO9EPcSybAWoWtXDc1UkRVkc46gbSnDd4TDAsRJkU8E58ekX-nLfjzWse1Il0kL0vcmt7UORO9kq19DYmuUnENXEoKB0Yj63UK96ouQoZ2Uq_ULcpted4eLzfy63G9VUlMC5z14WpOBJVn3sLa0RJanjQv4XizvIs-6IBo9iuO6LsUSgHXUKgBvCj69NwVb81fMzFdikf8a37AnBTW-LGxFyNSc0luTdG6RPByxZyUdfsgSCjsop3BbZ6OrcIFIDD1dxF7-LWL_yEoDHcsCy8eCPGoCwLzP-G-Q1BVuqp4pdODc=w1024-h272-no" alt="Play Store Beta" /></p>
+
+<p>Play Store Beta に反映まで少しタイムラグがあるので<br />
+Bitbucket Pipelines 完了後すぐに Play Store へアクセスしても<br />
+古いバージョンが見えていることが多いです。</p>
+
+<p>体感ベースですが Google Play Console に登録しているメールアドレス宛に<br />
+公開完了通知メールがくるとほぼ更新完了しています。</p>
+
+<p><img src="https://lh3.googleusercontent.com/Bvuz37ByD8Ayz4gjwQbmH8CUqUxWo0-4vSBJ1eGiDjOAnFUnpIjTclWFSzWPbv7z79QHJEtXNz7Tqhf63Jg_HtFxjiESeqPWbQhCEYb2lBD-ufxpL1kFU9eNNB2UvwjCfnIOFvU3RrOr04GgXywgzLNPUURwNeSFViipsdv17VSftzX6iL8LS1zH0bJzrEkdFi7-0Ul5da7yS0Gcl_7NEhBfOW6BmY_3SkIckZ0G9tq1B8POP6RUMBsp6hWgNGwP7_t33vLky23kHCYngKMxpPb2c_mxdm8dXkWF4yQmejDfqJx9jkJp_vMZqhUngWIjqxU_XTs_WTi9wvhIkPkggHQtcVsN82AfPAmz6oDjjCjSwAb4X4H6rfsa7582X6NH16PsXapGdeHH3Avqa4ZhVfvUVh5Z0XzSE17L0c03-UhIrvgIJfAXzdIrUeUu7PVAMMalUBeHS5lEaPqpXdIFM44MGWWzadXX0udIqeiHZPv92K7ZR1FbR2cTkb03qvba0XJQhF-RlHhZgTbAo1MFIgsVUAWezwCs9cp-8zVHHqQHt5xljPiHS_dwo5ZdxpHN5WsTMDnYJno1vG6ebR8OII9aGTno04OseHC6reF3_gsHIU7OiKDMjpW6VrukbdErIQVNBQ8aUsKI23sxFSfFaYzBPaJoPEuMmCU=w1220-h705-no" alt="設定からアプリ更新の通知を受け取る設定ができます" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/ulDXdPziDu4Oyr_kcr2ueAqkGOFDfoek_qYcATjQHcsVhhtvE-CiuCJxmbRoRzSFsdpm78k5UaFP7pQylhK5wT_yP9BhJ-oYOjHrmhftU33fN89M4UPKNAemiRRbGAm0lmAqQ9qXfkTGGVxliU3AHfl-milnR5Cp5YJBOcvmwPy2DE94JDTUcqzIxTZ0KhzA0M4HiOJfWMYnlenynRqS01w3xGW6dpWs3UOj_g_5cRmV2OzxOpp1IDWzZtHhcgQnN_XjVwUdNOLHyvG-3H5_2c-_p9uLqJDD2RmZ4zJOTtT4afkqxwZTiROU-vSAoIULctDfKueB95WbQuJT31z9roqZeLzOJ3KywSNC4v7yLClmgDUIKmWzUc1Azx45VQWJ3cj3YigMOv8EUOjJkc9Si2MlIISEmPlak7Wfe4Y67ViYB-Ax9lKcdA5b9OAj0lmW8Zkv2Mj0YWq8HxL8lLrVPz1AH5K7CvL_lKsx4_UpTfeynakzH042O3MAtjTDNrIrMEKiFU3oofoTvppWuEkawD78qIsFArfIH7_uCqSjNftB_GEsZr4WSWpGKrQYNVNMO-sPkpyLM8riSrrO61Kcvl4YNolsRloh6mVLT4C7oc5Pjg-OL37Ot6y6-hqWtCXBS8zDt-Cfs4Si9NG1Bq3G7hlO5qHL7pXsWDo=w634-h241-no" alt="IFTTTで公開通知を受け取っておくと便利です" /></p>
+
+<p>ベータ版を管理からベータアプリのテスターを登録できます。<br />
+<img src="https://lh3.googleusercontent.com/z9psmsnydCROE-C0EU6m22gOuPUxoU-LZLTsqYrKCP3wLE1sU08T7MQJLHmNcSInMT7P4tow4k5bfeKlwnVQ4z_0OvE2JpGykfoIB4tgo_utpVkPDyqfsu79RVl5e8MD5ewEZDhhv_o1fjIiRSV8jLPjXPSjvfZjg3sMvE3E5uyQRaxfY1rG4Z1UnuAJO66GpxogPeKa2wXLrTxXXcgl-B-_q93kH_3FxCbAPwXYo2IsYMW8wDW3Iq8AJ9qwIBHu0EX7KtCDhz_HGmytr-qKNS6bUH0Vdwgsl12nIysq9t3nSqI41Vfeqvg0n3GcwzYiX1bJ24F23d3gAjYNTFW9X8jigqbAOj33s_R3Jf5242v53l2cGimmEjbBXG6o-UGm8vSOiPE-MPXwvpygkX5eu2k4EFlpnaB6k-97FysywCpmhTVBp8du84o5KcEDNY8QmL0SkzVYsY3aqI6GYgYUUbgJ5HExdoyh5jy405huv_YLWK5O2lpALnsTSAw7_mEuLJHsPEggvqwkAMvZrUf1onjxLOuNxwvCZV8VYwEivpi_XhbrcadXyalFJ8fuWkm4qonGtRTg2jb4qdFOVjVeNnbh81OHdLtFnyYA0NBXLJ_9wV727yt1GD5hPCRmOfztEo2iJEF4eQGYsSQiVvlu_7PGkkC_cnRk-Uk=w1003-h660-no" alt="ベータテスターの登録" />
+テスターの追加は簡単でテスターの gmail アドレスを登録して<br />
+テスターとして認証するためのオプトイン URL を踏んでもらうだけです。</p>
+
+<p>テスターとしてこのあと実際に公開されるアプリを一通り触ってみて<br />
+問題がなければ製品版として公開します。</p>
+
+<p>右上の「製品版にリリース」ボタンを押します。<br />
+<img src="https://lh3.googleusercontent.com/vk28kyTnGDQGuPBHpjl69mLHdUcocJVNJzLtUNPc2nk20xP7tDUYs7F56A_5WWwQNEHEdJ-w-8NQPK-nqQXIy5SpR7MyY9Ce1wF_Jrt8jTXTSP8xWy1_Dfj9BzC-dUyl3QrCAelF25SAuawQV2To0ggFaROk8Gaf3ysn8-iTSe-Fr8u0p0YKNQ_dIhlWaA00x3AilbLO8BgNKBDZwMJU3MmJNKsJ1mv4PLoEYLRU59DJgTCMM7ysJEW-fRrQRdWcy2bKPAXAu6WWnCVx54Uw5KrZ6kzgPEcexB-OgluS2Ybi9C01o_PoniF55XnOk1QIrIUnqCedtYG5SxkY6OnEMkV-Mu1XYoOqTCI4EUSwCHij5mrS9MolZjbUeQ8RZZ-7ltsw-swt1vnQVSotiSZR2e8bCUsBfdY7_-i32D5t0wUWd3ET5pDcouJ7p8hyp-XGOLIa-wvjLOPti0cYDL46G1YVcaeBm6VrGlWcb61UYWGzMQPSQgd3MWnodBlYae6fpSMdmR9hOJ_QlyOsSawxDS2AaRJo8aUYLxENimTaSqhOS8BoVd5f6i0hjhljChVKR6w2jU5IhygYqj4WetopLYGp_P__EUd6bUTIXLAdjsq0rQwPYy-QK4wOAPswPyNfc2fcG6lMEofuRhZHfx7akEK9U0VI3mTHwhw=w992-h649-no" alt="ベータで検証されたアプリがそのまま公開されるので安心です" /></p>
+
+<p>あとは「確認」ボタンを押していくだけで製品版として公開できます。<br />
+<img src="https://lh3.googleusercontent.com/9Y11MSTmrRAds8v_Q7b0DTpw_2q8Ha-KbEGyuJ7MEYlGPSVMzb3l0Dpe8NWI3BHXn-LpZc2xuuQbFQVyi-0PtojM3JhE3Y7-1wGlcchqgKE5_hyYxYyNQ5AabiVtDc46DHcdxC1jl-D9TiBT4LKJFrXTTjkessPJ1KvSdlYU7y2lTKbL4o1iiLnVZoV497O13wL18BwBWNCEOyek1amQ2rFFgppREibcx8WfNwWj5ekveIKK0NauYww8QVhqC2H22pAG6Kzylu-cLLQ3Z8HCt3L6m9SViGYoLibCgAJP6_QQafT-aFmC7rQ1-os0TCmLNOvNseh26t2ucGw1s4Ub6i4qQi9amN9WqcPmGiLKzsmq5o-ogI5I_LTilmetfRBHFAY5GR_TwoNUZlcWzy1rjIIm00eKqPGVEjOYu3OEFaZ_IJ0xqLjGb_BK8S7x9k3T6cVDPyoWn9MXaIdFkPUzNYpy72U0dpVEChLaaeHo2IoEwi1S8iuPd8NWWna61jrDlbU7j1BhJ9KGf2xXi4e9ddpSmzLtGcC4siXZ32W40vL-Y8sOdHOvnbQTIWSr0mHb1gbO4I4mS9Fd9AYzEI1f6DNpjjq9oVmoftlMnP4v6w49hMa-QwZMi-NKKrC_KEVGipGCigRl0Qm9nv34g62DVj7aFj1zd5zaHko=w1010-h681-no" alt="リリースノートなども後述のプラグインで設定可能です" /></p>
+
+<h2 id="ci-環境の設定方法">CI 環境の設定方法</h2>
+
+<p>CI 環境と書いていますが、ここでは Bitbucket Pipelines を指しています。<br />
+docker ベースの CI 環境であれば Bitbucket Pipelines でなくとも<br />
+自身のプラットフォームに合わせて調整可能かと思います。</p>
+
+<p>では、実際に利用している bitbucket-pipelines.yml が以下になります。</p>
+
+<pre><code>image:
+  name: housmart/android-ci:latest
+  username: $DOCKER_HUB_USERNAME
+  password: $DOCKER_HUB_PASSWORD
+
+pipelines:
+  branches:
+    master:
+      - step:
+          caches:
+            - gradle
+          script:
+            - mkdir -p ~/.ssh
+            - (umask  077 ; echo ${MY_SSH_KEY} | base64 --decode &gt; ~/.ssh/id_rsa)
+            - git clone ssh://git@bitbucket.org/Housmart-Inc/android_certificates.git
+            - cp android_certificates/kawlu-release-key.jks app/
+            - cp android_certificates/key.json app/
+            - cp android_certificates/keystore.properties .
+            - mkdir /usr/local/android-sdk-linux/licenses
+            - echo ${ANDROID_SDK_LICENSE} &gt; /usr/local/android-sdk-linux/licenses/android-sdk-license
+            - ./gradlew testDebug
+            - git log -3 --pretty=format:&quot;%s, %an, %cd&quot; &gt; release_notes.txt
+            - VERSION_NAME=`grep versionName app/build.gradle | sed s/\&quot;//g | awk '{print $2}'`
+            - git tag ${VERSION_NAME}
+            - git push origin :${VERSION_NAME}
+            - git push origin --tags
+            - ./gradlew assembleRelease crashlyticsUploadDistributionRelease
+            - ./gradlew publishApkRelease
+  default:
+    - step:
+        caches:
+            - gradle
+        script:
+            - mkdir /usr/local/android-sdk-linux/licenses
+            - echo ${ANDROID_SDK_LICENSE} &gt; /usr/local/android-sdk-linux/licenses/android-sdk-license
+            - ./gradlew testDebug
+            - git log -3 --pretty=format:&quot;%s, %an, %cd&quot; &gt; release_notes.txt
+            - sed -i &quot;s/versionCode [0-9]/versionCode `date +&quot;%-m%d%H%M&quot;`/&quot; app/build.gradle
+            - cp keystore/debug.keystore ~/.android
+            - ./gradlew assembleDebug crashlyticsUploadDistributionDebug
+            - mkdir -p ~/.ssh
+            - (umask  077 ; echo ${MY_SSH_KEY} | base64 --decode &gt; ~/.ssh/id_rsa)
+            - git clone ssh://git@bitbucket.org/Housmart-Inc/android_certificates.git
+            - cp android_certificates/kawlu-release-key.jks app/
+            - cp android_certificates/key.json app/
+            - cp android_certificates/keystore.properties .
+            - ./gradlew assembleRelease crashlyticsUploadDistributionRelease
+</code></pre>
+
+<p>順を追って説明をしていきます。</p>
+
+<pre><code>image:$
+  name: housmart/android-ci:latest$
+  username: $DOCKER_HUB_USERNAME$
+  password: $DOCKER_HUB_PASSWORD$
+</code></pre>
+
+<p><code>3.</code> で automated builds されている image になります。<br />
+Bitbucket Pipelines が動作するトリガーとしては<br />
+master ブランチだけ Play Store Beta にあげるのでその処理を追加してあげているのと<br />
+それ以外のブランチでは Fabric Beta に apk をアップロードする仕組みにしています。<br />
+private image なので pull するための認証情報を加えています。<br />
+本記事では master ブランチのステップのみを取り上げて詳細に説明をしていきます。</p>
+
+<pre><code>        caches:
+            - gradle
+</code></pre>
+
+<p>Bitbucket Pipelines では指定したディレクトリをキャッシュし、<br />
+次回動作時に再利用することが可能です。<br />
+gradle の場合はデフォルトの設定でキャッシュできるので設定はシンプルです。<br />
+gradle 以外でもデフォルトで指定できるものは以下に公式ドキュメントがあります。<br />
+<a href="https://confluence.atlassian.com/bitbucket/caching-dependencies-895552876.html">https://confluence.atlassian.com/bitbucket/caching-dependencies-895552876.html</a><br />
+自分で指定したディレクトリにキャッシュさせたい場合も上記公式ドキュメントに設定方法が記載されているので<br />
+参考にできるかと思います。</p>
+
+<pre><code>        script:
+          - mkdir -p ~/.ssh
+          - (umask  077 ; echo ${MY_SSH_KEY} | base64 --decode &gt; ~/.ssh/id_rsa)
+          - git clone ssh://git@bitbucket.org/Housmart-Inc/android_certificates.git
+          - cp android_certificates/kawlu-release-key.jks app/
+          - cp android_certificates/key.json app/
+          - cp android_certificates/keystore.properties .
+</code></pre>
+
+<p>apk ファイルのビルドに必要な Certificates Repository を clone するために<br />
+ssh の設定をしています。<br />
+この辺りは、公式ドキュメント通りに設定しています。<br />
+<a href="https://confluence.atlassian.com/bitbucket/use-ssh-keys-in-bitbucket-pipelines-847452940.html">https://confluence.atlassian.com/bitbucket/use-ssh-keys-in-bitbucket-pipelines-847452940.html</a><br />
+Certificates Repository を clone したら<br />
+適切な場所にファイルをコピーして設置します。</p>
+
+<pre><code>          - mkdir /usr/local/android-sdk-linux/licenses
+          - echo ${ANDROID_SDK_LICENSE} &gt; /usr/local/android-sdk-linux/licenses/android-sdk-license
+</code></pre>
+
+<p>apk をビルドする際に android-sdk-license が必要になるので設定します。<br />
+自分のホストマシンにあるライセンスを流用しています。<br />
+${ANDROID_SDK_LICENSE} は Bitbucket Pipelines の環境変数(Secured)として設定しています。</p>
+
+<pre><code>          - ./gradlew testDebug
+</code></pre>
+
+<p>テストの実施です。</p>
+
+<pre><code>          - git log -3 --pretty=format:&quot;%s, %an, %cd&quot; &gt; release_notes.txt
+          - VERSION_NAME=`grep versionName app/build.gradle | sed s/\&quot;//g | awk '{print $2}'`
+          - git tag ${VERSION_NAME}
+          - git push origin :${VERSION_NAME}
+          - git push origin --tags
+</code></pre>
+
+<p>release_notes.txt は Fabric Beta に必要なので過去のコミットログを出しています。<br />
+VERSION_NAME は app/build.gradle から拾ってきて<br />
+リリースタグとして利用しています。</p>
+
+<pre><code>          - ./gradlew assembleRelease crashlyticsUploadDistributionRelease
+</code></pre>
+
+<p>Fabric Beta に製品版として upload します。<br />
+過去のバージョンでバグが発生した際に Fabric Beta に<br />
+upload された apk ファイルからバグの再現性を確認するのに利用します。</p>
+
+<pre><code>          - ./gradlew publishApkRelease
+</code></pre>
+
+<p>Play Store Beta に apk ファイルを upload します。<br />
+Bitbucket Pipelines 上は1行ですが、実際には gradle の設定などが必要なので<br />
+後述の「apk ファイルを Play Store に公開するライブラリの設定方法」で設定方法について詳細を記載します。</p>
+
+<h2 id="play-store-beta-に配信するまでの時間について">Play Store Beta に配信するまでの時間について</h2>
+
+<p>だいたい 3 分くらいで終わります。<br />
+<img src="https://lh3.googleusercontent.com/LgsLtkGSMzPuawACk-iqHq3B3-lwsD-17x1MUKwK6ieTiZr0-FGi-4bJ1pOtDBXmwaV08-WiXy9XQRFB5GgpQ5lsiEBtUymInYCLSZVz5hiNJ5JfRxgsUKTfiMWFFlW4KgZs9QBFjQ9SQF3fsTIpQqjb3DaOPOQSj0Pr91_1jmnP2FbA129Czq_4EXMiE3syceVcRm_7k0g-fdnGQzfSRHAuimAMSnwZSGXFCi4reIWf9751ruem7tR0WBuJ5D7sFS59oeQB6FW7vaLoHw3-Dy95I-Ox6ASO68zNBWAmCqkQB-36DcOsGExs2772Ie7v5vq556E3sOF-NRb8yhX8wYafphX7UEZygDCTVGdYOfNbwGvDPuommoEB5PThSVv47WOuwrNL0jL1JdYZ1WH1s8JRAQ2BceoVrGHk6zc4Y37834RAbZaxIb3THDevZmThlQdoSDUdGYL3y_He1FYrBHrl8CGqT9PW-Z4anf9MwCYAwZlqjjZIQnLj3k1nfzlESAqoqO8xuyUdKkMPUtYEZQbTVFFRRPu0h5_Thu82ARaaMmgfIgWsvYKkeFlLv1JfAgGtjwMUmF69OKy-8NrRUESqhPo_lMhxHwdKgX2szQ2E1vPYHZ9mLCyPSWkG5egShlaXArhm0C_-B2GZRtx4wkHpVrt4ScENdlM=w1228-h905-no" alt="Bitbucket Pipelines Step Detail Sample" />
+<img src="https://lh3.googleusercontent.com/DMnfs8BkX0Kqt3-zW7IOeo2Dlfsq438t5zzY95BVwxkpoGsaLvWYRpTR5jKcKWR8Vq83ChF-w54C50Fl0aZHp5NksqDBRoihAwljIhdwGOnjc505dxKqNoFODHZDf94X8ZHR1VwMjzLiMpZcVnk8pdU65P92_zQhmRUlGcvIRpDDYYEgf_GUIIiUIGa6u-gIVY4ZVESGWweGZDEJbp9BUgdyNfDtmMV_lJEy4Tycu1uN_-1yNIiP_SXEZ56NdRJPNoEjOM04YxFyHdjTundDWqetSVcKL-BUuitkeIPj28ZFC-Pa6Jlga4MTi5GbTjNrPbN1wGPQj-DpvhkFw1q-dkE-OBmeNWN6HMSkFUTgaUid9r_GeIQeBNzTcCNLXT0FQJIodEsCaZHW-241_GScwyFyVJBfvSyXBKS1awIKwnr0X3MgZjENZxIyuykeHZ21SjgwX7JCMULC8jHVXdr--IyWF36iAzX1326AqiNAza_YGSI9fpk-tohVaSS-Orbz5ra7cKTPSWfAmt1bDKk05gsJaeaKshb6ktydAApTtD0gUrq3xfO0tGUB3gXSw8Knt6a5RrHMqKqkluEaKmD9FLoQtHem8nfDtEDmaUYsqiTHThQYVkoJWY7ADFQwhlWqfkg1AJInAxUjK7Um3QXxG-fwdDEyaMLdNUQ=w435-h602-no" alt="過去の Bitbucket Pipelines 実行時間" />
+ベースの image が docker 化されているのと、gradle cache、Bitbucket Pipelines の性能などが要因かと思いますが<br />
+特にストレスなく動作するので開発しやすいです。</p>
+
+<h2 id="apk-ファイルを-play-store-に公開するライブラリの設定方法">apk ファイルを Play Store に公開するライブラリの設定方法</h2>
+
+<p><a href="https://github.com/Triple-T/gradle-play-publisher">Triple-T/gradle-play-publisher</a> を利用しています。<br />
+設定方法は README に詳しく書いているのでその通りに設定したら問題ないです。<br />
+注意点としては <code>Specify the track</code> にある track を <code>beta</code> にすることです。<br />
+このプラグインを利用することでリリースノートも一緒に Play Store Beta まで配信してくれるので<br />
+Pull Request ベースでリリースノートがレビューできるのもいい感じです。</p>
+
+<h2 id="半年運用して分かったこと">半年運用して分かったこと</h2>
+
+<h3 id="間違えて-apk-ファイルを-play-store-beta-にあげた時の対応">間違えて apk ファイルを Play Store Beta にあげた時の対応</h3>
+
+<p>これは避けたい事象ではあるのですが、たまに確認が漏れていて Play Store Beta まで<br />
+あげてしまってしまうことがあります。<br />
+そんな時は versionCode を1つあげるしかなさそうです。<br />
+Play Store Beta にすでに上がっている versionCode は利用できないです。</p>
+
+<h3 id="proguard-を有効にした時にアプリがクラッシュする">Proguard を有効にした時にアプリがクラッシュする</h3>
+
+<p>新しいライブラリを入れて Progurad の設定を忘れてたりすると<br />
+製品版でクラッシュしたりします。<br />
+これを防ぐために基本的に全ての Pull Request に対して Progurad ありでビルドして<br />
+Fabric Beta で確認ができるようにしています。<br />
+まあ、毎回 Fabric Beta で確認はしんどいので新しいライブラリ追加したときくらいですかね。</p>
+
+<h3 id="アプリの強制アップデートに関して">アプリの強制アップデートに関して</h3>
+
+<p>今回の記事と全く関係ないですが、入れておくと何か困った時に助かります。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>長々と書きましたが、「Android アプリを master ブランチマージで Play Store Beta に公開する」というタイトルに沿った記事でした。<br />
+個人的には heroku ライクな環境になったので結構満足しています。<br />
+apk ファイルの作成から Play Store への公開作業は繰り返しの作業になるので<br />
+繰り返しの作業が得意なコンピュータに任せていきたいですね。<br />
+本記事では CI として Bitbucket Pipelines を利用していますが、<br />
+別の CI でも応用はできると思うのでみなさんの Android 開発環境の改善のきっかけになれば幸いです。</p>
+
+<hr />
+
+<p>Housmartでは不動産業界を変えるカウルを支えるエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="hatena-bookmark-button" data-hatena-bookmark-title="Android アプリを master ブランチマージで Play Store Beta に公開する" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="Android アプリを master ブランチマージで Play Store Beta に公開する" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f04%2fautomated-publish-to-play-store-for-android-app%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=Android%20%e3%82%a2%e3%83%97%e3%83%aa%e3%82%92%20master%20%e3%83%96%e3%83%a9%e3%83%b3%e3%83%81%e3%83%9e%e3%83%bc%e3%82%b8%e3%81%a7%20Play%20Store%20Beta%20%e3%81%ab%e5%85%ac%e9%96%8b%e3%81%99%e3%82%8b&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f04%2fautomated-publish-to-play-store-for-android-app%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f04%2fautomated-publish-to-play-store-for-android-app%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f04%2fautomated-publish-to-play-store-for-android-app%2f&amp;description=Android%20%e3%82%a2%e3%83%97%e3%83%aa%e3%82%92%20master%20%e3%83%96%e3%83%a9%e3%83%b3%e3%83%81%e3%83%9e%e3%83%bc%e3%82%b8%e3%81%a7%20Play%20Store%20Beta%20%e3%81%ab%e5%85%ac%e9%96%8b%e3%81%99%e3%82%8b" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f04%2fautomated-publish-to-play-store-for-android-app%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no)" alt="Android アプリを master ブランチマージで Play Store Beta に公開する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="title">Android アプリを master ブランチマージで Play Store Beta に公開する</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-04</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no)" alt="Android アプリを master ブランチマージで Play Store Beta に公開する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/management">
+                        management
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="title">Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-20 14:31:47 &#43;0900 JST" itemprop="datePublished">2017-11-20</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600)" alt="Android アプリを master ブランチマージで Play Store Beta に公開する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="title">「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-16 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-11-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="Android アプリを master ブランチマージで Play Store Beta に公開する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="title">デザイナー不在のチームのデザインフローを整えた話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-13 19:45:00 &#43;0900 JST" itemprop="datePublished">2017-11-13</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600)" alt="Android アプリを master ブランチマージで Play Store Beta に公開する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="title">会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-06 19:30:00 &#43;0900 JST" itemprop="datePublished">2017-11-06</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/android">
+                    android
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/android" style="font-size: 12px;">android</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
