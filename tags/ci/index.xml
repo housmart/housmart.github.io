@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Wed, 30 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/tags/ci/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android アプリを master ブランチマージで Play Store Beta に公開する</title>
+      <link>http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/</guid>
+      <description>&lt;p&gt;アプリケーションエンジニアの西辻です。&lt;br /&gt;
+今回の記事では、弊社内で開発している Android アプリを master ブランチマージで Play Store Beta に公開するまでの方法についてご紹介したいと思います。&lt;br /&gt;
+また、今回の記事は &lt;a href=&#34;https://qiita.com/advent-calendar/2017/android_second&#34;&gt;Qiita Android その2 Advent Calendar 2017&lt;/a&gt; 5日目に参加しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~</title>
