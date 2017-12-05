@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/</loc>
+    <lastmod>2017-12-05T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/</loc>
     <lastmod>2017-12-04T00:00:00+00:00</lastmod>
   </url>
@@ -213,7 +218,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/development/</loc>
-    <lastmod>2017-12-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-05T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -273,7 +278,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/ios/</loc>
-    <lastmod>2016-09-07T17:54:20+09:00</lastmod>
+    <lastmod>2017-12-05T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -351,7 +356,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2017-12-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-05T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -399,7 +404,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/swift/</loc>
-    <lastmod>2017-08-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-05T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -435,7 +440,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2017-12-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-05T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

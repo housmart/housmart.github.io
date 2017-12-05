@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>Android &middot; カウル Tech Blog</title>
+    <title>JSON API(json:api)をSwiftでいい感じにシリアライズする &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.31" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -9,9 +9,6 @@
     
       <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
     
-    
-      <link href="http://techblog.housmart.co.jp/tags/android/index.xml" rel="alternate" type="application/rss+xml" title="カウル Tech Blog" />
-      <link href="http://techblog.housmart.co.jp/tags/android/index.xml" rel="feed" type="application/rss+xml" title="カウル Tech Blog" />
     
     <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
     <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
@@ -22,15 +19,26 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/tags/android/" />
-    <meta property="og:title" content="Android" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/tags/android/" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" />
+    <meta property="og:title" content="JSON API(json:api)をSwiftでいい感じにシリアライズする" />
+<meta property="og:description" content="このブログではどのようにしてSwiftを使ってJSON API(json:api)のレスポンスをシリアライズするかについて書いていきます。
+
+http://jsonapi.org/
+
+Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド実装の詳細については触れません。
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/ualsccnOCvqC8UihBZ-zPT6uOfjS2C8kd2ppaXWiSyiyQwyWEw-CeJ1EY6gc5ZSZlGdeU13DYGlWQO-GMuWUBtXmvthyCILIu-qmEas5sqVUfAzsc5Mptc9ieAMU_A0cIrBzGBM07B6A-uksjaDLTHRm2P7z3y3zlOn1ptB85RsiXL4n9xFIdJ9Yy2jRhmt5QtVnzNNLhwpzosZUHYcY7e2UQEGh5rWgEqPWnvDvjN-gW8U2u2uE_DYsOUsuQAtjDWbW8jztwMgbsSRmCxrmwCdpRrL7FnzbyqOk23hjosutlN9WMAiU_eGpgRKYRsUe1ULnMr1urQKptQuvF0WI3B8AldhfvKXaAus6oFX9TBfDp7H8NTUCFKvK9w0YFtQOlqZawPTOYzzqr-Z8-F4CBB_sK5ylrE6PJy0bi5ohaoLXkzAkxbod9ptXcGknAsoOrSi3YK9BfgDqV3oYMKy_pI_9fQdw70XVsQPz8_BEXxg8cltMIID5mfvn6JbP-dpB4aW_yDwDWTLwrtXr8qufpvYQH3Gv_UwEkrydDi8y95J48aIFDYNgcg6EfpCd1Y3has1_b9nfJy57p40l5bg8SxM-koR9rBQJepqLbpwBdhFGXDPYC0dyyfgrNPBLxEVsBLSWLsUAaDuTSjSLnOOla9kMMujBA8xe4UI=w600" />
 
 
 
-<meta property="og:updated_time" content="2017-12-04T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2017-12-05T18:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2017-12-05T18:00:00&#43;09:00"/>
+
 
 
 
@@ -43,12 +51,36 @@
 
     
     
-<meta itemprop="name" content="Android">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="JSON API(json:api)をSwiftでいい感じにシリアライズする">
+<meta itemprop="description" content="このブログではどのようにしてSwiftを使ってJSON API(json:api)のレスポンスをシリアライズするかについて書いていきます。
+
+http://jsonapi.org/
+
+Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド実装の詳細については触れません。
+
+">
 
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Android"/>
-<meta name="twitter:description" content=""/>
+<meta itemprop="datePublished" content="2017-12-05T18:00:00&#43;09:00" />
+<meta itemprop="dateModified" content="2017-12-05T18:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="2477">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/ualsccnOCvqC8UihBZ-zPT6uOfjS2C8kd2ppaXWiSyiyQwyWEw-CeJ1EY6gc5ZSZlGdeU13DYGlWQO-GMuWUBtXmvthyCILIu-qmEas5sqVUfAzsc5Mptc9ieAMU_A0cIrBzGBM07B6A-uksjaDLTHRm2P7z3y3zlOn1ptB85RsiXL4n9xFIdJ9Yy2jRhmt5QtVnzNNLhwpzosZUHYcY7e2UQEGh5rWgEqPWnvDvjN-gW8U2u2uE_DYsOUsuQAtjDWbW8jztwMgbsSRmCxrmwCdpRrL7FnzbyqOk23hjosutlN9WMAiU_eGpgRKYRsUe1ULnMr1urQKptQuvF0WI3B8AldhfvKXaAus6oFX9TBfDp7H8NTUCFKvK9w0YFtQOlqZawPTOYzzqr-Z8-F4CBB_sK5ylrE6PJy0bi5ohaoLXkzAkxbod9ptXcGknAsoOrSi3YK9BfgDqV3oYMKy_pI_9fQdw70XVsQPz8_BEXxg8cltMIID5mfvn6JbP-dpB4aW_yDwDWTLwrtXr8qufpvYQH3Gv_UwEkrydDi8y95J48aIFDYNgcg6EfpCd1Y3has1_b9nfJy57p40l5bg8SxM-koR9rBQJepqLbpwBdhFGXDPYC0dyyfgrNPBLxEVsBLSWLsUAaDuTSjSLnOOla9kMMujBA8xe4UI=w600">
+
+
+
+<meta itemprop="keywords" content="swift,ios," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/ualsccnOCvqC8UihBZ-zPT6uOfjS2C8kd2ppaXWiSyiyQwyWEw-CeJ1EY6gc5ZSZlGdeU13DYGlWQO-GMuWUBtXmvthyCILIu-qmEas5sqVUfAzsc5Mptc9ieAMU_A0cIrBzGBM07B6A-uksjaDLTHRm2P7z3y3zlOn1ptB85RsiXL4n9xFIdJ9Yy2jRhmt5QtVnzNNLhwpzosZUHYcY7e2UQEGh5rWgEqPWnvDvjN-gW8U2u2uE_DYsOUsuQAtjDWbW8jztwMgbsSRmCxrmwCdpRrL7FnzbyqOk23hjosutlN9WMAiU_eGpgRKYRsUe1ULnMr1urQKptQuvF0WI3B8AldhfvKXaAus6oFX9TBfDp7H8NTUCFKvK9w0YFtQOlqZawPTOYzzqr-Z8-F4CBB_sK5ylrE6PJy0bi5ohaoLXkzAkxbod9ptXcGknAsoOrSi3YK9BfgDqV3oYMKy_pI_9fQdw70XVsQPz8_BEXxg8cltMIID5mfvn6JbP-dpB4aW_yDwDWTLwrtXr8qufpvYQH3Gv_UwEkrydDi8y95J48aIFDYNgcg6EfpCd1Y3has1_b9nfJy57p40l5bg8SxM-koR9rBQJepqLbpwBdhFGXDPYC0dyyfgrNPBLxEVsBLSWLsUAaDuTSjSLnOOla9kMMujBA8xe4UI=w600"/>
+<meta name="twitter:title" content="JSON API(json:api)をSwiftでいい感じにシリアライズする"/>
+<meta name="twitter:description" content="このブログではどのようにしてSwiftを使ってJSON API(json:api)のレスポンスをシリアライズするかについて書いていきます。
+
+http://jsonapi.org/
+
+Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド実装の詳細については触れません。
+
+"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 </head>
@@ -57,7 +89,7 @@
 
 
 <div id="container">
-    
+	
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -150,8 +182,9 @@
   </div>
 </header>
 
-    <div class="outer">
-        <aside id="profile">
+   	
+   	<div class="outer">
+	    <aside id="profile">
   <div class="inner profile-inner">
     <div class="base-info profile-block">
       <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
@@ -243,45 +276,436 @@
   </div>
 </aside>
 
-        <section id="main">
-            <section class="archives-wrap">
-                <div class="archive-category-wrap">
-                    <span class="archive-category">Android</span>
-                </div>
-                <div class="archives">
-                    
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
             
-            <a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="thumbnail">
                 
-                <span style="background-image:url(https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no)" alt="Android アプリを master ブランチマージで Play Store Beta に公開する" class="thumbnail-image"></span>
+                <img src="https://lh3.googleusercontent.com/ualsccnOCvqC8UihBZ-zPT6uOfjS2C8kd2ppaXWiSyiyQwyWEw-CeJ1EY6gc5ZSZlGdeU13DYGlWQO-GMuWUBtXmvthyCILIu-qmEas5sqVUfAzsc5Mptc9ieAMU_A0cIrBzGBM07B6A-uksjaDLTHRm2P7z3y3zlOn1ptB85RsiXL4n9xFIdJ9Yy2jRhmt5QtVnzNNLhwpzosZUHYcY7e2UQEGh5rWgEqPWnvDvjN-gW8U2u2uE_DYsOUsuQAtjDWbW8jztwMgbsSRmCxrmwCdpRrL7FnzbyqOk23hjosutlN9WMAiU_eGpgRKYRsUe1ULnMr1urQKptQuvF0WI3B8AldhfvKXaAus6oFX9TBfDp7H8NTUCFKvK9w0YFtQOlqZawPTOYzzqr-Z8-F4CBB_sK5ylrE6PJy0bi5ohaoLXkzAkxbod9ptXcGknAsoOrSi3YK9BfgDqV3oYMKy_pI_9fQdw70XVsQPz8_BEXxg8cltMIID5mfvn6JbP-dpB4aW_yDwDWTLwrtXr8qufpvYQH3Gv_UwEkrydDi8y95J48aIFDYNgcg6EfpCd1Y3has1_b9nfJy57p40l5bg8SxM-koR9rBQJepqLbpwBdhFGXDPYC0dyyfgrNPBLxEVsBLSWLsUAaDuTSjSLnOOla9kMMujBA8xe4UI=w600" class="article-banner">
                 
-            </a>
             
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/">Android アプリを master ブランチマージで Play Store Beta に公開する</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2017-12-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-04</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                </div>
-            </section>
-            <nav id="page-nav">
 
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/">
+    <h1 class="article-title" itemprop="name">
+        JSON API(json:api)をSwiftでいい感じにシリアライズする
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-12-05 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-05</time>
+            &middot;
+            2477
+            words
+            &middot;
+            5
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">development</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/swift">swift</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ios">ios</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="hatena-bookmark-button" data-hatena-bookmark-title="JSON API(json:api)をSwiftでいい感じにシリアライズする" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>このブログでは<strong>どのようにしてSwiftを使って<code>JSON API(json:api)</code>のレスポンスをシリアライズするか</strong>について書いていきます。</p>
+
+<p><a href="http://jsonapi.org/">http://jsonapi.org/</a></p>
+
+<p><a href="https://qiita.com/advent-calendar/2017/swift">Swift Advent Calendar 2017</a>の6日目の記事ですので、サーバサイド実装の詳細については触れません。</p>
+
+<p></p>
+
+<h2 id="概要">概要</h2>
+
+<ol>
+<li><a href="#anchor0">JSON APIについて</a></li>
+<li><a href="#anchor1">JSON APIをシリアライズできるクライアント</a></li>
+<li><a href="#anchor2">Spineを使ったJSON APIのシリアライズ</a>
+
+<ul>
+<li><a href="#anchor2-0">シリアライズ対象のJSON</a></li>
+<li><a href="#anchor2-1">シリアライズ後に使うstruct</a></li>
+<li><a href="#anchor2-2">Resouceを使ったシリアライズに必要な記述</a></li>
+<li><a href="#anchor2-3">JSONをシリアライズ</a></li>
+<li><a href="#anchor2-4">シリアライズ後のstructの拡張</a></li>
+</ul></li>
+<li><a href="#anchor3">SpineのSwift4対応、メンテナンス状況について</a></li>
+<li><a href="#anchor4">まとめ</a></li>
+</ol>
+
+<p><div id="anchor0"/></p>
+
+<h2 id="json-apiについて">JSON APIについて</h2>
+
+<p><code>JSON API</code>はJSONを使ったAPIを作るための仕様です。レスポンスの返し方だけでなくリクエスト方法やエラーの表現等もしっかり定義されています。<a href="http://jsonapi.org/faq/#is-there-a-json-schema-describing-json-api">こちら</a>には、<code>JSON Schema</code>を使って<code>JSON API</code>を定義したファイルも置かれています。
+もしサーバサイドがRailsだった場合は<a href="https://github.com/rails-api/active_model_serializers">ActiveModelSerializers(AMS)</a>を使うと実装も簡単です。</p>
+
+<p><div id="anchor1"/></p>
+
+<h2 id="json-apiをシリアライズできるクライアント">JSON APIをシリアライズできるクライアント</h2>
+
+<p>jsonapi.orgには各言語で使える<a href="http://jsonapi.org/implementations/#client-libraries-ios">クライアントの一覧</a>が掲載されています。
+<code>JSON API</code>はググラビリティが低く、「APIでJSONを返す方法」といった情報が出てきてしまいがちなので、提供されている一覧から探すのと楽です。</p>
+
+<p>iOS向けには以下の2つのクライアントが掲載されています。</p>
+
+<p>| クライアント | 実装言語 | Star数 | 最終コミット日 |
+|&mdash;-|&mdash;-|&mdash;-|&mdash;-|&mdash;-|
+| <a href="https://github.com/wvteijlingen/spine">Spine</a> | Swift | 261 | 2017-10-07 |
+| <a href="https://github.com/joshdholtz/jsonapi-ios">jsonapi-ios</a> |  Objective-C | 164 | 2016-06-16 |
+(Star数は2017/12/04時点)</p>
+
+<p>最終コミット日、Star数を見る限り、Swiftで使うなら<code>Spine</code>を選ぶのが無難です。</p>
+
+<p><div id="anchor2"/></p>
+
+<h2 id="spineを使ったjson-apiのシリアライズ">Spineを使ったJSON APIのシリアライズ</h2>
+
+<p><a href="https://itunes.apple.com/app/id1143903849">カウルのiOSアプリ</a>では実際に<code>Spine</code>を使っていますので、サンプルコードと共に使い方を紹介します。</p>
+
+<p>ちなみに<code>Spine</code>は通信処理もできますが、<a href="https://github.com/wvteijlingen/spine#using-the-serializer-separately">シリアライズ処理だけを使うこと</a>もできます。</p>
+
+<blockquote>
+<p>You can also just use the Serializer to (de)serialize to and from JSON:</p>
+</blockquote>
+
+<p>ここでは通信部分を省略するので、実際に使う際は<a href="https://github.com/Alamofire/Alamofire">Alamofire</a>等で取得したデータを渡してください。</p>
+
+<p><div id="anchor2-0"/></p>
+
+<h3 id="シリアライズ対象のjson">シリアライズ対象のJSON</h3>
+
+<p>以下のJSONを処理する想定のコードで解説します。</p>
+
+<pre><code class="language-json:sample.json">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;type&quot;: &quot;rooms&quot;,
+            &quot;attributes&quot;: {
+                &quot;price&quot;: 111000000
+            },
+            &quot;relationships&quot;: {
+                &quot;building&quot;: {
+                    &quot;data&quot;: {
+                        &quot;id&quot;: &quot;1&quot;,
+                        &quot;type&quot;: &quot;buildings&quot;
+                    }
+                }
+            }
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;type&quot;: &quot;rooms&quot;,
+            &quot;attributes&quot;: {
+                &quot;price&quot;: 91000000
+            },
+            &quot;relationships&quot;: {
+                &quot;building&quot;: {
+                    &quot;data&quot;: {
+                        &quot;id&quot;: &quot;1&quot;,
+                        &quot;type&quot;: &quot;buildings&quot;
+                    }
+                }
+            }
+        }
+    ],
+    &quot;included&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;type&quot;: &quot;buildings&quot;,
+            &quot;attributes&quot;: {
+                &quot;name&quot;: &quot;カウルマンション&quot;,
+                &quot;full_address&quot;: &quot;東京都渋谷区広尾1丁目7-7&quot;
+            }
+        }
+    ]
+}
+</code></pre>
+
+<p>「1つのビルに2つの部屋が紐づいたデータ」です。
+<code>JSON API</code>ではこのようにデータがフラットですし、<code>relationships</code>により複数のオブジェクトから1つのオブジェクトへの参照が可能です。</p>
+
+<p>他にも<code>meta</code>や<code>pagination</code>といった概念もあるのですが、詳細については<a href="http://jsonapi.org/format/">フォーマットの仕様</a>を参照してください。</p>
+
+<p><div id="anchor2-1"/></p>
+
+<h3 id="シリアライズ後に使うstruct">シリアライズ後に使うstruct</h3>
+
+<p>シリアライズが完了した後に返すオブジェクトは以下の<code>struct</code>を返すことにします。</p>
+
+<pre><code class="language-Swift:room.swift">struct Room {
+    let id: Int
+    let price: Int
+    let building: Building
+}
+</code></pre>
+
+<pre><code class="language-Swift:building.swift">struct Building {
+    let id: Int
+    let name: String
+    let address: String
+}
+</code></pre>
+
+<p><div id="anchor2-2"/></p>
+
+<h3 id="resouceを使ったシリアライズに必要な記述">Resouceを使ったシリアライズに必要な記述</h3>
+
+<p><code>Spine</code>の<code>Resource</code>クラスを継承してシリアライズする際は以下のようにします。<code>init</code>が多いですが大事なのは<code>resourceType</code>と<code>fields</code>です。<code>convert</code>は<code>struct</code>を返すためのサンプルです。</p>
+
+<pre><code class="language-Swift:room.swift">import Spine
+
+class RoomResource: Resource {
+
+    // ここはオプショナルで定義しておく必要がありました。後でstructに変換する際にunwrapしてます。
+    // NSNumberも気になるので取り回すstructではIntに変換します(´ω`)
+    var price: NSNumber?
+    var building: BuildingResource?
+
+    required init() {
+        super.init()
+    }
+
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    init(id: String) {
+        super.init()
+        self.id = id
+    }
+
+    override class var resourceType: ResourceType {
+        return &quot;rooms&quot;
+    }
+
+    override class var fields: [Field] {
+        return fieldsFromDictionary([
+            &quot;price&quot;: Attribute(),
+            // ここにBuildingResourceとのリレーションを書きます。
+            &quot;building&quot;: ToOneRelationship(BuildingResource.self)
+            ])
+    }
+
+    // structに変換する関数を持たせておきます。
+    func convert() -&gt; Room {
+        return Room(
+            id: id,
+            price: Int(truncating: price),
+            building: building
+        )
+    }
+
+}
+</code></pre>
+
+<pre><code class="language-Swift:building.swift">import Spine
+
+class BuildingResource: Resource {
+
+    // ここはオプショナルで定義しておく必要がありました。後でstructに変換する際にunwrapしてます。
+    var name: String?
+    var address: String?
+
+    required init() {
+        super.init()
+    }
+
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    init(id: String) {
+        super.init()
+        self.id = id
+    }
+
+    override class var resourceType: ResourceType {
+        return &quot;buildings&quot;
+    }
+
+    override class var fields: [Field] {
+        return fieldsFromDictionary([
+            &quot;name&quot;: Attribute(),
+            // JSON内の名前から変えたい場合はこんな感じ。スネークケースやキャメルケースから自動変換もできます。
+            &quot;address&quot;: Attribute().serializeAs(&quot;full_address&quot;)
+            ])
+    }
+
+    // structに変換する関数を持たせておきます。
+    func convert() -&gt; Building {
+        return Building(
+            id: id,
+            name: name,
+            address: address
+        )
+    }
+
+}
+</code></pre>
+
+<p><div id="anchor2-3"/></p>
+
+<h3 id="jsonをシリアライズ">JSONをシリアライズ</h3>
+
+<p>ここまで用意したらシリアライザーを実際に使って先ほどのJSONを処理します。</p>
+
+<pre><code class="language-Swift:serialization-sample.swift">let serializer = Serializer()
+serializer.registerResource(BuildingResource.self)
+serializer.registerResource(RoomResource.self)
+
+// ここでシリアライズ。よしなにguardなど。
+guard let document = try? serializer.deserializeData(data), let roomResources = document.data as? [RoomResource] else {
+    return nil
+}
+
+var rooms = [Room]()
+
+// structで詰め替えたければ。
+for roomResource in roomResources {
+    rooms.append(roomResource.convert())
+}
+</code></pre>
+
+<p><div id="anchor2-4"/></p>
+
+<h3 id="シリアライズ後のstructの拡張">シリアライズ後のstructの拡張</h3>
+
+<p>実際に使う際は<code>Equatable</code>対応等もしておくと比較やフィルターができて便利ですね。</p>
+
+<pre><code class="language-Swift:room.swift">extension Room: Equatable {
+
+    // MARK: Equatable
+
+    static func == (lhs: Room, rhs: Room) -&gt; Bool {
+        return lhs.id == rhs.id  &amp;&amp;
+            lhs.price == rhs.price &amp;&amp;
+            lhs.building == rhs.building
+    }
+
+}
+</code></pre>
+
+<pre><code class="language-Swift:building.swift">extension Building: Equatable {
+
+    // MARK: Equatable
+
+    static func == (lhs: Building, rhs: Building) -&gt; Bool {
+        return lhs.id == rhs.id  &amp;&amp;
+            lhs.name == rhs.name &amp;&amp;
+            lhs.address == rhs.address
+    }
+
+}
+</code></pre>
+
+<p><div id="anchor3"/></p>
+
+<h2 id="spineのswift4対応-メンテナンス状況について">SpineのSwift4対応、メンテナンス状況について</h2>
+
+<p>10月7日の時点で<code>Spine</code>の作者が、メンテナンス継続しない旨をコミットしています・・😢</p>
+
+<p>この記事を書いている時点では使っている限り動作に問題なく、<a href="https://github.com/wvteijlingen/Spine/pull/200">Swift4対応のPull Request</a>が出ています。(<a href="https://github.com/housmart/Spine/tree/swift4">こちら</a>にCIが通るようにしたブランチをおきました。)</p>
+
+<p>直近で<code>JSON API</code>をシリアライズする場合は<code>Spine</code>を使うことになるでしょうが、次のSwiftのバージョン更新時には対応が必要になるかもしれません。</p>
+
+<p><div id="anchor4"/></p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<ul>
+<li><code>JSON API</code>はJSONを使ってAPIを作るための仕様</li>
+<li>Swiftで処理するなら現状は<code>Spine</code></li>
+</ul>
+
+<p>Swiftで<code>JSON API</code>を返すAPIを利用する際の参考になれば幸いです！</p>
+
+<p>まっくす</p>
+
+<hr />
+
+<p>Housmartでは不動産業界を変えるカウルを支えるエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="hatena-bookmark-button" data-hatena-bookmark-title="JSON API(json:api)をSwiftでいい感じにシリアライズする" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="JSON API(json:api)をSwiftでいい感じにシリアライズする" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f05%2fserialize-json-api-with-swift%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=JSON%20API%28json%3aapi%29%e3%82%92Swift%e3%81%a7%e3%81%84%e3%81%84%e6%84%9f%e3%81%98%e3%81%ab%e3%82%b7%e3%83%aa%e3%82%a2%e3%83%a9%e3%82%a4%e3%82%ba%e3%81%99%e3%82%8b&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f05%2fserialize-json-api-with-swift%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f05%2fserialize-json-api-with-swift%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f05%2fserialize-json-api-with-swift%2f&amp;description=JSON%20API%28json%3aapi%29%e3%82%92Swift%e3%81%a7%e3%81%84%e3%81%84%e6%84%9f%e3%81%98%e3%81%ab%e3%82%b7%e3%83%aa%e3%82%a2%e3%83%a9%e3%82%a4%e3%82%ba%e3%81%99%e3%82%8b" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f05%2fserialize-json-api-with-swift%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Android アプリを master ブランチマージで Play Store Beta に公開する</div>
+    </a>
+    
+
+    
 </nav>
 
-        </section>
-        <aside id="sidebar">
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
     
 <div class="widget-wrap">
     <h3 class="widget-title">
@@ -295,7 +719,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/ualsccnOCvqC8UihBZ-zPT6uOfjS2C8kd2ppaXWiSyiyQwyWEw-CeJ1EY6gc5ZSZlGdeU13DYGlWQO-GMuWUBtXmvthyCILIu-qmEas5sqVUfAzsc5Mptc9ieAMU_A0cIrBzGBM07B6A-uksjaDLTHRm2P7z3y3zlOn1ptB85RsiXL4n9xFIdJ9Yy2jRhmt5QtVnzNNLhwpzosZUHYcY7e2UQEGh5rWgEqPWnvDvjN-gW8U2u2uE_DYsOUsuQAtjDWbW8jztwMgbsSRmCxrmwCdpRrL7FnzbyqOk23hjosutlN9WMAiU_eGpgRKYRsUe1ULnMr1urQKptQuvF0WI3B8AldhfvKXaAus6oFX9TBfDp7H8NTUCFKvK9w0YFtQOlqZawPTOYzzqr-Z8-F4CBB_sK5ylrE6PJy0bi5ohaoLXkzAkxbod9ptXcGknAsoOrSi3YK9BfgDqV3oYMKy_pI_9fQdw70XVsQPz8_BEXxg8cltMIID5mfvn6JbP-dpB4aW_yDwDWTLwrtXr8qufpvYQH3Gv_UwEkrydDi8y95J48aIFDYNgcg6EfpCd1Y3has1_b9nfJy57p40l5bg8SxM-koR9rBQJepqLbpwBdhFGXDPYC0dyyfgrNPBLxEVsBLSWLsUAaDuTSjSLnOOla9kMMujBA8xe4UI=w600)" alt="Android" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/ualsccnOCvqC8UihBZ-zPT6uOfjS2C8kd2ppaXWiSyiyQwyWEw-CeJ1EY6gc5ZSZlGdeU13DYGlWQO-GMuWUBtXmvthyCILIu-qmEas5sqVUfAzsc5Mptc9ieAMU_A0cIrBzGBM07B6A-uksjaDLTHRm2P7z3y3zlOn1ptB85RsiXL4n9xFIdJ9Yy2jRhmt5QtVnzNNLhwpzosZUHYcY7e2UQEGh5rWgEqPWnvDvjN-gW8U2u2uE_DYsOUsuQAtjDWbW8jztwMgbsSRmCxrmwCdpRrL7FnzbyqOk23hjosutlN9WMAiU_eGpgRKYRsUe1ULnMr1urQKptQuvF0WI3B8AldhfvKXaAus6oFX9TBfDp7H8NTUCFKvK9w0YFtQOlqZawPTOYzzqr-Z8-F4CBB_sK5ylrE6PJy0bi5ohaoLXkzAkxbod9ptXcGknAsoOrSi3YK9BfgDqV3oYMKy_pI_9fQdw70XVsQPz8_BEXxg8cltMIID5mfvn6JbP-dpB4aW_yDwDWTLwrtXr8qufpvYQH3Gv_UwEkrydDi8y95J48aIFDYNgcg6EfpCd1Y3has1_b9nfJy57p40l5bg8SxM-koR9rBQJepqLbpwBdhFGXDPYC0dyyfgrNPBLxEVsBLSWLsUAaDuTSjSLnOOla9kMMujBA8xe4UI=w600)" alt="JSON API(json:api)をSwiftでいい感じにシリアライズする" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -320,7 +744,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no)" alt="Android" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no)" alt="JSON API(json:api)をSwiftでいい感じにシリアライズする" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -345,7 +769,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no)" alt="Android" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no)" alt="JSON API(json:api)をSwiftでいい感じにシリアライズする" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -370,7 +794,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600)" alt="Android" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/f_oVuAoXEPttyo1spOpnO1skAMC-6hdxLLp84Otq7B1aFZcTKTHO-XKUbBwpMaIkNEQ7L4gZayJwVPNVujQo3cbncclfYja4Koa5ly_R_ql0eGSmMgAV4YV5exLbHeVyqMFNEhJaOzzZfr8-9G-v_zqLyZuIkUSeU3qOSN26zFox33as5WuV8cfh4xgTEPTJJs1-VXEJcvTXhbNPmfD-o-c8SQQgdZZP2AxAu0vhjVkSW8bW63jtL89ZHBQLbPbCA9ME471CY9nOUE7VANvFn3n2F3mfX4RBgc4qYpgQVmGWrmjU1i22X1LmGgSx1qTowcn79omT7ZWFR8ZAmOmviGRRSwTIeW7mjeE5NWb1E_YM5YRT4EILuWbyCpnriZ0McjTiVuIsuwj097s5NuMVLcUWOp-HosNdT5LJ953d6kK181mPkPqFqHfNLdZFOYFTTAHpXO6dsTamPrCkldyxNiNeWvewDUO-f7q8ihR_kzON3hBHyq04xYiPDzjeSOr3aoUUHqw-rXxr3QQ11yRJ95h-HWKs0-5Ks_urLgLjjHY4y6nmHrDgL-PRPWp-qHU1W0yCQR4pk8Yp7lGkzu5sYYyK_gKS8UaXmYGmf32RgTmVhrMVNyJ8ikByggRAUI1eig6z21DjJ1flORUyjuAeRNP3CAUEsUb6Gbw=w600)" alt="JSON API(json:api)をSwiftでいい感じにシリアライズする" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -395,7 +819,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="Android" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="JSON API(json:api)をSwiftでいい感じにシリアライズする" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -838,7 +1262,7 @@
     <div id="toTop" class="fa fa-chevron-up"></div>
 </aside>
 
-    </div>
+	</div>
 </div>
 
 <footer id="footer">

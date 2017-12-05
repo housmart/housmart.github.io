@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Sun, 20 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Dec 2017 18:00:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/tags/swift/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JSON API(json:api)をSwiftでいい感じにシリアライズする</title>
+      <link>http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/</link>
+      <pubDate>Tue, 05 Dec 2017 18:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/</guid>
+      <description>&lt;p&gt;このブログでは&lt;strong&gt;どのようにしてSwiftを使って&lt;code&gt;JSON API(json:api)&lt;/code&gt;のレスポンスをシリアライズするか&lt;/strong&gt;について書いていきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jsonapi.org/&#34;&gt;http://jsonapi.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://qiita.com/advent-calendar/2017/swift&#34;&gt;Swift Advent Calendar 2017&lt;/a&gt;の6日目の記事ですので、サーバサイド実装の詳細については触れません。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SwiftのOSSライブラリに機能を追加したときに心がけたこと</title>
