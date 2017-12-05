@@ -63,7 +63,7 @@ Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド�
 
 <meta itemprop="datePublished" content="2017-12-05T18:00:00&#43;09:00" />
 <meta itemprop="dateModified" content="2017-12-05T18:00:00&#43;09:00" />
-<meta itemprop="wordCount" content="2477">
+<meta itemprop="wordCount" content="2469">
 
   <meta itemprop="image" content="https://lh3.googleusercontent.com/ualsccnOCvqC8UihBZ-zPT6uOfjS2C8kd2ppaXWiSyiyQwyWEw-CeJ1EY6gc5ZSZlGdeU13DYGlWQO-GMuWUBtXmvthyCILIu-qmEas5sqVUfAzsc5Mptc9ieAMU_A0cIrBzGBM07B6A-uksjaDLTHRm2P7z3y3zlOn1ptB85RsiXL4n9xFIdJ9Yy2jRhmt5QtVnzNNLhwpzosZUHYcY7e2UQEGh5rWgEqPWnvDvjN-gW8U2u2uE_DYsOUsuQAtjDWbW8jztwMgbsSRmCxrmwCdpRrL7FnzbyqOk23hjosutlN9WMAiU_eGpgRKYRsUe1ULnMr1urQKptQuvF0WI3B8AldhfvKXaAus6oFX9TBfDp7H8NTUCFKvK9w0YFtQOlqZawPTOYzzqr-Z8-F4CBB_sK5ylrE6PJy0bi5ohaoLXkzAkxbod9ptXcGknAsoOrSi3YK9BfgDqV3oYMKy_pI_9fQdw70XVsQPz8_BEXxg8cltMIID5mfvn6JbP-dpB4aW_yDwDWTLwrtXr8qufpvYQH3Gv_UwEkrydDi8y95J48aIFDYNgcg6EfpCd1Y3has1_b9nfJy57p40l5bg8SxM-koR9rBQJepqLbpwBdhFGXDPYC0dyyfgrNPBLxEVsBLSWLsUAaDuTSjSLnOOla9kMMujBA8xe4UI=w600">
 
@@ -296,7 +296,7 @@ Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド�
             <i class="fa fa-calendar"></i>
             <time datetime="2017-12-05 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-05</time>
             &middot;
-            2477
+            2469
             words
             &middot;
             5
@@ -382,11 +382,34 @@ Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド�
 
 <p>iOS向けには以下の2つのクライアントが掲載されています。</p>
 
-<p>| クライアント | 実装言語 | Star数 | 最終コミット日 |
-|&mdash;-|&mdash;-|&mdash;-|&mdash;-|&mdash;-|
-| <a href="https://github.com/wvteijlingen/spine">Spine</a> | Swift | 261 | 2017-10-07 |
-| <a href="https://github.com/joshdholtz/jsonapi-ios">jsonapi-ios</a> |  Objective-C | 164 | 2016-06-16 |
-(Star数は2017/12/04時点)</p>
+<table>
+<thead>
+<tr>
+<th>クライアント</th>
+<th>実装言語</th>
+<th>Star数</th>
+<th>最終コミット日</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="https://github.com/wvteijlingen/spine">Spine</a></td>
+<td>Swift</td>
+<td>261</td>
+<td>2017-10-07</td>
+</tr>
+
+<tr>
+<td><a href="https://github.com/joshdholtz/jsonapi-ios">jsonapi-ios</a></td>
+<td>Objective-C</td>
+<td>164</td>
+<td>2016-06-16</td>
+</tr>
+</tbody>
+</table>
+
+<p>(Star数は2017/12/04時点)</p>
 
 <p>最終コミット日、Star数を見る限り、Swiftで使うなら<code>Spine</code>を選ぶのが無難です。</p>
 
@@ -467,14 +490,20 @@ Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド�
 
 <p>シリアライズが完了した後に返すオブジェクトは以下の<code>struct</code>を返すことにします。</p>
 
-<pre><code class="language-Swift:room.swift">struct Room {
+<pre><code class="language-Swift:room.swift">// Room.swift
+
+struct Room {
     let id: Int
     let price: Int
     let building: Building
 }
 </code></pre>
 
-<pre><code class="language-Swift:building.swift">struct Building {
+<p><div/></p>
+
+<pre><code class="language-Swift:building.swift">// Building.swift
+
+struct Building {
     let id: Int
     let name: String
     let address: String
@@ -487,7 +516,9 @@ Swift Advent Calendar 2017の6日目の記事ですので、サーバサイド�
 
 <p><code>Spine</code>の<code>Resource</code>クラスを継承してシリアライズする際は以下のようにします。<code>init</code>が多いですが大事なのは<code>resourceType</code>と<code>fields</code>です。<code>convert</code>は<code>struct</code>を返すためのサンプルです。</p>
 
-<pre><code class="language-Swift:room.swift">import Spine
+<pre><code class="language-Swift:room.swift">// Room.swift
+
+import Spine
 
 class RoomResource: Resource {
 
@@ -533,7 +564,11 @@ class RoomResource: Resource {
 }
 </code></pre>
 
-<pre><code class="language-Swift:building.swift">import Spine
+<p><div/></p>
+
+<pre><code class="language-Swift:building.swift">// Building.swift
+
+import Spine
 
 class BuildingResource: Resource {
 
@@ -619,6 +654,8 @@ for roomResource in roomResources {
 
 }
 </code></pre>
+
+<p><div/></p>
 
 <pre><code class="language-Swift:building.swift">extension Building: Equatable {
 
