@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:updated_time" content="2017-12-05T18:00:00&#43;09:00"/>
+<meta property="og:updated_time" content="2017-12-11T17:00:00&#43;09:00"/>
 
 
 
@@ -166,12 +166,12 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        32
+        33
         <span>Posts</span>
       </div>
       <div class="article-info-block">
         
-          31
+          33
         
         <span>
             Tags
@@ -246,6 +246,113 @@
 
     <section id="main">
     
+    
+    <article class="article article-type-post" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+            <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" itemprop="url">
+                
+                <img src="https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no" class="article-banner">
+                
+            
+            </a>
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/">
+    <h1 class="article-title" itemprop="name">
+        【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-12-11 17:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-11</time>
+            &middot;
+            2456
+            words
+            &middot;
+            5
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">development</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ruby">Ruby</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/rails">Rails</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/gem">Gem</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="hatena-bookmark-button" data-hatena-bookmark-title="【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>
+                    <p>Housmartの宮永です。</p>
+
+<p><a href="http://weblog.rubyonrails.org/2017/11/27/Rails-5-2-Active-Storage-Redis-Cache-Store-HTTP2-Early-Hints-Credentials/">Ruby on Rails 5.2 beta</a>からデフォルトGemとしてRailsの起動を高速化するBootsnapが新たに採用されました。Railsでサービス運用をしているとGem数が増加し起動時間もどんどん遅くなっていくと経験をされている方も多いのではないでしょうか。<br />
+今回はBootsnapに関して、起動時間に関する検証を行いましたので簡単に紹介したいと思います。</p>
+
+<p>なお、今回は<a href="https://qiita.com/advent-calendar/2017/ruby_on_rails">Qiita Ruby on Rails Advent Calendar 2017</a>12日目の記事になります。</p>
+
+<p></p>
+
+                    <br>
+                </p>
+                <p class="article-more-link">
+                    <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/">
+                        Read more
+                    </a>
+                </p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="hatena-bookmark-button" data-hatena-bookmark-title="【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f11%2fruby-gem-bootsnap%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%80%90%e3%82%a2%e3%83%97%e3%83%aa%e8%b5%b7%e5%8b%95%e6%99%82%e9%96%93%e3%82%9250%25%e5%89%8a%e6%b8%9b%e3%80%91Rails5.2%e3%81%8b%e3%82%89%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88Gem%e3%81%ab%e6%8e%a1%e7%94%a8%e3%81%95%e3%82%8c%e3%81%9fBootsnap%e3%82%92%e6%a4%9c%e8%a8%bc%e3%81%97%e3%81%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f11%2fruby-gem-bootsnap%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f11%2fruby-gem-bootsnap%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f11%2fruby-gem-bootsnap%2f&amp;description=%e3%80%90%e3%82%a2%e3%83%97%e3%83%aa%e8%b5%b7%e5%8b%95%e6%99%82%e9%96%93%e3%82%9250%25%e5%89%8a%e6%b8%9b%e3%80%91Rails5.2%e3%81%8b%e3%82%89%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88Gem%e3%81%ab%e6%8e%a1%e7%94%a8%e3%81%95%e3%82%8c%e3%81%9fBootsnap%e3%82%92%e6%a4%9c%e8%a8%bc%e3%81%97%e3%81%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f11%2fruby-gem-bootsnap%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+    </article>
     
     <article class="article article-type-post" itemscope="" itemprop="blogPost">
         <div class="article-inner">
@@ -1178,102 +1285,6 @@
         </div>
     </article>
     
-    <article class="article article-type-post" itemscope="" itemprop="blogPost">
-        <div class="article-inner">
-            
-            <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" itemprop="url">
-                
-                <img src="https://lh3.googleusercontent.com/TU2gtTUScdZ6-AIyDIL6A_cyURuWrocADokJ8TsWG6yox0apbJwBnsug-OVnUpDijY-kXmV4KSSLV48XANloVrO8nOUZ6XUPNQdydHDMGKd6n_itlmFHIROJjMo4NaNvKpl2qVNEQaoSFIUXStY_oAEk4wcdZOgFmK-g0IthPqScI4DVIt2LV7TjNSkQYbtK2-DCwLLmawvJFPSPYJLV_WFngMt8esy4bTmaQF6iYmt57kytWDjPs1T5_R1LWM9zGJqQAk6UJLF4UZBJ2U9rV2FsH7bH32E8y1wXkCK_lXB0yh4e3P6oIxHyH2SDFr_fFcPmGifSgI-wKlYM4UXn5VYdtrny91zoKG1w9mNlZwqhC3m4WX8nHNLcc5AhNaApdvyyWIMaQxitxcb_AsOZu9qTarxfI9jqw-ErdJ-XdifgBY1qm0qwL9s0LnU0WkKXYVNzcWA5qsbCIquw8_IGTXv_RRI93LMsq5o0VyJww0hg3f2JlN-A1JFuzW2I7TYyw9QlbRukPatjMWheGrocqT1njWg-evzQt5eiXJcrNekApH7G2Zn8b_mWcXVdjIy08H30X8KCb9c70ZLir2RH2gjeiYKkqqoqXolDj9MNZuS-RNKI681R2aw2if2c-krGMGjpomVAGxCDfM92M2EHmn5f_QeFjRPgcCjcbMEdF-NjOA=w488-h257-no" class="article-banner">
-                
-            
-            </a>
-
-            <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/">
-    <h1 class="article-title" itemprop="name">
-        これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~
-    </h1>
-    </a>
-    <div class="article-meta">
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2017-08-30 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-08-30</time>
-            &middot;
-            2358
-            words
-            &middot;
-            5
-            minute read
-        </div>
-
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">DEVELOPMENT</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ci">CI</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-<div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="hatena-bookmark-button" data-hatena-bookmark-title="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-
-            <div class="article-entry" itemprop="articleBody">
-                <p>
-                    <p>アプリケーションエンジニアの西辻です。2017年4月からHousmartで主にAndroidアプリ開発を担当しています。今回のブログでは、弊社のCI環境としてメインで利用している Bitbucket Pipelines についての活用事例についてご紹介したいと思います。</p>
-
-<p></p>
-
-                    <br>
-                </p>
-                <p class="article-more-link">
-                    <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/">
-                        Read more
-                    </a>
-                </p>
-            </div>
-            <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="hatena-bookmark-button" data-hatena-bookmark-title="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-</div>
-
-<footer class="article-footer">
-    <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%81%93%e3%82%8c%e3%81%8b%e3%82%89CI%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%9f%e3%81%84%e3%81%9d%e3%81%93%e3%81%ae%e3%81%82%e3%81%aa%e3%81%9f%21%20Bitbucket%20Pipelines%20%e3%81%af%e3%81%84%e3%81%8b%e3%81%8c%3f%20%20~Bitbucket%20Pipelines%20%e3%81%ae%e6%b4%bb%e7%94%a8%e4%ba%8b%e4%be%8b~&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f&amp;description=%e3%81%93%e3%82%8c%e3%81%8b%e3%82%89CI%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%9f%e3%81%84%e3%81%9d%e3%81%93%e3%81%ae%e3%81%82%e3%81%aa%e3%81%9f%21%20Bitbucket%20Pipelines%20%e3%81%af%e3%81%84%e3%81%8b%e3%81%8c%3f%20%20~Bitbucket%20Pipelines%20%e3%81%ae%e6%b4%bb%e7%94%a8%e4%ba%8b%e4%be%8b~" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f08%2f30%2fhow-to-use-bitbucket-pipelines%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
-    </a>
-</div>
-
-    
-</footer>
-
-        </div>
-    </article>
-    
 
     <nav id="page-nav">
 
@@ -1297,6 +1308,31 @@
     </h3>
     <div class="widget">
         <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no)" alt="カウル Tech Blog" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="title">【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-11 17:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-11</time>
+                    </p>
+                </div>
+            </li>
             
             <li>
                 <div class="item-thumbnail">
@@ -1398,31 +1434,6 @@
                 </div>
             </li>
             
-            <li>
-                <div class="item-thumbnail">
-                    <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="thumbnail">
-                    
-                        
-                        <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="カウル Tech Blog" class="thumbnail-image"></span>
-                        
-                    
-                    </a>
-                </div>
-                <div class="item-inner">
-                    
-                    <p class="item-category">
-                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
-                        design
-                        </a>
-                    </p>
-                    
-                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="title">デザイナー不在のチームのデザインフローを整えた話</a></p>
-                    <p class="item-date">
-                        <time datetime="2017-11-13 19:45:00 &#43;0900 JST" itemprop="datePublished">2017-11-13</time>
-                    </p>
-                </div>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -1461,7 +1472,7 @@
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
                     development
                 </a>
-                <span class="category-list-count">6</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1607,6 +1618,13 @@
             </li>
             
             <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gem">
+                    gem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
                     git
                 </a>
@@ -1715,7 +1733,14 @@
                 <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
                     rails
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ruby">
+                    ruby
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1793,6 +1818,8 @@
         
         <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
         
+        <a href="http://techblog.housmart.co.jp/tags/gem" style="font-size: 12px;">gem</a>
+        
         <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
         
         <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
@@ -1824,6 +1851,8 @@
         <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
         
         <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ruby" style="font-size: 12px;">ruby</a>
         
         <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
         

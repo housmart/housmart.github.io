@@ -94,6 +94,15 @@
     </item>
     
     <item>
+      <title>Gem</title>
+      <link>http://techblog.housmart.co.jp/tags/gem/</link>
+      <pubDate>Mon, 11 Dec 2017 17:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/tags/gem/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Git</title>
       <link>http://techblog.housmart.co.jp/tags/git/</link>
       <pubDate>Wed, 22 Jun 2016 21:25:46 +0900</pubDate>
@@ -231,9 +240,18 @@
     <item>
       <title>Rails</title>
       <link>http://techblog.housmart.co.jp/tags/rails/</link>
-      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 11 Dec 2017 17:00:00 +0900</pubDate>
       
       <guid>http://techblog.housmart.co.jp/tags/rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby</title>
+      <link>http://techblog.housmart.co.jp/tags/ruby/</link>
+      <pubDate>Mon, 11 Dec 2017 17:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/tags/ruby/</guid>
       <description></description>
     </item>
     

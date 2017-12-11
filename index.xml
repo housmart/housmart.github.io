@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Tue, 05 Dec 2017 18:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 11 Dec 2017 17:00:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した</title>
+      <link>http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/</link>
+      <pubDate>Mon, 11 Dec 2017 17:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/</guid>
+      <description>&lt;p&gt;Housmartの宮永です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://weblog.rubyonrails.org/2017/11/27/Rails-5-2-Active-Storage-Redis-Cache-Store-HTTP2-Early-Hints-Credentials/&#34;&gt;Ruby on Rails 5.2 beta&lt;/a&gt;からデフォルトGemとしてRailsの起動を高速化するBootsnapが新たに採用されました。Railsでサービス運用をしているとGem数が増加し起動時間もどんどん遅くなっていくと経験をされている方も多いのではないでしょうか。&lt;br /&gt;
+今回はBootsnapに関して、起動時間に関する検証を行いましたので簡単に紹介したいと思います。&lt;/p&gt;
+
+&lt;p&gt;なお、今回は&lt;a href=&#34;https://qiita.com/advent-calendar/2017/ruby_on_rails&#34;&gt;Qiita Ruby on Rails Advent Calendar 2017&lt;/a&gt;12日目の記事になります。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>JSON API(json:api)をSwiftでいい感じにシリアライズする</title>
