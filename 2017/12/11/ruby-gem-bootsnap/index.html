@@ -65,7 +65,7 @@ Ruby on Rails 5.2 betaからデフォルトGemとしてRailsの起動を高速�
 
 <meta itemprop="datePublished" content="2017-12-11T17:00:00&#43;09:00" />
 <meta itemprop="dateModified" content="2017-12-11T17:00:00&#43;09:00" />
-<meta itemprop="wordCount" content="2456">
+<meta itemprop="wordCount" content="2174">
 
   <meta itemprop="image" content="https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no">
 
@@ -299,7 +299,7 @@ Ruby on Rails 5.2 betaからデフォルトGemとしてRailsの起動を高速�
             <i class="fa fa-calendar"></i>
             <time datetime="2017-12-11 17:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-11</time>
             &middot;
-            2456
+            2174
             words
             &middot;
             5
@@ -412,8 +412,7 @@ close z/sample.rb
 <h3 id="検証内容">検証内容</h3>
 
 <ul>
-<li>a. Boosnap導入前後でRailsコマンド実行速度はどの程度改善されるか</li>
-<li>b. BoosnapとSpringの組み合わせでRailsコマンド実行速度はどの程度改善されるか</li>
+<li>Boosnap導入前後でRailsコマンド実行速度はどの程度改善されるか</li>
 </ul>
 
 <h3 id="検証環境">検証環境</h3>
@@ -477,16 +476,15 @@ require 'bootsnap/setup' # 1行追加
 
 <h3 id="検証結果">検証結果</h3>
 
-<h4 id="a-bootsnap導入前後でrailsコマンド実行速度はどの程度改善されるか">a. Bootsnap導入前後でRailsコマンド実行速度はどの程度改善されるか</h4>
+<h4 id="bootsnap導入前後でrailsコマンド実行速度はどの程度改善されるか">Bootsnap導入前後でRailsコマンド実行速度はどの程度改善されるか</h4>
 
-<p>まず純粋にBootsnapの効果を見たいのでSpringは起動せず検証しました。
+<p>純粋にBootsnapの効果を見たいのでSpringは起動せず検証しました。
 結果はこちらです。</p>
 
 <table>
 <thead>
 <tr>
 <th>Bootsnap</th>
-<th>起動時間(初回)</th>
 <th>起動時間（2回目以降の平均）</th>
 </tr>
 </thead>
@@ -494,60 +492,28 @@ require 'bootsnap/setup' # 1行追加
 <tbody>
 <tr>
 <td>なし</td>
-<td>14.27秒</td>
 <td>8.18秒</td>
 </tr>
 
 <tr>
 <td>あり</td>
-<td><b>8.60秒</b></td>
 <td><b>4.20秒</b></td>
 </tr>
 </tbody>
 </table>
 
-<p>絵に描いたような展開ですが、起動時間は約50%削減と公式ドキュメントにあった結果になりました。
+<p>5回ほどコマンド実行した上で2回目から5回目の平均で算出しています。<br />
+絵に描いたような展開ですが、起動時間は約50%削減と公式ドキュメントにあった結果になりました。
 確かにキャッシュの効果が大きく出ているようです。</p>
 
 <p>正直ここまで効果が出るとは思いませんでした。</p>
 
-<h4 id="b-bootsnapとspringの組み合わせでrailsコマンド実行速度はどの程度改善されるか">b. BootsnapとSpringの組み合わせでRailsコマンド実行速度はどの程度改善されるか</h4>
-
-<p>次にSpringを起動させた状態で実行してみました。ここでは併用でさらにパフォーマンスが出るかを見ています。</p>
-
-<table>
-<thead>
-<tr>
-<th>Bootsnap</th>
-<th>起動時間(初回)</th>
-<th>起動時間（2回目以降の平均）</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>なし</td>
-<td>12.3秒</td>
-<td>1.538秒</td>
-</tr>
-
-<tr>
-<td>あり</td>
-<td><b>6.23秒<b/></td>
-<td><b>1.443秒<b/></td>
-</tr>
-</tbody>
-</table>
-
-<p>2回目以降はSpringのpre-loadにより劇的に速くなりますが、こちらもBootsnapを導入することでさらに向上しています。
-特に初回起動からキャッシュが活きるのがBootsnapの特徴でしょうか。</p>
-
 <h3 id="まとめ">まとめ</h3>
 
-<p>今回は開発用のコマンドでの検証だったので、Springと並べて説明したのですが、貢献するシーンが少々異なると思います。Bootsnapはrequireの高速化という意味ではproductionでも貢献するGemです。</p>
+<p>今回は開発用のコマンドでの検証だったので、一部Springと並べて説明したのですが、貢献するシーンが多少異なると思います。Bootsnapはrequireの高速化という意味ではproductionでも貢献するGemです。</p>
 
 <p>確かにBootsnapによりアプリ起動が高速化されることがわかりました。<br />
-導入もシンプルなので、5.2を待たずして、早速弊社でも採用していこうかなと思っています。</p>
+導入もかなりシンプルなので、5.2を待たずして、早速弊社でも採用していこうかなと思っています。</p>
 
 <hr />
 
