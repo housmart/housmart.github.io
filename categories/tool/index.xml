@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tool on カウル Tech Blog</title>
+    <link>http://techblog.housmart.co.jp/categories/tool/</link>
+    <description>Recent content in Tool on カウル Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
+    <lastBuildDate>Sat, 16 Dec 2017 10:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="http://techblog.housmart.co.jp/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>スタートアップでJira運用して、この1年間でよく聞かれた使い方5選</title>
+      <link>http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/</link>
+      <pubDate>Sat, 16 Dec 2017 10:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/</guid>
+      <description>&lt;p&gt;Housmartの宮永です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://housmart.co.jp/&#34;&gt;Housmart&lt;/a&gt;ではプロジェクト管理ツールに&lt;a href=&#34;https://ja.atlassian.com/software/jira&#34;&gt;Jira&lt;/a&gt;を採用しています。Jiraはエンジニアリングの時と違って意外とググって解決策を見つけ出すことができないなんてことが多いですよね。&lt;/p&gt;
+
+&lt;p&gt;今回は社員20人程度のスタートアップでこの1年Jiraを運用している中で、よく聞かれたことやお願いされたことをベースに5つほど機能紹介したいと思います。&lt;/p&gt;
+
+&lt;p&gt;また、今回の記事は &lt;a href=&#34;https://qiita.com/advent-calendar/2017/augj&#34;&gt;Qiita Atlassian（JIRA , Confuence, Trello, Bitbucket）のTips Advent Calendar 2017&lt;/a&gt; 16日目に参加しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

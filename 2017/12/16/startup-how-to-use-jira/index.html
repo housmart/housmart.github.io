@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>スタートアップでJira運用して、この1年間でよく聞かれた使い方5選 &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.31" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" />
+    <meta property="og:title" content="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" />
+<meta property="og:description" content="Housmartの宮永です。
+
+Housmartではプロジェクト管理ツールにJiraを採用しています。Jiraはエンジニアリングの時と違って意外とググって解決策を見つけ出すことができないなんてことが多いですよね。
+
+今回は社員20人程度のスタートアップでこの1年Jiraを運用している中で、よく聞かれたことやお願いされたことをベースに5つほど機能紹介したいと思います。
+
+また、今回の記事は Qiita Atlassian（JIRA , Confuence, Trello, Bitbucket）のTips Advent Calendar 2017 16日目に参加しています。
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no" />
+
+
+
+<meta property="article:published_time" content="2017-12-16T10:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2017-12-16T10:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選">
+<meta itemprop="description" content="Housmartの宮永です。
+
+Housmartではプロジェクト管理ツールにJiraを採用しています。Jiraはエンジニアリングの時と違って意外とググって解決策を見つけ出すことができないなんてことが多いですよね。
+
+今回は社員20人程度のスタートアップでこの1年Jiraを運用している中で、よく聞かれたことやお願いされたことをベースに5つほど機能紹介したいと思います。
+
+また、今回の記事は Qiita Atlassian（JIRA , Confuence, Trello, Bitbucket）のTips Advent Calendar 2017 16日目に参加しています。
+
+">
+
+
+<meta itemprop="datePublished" content="2017-12-16T10:00:00&#43;09:00" />
+<meta itemprop="dateModified" content="2017-12-16T10:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="2676">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no">
+
+
+
+<meta itemprop="keywords" content="Jira,Atlassian," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no"/>
+<meta name="twitter:title" content="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選"/>
+<meta name="twitter:description" content="Housmartの宮永です。
+
+Housmartではプロジェクト管理ツールにJiraを採用しています。Jiraはエンジニアリングの時と違って意外とググって解決策を見つけ出すことができないなんてことが多いですよね。
+
+今回は社員20人程度のスタートアップでこの1年Jiraを運用している中で、よく聞かれたことやお願いされたことをベースに5つほど機能紹介したいと思います。
+
+また、今回の記事は Qiita Atlassian（JIRA , Confuence, Trello, Bitbucket）のTips Advent Calendar 2017 16日目に参加しています。
+
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        34
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          34
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/">
+    <h1 class="article-title" itemprop="name">
+        スタートアップでJira運用して、この1年間でよく聞かれた使い方5選
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-12-16 10:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-16</time>
+            &middot;
+            2676
+            words
+            &middot;
+            6
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/tool">tool</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/jira">Jira</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/atlassian">Atlassian</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>Housmartの宮永です。</p>
+
+<p><a href="http://housmart.co.jp/">Housmart</a>ではプロジェクト管理ツールに<a href="https://ja.atlassian.com/software/jira">Jira</a>を採用しています。Jiraはエンジニアリングの時と違って意外とググって解決策を見つけ出すことができないなんてことが多いですよね。</p>
+
+<p>今回は社員20人程度のスタートアップでこの1年Jiraを運用している中で、よく聞かれたことやお願いされたことをベースに5つほど機能紹介したいと思います。</p>
+
+<p>また、今回の記事は <a href="https://qiita.com/advent-calendar/2017/augj">Qiita Atlassian（JIRA , Confuence, Trello, Bitbucket）のTips Advent Calendar 2017</a> 16日目に参加しています。</p>
+
+<p></p>
+
+<h2 id="目次">目次</h2>
+
+<ul>
+<li>特定のグループだけアクセスできるプロジェクトを用意したい</li>
+<li>複数のチケットを一度に編集、削除をしたい</li>
+<li>作業時間のレポートを作成したい</li>
+<li>特定のプロジェクトや特定のグループのチケットだけをSlackに通知したい</li>
+<li>BoardやBacklog上のチケットのレイアウトを編集したい（componentを表示したい など）</li>
+</ul>
+
+<h3 id="環境について">環境について</h3>
+
+<p>弊社はクラウド型（Jira Server Cloud）のVersion7.6（latest &amp; new interface）を使用しております。
+また使用している言語は英語になっているので、日本語版お使いの方はキャプチャを参考にして設定して頂けるとわかりやすいかと思われます。</p>
+
+<p>※バージョンによって画面のレイアウトや使用できる機能が大きく変わりますのでご注意ください。</p>
+
+<h2 id="特定のグループだけアクセスできるプロジェクトを用意したい">特定のグループだけアクセスできるプロジェクトを用意したい</h2>
+
+<p>「作成したTest ProjectをAチームだけがアクセスできるようにしたい。」
+そんな時に必要な設定手順です。</p>
+
+<p>流れは下記の様な感じになります。</p>
+
+<ol>
+<li>Site Administrationでグループを用意する</li>
+<li>Project Settings &gt; People で前ステップで用意したグループに権限を付与する</li>
+</ol>
+
+<h3 id="1-site-administrationでグループを用意する">1. Site Administrationでグループを用意する</h3>
+
+<ul>
+<li><p>Jira homeの左のメニューから 設定 &gt; Site Administration
+<img src="https://lh3.googleusercontent.com/Bxc512DkvD7nqrRJw2n6owiTrML-Ou1wbaZFdxXKn9jKTphN09k-hFTBGM4TufZD9BoqlxYiPRqP5pUGV8IsRFlizwnLXnOXsHJuRzwp_-tIUu1uMgsW443mMsHF-L_Kf2UKonuTT4oXVxCYJouzXPNo1HBv1qGlWDiNUjvSrS5QVqInUK3wuyHEnF2WjEFlY3e9__J3wagPFGSe0O2aUNYr2rStpAcnCKeMvBgO9ZOOyByOCfArxyKOFlhvAAyFCbmyUnFUc6hvbtHrqX03PAsJ88yiMRHT9pABhM1kaU9a657I1LmOkHCDKbZBX7Bvcz0a4sPLgDLhvToFjehNXG75BtCTcVVgGequp5tHQM-AjDsImXl1pTlRLQzeOn_-uGoa2Tn0gPsBr9DTMYxLhovQcNoomWGy7rZeETb5eIl6baOnZ-IFNg-R-5zhj97gS1EI71b1_w93Kg73QXnrrIk6VG1GiCXdJJUwj_rnDNQp7MfHgYGWOI2Ut1NYg0EP5lsmg0zCV43YAquHEA1b9xkmZ6D4Ipw7KZ4ESWLDTC0HQBnOPb6Y_unh3BBDRW4KOrPdFBt9rxL8_6AYwjtyTDd3ZmtVLvR4mfwiAqaKJByPH8dWomRhMU1duasS1d1hJaeIkyM6ZcLEEWy5OhPVKBxAjKrk_lW7rXY=w600-no" alt="Site Administrationへ" /></p></li>
+
+<li><p>次にGroupsを選択し、右上(Create group)からグループを作成します。（グループ名の例: Aチーム）
+<img src="https://lh3.googleusercontent.com/U9dkqUjJ7wAjonL9uKH5tmhYUwksadeSV5QevqE0MBKrbUAOoaqNk8cMzSJzEt9ei-7nRbeaPgj9DhJtme6WweHA_TNpn6ZOhTNjT1Hqi4ty3iG79qfJasLbkE40lAL-pZ1BnUum1DqnuGicHOCHbm7tS_nXAyVF7_tqv9bn59r2nKz0dCaM-LhKu-QpzXOJm1YlTuDS3CTflQZZ3cFVAlKTkiQR1JAJBGmg9QiWj_qUbVXw1l3lKV9NRhshSYXjCI3zMcN-atXGCOySlRso8wdBEiUUs0TmDAFC6Q8NTccHO9RfyvFbc4H-Yyu-aNb3orgRCOZMrZJFF1Lj87U-q58lYyjzoABQJsgiNxnkq8NWIBb3pGzEvsUxaWCspuBH0TD0akvitTTW6bLnCvcMRNYOAmN6kDNPJdO7w1oKVL7NH5i33cBms6V9vO24N_V8VN3hbjS_hmnT8q0-9p6h3sKMm4A2FsqZIZzlOK1zKVGIz8LTInqhz8EzH08RAKaheVCWVX18WH3qpkKJPEc3kXPdup9DOTxutQHN31AerHuL9J-AMZ6uTo9aFWP3FXK-KLKfvaQgpDZaAMw4v8qiFpvfMuR90hgOXPVKD5NSYKKJ8adw2r8a5fhGMWI2VTH5MqLvwPcCqw1RlKBHHfYS_sjczqk1N_TXxAs=w600-no" alt="グループを作成する" /></p></li>
+</ul>
+
+<h3 id="2-project-settings-people-で前ステップで用意したグループに権限を付与する">2. Project Settings &gt; People で前ステップで用意したグループに権限を付与する</h3>
+
+<p>1で作成したグループをプロジェクトの設定から追加して他のグループ（Aチーム以外）からは参照されないようにします。</p>
+
+<ul>
+<li><p>Jira上の対象プロジェクトの適当な画面を開き、設定アイコンをクリックします。
+<img src="https://lh3.googleusercontent.com/qhmz-dsnCqhRSVIPcKS5GwiMgezidJBdzgMKa2qolV4VncaaKDt4114HUXulGYYih0EZ_qxzz6WnKYfYEZSr5UlJfQ5eZsGN15w0BN4cl_3uY3lNdV0cyLBtbLSZe148QIEHe3hWfvO52A7-ugAldi2UggRLDn7HUuFuiloiDsm1aDZZZUjFGR7XQDRmQsQkVMYBy0lgEJL_h_DfDyJ9PgqCG7bC1f-QjLe8ysLj5-X1y3ViiBrsYdUWgbrEjo-x9Ee85k6niDDoBovFlPUuNy18shy8RQ-WMWV8FGWDm_xPThQaX2IUVPfRYiH42M76E62l6q2TBUnQ_anr4CKpeTpR1ib3WB8zWVP-098c5KooFXqMQaem31u4oxw5xW-ylVAGn5qVTIOmNPgRDi8cKhuunxQ6mIGEvMOabaPAgmSCQ-dCh9Xs_uFImEuhmqL1vsreOCgX8PZcyHrfprtUcNJ44ebTLEZP1tOwB9lzjqVe559rLJqByQAgnQIlWUPlNRuvGdgiSv1pR0penndrOb1Jyx2oSqtvT2AKptb21z8R55Xqq10FaeP_Tf_fckXBOwbM75XSwmY_AN0xoUunNj-NRFpaafcS-g_oZiiAVflVi2XQ8VV_g8PjG8nJ8Y_ChFeJqL-oIARysGtQM5CEliA9WFo2IJc4_XM=w600-no" alt="Settingsへ" /></p></li>
+
+<li><p>People からアクセスさせたいグループを追加します。
+<img src="https://lh3.googleusercontent.com/EKBUkoSb-wZSMWaoQ1cUo-5GRwJ9-cHUVWi-JjYLDyIBVu_EkGWyeyyQWgJiXQll26ARGEflaecgUPrL2XjhsmDo_UfFp0iAnBUuA6Q6wJbV58OGDkFXXH97EFqC41PaabXnfQN46TTBC7LzDvrU3vWcMd2rexG9iZdqGpQAdawmUQCyXEPC5liLgrGsCW-JQTqEcemgBgX_rNTeTbhtEe8DhrrCA0A74UFAfSvMdZ0MDEtjwiwinDUp_oqCPBsOWvWiC8CrQ6Jm5eP6NsjNOByb_16vauvSpjZ1MYqVpAXgg3CjmT3PRlyHH_YZFwdPsbrRdsBM-tEWGQjA92RUeWaWHg5Yd3UNdLIzkIVzMr0Z8MgWkHAD-cHtqK9HflUaJY0lOVGplkyq-AcYHFY9UQI1WQnMgIS2eX1Bmih_EZ_eklGXcruA0Cb-nLRy1vuMl4dOxFBrCJKFrsPMitUPH1phfitTuBfJ9ciPY3ctrNPTEeLiqoW9sSx8EdKZdfrEetZJ8F_WbtrX0xKbDKlW9dhuiATHBCrCdH6ythUEX7T8gkHc6-vR1wpSNB8ZOj5BT1DTokPvqRoqbyaWkJTg1jmksfI08rh3WEe1UzLT7U1f0YauuiZtqvQErIy0_Yt-mR9y0jVIIb5bZM6AQ4H7dimE4VbE6xSNlhU=w600-no" alt="グループを追加" /></p></li>
+</ul>
+
+<p>すると下記のような状態になると思います。
+ただ、これだけだとまだ他のグループからは見えています。（キャプチャにある「社員」はTest Projectにアクセス出来る状態）
+<img src="https://lh3.googleusercontent.com/XqPQWLzKBOse2I1esbJ80gPRY_6YIP338BptlBlkSpw_7AlU9XudyrGl2eWF7pkc_FiA_iCxnj6mr9OqwHE7eI_nBDcwjLuWiMvuSRG-TngR-lJaJliir_VyfhYhQR8ZfUE-xuPw2zfhP6Xlpn2MRuohEoYfdy381pJQyWo4m-PKlTOzARzDynEqlGep3kskXk7OucsfJiNFXBClTByBk4_PRXq6JZlzpvvkpjlavo18TIAT9bJQBMbItmxBIE8Lk2HYlFPv-jgFSAoVKKH-f6kXa7SKJicByEMnclRhIFhu1E2Dv2ZZNN_HNk34F6_wBywA_J9mD8jMXJTXvCRIWtC4Y33iRbgccqtqe5J_6oFXcqabKHl9Jg0ACKqYaHjnbkCVPaFKJFM-4DSNNNKJObU6AgmaXMlgGKz5sfadeZyxDOOdZ6mcq78lEyG6II-rb2jrj9Qv1Uuxebhcfo-NxsHZO2SUpRTv-7b23TqmrV8Ie1o9soxGXq1ptLxuEKRmfkb9vWUumFxCGCfDsaoBgNHamVZWQfype8CBxNgdlUyDhmycJAKEt9jHQdAkHDxb6VBA8j7PtwkDcc6R0H-lFjrj0Ovlvd6I4JXl_CMBsZgdw3oeimU62ZmJL5bqOhyGBdKehqXOnzLl-yz9ANggVBuRjrYUpK2TVyo=w600-no" alt="アクセス不要なグループは設定削除" /></p>
+
+<p>ですので、最後に対象外のグループは削除してしまいます。（この例だと「社員」は権限を削除）
+<img src="https://lh3.googleusercontent.com/L8ExlGETmJqAMdN8qSMvn4quQLLwFFV3_vT924uyQjm-KZVqVk2RgJZV_q_MIDVudFntwNcZgKyj4C3AFEbFNmQ9CundP9er-aJ_ER2A0g9mrb-6O1-nHcj_4ysS9z4zFhpFfu-6wzZrFmaE-C0F4nrTwMpLfI_7If2KmOAKe4azwwbUmiRcyY44XR0MXJ2Af5wDg68iBJWoSW3NnZufW8zbl7hAeEXAwDMSuA3U6Q3nnT4SE6H2o8bWcBSF3UWf3vJlSjp8mhJUmJrRzwMOVTtt-7SnS0ZqSi7-i3Dz0-NGk67RC971DAz1DjJoCrmpfHrPTKD7h8e19eNaXeyNSSm3A0aV4oUIY1DGH5DfwUht_MNgqf5nSiMm87jB09jBKbdLUkdbBOu0evI2scMkp7jQlmoGnXluO8_qv7aDY7ndORowsLDG8cEbCaKSm1SFo7WN8L57Zq1wDnWBZJOlsHbgPsL3BPqkO5eVpfEBCx8JYyFq-XMGxAtRjp_W_MTHRCoU6ASKiv6TkwPtq29s4SCSGhAi3maxDNjmpqldXaHFgpyJp_VFrw0Ag214_Llb-3MoEehZdSr9kj7bd-19yY10YYjmYgPWUPbJzQT1dB3pB_mU2iLgaW5Y-Lv7mxFN9VhsIGuMisuLSfi7GgEV66DFdQJgF_V3Mws=w600-no" alt="アクセス不要なグループは設定削除" /></p>
+
+<p>これで「Test ProjectをAチームだけがアクセスできる」状態ができました。</p>
+
+<h2 id="複数のチケットを一度に編集-削除をしたい">複数のチケットを一度に編集、削除をしたい</h2>
+
+<p>これは知らなきゃソンソンな機能ですね。</p>
+
+<p>「（たくさんチケットを作成した後に）componentも設定しておいてください。」<br />
+「間違えて大量にチケットを作成したので削除しないと」<br />
+よくある話ですね。</p>
+
+<p>今回はIssues, Board 2画面から操作方法を紹介します。</p>
+
+<h3 id="issuesの画面からチケットをまとめて操作する">Issuesの画面からチケットをまとめて操作する</h3>
+
+<p>とても簡単です。
+適当に条件を設定し、削除したい、編集したチケットに絞ることができたら右上から Bulk change をクリック
+<img src="https://lh3.googleusercontent.com/Ulq7m3wg69sWkkLUaWxpM53WAd2IAYfj2CfbQklCfEcd3m14Y2CO8npL67Sfo4ZNXLiSKmjZ-1CoPB385fvstqAYTOsIaMcPl_nYWwErDH2L_0xeQH3vn7h4phoM-DcQIMl_dkHNo9BK33ngd9se2ca5wRAryowExFtD1XhAzU1Id06nALxXfu7pRnFpSyVy1IBrKjwVr9oZqp93hhhLPpzr_c9h67sNO4UwmICt28W-Kk6lWuvKQbQwckP3DFEuXQPnSQdJGzQRSVRQJAHJVAfFVjq-IK0JuWi9DEHqwpEhYNKvtYbcsBjZVE2IeZ8Vlf6esCam5IzhumPPL0NcN-btXUGeqGR-Sx3uRe0uZrsTSqvo538SRH8OdLNtxRWoBNxHGnX5VVvuTJQoQHnQAf1sFGFbWNtR81M9pel2QHClMW3N5GOxNufTJ_S_gYlbAUg_HYK1nWeSQ9nAebR13CD6LKXkZtcl-8aamwJKlgXP5mv48T5I-LXqx7g34ZajOU3ws-wIzAesbGdIk1Pnlxhx_H055HgyE-ficXQNz806nQRE-Z6PjWjKWrMav-e5KqW2Fx4PRFUTNFoNqqnKDNJbVUWEHlgow_YyNEaMGHB597EiXL8Cov0L3drcxhbAL-8PnlnjRxHoSd_2fIaarDikY3TAb6ayFGk=w600-no" alt="Bulk chang" />
+※まとめて編集できるチケット数の上限は1000です。</p>
+
+<p>ステップを進めていくと下記のような画面が表示されます。
+<img src="https://lh3.googleusercontent.com/YOUupmGtYFJaGFaymob4ejD5ApJAzdeTnTy2DkUXshOSLUPbueGPLs3SdobhaAJm2QUd0Nxe1oDt2DpE2O3huI3JaLytn2NL8Qv7PGh9Um0Rw42An40P08ZFWQ74NW3vUHEto7H02neSNJtnyzXfoJdlnLng0HoIK5BTE439hgb4m9iFxqqMRMDZuanGxnbfUjl7OaDPF-GfhL4wJjKnnVhJAB4A2mUMPI_BgLFBVTX9uFwc1fKVl1GC4Mx_T7dKx7KEScHaVng2_X_YNYx9c6C91uh_A_MnH4FgnM0FR1h3CV-JEjdWguzse5UR3-DxAYtJNOEZ3lPT9rhsHOA6C_t-O8JhZVrGFWPukzlIezyrXh00Q-b_4qDG6GK30hCDBEfSpuWQ_xgwkUurppkYQe6jh9YoW6koJFnNuD3xvt8_KNDKAnj-zyDhO8a1jHK23GzPAsVTqXGLP46xgMZbfS07A82sFNkUCpuHm0H30zOyxIV8ZsFj0wPmbs56caUTDXefdooMsUGRrVX_vbrW0LBHuFoUzgWJYIkLDw3LmuxJAcLvbtgqJtgTwdxpRyAFT_pkrJ2x2qlUSCAMgnJjsazc3x5izNykEx4jBe16ugiEU0ihCZAFFmzI7SnDBC8lF7JT5D2f9zmzrKUrWpxvXkB3jFf1bj9g0Sc=w600-no" alt="Bulk Changeの途中" />
+編集、プロジェクト間の移動、削除など大体の更新作業ができます。</p>
+
+<p>あとはステップにそって入力、設定すると完了です。
+（まとめて更新するときは確認画面で通知をしないようにした方がよいです。大量のメールが来てビックリします。）</p>
+
+<h3 id="boardの画面からチケットをまとめて操作する">Boardの画面からチケットをまとめて操作する</h3>
+
+<p>Board上からもできます。</p>
+
+<p>チケットをまとめて選択し、右クリックからメニュー展開 Bulk change より編集
+<img src="https://lh3.googleusercontent.com/LN9D2ZQYTgPZ74yWkgKKNEeR0p3VZjdoPMc4UHMxQmPN6M_5k3KICkvOkEkwjqNTeDPoKVPR_hFpHD0rUFCBOzYW5Q2UY6NP6TE3x9f-w72QAF1LQjgtv1MUoXBcG8aaxQemgW0iPvZ5u04qVrUamtnLLw442DzbeYMBEK39AOQqYhj1xRY_iJTW5C4Vg7HBOAEIvJYxYTlXRZPLOrroG0hNWyHfAW-QAylZKAD-axc65dtpO0cLOzKqatzO-pBy3cxFGcYR3oaR99EKB_tTwtgYPymEy7-wSD4e0mzgBzM1nGWq-GND1gzvKuUK82zwk7EOlKKz_lntrEyA4ziPsu7vQA80jvQVUot2fGUimFydexE1T_gAQ4sfqTyAGc8UC7B8tHe_VJztDXSDeahXmlZWpk6LVBlWQr4PK_SzMeCzEgRNs_c1tCb_-eQOoZuq6yg78CTKRNJoFgd0BUp8eP4xTPMu4lbcGGQZ8dDpkHatiKAdX-kPm26mbyRrYkIGcOZBnLeHEHJx_YZhuKFzxCsenWC36q2hfP5iexOWNI3S1C-yEjRLu_DeFv1rHijv3CTFMVeo6AAnr_sthXkWpl0piNZMuQHm4ZmU599gdeNINpWTz43NW876-noZAYbO6wN1T0kiNrb9_oxI8nnK3yJF2ZMaofFtz7g=w600-no" alt="BoardやActiveSprint上からも可能" /></p>
+
+<p>（以降は先程紹介した内容と同一なので省略します。）</p>
+
+<h2 id="作業時間のレポートを作成したい">作業時間のレポートを作成したい</h2>
+
+<p>こちらもあらゆる場面で発生する作業です。
+弊社ではプロジェクトの振り返りや業務委託メンバーの作業時間算出、税金計算のために年間の開発工数などそれぞれの場面でレポートを作成しています。</p>
+
+<p>作業時間のレポート機能についてはJiraプラグイン（<a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/">Tempo</a>)を採用しています。
+プラグインに関する内容は<a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/">別途弊社ブログ</a>  で紹介しておりますので、そちらをご覧ください。</p>
+
+<p><a href="https://tempo.io/">Tempo</a>をインストールすると、Jiraの左メニューが追加されます。
+そこをクリックしてあとはよしなに時間やfilterを使ってレポートを出します。
+<img src="https://lh3.googleusercontent.com/L5FP4JjzUvdtNkQcKfPHqkpx8tAlKWRaX9Yg0C7LeivzO5KcByPepic-sjPysYeMcs434MYfnXj610JXTdaxI3TroYIgdvZ1zYwPkmPoWDSZBbx3Ju8u5bn6-rm114blaRWEmlFTcAsxtBpi_AQC2qc6EopHwUTTjgl-cvBdVNqEK4zJABoQSepmnCHK9J2mCOLdZj7Y1PFzGxgMHAkiBfJe46gCvWeZSybt4j2637httMTmTkCf_6LB4ZZLdlMO62Hgc7IcRrwA1bjBHjdqiH72pJXa5AUYXvNlNyxL8SKok1g4FPPJR6qhvpuZZkPwbDuxfIY4GXLvWkwYC28M_dC_XjgH8bset37_0v82dV_hSx1Vg-VrS_DyRv9QE7b5WsWfNOMMX6CPrh62GBwuli_CXge76-_xEa48fTIWHHYGH5QMAVyzNnMy-1noj1d-hIoQ7-eWVWxrWu_bCfTfCKPQsUFLCVMrI_grrKtfAoSsJyqIfEO2tebZzxlVMib1OYgJWgFz7_19qqIHRLdA2rjp-PicWyS3Qm_XlZYt12Q_rO5m97Sk9c5iFKukdidFuY8aFAx53Z4KPfhocCQL_IFpJJvieF_gmeRycB0JNhYMoMdbQPCaU_LNG1uN4TItBpzGwtfXn7pI_keJcYIlnFssRaJXl4cd9oc=w600-no" alt="report" /></p>
+
+<ul>
+<li><p>年間の工数を算出したり
+<img src="https://lh3.googleusercontent.com/Aj0ITGYVmMA4ElvvBeUgGXwm8t4aEA1JyM7uq7mOznhrOS-TZORzR7_ElkLX9weQpzuL5EFkYjiVJb-7xvRSP0BBX-V9z1QbDxMXvCZkwP1pHxo40hWIzgfcNboQAFX0vpnlhRCI-nZeVmPVqUuNiRkujpDviwt7u3hyJrir5Oez3YrBGq-z-52EV15Gqdl4PCNpKtKSo-7xrMKpbIEPrkdNJeMV4xUtRmj7lQSNqF6Q7MYxMp142utF53u58Kp33O5vZqE9W8ugl4xUm-Je_kY3jFgvkaELfxwfDbW8zOGYeL76HnyXYxbgLs0GaRw25kPbgtnp0jK0oABo4V7nHuO0B31jzbId9u_CinlLrYp17AtNqTOIP5qSAQQj6bgn0h9cVPta5tHQRIFBXU03wANkM_rxhTc4inqbuyi5K67Gx6_10Id9yX43SgMfbYZwF41_SytHyfjUc5VT2rnZxqREhKsEzAQmJZn71sjy9vkWvACb7Su30oA4lxMC48X_q2cwt3z1-ymdp3N_ygSxKh-qQlPAJxgROwCnixRSG0eG3WVfSQ2qTpUUW9AvgmcEsAM_v6sPgmV0-h9cA9S3bDUh1AzPvQ8TWnCb0NlXYHyrom7hVKdcQ6UoWJHa5Dk43Dn272hMvDFuI9jWOPjTjoV3R8loMYMjlyk=w600-no" alt="年間の工数" /></p></li>
+
+<li><p>1ヶ月内でそれぞれの案件でどのくらい時間をかけたのかなど一瞬で出力できます。
+<img src="https://lh3.googleusercontent.com/xofWzn2CXBE-TIZO4TwFgpxuFeeP2VG0k3Cb1bLy0e5AFqgNfZU6yUPE2YKzYnHAVxacvHSkGg_ZxwHpAz7LnmTnA49V5yoy_ULkmlKEf8I3hZp3l3VkwROtUlrfjyfg-OafNs7F9oMx4oAyOxVqnsM7VYiamU5xd4d2rS0sa3BDYyVX7pTCCmD1cuSq6vzhw3phuBbnacx9TcVDJUtvhDA6gb37JK0IZMcEgJ7y5H2Qe_P-uSMZmUjdXn3FrP1bdw4eFI8ILChM_IUx7j-X8FCwYuw6QQMi52NsrNfiQRtVZWFcJOtqL6E-976N5qL5cjUDapzPFUEzRNg0B7ZzhC3U5CX2zn6mdjI68Gl3PvF2_BnT7USvFxm4WlZJg1herSBO1RpX6RBs-enT1OpJ7-mDmb7QxA94_qttGmX44iR2SsfP5qkjWp28H8zGfj4jKOCbDlLgOqWY1w-sJBW07qBjKweFV8EbU8_gvVNqyGtDXtisJPVt7HqxBy_Gvs7kYeOzCHDltH4mP0knjwvVY5_WaIfGN73KqPDP23iMJJuRlBjP46O-mtthIX9rZT88JKg_W1GhpwutOGznsA0wMNMFdnScbDNd2EldfOkIclkdymMHHDIPG4UBqh27gxEtfO_Qc4KJOeddEzgCM29dwY3IOTd3OFXiM-w=w600-no" alt="プロジェクト単位の作業時間" /></p></li>
+</ul>
+
+<p>右上からPDFやExcelでの出力もできるので必要あれば出力して提出しています。</p>
+
+<h2 id="特定のプロジェクトや特定のグループのチケットだけをslackに通知したい">特定のプロジェクトや特定のグループのチケットだけをSlackに通知したい</h2>
+
+<p>「Test Project内のチケットの更新情報だけSlackに通知したい」といった時の手順です。</p>
+
+<ul>
+<li><p>Jira HOMEより設定（Settings）をクリック
+<img src="https://lh3.googleusercontent.com/2fopQhvF2i9V2fFMHdbjYtxtry-Pi5FOUomGKM-u1clW7hieWygE4L7VbL5X0iVTr-gyMyn2auBmsg8OYlhJjwDHuxkAwHuhqt33P25H9YWcxmGZefIhXk4jEsNW3mASJ_zkRWiTfF1873CSMGEzwU3WHCf7OODb8oxLsJd67_34_rlpK1yE1qQprr3qB2gqRA4tPyng5t3ysl_5Zl7Oi8_zU18OjUX4n0rGJ4pOhdCd2QRxBAl-zq_A9brbhtZUEBs3vNOYL-C4u522SRl0YNf6ELG6ATP9Mo_YtapdSck8VYy12hVNLjrSwCXMLelDYy7tULZ3EG8Tz0KOzKsCU9tq8W_bkjZDIZTQXvN7fcwCB0N9vNVqwFpT336a0TeV9EqCDqZpWTQLD2ZOwy4oDZr5YaoajXSjYXfEP4T-lkEg4T_2a07A1V340p3q4kOkHUyJheNE71OqvqWRQ1DNRSX8LJHvhLW-I3CsBaB7_cKlLzX0CpPp1dYcTpNqdmQ7vmlwXDq5cl62wVIrV4I0ZMv1hUEhnktzfibEqblSqMS7wMHojGRZElQGSEaG99xvEKiZADHDZCsLoXR9XRM1Q8AUOgWo5lKYBXMV270GNDhnleNg596Ae5gdCNoCZb0pE_1ZTbAoyr3YuEfFb_SnED1kwQmtGwthWsc=w600-no" alt="Settings" /></p></li>
+
+<li><p>System &gt; WebHooks &gt; Create a WebHook で作成画面に遷移できます。
+<img src="https://lh3.googleusercontent.com/e8e7Elbg3ylAQGHS4C5IT47xgRS87YkPqwTOc6wfh1WEOs9lkjMRbeR7YY9TozoMQ6DLjnrh0tN_EP27jHxNdK6IL57aw8z5Cav2xZGMrWPO-0VkKSwSjNzE7j0tVuUPHAsi7K47DceuC2EBrrHIfKqhvGEdc3NmSrOfI0JLOdwt5iHpvLj8FBuyi0z7YhxQiuh1dnQfRj8CZJm2A-kN0tjjaT0iNwB5WMG2-CsJRs3oBDXQPkzefz7WFgcHqpInAp5FKDxeDIDtZpoTq0Q27hqfJtJH9Ghm2hI-gaF0nB2YDTM36F3aayal3x_SY2fjSmIIN-VEAe56e9uGcqtaZndib6gcvbn86geoJTt3hrRCCYbT-YqLFIULdMCg2PreoQUKlGcEyYTC5glkKNRXsxO5Nsw8K38Plc58WLq51LYFio_WKy_eLpwm0Qhx5T5iQlyjZKtN1gvvjh8dZeJ2dCH45GCMmg3Cx225fS4UcStWJbgn6K7Pv_7opF8pmyNSzbtp5Ol3uAI5zLrNLvFzewWEjljFi_KptJM__WFqWDGcWWcd8QJQ4YlzLJT1Jr32cGyxXqq-0uQE88A6AQKqSOQ1UGCn4TDnk10NpPew6I4voj6vJZufav385vQJspNgtlLDO37s4iEkCREDQv22reFUyUALvuREuYo=w600-no" alt="WebHook情報作成画面" />
+<img src="https://lh3.googleusercontent.com/z7JMO7X5RBsZNdxY65wB6Cq88hvn-GCe8z2pgANmmzDipH_rdNCnmXz5SxwIWNaXX9ZxZKf3L-p9fdvYJcSyTrLK8LMRBzLO3s5FYRaeJN6ZSH8ejJZePjbw34qabuBSHD6eRQsKiUDUOw9ziJwf9QtuzMRoOafmYjqMCXut-elAfnU64nFelsEOyLXQzk1XdRMgovq9UGoAPFWkFtJLjYEjKxxfKC3Z-38N0Q8tqfyHXh745RBu3Lw1T6Z0rhpmAD-ZrY34eolSATenO2gTBG3dT38la4JmRamUm3KzKanq9iUzUwMOEUnd9gDVvqxGlC0Uf5QMBEbmpTHvmXCuSl_MZiE7Ko3QUXev1gE4xAYPIgfmBxxkhOjw4C2boxeRQS4uZv63eRyD0SZWcBbyGzRlWAe7pZwL09v1xZxuV-Og6y2vKkSxEeZh-_SHNzV7zxG174kApbrNqWdnCNZH7Hnd-SRLv8C6AhTwFVbaPCfbljc3c9RddXnjtwGYrgb6LoeOrq3-ceNjvcKLIWqUQIApaICqPeTKzHYWTGyPYx_vIQK_31Tmt6wrqjhdCTgc3B0pFZZ-8XEX46u2B17MZ1PsPmwusZdNX7Dkve7SxegLqk4NyPZfooJ2RuE86aB7qqVj8v_H_X9_GhMX4XhZJRz0WGJ-172f1hQ=w600-no" alt="WebHookを作成" /></p></li>
+
+<li><p>自由にJQLを書けるのでfilterを用意して設定するもよし、その場でマニュアルでJQLを書くもよしよしなに通知対象のチケットを絞ることができます。
+<img src="https://lh3.googleusercontent.com/qRJ0dVfb9rTSDGsfmDM4dKF1RDd9KN6mfbGA1RdmTfKtHEx63BNIaBcB9wJsxoRCQMgYOEvrwkvXVUSFlYfkamkMrZBG-dahFkyq2mFBkKYOGwZA4JkMXy4w4asPj0uFFMh05igMVZUB7fHoYmeOaZOQXw80UmUI1kuK0gYZu-GqcSVSQ41CVR7-xpZecCCqIlLdfjC7vmCpTy_iceu17KldwFgiA0ueBxdqedgUw9M4kMS0ZztyyUvxY6YOe-QDgeBRTrL3V0hmxnAIQRhzULPCA2QdY9qiuxuQlsyl1YRXwLtWCSAX-yH9bkJrkR4Zs6HpG303W0FGDfwF6543Jw-4HF1pqaxYZj9wvzjDb9FG2DtnHoqaIjQVjZz8OhLSUeh7_JsWQCBEL6T5vg6NaHrb8Tp1-89PoYxwSYi9EyT3wiVMToAhXlDcXClZ4vXLUA8HElp-hNSTYCBEx5YwBbOGtWSIsiSBazfigKGQgnFmRrTJDxaGnPu-cXGhJPOO6njpPkU-mCC8SOEnGvYa5O_EZ-F4cjp3TUCFmMPO_dIQU9aVWu2g1XQDCcARxLosW4FQgByO0-QpwiIcBgQpWfmcg-zXlXFzDphfjSLWEJB-1ZkpGB3xXxrxcBj2YKBScXTTdiqxHI92DPLziTDmA9xZ-JCJ2ZlsE_M=w600-no" alt="JQLが使えるのでお好みの条件でfilterして通知しましょう" /></p></li>
+</ul>
+
+<p>Slack側の設定（webhook url発行など）についてはSlackオフィシャルの<a href="https://get.slack.help/hc/ja/articles/218475657-Slack-%E3%81%AB-JIRA-%E3%81%AE%E6%9B%B4%E6%96%B0%E6%83%85%E5%A0%B1%E3%82%92%E6%8A%95%E7%A8%BF%E3%81%99%E3%82%8B">ヘルプページ</a>より御覧ください。</p>
+
+<h2 id="boardやbacklog上のチケットのレイアウトを編集したい-componentを表示したい-など">BoardやBacklog上のチケットのレイアウトを編集したい（componentを表示したい など）</h2>
+
+<p>BoardやBacklog上のチケットのレイアウトをカスタマイズしたい時の手順になります。</p>
+
+<ul>
+<li><p>対象のプロジェクトボード右上の設定（Board Settings）よりボード設定画面へ
+<img src="https://lh3.googleusercontent.com/4XrJD95A5Ku_gi8qJWo1OcRaIKAeXQayDgRUz4JNIoj1MTSievsrbX_X593nab0rhh7tC8BkDXOyHkMX-STI2aVDuiOTMZlzLQXgWKmIEWIdS5aq2aXWsHZ6YWJAl2hxCryyyaGl2nzDp4IlftvD2VFUTtDE8GnDLIqE11X1XFJRNpXvLLOLv5ND84DpGgPIMGMifpE-Q7BavS988uagX-SydZqyPfd7JFP6tXWJR_Zxsjz68uwwWLKe4hcNloTpVdFvrO4la3HJGd9fsPn0Q962Wzjlpmlg_8iQxkIMJ-y92-Ikf6tJdWNoSDfBtL9IXI2T0qRBc3ALuYtSVR0QyXeMDNa4KuXGGXr4112PCx368ZEtlKbj5zKvtkDtRtwQliJ_vzpu2e9IHjmwd16djGdjx1yDKHq0UMbbxfzwF57TUEu_bKFdZbBc-8LrrHY9eEa5oWo6UnBXIddMOfI11_oY-F2ssjQQ4m1srWmHuPKgIM2xVe7xCt19UsQMgiw4loYD5s0Jt_9xc6JRkD_Han1MNDc417mH9Xyp5Cl2cWGe5mM-iZxofElAnwGIzlBlfDFTRD7jqWznkGVKAZZnpSnWph3_BRfWM36smvww2p4vQcwLQEDJuGlNz79LKnZJmbsFRd0teHM-3jJXXaziZfBrZDVie3r5GzE=w600-no" alt="Board Setting" /></p></li>
+
+<li><p>Card layoutからバックログ（backlog）とカンバン（active sprints）どちらもレイアウトを編集することができます。</p>
+
+<ul>
+<li>以前のバージョンでは結構項目を足すことができたのですが、最新のバージョン（新デザイン）からは3項目までしか設定できないようです。
+<img src="https://lh3.googleusercontent.com/D1mFaXgsRoEIdjsS8cpglA18E8JAnrM0U-NW2mNoiD3zHH5vQ6ujF3Xn7wQIVsAjdZZmgoz7q3BYfxYrTX0iF6doj5mIVq8GStUQRcnjWLtkGqkUAQZZxflLPYolBJ27XbORxe3Kd4L2lBT3mhViuXPEVnEh5cPjXBtNzjTGetJqCZH9NxbhL7zDda8saQIgj5IGXqycGY4omjlp-BZaLXlYBdghUMEFn_fDZwaresbx23_t4kDC2zAn5BlqXvwf1cEHdwdzsWoZxwDE1KL7idUC0vKpU2M9iNZmKtgXGrkmHDajjomIkCisqJZOloJJJmtOjV-VdSMvCB15-Eaf1a9GQeLbT1lKipzi8R2xPuufZsPo1EOgk9H20zmt88G_UqLxWyGCEl4Co8Nz4xrCPqCryw85YMit83S_F8ChRrgWWubfeDdA2H81hl0p06apJtop08IT0wRxm8lJlhGe1MTD3rVEFbL67GT9hPo8s2mKYjVXcxUcbg_594ff72J4gjj3fdCgKVk4ruIoHQN_k4e_HP-sNKBY5p-5Mv1eDXZMtdhhxU6J2dCtx7-JCPHgrodg5BU94xdBbH1zTaYaS6R1o4V6o1qWqr5WwnM8Gxtt3d0gJB22pVT8vew_eeo7pk4nmymsZtWGGDQyS6HtTgAFI7FHDUbnr2w=w600-no" alt="backlogもactive sprintもレイアウト変更できる" /></li>
+</ul></li>
+
+<li><p>Jira上の情報は大抵出力出来ると思います。表示したい項目を選びましょう。
+<img src="https://lh3.googleusercontent.com/3CwaQtJ7yGZ3CuWwe-bQy9JR_KjKoBb7dPeyqENxWm9tR77dpQcTBWVe96-zosXWxhmD8lKes-V_qxFux41TZowzpKQ9WzaZn5YTJBsN3TZ-tojKbmGzDtgIgkz-_SHau2lE1k67_NTTXMCTw4ZkM7WVEv8DA5bOSDMz43CQd4zjNVThmrTY9wBQFqB1bn0WMghvN1D1kkZv9y8tEkyvIRv_kfodQY8BmXJPWIq6L_1YaQhRmBLV-v0Dhzo4yiXv2ZfMWs48PqFAfnh6vJ9J61-vZrsPIlqBZH8NI35RERb27bbkjV0ylm8lSj5CCIGPGE98CzJXzQQKY7hde5wHDme47Hn1gE3EPPCGVo3Nw1EEDBOByCur97pYZKj7W1ObrN_cwnZebcN0fbgS8OXZVfOPwEWFxQi4JWwRGSNTjZrm945avLOcW44vC5DMj9TYD1bS6Q0Rxsl5fJjs691W1imfq_BC2mN5VEPbKhQovz6wSv0YR-g57EPFAJZCXTVVHrXv2Eud1-uz2bDhit8_a0goQj7P50jb_HNxYzKaGHlRTEaHiUJVRDwjcKTg_WjfsCqHWwzSB6Ny22yuJX8IsULFyqQsm6Z8XjusJrYGrOvXfER4Kkjx2HoHD0PpWyrOKqDyG2DLgusthd43qVeRkdE5CVS58MXAAaE=w600-no" alt="選択できる項目" /></p></li>
+</ul>
+
+<h2 id="最後に">最後に</h2>
+
+<p>Jiraは多機能かつ柔軟性が高いので、解決方法も複数あったりすることもあります。上述した内容とは別の方法で運用されている方も多いかと思いますが、参考になれば幸いです。</p>
+
+<hr />
+
+<p>Housmartでは不動産業界を変えるカウルを支えるエンジニアを募集しています。
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f16%2fstartup-how-to-use-jira%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%a7Jira%e9%81%8b%e7%94%a8%e3%81%97%e3%81%a6%e3%80%81%e3%81%93%e3%81%ae1%e5%b9%b4%e9%96%93%e3%81%a7%e3%82%88%e3%81%8f%e8%81%9e%e3%81%8b%e3%82%8c%e3%81%9f%e4%bd%bf%e3%81%84%e6%96%b95%e9%81%b8&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f16%2fstartup-how-to-use-jira%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f16%2fstartup-how-to-use-jira%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f16%2fstartup-how-to-use-jira%2f&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%a7Jira%e9%81%8b%e7%94%a8%e3%81%97%e3%81%a6%e3%80%81%e3%81%93%e3%81%ae1%e5%b9%b4%e9%96%93%e3%81%a7%e3%82%88%e3%81%8f%e8%81%9e%e3%81%8b%e3%82%8c%e3%81%9f%e4%bd%bf%e3%81%84%e6%96%b95%e9%81%b8" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f16%2fstartup-how-to-use-jira%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no)" alt="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/tool">
+                        tool
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="title">スタートアップでJira運用して、この1年間でよく聞かれた使い方5選</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-16 10:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no)" alt="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="title">【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-11 17:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-11</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/VB-A4qYqhjfFRPEYeRl09TRdUL0ELKUSJaNGd-ZQjO6uaatZz94wphmGooWGP4-6_qna2T35uvMM5n6duy8uuPWEsbcdDKeuY0C9W-UBM2jlRCh7SrERNwpxiLhV_1poIPnyLnGCJIAmDL5TuhMGBcpId7vwLNjach_zEBjn43JY46QNAxMmsKz10la3HSCoGoj4kq13zxIDNAx6jMD0rASukebiyYni79oNCP5IXY12wSaIp_DVWfZtaDqiHiCbrvdzYEQ98YeQFRyx1X5lom2W-UhM00tHk-26QBXTCu0ms0PWlQL9Rf-BC4MTAPZAdQ7YxVIKTTS7iOQyk8vpJvHEp4VVhjwr5mmA_Umm8wKNiuVTIxdH0b1LE-9K6h6ZYHdnRzevrT8A7wGmu-MVsLXuHLJ9-P3qrNAfuL34fzfubEleCs039_wa9NYS_P6d30rrVaoTVFyDN2nf2fHPXsM0VAOAwpaf6yBTADHk-vknOyo-PFO8X3nB7DxBbkLMI_6RFq26tmQuTABvxBQfruOdfgJWPCBxVwenIMxeEGgTtu_5qNseI-ul3tOTl_APHKS7ZhsDEM8vPEN0J9wcyIOGvdR_qyqcSNaLP6b0vHlfjQGJrDa9kLUJ8WF0oVn1ZvOXcCu8gPK95QL_jeVTs3Y3z6DAG-Fj--8=h200)" alt="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="title">JSON API(json:api)をSwiftでいい感じにシリアライズする</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-05 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-05</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no)" alt="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="title">Android アプリを master ブランチマージで Play Store Beta に公開する</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-04</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/FGUW62xM7jE0XUqaC9FFDftVqHUBYL1cQ72aTSeWUJ7-mXG4u28wndpEsw_3fq3mgrMdGKCPAvzjUbOs_ovJWodEQ8mOC-Tl6u-6qm_FI6CVUPJixphDWifRCf9GTYMyDLSRJzl7cC5qNWIeZQUwgSsI8-suD1mNi50EXONOyBPHOLbnTrZUv6ld8aX0DBx_dghJvZDRZd-mX63iI0ujSS1AoyPJ9Vzmaq35C3aIdTw5GN3NRgU5HJ6m39uh-B_w_gfreqSrloxCFavaRHfXaf1z3pRhWWaLhgVMMUIq40yTjMPlx1zT3HNYRMDdZwm3F3qXvrIO64mb3lObbmAuav-LDk4VsVX0kowSJWi3twrJZwsANW7dFth8-l_eCBPXok_SUKLkuIyVtvaS5O-EOgTVh5XEE3cVMjXXUgeN8klYGuVI3FDtlJfZPOCB_zqduL7I6ob27fjtwiOuGZ4zVAP0s18OF8pzqOdPN2-rI1sF84TyQKBoUhEGIC_WsW4hCuD-Dyy8fOAglAbb46YjA_6ntecvsBI9wUf3OgeOmO9OkgrI9sseSkHwkMTKXSpzFcVRFMcErkp2d58R1UH6ZipuOWvAPT3DGzGOnE7_gJwV9KogInCbbcxB_aBHrWFdkM3pjThwIdqOrsIbRhO_u-0i9L2yRGBEOJA=w386-h108-no)" alt="スタートアップでJira運用して、この1年間でよく聞かれた使い方5選" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/management">
+                        management
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/11/20/jira-tempo-plugin/" class="title">Jiraのレポート機能が物足りないのでTempoを導入してチームの全作業時間を可視化した話</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-11-20 14:31:47 &#43;0900 JST" itemprop="datePublished">2017-11-20</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/tool">
+                    tool
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/android">
+                    android
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/atlassian">
+                    atlassian
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gem">
+                    gem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ruby">
+                    ruby
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/android" style="font-size: 12px;">android</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/atlassian" style="font-size: 12px;">atlassian</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gem" style="font-size: 12px;">gem</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ruby" style="font-size: 12px;">ruby</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

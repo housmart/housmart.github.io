@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/</loc>
+    <lastmod>2017-12-16T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/</loc>
     <lastmod>2017-12-11T17:00:00+09:00</lastmod>
   </url>
@@ -169,6 +174,12 @@
   </url>
   
   <url>
+    <loc>http://techblog.housmart.co.jp/tags/atlassian/</loc>
+    <lastmod>2017-12-16T10:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/categories/</loc>
     <priority>0</priority>
   </url>
@@ -301,7 +312,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/jira/</loc>
-    <lastmod>2017-11-20T14:31:47+09:00</lastmod>
+    <lastmod>2017-12-16T10:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -367,7 +378,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2017-12-11T17:00:00+09:00</lastmod>
+    <lastmod>2017-12-16T10:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -432,6 +443,12 @@
   </url>
   
   <url>
+    <loc>http://techblog.housmart.co.jp/categories/tool/</loc>
+    <lastmod>2017-12-16T10:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/tags/tools/</loc>
     <lastmod>2016-09-01T15:54:20+09:00</lastmod>
     <priority>0</priority>
@@ -457,7 +474,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2017-12-11T17:00:00+09:00</lastmod>
+    <lastmod>2017-12-16T10:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
