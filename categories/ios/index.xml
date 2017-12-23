@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Wed, 07 Sep 2016 17:54:20 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 23 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/categories/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OSSを読んでAirbnbのホーム画面の実装を想像してみた</title>
+      <link>http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/</guid>
+      <description>OSSを読んで調査しながら、手を動かしているうちに出来上がったのがこちらです。 はじめに AirbnbのiOSアプリの実装に興味が沸いたのですが</description>
+    </item>
     
     <item>
       <title>ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)</title>

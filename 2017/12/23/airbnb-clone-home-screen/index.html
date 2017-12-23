@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>OSSを読んでAirbnbのホーム画面の実装を想像してみた &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.31" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" />
+    <meta property="og:title" content="OSSを読んでAirbnbのホーム画面の実装を想像してみた" />
+<meta property="og:description" content="OSSを読んで調査しながら、手を動かしているうちに出来上がったのがこちらです。 はじめに AirbnbのiOSアプリの実装に興味が沸いたのですが" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no" />
+
+
+
+<meta property="article:published_time" content="2017-12-23T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2017-12-23T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="OSSを読んでAirbnbのホーム画面の実装を想像してみた">
+<meta itemprop="description" content="OSSを読んで調査しながら、手を動かしているうちに出来上がったのがこちらです。 はじめに AirbnbのiOSアプリの実装に興味が沸いたのですが">
+
+
+<meta itemprop="datePublished" content="2017-12-23T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-12-23T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3033">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no">
+
+
+
+<meta itemprop="keywords" content="ios," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no"/>
+<meta name="twitter:title" content="OSSを読んでAirbnbのホーム画面の実装を想像してみた"/>
+<meta name="twitter:description" content="OSSを読んで調査しながら、手を動かしているうちに出来上がったのがこちらです。 はじめに AirbnbのiOSアプリの実装に興味が沸いたのですが"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        35
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          34
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/oYbGNEhRd0UJHySQppEYMOwcOGOwKbuF2SAJjM85L-ADb5XaIm1FAY4N9BpmXjOiKF9ppBL6V-Wp5O21qlW-C6eIXaZL-xlFWeuDbwCbiwOvkVdY6_A9cr-uwbCrqSS3TFOcgJQcUo-INSk5PbjN-DQpws9dGu4tvnaSsI-0hWXAy63fI5JItBPEoKLodgHjq-JPkG45syo4E2LLFqyZRpC5LnP7WHSENXvLmKaHd3mgJBPEFa0GnTxC5ILwKCLN8A29dZoxBpQd4PzngFy0cWpQ4iLgrI0hC-ulme7IYz0MTja2LzJfxi3lvagBzWhoVHJW1N3KpvL-ytbN4DdFSqqFyxyP6FVqk4f-ZqAxzpx9M3ep1dZ7yGHyuv9dNC__Fgex_AOqf4P3yFHalwcVRIQH-7sIjhNUGeU8LkUP16tIUn7KsmRfwCFJTP_RpdAAhTKaHZomVTlenSCtSVBX8_kqUeYg50pFhXf6ESWNN5xqNGOBP9ut_s-r1qtsiugc-fJ2cM3EQOhcaPfMfSf8DW7tsa8Xc7r3T0zkFBJ99PvXmd0bAM5co6JGw89w6XiQKy4GnX0Jdzgw204dlGkE_K8o_pwmRAhfCLmJma0=w397-h175-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/">
+    <h1 class="article-title" itemprop="name">
+        OSSを読んでAirbnbのホーム画面の実装を想像してみた
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-12-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-23</time>
+            &middot;
+            3033
+            words
+            &middot;
+            7
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">ios</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ios">ios</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="hatena-bookmark-button" data-hatena-bookmark-title="OSSを読んでAirbnbのホーム画面の実装を想像してみた" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>OSSを読んで調査しながら、手を動かしているうちに出来上がったのがこちらです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/q544uGEU9EY7jpbxpfKruFi6vp0uglv05w1DmWCDYQGr7eS6S4TcSFEL1W5mAPv1VscMvNFdG4mN94ofIP2oaCKE0AONHoqicsxbRrobnEw-7flGPKalPzHh74upQ9zfB2h2nIw1PM7AHGivOQ6bTET18kIzTCTE9tz-Gm4jK_JuywQvCiW-3LyW9k6RjQha7bf7Gs2R_qOSFEw1RmlFmlKLRoeed5o9X6ui1XjbwRkFNmNsFuNjlaGLKdG0jVFaUhpj3OMOrxgt6nfnC6kUNbkCrq_zlb5y_lkfAfhna5AP7KOMRR8WyfnGcFxsXWtDetKD8GHtW2NCCg3uGuCVTVROO85y0fgc0Y8YTco_-thKHdRkKjl5NLhtmrUxLsUjUm5Y_p7acaMaigbYPO966bltghNi9mtr2HxOEska6uslR0zZqc5oLLLZMpYwISDGDhsfzUqtT60gwST7bJ9xIIKyns4Ff2qKIwF6oys2gKp9ZBc5fGrAX3TDPTGylvrrnFIiFf2fILCdLUGlSkSh6n0VSDdM8DbK7HzeeqPus0jeIJ9pz1tFX8cWwbrno06NOX0IS1nwERCm5DhvcYWozLNmY4a49WwEIFnaNwY=w280-h480-no"></p>
+
+<p><img src="https://lh3.googleusercontent.com/J-1oaC7hdqlShUP9rYnAbD-Q_qDh5zvR3lLBP1BAsHW4kIPgpV_DuofrbflMOpXsQu2BLfn67l4i7MZMGV8ALGd8yssl3vLxq5LcGOS-7mEC6Gqgo_9hXm1eok2FcMHCdbEaVyaufIYQivQfaX5fP4J1iZqTotNyFv6ZlXd1q5B8GgT-3dhoSbGkQiofmukEsPil9L49cmezP1cE79Yh-kowJFI6oV0QuPRH5CszWAroNJSrpWPIG-wnVxGjHvfBTwapYOvlcvnjXCNXzLT69Mm03gegX6S-I5oZ9CbYVw0spJpPjnSUEMe_9nY35b3M5oSPfm6fhx1Idfo74xZyWmOz86oDD0_ioDNXgPTOyFGX3oEXxWUJri9vbyK_XZsu0Ix7WWklFK65zGYo9_YQcJ8eyAsz5Y8hMuoBhqfzdnq67eeFNhJceBTx0zJzqeuaQpeuViRTo4m5TizOb3xet4pYgFS_bt9kURsWuqqCBn9VAXhyzWKc1VEsByYX9RaEw8VU8DibPSxM2J0xR8Mlp2lJizT6N2ROFgg-FaiB_Ox01S1noS5bA9MQj-EQ5TU_jML9bfHfvUSpuFGMhgkTpp3qq_ypk02IBFEe4pc=w280-h480-no"></p>
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>AirbnbのiOSアプリの実装に興味が沸いたのですが、Airbnbのソースを直接読むこともできません。そこで、似たような動作を実現しているOSSから内部実装を推測して自分でも書いてみることにしました。事前に調査したところ、既に<a href="https://github.com/yonasstephen/swift-of-airbnb">似たようなこと</a>を考えている方がいて、大いに参考にさせて頂きました。感謝です。</p>
+
+<p>今回の記事は、私が調査して気づいたことを再度整理した、という位置付けです。
+これ以降の記述は下記のような読者を想定して書いていますので、ご承知おき下さい。 m(_ _)m</p>
+
+<ul>
+<li>iPhoneアプリ開発の経験は多少あるけれどもUIの実装は苦手</li>
+<li>著名なアプリの実装に興味がある</li>
+</ul>
+
+<h2 id="画面の構成">画面の構成</h2>
+
+<p>TableViewが縦のスクロールを担い、各ジャンルのリストを横にスクロールしていく部分はTableViewの各rowの中に配置したCollectionViewで実現しています。</p>
+
+<p>&hellip;日本語で表現しようとすると辛いのですが、要はこういう事です。</p>
+
+<p><img src="https://lh3.googleusercontent.com/cYFSPlQ3MoHxalkeOEpZ-R9F7f9H5KldHgOUA8NHhx3TaqS1G9CwSD6P74LHMuoaQ5Ke0ShiwaIpidQEiS9gfAmmuz6K39OcCpH6fyoUOsk_aL6LxgedFlqLEWbdnFbE2PLwN5OiEGzRKk20b9-6L8nAIFslY7chSH8DxjRSJiUa3eBI8B09X7hpu1cf5nNCQbEp0B0nps9gMc3iHJR0vxn16Q6nTN9-i7Jsu31t5OgbKd51sTk-vDlfCkMszgwg-GoqirvLvssFzDR3ionROiii3oYHNvimDhV1atjMz8TTvdJL6RlesQ3L_b7OMkubezvFr8eNfzJf4hoYx2GtW0vga-SjAYxcWVwkqWOhKfiWJzwD1xPeaNrpWwr8tfRlsDjimxuC_gkKzhpoPvIy_zKDYxMZyOtvV7tqqouYkbAOdJEnxkAGWJmK0HlP80nYwkTytoBlVzlPUmavSINx7zAda2nhm9nor6U5elF7wiU7joXflJST_pNMc4AK7vKv7k90J8ToRvR8-AiwCld75Vbv0s9BI2ifI2-1l6QK7BNi1koIBRMVKaFV0JB8qDksTU_1NSOFNQx9t-V266Oz-JR185YS48dnwSQo9pE=w769-h621-no"></p>
+
+<p>CollectionViewは縦横双方へのスクロールに対応しているので、一見、CollectionViewだけでも実現できそうな気もします。ただ、各ジャンルのリストは、それぞれ他ジャンルの影響を受けずに独立して横スクロールできる必要があるため、このような構成となっているようです。</p>
+
+<h2 id="スクロール位置に応じて拡大-縮小するヘッダ">スクロール位置に応じて拡大・縮小するヘッダ</h2>
+
+<p>Airbnbを使用していると、ユーザのスクロールに合わせて、ヘッダが縮小したり、拡大したりすることに気づくと思います。Facebookなどでも実装されているUIですね。</p>
+
+<p><img src="https://media.giphy.com/media/l3mZbfB5m7i2BPp8Q/giphy.gif" alt="Animationg Header" /></p>
+
+<p>細かく見ていくと、少なくとも3つの機能を備えていることが確認できました。順番に見ていきます。</p>
+
+<h3 id="1-スクロール位置に応じてヘッダの高さが変化する">1.スクロール位置に応じてヘッダの高さが変化する</h3>
+
+<p>最初にアプリを起動したときには、ヘッダは目一杯の高さまでexpandして検索の利便性を高めています。ユーザがコンテンツを下にスクロールしていくと、徐々にヘッダは縮小されていきます。</p>
+
+<h3 id="2-ヘッダの高さに応じてalpha値を0から1の間で変化させる">2.ヘッダの高さに応じてalpha値を0から1の間で変化させる</h3>
+
+<p><img src="https://lh3.googleusercontent.com/WYC9WoptzfusE9Ne-7drA2Emj-BRRpJPC6voyZL8aLGefCRysO5tY8z0mJxhtd2Cf4uAKIWqZicEVAqqLw8zG7PmEAHUl11CJRW5kYJBSBZcpptgnwaJ21Z9-XX2FZB0UVs_kdt76TMrePqtPgSvIr9m2OgHnE4ySbvXXm9cCiPS2NSsL75qOi5Z1OjVnhwQlJjrZPFyGx3dTZ3LmzXIDt-C31C-O4lGaR6kOv7-36jlcWr7WgKvUwmw4I6efwz4OBp1_fEQptJ6crTb6wwzTOxokAbVRA4VP4HnIwQj4XHNVYeMtLpCSi2oQLiEPdCGMEkz0o4HZwS2e4L3GVv0YGshG-XoPb24rb0rkAjHFxxztEzo2DZBv7c8O69rTVPdXR_JaMSvdnv6uhemiwX7RgRqFWMi46SdoU2BYPQW4cUa7mrBkaTTeh12rvizE2FKWUuBQErER8YcscQhFnjigXvYmjfp2dh8D6u2nAWPJ9osCKV8H0YfthJ2lXJ7EXMytn3bQdJZ5TF8CMHUCknNxOubXrl92RjKCX7Dk3hre_oAPB1RF4cBW1_BNbpygtL7aPSct-o7zjtPif2qEILSnxQj7DjqvZOHmqgX2-M=w422-h178-no"></p>
+
+<p>(説明の都合上、ラベルの背景色を変更しています。)</p>
+
+<p>現在のヘッダの高さに応じて、alpha値が0から1に変化しています。ヘッダの高さが最小のときalpha = 0, ヘッダの高さが最大の時alpha = 1になるように実装されています。</p>
+
+<h3 id="3-スクロールの途中-中途半端な位置で指を離すと-ヘッダの高さがmaximum-height-もしくは-minimum-heightまで拡大-縮小する">3.スクロールの途中、中途半端な位置で指を離すと、ヘッダの高さがmaximum height もしくは minimum heightまで拡大/縮小する</h3>
+
+<p>これも言葉でお伝えするのが難しいので、もう一度、実物をお見せします。</p>
+
+<p><img src="https://lh3.googleusercontent.com/WYC9WoptzfusE9Ne-7drA2Emj-BRRpJPC6voyZL8aLGefCRysO5tY8z0mJxhtd2Cf4uAKIWqZicEVAqqLw8zG7PmEAHUl11CJRW5kYJBSBZcpptgnwaJ21Z9-XX2FZB0UVs_kdt76TMrePqtPgSvIr9m2OgHnE4ySbvXXm9cCiPS2NSsL75qOi5Z1OjVnhwQlJjrZPFyGx3dTZ3LmzXIDt-C31C-O4lGaR6kOv7-36jlcWr7WgKvUwmw4I6efwz4OBp1_fEQptJ6crTb6wwzTOxokAbVRA4VP4HnIwQj4XHNVYeMtLpCSi2oQLiEPdCGMEkz0o4HZwS2e4L3GVv0YGshG-XoPb24rb0rkAjHFxxztEzo2DZBv7c8O69rTVPdXR_JaMSvdnv6uhemiwX7RgRqFWMi46SdoU2BYPQW4cUa7mrBkaTTeh12rvizE2FKWUuBQErER8YcscQhFnjigXvYmjfp2dh8D6u2nAWPJ9osCKV8H0YfthJ2lXJ7EXMytn3bQdJZ5TF8CMHUCknNxOubXrl92RjKCX7Dk3hre_oAPB1RF4cBW1_BNbpygtL7aPSct-o7zjtPif2qEILSnxQj7DjqvZOHmqgX2-M=w422-h178-no"></p>
+
+<p>ユーザが途中でスクロールをストップし指を離した時に、ヘッダの高さをアニメーション付きで拡大 or 縮小させます。</p>
+
+<p><img src="https://lh3.googleusercontent.com/9fhxRDBqPDgAtkP__9GT9vij9_ksesXUSH4lJO7LXK0THF8bhSBH15NlICHqpOkDft11UbGW2j-Jtme42CHuZ4fc3ISVU4_uiOG-G7RqwRJBLKG4zAe-aoTZm-XrRyv0Z1VQZGkjdfeOOef5Nyt6VIalVPPrca5TBKgjc7DhqWOt11HlmfRvyqapaR0R2xT6yZMtABpKyjLzS9tMrVuKjJPIirhlMLuWj54lB4yJxWYD1U1LqEO8d4SiL4FO6vnkbTWFCu0P2wZYcF9rXx5gRp22jvWQc1uWOqxDFOkyDzAl04C67sX3un-6RZO6FYB0e4_TxqHGN4xQUjwY8Bg4SewR5TVJFWFkXa7w1YsWNRpa-cMwILW2OKgdoRRlkTqhPgvAcbkxf31ofgRVJQrC4ek1WfgtjUdle0w0AIt_cqOW4-YcuA3PP_1zf5IW77FBjcbzHspn-jmicihcOrc-KrZgoG5qqpp68rvt4giChYWDqeoISrjl_O68n-qJCYaC13mhdazLU3LUXpGp0Dl9A1LMnW5aQBgXrQbAFd1VthdN28sV8Qmblxti0_lB1-HRJ0XHQQtgKcYnHZ7m9_mIhNkpnKzoWcmfOvfupsM=w598-h157-no"></p>
+
+<p>つまり</p>
+
+<ul>
+<li>ヘッダの高さがmaximum heightよりminimum heightに近い状態で指を離したら、ヘッダの高さはminimum heightまで縮小します。</li>
+<li>ヘッダの高さがminimum heightよりmaximium heightに近い状態で指を離したら、ヘッダの高さはmaximum heightまで拡大します。</li>
+</ul>
+
+<p>以下、本文中ではこの機能を <code>snap</code> と呼ぶことにします。</p>
+
+<h2 id="実装">実装</h2>
+
+<p>さきほど説明した3つの機能の内部実装をみていきます。</p>
+
+<h3 id="first-step">first step</h3>
+
+<p>ヘッダの高さを制御するために、ヘッダの height constraintをIBOutletとして切り出します。</p>
+
+<p><strong>SearchExpandableHeader.swift</strong></p>
+
+<pre><code>class SearchExpandableHeader: UIView {
+    
+    @IBOutlet fileprivate weak var _heightConstraint: NSLayoutConstraint!
+
+</code></pre>
+
+<h3 id="ヘッダの高さ-minimum-height-maximum-height-を定義する">ヘッダの高さ(minimum height, maximum height)を定義する</h3>
+
+<p>ヘッダの高さはコンテンツのスクロールに応じて一定の範囲内で変動します。
+これを実現するために、minimum height, maximum heightを定義します。</p>
+
+<p><strong>SearchExpandableHeader.swift</strong></p>
+
+<pre><code>    private var _maximumHeight: CGFloat = 140
+    private var _minimumHeight: CGFloat = 90
+</code></pre>
+
+<h3 id="スクロールの方向に応じて動きを変える">スクロールの方向に応じて動きを変える</h3>
+
+<p>スクロールの方向を判定するために、<code>previousContentOffset</code>と <code>scrollView.contentOffset.y</code>を比較しています。</p>
+
+<p><strong>SearchViewcontroller.swift</strong></p>
+
+<pre><code>  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let deltaYOffset = scrollView.contentOffset.y - previousContentOffset
+        let isScrollingDown = deltaYOffset &gt; 0 &amp;&amp; !isTopReached(scrollView)
+        let isScrollingUp = deltaYOffset &lt; 0 &amp;&amp; !isBottomReached(scrollView)
+        
+        if expandableHeader.canAnimate(scrollView) {
+            let newHeight = nextHeight(isScrollingDown: isScrollingDown, isScrollingUp: isScrollingUp, deltaYOffset: deltaYOffset, currentHeight: expandableHeader.heightConstraintConstant)
+            
+            if newHeight != expandableHeader.heightConstraintConstant {
+                expandableHeader.heightConstraintConstant = newHeight
+                setScrollPosition(position: previousContentOffset)
+            }
+        }
+    }
+</code></pre>
+
+<ul>
+<li>前回のスクロール位置との差分</li>
+<li>スクロールの方向</li>
+</ul>
+
+<p>が得られたので、ヘッダの高さを変更できます。スクロールの差分に応じてヘッダの高さを変動させます。このとき、あらかじめ定義した minimum heightからmaximum heightの範囲内におさまるように、max, minを用いて制御しています。</p>
+
+<p><strong>SearchViewcontroller.swift</strong></p>
+
+<pre><code>  private func nextHeight(isScrollingDown: Bool, isScrollingUp: Bool, deltaYOffset: CGFloat, currentHeight: CGFloat)  -&gt; CGFloat {
+        
+        if isScrollingDown {
+            return max(expandableHeader.minimumHeight, expandableHeader.heightConstraintConstant - abs(deltaYOffset))
+        } else if isScrollingUp {
+             return min(expandableHeader.maximumHeight, expandableHeader.heightConstraintConstant + abs(deltaYOffset))
+        }
+        // スクロールしてなければ、もとの高さのまま
+        return currentHeight
+    }
+</code></pre>
+
+<p>tableviewに含まれるコンテンツが少なくて、画面におさまる範囲内であれば、ヘッダの高さを変化させる必要性もありません。そこで事前に <code>canAnimate(scrollView)</code> を実行してコンテンツの量をチェックしています。考慮漏れしそうな所ですが、この辺の気遣いは素晴らしいなーと思いました。</p>
+
+<p><strong>SearchViewcontroller.swift</strong></p>
+
+<pre><code>    if expandableHeader.canAnimate(scrollView) {
+        // ヘッダの高さを計算する
+    }
+</code></pre>
+
+<p>canAnimateの中身はこんな感じ。。</p>
+
+<p><strong>SearchViewcontroller.swift</strong></p>
+
+<pre><code>    func canAnimate(_ scrollView: UIScrollView) -&gt; Bool {
+        let scrollViewMaxHeight = scrollView.frame.height + range
+        return scrollView.contentSize.height &gt; scrollViewMaxHeight
+    }
+</code></pre>
+
+<h3 id="ヘッダの高さに応じてalpha値を変化させる">ヘッダの高さに応じてalpha値を変化させる</h3>
+
+<p>ヘッダのheightの制約を更新すると、<code>updateProgress()</code> が実行され、どの程度ヘッダが拡大/縮小しているのかを計算し、<code>_progress</code> に格納します。
+_progressは割合を表すので、0から1の範囲におさまるように制御しています。</p>
+
+<p><strong>SearchExpandableHeader.swift</strong></p>
+
+<pre><code>     public var heightConstraintConstant: CGFloat {
+        get {
+            return _heightConstraint.constant
+        }
+        
+        set (newHeightConstraintConstant) {
+            _heightConstraint.constant = newHeightConstraintConstant
+            updateProgress()
+        }
+    }
+
+    private func updateProgress() {
+        let openAmount = _heightConstraint.constant - minimumHeight
+        let newProgress = openAmount / range
+        
+        _progress = fmin(fmax(newProgress, 0.0), 1.0)
+    }
+</code></pre>
+
+<p>制約が更新されると<code>layoutSubviews()</code>が呼び出され、さきほど計算した <code>_progress</code> の値を用いて、ヘッダのalphaを操作します。</p>
+
+<p><strong>SearchExpandableHeader.swift</strong></p>
+
+<pre><code>    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.searchConditionsView.alpha = self._progress
+        })
+    }
+</code></pre>
+
+<h3 id="スクロールが止まったらsnapを効かせていい感じにヘッダを動かす">スクロールが止まったらsnapを効かせていい感じにヘッダを動かす</h3>
+
+<p>スクロールが止まったタイミング/指を離した後にスクロールしなくなったタイミングを検知して、<code>snap()</code> メソッドを呼び出します。</p>
+
+<p><strong>SearchViewController.swift</strong></p>
+
+<pre><code>
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // scrolling has stopped
+        expandableHeader.snap()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            // scrolling has stopped
+            expandableHeader.snap()
+        }
+    }
+
+</code></pre>
+
+<p><img src="https://lh3.googleusercontent.com/v4PRJeg_ALeVnF52F2pLvygeBICwaVvQRhYNkX9gaajRk7x-hcTZ_CZBMjSAwPI2piALSIP3g1lIIkU-8UVOmz_DlkF1H0kRJgt51BlRF4S9vO0BdWofGHg7zZJiQsgb78Tu3eapbwwUe_0ojv4_bzF0ZiEYNJTaWvwoeXXjLJNoaD_BEjSp3Qtyoy-2LwSAVIiOguZx_KHF3t9g8TBXKkn3XZ3yaCc6AXW-YErkUI0iasrAthxDXqURQa7VAiZUQsVW4w5O3-Uq3HQ61MOjehsL8_X8YCM1VUrwyl2u7nwy7vJbOtCq0kQduBOUIm0dToEMximQzsQz6eyUBJ4Wgz3LgGLBtWEKztHiVdaHwHTIlzUj-a26w7XLDMWaZkIp0Re8xX457E3ejTLyw0ocv4blfXR2YMPCoPGW-EsEXg9QUAqs9nyLMPY-3kz5FE06A5OEm6CELTLi1-J__p9_wBBvIolTU-XHYYQtrBco9mwuuVtpge3wAv9JdmS8rdCL8TtdmLqXaz32UtOVaBwKH3wJUYhlN3RIZplqOGWUqxMttlPat3w_dL13JsMYDm8ZyF3EkEAEbmIUyh3MmRCplfe8ukNNWAE4rwaRM3I=w500-h84-no"></p>
+
+<p>上の図の赤い縦線の範囲内でヘッダの高さが変化するのですが、<code>snap()</code>が発動した時点で、ヘッダの高さがmidPointを超えていれば、ヘッダが拡大します。ヘッダの高さがmidPointよりも小さければ、ヘッダが縮小します。</p>
+
+<p><strong>SearchExpandableHeader.swift</strong></p>
+
+<pre><code>
+    func snap() {
+        let midPoint = minimumHeight + (range / 2)
+        
+        if heightConstraintConstant &gt; midPoint {
+            expand()
+        } else {
+            collapse()
+        }
+    }
+</code></pre>
+
+<p><code>expand()</code>, <code>collapse()</code> はこんな感じで実装しました。
+制約を変更する前に、未適用の表示を更新しておきます。
+そのあと、animationブロックの外で制約を変更して、アニメーションを実行します。</p>
+
+<p><strong>SearchExpandableHeader.swift</strong></p>
+
+<pre><code>
+protocol SearchExpandableHeaderDelegate {
+    func updateLayout()
+}
+
+class SearchExpandableHeader: UIView {
+ private func expand() {
+        self.delegate?.updateLayout()
+        self.heightConstraintConstant = self.maximumHeight
+        UIView.animate(withDuration: 0.6, animations: {
+            self.delegate?.updateLayout()
+        })
+    }
+    
+    private func collapse() {
+        self.delegate?.updateLayout()
+        self.heightConstraintConstant = self.minimumHeight
+        UIView.animate(withDuration: 0.6, animations: {
+            self.delegate?.updateLayout()
+        })
+    }
+}
+</code></pre>
+
+<p><strong>SearchViewController.swift</strong></p>
+
+<pre><code>
+extension SearchViewController: SearchExpandableHeaderDelegate {
+    func updateLayout() {
+        self.view.layoutIfNeeded()
+    }
+}
+
+</code></pre>
+
+<p>以上で完成です。</p>
+
+<h2 id="最後に">最後に</h2>
+
+<p>誤りの指摘などございましたら、お気軽にコメントをお願い致します m(_ _)m</p>
+
+<p>一瞬の動きの中にも、ソースを読まないと気づかないような細かい制御がいくつも入っていて勉強になりました。</p>
+
+<p>今回、作成したAirbnb cloneのソースコードは<a href="https://github.com/tjnet/airbnb-clone">こちら</a>に置きました。また時間をみつけて、他の画面も掘り下げてみたいと思います。</p>
+
+<h2 id="あわせて読みたい">あわせて読みたい</h2>
+
+<p>このあたりは実際のAppStoreにリリースされているものがOSSになっているようで、面白そうですね。</p>
+
+<ul>
+<li><a href="https://github.com/kickstarter/ios-oss">kickstarter/ios-oss: Kickstarter for iOS. Bring new ideas to life, anywhere.</a></li>
+<li><a href="https://github.com/RocketChat/Rocket.Chat.iOS">RocketChat/Rocket.Chat.iOS: Rocket.Chat Native iOS Application</a></li>
+<li><a href="https://github.com/voisine/breadwallet-ios">voisine/breadwallet-ios: bread - bitcoin wallet</a></li>
+</ul>
+
+<h2 id="参考リンク">参考リンク</h2>
+
+<p>実装にあたっては、下記を参考にさせていただきました。</p>
+
+<ul>
+<li><a href="https://www.leanplum.com/blog/ux-analysis-airbnb/">UX Analysis: How Airbnb Engages Users w/ Fictionless Flows | Leanplum</a></li>
+<li><a href="https://github.com/yonasstephen/swift-of-airbnb">yonasstephen/swift-of-airbnb: A self-taught project of learning Swift by making some of Airbnb&rsquo;s screens</a></li>
+<li><a href="https://github.com/bryankeller/BLKFlexibleHeightBar/blob/cbb6bda8d3c55d465db6b77dd01b8107dcff8a08/BLKFlexibleHeightBar/SquareCashStyleBehaviorDefiner.m">BLKFlexibleHeightBar/SquareCashStyleBehaviorDefiner.m at cbb6bda8d3c55d465db6b77dd01b8107dcff8a08 · bryankeller/BLKFlexibleHeightBar</a></li>
+<li><a href="https://ashfurrow.com/blog/putting-a-uicollectionview-in-a-uitableviewcell-in-swift/">Putting a UICollectionView in a UITableViewCell in Swift - Ash Furrow</a></li>
+<li><a href="https://michiganlabs.com/ios/development/2016/05/31/ios-animating-uitableview-header/">iOS Animating UITableView Header - Michigan Software Labs</a></li>
+<li><a href="http://takuyaokamoto.hateblo.jp/entry/2017/07/10/020751">kicksterter/ios-oss を観察してみて思ったこと（その１） - おぼえがき</a></li>
+<li><a href="https://qiita.com/shoheiyokoyama/items/2f76938dffa845130acc">UIViewにおけるレイアウトのライフサイクル - Qiita</a></li>
+<li><a href="https://developers.eure.jp/tech/ios_layout_beginners/">iOSエンジニア必見！！iOSのレイアウトで押さえておきたいこと【総集編】 | eureka tech blog</a></li>
+<li><a href="https://qiita.com/caesar_cat/items/051cda589afe45255d96">AutoLayout制約値を変更したアニメーションで勘違いしていた件 - Qiita</a></li>
+</ul>
+
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="hatena-bookmark-button" data-hatena-bookmark-title="OSSを読んでAirbnbのホーム画面の実装を想像してみた" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="OSSを読んでAirbnbのホーム画面の実装を想像してみた" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f23%2fairbnb-clone-home-screen%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=OSS%e3%82%92%e8%aa%ad%e3%82%93%e3%81%a7Airbnb%e3%81%ae%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e5%ae%9f%e8%a3%85%e3%82%92%e6%83%b3%e5%83%8f%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f23%2fairbnb-clone-home-screen%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f23%2fairbnb-clone-home-screen%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f23%2fairbnb-clone-home-screen%2f&amp;description=OSS%e3%82%92%e8%aa%ad%e3%82%93%e3%81%a7Airbnb%e3%81%ae%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e5%ae%9f%e8%a3%85%e3%82%92%e6%83%b3%e5%83%8f%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f23%2fairbnb-clone-home-screen%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">スタートアップでJira運用して、この1年間でよく聞かれた使い方5選</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/oYbGNEhRd0UJHySQppEYMOwcOGOwKbuF2SAJjM85L-ADb5XaIm1FAY4N9BpmXjOiKF9ppBL6V-Wp5O21qlW-C6eIXaZL-xlFWeuDbwCbiwOvkVdY6_A9cr-uwbCrqSS3TFOcgJQcUo-INSk5PbjN-DQpws9dGu4tvnaSsI-0hWXAy63fI5JItBPEoKLodgHjq-JPkG45syo4E2LLFqyZRpC5LnP7WHSENXvLmKaHd3mgJBPEFa0GnTxC5ILwKCLN8A29dZoxBpQd4PzngFy0cWpQ4iLgrI0hC-ulme7IYz0MTja2LzJfxi3lvagBzWhoVHJW1N3KpvL-ytbN4DdFSqqFyxyP6FVqk4f-ZqAxzpx9M3ep1dZ7yGHyuv9dNC__Fgex_AOqf4P3yFHalwcVRIQH-7sIjhNUGeU8LkUP16tIUn7KsmRfwCFJTP_RpdAAhTKaHZomVTlenSCtSVBX8_kqUeYg50pFhXf6ESWNN5xqNGOBP9ut_s-r1qtsiugc-fJ2cM3EQOhcaPfMfSf8DW7tsa8Xc7r3T0zkFBJ99PvXmd0bAM5co6JGw89w6XiQKy4GnX0Jdzgw204dlGkE_K8o_pwmRAhfCLmJma0=w397-h175-no)" alt="OSSを読んでAirbnbのホーム画面の実装を想像してみた" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="title">OSSを読んでAirbnbのホーム画面の実装を想像してみた</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-23</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no)" alt="OSSを読んでAirbnbのホーム画面の実装を想像してみた" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/tool">
+                        tool
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="title">スタートアップでJira運用して、この1年間でよく聞かれた使い方5選</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-16 10:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no)" alt="OSSを読んでAirbnbのホーム画面の実装を想像してみた" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="title">【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-11 17:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-11</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/VB-A4qYqhjfFRPEYeRl09TRdUL0ELKUSJaNGd-ZQjO6uaatZz94wphmGooWGP4-6_qna2T35uvMM5n6duy8uuPWEsbcdDKeuY0C9W-UBM2jlRCh7SrERNwpxiLhV_1poIPnyLnGCJIAmDL5TuhMGBcpId7vwLNjach_zEBjn43JY46QNAxMmsKz10la3HSCoGoj4kq13zxIDNAx6jMD0rASukebiyYni79oNCP5IXY12wSaIp_DVWfZtaDqiHiCbrvdzYEQ98YeQFRyx1X5lom2W-UhM00tHk-26QBXTCu0ms0PWlQL9Rf-BC4MTAPZAdQ7YxVIKTTS7iOQyk8vpJvHEp4VVhjwr5mmA_Umm8wKNiuVTIxdH0b1LE-9K6h6ZYHdnRzevrT8A7wGmu-MVsLXuHLJ9-P3qrNAfuL34fzfubEleCs039_wa9NYS_P6d30rrVaoTVFyDN2nf2fHPXsM0VAOAwpaf6yBTADHk-vknOyo-PFO8X3nB7DxBbkLMI_6RFq26tmQuTABvxBQfruOdfgJWPCBxVwenIMxeEGgTtu_5qNseI-ul3tOTl_APHKS7ZhsDEM8vPEN0J9wcyIOGvdR_qyqcSNaLP6b0vHlfjQGJrDa9kLUJ8WF0oVn1ZvOXcCu8gPK95QL_jeVTs3Y3z6DAG-Fj--8=h200)" alt="OSSを読んでAirbnbのホーム画面の実装を想像してみた" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="title">JSON API(json:api)をSwiftでいい感じにシリアライズする</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-05 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-05</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/zp1jf3uuKuLIcN9n3nKjoZB0aacvOJB56HJAYqZ0dH7UidO68VrSNVuvOeY5LDcktbht4G41OaIiJzDVgpSNKQK8hMcc-f1IXutYFuuFJV5gWEXJMFzY7cSxkEfWHoFXT5h2uWA7AIS0wKG_2FurbaPiFFqvaHS7ESiKHteSPu2GSRIbvxWDkdAwu7AEdeTXLmgpjiT4wwqP-FQGKugGFa9YWS3JHpeeTATo3XycvPpM5rfUBru6bHeKkub1-s85_ClyGf4GbizAhNU3w219R-sg69VffaFNjF_a2BfFbTiSC5GBcTUYLR3VivyVFYVdvJ88wl44hqMnAOgSkS49iB8RgX-U2wPXLNAEdsnBxBQPv6ArKjmlrfCT3l9Yd3q5nrToBv-noU1SReztmUnYCf3avw4ByMgVY-ZFun3nMEleuwu6b6VlEDk5pLS8IdfnIsQ5HIPke--PIyfovi7iTk2SafyDD9eVNmGWdGkQU9MzD_XLAHEXq8ew-O5kPSQb2vUgxB-C6kknXnDKXRStD7f2AejnngYcGpzIiWS8cdcoVo9hv9m-GKyPmdHWHsUNPFP_bt5Qx2S8C82DzdP5DpwOIl8epZHwBGbuUdJNdbthyC8KqPJTNUkBaZQBpIWG93IjQGl67NWzPQHHn78XUF_3gZ-UGF0wPVA=w1824-h1114-no)" alt="OSSを読んでAirbnbのホーム画面の実装を想像してみた" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/04/automated-publish-to-play-store-for-android-app/" class="title">Android アプリを master ブランチマージで Play Store Beta に公開する</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-04</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/tool">
+                    tool
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/android">
+                    android
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/atlassian">
+                    atlassian
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gem">
+                    gem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ruby">
+                    ruby
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/android" style="font-size: 12px;">android</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/atlassian" style="font-size: 12px;">atlassian</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gem" style="font-size: 12px;">gem</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ruby" style="font-size: 12px;">ruby</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
