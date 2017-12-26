@@ -18,7 +18,13 @@
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/</guid>
-      <description>Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したい</description>
+      <description>&lt;p&gt;Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したいと思います。&lt;/p&gt;
+
+&lt;p&gt;昨今のディープラーニングブームで、普通のWebサービスを作るエンジニアでもGPU実行環境が欲しい！という場面に出くわすことが多くなってきていると思います。そんな時にサクッと環境を作れるとかっこいいですね。&lt;/p&gt;
+
+&lt;p&gt;また、この記事は&lt;a href=&#34;https://qiita.com/advent-calendar/2017/deep-learning-engineering&#34;&gt;ディープラーニングのエンジニアリング Advent Calendar 2017&lt;/a&gt;の25日目に参加しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

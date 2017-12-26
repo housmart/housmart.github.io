@@ -21,7 +21,13 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <link rel="canonical" href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" />
     <meta property="og:title" content="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" />
-<meta property="og:description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したい" />
+<meta property="og:description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したいと思います。
+
+昨今のディープラーニングブームで、普通のWebサービスを作るエンジニアでもGPU実行環境が欲しい！という場面に出くわすことが多くなってきていると思います。そんな時にサクッと環境を作れるとかっこいいですね。
+
+また、この記事はディープラーニングのエンジニアリング Advent Calendar 2017の25日目に参加しています。
+
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" />
 
@@ -46,12 +52,18 @@
     
     
 <meta itemprop="name" content="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する">
-<meta itemprop="description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したい">
+<meta itemprop="description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したいと思います。
+
+昨今のディープラーニングブームで、普通のWebサービスを作るエンジニアでもGPU実行環境が欲しい！という場面に出くわすことが多くなってきていると思います。そんな時にサクッと環境を作れるとかっこいいですね。
+
+また、この記事はディープラーニングのエンジニアリング Advent Calendar 2017の25日目に参加しています。
+
+">
 
 
 <meta itemprop="datePublished" content="2017-12-26T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2017-12-26T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2860">
+<meta itemprop="wordCount" content="2866">
 
   <meta itemprop="image" content="https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no">
 
@@ -62,7 +74,13 @@
     <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image:src" content="https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no"/>
 <meta name="twitter:title" content="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する"/>
-<meta name="twitter:description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したい"/>
+<meta name="twitter:description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したいと思います。
+
+昨今のディープラーニングブームで、普通のWebサービスを作るエンジニアでもGPU実行環境が欲しい！という場面に出くわすことが多くなってきていると思います。そんな時にサクッと環境を作れるとかっこいいですね。
+
+また、この記事はディープラーニングのエンジニアリング Advent Calendar 2017の25日目に参加しています。
+
+"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 </head>
@@ -278,7 +296,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2017-12-26 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-26</time>
             &middot;
-            2860
+            2866
             words
             &middot;
             6
@@ -325,13 +343,13 @@
 
 
             <div class="article-entry" itemprop="articleBody">
-                
-
-<p>Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したいと思います。</p>
+                <p>Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したいと思います。</p>
 
 <p>昨今のディープラーニングブームで、普通のWebサービスを作るエンジニアでもGPU実行環境が欲しい！という場面に出くわすことが多くなってきていると思います。そんな時にサクッと環境を作れるとかっこいいですね。</p>
 
 <p>また、この記事は<a href="https://qiita.com/advent-calendar/2017/deep-learning-engineering">ディープラーニングのエンジニアリング Advent Calendar 2017</a>の25日目に参加しています。</p>
+
+<p></p>
 
 <h1 id="背景など">背景など</h1>
 
@@ -460,7 +478,6 @@ ecs-cli scale --capability-iam --size 0
 
 <p>いかがでしたでしょうか。今回はAWS ECS上でGPU計算環境を構築する手順をご紹介しました。
 みなさんがクラウド上でGPU環境をサクッと作れる様になる助けになれば幸いです。</p>
-
             </div>
             <div class="hatena_button">
   <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="hatena-bookmark-button" data-hatena-bookmark-title="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
