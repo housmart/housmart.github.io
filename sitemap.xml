@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/</loc>
+    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/</loc>
     <lastmod>2017-12-23T00:00:00+00:00</lastmod>
   </url>
@@ -220,6 +225,12 @@
   </url>
   
   <url>
+    <loc>http://techblog.housmart.co.jp/tags/deep-learning/</loc>
+    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/tags/design/</loc>
     <lastmod>2017-11-13T19:45:00+09:00</lastmod>
     <priority>0</priority>
@@ -250,6 +261,18 @@
   </url>
   
   <url>
+    <loc>http://techblog.housmart.co.jp/tags/ecs/</loc>
+    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/categories/ecs/</loc>
+    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/tags/elasticsearch/</loc>
     <lastmod>2016-12-16T10:23:43+09:00</lastmod>
     <priority>0</priority>
@@ -276,6 +299,12 @@
   <url>
     <loc>http://techblog.housmart.co.jp/tags/git/</loc>
     <lastmod>2016-06-22T21:25:46+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/gpu/</loc>
+    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -383,7 +412,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2017-12-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -479,7 +508,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2017-12-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

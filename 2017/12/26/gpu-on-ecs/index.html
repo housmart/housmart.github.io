@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.31" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" />
+    <meta property="og:title" content="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" />
+<meta property="og:description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したい" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no" />
+
+
+
+<meta property="article:published_time" content="2017-12-26T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2017-12-26T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する">
+<meta itemprop="description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したい">
+
+
+<meta itemprop="datePublished" content="2017-12-26T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-12-26T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2860">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no">
+
+
+
+<meta itemprop="keywords" content="ecs,gpu,deep-learning," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no"/>
+<meta name="twitter:title" content="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する"/>
+<meta name="twitter:description" content="Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したい"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        36
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          37
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/">
+    <h1 class="article-title" itemprop="name">
+        ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2017-12-26 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-26</time>
+            &middot;
+            2860
+            words
+            &middot;
+            6
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ecs">ecs</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ecs">ecs</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/gpu">gpu</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/deep-learning">deep-learning</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="hatena-bookmark-button" data-hatena-bookmark-title="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>Housmartの高松です。今回はディープラーニングのためのGPU計算実行環境を物理サーバーからAWSのECSに移行した話について紹介したいと思います。</p>
+
+<p>昨今のディープラーニングブームで、普通のWebサービスを作るエンジニアでもGPU実行環境が欲しい！という場面に出くわすことが多くなってきていると思います。そんな時にサクッと環境を作れるとかっこいいですね。</p>
+
+<p>また、この記事は<a href="https://qiita.com/advent-calendar/2017/deep-learning-engineering">ディープラーニングのエンジニアリング Advent Calendar 2017</a>の25日目に参加しています。</p>
+
+<h1 id="背景など">背景など</h1>
+
+<p>Housmartでは、<a href="https://kawlu.com/market">マンションを賢く買えるアプリ「カウル」</a>で提供している売り出し中のマンションの市場相場価格を推定する機能にディープラーニングを利用しています。その他にも実験的なプロジェクトとしてディープラーニングを用いた画像分類などにも取り組んでいます。</p>
+
+<p>実行環境として、2年ほどGPUを搭載した物理マシンをオフィスに置いて計算を行なっていましたが、2017年12月からAWS ECSに移行しました。</p>
+
+<p>理由としては以下の2つです。</p>
+
+<h2 id="クラウド上のgpuマシンの値段が下がって来た">クラウド上のGPUマシンの値段が下がって来た</h2>
+
+<p>GPU物理マシンを構築した当時(2015年ごろ)は1番小さいGPUインスタンスを1ヶ月起動し続けるだけで20万円を超えるくらいの金額だったと記憶しています。（移行前の物理サーバが1台20万円ちょっと）</p>
+
+<p>今では値段も下がってきて、AWSのGPU搭載で一番小さいp2.xlargeのインスタンス（1GPU/4vCPU/61GB RAM）だと1時間あたり$0.9と非常に安価に利用できるようになってきました。</p>
+
+<p>1ヶ月稼働し続けたとしても \$650/month 、仮に1日あたり2時間程度の利用だとすると \$54/month です。日次で動かすバッチだけならこの程度のコストで利用可能なので、移行を決めました。</p>
+
+<p>参考）
+<a href="https://aws.amazon.com/jp/ec2/instance-types/p2/">Amazon EC2 P2 インスタンス</a>
+<a href="https://aws.amazon.com/jp/about-aws/whats-new/2017/10/introducing-amazon-ec2-p3-instances/">Amazon EC2 P3 インスタンスをリリース</a></p>
+
+<h2 id="物理サーバーは管理がやっぱり辛い">物理サーバーは管理がやっぱり辛い</h2>
+
+<p>2年程度GPUマシンの管理をしていましたが、やっぱり物理サーバーの管理は辛いですね。</p>
+
+<p>ネットワークのトラブルや、間違えて環境を壊してしまったり、ドライバやOSのアップデートで動かなくなったりとその度にトラブルシューティングに結構な時間を取られてしまいます。</p>
+
+<h1 id="なぜawsを選んだか">なぜAWSを選んだか</h1>
+
+<p>GCP・AWS・さくらなど、現実的な選択肢がいくつかありますが、各社値下げ合戦をしているのでそこまで大きな価格差は今後も出ないだろうという予想をしています。</p>
+
+<p>なので、現状のカウルのインフラ構成に沿ってAWS ECSを使うことに決めました。リソースをたくさん使う様ながっつりしたGPU計算をする場合はもうちょっとシビアに比較した方がいいかもしれませんが、カジュアルな使い方ならAWSで十分でしょう。</p>
+
+<p>現状、値段的には <strong>Microsoft &gt;&gt;&gt; IBM &gt;&gt; AWS &gt; GCP &gt; さくら</strong> という感じでしょうか。ただ直近さくらはNVIDIAのライセンス問題もあり、今後どうなるかはわかりません。</p>
+
+<h1 id="構成">構成</h1>
+
+<p>以前のブログ<a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/">「会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと」</a>で紹介したDigdagを用いたバッチ実行環境から、GPUマシンで構築したECSクラスタにjobを投入する方式を採用しています。（Digdagからのjob実行時にクラスタ名を渡しているので、そこにGPUクラスタ名を渡すイメージ）</p>
+
+<p>また、24時間フル稼働させる必要はないので、GPU計算を必要とするjobの直前にGPUクラスタにインスタンスを追加し、バッチが終わり次第インスタンスを落とすという経済的な設計になっています。</p>
+
+<p>インスタンスのスケーリングは<a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI.html">ecs-cli</a>というECSクラスタ用のコマンドラインツールを使っています。</p>
+
+<h1 id="クラスタ設定方法">クラスタ設定方法</h1>
+
+<p>以下の手順で設定していきます。</p>
+
+<ol>
+<li>GPU on ECS用のAMIを作成する</li>
+<li>ECSクラスタを作成する</li>
+<li>ECSクラスタの裏側にあるCloudFormationにAMIを登録する</li>
+<li>GPU用のTaskDifinitionを作成する</li>
+</ol>
+
+<p>順番に見ていきましょう。</p>
+
+<h2 id="1-gpu-on-ecs用のamiを作成する">1. GPU on ECS用のAMIを作成する</h2>
+
+<p>公式ドキュメントが存在するので、<a href="http://docs.aws.amazon.com/ja_jp/batch/latest/userguide/batch-gpu-ami.html">こちら</a>を参照してください。
+GPU用のドライバが入っているAMIに<a href="https://github.com/NVIDIA/nvidia-docker">nvidia-docker</a>をインストールして、再度AMIを作成する手順です。</p>
+
+<p>nvidia-dockerとは、dockerのラッパーとして実装されているツールで、ホストOS上にNVIDIAのドライバがインストールされていれば、CudaToolkitを含んだコンテナからGPUを利用出来るようになります。
+参考）<a href="http://www.nvidia.co.jp/object/docker-container-jp.html">http://www.nvidia.co.jp/object/docker-container-jp.html</a></p>
+
+<h2 id="2-ecsクラスタを作成する">2. ECSクラスタを作成する</h2>
+
+<p>こちらも<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/create_cluster.html">公式の手順</a>にそってクラスタを作成してください。
+細かい設定はこの後いじるので、基本的にはデフォルト値で作成して問題ありません。</p>
+
+<h2 id="3-ecsクラスタの裏側にあるcloudformationにamiを登録する">3. ECSクラスタの裏側にあるCloudFormationにAMIを登録する</h2>
+
+<p>ECSは実は裏側でCloudFormationのテンプレートを保持しています。
+クラスタで起動するインスタンスのタイプや元となるAMIを変更するにはCloudFormationのテンプレートを修正する必要があります。</p>
+
+<p>AWSコンソール上で CloudFormation &gt; EC2ContainerService-${クラスタ名}を選択 &gt; Update Stack &gt; 2番目の画面で以下2箇所を設定 &gt; 更新 で設定完了です。</p>
+
+<p><img src="https://lh3.googleusercontent.com/TjcbwSNmIOirytZ7GXCRuwsEPvC6iGyL7YpppaU_WCAMYP1eTbXETjw-619TyF-6gxBHq19WcwX-Gf-3RSd1wATanM23lKKT0o6C_9foAyowWhqxq6pP7S3vI6B95ZCBdbatu5J_g-L93M-dZffK7OW5EAX-vDFfQENMOG_xMAUeX27gswZCYVc0813JxwSrtQuFXoZ4UyVNPb5cVxQBmZ3VgfDAuecGwyKKMwcRqDZnpiKGmQHVUw287ycG3rloawYwSWXM7KB4pJ6AnpunrTBfzHN7bDFwWC9NM0-P6ZqcXG-EEmWSMoaRy0LqnOZYDnKZZUM_1Oz_tRF9LScv3-DciIIJo3mXCapQmhjG3AkN5SFlGGMwI4VU0t_TvUBOE2hQHmkcf6jLLmguYfvUZSJSn7lKKx4ipJL37j-KW1Bm20ZjdcLayJTLB1p3j0gPg84PjfnHb83MWtgA-KOPMmup3g-wZx-fAKFD5w4Zw_6cK4IgrpOHFeEC5csPsPF9WCzUxQ8id0P9MesMXSluiWFjOl42nnfySCpyPiTQjMlzeesmiz2MZ8UOOCqSwq0f04CvfuXRhY9eoLBH7DYZsvmH3iqNqp4UJGTNsy1BC77m8hm6V81IgIN-_t9BG0SlL0rtCSPzlwt6EEbnWOdpEBrQFRx9aMWO=w1681-h945-no" alt="Update Stack.png" /></p>
+
+<h2 id="4-gpu用のtaskdifinitionを作成する">4. GPU用のTaskDifinitionを作成する</h2>
+
+<p><a href="http://docs.aws.amazon.com/ja_jp/batch/latest/userguide/batch-gpu-ami.html">先ほどのドキュメント</a>にもある通り、実行時にコンテナからnvidiaのドライバを見える様にする必要があるので、マウントポイントを設定しましょう。以下のコマンドの-vオプションに相当する設定です。</p>
+
+<pre><code>sudo docker run -v /var/lib/nvidia-docker/volumes/nvidia_driver/latest:/usr/local/nvidia nvidia/cuda:9.0-cudnn7-devel nvidia-smi
+</code></pre>
+
+<p>ECS &gt; Task Definitions &gt; Create new Task Definition &gt; Add volume としてマウントするVolumeを作成します。
+<img src="https://lh3.googleusercontent.com/eqPdSEpfHUIeiwz-_YWDpF5WP0v9fyWA1LFBOizPs8GdujsqBo4lay7wNtzTpkBuYzZPUSiMwoaXpaHteSEdngfmJCvj2Tc-qoTyJHbM933c2e6wwynNZTkn-E-PPTO1i0HdsZFq7YLN2FMAHuIeqH06KH76Y8Pbn_TkvtIH3BJi2gQpolKC_PZlnCW9S5LS8fycab6cs-472SdBKcTJvTx1CT2oEaPNlwa2q5XcSUNd1Mb9a2DcfjYXo4g2AuH6G7nkiCisEtNUFW_93DFflWUZP3Yb9-pKNQTrJn72rpbZW8dYft7AjpqJ7R4bQKGe8J3ACrERn8XcXmgXhHK5x6jEloiAhISHWPWzRz8x0Hn5tF4rMJVPN-f_XLcXk6PnRDp8GFoVV1wNHi5pe-f58TqQJpMFlsmkjbNvj2St2AWJCqVVZaHZ_ZwC4Tk0olFeFSVjGqR4k_iaIhnXPpr5Mr7jmHXN_fxL-DKld4REz2DwSgMnMfUYlt_n5-xdQvMybkRrTFbSkjhvUBtC4dGLvQ3mdZ3Z8Nx-hK3PEWdhRo-7fPBj2DXleJ8xdjYULWU1197yVIxdiIFw92fwt-ad9FjgZYfVegPIK_vzgYZ9xWhqb258xAYbMjBD9xDS5tQaNInLcoC0VRrlTQe9K5Z7URBY94po8gHT=w1696-h932-no" alt="Amazon ECS.png" /></p>
+
+<p>続いて Add container &gt; Mount points から作成したVolumeをマウントします。
+<img src="https://lh3.googleusercontent.com/cnE5k5k9a_GJb2uPdXf516oO87ZUHD8NXE1RiBfJLbGhSAKJAH5DdbiHQaQ7Mi5sEzD93BoYUhpUkq0o-V2uBSkqsX7zitdeapk2YpaLTAZbZOpz-AbT1V_YFKHy1ZJ-JHsuEO3mARPYOgUSjqR1WPaVaA6jRElAfm6ZZzhIyraZ7lDF2sjc22H84rbY7oxKuAQ47ZsIqt-CECs18ne3vfCYKlJvDdX4Pg6X36HWDEQ9hfjLHWIjZW0atq0StvjqzHXgD_2nkEBaydINfB_SdHWvyRXyxJgz-D7C4358MOP7tqF9SmbS8gkFdSp_tu1EhbOsjkB-pWflukfeU0uvkoafWgXR1iBmp8t8tGBgDRezaIjHGyR44oUEjnhiQZHR0HTbYsa-IXKeVLQtSpFGTtuUnK-IHkqvirua-98UUxE6YOHGUZsiB-rK7WxlaMtgSZwtyaU3KT4GF_iCM3Q4r6wZdw0yyNGcDxR0fI3R21al6fviFdCFsahm9hKsAVtNSz144i7IvL4_McEQPP9j7Ye6fbg6bY9Z7uu96EHltdzcEGasruKki_pk1yWQaS3t3RMYGwwvC-swbAJXYkCYEIyeAejAdntgXOPm9XOAUGlyPGT1GQWbF4Od3PITHjDKNwZuttm7Zl5Qo3jW-RipxkJllwr2cS8Y=w1696-h887-no" alt="Amazon ECS (1).png" /></p>
+
+<p>あとは通常通りTaskDefinitionを作成してください。</p>
+
+<p>これでECS上からGPU計算ができる環境が整いました。</p>
+
+<h1 id="インスタンスのスケーリング">インスタンスのスケーリング</h1>
+
+<p>最後にインスタンスのスケーリングについて紹介します。
+ecs-cliを<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_CLI_installation.html">こちら</a>を参考にインストールします。バイナリが配られているので落としてくるだけでOKです。</p>
+
+<p>AWSの環境変数をセットして</p>
+
+<pre><code>export AWS_ACCESS_KEY_ID=xxxx
+export AWS_SECRET_ACCESS_KEY=xxxx
+</code></pre>
+
+<p>以下のコマンドでecs-cliからクラスタのインスタンス数を操作することができます。先ほど設定変更したCloudFormationのStack nameを指定しなければうまく動かないので注意してください。</p>
+
+<pre><code># ecs-cliの設定
+ecs-cli configure --region ap-northeast-1 --cluster ${cluster-name} --cfn-stack-name ${cloudformation-stack-name}
+
+# GPUインスタンス1台立ち上げ
+ecs-cli scale --capability-iam --size 1
+
+# GPUインスタンス全台ストップ
+ecs-cli scale --capability-iam --size 0
+</code></pre>
+
+<p>上記のコマンドをシェル化して、Digdagの定義でGPU計算jobの前後で呼び出せば使う時だけインスタンスが立ち上がるようになります。</p>
+
+<p>参考）
+<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_CLI_installation.html">http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_CLI_installation.html</a>
+<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/cmd-ecs-cli-scale.html">http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/cmd-ecs-cli-scale.html</a></p>
+
+<h1 id="最後に">最後に</h1>
+
+<p>いかがでしたでしょうか。今回はAWS ECS上でGPU計算環境を構築する手順をご紹介しました。
+みなさんがクラウド上でGPU環境をサクッと作れる様になる助けになれば幸いです。</p>
+
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="hatena-bookmark-button" data-hatena-bookmark-title="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f26%2fgpu-on-ecs%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%83%87%e3%82%a3%e3%83%bc%e3%83%97%e3%83%a9%e3%83%bc%e3%83%8b%e3%83%b3%e3%82%b0%e7%94%a8%e3%81%aeGPU%e8%a8%88%e7%ae%97%e5%ae%9f%e8%a1%8c%e7%92%b0%e5%a2%83%e3%82%92ECS%e4%b8%8a%e3%81%a7%e3%81%aa%e3%82%8b%e3%81%b9%e3%81%8f%e5%ae%89%e3%81%8f%e6%a7%8b%e7%af%89%e3%81%99%e3%82%8b&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f26%2fgpu-on-ecs%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f26%2fgpu-on-ecs%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f26%2fgpu-on-ecs%2f&amp;description=%e3%83%87%e3%82%a3%e3%83%bc%e3%83%97%e3%83%a9%e3%83%bc%e3%83%8b%e3%83%b3%e3%82%b0%e7%94%a8%e3%81%aeGPU%e8%a8%88%e7%ae%97%e5%ae%9f%e8%a1%8c%e7%92%b0%e5%a2%83%e3%82%92ECS%e4%b8%8a%e3%81%a7%e3%81%aa%e3%82%8b%e3%81%b9%e3%81%8f%e5%ae%89%e3%81%8f%e6%a7%8b%e7%af%89%e3%81%99%e3%82%8b" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f12%2f26%2fgpu-on-ecs%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">OSSを読んでAirbnbのホーム画面の実装を想像してみた</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ecs">
+                        ecs
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="title">ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-26 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-26</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/0FpkbJkWCeFHzLE9EtS-kiRDvMH-RblM2ElsH29DCfUSw9IBSaC9q9SCmZu0exW3KXMXi44qdRYed8GEFGVFsOK_AlRNRBPUbNEA0gizaT_pEwE1cjxrfeeUDsGlHjJKmg35WGqxVpq2O-t9M_EIbCmn-zsUCwy9fIl0-G4i8CO8Y-tXFyAS0XS4cEPDlk-r8rf5cc8JDbpbHYfAfUsPgFbn2dII_n1fs4kiB54h1Tiyvym40IcH_y9Jq6QDOg41XjVPcRbU3A2ZEZVSbiKR_DcoKACat8UhvmmRUA4k5Ap35LDe9lH-mJFeoqZHF06wX3P46SJwoTe6AdpYjxBsnl0IkefgM3JUcDINedl_XGApsB3CDub5T2tTATK569IyCDZso2kAsMaND-gKiZpqCn7CnXuGpIkMQzOr7Hc0i8V-CCXeKUQ4781M9SAMO4AjUzTqjBC9GVFAncWfycnKzp5S3QDgTMtBuYjaKkwJoIt__UqkKHOFNnxROi6c6FIyZt3ccF_jmmyEF8QqGy-SytTIz92gTis5TDBP6G-nyEYBB1Q_VbJqnHyqgK3KEuBLK6lSzhPu0zu9pC9vdvVeNPjh27clj0dlZvmNcAUjFLDZevRYiCuoWUkh5QMN4khySBxRJnSHu8OGsnmO6V54BdqcYoykiWbg=w397-h175-no)" alt="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="title">OSSを読んでAirbnbのホーム画面の実装を想像してみた</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-23</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no)" alt="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/tool">
+                        tool
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="title">スタートアップでJira運用して、この1年間でよく聞かれた使い方5選</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-16 10:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-16</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no)" alt="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="title">【アプリ起動時間を50%削減】Rails5.2からデフォルトGemに採用されたBootsnapを検証した</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-11 17:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-11</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/VB-A4qYqhjfFRPEYeRl09TRdUL0ELKUSJaNGd-ZQjO6uaatZz94wphmGooWGP4-6_qna2T35uvMM5n6duy8uuPWEsbcdDKeuY0C9W-UBM2jlRCh7SrERNwpxiLhV_1poIPnyLnGCJIAmDL5TuhMGBcpId7vwLNjach_zEBjn43JY46QNAxMmsKz10la3HSCoGoj4kq13zxIDNAx6jMD0rASukebiyYni79oNCP5IXY12wSaIp_DVWfZtaDqiHiCbrvdzYEQ98YeQFRyx1X5lom2W-UhM00tHk-26QBXTCu0ms0PWlQL9Rf-BC4MTAPZAdQ7YxVIKTTS7iOQyk8vpJvHEp4VVhjwr5mmA_Umm8wKNiuVTIxdH0b1LE-9K6h6ZYHdnRzevrT8A7wGmu-MVsLXuHLJ9-P3qrNAfuL34fzfubEleCs039_wa9NYS_P6d30rrVaoTVFyDN2nf2fHPXsM0VAOAwpaf6yBTADHk-vknOyo-PFO8X3nB7DxBbkLMI_6RFq26tmQuTABvxBQfruOdfgJWPCBxVwenIMxeEGgTtu_5qNseI-ul3tOTl_APHKS7ZhsDEM8vPEN0J9wcyIOGvdR_qyqcSNaLP6b0vHlfjQGJrDa9kLUJ8WF0oVn1ZvOXcCu8gPK95QL_jeVTs3Y3z6DAG-Fj--8=h200)" alt="ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/development">
+                        development
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/05/serialize-json-api-with-swift/" class="title">JSON API(json:api)をSwiftでいい感じにシリアライズする</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-05 18:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-05</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/tool">
+                    tool
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/android">
+                    android
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/atlassian">
+                    atlassian
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/deep-learning">
+                    deep-learning
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gem">
+                    gem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gpu">
+                    gpu
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ruby">
+                    ruby
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/android" style="font-size: 12px;">android</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/atlassian" style="font-size: 12px;">atlassian</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/deep-learning" style="font-size: 12px;">deep-learning</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ecs" style="font-size: 12px;">ecs</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gem" style="font-size: 12px;">gem</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gpu" style="font-size: 12px;">gpu</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ruby" style="font-size: 12px;">ruby</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
