@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>ディープラーニング用のGPU計算実行環境をECS上でなるべく安く構築する</title>
+      <title>ディープラーニング用のGPU計算実行環境をAmazonECS上でなるべく安く構築する</title>
       <link>http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/</link>
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
