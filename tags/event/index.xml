@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Thu, 16 Nov 2017 18:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Feb 2018 16:00:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/tags/event/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>「良い通知」についてROPPONGI.swiftで発表しました</title>
+      <link>http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/</link>
+      <pubDate>Mon, 26 Feb 2018 16:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://visits.connpass.com/event/78975/&#34;&gt;ROPPONGI.swift 第1回&lt;/a&gt;にて「良い通知」について考えた内容を発表しました📣&lt;/p&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;4c497162359241c1934dd7d5da12b90b&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>「リテンション率を2倍にするための2つの視点」をGrowth Hack Talksで発表しました</title>

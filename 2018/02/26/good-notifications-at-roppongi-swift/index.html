@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>Infra &middot; カウル Tech Blog</title>
+    <title>「良い通知」についてROPPONGI.swiftで発表しました &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.31" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -9,9 +9,6 @@
     
       <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
     
-    
-      <link href="http://techblog.housmart.co.jp/categories/infra/index.xml" rel="alternate" type="application/rss+xml" title="カウル Tech Blog" />
-      <link href="http://techblog.housmart.co.jp/categories/infra/index.xml" rel="feed" type="application/rss+xml" title="カウル Tech Blog" />
     
     <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
     <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
@@ -22,15 +19,24 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/categories/infra/" />
-    <meta property="og:title" content="Infra" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/categories/infra/" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" />
+    <meta property="og:title" content="「良い通知」についてROPPONGI.swiftで発表しました" />
+<meta property="og:description" content="ROPPONGI.swift 第1回にて「良い通知」について考えた内容を発表しました📣
 
 
 
-<meta property="og:updated_time" content="2017-11-06T19:30:00&#43;09:00"/>
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600" />
+
+
+
+<meta property="article:published_time" content="2018-02-26T16:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2018-02-26T16:00:00&#43;09:00"/>
+
 
 
 
@@ -43,12 +49,32 @@
 
     
     
-<meta itemprop="name" content="Infra">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="「良い通知」についてROPPONGI.swiftで発表しました">
+<meta itemprop="description" content="ROPPONGI.swift 第1回にて「良い通知」について考えた内容を発表しました📣
 
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Infra"/>
-<meta name="twitter:description" content=""/>
+
+">
+
+
+<meta itemprop="datePublished" content="2018-02-26T16:00:00&#43;09:00" />
+<meta itemprop="dateModified" content="2018-02-26T16:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="671">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600">
+
+
+
+<meta itemprop="keywords" content="swift,ios,event,presentation," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600"/>
+<meta name="twitter:title" content="「良い通知」についてROPPONGI.swiftで発表しました"/>
+<meta name="twitter:description" content="ROPPONGI.swift 第1回にて「良い通知」について考えた内容を発表しました📣
+
+
+
+"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 </head>
@@ -57,7 +83,7 @@
 
 
 <div id="container">
-    
+	
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -150,8 +176,9 @@
   </div>
 </header>
 
-    <div class="outer">
-        <aside id="profile">
+   	
+   	<div class="outer">
+	    <aside id="profile">
   <div class="inner profile-inner">
     <div class="base-info profile-block">
       <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
@@ -243,91 +270,158 @@
   </div>
 </aside>
 
-        <section id="main">
-            <section class="archives-wrap">
-                <div class="archive-category-wrap">
-                    <span class="archive-category">Infra</span>
-                </div>
-                <div class="archives">
-                    
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
             
-            <a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/" class="thumbnail">
                 
-                <span style="background-image:url(https://lh3.googleusercontent.com/TWbriV3C3bjBs5U0BqELGYnWC6QmHIbPtPFHi7a3lMPtdgBBtQkbG5eHWUhiNe6ppytpZhABj6RluhRYg85O5-1rs9z_9qlQpTabCt9UtIgxTzREOoHnOBBKoqsh0im78JE1rhEiOtBEhWajNvgZUZ9848B9yeRjX7xdRM9aRVavHVvyIaIGRtR-Y8Q8Z8_v2ZaHexbu6dXe7ApI4pbRLFLao9utgnBuQEtIMMvxDX3PFDpqfiIBoLhb9GNUm1e7h4KgtyKPb7xfX3OFJhXUVzyVYEsB_vgzRop0mXbe7Q7K71It8vibo6illAeZyOsswT28r2kK39I5PurbfV1McmOnoE3P_P7LG1FfM8z4JQAtBHVwh4RYIyT4fe9EmdbdaMEXjNupVLHHHtKO1vpii8_Ku1dDchD9AX6a8cFGsOWtL9BrLCugJ9YzcBfOpGKt5Fs3wGFvOEHiITrxX5Hu7k6Dfs4tLxkJjcxsq8ZIAAUG19gvOXv3blQrEsQJeQY5GMYUzuWF8nTcDLD6rsCyzMHBzXkmVjc8LoZiwfeROUwZ7npzjKS-L_EN8O2TIDxS8AXzYd4KOXPwa5A-FmOculQPSHnOrmisfI6fy5I1swXiWc4WFv4754HHE4MNDJoaL1LpHEvEH6l58dHyBsVB9xIwYpPQ42_UaSo=w600)" alt="会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと" class="thumbnail-image"></span>
+                <img src="https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600" class="article-banner">
                 
-            </a>
             
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/">会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2017-11-06 19:30:00 &#43;0900 JST" itemprop="datePublished">2017-11-06</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/" class="thumbnail">
-                
-                <span style="background-image:url(http://techblog.housmart.co.jp//images/20160310_top.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]" class="thumbnail-image"></span>
-                
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2016/03/10/prepare_for_wbs2/">テレビ放送に向けての負荷対策(AWS x Rails の場合)[後編]</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2016-03-10 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-10</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/" class="thumbnail">
-                
-                <span style="background-image:url(http://techblog.housmart.co.jp//images/20160303_top.jpg)" alt="テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]" class="thumbnail-image"></span>
-                
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2016/03/03/prepare_for_wbs/">テレビ放送に向けての負荷対策(AWS x Rails の場合)[前編]</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2016-03-03 16:57:26 &#43;0900 JST" itemprop="datePublished">2016-03-03</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                </div>
-            </section>
-            <nav id="page-nav">
 
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/">
+    <h1 class="article-title" itemprop="name">
+        「良い通知」についてROPPONGI.swiftで発表しました
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2018-02-26 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-02-26</time>
+            &middot;
+            671
+            words
+            &middot;
+            2
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">event</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/swift">swift</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/ios">ios</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/presentation">presentation</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="hatena-bookmark-button" data-hatena-bookmark-title="「良い通知」についてROPPONGI.swiftで発表しました" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p><a href="https://visits.connpass.com/event/78975/">ROPPONGI.swift 第1回</a>にて「良い通知」について考えた内容を発表しました📣</p>
+
+<script async class="speakerdeck-embed" data-id="4c497162359241c1934dd7d5da12b90b" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p></p>
+
+<p>アプリを作った際にほぼ必ず送ることになる通知ですが、なんとなく送ってそのままになっていませんか？</p>
+
+<p>この資料ではメールも含めた「良い通知」を送るために以下の3つを大事なポイントとして挙げました。</p>
+
+<ul>
+<li><strong>「良い通知」は送る対象が絞られている</strong></li>
+<li><strong>「良い通知」は計測により支えられている</strong></li>
+<li><strong>「良い通知」はなめらかにアプリに遷移できる</strong></li>
+</ul>
+
+<p>なめらかな遷移のために、iOSの <em>ディープリンク</em> に使われる<code>Custom URL Scheme</code>と<code>Universal Links</code>の違いも簡単にまとめています。<br />
+「通知を送ろう」「ディープリンクを実装しよう」となった時に非エンジニアとエンジニアが一緒に考えるためのきっかけや参考になれば幸いです。</p>
+
+<p>会場で「効果出てますか？」という質問をいただいたのですが、実際に<a href="https://kawlu.com/market">カウル</a>ではリテンション率やアクション数が伸びてきています。(関連ブログ: <a href="http://techblog.housmart.co.jp/2017/11/16/repro-growth-hack-talks-7/">「リテンション率を2倍にするための2つの視点」</a>)</p>
+
+<p><blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">良い通知について！<a href="https://twitter.com/macs_6?ref_src=twsrc%5Etfw">@macs_6</a> さん！ ウザい通知にならないようにしたいよねっ。  <a href="https://twitter.com/hashtag/roppongiswift?src=hash&amp;ref_src=twsrc%5Etfw">#roppongiswift</a> <a href="https://t.co/coKuHSMPkE">pic.twitter.com/coKuHSMPkE</a></p>&mdash; ゆこびん@try! Swift organizer (@yucovin) <a href="https://twitter.com/yucovin/status/966992871311077376?ref_src=twsrc%5Etfw">2018年2月23日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><a href="https://twitter.com/search?q=%23roppongiswift">#roppongiswiftの関連ツイート</a></p>
+
+<p>会場ではSwiftコントリビューターの方々や、<a href="https://www.tryswift.co/">try! Swift Conference</a>のオーガナイザーや参加者の皆様と話せて、とても刺激を受けました！！</p>
+
+<p>スタッフのみなさま、ありがとうございました！</p>
+
+<p>まっくす</p>
+
+<hr />
+
+<p>Housmartでは不動産業界を変えるカウルを支えるエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="hatena-bookmark-button" data-hatena-bookmark-title="「良い通知」についてROPPONGI.swiftで発表しました" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="「良い通知」についてROPPONGI.swiftで発表しました" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f02%2f26%2fgood-notifications-at-roppongi-swift%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%80%8c%e8%89%af%e3%81%84%e9%80%9a%e7%9f%a5%e3%80%8d%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6ROPPONGI.swift%e3%81%a7%e7%99%ba%e8%a1%a8%e3%81%97%e3%81%be%e3%81%97%e3%81%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f02%2f26%2fgood-notifications-at-roppongi-swift%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f02%2f26%2fgood-notifications-at-roppongi-swift%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f02%2f26%2fgood-notifications-at-roppongi-swift%2f&amp;description=%e3%80%8c%e8%89%af%e3%81%84%e9%80%9a%e7%9f%a5%e3%80%8d%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6ROPPONGI.swift%e3%81%a7%e7%99%ba%e8%a1%a8%e3%81%97%e3%81%be%e3%81%97%e3%81%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f02%2f26%2fgood-notifications-at-roppongi-swift%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">ディープラーニング用のGPU計算実行環境をAmazonECS上でなるべく安く構築する</div>
+    </a>
+    
+
+    
 </nav>
 
-        </section>
-        <aside id="sidebar">
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
     
 <div class="widget-wrap">
     <h3 class="widget-title">
@@ -341,7 +435,7 @@
                     <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="Infra" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="「良い通知」についてROPPONGI.swiftで発表しました" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -366,7 +460,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="Infra" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="「良い通知」についてROPPONGI.swiftで発表しました" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -391,7 +485,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/0FpkbJkWCeFHzLE9EtS-kiRDvMH-RblM2ElsH29DCfUSw9IBSaC9q9SCmZu0exW3KXMXi44qdRYed8GEFGVFsOK_AlRNRBPUbNEA0gizaT_pEwE1cjxrfeeUDsGlHjJKmg35WGqxVpq2O-t9M_EIbCmn-zsUCwy9fIl0-G4i8CO8Y-tXFyAS0XS4cEPDlk-r8rf5cc8JDbpbHYfAfUsPgFbn2dII_n1fs4kiB54h1Tiyvym40IcH_y9Jq6QDOg41XjVPcRbU3A2ZEZVSbiKR_DcoKACat8UhvmmRUA4k5Ap35LDe9lH-mJFeoqZHF06wX3P46SJwoTe6AdpYjxBsnl0IkefgM3JUcDINedl_XGApsB3CDub5T2tTATK569IyCDZso2kAsMaND-gKiZpqCn7CnXuGpIkMQzOr7Hc0i8V-CCXeKUQ4781M9SAMO4AjUzTqjBC9GVFAncWfycnKzp5S3QDgTMtBuYjaKkwJoIt__UqkKHOFNnxROi6c6FIyZt3ccF_jmmyEF8QqGy-SytTIz92gTis5TDBP6G-nyEYBB1Q_VbJqnHyqgK3KEuBLK6lSzhPu0zu9pC9vdvVeNPjh27clj0dlZvmNcAUjFLDZevRYiCuoWUkh5QMN4khySBxRJnSHu8OGsnmO6V54BdqcYoykiWbg=w397-h175-no)" alt="Infra" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/0FpkbJkWCeFHzLE9EtS-kiRDvMH-RblM2ElsH29DCfUSw9IBSaC9q9SCmZu0exW3KXMXi44qdRYed8GEFGVFsOK_AlRNRBPUbNEA0gizaT_pEwE1cjxrfeeUDsGlHjJKmg35WGqxVpq2O-t9M_EIbCmn-zsUCwy9fIl0-G4i8CO8Y-tXFyAS0XS4cEPDlk-r8rf5cc8JDbpbHYfAfUsPgFbn2dII_n1fs4kiB54h1Tiyvym40IcH_y9Jq6QDOg41XjVPcRbU3A2ZEZVSbiKR_DcoKACat8UhvmmRUA4k5Ap35LDe9lH-mJFeoqZHF06wX3P46SJwoTe6AdpYjxBsnl0IkefgM3JUcDINedl_XGApsB3CDub5T2tTATK569IyCDZso2kAsMaND-gKiZpqCn7CnXuGpIkMQzOr7Hc0i8V-CCXeKUQ4781M9SAMO4AjUzTqjBC9GVFAncWfycnKzp5S3QDgTMtBuYjaKkwJoIt__UqkKHOFNnxROi6c6FIyZt3ccF_jmmyEF8QqGy-SytTIz92gTis5TDBP6G-nyEYBB1Q_VbJqnHyqgK3KEuBLK6lSzhPu0zu9pC9vdvVeNPjh27clj0dlZvmNcAUjFLDZevRYiCuoWUkh5QMN4khySBxRJnSHu8OGsnmO6V54BdqcYoykiWbg=w397-h175-no)" alt="「良い通知」についてROPPONGI.swiftで発表しました" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -416,7 +510,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no)" alt="Infra" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no)" alt="「良い通知」についてROPPONGI.swiftで発表しました" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -441,7 +535,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/11/ruby-gem-bootsnap/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no)" alt="Infra" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/-l6cv5qoJP3QBAAXzKNzXkmA4hswbsyGECoS1OAKKcjfXSVKIGWdoh6yPY6FHwkyb2FtJ6WPVD707Pi4-ANc9P1DuHBwSGM8GjirZ9NzQcoDQBaF1GpxDC6tmYZNQv1olqkbdchXeDGEMCBWgAf0YwblsyT-PWuxQvZXwbjs65AwPuKv-Le_SD-gUXYTdCFO2tI_56mNDpYpr66xhmVPPJaNcyAQpeE7qcgAdtl8WBzCYPI0-eplHm2DPncqUkNlktw8wAsC4HUBZsBhD2wxJjQFTZZn02u75GkawzG_84WgtQDPiCTSWQlBZ5S5uAHfTRojC-5g8CbQAgZ3XFFOiC0msOd8MwI7bf_gf0CIYa_CEqjXu-EPWzmQXouB75cuwaMEFKLfckb9foVDPmJvPL8-i9378jMuSUIgG2yZWRPU0Vrs7LZB0jDtq15jzcU-MZskdKG_WhFVCpXAqk4Btk6hM3sgEz7zL6gKRWECi6Cfu866PmUVtjv7-vNJWSxDUkjB0DjM1EPGHshLCQyFYBg94jOoPAOWFhZn4bvOUXI3moRJyGyShWFf8I6iXLmxFVnEHTZ78llJMx36cCPKMNbF75hyjlQ4uUOmhNFKd33QuU06kccV6xb5IMHLSHIHCpxLpUt3Eh_ahUX5p0qwFsunoczVtiYhNpU=w600-no)" alt="「良い通知」についてROPPONGI.swiftで発表しました" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -952,7 +1046,7 @@
     <div id="toTop" class="fa fa-chevron-up"></div>
 </aside>
 
-    </div>
+	</div>
 </div>
 
 <footer id="footer">
