@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Mon, 26 Feb 2018 16:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 08 Mar 2018 16:00:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た</title>
+      <link>http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/</link>
+      <pubDate>Thu, 08 Mar 2018 16:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/</guid>
+      <description>&lt;h1 id=&#34;sketch49のプロトタイピング機能を実際に試してみた&#34;&gt;Sketch49のプロトタイピング機能を実際に試してみた&lt;/h1&gt;
+
+&lt;p&gt;カウルTechBlogをご覧のみなさん、こんにちは。カウルでプロダクトデザイナーを勤めている稲井です。主にUIデザイン〜フロントエンドコーディングまでを担当しています。詳しい業務内容は以前&lt;a href=&#34;http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/&#34;&gt;寄稿した記事&lt;/a&gt;にまとまっておりますのでそちらをご覧ください。&lt;/p&gt;
+
+&lt;p&gt;今回のTechBlogは、デザインツールSketchのアップデート(Sketch49)でプロトタイピング機能がリリースされたので使用感を確かめてご紹介しようと思います。はてさてプロトタイピングの戦国時代に終止符を打つ決定的な機能となり得るのか？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>「良い通知」についてROPPONGI.swiftで発表しました</title>

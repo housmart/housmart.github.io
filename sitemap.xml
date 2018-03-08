@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/</loc>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/</loc>
     <lastmod>2018-02-26T16:00:00+09:00</lastmod>
   </url>
@@ -237,13 +242,13 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/design/</loc>
-    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/design/</loc>
-    <lastmod>2017-11-13T19:45:00+09:00</lastmod>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -316,6 +321,12 @@
   <url>
     <loc>http://techblog.housmart.co.jp/tags/hackathon/</loc>
     <lastmod>2016-02-17T16:57:26+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/hands-on/</loc>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -417,7 +428,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2018-02-26T16:00:00+09:00</lastmod>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -446,6 +457,12 @@
   </url>
   
   <url>
+    <loc>http://techblog.housmart.co.jp/tags/prototyping/</loc>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/tags/rails/</loc>
     <lastmod>2017-12-11T17:00:00+09:00</lastmod>
     <priority>0</priority>
@@ -460,6 +477,12 @@
   <url>
     <loc>http://techblog.housmart.co.jp/tags/search/</loc>
     <lastmod>2016-12-16T10:23:43+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://techblog.housmart.co.jp/tags/sketch/</loc>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -513,7 +536,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2018-02-26T16:00:00+09:00</lastmod>
+    <lastmod>2018-03-08T16:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

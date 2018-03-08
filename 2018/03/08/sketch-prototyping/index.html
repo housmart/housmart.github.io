@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.31" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" />
+    <meta property="og:title" content="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" />
+<meta property="og:description" content="Sketch49のプロトタイピング機能を実際に試してみた
+
+カウルTechBlogをご覧のみなさん、こんにちは。カウルでプロダクトデザイナーを勤めている稲井です。主にUIデザイン〜フロントエンドコーディングまでを担当しています。詳しい業務内容は以前寄稿した記事にまとまっておりますのでそちらをご覧ください。
+
+今回のTechBlogは、デザインツールSketchのアップデート(Sketch49)でプロトタイピング機能がリリースされたので使用感を確かめてご紹介しようと思います。はてさてプロトタイピングの戦国時代に終止符を打つ決定的な機能となり得るのか？
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no" />
+
+
+
+<meta property="article:published_time" content="2018-03-08T16:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2018-03-08T16:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た">
+<meta itemprop="description" content="Sketch49のプロトタイピング機能を実際に試してみた
+
+カウルTechBlogをご覧のみなさん、こんにちは。カウルでプロダクトデザイナーを勤めている稲井です。主にUIデザイン〜フロントエンドコーディングまでを担当しています。詳しい業務内容は以前寄稿した記事にまとまっておりますのでそちらをご覧ください。
+
+今回のTechBlogは、デザインツールSketchのアップデート(Sketch49)でプロトタイピング機能がリリースされたので使用感を確かめてご紹介しようと思います。はてさてプロトタイピングの戦国時代に終止符を打つ決定的な機能となり得るのか？
+
+">
+
+
+<meta itemprop="datePublished" content="2018-03-08T16:00:00&#43;09:00" />
+<meta itemprop="dateModified" content="2018-03-08T16:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="4584">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no">
+
+
+
+<meta itemprop="keywords" content="design,prototyping,sketch,hands on," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no"/>
+<meta name="twitter:title" content="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た"/>
+<meta name="twitter:description" content="Sketch49のプロトタイピング機能を実際に試してみた
+
+カウルTechBlogをご覧のみなさん、こんにちは。カウルでプロダクトデザイナーを勤めている稲井です。主にUIデザイン〜フロントエンドコーディングまでを担当しています。詳しい業務内容は以前寄稿した記事にまとまっておりますのでそちらをご覧ください。
+
+今回のTechBlogは、デザインツールSketchのアップデート(Sketch49)でプロトタイピング機能がリリースされたので使用感を確かめてご紹介しようと思います。はてさてプロトタイピングの戦国時代に終止符を打つ決定的な機能となり得るのか？
+
+"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        38
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          40
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/">
+    <h1 class="article-title" itemprop="name">
+        プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2018-03-08 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-08</time>
+            &middot;
+            4584
+            words
+            &middot;
+            10
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">design</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/design">design</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/prototyping">prototyping</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/sketch">sketch</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/hands-on">hands on</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="hatena-bookmark-button" data-hatena-bookmark-title="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <h1 id="sketch49のプロトタイピング機能を実際に試してみた">Sketch49のプロトタイピング機能を実際に試してみた</h1>
+
+<p>カウルTechBlogをご覧のみなさん、こんにちは。カウルでプロダクトデザイナーを勤めている稲井です。主にUIデザイン〜フロントエンドコーディングまでを担当しています。詳しい業務内容は以前<a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/">寄稿した記事</a>にまとまっておりますのでそちらをご覧ください。</p>
+
+<p>今回のTechBlogは、デザインツールSketchのアップデート(Sketch49)でプロトタイピング機能がリリースされたので使用感を確かめてご紹介しようと思います。はてさてプロトタイピングの戦国時代に終止符を打つ決定的な機能となり得るのか？</p>
+
+<p></p>
+
+<p>※2018/03/08執筆時の感想になります。これからアップデートされていくと思いますので詳しくはSketchの機能リリースページをウォッチしてください。
+<a href="https://sketchapp.com/docs/prototyping/">https://sketchapp.com/docs/prototyping/</a></p>
+
+<h2 id="sketchって何よ">Sketchって何よ？</h2>
+
+<p>今回の主役であるSketchはUIを作成するグラフィックツールの中でTOP３の中に必ず入ってくるツールです。動作の軽快さ操作のシンプルさなどの特徴により開発スピードを求められるUI作成の現場でよく使われています。</p>
+
+<p>しかし去年AdobeXDの正式リリースに続き、InVisionも独自のデザインツール「InVision STUDIO」のリリース予定を発表するなどデザイン+プロトタイピング一体型プラットフォームを巡って激しい開発競争が繰り広げられております。</p>
+
+<h2 id="そもそもプロトタイピングツールとは">そもそもプロトタイピングツールとは？</h2>
+
+<p>WebサイトのUIデザインを作成する時に静的なデザインカンプを作成し、それに基づいてHTMLにコーディングするやり方が一般的でした。スマートフォンの爆発的な普及に伴ってこういったデザインプロセスが合わなくなってきました。</p>
+
+<p>スマートフォンでの画面デザインでは一画面に表示できる情報量が少なく画面遷移が数多く発生するようになります。画面遷移を実装前に確認し、製品の品質をあげるために生まれたのがプロトタイピング（試作品）を作って試すという手法です。</p>
+
+<p>現在多数のプロトタイピングの作成ツールがしのぎを削っており、まさに戦国時代と言えます。大名に例えるなら、業界の風雲児的なInVisionは織田信長、数少ない国産ツールProttは豊臣秀吉、遅れてやってきたAdobeXDは徳川家康、独自路線のFigmaは伊達政宗みたいな感じでしょうか。</p>
+
+<p>上記のプロトタイピングツールの中でInVisionやProttはデザイン作成ツールSketchファイルを自動読み込みすることでユーザー数を伸ばしてきました。デザイン作成はSketchで行い、プロトタイピングは別のツールでというのが一般的になりつつあったように思います。</p>
+
+<p>今回のSketchのプロトタイピング機能はその流れに大きな一石を投じるリリースであり、今の時代にUIデザイン周りで飯食ってる人間として、実プロダクトへの運用を念頭に色々試していきたいなと思います。</p>
+
+<h2 id="今回試すこと">今回試すこと</h2>
+
+<p>基本操作の確認と実際のサンプルデザインデータを作成して使用感を確かめていきます。
+Sketchの最新版へのアップデートを行うと File &gt; New from Tmplete &gt; Prototyping Tutotrialが選択できますのでそのファイルを見ながら基本操作を確認できます。</p>
+
+<p><img src="https://lh3.googleusercontent.com/XgudzPjt4wa6s9y8oXF0R-jXW_Hq7oD2YYYPWKzoipFJeIW72ffinW88ikbYGWOlN4SrI_iG8Pf74g4jMyamCgR_EubS8PRjQjSH3t5zB0FTUVb6lCsutoqTGw4nmD0nfMvNQdZhx44iqpUxeMYM59tYJl9TrYRKfEEIRC20ugqTMarbpfsoRbaRIshxSX-Mlbgo7gCoN24_IdD91yT_F0koqTIphq88tzG3Tgq-ox5mOSyHOzFRDsCwtUw_1JIeXFc2iuqZ5GoDA6xvIGUMJkwybEKoPKcROr9IwPiQyJJodhrdxIZTbGOrQWBsxJFn6e91AOFFSL6nJt_zrCxLBi6Uf_wwd3PWU9Q6kEx_dYU0c4gWfvv1svv_B0Lc1eVoW31yJTzF0G9aQF790e9PYFs5veWdeF1uggDXZmMqkHstBOPMEdGSHsGngxUp_Z2TOY4OKjxZZmNN0hG2NySklF0gLdyOmmhgm-0bTMBjR96wFLI6QPmN4nwe6Q3kcfaMIRp_ZJRYXZBXM8xr6HDkjqS5NtVHjNotQ6C8i3fLBCT4ZkaUeAUSlmRUs5yL1cgcao6xtnbnedIVopCF1xR6Siw0FGZKHBMIb0qtIrjEYDD85PP8LtMSzhptKkHc6s_USVd1d4XRiFvB0SByb5fog-YZ3zE=w1124-h514-no" alt="テンプレートファイルの中にサンプルチュートリアルファイルが" /></p>
+
+<ul>
+<li>リンクの貼り付けと確認</li>
+<li>リンク設置の仕方、実機プレビュー</li>
+<li>シンボル対応などもうちょっと突っ込んで調べてみる</li>
+<li>シンボル内でのリンク設置と挙動、Libraryファイル化して呼び出した時の挙動など</li>
+<li>共有できるか(Sketch Cloud,Zeplin,InVision)</li>
+</ul>
+
+<h2 id="リンクの貼り付けと確認">リンクの貼り付けと確認</h2>
+
+<p>リンクはふた通りの貼り付け方法があるようです。オブジェクトを選択して&rdquo;W&rdquo;を押すとリンク用の矢印が出てくるのでリンクしたいアートボードまで引っ張って設定します。簡単ですね。しかも複数のオブジェクトを選択して一気にリンクをつけることもできるようなので結構便利ですね。</p>
+
+<p><img src="https://lh3.googleusercontent.com/Jy2c0gTJ_hf_Zn8qfxvfSizICvs9fGO8TEr2jWSL0-Ixg_NLgN-rBXaJjAweOUyZSc4YTtiSOwsyf6IWhyKYFEvtIZLyP35CeHpP2oYQQ-L2rbcG-we_xLGSW5yMHLe1mfQbgCf2KZAQresidf_FFWkaBSsgM5h9f69OYzNzAK-jiFZ9MDRm0cajggh8vwPJHgWuEvnynn0M5Q4JxPSs78ueoNPV67zN5ZDGCexm_-IOGU7iG7xq8o2KdLBplmPpxupy-47D_UL4PS7NWVdVFH99lnmaTgon6JEN3gijTMCfx8hF-KcBZ49006tGlFZFYxCaA8uRne5qgI_sAyfyeoVB3QSujqlHd4KQQVhk4yIFn1uJMJdmgEERpImUhHsF30HLwBZuIVF1MfEtg4HM_HgOHATENt58ixQrDyg7r4Bqaq7P2aDRhLbZ_PxzcU3j_nREa5H_NPrOJhkkP5Zplg_BqWR8P34fcS4aewb5Y3gz1ZhCLctiTPp6jGHwZ1iOUL07sq8rHF8kOzn-UOSyzww6H5LmusrbX7wCcKCKgTE-maJdFJWjvm-AAha619jh5NN6EHQO5X1XdVWclBPpz4mpPQEA5k1q73E3iAf0yOOmVwENUWk-0yKeW42kYTtnQOdOUBFiRIGFOSXeNcIEZGWQ8iU=w600-h400-no" alt="オブジェクトを選択して&quot;W&quot;を押してリンク先を選択" /></p>
+
+<p>もう一つの方法としてはホットスポットリンクを設定できるようです。シンボルの中に含まれているアイコンの上から個別にリンクを設定したいときやインラインのリンクなどに利用できそうです。</p>
+
+<p>リンクの矢印をアートボードの近くに表示されるアイコンに重ねることで移動先のアートボードを指定できるようです。画面が増えてきたときに使いやすそうです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/6-2tlSQnRHOQNyMJ3mfeIwudByK08lBlxkiYI9e28rfIC1f4hRWjVX3CDZl7x-3AU4g7FxsPnU3Q_QWhojfBzoUBr0BJ7Fe1AV9eL4KnuEEiz_V9rNwrk1GE9zqYRK-q-ALs0utnvjYCpaL8fpc4hxwBlKqjvJ5lGBW5YNcsAJ48knSCPG8odZS8P60MQXUShVcc8TFLXBx4G0pGLCS9nletuI4xnZ_xgwun6I9laX6e750_pYlTEoOoNLUO3PV4tBDD3HA6PHVds6fbtlDIXkNvCuelKCm3Y3uVvKB_KL7FoHrsccH0-1SwHRYHkKasX_e_YI8VHsajKrSbIrhb8vP03XaFXM_1KTkb9taVjrKtA7LE5P82_w6lKZKm-AfB53RyV59ghsauMY_xD481KHHiljqrPaCUWPyJUJ9_Mor9Ak_7eYEpuFrQG2wPIGnQY47oF-8eUPjRvL-QpJflP1m5plN5wNlZ4KFZ4UM_rtQAJbrHSVtkj-ZSWjmKZvZcXLBtLPNViEkH_5cEMHG1ZbX-QGrHbqyxHVDsURoPZwQDPNlnPgLGsQvQBjHKI0HPih5yy4YS9t3bgYAHWH_yXiSQwd9qTubioz9-URg800IQIKKJ58fyUf0bQzRi3vtcmG4-7ilFRB3GPa0xYqyM-zLIKTU=w600-h400-no" alt="&quot;H&quot;キーを押すとホットスポットリンクの追加ができる" /></p>
+
+<p>リンクの画面遷移時のアニメーションの変更や遷移先の再編集は右パネルから行うことができます。
+アニメーションの種類にディゾルブが含まれていないこと、アニメーションのイージング秒数などの細かい設定ができないのが若干のマイナスですが画面遷移の確認としては十分な機能を備えていると言えそうです。
+<img src="https://lh3.googleusercontent.com/qiMPRTjcqIpGndB0lffFAs0MxPEgay76s7MGLAlRqX_pZPiUvQdkyB3Ym116APr9hC7oAtyVBVTiYrPxpDzh-4JsVRyqGbHB90D980ITW5vCNf1lAPGnOMpLd8NYdYn-oVGXqY6Wk_6gsSTewvCMclJe3sWG0eArP-DVhr9V6SCAKDMjzoIp9McJAPo66CUX83i-wjDIkvN6vM5zz592hWhxtI00XmizSc7iL0VMvQWCnwSuHdx8zad_ayeCeOHN0goJjalldXeq-sTuStQL9r_zeeXtPKFjl0Yi67LI1Cqv5Qipyt5K34sT2axH-Bm-OEBji8lTkJ7Rsjtemc81ikySUIfdRl1aCnsmDdUD_RrogR8jARJH54ligm5AJnpKAil7Tw14RRHCGTE_mGQJmgqrrbPQSj8UlQn3R-4S516sHeimwJf6CkuY-72YMVOnrh2UyaAdyjdn4Cs_tT5uuq5PEozJ6DTHRJ566bg-yAVyRYPAnbZAQ5v8TuSrtO7gRiLQiNxQ1gjzJ4Gqvt2TVzZRFjFdRceun-I6K1MSeOjOmMWX5SrYTlpHO69nlaYVQfR_FHpuWny6QH2OhPJx4AsKwPeeDU6NJFfh9f0FJPnbt4jfz6A9X_eIxSNINR7ZJ__Q5rMXoxJQiLu8iE538fp1b9M=w1236-h740-no" alt="右パネルからリンク先や遷移時のアニメーションタイプの変更" /></p>
+
+<p>作成したプロトタイプは画面右上のプレビューボタンを押すか、&rdquo;Cmd + P&rdquo;で確認できます。
+<img src="https://lh3.googleusercontent.com/J1xLz_1TpO9Ro7iADbT6g6JEeCMevNzEA9gEvMLK5FKg5mEu0BLacSTkJHWjNOfgsXfE_6tV6GBWuSzmCZ6XFQHoQx4Rsd8bmJOKDje8I_tM76olR2SbL_KySePys2o1Pplyvp8kQegTvRMEyymKvXHHU7xKraTEqFO2FRJlLeBlMsOG3tIUftVZuhkAbphOS82Xa-CDwsWkOMtCnnhZNupsnWuntProD8M81F19fEIlrosXb1HsmfM9rQmmO7KMq8gnHRgrANoM3RZVr-ewSjaRxcIl7hDyrY3pagqakASGCrH5q0PTAynAGzrbU4q_OMyoe7BiAUafsS01DMYYOpkC31PgSE-gMDdYVnhIgCIKW1wrtlbvLjxSKzn9LynqmK8R00dZnXNOiJ2M8Tq6NsDpdry_7n1GGBoeh0-PpvhHIV-KHqM_IGuunXBCk-sY_k0NJp_agc2kxyLbPAOSuFDq_QOh0QRlcn__hF-27UZJv7ndSIJ-N4FSKFmW4atLJmUX4LS3P0O8wWN5QPrXMZNu4ao-cypsSgmUHS-5kSYwZ5YBLDBfISRpYTFDyd0h9WT35VpQvyjBlI5WEJo8GC-VxbqS-jnrGq2MFwsB00Caj3uCQVtRpBBY_h0K2KN8o9qjX7LoNdb0VTjuqtOweWh2YQc=w372-h136-no" alt="オレンジ系のアイコンがかわいい" /></p>
+
+<p>iOSの場合、Sketch Mirrorというアプリを使えばそのまま実機で確認もできるのですが今回のプロトタイプもバッチリ動いていました。リンク変更のプロトタイプへの更新も爆速なのでかなり捗りそうです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/KKds1zKKot32ITLS8xY5llitX0Q4UfIJL2WuCtQ6-hN0yfg7hinx6LSg9j5AVPfOBag_ui_mwyxCjfWHDlLWVUS7RamoqCP7Z5NV1ZAwecjf8ys-b32sK7lBWYM4AwqL6K29p8sfnXXSm84t4y7dAHjFTIS-Sf_jB3bKlKVgf5vPm0unDk-7a3Y2O6ilHjNruroWPEnYcemzX1466R3fp-IOtGRlE3UglF5ecLaoFbWw55u_lFS7CFm0FbDQP8FdF20IQ1KqUYg4vaQ8HM1JWZ07GTdzDnLowsqT7w3ChUek3nslfSIhcGhGfkIyTWS9gHUSffF4ere8Lkw6SKW6L-4qGpvcAVZdxlJ_yzzwe1F6M3gDMb5W3zKnoT8zT-BIueB9PsqAt1WXdaiYfqTCwg55ENy3NQE-F2ujizffIepI1l5kcoBD0Z8UbzVbgreOkzKu21K_M09W7I-65JrEbvQe1qs5MGCXNN4REf4mG7SZbl7Y-qyGqS7mSTJr038QtVH7xlZUoEasI1GGlUH_DJQwJw6e1aMeAU4dDq81Sfvx8sWy6PxHLs5D_KMF1A5ak6Ll3qjeGQCPbkx-xsMf5ddt_ZvlheWRhgTG7mkd38bIP62dH6eE0kYKMBNbhiZlXiaU5ba_u5FknL44KOpxsGoewLc=w1084-h609-no" alt="Sketch Mirrorアプリへの接続には同一Wifiを利用" /></p>
+
+<p>※Androidの場合はCrystalというアプリで確認できるようですが、こちらに関しては　今回のアップデートに対応できているかどうかまだ未確認です。</p>
+
+<h2 id="もうちょっと突っ込んで試してみる">もうちょっと突っ込んで試してみる</h2>
+
+<p>ヘッダーやタブバーなど共通で使い回すシンボル内でのリンクの動きはどうなるのでしょうか？
+前述のPrototyping Tutotrialデザインサンプルだと少し分かりづらいので、自前でサンプルのデザインを作成し試してみました。</p>
+
+<p>細かいチェックポイントは4つ</p>
+
+<ul>
+<li>シンボルの中でのリンクの設定できるか？</li>
+<li>シンボルをLibrary化したときリンクはどう動くか？</li>
+<li>フッタのボタンなどをフロートで固定表示できるか？</li>
+<li>メンバーへの遠隔共有はどこまでできるか？</li>
+</ul>
+
+<p><img src="https://lh3.googleusercontent.com/KmrR7LXVjFIx8oDV5yC8H8Y0-e15OtOtvafIRH-TTWmasHK6gmJJLJbV7ggH6aJt-I2cDTrmkNv3cWjugVYHr3VyRAlTvuyhz4G1Kkr7wfNa0QNb_x2qjE1SpI6Po2s82q4Weat1XZNw1x4IlQQLJd9yzo-mLcm8HORLOR4u8u0_-qrY_zmgRnzNp4D93z_0N2leqOdYwcqyCxnlNjX76XibOl2ObWMi3k-AVlP6FfmEQGTnqAbyjTzJFzP3IcJUD7EmdIRvn2Ncky_xMSUK4Fm1K6SnyZ4zinz53T9fIBjQpLk4CzNAdgs9FuRcuUX0YgkpPw04FnJBTzzuwIsQ4yaNZdbFKLiu4wnmhTVUzbEMK4cXmiWh4CJB0UZo5vKbRcBxqZDtDRI4zZzXkt6JblDibRnTkaVIzss0tCfxS1VY-9VZadO_F1I5kXHN9ZcY7-Q_fZGJHf2VeVve9B2H4qTLjghEkdHDPrDt6SLUIpSGja_zlNLQfSwzYcPC72nh-KQQghr-yelMPjLM9uSSQTyWPCbVCGnv-MdWUM0aPcSbCba2pyaQvagiPKZsnut6nFud7xngw3895odiNOpJ6msT3U3o0Ecjn_Z7LWN78bxerMdTjQEGr1KJ8CLsWBIFVCmhLRGPDI0MtMj79WZgUEx6NIg=w1920-h1465-no" alt="" /></p>
+
+<h2 id="シンボルファイル内でのリンクの設定はできるか">シンボルファイル内でのリンクの設定はできるか？</h2>
+
+<h3 id="ホットスポットリンクを設定した場合">ホットスポットリンクを設定した場合</h3>
+
+<p>シンボルの中でもリンクを設定することは可能です。しかもシンボル内にホットスポットリンクを作成し場合は、プロパティパネルからリンク先のオーバーライドができるようです。
+やばいですね。この完成度。ベータつけてない理由わかりました。ただし画面遷移時のアニメーション方向のオーバーライドはまだできないようです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/MKDoNTzJ8jA5E_nZWpkereL1KSC_CSBB_-jzaULmuv-duQFP1wrj4kpsmGs27FWrnrT2tkMCbnL3VKOM1PkvyE-8e4Oit1vCWstLJc6w2XiP1w_D810r7UYgIic8FasS95L7BYTEaz-NIy2Kd0QShQ2-KO2VnzLkVoVNZWQxXLmNn9GzCVar341Zs2lTYXxscs7TEOf9ccGc2sxfgESJt_RH0b4TOA9pc010zw7rS5NusHlecOuVzi1STukhjolEzna-Nlx3QsYE5nT2yMLLSnaoG3V67pxYlPpgWRMzGKB3XNpMNIkxl_LyIcqTwm_zy0lC9pKVK4MPDG557pbyYznZy6vgtUZFsB-DTKYdgzCC-ZMt4UV5qwwQJ6LXyh1b972WwvWOBHp9FwJi_dtZzlZ2yP0JgNQOsjR9Y4iY1VQ4TFPKWIXMXoAMv0jk4OpEwGTwIPxzPKMXh_4f7ATwIBmT6tMumo3XmHihOSggXaLNMEssbwvmPaymgZB0KxFF9LshZ1a9pYjq0PDnRIRRosQ8x85zfxr2W7EarHd9ZxY_IYut6F9fmh_kqJDvNPuDUNtUniI2qBoYy-N0B1-iNqBpGG4mIqZazdK-CjFrPUJ1wtg-c9agHfq-FiVZTV8U2PrPxM-yUjNMLKHSlc_odllbylU=w600-h400-no" alt="シンボル内部でホットスポットリンクを作成した時は右パネルからの画面遷移先選択が必要" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/-rDqF4igeINhOcflPeSthx1jg21m7VJAowNM7xmdziCKQc-tAIqcSTYwoePuoZCiJVO-GCPOucb2HMAjafqJRvKKz6IiLF883pz5JLCUOT60Dp8Gw2pw8t1mIFdaRcO6B_FhaL7csnnVYlarxyMBg-QSV9p542bGaQdadJ8aYtkMCoZHE4TCCoahOcpD6tsRZEqr5jbjRvPj0dPO7Bm_JgkUP8NSh2pUoMh3jaL0IadAWdoBrbgGHaCXEJc1KaWfnUDg-tQUDaqhLqrcGN_eozU-xunxJVKaHvmqj1yMHV4IrxW9VxFC9Eh9jHuC7PeCwtX8xt2CN4hlJM1ujueXngY9i613hOQ9OXCKGFtBP2XXdn9CfSS6xGCyjIvBhjKpJx1YuOKkPstbzvYFK0YQaz0a6H1RGGOZ7k28DjSP9vNxeXo-yuJ6luqeXKcNMJ8isMIL6s6fN52ZlmQ9hxBDi3spJowvtDquhBWfZB23VPmzbWJZyQY6uQ6ecN2hQ7jP15I9_eg4FYkV_zDyFTKLvGO0sDrPaPYEavnisCGx2P5ETiQ3TViV5mdp3APxYEs557STiJc9Q1zGJCd-SlCyO_UUZVbRYqelaQfcW4Tebh6UB6lyL5gTawkD_lR-9iROTStGYxMAuEH-5tncIx8u_HTK7KI=w1656-h552-no" alt="シンボルの中で設定したホットスポットは左側のレイヤーパネルにも表示される" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/1ooGarNkzx3-JFgjv8I7xpkPvNpwx1xSnHtfIYvhlIxP78BPo8xFpssHqFERP9ROTfAXXpiDomE1gftHWbCy3Gp3KvD6iFUa6OspDNTT5wdrz5hkxVJl4qafZOFU1Asx2HRj0CGz9Gs9gNrUZqkkJkX2DsDJobuvj9WryiGuD3oa1lU9IHXY69X8V4UkQ_gaMVbLvHkaL_u-l6-bZOYpsMe1wqMvPGlxpxzMRTjzpeSLZQ-Vv24jQXgyMzFtnbXwMibIx10hj-PCm7uZ13oP26yR-iyuimhBYHR8fXY9DIsDzDXk2etPrqMDcFzX4gSBKbaL-SctjpYML8Mc-17jgvOyF5NCStpEQ91UbJuD-fM4sVMO3tHDwHwwMwyUxgq0vc8k0rnR6Ci49BTAFhrO3I4lUf3OfkydsDIjCU-s7bMfuC1899jMtm94wF72Wm0K9FH3ZMiZRKC4vHUORUFCi4AmUHNVliJgndutoEvbA-SmYGYdo3f5RLwxu_xDZs4z_LMHaj_RfETXV9lWHQZAqzPudO99tNcZxmj0StRjRv6rjb_nsypHRZzWop-mMYp7c2yR_89SRfHB5K0KZndKWdgYJAjabRgvpbrT_HAqN_uFn_KFE1iill0iBDuOQGb-jwZs_cztxIg7XxZNbXiaiHnwg2Y=w1882-h844-no" alt="" /></p>
+
+<h3 id="オブジェクトから設定する場合">オブジェクトから設定する場合</h3>
+
+<p>オブジェクトを選択してリンクを設定することは可能でしたが、この場合はリンク先のオーバーライドができないようです。
+タブバーとかヘッダーとかグローバルな固定リンク設定にはこちらのやり方も利用できそうですね。
+<img src="https://lh3.googleusercontent.com/d_MqfT0rRBlXl-_AJ1_O-VnDypDFsrW6eP80kEm-qeWur-8L7arHZuj_V_3102X90DQGMXW3CWjcrbH0rxSjIl4yZ8ME-ryr-28Qiq_qJb_zIUcx52yLaOr2JSqe4qb9MCD_cBkuyB-qFwgETRGaQTYpNaCxObYGjjnmF-oITl_HC9Dszg3B_6miaTtR89H0GeM_UYm8ve0SEUr-GSKvjVvyDZV7GZdQh2SBUKxli-fSSdExgV1x-TDudOov4cmJGqUew6k34hvOL1Kg1DAh42vfcvAfiwC-VDq5gPZ1q8LB5I3ybonu2iJsODcDgAh5XN3iitydrQ5Skt7_OkhszGZwxfMDvUJf02tpQTta4H1GuHbUbChg-0vOad305-VqQdwo5X9j-KeaAIpDOtSHTPkAqj3xG0v-LUaZnlU9ESSv8bcJpsWa87cHIyltbqe_-7yvoFjdqKXFWoZBUOPag-0Pp8-zvz_6E7LyNtB2x747vyecfePDeIl5S6rUyitv-zPznGJJTJ3hG04wxSbxdGk6nqXeKvpQuIil1XY3r9RcFhPEZ5g8yNFin5qlBDmmlNPnG0x-gbb4Zr3qIqFvxWp10B3WfiPKH1ffxqIgcfYuOtZNlYQ-dHKLSTOiuEpmb_wap3_BLGb4WkjTzSENOidtD3s=w600-h400-no" alt="オブジェクトを選択して&quot;W&quot;を押して作成したリンク設定はオーバライドできない様子" /></p>
+
+<h3 id="library化した場合にはリンク設定はどうなるのか">Library化した場合にはリンク設定はどうなるのか？</h3>
+
+<p>ホットスポットで設定したリンクは読み込まれていました。リンク先はNoneとして表示され、オーバーライドで再設定可能でした。ただしリンクの遷移先は同じファイル内のアートボードに限られるようです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/Vy7zPcFcNZHTGEQA6b5TzhF8U3XWuNGLIeNcpKFj_ZyducMMtE8LzkGxmZoXg0veyj1cTV0R5revo23fAVVq6aMcLGuWJDL8Un5eYm9xZZSJQ0Y0MllVWcQza1q6KSRv4IzYdOvNB2nmK-5CwMwcx1UNR0CFWv4Sh9HO2m5lVUEqxfQjD8aFkqGd1Ed82k8T4kHhaJuzTTHHJoSZXL98PK3HumeA2KedSWXW01BTOHDXZdj9GJGr85KWmEuZteE4DA5zHGcACgttkYjOnkbiEhzUn5bJKeB1BZAXqpacCgncSX4_JIJlKmb-jINQMfNghiPnmORWs_7XKsafUU3PmoowDbEq6EyhoKxRxvHW13BnDrhSV0g93Y8QBTQ_dAKo2bsIeGkAXDFfi7C_N03e4sbV8J6oE0XUvdcDKGDF8HLd4zYx72RKsg2GkgosG0Z0Vpbzj9AcRy28R5m8B0Q5cji_U5ap-YiUlkrCaRHyoBQqD07kooJYIl-32xtKYpxomSpKsujUzFmRimo3UI3fuXjI_UVtBRW9CPloraJUth0WHXMypqQBiTebkzpv7Q0FkI_rxBANV3p5QQ-TQFxIVbT6TcuKg4Xj6-oSY2fyeUtUZ9PMlRPxEm4Hzf2yh9km3qqMW6MWdXMVLYbPPpOazBlpXWw=w1626-h724-no" alt="Libraryファイル内でホットスポットリンクを作っておく運用もできそう" /></p>
+
+<h2 id="タブバーやヘッダなどフロートで固定表示できるか">タブバーやヘッダなどフロートで固定表示できるか？</h2>
+
+<p>InVisionではタブバーやヘッダーなどを固定表示できるのですがSketchの現バージョンでは表示できない模様です。ここら辺は少し残念ですね。誰かできる方法を教えてくれたら、うまい棒あげます。</p>
+
+<p><img src="https://lh3.googleusercontent.com/AYRD2JUEUsh23ZZnnZtuCpKmmKhoFxcWvBMe0JPJj3klVHJQWt6Pzs_3qQGBnga9yhSmMzIuSwe2dnF3m_Yikbb3PQnw-aDWGKOgtEriBCJheP6bFSv6Qg7_Z29nAEvvgVTI-pjxNVxVAKkkpGwDt7AqTY4WFRQs_xyuwNPdbCXo-C3A4BY_AqsRy8ie7U_jmiGEy_MTPljIINpcf4DVeIC2OvzAoXYEJFUtkCb_5hTIeloj0kTWM00cIt6ksX8WUpvVUT7rG8-7ubsNGcC3zge70IfcjMJicOjwxWExten8Cjt4gE9zQtKOUSPTx0dCavjPwgKuLrXXRaeYBo_tFI4oihcnV4E4t1lsQCHv5ndsnJ16sNr5fMuf2NtwN0gBgwE3m3wzkJxa6xOc6xGuFNzt5W4T2DYcjZei855vGJYoEAj1F-X6nTG7x8076UBZCxvfTN8WoxzoUR08j05NlHT4ossCZ9CFGlUIQ2iMESdnGGnSd9Qk9xx6DVRqTHi-aV3DvwRSsD5aIOWllXUUanY24Sp5dWkOP8pY-H2Bi1w_rgjwhX3GMz9SdUrUmfDYK7Pp6ldYr3MikQxrUxqyk-oxMCNcD3Xgkz-pmknZMVIKbULMs5iDIQUTVS46vpz1Jn3CaVNLyU79dTwvruoCbfzkWcc=w600-h400-no" alt="ヘッダ、フッタ固定は脳内補完" /></p>
+
+<h2 id="メンバーへの遠隔共有はどこまでできるか">メンバーへの遠隔共有はどこまでできるか？</h2>
+
+<p>デザインの共有はUI作成において重要なファクターの一つです。せっかく作ったプロトタイプをどうやって共有してメンバーに見てもらうのかも確認して見ました。Sketch Cloudを使う方法と、Zeplinを使う方法があるようです。そして普段使っているInVisionも試して見ました。</p>
+
+<h3 id="sketch-cloudからの共有">Sketch Cloudからの共有</h3>
+
+<p>右上のSketch Cloudのボタンを押しアップロード。
+<img src="https://lh3.googleusercontent.com/gRaQ2Qy1jYVTGrTSBKkb2Znqz4gK3wBFGqCxtI5GH8ErP7F1t9Uxdg0Z7He3vjqf6pTdSuLHYUN9Owouxk8bArDBDMKumjZeu_2I3cL5nWVNI36aMfmKZ4ubhuAowc5QyBZZiUrZIjZqCSkoSqUZljabFzx-jLJ-SdfyAjOzRV2jnT5ejbXzzqt5b16J0Qjtf_7donBNFfpFUzQ-EeK18eOsUBNkvM6WBuEb4ZGlHABVkWTAkPe_GNv1NctqmpgJ_A7NlfMiOxz7-YkzFBHc182pN20Nb5gtMggUadsCDrz8Y5uHux1wMWmSZi-a4GOY1Zdy_mjbuTLxfAiMcQVoSuGBHpdHoMCL0r7xPWVHFkFHqX8PReq5DYdvE3eowRONXpWta4mWZUd0f3scMH5VE9uAtJLaVm_jj6BvWTkxf1HiQL22eFKQwivndpj2Z1sIHNtIyfakpW9lSFmps25jGyeyqvi2idha-5gHgw-5d2Y3qdCK3SDyo_2AzZ7UWdXr0pToVJbpX0j1UIpfbwGE2fFccIqP76dQOxT3fYcYGYk0kGjrttEW7Nx-vhKktk1kktC-j85jLE6d9DDlSfzI_UgwB4LrWBcCOK1gvoHsB_9h56ItTFHHv5n2L6i4ggTWmhBc7r5jWBthpQ2sebhmVAgIYP0=w666-h544-no" alt="オレンジ色のアイコンがかわいい" /></p>
+
+<p>URLが発行されるのでリンクをクリックするとSketch Cloudのプロジェクトページが作成されています。
+共有したいユーザーのメールアドレスを打ち込むことでプロジェクトへの招待ができるようです。ここら辺はまさにInVisionと同じ流れですね。</p>
+
+<p><img src="https://lh3.googleusercontent.com/WAPF3WkixBvaUCGmC3eh3yj0oY-j-zwLPUhsKb_zNDeLarhDQpfnb7ffiqprTgXmeqPhUSr0-d4a-Hc6RZPWuAU6QKg-nmOzZITteUp4ePblc9TaFnqR8LVm7rSnvux9Pmny24n8yl97-Mf6hZgVxfQrXM9aa4FAOV88oL0abUag9D4Vzy-Wg6RBtHnAB78JzYGPgIplwZYwkibRLzGI2ojvBpSkJiuj0FlgihWWCDPlmQT70-gfoqDjRxRqMi6ty1v1EqCefhS6-IHBMCQhSQizLUih6OjopnYJpDKjAT-Cl3HEnxJTYaujk7bINmQPF9an3PbupRhQWOZS_4tntY24dRJdRSafG8eNmyEyDYcL1AbBftC00fIUF2wXKBlBUfiAiBQWriqZu2dq1x5F19UXVLSfXGWs0gjvWEyLSPhEtN0QjA_gIHHh7pESkrLkl_biuahMNyAa_Pxax3bDEb3U0EP5xh6-BRz3FZXZVulhMoE_G8FFnioiwP4t2E36Ffj_V_BOwanTTJWUnrYxw76ae71W3ySPLVis9LSSrpJs318BiiBa7kdQLRQmUfpHSF983b3fuDXB22H4LMnAMncmMi7J2ZLo_I_8aeoU-p05LuwcBiWtpayiMXzaQHmylXx1b3USGYbUOaw_4u0bhM03jL4=w1920-h1322-no" alt="オレンジ色のボタンがかわいいがZeplinに似てるので画面間違えそう" /></p>
+
+<p>面白いなと思ったのはアートボードだけでなく、シンボルなども全てアップされている点で、シンボルに対するコメントなども個別にできるのでいいなと思いました。</p>
+
+<p>逆にちょっと残念だったのはアートボード内でのコメント機能。InVisionにあるようなポインターでの指定ができずどの箇所への指定なのかはコメントで補足しなければいけないようです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/vgem6D7HZGpTBZXsNn330EYGrs6b8pvGO_EJqq4MIDZiShc67Kj5WcJaj6L_EDJgBV_X4syI_1a0GCQbvhGdLly_4ZubvbC_SlEahg4BrcDO_WyhCgmobDYzAhkRhotoKfpOl2S9K8BaMKltqpQythDDV9Ha2Ts-SufM9WQZ6dX-83wQQAnfpj7nIiPmd82IaTpMxh3A2q2sbv5SIN9TLvNm8tff3Pi0bnrIgQGeiI2JPIilNNlNbaPWLV2zADuXk0D2boWSY7MkeAs1lgnN7S2U_XcJ85Sc7_ryLEiy5AH6dfdiGs8xKdvlmgxHyLf8cJ--ZjNyXWygXUYRJ95GusFS3rI36bVc1F90aliq5PwhNeqfQwxYDE7ofkeRkcb_g7nVVtP06Q5BY_1S5tzPTcldO-L8Fx89mp-8qjM3ekxcMV4ILVH3AZaghl-seCwC_DIIOXNRWRES0dAJoyOVSpnd4dRJn2JdvxZk8iG50QLuteWta4a-zr69PxCTMprXXBouaPFlevL2qBhWFzCzBTSboyw_Qd-0p95qLuwh8cjsmtgny14CRD0bHIWuZ9dZd_SPZmmv3XZFAPSbRR4G_SfSjsOWBlaAYMYPt8abjfIs2FHP3-N0WKKB0UG5EoPYy7oYMt00GxXzUTCvkE2q4gS2wO0=w1920-h1316-no" alt="コメント機能は若干開発の余地ありですね" /></p>
+
+<h3 id="zeplinでの共有">Zeplinでの共有</h3>
+
+<p>ZeplinはSketch49のバージョンアップに対応しているようです。ZeplinのSketchプラグイン経由で今まで通りアップロードをすることが可能です。
+Shiftを押しながらクリックするか、右側のパネルからリンク先アートボードへの遷移確認が可能でした。</p>
+
+<p><img src="https://lh3.googleusercontent.com/sYaVJuh_et_kC2oyxbRmTcLfrt3Zt4Ks5_tbV-Oiskrb9xNbyeVchfXAcVc7nXClaPudQY_0u_9ixD9LAChqNsbePG8A_MOHvOO0NTNaxvIqCnjIvMiOaamvR1no32RMy870zg6X0HBIS4_OaF9k7EZH482H4SEvWX7ppX5znJi7CgKScCQ839iQMvrRGyoTsAfWSRtQM6m70Lk0V-1ubEBI-QyjlSoEBlqxuBFus1aiBQGqO8qvwP-hK4MgvxmkHUZj7s6Yll7OFQkGxYGQjnVjrK9OPRx5skN-5ElODH8hc52Y8XSIQXhGk9muwZ3JRztp-c2b0HYYSrXP5EPzl-aGDnQHQq1WD5O_uls0l_zEi_ItyK_B_o06ep0at4NewIEH6XMezkaS1La0-Us5ydtVFhGIf48IDK5K0hOShoWip03dv1fTgQfOlPm8oD04xVJu5NPt9ftQXwJoXYhAviJeCqZ4EdEQF_1Kf907O2boRduJBAWQT6bRQCXVfJMaaEjOOyXBt3V6Pypmc5y77Mi_eTEC1GN98E20SAHfrV3ORWnmpO2yGX-5_PjAEZIHpIwkAR72OQ_wyHNznVyQJ4kF6E6DPmysErdjbaQVn4Q-QIDIAdUdeoMw8GPNgmMJXTv-DQ11Rwv5GaZgqawUzlwv64A=w1920-h1394-no" alt="Zeplinでならコメントも打てるこっち使うか" /></p>
+
+<h3 id="invisionでの共有">InVisionでの共有</h3>
+
+<p>CraftというSketchプラグイン経由でInVisionのプロジェクトファイルとしてアップできるかどうか。さらに設定したリンク情報が引き継がれるかどうかを確認して見ました。</p>
+
+<p>アップロードはもちろん問題なくできましたが、Sketchで作成したホットスポットリンクやオブジェクトリンクなどは取り込まれませんでした。あくまで現時点（2018/03/08）ですので今後は対応していくのかどうかは注目していきたいところです。</p>
+
+<h1 id="まとめ">まとめ</h1>
+
+<h2 id="よかったところ">よかったところ</h2>
+
+<ul>
+<li>ホットスポットリンクのオーバーライド機能</li>
+<li>動作安定性、実機確認までのスピード</li>
+</ul>
+
+<p>シンボル内でのホットスポットリンクのオーバーライドが使えることでLibraryファイルを活かしつつ子ファイルでプロトタイプを作成するという流れがやりやすくなっていると思います。サードパーティ製のプラグインと違いSketch本家が出しているのでバージョンアップなどで使えなくなる心配がなくサンプルファイルを用いたテストの段階では非常にサクサク動いていました。</p>
+
+<h2 id="もうちょっとなところ">もうちょっとなところ</h2>
+
+<ul>
+<li>SketchCloud側の機能</li>
+<li>プロトタイプのプレビュー時に固定ヘッダ表現などができない</li>
+</ul>
+
+<p>Sketch Cloudはフィードバックや作業進捗用の確認機能がまだ充実していないのでInVisionの代わりにデザイン共有ツールとして使うにはまだ早い気がしましたが、このまま進化を続けていってほしいなと思いました。ヘッダ、フッタなどで使う固定表示機能は今後のアップデートで対応していって欲しいところです。</p>
+
+<h2 id="こう使うかな">こう使うかな</h2>
+
+<p>カウルではデザイナーとプログラマーが面と向かって開発してるので、UI画面遷移を作成しながらのMTGやユーザーテストなどで力を発揮しそうです。ただ遠隔での確認にはSketch CloudよりもInVisionやProttにまだまだ分がありそうなので、いきなり入れ替わるということもなく状況に応じてプロトタイピングツールを使い分けしていくことになりそうです。</p>
+
+<p>InVision + Sketchという流れでプロトタイプを作成していたのですが、画面をSyncさせる際の時間やInVisionでのリンク設定の煩わしさから「そろそろAdobe XDも試してみるか」と思っていた頃だったのでこのアップデートは助かりました。</p>
+
+<p>Sketch、AdobeXD、InVision Studioと様々なプロトタイピングツールが出てきますがどれが覇権を握るのかはさらに混沌として来るものと思われます。選り好みすることなく試してみて自分の働いている状況にあったツールを選んで見てください。</p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="hatena-bookmark-button" data-hatena-bookmark-title="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f08%2fsketch-prototyping%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%83%97%e3%83%ad%e3%83%88%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e6%88%a6%e5%9b%bd%e6%99%82%e4%bb%a3%e3%81%ab%e7%b5%82%e6%ad%a2%e7%ac%a6%e3%82%92%e6%89%93%e3%81%a6%e3%82%8b%e3%81%8b%ef%bc%9fSketch49%e3%81%ae%e3%83%97%e3%83%ad%e3%83%88%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e6%a9%9f%e8%83%bd%e3%82%92%e8%a9%a6%e3%81%97%e3%81%a6%e8%a6%8b%e3%81%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f08%2fsketch-prototyping%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f08%2fsketch-prototyping%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f08%2fsketch-prototyping%2f&amp;description=%e3%83%97%e3%83%ad%e3%83%88%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e6%88%a6%e5%9b%bd%e6%99%82%e4%bb%a3%e3%81%ab%e7%b5%82%e6%ad%a2%e7%ac%a6%e3%82%92%e6%89%93%e3%81%a6%e3%82%8b%e3%81%8b%ef%bc%9fSketch49%e3%81%ae%e3%83%97%e3%83%ad%e3%83%88%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e6%a9%9f%e8%83%bd%e3%82%92%e8%a9%a6%e3%81%97%e3%81%a6%e8%a6%8b%e3%81%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f08%2fsketch-prototyping%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">「良い通知」についてROPPONGI.swiftで発表しました</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="title">プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-03-08 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-08</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="title">「良い通知」についてROPPONGI.swiftで発表しました</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-02-26 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-02-26</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ecs">
+                        ecs
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="title">ディープラーニング用のGPU計算実行環境をAmazonECS上でなるべく安く構築する</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-26 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-26</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/0FpkbJkWCeFHzLE9EtS-kiRDvMH-RblM2ElsH29DCfUSw9IBSaC9q9SCmZu0exW3KXMXi44qdRYed8GEFGVFsOK_AlRNRBPUbNEA0gizaT_pEwE1cjxrfeeUDsGlHjJKmg35WGqxVpq2O-t9M_EIbCmn-zsUCwy9fIl0-G4i8CO8Y-tXFyAS0XS4cEPDlk-r8rf5cc8JDbpbHYfAfUsPgFbn2dII_n1fs4kiB54h1Tiyvym40IcH_y9Jq6QDOg41XjVPcRbU3A2ZEZVSbiKR_DcoKACat8UhvmmRUA4k5Ap35LDe9lH-mJFeoqZHF06wX3P46SJwoTe6AdpYjxBsnl0IkefgM3JUcDINedl_XGApsB3CDub5T2tTATK569IyCDZso2kAsMaND-gKiZpqCn7CnXuGpIkMQzOr7Hc0i8V-CCXeKUQ4781M9SAMO4AjUzTqjBC9GVFAncWfycnKzp5S3QDgTMtBuYjaKkwJoIt__UqkKHOFNnxROi6c6FIyZt3ccF_jmmyEF8QqGy-SytTIz92gTis5TDBP6G-nyEYBB1Q_VbJqnHyqgK3KEuBLK6lSzhPu0zu9pC9vdvVeNPjh27clj0dlZvmNcAUjFLDZevRYiCuoWUkh5QMN4khySBxRJnSHu8OGsnmO6V54BdqcYoykiWbg=w397-h175-no)" alt="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/ios">
+                        ios
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="title">OSSを読んでAirbnbのホーム画面の実装を想像してみた</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2017-12-23</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/z8no3DYuA-D-b_UERvc8xKaYbiYB-LN6q5E8l2lIjjHtkWCwkf1Ke87-rutfQhqjlQWs01pHOIhkt_VV9CaSuL6Brkeb1U2X48W4b0VDp6-w6j4UJYaeGdI2-eEZJwO2s48S3GIK5Ajks2r9MxLqLd2OTOhSpx-K6OBGKmGFqEM1j8G36dxsyRvsIYYGCHWfZ8BG1T9QSdNUxJvsFLMe_Y_Qvd5S19BPNPJRfzUGwqshtkEHzVtb-Wi_KFV_aQw67HjR_4juk_kyTyOE_wyb2Hgy71esrmlQqbjEa0l0qywforwZqlsFOH8KckMrpLr_jBjd5mdwhkKRx79j98nIXjkj8YZstPVoluHUtJdCioKpQQwAluy8pRd4eKqDnLPO5ZYtFwFecrNKWvS3gojQ59UMrKk85dVN1OBGM6fvwDqLd_t_ehomC1SFrAOQBm5cSx5drV_dl4cEx6ArXBPEuAJofsTVQMY4GNvDPPvgucp5ukaHSPe3SgKD_1IbHCnbtpzodBejPRklwDTK8HbvykhBNIJb9l-MnUQf2KNef-FMhNawn9HdC4WCme8I84jgvXKyOPxjyAas_xRIf-577w6O47cLwRq2jswD5xR8_zwou8s_BdVg3l1-xNV3wDoQc7mnGPrqvo7MF9pnnpUe6j-4BVUH2NPOERA=w600-no)" alt="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/tool">
+                        tool
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2017/12/16/startup-how-to-use-jira/" class="title">スタートアップでJira運用して、この1年間でよく聞かれた使い方5選</a></p>
+                    <p class="item-date">
+                        <time datetime="2017-12-16 10:00:00 &#43;0900 JST" itemprop="datePublished">2017-12-16</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/tool">
+                    tool
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/android">
+                    android
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/atlassian">
+                    atlassian
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/deep-learning">
+                    deep-learning
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">9</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gem">
+                    gem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gpu">
+                    gpu
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hands-on">
+                    hands-on
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/prototyping">
+                    prototyping
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ruby">
+                    ruby
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/sketch">
+                    sketch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/android" style="font-size: 12px;">android</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/atlassian" style="font-size: 12px;">atlassian</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/deep-learning" style="font-size: 12px;">deep-learning</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ecs" style="font-size: 12px;">ecs</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gem" style="font-size: 12px;">gem</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gpu" style="font-size: 12px;">gpu</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hands-on" style="font-size: 12px;">hands-on</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/prototyping" style="font-size: 12px;">prototyping</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ruby" style="font-size: 12px;">ruby</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/sketch" style="font-size: 12px;">sketch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
