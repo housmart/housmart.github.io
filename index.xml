@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Thu, 08 Mar 2018 16:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 20 Mar 2018 20:03:55 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>スタートアップの現場で役立つ開発要件のまとめ方</title>
+      <link>http://techblog.housmart.co.jp/2018/03/20/minispec/</link>
+      <pubDate>Tue, 20 Mar 2018 20:03:55 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2018/03/20/minispec/</guid>
+      <description>&lt;p&gt;こんにちは。ハウスマートの高松(&lt;a href=&#34;https://twitter.com/t2kmt&#34;&gt;@t2kmt&lt;/a&gt;)です。&lt;/p&gt;
+
+&lt;p&gt;皆さんは開発要件をまとめるのにどんなフォーマットを使っていますか？&lt;/p&gt;
+
+&lt;p&gt;開発要件をいい感じにまとめるのって大変ですよね。
+ドキュメント整備せずに開発に着手し始めてしまうと手戻り抜け漏れが出てしまいますが、一方で要件定義書をガチガチなフォーマットにするとドキュメントの作成自体の工数が増えてしまいます。
+スタートアップはスピードが命。ドキュメントを書きまくって開発が進まないなんて言語道断です。&lt;/p&gt;
+
+&lt;p&gt;開発要件の整理はプロジェクトの成否に多大なインパクトを与えますが、ほとんどの現場では企画を考える人にフォーマットが委ねられていることが多いと思います。&lt;/p&gt;
+
+&lt;p&gt;今回は皆さんが快適に開発要件をまとめられるように、ハウスマートで利用している mini spec というフォーマットをご紹介します。
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た</title>

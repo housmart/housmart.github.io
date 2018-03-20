@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>Design &middot; カウル Tech Blog</title>
+    <title>スタートアップの現場で役立つ開発要件のまとめ方 &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.31" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -9,9 +9,6 @@
     
       <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
     
-    
-      <link href="http://techblog.housmart.co.jp/tags/design/index.xml" rel="alternate" type="application/rss+xml" title="カウル Tech Blog" />
-      <link href="http://techblog.housmart.co.jp/tags/design/index.xml" rel="feed" type="application/rss+xml" title="カウル Tech Blog" />
     
     <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
     <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
@@ -22,15 +19,33 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/tags/design/" />
-    <meta property="og:title" content="Design" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/tags/design/" />
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2018/03/20/minispec/" />
+    <meta property="og:title" content="スタートアップの現場で役立つ開発要件のまとめ方" />
+<meta property="og:description" content="こんにちは。ハウスマートの高松(@t2kmt)です。
+
+皆さんは開発要件をまとめるのにどんなフォーマットを使っていますか？
+
+開発要件をいい感じにまとめるのって大変ですよね。
+ドキュメント整備せずに開発に着手し始めてしまうと手戻り抜け漏れが出てしまいますが、一方で要件定義書をガチガチなフォーマットにするとドキュメントの作成自体の工数が増えてしまいます。
+スタートアップはスピードが命。ドキュメントを書きまくって開発が進まないなんて言語道断です。
+
+開発要件の整理はプロジェクトの成否に多大なインパクトを与えますが、ほとんどの現場では企画を考える人にフォーマットが委ねられていることが多いと思います。
+
+今回は皆さんが快適に開発要件をまとめられるように、ハウスマートで利用している mini spec というフォーマットをご紹介します。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2018/03/20/minispec/" />
+
+  <meta property="og:image" content="http://techblog.housmart.co.jp/" />
+
+  <meta property="og:image" content="http://techblog.housmart.co.jp/" />
 
 
 
-<meta property="og:updated_time" content="2018-03-08T16:00:00&#43;09:00"/>
+<meta property="article:published_time" content="2018-03-20T20:03:55&#43;09:00"/>
+
+<meta property="article:modified_time" content="2018-03-20T20:03:55&#43;09:00"/>
+
 
 
 
@@ -43,12 +58,48 @@
 
     
     
-<meta itemprop="name" content="Design">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="スタートアップの現場で役立つ開発要件のまとめ方">
+<meta itemprop="description" content="こんにちは。ハウスマートの高松(@t2kmt)です。
+
+皆さんは開発要件をまとめるのにどんなフォーマットを使っていますか？
+
+開発要件をいい感じにまとめるのって大変ですよね。
+ドキュメント整備せずに開発に着手し始めてしまうと手戻り抜け漏れが出てしまいますが、一方で要件定義書をガチガチなフォーマットにするとドキュメントの作成自体の工数が増えてしまいます。
+スタートアップはスピードが命。ドキュメントを書きまくって開発が進まないなんて言語道断です。
+
+開発要件の整理はプロジェクトの成否に多大なインパクトを与えますが、ほとんどの現場では企画を考える人にフォーマットが委ねられていることが多いと思います。
+
+今回は皆さんが快適に開発要件をまとめられるように、ハウスマートで利用している mini spec というフォーマットをご紹介します。
+">
 
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Design"/>
-<meta name="twitter:description" content=""/>
+<meta itemprop="datePublished" content="2018-03-20T20:03:55&#43;09:00" />
+<meta itemprop="dateModified" content="2018-03-20T20:03:55&#43;09:00" />
+<meta itemprop="wordCount" content="3593">
+
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/">
+
+  <meta itemprop="image" content="http://techblog.housmart.co.jp/">
+
+
+
+<meta itemprop="keywords" content="project,management," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="http://techblog.housmart.co.jp/"/>
+<meta name="twitter:title" content="スタートアップの現場で役立つ開発要件のまとめ方"/>
+<meta name="twitter:description" content="こんにちは。ハウスマートの高松(@t2kmt)です。
+
+皆さんは開発要件をまとめるのにどんなフォーマットを使っていますか？
+
+開発要件をいい感じにまとめるのって大変ですよね。
+ドキュメント整備せずに開発に着手し始めてしまうと手戻り抜け漏れが出てしまいますが、一方で要件定義書をガチガチなフォーマットにするとドキュメントの作成自体の工数が増えてしまいます。
+スタートアップはスピードが命。ドキュメントを書きまくって開発が進まないなんて言語道断です。
+
+開発要件の整理はプロジェクトの成否に多大なインパクトを与えますが、ほとんどの現場では企画を考える人にフォーマットが委ねられていることが多いと思います。
+
+今回は皆さんが快適に開発要件をまとめられるように、ハウスマートで利用している mini spec というフォーマットをご紹介します。
+"/>
 <meta name="twitter:site" content="@HousmartJournal"/>
 
 </head>
@@ -57,7 +108,7 @@
 
 
 <div id="container">
-    
+	
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -150,8 +201,9 @@
   </div>
 </header>
 
-    <div class="outer">
-        <aside id="profile">
+   	
+   	<div class="outer">
+	    <aside id="profile">
   <div class="inner profile-inner">
     <div class="base-info profile-block">
       <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
@@ -243,160 +295,255 @@
   </div>
 </aside>
 
-        <section id="main">
-            <section class="archives-wrap">
-                <div class="archive-category-wrap">
-                    <span class="archive-category">Design</span>
-                </div>
-                <div class="archives">
-                    
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
             
-            <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="thumbnail">
                 
-                <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た" class="thumbnail-image"></span>
+                <img src="https://lh3.googleusercontent.com/JAQVo36baaq0zxd0J8nB9J02tfviMhac_BYbKURjJ2p_JPhpCIdYAF2I15CRq8BUX4_gqvJ29MrkbmoUA3wMeFKMTYmz1JpwRfyp3ur8zX5W4BcAPp-vihSinba8YH8mG9qKoAYOLAtiV2f09u58ANxqReK7ZnfWm6MZSZDJJQMbXO8V-uGYKl4g7jifAacERoLUHftm-Yb3m294nlt455AWNyeevj9ajt56SS04d0CshLVHuXW7EuY2CdgigjrLRCwiRJcZTCuAh2Qdfv-dETcgFce3XiV45wy1DfECdC4aSymzyQiDZt5fKkVjk98bqdC1WkwDl0-pt8xbYQ9szzgOkhdDg4-28KMYmCFjriNYiUELH6AzXLxhaZjtaaXA5KtQpPHouWpmFkFrzvY0zZOodJnaLvgkmNtxOZKhpaSZfDzVSjDL1lenj63lUYakvEi-raicCI2vBErC_iRU8LKKMNFgGq9HG9jM4AJdI1DmBQALcJdYiYa_jCbURL6INXpUz1alSzSB5lMKVviaBgyLu3AAEWJghCaZeEEQBDJyD3aSM0J1fWSiHMGUeYZXcp1ixIBxp8Aa9l7X1MMCVzDfhx_AcdGeXuMJ7ATn4tcqIKtRlVjiWOwxi_Mjpna74OPuw0cKPvXXD64bet1mm1Zto2w0aWjn=w640-h480-no" class="article-banner">
                 
-            </a>
             
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/">プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2018-03-08 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-08</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/" class="thumbnail">
-                
-                <span style="background-image:url(https://lh3.googleusercontent.com/_vi02tbZ9CKsxwuUOaIaUfnDn7O2u63364DQ7NiUjE0ljI-X23N0VCj7sJFd_HDUUu68uzsXNgfT7_sMfVs8kkF85cyV61uJ5jYTZpCmi2jIikmgwXO_JdAQZCsU3bzbkEdFXoAwseL6-JUNLb90khOOuIQHrUfQsbPAyE7eQHE9FvZlr3_12A-BSrnj6cfwjd0V13vr74OIiZm2_7ypYt5zUiE5LI94cQU1Iz-QQOpxXJzHYroZlTWfOD_A9KUkk6FdG-LEP9Xl5PIpPPUcfANYtTiV6wkp1-HzQ6eYXH3YlW4X81adE1Fez78K2yL2g0r3M15lpizw16bC6YMdWrVRdkS9t6A9OJKMwE10swl_Ai3MEisi3AFqgA3lUYiZlwuP1EMTDEySt2fGy4lktFmjrhvrflCWYkSb4o-6D6J17PzcuWx1xVOTDkAaOzMi7FFMG9XNmHFcPCXSzin7mis5xqfVnnKnU3jpZ9E59Aqm_3LEQ98YBL9vaVc5ympf9iIpEsmVfBevvduUF5X4LvPeK_2FZ6_65jHeGGg_Rq-1VKknBiW7dT275emhUF-jIyOnBbqkaAFdGISTG5t239i9Mh6EO_NqTVea2M9Y7hvFtwQRHOC4Eo6dzsK05LlkquVkTU-qf1X3ir1YNgffbS0LFZraStmLu7U=w690-h360-no)" alt="デザイナー不在のチームのデザインフローを整えた話" class="thumbnail-image"></span>
-                
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2017/11/13/dev-design-workflow/">デザイナー不在のチームのデザインフローを整えた話</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2017-11-13 19:45:00 &#43;0900 JST" itemprop="datePublished">2017-11-13</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/" class="thumbnail">
-                
-                <span style="background-image:url(https://lh3.googleusercontent.com/AwhGUDFAXPXEXqXcmuzPqGZ0JyuZreHniW1yUPkxO9xKNN8zoggW9qhjjyWylvDRiYCscw36Nlx52PsDJgCLNpTwCPz3vbJZ9bbVO2IGB6PtoeSEB_t3zYkriBHlOQW6HAkkmCNryiVOLzPJ634z_H_UT29ks22OzMIe0edZ9FD6Djd5GqXMWvNpeCc_TYAeAS-cE-dWJsWnkj_WN2Cxk8xeWv-_DTaWdV1FQvXu3FjVI763yqtjMFbALQVHQXWqy4fI7qlVifCtLxLCl7ZecZAbB3_Am8ZBqvH523aSPF_OSSpE10qPtlEXAm5A24Pyw6g9f1pwvVx5YjEmiX049tbMOROlDzPMA8dUkkwhXP794pQ01y6ggm4obdasouSb3kfcmZOp68RWS3T_Y3y4eSySFlZcj6rkJyt-8bP79ovDWlAB5NDzzk2bwf6A_iwJBqyTScWMAO7fpfpt4M16XSYPnf5rsi7yzwRrW60IO7jdunS7gaQOA7hK1caiLlVJeRrSJtYHTlwUCG1w5OLy2rIeGGfChLODthFnAcg-s9GTY7r7WyfpaMJ-9XGszOCogLIJL7MoG62Tnmg6Q1qT2UvixcrlBrbLjL52yje4IUndlmxg=w600)" alt="スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~" class="thumbnail-image"></span>
-                
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2016/11/08/ux-improvement/">スタートアップ UX設計の舞台裏 ~ペルソナ・カスタマージャーニーマップ編~</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2016-11-08 15:40:44 &#43;0900 JST" itemprop="datePublished">2016-11-08</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/" class="thumbnail">
-                
-                <span style="background-image:url(https://lh3.googleusercontent.com/2E-oF0qTDFYUs4o_uFmYAo4uFsx2g1NISHg2UfiSvqfMDTxOeblr66t3Ml3xlJcz7_5ah5bZWl7WmZpiv6FmzI2SU2r5WzQKS52QMxyMMhXKdDtoGF1WIZ8Am33DfpLh00Cy9D4wlOAnO7DxNdbjadBonWy5P1W7BD1rCa52utStX1VmIqWSX5j5IK3m3Gx8-vN1Ub_VRk3ifMx2h1AwGlgtk2bpu7NSB3DUzB2rjsrLwh3n_LofmeiRHWPl8lTm5UJBUk6htWOKQCwCBsInMEN5-LnSndPIuGQ93gxP8LBQQy6hJXWX_aruMKL3EioA2kWyZlj0RxLK2AWUP6mVUloYoFJV0udlfd5cSfwpjlSlVAK36n7GGsZViWmN19psQ05ISZV0zqzHjXBLc7EpWDycP5WSHjmqr-N2Hgw7gVGfdPjFPWmLBjW9zDjo3Zz5hsZgT32V4NQWfZqiCuMvt5dxi7_g_TObIUPgm-zrzQwdTdnfVdkn3muNWqcZpLstHKarl73PrVrqAGYiSo5cv6xg6dcWYDciFXOQBccW-YdQ5JNNOwrkS4vrW-bLWtxw1yJqawUQ82V_7oUdgGXdmnClAuZzRCSnoMCfW4nY294QOg_FnQ=s800)" alt="ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)" class="thumbnail-image"></span>
-                
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2016/09/07/ios-tips-for-developer/">ちょっとの工夫でスムーズに！iOSアプリ開発のコツ9つ(コーディング・デザイン編)</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2016-09-07 17:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-07</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/" class="thumbnail">
-                
-                <span style="background-image:url(https://lh3.googleusercontent.com/mAZo021Zuw_Zp4JraHEVArFU7fsHZRPq1jMm4NsBD8ngJRgAmLHDnEvVvQMK8up4u0mKsO_m_rem7PbvOqqFOK3fTDFik7JizaKkEug2sgIA0G4bUkKTByXAREiqToX5ozEJOAguMKDJhUAnxNhUNVH40EjoNb1J8q7kxWRYZLOItRQlbKm7ggcjOlAxCEI16R4X0_A1XakO4XEpcDbAGrhIdyMA1NWKHHQxuGgGxk6W0JbiR3u3oxpv3yaHjJV5ZBN9HfZ1OpcW6RTodfitUcFhXdjgCm28ghZe1drsVub8JWjjE6CiYAGs4urpJ2tsUI5PrgzD-GXr2RxLekbGBXV7QdOY0ZOfyBLDEHGt1tvD0KZBZAa05ap2VieImvtqxxe3ZIkeNdPMtIE4spLohoGzPV8ZQgpDrGm3epkUm1gXsDFi1-naiDIdvSyXAYZP-e4HWJ8Z5A0UMmjO1yURQ7MmDtVLCvb6QTD_ACW-bb2wneWQovyE6ZTWuA9ghDnYDaxpxEDUzZG2b4d7Xh_7dDIVGGyLTgkyJdZFN5cLIug7LpSK--0CcesoY_GqMbAqXcwkTSFNoAZ1om6XtrI3UjP3E4uN-xWBMEJSYczuYVJ-cf3TGQ=s800)" alt="【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと" class="thumbnail-image"></span>
-                
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2016/09/01/ios-development-tips/">【2016年夏】iPhoneアプリを作り始める前に考えておきたい5つのこと</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2016-09-01 15:54:20 &#43;0900 JST" itemprop="datePublished">2016-09-01</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                        <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/" class="thumbnail">
-                
-                <span style="background-image:url(https://lh3.googleusercontent.com/F7GXQx32f_mb56GFuNaC3Yl3zhrYpt4O7y2xSeTT32fGC8OiUvqX6ybM59L5gxeUr68aR4GOGgFTSXWioalzT2GP0GzJ_3pARE0lxqvN5kgnIYd24ap8WUH1L-Wv1UdDLQDBf7e46l6ccvx5OeOdXsYGvqv6PJxnrBUqX0-6eOI6gU_ArWtB6B132OtAPGPG-HOBHoH4AxgC9MlAMUuO8dJnJwpW3X6-6gzXa1HiNlD6UJ-NQhUm6YpY731xc2UO5Zo8far-zMG3dIpPO9egNrwM-gpG5Q-chDO-Q7tvy2yK6sVaTRggxGAXhsNSe4zIBPYxWElqWlauCgqPQR2HnMZGpaAZxKrVtN1mzEhVEv5r7IEv3dfw0-_t2g8Qq53csbub3d-sdTyggnMxScqzYgc5rnflPiCB-F6fR7Fe26WUHQxQ2Zc6UZReJCfi121pOKu7hXm_F51gETXqIDsPU1SQHTeOfP9_eOvtJyu9CKPQBiCb1zS5R9vMavzUxy48WVppAdfBGHGaWE89y-JQBPvnVphxl1ai-r6eesg69gTrzfTlyw9tNJMbp3CfcVeVJYsuOQ60qtiIGmJo94De7tGJcXbQF3U=w512-h384-no)" alt="イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート" class="thumbnail-image"></span>
-                
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2016/05/24/design-for-innovation-2016/">イノベーションにおけるデザインの役割 - Design for Innovation 2016 参加レポート</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2016-05-24 09:18:46 &#43;0900 JST" itemprop="datePublished">2016-05-24</time>
-            </div>
-        </header>
-    </div>
-</article> 
-                    
-                </div>
-            </section>
-            <nav id="page-nav">
 
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2018/03/20/minispec/">
+    <h1 class="article-title" itemprop="name">
+        スタートアップの現場で役立つ開発要件のまとめ方
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2018-03-20 20:03:55 &#43;0900 JST" itemprop="datePublished">2018-03-20</time>
+            &middot;
+            3593
+            words
+            &middot;
+            8
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">project</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/project">project</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/management">management</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/20/minispec/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップの現場で役立つ開発要件のまとめ方" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                <p>こんにちは。ハウスマートの高松(<a href="https://twitter.com/t2kmt">@t2kmt</a>)です。</p>
+
+<p>皆さんは開発要件をまとめるのにどんなフォーマットを使っていますか？</p>
+
+<p>開発要件をいい感じにまとめるのって大変ですよね。
+ドキュメント整備せずに開発に着手し始めてしまうと手戻り抜け漏れが出てしまいますが、一方で要件定義書をガチガチなフォーマットにするとドキュメントの作成自体の工数が増えてしまいます。
+スタートアップはスピードが命。ドキュメントを書きまくって開発が進まないなんて言語道断です。</p>
+
+<p>開発要件の整理はプロジェクトの成否に多大なインパクトを与えますが、ほとんどの現場では企画を考える人にフォーマットが委ねられていることが多いと思います。</p>
+
+<p>今回は皆さんが快適に開発要件をまとめられるように、ハウスマートで利用している mini spec というフォーマットをご紹介します。
+</p>
+
+<h1 id="mini-spec-とは">mini spec とは</h1>
+
+<p>mini spec とは開発の要件をまとめるフォーマットで、2016年頃にペロリのテックブログで紹介されていたものです。ハウスマートではそれを参考に、改良を続けながら2年ほど運用してきています。（mini spec とはペロリの社内用語で一般的な名称ではないようです）</p>
+
+<p>2年ほど使い続けていますが、このフォーマットは必要なことが網羅されていて、かつ冗長な部分はカットされているため、スタートアップのような企画と開発にスピード感が求められる現場には非常にマッチしています。</p>
+
+<p>最近知り合いにこのブログ紹介しようと思ったところ本家のブログが削除されていたため、誰かの参考になればと思い今回ブログにまとめることにしました。</p>
+
+<p>ハウスマートの mini spec では以下の9つの項目をプロジェクトごとにまとめています。</p>
+
+<ul>
+<li>解決すべき課題（Issue to be Solved）</li>
+<li>ユーザーストーリー（User Stories）</li>
+<li>影響範囲（Repository/Platform）</li>
+<li>非機能要件（Non-functional Requirements）</li>
+<li>KPI（Purpose）</li>
+<li>リリース希望日（Target Due）</li>
+<li>体制 / 規模感（Team）</li>
+<li>ステークホルダ（Stakeholders）</li>
+<li>参照（Reference）</li>
+</ul>
+
+<h1 id="各項目について">各項目について</h1>
+
+<p>それぞれの項目でどのような内容を書いているかを紹介します。
+以下の項目を説明も含めてまるっとMarkdownのテンプレートとし、これをコピーして説明を見ながら各項目を埋めていくスタイルで使っています。</p>
+
+<p>（mini specの魅力を存分に伝えるため、項目の説明に関してはペロリブログ本家に書かれていた説明とハウスマート社内で追記・書き換えしたものが含まれていますがご了承ください）</p>
+
+<h2 id="解決すべき課題-issue-to-be-solved">解決すべき課題（Issue to be Solved）</h2>
+
+<p>現在顕在化している課題とその解決のニーズを記載します。</p>
+
+<p>ここで意識するのは、いわゆる論文の前書きのように、である調で理系っぽく客観的に記述するようにしています。そのほうがちょっとカッコいいのと、誰が読んでも、それは大きな課題だなあ、やるべきだよなあ、と少し高めのサービス目線から重要性を感じてもらえるからです。
+課題を裏付ける根拠や数字がある場合は併記します。</p>
+
+<h2 id="ユーザーストーリー-user-stories">ユーザーストーリー（User Stories）</h2>
+
+<p>ユーザー視点でどうあるべきかのストーリーを、ユーザーが機能に気がつくところから箇条書きで順序を追って記載します。</p>
+
+<p>ここで大事なのは、アクターに漏れがないかです。エンドユーザーだけでなく、コンテンツを運用する人や、分析する人、外部のパートナー等あらゆるアクターのユースケースを書きます。そうしないと、管理ツールってどうするの？みたいなあるあるが後で起きて露頭に迷うので最初から決めます。管理ツールがないなら、エンジニアが redis にデータを投入する等書きます。</p>
+
+<p>そして、ここはストーリーなので特にエンドユーザー向けのユースケースは、ワクワクするような、ユーザー感情も一緒に記載するようにします。</p>
+
+<h2 id="影響範囲-repository-platform">影響範囲（Repository/Platform）</h2>
+
+<p>改修範囲がWeb か、アプリか、両方か、管理画面か等を記載します。アプリの場合は必要であればバージョンの指定もします。</p>
+
+<p>詳細にわかればリポジトリ単位で変更点を列挙していきます。もし初期段階でわからない部分があれば複数の可能性について書いても良いです。（ここをこう変えてもいいかもしれないし、他の部分を変えてもいいかもしれない、のように書く）</p>
+
+<h2 id="非機能要件">非機能要件</h2>
+
+<p>機能以外の要件を書きましょう。
+画面やAPIのレスポンススピード、バッチの処理時間、データ量などシステム的に気にしておくべきことを箇条書きで列挙します。</p>
+
+<h2 id="kpi-purpose">KPI（Purpose）</h2>
+
+<p>現状の KPI と目標の KPI、もしくは定性的な目標を記載します。
+追うKPIを定義することで、どの数字を計測可能な状態にしておくかを明確にするのが目的です。
+また、ネガティブなインパクトが考えられる数字もKPIとして定義し、可能であれば許容する範囲を事前に定めます。</p>
+
+<h2 id="リリース希望日-target-due">リリース希望日（Target Due）</h2>
+
+<p>希望なのか、デッドラインなのか、理由も含めて記載します。
+最終的なスケジュールは全体のプライオリティの中で決めるので、デッドラインがない場合はだいたいで大丈夫です。</p>
+
+<h2 id="体制-規模感-team">体制 / 規模感（Team）</h2>
+
+<p>ざっくり何人でどれくらいの期間かを記載します。</p>
+
+<h2 id="リスク-risks">リスク（Risks）</h2>
+
+<p>プロジェクトを進行する上で認識しているリスクがあれば記載、かつリスクへの対処法も併記します。実装で詰まる可能性が見えている箇所などがあれば挙げておいてください。また、施策の結果起こりうるリスクも記載してください。
+いちばん大事なのは許容するリスクを書いておくことです。このリスクは承知で挑むのだ、ということを伝えて腹落ち感が出るように。</p>
+
+<h2 id="ステークホルダ-stakeholders">ステークホルダ（Stakeholders）</h2>
+
+<p>この要件に対してレビューが必要な人を by name で記載します。
+誰にどのタイミングでどんな観点で見てもらうのかを意識して書きましょう。</p>
+
+<h2 id="参照-reference">参照（Reference）</h2>
+
+<p>参考資料があれば記載します。
+過去の mini spec だったり、既存仕様、ベンチマークにしている他社サービスなど index として並べます。</p>
+
+<h1 id="どうやって運用しているか">どうやって運用しているか</h1>
+
+<p>ハウスマートでは2週間スプリントで開発を行なっていますが、ざっくり見積もった時にタスクが一人で一週間以上かかるようなものに関しては mini spec を作成するようにしています。
+それより小さな開発に関してはドキュメント作成のコストが相対的に高くなってしまうためプランニングポーカーの際に要件や仕様を確認するにとどめています。</p>
+
+<p>ハウスマートではプロジェクトをリードするエンジニアもしくはデザイナーが mini spec を作成します。簡単なものであれば30分程度、大きいものでも2-3時間程度で書き終わるボリュームにしています。
+作成した mini spec はタスクに分割して見積もりをする前に、チーム全体でレビューをしています。</p>
+
+<p>また、大きめなプロジェクト振り返りの際にはプロジェクト進行がよりよく進むために mini spec の項目自体も振り返るようにしています。</p>
+
+<h1 id="導入して感じたメリット3つ">導入して感じたメリット3つ</h1>
+
+<h2 id="開発前に全体感が共有できるので手戻りが少なくなった">開発前に全体感が共有できるので手戻りが少なくなった</h2>
+
+<p>プロジェクトに着手する前に全体感が明確になっており、チーム全体のレビューも通っているため認識の齟齬による手戻りが大幅に少なくなりました。</p>
+
+<h2 id="プロジェクトの振り返りがちゃんとできるようになった">プロジェクトの振り返りがちゃんとできるようになった</h2>
+
+<p>事前にプロジェクトの KPI を明確にして開発を始めるため、その数値を取得できる状態で機能がリリースされるようになります。
+そのため、リリース後のKPIへのインパクトの振り返りが確実になされるようになりました。</p>
+
+<h2 id="誰が企画しても品質に差が出なくなった">誰が企画しても品質に差が出なくなった</h2>
+
+<p>フォーマット化していることによってレビューポイントが明確になるため、きちんとレビューを行えば企画に慣れていないメンバーでも安定したクオリティでプロジェクトを進めることができるようになりました。</p>
+
+<h1 id="使う時に気をつけたいこと">使う時に気をつけたいこと</h1>
+
+<p>mini spec を導入することの最大のメリットは、「プロジェクトの企画」という行為自体を改善するサイクルを作れることだと思っています。</p>
+
+<p>あの人の企画はわかりやすい、あの人の企画は抜け漏れがある、といったような人依存の状況を脱却してフォーマットに対して建設的なフィードバックを行なうことが大切です。
+なので、実際に現場で使用する際にはフォーマット自体の見直しを定期的に行うことをお勧めします。</p>
+
+<p>また、フォーマットの項目や粒度などはそのチームのメンバー状況やスキルセットによって変わってくると思うので、自分達に合った最適なフォーマットを見つけてみてください。</p>
+
+<h1 id="おわりに">おわりに</h1>
+
+<p>ハウスマートではエンジニアやデザイナーがプロジェクトの企画から主導できる環境を用意しています。
+「何を作るか」から自分で考える環境で仕事をしたい！という方、ぜひ一緒に働きましょう。</p>
+
+<p><a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a>
+<a href="https://www.wantedly.com/projects/69347">今話題の不動産テック！スタンダードを創るUI/UXデザイナーをWanted</a></p>
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/20/minispec/" class="hatena-bookmark-button" data-hatena-bookmark-title="スタートアップの現場で役立つ開発要件のまとめ方" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/20/minispec/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="スタートアップの現場で役立つ開発要件のまとめ方" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f20%2fminispec%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%ae%e7%8f%be%e5%a0%b4%e3%81%a7%e5%bd%b9%e7%ab%8b%e3%81%a4%e9%96%8b%e7%99%ba%e8%a6%81%e4%bb%b6%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81%e6%96%b9&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f20%2fminispec%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f20%2fminispec%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f20%2fminispec%2f&amp;description=%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%81%ae%e7%8f%be%e5%a0%b4%e3%81%a7%e5%bd%b9%e7%ab%8b%e3%81%a4%e9%96%8b%e7%99%ba%e8%a6%81%e4%bb%b6%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81%e6%96%b9" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f20%2fminispec%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た</div>
+    </a>
+    
+
+    
 </nav>
 
-        </section>
-        <aside id="sidebar">
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
     
 <div class="widget-wrap">
     <h3 class="widget-title">
@@ -410,7 +557,7 @@
                     <a href="http://techblog.housmart.co.jp/2018/03/20/minispec/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/JAQVo36baaq0zxd0J8nB9J02tfviMhac_BYbKURjJ2p_JPhpCIdYAF2I15CRq8BUX4_gqvJ29MrkbmoUA3wMeFKMTYmz1JpwRfyp3ur8zX5W4BcAPp-vihSinba8YH8mG9qKoAYOLAtiV2f09u58ANxqReK7ZnfWm6MZSZDJJQMbXO8V-uGYKl4g7jifAacERoLUHftm-Yb3m294nlt455AWNyeevj9ajt56SS04d0CshLVHuXW7EuY2CdgigjrLRCwiRJcZTCuAh2Qdfv-dETcgFce3XiV45wy1DfECdC4aSymzyQiDZt5fKkVjk98bqdC1WkwDl0-pt8xbYQ9szzgOkhdDg4-28KMYmCFjriNYiUELH6AzXLxhaZjtaaXA5KtQpPHouWpmFkFrzvY0zZOodJnaLvgkmNtxOZKhpaSZfDzVSjDL1lenj63lUYakvEi-raicCI2vBErC_iRU8LKKMNFgGq9HG9jM4AJdI1DmBQALcJdYiYa_jCbURL6INXpUz1alSzSB5lMKVviaBgyLu3AAEWJghCaZeEEQBDJyD3aSM0J1fWSiHMGUeYZXcp1ixIBxp8Aa9l7X1MMCVzDfhx_AcdGeXuMJ7ATn4tcqIKtRlVjiWOwxi_Mjpna74OPuw0cKPvXXD64bet1mm1Zto2w0aWjn=w640-h480-no)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JAQVo36baaq0zxd0J8nB9J02tfviMhac_BYbKURjJ2p_JPhpCIdYAF2I15CRq8BUX4_gqvJ29MrkbmoUA3wMeFKMTYmz1JpwRfyp3ur8zX5W4BcAPp-vihSinba8YH8mG9qKoAYOLAtiV2f09u58ANxqReK7ZnfWm6MZSZDJJQMbXO8V-uGYKl4g7jifAacERoLUHftm-Yb3m294nlt455AWNyeevj9ajt56SS04d0CshLVHuXW7EuY2CdgigjrLRCwiRJcZTCuAh2Qdfv-dETcgFce3XiV45wy1DfECdC4aSymzyQiDZt5fKkVjk98bqdC1WkwDl0-pt8xbYQ9szzgOkhdDg4-28KMYmCFjriNYiUELH6AzXLxhaZjtaaXA5KtQpPHouWpmFkFrzvY0zZOodJnaLvgkmNtxOZKhpaSZfDzVSjDL1lenj63lUYakvEi-raicCI2vBErC_iRU8LKKMNFgGq9HG9jM4AJdI1DmBQALcJdYiYa_jCbURL6INXpUz1alSzSB5lMKVviaBgyLu3AAEWJghCaZeEEQBDJyD3aSM0J1fWSiHMGUeYZXcp1ixIBxp8Aa9l7X1MMCVzDfhx_AcdGeXuMJ7ATn4tcqIKtRlVjiWOwxi_Mjpna74OPuw0cKPvXXD64bet1mm1Zto2w0aWjn=w640-h480-no)" alt="スタートアップの現場で役立つ開発要件のまとめ方" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -435,7 +582,7 @@
                     <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="スタートアップの現場で役立つ開発要件のまとめ方" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -460,7 +607,7 @@
                     <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="スタートアップの現場で役立つ開発要件のまとめ方" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -485,7 +632,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="スタートアップの現場で役立つ開発要件のまとめ方" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -510,7 +657,7 @@
                     <a href="http://techblog.housmart.co.jp/2017/12/23/airbnb-clone-home-screen/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/0FpkbJkWCeFHzLE9EtS-kiRDvMH-RblM2ElsH29DCfUSw9IBSaC9q9SCmZu0exW3KXMXi44qdRYed8GEFGVFsOK_AlRNRBPUbNEA0gizaT_pEwE1cjxrfeeUDsGlHjJKmg35WGqxVpq2O-t9M_EIbCmn-zsUCwy9fIl0-G4i8CO8Y-tXFyAS0XS4cEPDlk-r8rf5cc8JDbpbHYfAfUsPgFbn2dII_n1fs4kiB54h1Tiyvym40IcH_y9Jq6QDOg41XjVPcRbU3A2ZEZVSbiKR_DcoKACat8UhvmmRUA4k5Ap35LDe9lH-mJFeoqZHF06wX3P46SJwoTe6AdpYjxBsnl0IkefgM3JUcDINedl_XGApsB3CDub5T2tTATK569IyCDZso2kAsMaND-gKiZpqCn7CnXuGpIkMQzOr7Hc0i8V-CCXeKUQ4781M9SAMO4AjUzTqjBC9GVFAncWfycnKzp5S3QDgTMtBuYjaKkwJoIt__UqkKHOFNnxROi6c6FIyZt3ccF_jmmyEF8QqGy-SytTIz92gTis5TDBP6G-nyEYBB1Q_VbJqnHyqgK3KEuBLK6lSzhPu0zu9pC9vdvVeNPjh27clj0dlZvmNcAUjFLDZevRYiCuoWUkh5QMN4khySBxRJnSHu8OGsnmO6V54BdqcYoykiWbg=w397-h175-no)" alt="Design" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/0FpkbJkWCeFHzLE9EtS-kiRDvMH-RblM2ElsH29DCfUSw9IBSaC9q9SCmZu0exW3KXMXi44qdRYed8GEFGVFsOK_AlRNRBPUbNEA0gizaT_pEwE1cjxrfeeUDsGlHjJKmg35WGqxVpq2O-t9M_EIbCmn-zsUCwy9fIl0-G4i8CO8Y-tXFyAS0XS4cEPDlk-r8rf5cc8JDbpbHYfAfUsPgFbn2dII_n1fs4kiB54h1Tiyvym40IcH_y9Jq6QDOg41XjVPcRbU3A2ZEZVSbiKR_DcoKACat8UhvmmRUA4k5Ap35LDe9lH-mJFeoqZHF06wX3P46SJwoTe6AdpYjxBsnl0IkefgM3JUcDINedl_XGApsB3CDub5T2tTATK569IyCDZso2kAsMaND-gKiZpqCn7CnXuGpIkMQzOr7Hc0i8V-CCXeKUQ4781M9SAMO4AjUzTqjBC9GVFAncWfycnKzp5S3QDgTMtBuYjaKkwJoIt__UqkKHOFNnxROi6c6FIyZt3ccF_jmmyEF8QqGy-SytTIz92gTis5TDBP6G-nyEYBB1Q_VbJqnHyqgK3KEuBLK6lSzhPu0zu9pC9vdvVeNPjh27clj0dlZvmNcAUjFLDZevRYiCuoWUkh5QMN4khySBxRJnSHu8OGsnmO6V54BdqcYoykiWbg=w397-h175-no)" alt="スタートアップの現場で役立つ開発要件のまとめ方" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -1048,7 +1195,7 @@
     <div id="toTop" class="fa fa-chevron-up"></div>
 </aside>
 
-    </div>
+	</div>
 </div>
 
 <footer id="footer">
