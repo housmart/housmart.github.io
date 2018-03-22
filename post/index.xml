@@ -7,10 +7,38 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Powered by [Kawlu](//kawlu.com).</copyright>
-    <lastBuildDate>Tue, 20 Mar 2018 20:03:55 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 22 Mar 2018 18:00:00 +0900</lastBuildDate>
     
 	<atom:link href="http://techblog.housmart.co.jp/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法</title>
+      <link>http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/</link>
+      <pubDate>Thu, 22 Mar 2018 18:00:00 +0900</pubDate>
+      
+      <guid>http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/</guid>
+      <description>&lt;p&gt;エンジニアの&lt;a href=&#34;https://twitter.com/macs_6&#34;&gt;@macs_6&lt;/a&gt;です。&lt;/p&gt;
+
+&lt;p&gt;AWS上で稼働中のサービスをスケールアウトする際に、DBのパスワード等のセキュアな設定をどこに保存しておくか困ったことはありませんか？&lt;/p&gt;
+
+&lt;p&gt;HerokuやKubernetesであれば以下の機能があります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Heroku: &lt;a href=&#34;https://devcenter.heroku.com/articles/config-vars&#34;&gt;Config Vars&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kubernetes: &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/secret/&#34;&gt;Secrets&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;AWSではどこで管理すればいいのでしょうか？&lt;/p&gt;
+
+&lt;p&gt;KubernetesをAWS上に構築するサンプルを見てみると&lt;a href=&#34;https://github.com/aws-samples/aws-workshop-for-kubernetes/tree/master/04-path-security-and-networking/401-configmaps-and-secrets&#34;&gt;Secretsの裏側にはパラメータストア&lt;/a&gt;が利用されています。&lt;/p&gt;
+
+&lt;p&gt;そこでこのブログではAWS ECS上でのRedash構築を例にして、&lt;strong&gt;パラメータストアとKMSを使った秘密情報を含んだ環境変数の管理方法&lt;/strong&gt;について紹介します。&lt;/p&gt;
+
+&lt;p&gt;現在のECS環境については、&lt;a href=&#34;http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/&#34;&gt;&amp;ldquo;会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと&amp;rdquo;&lt;/a&gt;で紹介しているので、そちらを参照して下さい。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>スタートアップの現場で役立つ開発要件のまとめ方</title>

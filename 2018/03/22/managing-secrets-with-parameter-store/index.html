@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？ &middot; カウル Tech Blog</title>
+    <title>AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法 &middot; カウル Tech Blog</title>
     <meta name="generator" content="Hugo 0.31" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,24 +19,38 @@
     <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" />
-    <meta property="og:title" content="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" />
-<meta property="og:description" content="Housmart高松です。
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" />
+    <meta property="og:title" content="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" />
+<meta property="og:description" content="エンジニアの@macs_6です。
 
-2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。
-今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである &ldquo;Ruby x データサイエンス&rdquo; の観点からRuby Kaigiの参加レポートをします。
+AWS上で稼働中のサービスをスケールアウトする際に、DBのパスワード等のセキュアな設定をどこに保存しておくか困ったことはありませんか？
+
+HerokuやKubernetesであれば以下の機能があります。
+
+
+Heroku: Config Vars
+Kubernetes: Secrets
+
+
+AWSではどこで管理すればいいのでしょうか？
+
+KubernetesをAWS上に構築するサンプルを見てみるとSecretsの裏側にはパラメータストアが利用されています。
+
+そこでこのブログではAWS ECS上でのRedash構築を例にして、パラメータストアとKMSを使った秘密情報を含んだ環境変数の管理方法について紹介します。
+
+現在のECS環境については、&ldquo;会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと&rdquo;で紹介しているので、そちらを参照して下さい。
 
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" />
 
-  <meta property="og:image" content="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no" />
+  <meta property="og:image" content="https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600" />
 
 
 
-<meta property="article:published_time" content="2017-09-20T15:31:47&#43;09:00"/>
+<meta property="article:published_time" content="2018-03-22T18:00:00&#43;09:00"/>
 
-<meta property="article:modified_time" content="2017-09-20T15:31:47&#43;09:00"/>
+<meta property="article:modified_time" content="2018-03-22T18:00:00&#43;09:00"/>
 
 
 
@@ -50,32 +64,60 @@
 
     
     
-<meta itemprop="name" content="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？">
-<meta itemprop="description" content="Housmart高松です。
+<meta itemprop="name" content="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法">
+<meta itemprop="description" content="エンジニアの@macs_6です。
 
-2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。
-今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである &ldquo;Ruby x データサイエンス&rdquo; の観点からRuby Kaigiの参加レポートをします。
+AWS上で稼働中のサービスをスケールアウトする際に、DBのパスワード等のセキュアな設定をどこに保存しておくか困ったことはありませんか？
+
+HerokuやKubernetesであれば以下の機能があります。
+
+
+Heroku: Config Vars
+Kubernetes: Secrets
+
+
+AWSではどこで管理すればいいのでしょうか？
+
+KubernetesをAWS上に構築するサンプルを見てみるとSecretsの裏側にはパラメータストアが利用されています。
+
+そこでこのブログではAWS ECS上でのRedash構築を例にして、パラメータストアとKMSを使った秘密情報を含んだ環境変数の管理方法について紹介します。
+
+現在のECS環境については、&ldquo;会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと&rdquo;で紹介しているので、そちらを参照して下さい。
 
 ">
 
 
-<meta itemprop="datePublished" content="2017-09-20T15:31:47&#43;09:00" />
-<meta itemprop="dateModified" content="2017-09-20T15:31:47&#43;09:00" />
-<meta itemprop="wordCount" content="2963">
+<meta itemprop="datePublished" content="2018-03-22T18:00:00&#43;09:00" />
+<meta itemprop="dateModified" content="2018-03-22T18:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="3718">
 
-  <meta itemprop="image" content="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no">
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600">
 
 
 
-<meta itemprop="keywords" content="data-analysis,event," />
+<meta itemprop="keywords" content="operation,docker,infra," />
 
     <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no"/>
-<meta name="twitter:title" content="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？"/>
-<meta name="twitter:description" content="Housmart高松です。
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600"/>
+<meta name="twitter:title" content="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法"/>
+<meta name="twitter:description" content="エンジニアの@macs_6です。
 
-2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。
-今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである &ldquo;Ruby x データサイエンス&rdquo; の観点からRuby Kaigiの参加レポートをします。
+AWS上で稼働中のサービスをスケールアウトする際に、DBのパスワード等のセキュアな設定をどこに保存しておくか困ったことはありませんか？
+
+HerokuやKubernetesであれば以下の機能があります。
+
+
+Heroku: Config Vars
+Kubernetes: Secrets
+
+
+AWSではどこで管理すればいいのでしょうか？
+
+KubernetesをAWS上に構築するサンプルを見てみるとSecretsの裏側にはパラメータストアが利用されています。
+
+そこでこのブログではAWS ECS上でのRedash構築を例にして、パラメータストアとKMSを使った秘密情報を含んだ環境変数の管理方法について紹介します。
+
+現在のECS環境については、&ldquo;会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと&rdquo;で紹介しているので、そちらを参照して下さい。
 
 "/>
 <meta name="twitter:site" content="@HousmartJournal"/>
@@ -278,25 +320,25 @@
         <div class="article-inner">
             
                 
-                <img src="https://lh3.googleusercontent.com/gzNXD3nwgT96lXUh5o5JSibCr2I3b4EhmZlpTbAQa1DUSPHuAj4PYQr4w0DwWX-ENI9uqLZDs0TzZ1t3l8Kck_HFHvEtMoemHZyTjNnKoQ-sb69XHwEqnrKJftV8cgQxAQwT5y9F5-1yJ3mcIeYEFq7XT6sTBvqQgvBj3cWcE-6CYk1gKx6ILaAmzPUfRs4rhlVQSJOQHz0fZCsQTBULLss7U-7r_G_YE5nxU7u4fXwVWtVIEECSSHdmgM24nNxB388BLWep9XprsEBgVkCq4mmsrcLumrZ9Erss6uKFK6KUoArB2rvEDriJc9HkEutficHXh9KDBpd_m_vpyD_C0-6SuaWwja3XMsb-C-1oT_7awU_hw2O9A1RvC0peeEacQ5hQHsN0TB3NZ6BUcOHRMqVsZok4R7z4EIlixUIQTAbAnIVweFQHYvL73OdzjB6jn-UpV6MKxUhEzpIEY7TT6WFqncrQYmIsl3U6IFDLIlizghjlRLzwf0_EjXpFN6-7OxGM7CaCkRaof--y51lRaFEpufMRr6XMWgCPBspe9mKz1-SQ4jcsiGO169xKvOFGEsD5uQ4mgjYDCMM_qqjLn0-x477U-ga3vp-OK2yJH9s6wzqO7fY1s4VoldaoKCBwfsefR-T_6TalYmtmfKu8F-F0CouRIcvlQZs=w1200-h630-no" class="article-banner">
+                <img src="https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600" class="article-banner">
                 
             
 
             <header class="article-header">
-    <a href="http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/">
+    <a href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/">
     <h1 class="article-title" itemprop="name">
-        【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？
+        AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法
     </h1>
     </a>
     <div class="article-meta">
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2017-09-20 15:31:47 &#43;0900 JST" itemprop="datePublished">2017-09-20</time>
+            <time datetime="2018-03-22 18:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-22</time>
             &middot;
-            2963
+            3718
             words
             &middot;
-            6
+            8
             minute read
         </div>
 
@@ -307,7 +349,7 @@
             <div class="article-category">
                 <i class="fa fa-folder"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">event</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">infra</a>
                 
                 
             </div>
@@ -320,10 +362,13 @@
             <div class="article-category">
                 <i class="fa fa-tags"></i>
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/data-analysis">data-analysis</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/operation">operation</a>
                 &middot;
                 
-                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/event">event</a>
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/docker">docker</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/infra">infra</a>
                 
                 
             </div>
@@ -332,107 +377,329 @@
     </div>
 </header>
 <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="hatena-bookmark-button" data-hatena-bookmark-title="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="hatena-bookmark-button" data-hatena-bookmark-title="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 </div>
 
 
             <div class="article-entry" itemprop="articleBody">
-                <p>Housmart高松です。</p>
+                <p>エンジニアの<a href="https://twitter.com/macs_6">@macs_6</a>です。</p>
 
-<p>2017年9月18-20日の3日間、広島で開催されたRuby Kaigi 2017に参加してきました。Ruby Kaigi自体は去年に引き続き2回目の参加となります。<br />
-今年も様々なトピックがありましたが、今回は私が注目しているテーマの1つである <strong>&ldquo;Ruby x データサイエンス&rdquo;</strong> の観点からRuby Kaigiの参加レポートをします。</p>
+<p>AWS上で稼働中のサービスをスケールアウトする際に、DBのパスワード等のセキュアな設定をどこに保存しておくか困ったことはありませんか？</p>
+
+<p>HerokuやKubernetesであれば以下の機能があります。</p>
+
+<ul>
+<li>Heroku: <a href="https://devcenter.heroku.com/articles/config-vars">Config Vars</a></li>
+<li>Kubernetes: <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secrets</a></li>
+</ul>
+
+<p>AWSではどこで管理すればいいのでしょうか？</p>
+
+<p>KubernetesをAWS上に構築するサンプルを見てみると<a href="https://github.com/aws-samples/aws-workshop-for-kubernetes/tree/master/04-path-security-and-networking/401-configmaps-and-secrets">Secretsの裏側にはパラメータストア</a>が利用されています。</p>
+
+<p>そこでこのブログではAWS ECS上でのRedash構築を例にして、<strong>パラメータストアとKMSを使った秘密情報を含んだ環境変数の管理方法</strong>について紹介します。</p>
+
+<p>現在のECS環境については、<a href="http://techblog.housmart.co.jp/2017/11/06/ecs-migration-project/">&ldquo;会社の本番環境をDocker(ECS)に置き換えるために準備したこと気づいたこと&rdquo;</a>で紹介しているので、そちらを参照して下さい。</p>
 
 <p></p>
 
-<h1 id="rubyコミュニティのデータサイエンスへの取り組み">Rubyコミュニティのデータサイエンスへの取り組み</h1>
-
-<p>ここ2-3年で機械学習・ディープラーニングやデータサイエンスを業務で使うことはどんどん普通のことになってきています。<br />
-この領域はほとんどがPython/R/Scalaなどで行われており、最近までRubyでデータサイエンスをやるのは実質不可能な状態でした。<br />
-ですが、Rubyが言語としてこれらの領域をサポートするかは、Rubyのこれからを考える意味でもとても重要になります。<br />
-これらの現状を踏まえた上で、Rubyをデータサイエンスに活用できるようにしようという活動がここ最近Rubyコミュニティ内でも行われてきています。</p>
-
-<p>弊社が提供しているマンション売買サービスのカウルもWebサーバやAPIなど、基本的なコンポーネントはRuby on Railsで作られているのですが、マンションの価格推定機能や画像処理・データ処理の部分に機械学習を導入しており、その部分はPythonでの実装になっています。</p>
-
-<p>Rubyで動いているサービスから機械学習を利用する場合、以前は2つの選択肢がありました。</p>
-
-<ol>
-<li>Rubyで頑張って実装する</li>
-<li>他言語(Pythonなど)でAPIを実装してRubyから呼び出す</li>
-</ol>
-
-<p>Rubyで機械学習のアルゴリズムを実装しようとする場合、現状ではPythonに匹敵する機械学習ライブラリは存在せず、全てを自前で実装していくのは現実的ではありません。</p>
-
-<p>なので、カウルでは2. のパターンでPythonを用いて実装しています。<br />
-しかし、同一のDBを複数言語から参照すると双方でスキーマ変更などに追従する必要があったり、別でAPI用のサーバを管理コストが生じるなどの課題を感じています。</p>
-
-<h1 id="pycallという選択肢">PyCallという選択肢</h1>
-
-<p>そこで、Rubyコミッターであるむらけんさん（<a href="https://twitter.com/mrkn">@mrkn</a>）が2016年のRuby Kaigiで、 <strong>Pythonの資産(scikit-learn,pandas,numpyなどのライブラリ)をRubyから利用できるようにするプロジェクト&rdquo;PyCall&rdquo;</strong> の開発を打ち出しました。<br />
-<a href="https://github.com/mrkn/pycall.rb">PyCall</a>はRubyからPythonのライブラリを直接呼び出せるようにするためのgemとして開発されています。</p>
-
-<p>機械学習やディープラーニングの領域では日々新しいアルゴリズムが論文として発表され、すぐに実装がオープンソースとして公開されるようなスピード感での開発が常識になっています。<br />
-この事情を考えると、これらの研究開発に近い分野のエンジニアが突然Rubyで新規のアルゴリズムを実装しだすことは考えにくいため、既存のPythonの資産をRubyから利用するアプローチには納得感が高く、期待を持って見ていました。</p>
-
-<p>そして、1年後である今回のRuby KaigiでPyCallの安定版である1.0のリリースが<a href="http://rubykaigi.org/2017/presentations/mrkn.html">むらけんさんのトーク</a>の中で発表されました。</p>
-
-<p>デモではpandasでのデータ処理やmatplotlibでのグラフ描画、ディープラーニング用ライブラリであるKerasを使った画像検出などを実際に見せてくれました。<br />
-pandasやmatplotlib、numpyなどの使用頻度の高いライブラリはPyCallをさらにwrapしてインターフェースが整えられたgemとして提供されており、KerasはPyCallを直接使ってライブラリを呼び出すような実装になっていました。</p>
-
-<p>セッション後実際に触ってみた感じでは、Pythonのライブラリを直接呼び出せることもあり本当にRubyでデータサイエンスができるようになった、と言うのに十分な完成度だと感じました。<br />
-以下のリンクを参考にDockerイメージを利用して簡単に試すことができるので、興味があれば触ってみてください。</p>
+<h2 id="目次">目次</h2>
 
 <ul>
-<li><a href="https://github.com/rubydata/rubykaigi2017">https://github.com/rubydata/rubykaigi2017</a></li>
-<li><a href="https://github.com/RubyData/rubykaigi2017/blob/master/pycall_lecture.ipynb">https://github.com/RubyData/rubykaigi2017/blob/master/pycall_lecture.ipynb</a></li>
+<li><a href="#anchor0">システム全体像と今回使うAWSのサービス</a></li>
+<li><a href="#anchor1"><code>docker-compose.yml</code>の用意</a></li>
+<li><a href="#anchor2">パラメータの保存と暗号化</a></li>
+<li><a href="#anchor3">権限の設定</a></li>
+<li><a href="#anchor4">Redashの起動</a></li>
+<li><a href="#anchor5">まとめ</a></li>
 </ul>
 
-<h1 id="ruby-x-データサイエンスのこれから">Ruby x データサイエンスのこれから</h1>
+<p><div id="anchor0"/></p>
 
-<p>ですが、セッションの中でむらけんさんがPycallは一時的なソリューションだとも語っていました。<br />
-実際にPyCall以外に、Rubyで頑張って実装すると言うアプローチでも色々なプロジェクトが進行しています。</p>
+<h2 id="システム全体像と今回使うawsのサービス">システム全体像と今回使うAWSのサービス</h2>
 
-<h2 id="numoプロジェクト">Numoプロジェクト</h2>
+<p>登場するAWSのサービスは以下です。</p>
 
-<p>そのうちの一つが、Rubyで科学計算を実現しようと言う<a href="https://github.com/ruby-numo/numo/blob/master/README.md">Numoプロジェクト</a>です。<br />
-<a href="http://rubykaigi.org/2017/presentations/masa16tanaka.html">Numoに関する発表</a>も2日目の午後にありました。</p>
+<ul>
+<li><a href="https://aws.amazon.com/jp/ecs/">ECS (Elastic Container Service)</a>
 
-<p>このプロジェクトは筑波大学の田中昌宏さん（<a href="https://twitter.com/masa16tanaka">@masa16tanaka</a>）がプライベートでやっているプロジェクトで、Numpyと同等の機能を志向する行列計算ライブラリのNumo::NArrayや、データビジュアライズのためのgnuplot、GNU scientific library、フーリエ変換のwrapperライブラリなどが存在します。<br />
-完全にプライベートプロジェクトであり、一人で開発しているため急速に実装が進んでいくことはなさそうですが、行列計算のための良いライブラリ(Numo::NArray)が提供されていることはデータサイエンスをRubyでやる、と言う観点からも非常に大きい貢献だと思います。</p>
+<ul>
+<li>Dockerコンテナの実行場所です。</li>
+</ul></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/what-is-systems-manager.html">SSM (Systems Manager)</a> の<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-paramstore.html">パラメータストア</a>
 
-<h2 id="red-data-toolsプロジェクト">red-data-toolsプロジェクト</h2>
+<ul>
+<li>各種AWSサービスから参照・連携ができる設定管理のためのKVSといった感じ。今回は秘密情報を含めた<strong>環境変数の保存</strong>に使います。</li>
+</ul></li>
+<li><a href="https://aws.amazon.com/jp/kms/">KMS (Key Management Service)</a>
 
-<p>また、PyCallの作者でもあるむらけんさんも参加する、<a href="https://red-data-tools.github.io/">red-data-tools</a>と言うプロジェクトもあります。<br />
-red-data-toolsはRuby用のデータ処理ツールを提供するプロジェクトです。中でも、複数の言語のデータ処理のために共通で開発されているApache Arrowのフォーマットをサポートするためのライブラリが充実している点が特徴だと言えます。</p>
+<ul>
+<li>パラメータストアの<strong>暗号化に使うキー</strong>はKMSで発行します。</li>
+</ul></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html">IAM (Identity and Access Management)</a>
 
-<p>Apache Arrowは大規模なデータ処理のために作られた仕様で、異なる言語からなるプラットフォーム間のデータ交換コストを下げることが目的で開発が進んでいます。PythonのpandasやScalaで書かれているSparkなどのメジャーどころも採用しているものになります。</p>
+<ul>
+<li>KMSで発行・管理するキーへのアクセス<strong>権限の制御</strong>に使います。</li>
+</ul></li>
+</ul>
 
-<p>業界標準となりつつあるApache Arrowに対応していくことで、今後Rubyがよりデータサイエンスの分野で使われるようになる可能性を模索していくようです。</p>
+<p>これらを使って以下のことをします。</p>
 
-<p>これ以外にも今回のRuby Kaigiでは発表がなかった科学技術計算のSciRubyプロジェクトや、機械学習・ディープラーニングに関連する取り組みも存在します。<br />
-参考）<br />
-<a href="https://sciruby-jp.github.io/">SciRuby</a><br />
-<a href="https://github.com/arbox/machine-learning-with-ruby">Awesome Machine Learning with Ruby</a></p>
+<ul>
+<li>ECS上で稼働するDockerコンテナ(Redash)の用意</li>
+<li>パラメータストアに設定を保存、KMS上の暗号化キーで暗号化</li>
+<li>暗号化キーにアクセスできるIAM Roleを作成、Dockerコンテナに付与</li>
+<li>Dcokerコンテナはパラメータストアに保存された設定を使って稼働</li>
+</ul>
 
-<h1 id="まとめ">まとめ</h1>
+<p><img src="https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600" alt="全体像" /></p>
 
-<p>今回のPyCallの安定版の発表により、Rubyでのデータサイエンスが可能な環境になったと私は感じています。<br />
-また、今後の展望も打ち出されており、今後ますますRubyでデータサイエンスをやる環境は整っていくと思います。</p>
+<p><div id="anchor1"/></p>
 
-<p>一方で、（周りを見ている限り）データサイエンスを得意とするエンジニアで、かつRubyを使う人はあまり多くはないと感じています。<br />
-今後、データサイエンスや機械学習・ディープラーニングのコモディティ化が進んでいき、Rubyエンジニアが通常の業務の延長でそれらを使うようになると、これらの取り組みはもっともっと盛り上がっていくのではないかと思いました。</p>
+<h2 id="docker-compose-yml-の用意"><code>docker-compose.yml</code>の用意</h2>
+
+<p>早速、ECS上の<a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html">Task Definition</a>を<code>ecs-cli</code>を使って、<code>docker-compose.yml</code>から作成します。<br />
+現在、<a href="https://github.com/aws/amazon-ecs-cli/issues/218"><code>ecs-cli</code>はv3をサポートしていないため</a>v2を使用します。</p>
+
+<pre><code class="language-yml"># docker-compose-production.yml
+version: '2'
+services:
+  server:
+    image: redash/redash:4.0.0.b3387
+    command: bash -c 'wget https://path/to/parameter-store-exec -O parameter-store-exec &amp;&amp; chmod +x parameter-store-exec &amp;&amp; AWS_REGION=ap-northeast-1 PARAMETER_STORE_EXEC_PATH=/prod/redash ./parameter-store-exec bin/docker-entrypoint server'
+    ports:
+      - &quot;0:5000&quot;
+    environment:
+      PYTHONUNBUFFERED: 0
+      REDASH_LOG_LEVEL: INFO
+      REDASH_REDIS_URL: redis://your-redis-host:6379/0
+      # REDASH_DATABASE_URL: stored in Parameter Store
+      REDASH_HOST: example.com
+      REDASH_ALLOW_SCRIPTS_IN_USER_INPUT: true
+      REDASH_DATE_FORMAT: YY/MM/DD
+      REDASH_PASSWORD_LOGIN_ENABLED: true
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: /your-group
+        awslogs-region: ap-northeast-1
+        awslogs-stream-prefix: redash
+    mem_reservation: 134217728 # 128MB
+  worker:
+    image: redash/redash:4.0.0.b3387
+    command: bash -c 'wget https://path/to/parameter-store-exec -O parameter-store-exec &amp;&amp; chmod +x parameter-store-exec &amp;&amp; AWS_REGION=ap-northeast-1 PARAMETER_STORE_EXEC_PATH=/prod/redash ./parameter-store-exec bin/docker-entrypoint scheduler'
+    environment:
+      PYTHONUNBUFFERED: 0
+      REDASH_LOG_LEVEL: INFO
+      REDASH_REDIS_URL: redis://your-redis-host:6379/0
+      # REDASH_DATABASE_URL: stored in Parameter Store
+      QUEUES: &quot;queries,scheduled_queries,celery&quot;
+      WORKERS_COUNT: 2
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: /your-group
+        awslogs-region: ap-northeast-1
+        awslogs-stream-prefix: redash
+    mem_reservation: 134217728 # 128MB
+</code></pre>
+
+<p>今回はAWS上で構築する想定なので、データベースやRedisはRDSやElastiCacheといったマネージドのものを使いましょう。</p>
+
+<p>ローカルで使う<code>docker-compose.yml</code>と異なるのは以下の点です。</p>
+
+<ul>
+<li>commandにてパラメータストアの値を展開するための<code>parameter-store-exec</code>を使っている。</li>
+<li>ポートのマッピングで、<a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/dynamic-port-mapping-ecs/">動的ポートマッピング</a>するためにホスト側を0にしている。</li>
+<li>REDASH_DATABASE_URLがパラメータストアに切り出されている。(DBパスワードを含むため)</li>
+<li>loggingのdriverにawslogsが指定されている。</li>
+<li>mem_reservationでmemoryのsoft limitを指定している。(hard limitを使うならmem_limitにする)</li>
+</ul>
+
+<p>パラメータストアから環境変数を展開する<a href="https://github.com/cultureamp/parameter-store-exec">parameter-store-exec</a>はGoで書かれているので、事前に対象のアーキテクチャに合わせてビルドしておきます。<br />
+<code>parameter-store-exec</code>に似たツールとして<a href="https://github.com/Droplr/aws-env">aws-env</a>というものもあります。</p>
+
+<ul>
+<li><code>parameter-store-exec</code>: 引数で渡されたcommandに変数を適用する。entrypointとして使用する想定。</li>
+<li><code>aws-env</code>: 取得した変数を環境変数に展開する。</li>
+</ul>
+
+<p>今回は<code>aws-env</code>で展開出来ないパラメータがあったため、<code>parameter-store-exec</code>を使っています。</p>
+
+<p>上記の<code>docker-compose.yml</code>ではcommandに<code>parameter-store-exec</code>のダウンロードと実行を詰め込んでいますが、<code>Dockerfile</code>の記述してENTRYPOINTにしておくと、<code>docker-compose.yml</code>の記述量を減らせます。<br />
+公式のイメージを基に<code>Dockerfile</code>に書く場合は、元々のENTRYPOINTを上書きすることに注意しましょう。</p>
+
+<p><code>ecs-cli</code>向けに、<code>ecs-params.yml</code>というファイルも用意して<a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/cmd-ecs-cli-compose.html#cmd-ecs-cli-compose-ecsparams"><code>docker-compose.yml</code>に対応しないフィールドの値を定義</a>します。</p>
+
+<pre><code class="language-yml"># ecs-params.production.yml
+version: 1
+task_definition:
+  ecs_network_mode: bridge
+  task_role_arn: your-role-arn
+run_params:
+ network_configuration:
+   awsvpc_configuration:
+     subnets:
+       - your-subnet-0
+       - your-subnet-1
+</code></pre>
+
+<p>ここで大事なのは<code>task_role_arn</code>に適切なロールを与えて、<code>docker-compose.yml</code>でパラメータストアに切り出した秘密情報にアクセスできるようにすることです。<code>task_execution_role</code>ではないことに注意しましょう。<br />
+ロールの作成は後のセクションで紹介します。</p>
+
+<p><div id="anchor2"/></p>
+
+<h2 id="パラメータの保存と暗号化">パラメータの保存と暗号化</h2>
+
+<p>まずは暗号化のためのキーをKMSで作成します。あとでGUI上でも判別できるようにaliasで名前もつけておきます。</p>
+
+<pre><code class="language-bash">$ aws kms create-key --description ecs-redash --region ap-northeast-1
+$ aws kms create-alias --alias-name &quot;alias/prod-redash&quot; --target-key-id &quot;your-key-id&quot;
+</code></pre>
+
+<p>上記のaliasは<code>alias/</code>で始める必要があります。</p>
+
+<p>次に先ほど作ったキーで値をパラメータストアに暗号化して保存します。</p>
+
+<pre><code class="language-bash">$ aws ssm put-parameter --name /prod/redash/REDASH_DATABASE_URL --value &quot;postgresql://user:passwrod@host/database&quot; --type SecureString --key-id &quot;your-key-id&quot;
+</code></pre>
+
+<p>パラメータストアは上記の<code>/prod/redash/REDASH_DATABASE_URL</code>のようにスラッシュで区切って<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/sysman-paramstore-su-organize.html">階層化</a>したり、<a href="https://aws.amazon.com/jp/blogs/news/organize-parameters-by-hierarchy-tags-or-amazon-cloudwatch-events-with-amazon-ec2-systems-manager-parameter-store/">タグを使って管理することが出来ます</a>。<br />
+<code>parameter-store-exec</code>や<code>aws-env</code>は、特定の階層の値をまとめて展開することが出来るので、今回は<code>/prod/redash/</code>という階層で値を管理しています。</p>
+
+<p><div id="anchor3"/></p>
+
+<h2 id="権限の設定">権限の設定</h2>
+
+<p>ロールの作成は<a href="https://aws.amazon.com/jp/blogs/news/managing-secrets-for-amazon-ecs-applications-using-parameter-store-and-iam-roles-for-tasks/">こちら</a>を参考に行います。</p>
+
+<pre><code class="language-json">{
+   &quot;Version&quot;: &quot;2012-10-17&quot;,
+   &quot;Statement&quot;: [
+     {
+       &quot;Sid&quot;: &quot;&quot;,
+       &quot;Effect&quot;: &quot;Allow&quot;,
+       &quot;Principal&quot;: {
+         &quot;Service&quot;: &quot;ecs-tasks.amazonaws.com&quot;
+       },
+       &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+     }
+   ]
+ }
+</code></pre>
+
+<p>上記を<code>ecs-tasks-trust-policy.json</code>という名前で保存してロールを作成。</p>
+
+<pre><code class="language-bash">$ aws iam create-role --role-name ecs-redash --assume-role-policy-document file://ecs-tasks-trust-policy.json
+</code></pre>
+
+<p></p>
+
+<pre><code class="language-json">{
+     &quot;Version&quot;: &quot;2012-10-17&quot;,
+     &quot;Statement&quot;: [
+         {
+            &quot;Sid&quot;: &quot;Sid0&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: &quot;ssm:DescribeParameters&quot;,
+            &quot;Resource&quot;: &quot;*&quot;
+         },
+         {
+             &quot;Sid&quot;: &quot;Sid1&quot;,
+             &quot;Effect&quot;: &quot;Allow&quot;,
+             &quot;Action&quot;: [
+                 &quot;ssm:GetParameter&quot;,
+                 &quot;ssm:GetParameters&quot;,
+                 &quot;ssm:GetParametersByPath&quot;
+             ],
+             &quot;Resource&quot;: [
+                 &quot;arn:aws:ssm:ap-northeast-1:&lt;account-id&gt;:parameter/prod/redash/*&quot;
+             ]
+         },
+         {
+             &quot;Sid&quot;: &quot;Sid2&quot;,
+             &quot;Effect&quot;: &quot;Allow&quot;,
+             &quot;Action&quot;: [
+                 &quot;kms:Decrypt&quot;
+             ],
+             &quot;Resource&quot;: [
+                 &quot;arn:aws:kms:ap-northeast-1:&lt;account-id&gt;:key/&lt;key-id-for-prod-redash-key&gt;&quot;
+             ]
+         }
+     ]
+ }
+</code></pre>
+
+<p>次に上記のファイルを<code>redash-secret-access.json</code>という名前で作成して、以下を実行してIAMポリシーを作成し、先ほど作ったロールに付与します。</p>
+
+<pre><code class="language-bash">$ aws iam create-policy --policy-name ecs-redash --policy-document file://redash-secret-access.json
+$ aws iam attach-role-policy --role-name ecs-redash --policy-arn &quot;arn:aws:iam::&lt;account-id&gt;:policy/ecs-redash&quot;
+</code></pre>
+
+<p><code>ssm:GetParameters</code>や<code>ssm:GetParametersByPath</code>等、必要なコマンドへの権限が全て揃っているか注意しましょう。<br />
+今回のファイルは<code>parameter-store-exec</code>の使用に必要な権限を付与しています。</p>
+
+<p>作成したロールを<code>ecs-params.yml</code>で指定しておきます。</p>
+
+<p><div id="anchor4"/></p>
+
+<h2 id="redashの起動">Redashの起動</h2>
+
+<p>ここまでで以下のものを用意しました。</p>
+
+<ul>
+<li><code>docker-compose.yml</code>と<code>ecs-params.yml</code></li>
+<li>パラメータストア上に暗号化されたDBの秘密情報</li>
+<li>パラメータストアと暗号化に使用したキーへの権限</li>
+</ul>
+
+<p>あとはこれらを使ってECSのServiceを<code>service up</code>で起動するだけです。</p>
+
+<pre><code>$ ecs-cli compose -c your-cluster-name -p your-project-name service up --target-group-arn your-elb-arn --container-name server --container-port 5000
+</code></pre>
+
+<p><code>ecs-cli compose</code>はデフォルトで<code>docker-compose.yml</code>と<code>ecs-params.yml</code>を参照しますが、別名を使っている場合は指定が必要です。<br />
+上記のコマンドで指定しているELBの作成作業についてはここでは割愛しています。</p>
+
+<p>Redashについては初回にDBの設定が必要なので、<code>docker-compose run</code>の要領で以下も実行しておきます。</p>
+
+<pre><code>$ ENTRYPOINT=&quot;wget https://path/to/parameter-store-exec -O parameter-store-exec &amp;&amp; chmod +x parameter-store-exec &amp;&amp; AWS_REGION=ap-northeast-1 PARAMETER_STORE_EXEC_PATH=/prod/redash ./parameter-store-exec bin/docker-entrypoint&quot;
+$ ecs-cli compose -c your-cluster-name -p your-project-name run server &quot;bash -c \&quot;$ENTRYPOINT create_db\&quot;&quot;
+</code></pre>
+
+<p>ここで対象のホストにアクセスすると、パラメータストア上のDB情報をRedashが参照して、正しく動作していることが確認できるはずです。</p>
+
+<p>運用時には、<code>docker-compose.yml</code>やDockerイメージに変更があった場合に<code>service up</code>を実行することでTask Definitionが更新され、Serivceが使用しているTask Definitionのrevisionも更新され、最新のDockerイメージでコンテナを起動することが出来ます。</p>
+
+<p><div id="anchor5"/></p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>一度IAMロールの作成やキーの作成等を済ませてしまえば、ローカルでDockerを使う場合とそれほど大きな違いなく、DBのパスワード等のセキュアな情報を使ってECS上でコンテナを動かすことができます。</p>
+
+<p>今回は<code>ecs-redash</code>というIAMロールを作って、パラメータストアの<code>/prod/redash</code>以下にセキュアな環境変数を保存しました。<br />
+このようにパラメータストアではアプリケーション毎にアクセス権限を分けておくことができるので、担当アプリケーションが細かく分かれているような場合でも使用することが出来ます。<br />
+パラメータストアを活用して、アプリケーションも設定もポータブルに管理しておきましょう！</p>
+
+<p>まっくす</p>
+
+<hr />
+
+<p>Housmartでは不動産業界を変えるカウルを支えるエンジニアを募集しています。<br />
+<a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a></p>
             </div>
             <div class="hatena_button">
-  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="hatena-bookmark-button" data-hatena-bookmark-title="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="hatena-bookmark-button" data-hatena-bookmark-title="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 </div>
 
 <footer class="article-footer">
     <div class="share">
-    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2017/09/20/ruby-kaigi-2017-datascience/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
-    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
-    <a href="https://twitter.com/share?text=%e3%80%90Ruby%20Kaigi%202017%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e3%80%91Ruby%e3%81%a7%e3%83%87%e3%83%bc%e3%82%bf%e3%82%b5%e3%82%a4%e3%82%a8%e3%83%b3%e3%82%b9%e3%81%af%e5%87%ba%e6%9d%a5%e3%82%8b%e3%81%ae%e3%81%8b%ef%bc%9f&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
-    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f&amp;description=%e3%80%90Ruby%20Kaigi%202017%e3%83%ac%e3%83%9d%e3%83%bc%e3%83%88%e3%80%91Ruby%e3%81%a7%e3%83%87%e3%83%bc%e3%82%bf%e3%82%b5%e3%82%a4%e3%82%a8%e3%83%b3%e3%82%b9%e3%81%af%e5%87%ba%e6%9d%a5%e3%82%8b%e3%81%ae%e3%81%8b%ef%bc%9f" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
-    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2017%2f09%2f20%2fruby-kaigi-2017-datascience%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f22%2fmanaging-secrets-with-parameter-store%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=AWS%e4%b8%8a%e3%81%ae%e3%83%91%e3%82%b9%e3%83%af%e3%83%bc%e3%83%89%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e7%ae%a1%e7%90%86%e3%81%a7%e3%81%8d%e3%81%a6%e3%81%be%e3%81%99%e3%81%8b%ef%bc%9fAWS%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf%e3%82%b9%e3%83%88%e3%82%a2%e3%81%a7%e7%a7%98%e5%af%86%e6%83%85%e5%a0%b1%e3%82%92%e5%ae%89%e5%85%a8%e3%81%ab%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f22%2fmanaging-secrets-with-parameter-store%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f22%2fmanaging-secrets-with-parameter-store%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f22%2fmanaging-secrets-with-parameter-store%2f&amp;description=AWS%e4%b8%8a%e3%81%ae%e3%83%91%e3%82%b9%e3%83%af%e3%83%bc%e3%83%89%e3%81%a1%e3%82%83%e3%82%93%e3%81%a8%e7%ae%a1%e7%90%86%e3%81%a7%e3%81%8d%e3%81%a6%e3%81%be%e3%81%99%e3%81%8b%ef%bc%9fAWS%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf%e3%82%b9%e3%83%88%e3%82%a2%e3%81%a7%e7%a7%98%e5%af%86%e6%83%85%e5%a0%b1%e3%82%92%e5%ae%89%e5%85%a8%e3%81%ab%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f03%2f22%2fmanaging-secrets-with-parameter-store%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
     </a>
 </div>
 
@@ -444,21 +711,14 @@ red-data-toolsはRuby用のデータ処理ツールを提供するプロジェ�
         
 <nav id="article-nav">
     
-    <a href="http://techblog.housmart.co.jp/2017/08/30/how-to-use-bitbucket-pipelines/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="http://techblog.housmart.co.jp/2018/03/20/minispec/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">これからCIを導入したいそこのあなた! Bitbucket Pipelines はいかが?  ~Bitbucket Pipelines の活用事例~</div>
+      <div class="article-nav-title">スタートアップの現場で役立つ開発要件のまとめ方</div>
     </a>
     
 
-    
-    <a href="http://techblog.housmart.co.jp/2017/10/23/migrate-local-dev-env-to-docker/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">複数の rails プロジェクトが共存する開発環境を Docker 化した話を晒してみる</div>
-    </a>
     
 </nav>
 
@@ -486,7 +746,7 @@ red-data-toolsはRuby用のデータ処理ツールを提供するプロジェ�
                     <a href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600)" alt="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -511,7 +771,7 @@ red-data-toolsはRuby用のデータ処理ツールを提供するプロジェ�
                     <a href="http://techblog.housmart.co.jp/2018/03/20/minispec/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/JAQVo36baaq0zxd0J8nB9J02tfviMhac_BYbKURjJ2p_JPhpCIdYAF2I15CRq8BUX4_gqvJ29MrkbmoUA3wMeFKMTYmz1JpwRfyp3ur8zX5W4BcAPp-vihSinba8YH8mG9qKoAYOLAtiV2f09u58ANxqReK7ZnfWm6MZSZDJJQMbXO8V-uGYKl4g7jifAacERoLUHftm-Yb3m294nlt455AWNyeevj9ajt56SS04d0CshLVHuXW7EuY2CdgigjrLRCwiRJcZTCuAh2Qdfv-dETcgFce3XiV45wy1DfECdC4aSymzyQiDZt5fKkVjk98bqdC1WkwDl0-pt8xbYQ9szzgOkhdDg4-28KMYmCFjriNYiUELH6AzXLxhaZjtaaXA5KtQpPHouWpmFkFrzvY0zZOodJnaLvgkmNtxOZKhpaSZfDzVSjDL1lenj63lUYakvEi-raicCI2vBErC_iRU8LKKMNFgGq9HG9jM4AJdI1DmBQALcJdYiYa_jCbURL6INXpUz1alSzSB5lMKVviaBgyLu3AAEWJghCaZeEEQBDJyD3aSM0J1fWSiHMGUeYZXcp1ixIBxp8Aa9l7X1MMCVzDfhx_AcdGeXuMJ7ATn4tcqIKtRlVjiWOwxi_Mjpna74OPuw0cKPvXXD64bet1mm1Zto2w0aWjn=w640-h480-no)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JAQVo36baaq0zxd0J8nB9J02tfviMhac_BYbKURjJ2p_JPhpCIdYAF2I15CRq8BUX4_gqvJ29MrkbmoUA3wMeFKMTYmz1JpwRfyp3ur8zX5W4BcAPp-vihSinba8YH8mG9qKoAYOLAtiV2f09u58ANxqReK7ZnfWm6MZSZDJJQMbXO8V-uGYKl4g7jifAacERoLUHftm-Yb3m294nlt455AWNyeevj9ajt56SS04d0CshLVHuXW7EuY2CdgigjrLRCwiRJcZTCuAh2Qdfv-dETcgFce3XiV45wy1DfECdC4aSymzyQiDZt5fKkVjk98bqdC1WkwDl0-pt8xbYQ9szzgOkhdDg4-28KMYmCFjriNYiUELH6AzXLxhaZjtaaXA5KtQpPHouWpmFkFrzvY0zZOodJnaLvgkmNtxOZKhpaSZfDzVSjDL1lenj63lUYakvEi-raicCI2vBErC_iRU8LKKMNFgGq9HG9jM4AJdI1DmBQALcJdYiYa_jCbURL6INXpUz1alSzSB5lMKVviaBgyLu3AAEWJghCaZeEEQBDJyD3aSM0J1fWSiHMGUeYZXcp1ixIBxp8Aa9l7X1MMCVzDfhx_AcdGeXuMJ7ATn4tcqIKtRlVjiWOwxi_Mjpna74OPuw0cKPvXXD64bet1mm1Zto2w0aWjn=w640-h480-no)" alt="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -536,7 +796,7 @@ red-data-toolsはRuby用のデータ処理ツールを提供するプロジェ�
                     <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -561,7 +821,7 @@ red-data-toolsはRuby用のデータ処理ツールを提供するプロジェ�
                     <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" class="thumbnail-image"></span>
                         
                     
                     </a>
@@ -586,7 +846,7 @@ red-data-toolsはRuby用のデータ処理ツールを提供するプロジェ�
                     <a href="http://techblog.housmart.co.jp/2017/12/26/gpu-on-ecs/" class="thumbnail">
                     
                         
-                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="【Ruby Kaigi 2017レポート】Rubyでデータサイエンスは出来るのか？" class="thumbnail-image"></span>
+                        <span style="background-image:url(https://lh3.googleusercontent.com/Da8h3zns1IGYqr-ggQz9arTMHEzaNoxUVLqk40Kik3YBNlOdeZz80C0GoJ3bmuoSlWMbHiR_OKwv5n_ut0yLHwZc-NC8868LtdLTxYIAKqZB_9YyHxHBPa2SLzpsvKPO3YdpVb31QMPgYEh49xmUZYw1OuYccKLFW-Ax33Bu_ctgdXwm8weS8qg9JGeNvH-waXZwX3YsiJ7dhxwWGqPWGN3uekRydqtlogG4-Xt64xA9uIdYkuWNOTBQAtVA3hmVaN3nNnhw2A_3VFZVGwvF0ULHPDj-mdf5tma_lmM3X6vDIJKiim94FWDcIZtkf_oliqBOgJBGaTKpCVNkYjEwDqeAbySELyviYTERsgFIPAIScK_qDhBYu4O_P8O7Z99eDQP7IpIPf4509jk5rv69HIaIKbXv3UNGhYOt1cq5tBeN2O9qz_sZeyX4-LrO0kU7a7W9tK5z8WWgv55rGzYdK0y48s7XSVMtWe4P28s6xa_Y5ZRYgK9bOXpysRFNHuvOI6gQxtAfOa0Y7QNr7zarHvFzcQSVWHUhMIh73vsksGt8foRFlLrDt3nKbvbta9c-UVXj63qZR6zanS-3tIlyzFpAJm0Lzk3B_N2KRtpCIb7pg26-9u7b047DhncHFvHxU1RNkrCkdzQIhXBWPa4Lt4HrEyEDVgXM=w960-h540-no)" alt="AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法" class="thumbnail-image"></span>
                         
                     
                     </a>
