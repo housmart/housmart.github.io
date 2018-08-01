@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Abstract &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.31" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+      <link href="http://techblog.housmart.co.jp/tags/abstract/index.xml" rel="alternate" type="application/rss+xml" title="カウル Tech Blog" />
+      <link href="http://techblog.housmart.co.jp/tags/abstract/index.xml" rel="feed" type="application/rss+xml" title="カウル Tech Blog" />
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/tags/abstract/" />
+    <meta property="og:title" content="Abstract" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/tags/abstract/" />
+
+
+
+<meta property="og:updated_time" content="2018-07-24T18:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="Abstract">
+<meta itemprop="description" content="">
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Abstract"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+    
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        41
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          41
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+        <section id="main">
+            <section class="archives-wrap">
+                <div class="archive-category-wrap">
+                    <span class="archive-category">Abstract</span>
+                </div>
+                <div class="archives">
+                    
+                    
+                        <article class="archive-article archive-type-post">
+    <div class="archive-article-inner">
+        <div class="archive-article-thumbnail">
+            
+            <a href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="thumbnail">
+                
+                <span style="background-image:url(https://lh3.googleusercontent.com/cuIAYpdFRT-p6ILtYH19hySPo1QAc5na3ychujmZagBrcoNF2ap5nQnsVWoaqZ2o-L8q52tZfWTPxrcSkS49D1jKruAh4f7D27Ne7dKF5BBXil-cv68leqQHtCbz6kCRqt5UhAUe--R9MBpwqyp7vfsxx1iL42g3IBNcN6zuKHRNRVlh1__a8bRj55uoygyopqXtyU-Aqp9eP-EpKRaoPuXXNrcI3aRAjjzHafXRHMO3Dx5UrPjvwC9IUMnyZdWyIQriHpikIrEFF1hEZmlifdUoECOD4-II6IjxengE96MHIuWny2LOi_HcZDHjDnGzipCXSaQUoQeujWiv2-QMJBYcuPsgaEUvYojCfTn5y0mqPwBCTypCl2NIO73alIOTdRfZFVZjtnW7Z26nC-3nOCrOxtoNQULneuMDQMvo6reU9nAbrf1xU2bHbaUQVY67j4HILTs4RXzJO8RFC2ilIwGNcYgOdfLA-nA3j3-DoFKozhVv47Xq9Eeq_jSVEtlb3fhYbfDwMfLPSkXmwCuJGL3UxkRqNPUnk7YoHee178TjmDtZ8GlGk4XTFj7FugqnZAxGLrvTA0OwD0Qmfgv-3dTBRT6-ECt9sxiJC7teQXFCHg1w1VVM-dWXY8QlQUnthYRsRJdt3XFbs72rLmyNKkwfl9s=w600)" alt="Sketchのバージョン管理にAbstractを導入した話" class="thumbnail-image"></span>
+                
+            </a>
+            
+        </div>
+        <header class="archive-article-header">
+            <h1 itemprop="name">
+            <a class="archive-article-title" href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/">Sketchのバージョン管理にAbstractを導入した話</a>
+            </h1>
+            <div class="archive-article-date">
+                <i class="fa fa-calendar"></i>
+                <time datetime="2018-07-24 18:00:00 &#43;0900 JST" itemprop="datePublished">2018-07-24</time>
+            </div>
+        </header>
+    </div>
+</article> 
+                    
+                </div>
+            </section>
+            <nav id="page-nav">
+
+</nav>
+
+        </section>
+        <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/cuIAYpdFRT-p6ILtYH19hySPo1QAc5na3ychujmZagBrcoNF2ap5nQnsVWoaqZ2o-L8q52tZfWTPxrcSkS49D1jKruAh4f7D27Ne7dKF5BBXil-cv68leqQHtCbz6kCRqt5UhAUe--R9MBpwqyp7vfsxx1iL42g3IBNcN6zuKHRNRVlh1__a8bRj55uoygyopqXtyU-Aqp9eP-EpKRaoPuXXNrcI3aRAjjzHafXRHMO3Dx5UrPjvwC9IUMnyZdWyIQriHpikIrEFF1hEZmlifdUoECOD4-II6IjxengE96MHIuWny2LOi_HcZDHjDnGzipCXSaQUoQeujWiv2-QMJBYcuPsgaEUvYojCfTn5y0mqPwBCTypCl2NIO73alIOTdRfZFVZjtnW7Z26nC-3nOCrOxtoNQULneuMDQMvo6reU9nAbrf1xU2bHbaUQVY67j4HILTs4RXzJO8RFC2ilIwGNcYgOdfLA-nA3j3-DoFKozhVv47Xq9Eeq_jSVEtlb3fhYbfDwMfLPSkXmwCuJGL3UxkRqNPUnk7YoHee178TjmDtZ8GlGk4XTFj7FugqnZAxGLrvTA0OwD0Qmfgv-3dTBRT6-ECt9sxiJC7teQXFCHg1w1VVM-dWXY8QlQUnthYRsRJdt3XFbs72rLmyNKkwfl9s=w600)" alt="Abstract" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="title">Sketchのバージョン管理にAbstractを導入した話</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-07-24 18:00:00 &#43;0900 JST" itemprop="datePublished">2018-07-24</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600)" alt="Abstract" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="title">AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-03-22 18:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-22</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/03/20/minispec/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JAQVo36baaq0zxd0J8nB9J02tfviMhac_BYbKURjJ2p_JPhpCIdYAF2I15CRq8BUX4_gqvJ29MrkbmoUA3wMeFKMTYmz1JpwRfyp3ur8zX5W4BcAPp-vihSinba8YH8mG9qKoAYOLAtiV2f09u58ANxqReK7ZnfWm6MZSZDJJQMbXO8V-uGYKl4g7jifAacERoLUHftm-Yb3m294nlt455AWNyeevj9ajt56SS04d0CshLVHuXW7EuY2CdgigjrLRCwiRJcZTCuAh2Qdfv-dETcgFce3XiV45wy1DfECdC4aSymzyQiDZt5fKkVjk98bqdC1WkwDl0-pt8xbYQ9szzgOkhdDg4-28KMYmCFjriNYiUELH6AzXLxhaZjtaaXA5KtQpPHouWpmFkFrzvY0zZOodJnaLvgkmNtxOZKhpaSZfDzVSjDL1lenj63lUYakvEi-raicCI2vBErC_iRU8LKKMNFgGq9HG9jM4AJdI1DmBQALcJdYiYa_jCbURL6INXpUz1alSzSB5lMKVviaBgyLu3AAEWJghCaZeEEQBDJyD3aSM0J1fWSiHMGUeYZXcp1ixIBxp8Aa9l7X1MMCVzDfhx_AcdGeXuMJ7ATn4tcqIKtRlVjiWOwxi_Mjpna74OPuw0cKPvXXD64bet1mm1Zto2w0aWjn=w640-h480-no)" alt="Abstract" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">
+                        project
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/03/20/minispec/" class="title">スタートアップの現場で役立つ開発要件のまとめ方</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-03-20 20:03:55 &#43;0900 JST" itemprop="datePublished">2018-03-20</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="Abstract" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="title">プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-03-08 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-08</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="Abstract" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="title">「良い通知」についてROPPONGI.swiftで発表しました</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-02-26 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-02-26</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/tool">
+                    tool
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/abstract">
+                    abstract
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/android">
+                    android
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/atlassian">
+                    atlassian
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/deep-learning">
+                    deep-learning
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">9</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gem">
+                    gem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gpu">
+                    gpu
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hands-on">
+                    hands-on
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/prototyping">
+                    prototyping
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ruby">
+                    ruby
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/sketch">
+                    sketch
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/abstract" style="font-size: 12px;">abstract</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/android" style="font-size: 12px;">android</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/atlassian" style="font-size: 12px;">atlassian</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/deep-learning" style="font-size: 12px;">deep-learning</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ecs" style="font-size: 12px;">ecs</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gem" style="font-size: 12px;">gem</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gpu" style="font-size: 12px;">gpu</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hands-on" style="font-size: 12px;">hands-on</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/prototyping" style="font-size: 12px;">prototyping</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ruby" style="font-size: 12px;">ruby</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/sketch" style="font-size: 12px;">sketch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+    </div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Sketchのバージョン管理にAbstractを導入した話 &middot; カウル Tech Blog</title>
+    <meta name="generator" content="Hugo 0.31" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="カウル開発チーム">
+    
+      <meta name="description" content="カウル開発チーム公式ブログ。圧倒的にわかりやすく自由な不動産マーケットの創造のため日々精進するエンジニア集団の日々を綴ったテックブログです。">
+    
+    
+    <link rel="icon" href="http://techblog.housmart.co.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="http://techblog.housmart.co.jp/apple-touch-icon.png" />
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/monokai.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/css/custom_main.css">
+    <link rel="stylesheet" href="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" />
+    <meta property="og:title" content="Sketchのバージョン管理にAbstractを導入した話" />
+<meta property="og:description" content="カウルのプロダクトデザイナー稲井です。 今回はSketchファイルのバージョン管理ツールにAbstractを導入した話をします。 暑い暑い夏にひ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" />
+
+  <meta property="og:image" content="https://lh3.googleusercontent.com/cuIAYpdFRT-p6ILtYH19hySPo1QAc5na3ychujmZagBrcoNF2ap5nQnsVWoaqZ2o-L8q52tZfWTPxrcSkS49D1jKruAh4f7D27Ne7dKF5BBXil-cv68leqQHtCbz6kCRqt5UhAUe--R9MBpwqyp7vfsxx1iL42g3IBNcN6zuKHRNRVlh1__a8bRj55uoygyopqXtyU-Aqp9eP-EpKRaoPuXXNrcI3aRAjjzHafXRHMO3Dx5UrPjvwC9IUMnyZdWyIQriHpikIrEFF1hEZmlifdUoECOD4-II6IjxengE96MHIuWny2LOi_HcZDHjDnGzipCXSaQUoQeujWiv2-QMJBYcuPsgaEUvYojCfTn5y0mqPwBCTypCl2NIO73alIOTdRfZFVZjtnW7Z26nC-3nOCrOxtoNQULneuMDQMvo6reU9nAbrf1xU2bHbaUQVY67j4HILTs4RXzJO8RFC2ilIwGNcYgOdfLA-nA3j3-DoFKozhVv47Xq9Eeq_jSVEtlb3fhYbfDwMfLPSkXmwCuJGL3UxkRqNPUnk7YoHee178TjmDtZ8GlGk4XTFj7FugqnZAxGLrvTA0OwD0Qmfgv-3dTBRT6-ECt9sxiJC7teQXFCHg1w1VVM-dWXY8QlQUnthYRsRJdt3XFbs72rLmyNKkwfl9s=w600" />
+
+
+
+<meta property="article:published_time" content="2018-07-24T18:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2018-07-24T18:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+<meta itemprop="name" content="Sketchのバージョン管理にAbstractを導入した話">
+<meta itemprop="description" content="カウルのプロダクトデザイナー稲井です。 今回はSketchファイルのバージョン管理ツールにAbstractを導入した話をします。 暑い暑い夏にひ">
+
+
+<meta itemprop="datePublished" content="2018-07-24T18:00:00&#43;09:00" />
+<meta itemprop="dateModified" content="2018-07-24T18:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="3357">
+
+  <meta itemprop="image" content="https://lh3.googleusercontent.com/cuIAYpdFRT-p6ILtYH19hySPo1QAc5na3ychujmZagBrcoNF2ap5nQnsVWoaqZ2o-L8q52tZfWTPxrcSkS49D1jKruAh4f7D27Ne7dKF5BBXil-cv68leqQHtCbz6kCRqt5UhAUe--R9MBpwqyp7vfsxx1iL42g3IBNcN6zuKHRNRVlh1__a8bRj55uoygyopqXtyU-Aqp9eP-EpKRaoPuXXNrcI3aRAjjzHafXRHMO3Dx5UrPjvwC9IUMnyZdWyIQriHpikIrEFF1hEZmlifdUoECOD4-II6IjxengE96MHIuWny2LOi_HcZDHjDnGzipCXSaQUoQeujWiv2-QMJBYcuPsgaEUvYojCfTn5y0mqPwBCTypCl2NIO73alIOTdRfZFVZjtnW7Z26nC-3nOCrOxtoNQULneuMDQMvo6reU9nAbrf1xU2bHbaUQVY67j4HILTs4RXzJO8RFC2ilIwGNcYgOdfLA-nA3j3-DoFKozhVv47Xq9Eeq_jSVEtlb3fhYbfDwMfLPSkXmwCuJGL3UxkRqNPUnk7YoHee178TjmDtZ8GlGk4XTFj7FugqnZAxGLrvTA0OwD0Qmfgv-3dTBRT6-ECt9sxiJC7teQXFCHg1w1VVM-dWXY8QlQUnthYRsRJdt3XFbs72rLmyNKkwfl9s=w600">
+
+
+
+<meta itemprop="keywords" content="design,sketch,Abstract," />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="https://lh3.googleusercontent.com/cuIAYpdFRT-p6ILtYH19hySPo1QAc5na3ychujmZagBrcoNF2ap5nQnsVWoaqZ2o-L8q52tZfWTPxrcSkS49D1jKruAh4f7D27Ne7dKF5BBXil-cv68leqQHtCbz6kCRqt5UhAUe--R9MBpwqyp7vfsxx1iL42g3IBNcN6zuKHRNRVlh1__a8bRj55uoygyopqXtyU-Aqp9eP-EpKRaoPuXXNrcI3aRAjjzHafXRHMO3Dx5UrPjvwC9IUMnyZdWyIQriHpikIrEFF1hEZmlifdUoECOD4-II6IjxengE96MHIuWny2LOi_HcZDHjDnGzipCXSaQUoQeujWiv2-QMJBYcuPsgaEUvYojCfTn5y0mqPwBCTypCl2NIO73alIOTdRfZFVZjtnW7Z26nC-3nOCrOxtoNQULneuMDQMvo6reU9nAbrf1xU2bHbaUQVY67j4HILTs4RXzJO8RFC2ilIwGNcYgOdfLA-nA3j3-DoFKozhVv47Xq9Eeq_jSVEtlb3fhYbfDwMfLPSkXmwCuJGL3UxkRqNPUnk7YoHee178TjmDtZ8GlGk4XTFj7FugqnZAxGLrvTA0OwD0Qmfgv-3dTBRT6-ECt9sxiJC7teQXFCHg1w1VVM-dWXY8QlQUnthYRsRJdt3XFbs72rLmyNKkwfl9s=w600"/>
+<meta name="twitter:title" content="Sketchのバージョン管理にAbstractを導入した話"/>
+<meta name="twitter:description" content="カウルのプロダクトデザイナー稲井です。 今回はSketchファイルのバージョン管理ツールにAbstractを導入した話をします。 暑い暑い夏にひ"/>
+<meta name="twitter:site" content="@HousmartJournal"/>
+
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLK63S"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLK63S');</script>
+
+
+<header id="header">
+    <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="http://techblog.housmart.co.jp/" id="logo"><i class="logo" style="background-image: url('http://techblog.housmart.co.jp/css/images/logo.png')"></i><span class="site-title">カウル Tech Blog</span></a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a>
+          
+          
+          
+          <a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://techblog.housmart.co.jp/images/housmart.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/tags/">タグ</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="http://techblog.housmart.co.jp/categories/">カテゴリ</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" results="0" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="q" value="site:http://techblog.housmart.co.jp/">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+	    <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="http://techblog.housmart.co.jp/images/housmart.png">
+      <h2 id="name">カウル開発チーム</h2>
+      
+      <p class="kawlu-links">
+        <a href="https://kawlu.com/market">カウル</a> / <a href="https://kawlu.com/journal">マンションジャーナル</a> / <a href="https://kawlu.com/library">カウルライブラリー</a>
+      </p>
+      <span id="location"><i class="fa fa-map-marker"></i>Shibuya, Japan</span>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        41
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          41
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//plus.google.com/+108143914839070351272" target="_blank" title="Google+"><i class="fa fa-googleplus"></i></a></td>
+
+
+
+<td><a href="//facebook.com/housmart.co.jp" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></td>
+
+
+
+<td><a href="//twitter.com/HousmartJournal" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+	    <section id="main">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <div class="article-inner">
+            
+                
+                <img src="https://lh3.googleusercontent.com/cuIAYpdFRT-p6ILtYH19hySPo1QAc5na3ychujmZagBrcoNF2ap5nQnsVWoaqZ2o-L8q52tZfWTPxrcSkS49D1jKruAh4f7D27Ne7dKF5BBXil-cv68leqQHtCbz6kCRqt5UhAUe--R9MBpwqyp7vfsxx1iL42g3IBNcN6zuKHRNRVlh1__a8bRj55uoygyopqXtyU-Aqp9eP-EpKRaoPuXXNrcI3aRAjjzHafXRHMO3Dx5UrPjvwC9IUMnyZdWyIQriHpikIrEFF1hEZmlifdUoECOD4-II6IjxengE96MHIuWny2LOi_HcZDHjDnGzipCXSaQUoQeujWiv2-QMJBYcuPsgaEUvYojCfTn5y0mqPwBCTypCl2NIO73alIOTdRfZFVZjtnW7Z26nC-3nOCrOxtoNQULneuMDQMvo6reU9nAbrf1xU2bHbaUQVY67j4HILTs4RXzJO8RFC2ilIwGNcYgOdfLA-nA3j3-DoFKozhVv47Xq9Eeq_jSVEtlb3fhYbfDwMfLPSkXmwCuJGL3UxkRqNPUnk7YoHee178TjmDtZ8GlGk4XTFj7FugqnZAxGLrvTA0OwD0Qmfgv-3dTBRT6-ECt9sxiJC7teQXFCHg1w1VVM-dWXY8QlQUnthYRsRJdt3XFbs72rLmyNKkwfl9s=w600" class="article-banner">
+                
+            
+
+            <header class="article-header">
+    <a href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/">
+    <h1 class="article-title" itemprop="name">
+        Sketchのバージョン管理にAbstractを導入した話
+    </h1>
+    </a>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2018-07-24 18:00:00 &#43;0900 JST" itemprop="datePublished">2018-07-24</time>
+            &middot;
+            3357
+            words
+            &middot;
+            7
+            minute read
+        </div>
+
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">design</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/design">design</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/sketch">sketch</a>
+                &middot;
+                
+                <a class="article-category-link" href="http://techblog.housmart.co.jp/tags/abstract">Abstract</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+<div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="hatena-bookmark-button" data-hatena-bookmark-title="Sketchのバージョン管理にAbstractを導入した話" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+
+            <div class="article-entry" itemprop="articleBody">
+                
+
+<p>カウルのプロダクトデザイナー稲井です。<br />
+今回はSketchファイルのバージョン管理ツールにAbstractを導入した話をします。</p>
+
+<p>暑い暑い夏にひんやりとした話題をお届けしたかったのですが、そんなに寒くも暑くもない話題です。
+デザインファイルの管理に頭を悩ませているデザイナーの方のストレスを少しでも軽減できれば幸いです。</p>
+
+<h2 id="バージョン管理の必要性">バージョン管理の必要性</h2>
+
+<p>カウルではSketchファイルの管理や共有をDropbox上で行ってきました。
+デザイナー同士の作業がぶつからないように作業単位でファイルを分割し、衝突を避けるなどの工夫を行ってきました。</p>
+
+<p>デザイナーが少ない状況では管理コストを下げるのに有効でしたが、作業ファイルの分散化やバージョンごとのファイルが増えるなど複数人作業には向いていませんでした。</p>
+
+<p>プロダクトラインの増加にあたり、事業のスピードアップの観点からSketchファイルにもバージョン管理を導入し複数人でデザインできる体制を作ることにしました。</p>
+
+<h2 id="バージョン管理ツールabstractについて">バージョン管理ツールAbstractについて</h2>
+
+<p>バージョン管理を行うにあたり、
+今回はAbstract(アブストラクト)というサービスを利用することとしました。
+GitHubやBitbucketのSketchファイル版ととらえてもらえばOKです。</p>
+
+<p>GitHubなどと大きく違う点は.sketchファイルの変更点のプレビューができる点です。コミット時に変更のあったアートボードやシンボルの一覧が表示されるのでブランチ内の作業ログが簡単に追えます。</p>
+
+<p><img src="https://lh3.googleusercontent.com/7OTK1m2LQvD6NfEbXDA9g1duRihV_7j7M_mAT3VtN0i6OsJ6_D_WPiDlEFL7JnYNxb7cGiUk2VAiohaBq85y3kLe6nCcpbZ1Qwt99dHUcvWaqcrQgFIYtnXJFuvx-7V9qxmdgL2CKL6QkNMOvv4oe0DA1yupi44EmoZKg5mWuOIn34mT1t2olOcxLotn8QPQ0fWDcz29cD1J3qWgrgpKX-LMkOq95MNWjeOFNBMwbxBIVBn1QLtKWa64x2HoSa5DWHa53i6HMgwYhAOB5sxgbw7noOgOfyjyV5G_9B7SzapYpMw9ZQNhNcn4SXP_3f8rwlExSJCszPYNes7JPSy7pJwGrGbcETVGBlJ8-6Ut3vlEwlwkWnWGpDNXb87pi9sCNhHBPmjHJQlEHLd-mLltRZiaTB6gAqk3HIbFXzEngvIJ6jjS7woRYR-ZKsvp4kEPNPL2O5d4NeD5mVJ8I4Jj0vX_eRcQml50y7JCvyJv95yixTibOY-XL8JV1yMwiRxeDkVWxIzQUDgMfI5gDZoytCvjqCa497hyOBYedh8G-_NbeI86srXDK5m15veyK5QBHfgXSkOUPtg6YijdF3pSg-7RRzACQ7BMd5TKp7ypc1SZHXnu1WQvEhsKORbouNglEkuGlPZKfstStFIXSRmOlTt5AUzQk5Kl=w1920-h895-no" alt="Abstractで作業コミットしている様子" /></p>
+
+<p>ブランチをマージする際にコンフリクトを検知した時は、どちらの変更を採用するかアートボード単位で選択し解消することができます。便利ですねー。</p>
+
+<p><img src="https://lh3.googleusercontent.com/kwwNDrMBZNfvMMLKoujQ6BX_DwxGUkyheVQWHrdsIl3VPGzm2uHrFx9B1mrO_K0YQBXPsJjMYAJu8F04TNII45VLcpW3MpZE1d350YJKgRCmLpxPmBGXGv8UD2q4I3uiM60BtZsCX_5-crNqtWljVDlknDWYK3ND9IjLpmvPN-zsk8TGgfD-C8mPhaGhYDhzLObzZqX2egR6CSBA6pdvP9cQCWOAG5KE7OrcfI4nOkhJiUGLIFOeCw-R8wVpM6w0XE1TwNSYfBCDs_I8VHqll-lMszprCqig6xigiP8w2pvreCvQz-hluBGnOzGawpfAd8GWqs52Zo8t-KiMnyPWSlWy5v5sdZHhYi8OZcq3p9SBR4Z1wq_5937ROwLabIs4CNOr1tp-qAUnE4ALlELB8BLXa5UNPnvXFHzWZKbEdqg8cvszbHs63XsBbuw6VUnyGyZbX0Z4prU28OWZJFCTsgtc_5J9Oo-ylDChLohTv-2BNo9i8hVl9a7fOYzyZYBWVU3TXPZ_nUe3NRTjgSFwMi4FK6nCShtPU5NYi3uRA2Kp0zxzdSvEgCI9BAeEPOSMXJIn2Gzv0oYg8gnfzA9KpnBvll62r--ulnjwFodjC4hf0q6FE8pM4CEVJTxxVQV-GIz9hH77hmPS5DAwpujgrUB9WJK4m6jm=w2328-h1066-no" alt="コンフリクトを検知した様子" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/O4kP-WTc4VM4r3qCHfr1GTEqfY44iXVSGOX6QFNd03rYYdX_CY6AqdhqjjCkR8Ck9uoQsUFe4U92ehqDbgiOgJJq4MOZLEuurpQ0myI8N4-jPg9j4_togKfdQjzrlHuPOD3GNTz72kWQP0z1joGfUvkfhq7ceKrTqGtts-qjj_pfOTGuYqVI6XR6LtFE051RzepAkrCUDmRf9L6guKoqvhsidVB2fdQj6QnzPeoJmfZoDpy7pjqmQRJRsBsDr17s_fOhaXUkprdPCxce_dvdKinEACsGSqW9GErRsmFbhybe_gttX7WZh_3AcY0w6NpBbtuttNwrE68uFqlG9FzcpvDnaNFTYodWCdcQ6EEkFA7WSUlVgvbS4z2L4TLBh7McKcBgtaF26-JS_BdQEigw_5qRvSmbC5LsBty7H56z4MVeQvFJykOsO4uBD99ItfInWKo-Lbnl4JqnkwqqBcXjqIbGJI-f8PBD5qvQfOme7pmUL8fEThysN-CHNTKC8ilm1IPW2XDmXn77eqeN2v7hqa-rRMboQVMxe8N56rh8Zj35f3Qvnk0ZJOG1405yyOwI2S-xJUmnnkSRms99xvU0Z6nQfkCHVF217JzLxtp-9QGzByleKPKzZkSguV2AvsRy28zM_1yikld-GNXysQhXwQJm_TIK2I5m=w2880-h1678-no" alt="どちらの変更を採用するかアートボード単位で選択して解消できる" /></p>
+
+<p>また、Sketchプラグインからコミットができるのでデザイン作業を分断することなくバージョン管理が行えるのも便利です。</p>
+
+<p>ただし、.sketchファイル以外のデザインファイル(.aiや.psd、.pngなど)は管理対象に含められないので注意が必要です。sketchファイル内の画像の書き出しにも現時点では未対応のようなのでZeplinとの併用が必要そうです。</p>
+
+<h3 id="abstractでできることの概要">Abstractでできることの概要</h3>
+
+<p>※2018/7時点
+最新の情報は<a href="https://support.goabstract.com/hc/en-us/sections/360000606552-Release-notes">リリースノート</a>を参照ください。</p>
+
+<h4 id="できること">できること</h4>
+
+<ul>
+<li>Sketchファイルバージョン管理</li>
+<li>ブランチのマージ、リバート（変更差分のプレビューが可能）</li>
+<li>Sketchプラグインからのコミット</li>
+<li>デザインファイルへのコメント</li>
+</ul>
+
+<h4 id="できないこと">できないこと</h4>
+
+<ul>
+<li>.sketch以外の拡張子のファイルバージョン管理</li>
+<li>スライスの書き出し</li>
+<li>ローカルリポジトリの管理</li>
+<li>プルリクエスト</li>
+</ul>
+
+<h4 id="画面構成の説明動画">画面構成の説明動画</h4>
+
+<p>素晴らしい動画説明がありましたので動画をご覧になる時間がある方はこちらを
+ご覧ください。
+<a href="https://learnux.io/course/abstract/abstract-overview">https://learnux.io/course/abstract/abstract-overview</a>
+<a href="https://learnux.io/course/abstract/new-abstract-interface">https://learnux.io/course/abstract/new-abstract-interface</a></p>
+
+<h2 id="カウルでの導入-abstractにorganizationを作る">カウルでの導入：AbstractにOrganizationを作る</h2>
+
+<p>初めての導入だったのですがある程度の規模までカバーできそうなビジネスプランを契約しました。</p>
+
+<p>はじめに会社単位のグループ（Organization）を作成しました。
+Organizationの中にメンバーを招待したりプロジェクトを作成することができます。</p>
+
+<p>Sketchファイルの編集やコミットを行うユーザーはContributior、
+閲覧のみで利用するユーザーはGuestとして招待することができます。</p>
+
+<p>Organizationに招待されたユーザは全てのプロジェクトを閲覧できますが、プロジェクト単位で招待すると個別プロジェクトのみ閲覧になるので、要件によって使い分けることになりそうです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/R9MR0oI_6Td7eAJvM2mcRwA5_zHs9Y6Vxse54nXVJP6d4e-O6qwhLJA_u38wu2ihRzmuOpUqgThuVuVqxesVwHrk0nziLd_8njrH6Fn9uQHsiGdoM6ZJxNBhuzRWLLdwFtpFY7HIyM9bj2FsWo3s51gYO9v6CADbA9sIsa7HgLY1a_9FcAqAn7oFVbKlUoUcDZNO4i7jh309957Jgyw0yA5J_FCMFQCxfsh9MEuVc_kXo8hGIUlGfJht6YEVgKYnbREw11RlfLs79v1zkQFmGkhk5-Lr6TTUTm5oJ48FePYPBi2cwsV3FG2w4g5qf2VjjWuOvFxtGG_IzuttSnju96XiAAy_gbe0lmkNHCc8vhpjWPmE01c7gSd2mq9e2os8PcplaIb9IX8hPXKxHjXo7TFJXUBAPVjclnQTWB9Hibk3LeZsI9TCE_Ent3I7yIxLamH1X2iM8eHneGyvcznbIyjwCYkSt3u1H84vdBS1MoZ-O2RdtDyaD7OWGc7VrbBHmaJKIy2rqW7FWCj_vtNvBZaS63iND_3HSuM8zB2G3s4SpN1IiOiep-Sm7ymTxmMOn7U5YvwdZFmQY9cnpwnxqAW-QRTzUFWVRqc7KoJXWAFQvBV8br92iSap0T28rhf224fz00v22FnRaCE6d193LhnNiHY=w1450-h1186-no" alt="Organizationの構成" /></p>
+
+<h2 id="abstractプロジェクト内での作業イメージ">Abstractプロジェクト内での作業イメージ</h2>
+
+<p><img src="https://lh3.googleusercontent.com/WS3GTiyHomPNg-Lcr2tCoM5i4EvYs2ek3lKtIBgweknIe5DXlxfeL3IfoRhrHJ3mr8VROnJIfYc7xml0HCWMZVrpb0gq4tSru9moFbyzWZkkU0km1tShUGKhkNemwMol7flOjyy3ZjxUsIznUDYZGqtYI1iNbLji0g7koVZoOLDcre4nT-LCOJj85XNehf6_w2OcJ-gvUCufm8CyMXtKW1cEGs-krfvX_7vFSkr4UC6OhOv2Q60mPhTYv5IE3lkIFfa2_VaQ7qMbeJ_C4Plj93s0QfFEXEzu-xY5ek2fpx-o0X0VJtdMtEwG3JiUhHcODSRNa1DfXYS2890JGAxu2I0wwgQv8BIdHwiulL81ZUkqun64WnIvU4WPc2o5iIijBp1sNDrk6_0st4HQ_XHq_DOfMdyH2nR4Ckz--C_l08tUqEJYketFeVgIMZBN8CcDeM129QHn3De9yCS_ONvOLKVTCSRn7vgMmI4-7YywkZwC8FWZIqkKgkDfLaQNhGeUkpvcyCddhhuTjmiwUR5QAxp3N3dDl3gvJLR0BgZPYSYLPiTcyHmkUhl9hFDh6U3Nk5Ay1u13nNCtdjk1EHOLAlu4Hib7Na0y2sgzv8MY11cKXaIJ3aSZf_2mgSGKOEbvPoMFZ5xjeCCxK3vc0qLn2zg5N-o=w1920-h1189-no" alt="Abstractプロジェクト内での作業イメージ" /></p>
+
+<p>ファイル管理を行うAbstractのクラウドリポジトリ上に各プロダクト単位でプロジェクトファイルを
+ADMINユーザーが作成します。</p>
+
+<p>Sketchファイルを編集するデザイナーはContributorとして招待される形になります。
+<a href="https://app.goabstract.com/download">AbstractのMacアプリ</a>をダウンロードしプロジェクトにアクセスします。</p>
+
+<p>プロジェクト内でContributorはブランチを切ります。
+Abstract MacアプリからSketchファイルを開くとローカルに一旦落とされオフラインでもデザイン作業ができるようになります。</p>
+
+<p>作業ファイルをコミットするにはAbstract Sketchプラグイン を利用します。
+コミットログなどに変更点を書き込んでコミットすることになります。</p>
+
+<p>ブランチを切れるContributorであればそのままマージもできてしまいますが、カウルではADMINによる確認をしてからマージしようと思っています。</p>
+
+<h2 id="sketch-ライブラリファイルをabstractに載せるには">Sketch ライブラリファイルをAbstractに載せるには？</h2>
+
+<p>Sketch使いであれば、ライブラリファイルの扱いがどうなるかも気になるところかと思います。
+Abstract上でのライブラリファイルの設定の仕方をお教えします。</p>
+
+<p>Sketch ライブラリファイルについてはこちらのURLを参照ください。
+<a href="https://sketchapp.com/docs/libraries/">https://sketchapp.com/docs/libraries/</a></p>
+
+<h3 id="1-ライブラリーファイルをインポートまたは新規作成">1.ライブラリーファイルをインポートまたは新規作成</h3>
+
+<p>Abstractプロジェクトのメインメニューから FILES &gt; ADD FILEを選択します。
+<img src="https://lh3.googleusercontent.com/UUmfGhgLVkf0ro6Ar5J9F7PH_zDOMqkVeA1fpyuC7R8eejbA3C_fGkQe6gOOhFB-XgIWQBC0g4ZdH_sTKC41RcmgfX3KLrt6rPJat6IOaUApSenTtMBZzaOmbfrB1S3Dd4fenxHZXlT2gUsWAh7Xb2riNPSoa1YfQhUrEKTb20a0BrwxRbmVnEkxizZPNHWTGmqmowWDfOZTCKdfVULON_RQiNxGPysXlSnc2lszqp0_7YA6LYMunEEJX5hxb7uaMctuNH0VyiYaH7IhpMr39Si1ccguuTIxUvAuwxlrt9TfnPFBpG-TeyJkfa0Pebi2lUBOC44xIma_25FkmA6lTDuwOUsKoD2_DgX4KZ5ooJouofj-6FtbEhrWUnuaqTPA-AF0oc7KCkuSXJAU6r5XzvkpfuqzQCkGW8AP3-Sx4rrmq4HnWw70dzFaQ0URsYOO0u_Vy88bmABoo_dBVo4Kw8IrwfB2I-hyYqVCjsuo9d5Fs9c34V3EGXT6F7IQsfCz_cqMSwLtq1gpbPuBYWO3gp2gGBcQRZ2-lFlBjwxcpNXufh_zZ0Az0DNdCyqZ2v8vpQjbBWpKRd4GqTnSJJcQXRYpbLDU7i4RNxzIflzsN-lUEGzUnwcytaHp_z6hYYJQ_hH0B8J904Rpm9v8o-VKhmH-jg=w1516-h978-no" alt="ライブラリーファイルの追加の様子" />
+新規に作成する場合 -&gt; Create Sketch File as Libaryを選択<br />
+既存のライブラリファイルをインポートする場合 -&gt; Import Sketch File as Libaryを選択<br />
+Abstractにアップされているライブラリファイルを利用する場合 -&gt; Link libraryを選択</p>
+
+<h3 id="2-ローカルライブラリを参照している場合-sketchファイルを開いてabstract上のライブラリに入れ替える">2.ローカルライブラリを参照している場合、Sketchファイルを開いてAbstract上のライブラリに入れ替える</h3>
+
+<p>Sketchファイルを開くとローカルのライブラリを参照している場合がありますので
+その場合は、Symbol Swap Librariesというプラグインを使ってAbstract内で管理されているライブラリを選択してください。
+<img src="https://lh3.googleusercontent.com/rT55fxEPNTvDnoD-wjMsyho2HcnEGfokMmxJI_Jd_zwq1C5qSFHCSgXw4cD9N7S-gfFL4MJFk0DZjS5Oi4s4Uyx0VydRc3J7E0LuE13RlYc3Hw6Ws4PIEb6z-I2CkYTh3wWcCMgOrS6hgM9YOK3mnyypyjvw-U_QkVzX-Zzh37xMrhMi9vuoMLjarDz4iHY7sqJaGtXU12271KzNqAUpiuvqoumLWbBMraN0Noga-zJm8KmlQZlQrSMsEwjbEzjDxrkqBoRYU5f180fMdf42Sj_5ncqrKZVF7k2nEhcnN912hjOgLBxg03Se9zsVTJyuzl_-JXM9dO8WtAF-1fV5MRMO-oRkptJ6Rqa_PyL3QzClCOBIKF8FlrRhDxpqhSFUlMW438NixSGdFQJHDjWpYy5EIsxYXreI-CzhA7WzVu-kJ7tG7bw19KJ_TA77ojYM2yx5wGQlW3xpWoTM9TocMCah4zvvdrsk123tZeRvlwooWJx1M0bwlWsOBjLCW7Hq9Opc_0xSlqFzNHYSG2TSjQbV6lyfjMer-hyMTpwdQjNNfNlUrWoFZtfNT_OCcY_ZkHvF1s8FIhRQlYvcuudLWOt1B3r9cWhax3ZAJgA5YjFJiRkVr1RKIDWIkb15SQTHigMr1ou4dtnEK4lnB10HcQZHMSI=w1144-h730-no" alt="そのままSketchファイル開くと同名のローカルライブラリファイルを開いてしまう" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/JTd_2lqGYo8nvWrt9h769POQ5Y8n45ww1tIY_ffzQMoX9UKk0KofwivbfJE6hISAbAosoLc4ipDTVv0WnXJtS2eJGOt5Th213UU6K2Dhedt6DuEGpgQan7b6QZ7U8G9Qib14B8LM8VBRdT0FQthTxcYgfmeUnZ5VjR_KAE-CkPicfE6CDchM7C5nE-AsYOhzAC7TmDoIl4Cvgr-qt2n66AghHad66rvwtpjNs0mfQg95kzMQojGblUE7tuGfvBR_d05Yh_vrH8MCtLf17WHmmmaqRPgyWIeaNFmFIXCYageT7HN7j0AOqkvP-8pIJuV9mayhpEI06tuUsmrBJiPRybZdxlT0ii_7-giq3lePwb5iFaaCCJsdJTdlWCdo7wm6AZ9c-Q2SgqlfC0iiS6Ovc4YBWLPlgFXuGQfTfmabh5Sn9PAxBsD-rgSypi8yUq0ik2ckaUTnEhaPXFl4vjhXfx5z5E43Gpo-Pq_0LlwUC8PuQ1TeMoeVUm0b54nYzL74P79ltj-bea8S2S_-JG5ykcgq6u2fH0nv109H1vdIhX_J2Y2_NDT1BJB4GIe__4GyghNZ5GzNzRk9fRbUqoTBZ95yzRSinOuRcdZnZ2K2pakX1W_KFdD8IE75i0PabA6Umopr_2-ejFSDoFAgvijanKOnZ9U=w1610-h682-no" alt="SketchプラグインでSketchライブラリをスイッチ！" /></p>
+
+<p>本家のヘルプのこの記事を参考にさせていただきました。<br />
+<a href="https://support.goabstract.com/hc/en-us/articles/360001392632-Importing-Sketch-Libraries">https://support.goabstract.com/hc/en-us/articles/360001392632-Importing-Sketch-Libraries</a></p>
+
+<h2 id="プロジェクトをまたぐライブラリファイルの利用をする場合は">プロジェクトをまたぐライブラリファイルの利用をする場合は</h2>
+
+<p>上記のLink Libraryというボタンを押すと、下記のようなプロジェクト一覧ダイアログが表示されます。カウルではBootstrapのワイヤフレーム素材やGoogleのマテリアルアイコンの素材など全プロジェクトで共通利用できそうなものはプロジェクト化して一元管理するようにしました。</p>
+
+<p>共通のカラーミックスインや写真などもサービス内で共通利用していくことも可能かもしれません。
+ノウハウが溜まってきたらまた共有したいと思います。</p>
+
+<p><img src="https://lh3.googleusercontent.com/UPAfLZvh9PWly511X1X_rMg_QerAGeunX_40fgoHSeafrQrYHkarmJrt6TWzEH4CdI7F3RJ0w0XAuh4uejN0LfclBMSfIn1LTQbCyIaAOjU5jU_DBp1TWQy3OI1aKQrDmcHBfJau9RohEaxeax7cf3HFYHkUKMrF3533TF9wynToiSsLOAA-XoQFmOpbgXf-AP-S6hsmVCPUqwFJq8umj-Jh80wn0qQ_JPKsdwTsjN84aql4iwOP7EMx5a0jyqlWGRae6Sy60TYTQcMh51h6B8c8d3cERWewXyKaqaPkGfHRY7sXlr2Da2C9SJEhMcQUn3N7hS0djOxtuCJq0slUV7eYPOzV4FD9nsFqgybASwGdeHpWNWAmR-k74qe4nZvgLlzsXhQoEq_PDXxJC4u5291d9dqlMQsXLEiD5LsaHpgzHZ-ihmkJwmawuZAnlb1muwIg2CnJ1ZbBFpboZwbrsMmCTQeMnA5D3oLwSBJ01Ab5A4lbzFPhFurreAjsnWUiiCbKHgxW8uObbEAzwXV5IG1rOXRmOQPMktc2Y_e_kUt5_oQticCU1I_BtWIuOOmgTe53XV2Azc5zerNxDncAdI48yOY0cniYFiMN_X1qSXj_ReW5GFMLr0jmiDKVWezlU88TXTXBo4sFy1k2OYHSWRt31wU=w1232-h922-no" alt="Abstractにアップされてるライブラリファイルを選択することができます" /></p>
+
+<h2 id="contributor-guestの追加-admin向け">Contributor/Guestの追加（ADMIN向け）</h2>
+
+<p>AbstractのMacアプリの Billingリンク をクリックし、シート数を変更して保存。
+シートの数だけContributorを参加させることができます。
+現時点では、ビジネスプランで1シートあたり$16.67ドル程度かかります。月単位で必要最小限の利用数に変更していく形になりそうです。</p>
+
+<p><img src="https://lh3.googleusercontent.com/TOVuZ05AUKGruO_wYCfvfVMu8EyqAJPmkJ96odqvEVKyVzUayKfMOaO4wbdgFKtene8Gyo0R4bzNVB00RY3NPk6jR_mDmfNDjcthRFwdO73uxoFVbrpH5V-LiOiSOEgPucWI2Sg-3d6G3hudHqDqAlrallIeSmB6qA4rmIxr-cJCxR4RECMq0VsnLsdVZtxGDfkLR-7c6x2GQ1bWhsyWN8PlpUEMpMjaoP6xXQgqQx0Ylo44SIu-o5wKyCQMRwu_GjR4CYq8iGqd_tw9i88B7PwMDa1mMcfbHBNb2_ayl0aB42JFIBDUiHo_xA4GXu7kxucJY9_D47x72L2NP0OMUMYX3eTTWoSRIgOJS-cvaBfy2fAFsWghkDOL-nWE6N8YIXY3ns-fFD-b_s-c_ZXmnxrwLMdLXDooge1i__kWl6xO_N-DJTaR7v7-gIqZ0EQZYvqF0JhXuh_lOe4qXNdP_uAte2abMowY0393gaPVtRBXQ5TptCHng_-EXy-WvNvMzDT0PRyhmCMluOQppd0awUBjmpQa9PUfX8eIl3hF3CHDkxd_KQfpjbPi_DM6JLUy4t4WsGSwk7Qh6M7PqLVRxdZjoiF1p59njw9-FdF4xzGpiLc5YgoDwYEydXstsMO41JhWOoMRxDPvdH4JQYKM2-D7-tw=w1920-h1034-no" alt="シート数を変更することでContributorのコントロールができる" /></p>
+
+<h2 id="デザインファイルのバージョン管理導入によって今後期待できること">デザインファイルのバージョン管理導入によって今後期待できること</h2>
+
+<h3 id="会社のデザイン資産管理が楽">会社のデザイン資産管理が楽</h3>
+
+<p>特にデジタルプロダクトの場合、長期に渡る開発で作業者の引き継ぎなどが発生するたびにデザインデータの分散化が起こり資産として残すのが難しかったように思います。
+すでにプログラムの世界では当たり前のバージョン管理が導入されることでデザインファイルを資産として捉えやすくなると思います。</p>
+
+<h3 id="新規開発のスクラップ-ビルドを簡単にできる">新規開発のスクラップ&amp;ビルドを簡単にできる</h3>
+
+<p>ブランチ切れるだけでだいぶデザイナーは心理的に楽になります。複数のパターンの比較検討をした場合もコミットしておけば切り戻しなどが簡単に行えます。どんどん作ってどんどん壊しましょう。</p>
+
+<h3 id="デザイン作業のブラックボックス化を防ぐ">デザイン作業のブラックボックス化を防ぐ</h3>
+
+<p>今までもZeplinなどで成果物の共有は簡単になってきました。しかし変更点についてはコメントで補足する必要があったり、作業の工程は見えずらいものがありました。
+Abstractの場合は変更点をこまめにコミットすることで作業の文脈がわかるのでデザイナー同士やエンジニアとの間での認識も取りやすくなると思われます。</p>
+
+<h1 id="おわりに">おわりに</h1>
+
+<p>ハウスマートではデザイナーやエンジニアがプロジェクトの企画から主導できる環境を用意しています。「何を作るか」から自分で考える環境で仕事をしたい！という方、ぜひ一緒に働きましょう。</p>
+
+<p><a href="https://www.wantedly.com/projects/69047">今話題のReTech！業界を変えるカウルを支えるエンジニアをWanted！</a><br />
+<a href="https://www.wantedly.com/projects/69347">今話題の不動産テック！スタンダードを創るUI/UXデザイナーをWanted</a></p>
+
+            </div>
+            <div class="hatena_button">
+  <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="hatena-bookmark-button" data-hatena-bookmark-title="Sketchのバージョン管理にAbstractを導入した話" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<footer class="article-footer">
+    <div class="share">
+    <a href="http://b.hatena.ne.jp/entry/http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="fa fa-hatena article-share-hatena" target="_blank" data-hatena-bookmark-title="Sketchのバージョン管理にAbstractを導入した話" data-hatena-bookmark-layout="simple-balloon" title="はてなブックマーク">
+    <a href="http://getpocket.com/edit?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f07%2f24%2fabstract-version-controll%2f" class="fa fa-get-pocket article-share-pocket" target="_blank"></a>
+    <a href="https://twitter.com/share?text=Sketch%e3%81%ae%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e7%ae%a1%e7%90%86%e3%81%abAbstract%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%9f%e8%a9%b1&amp;url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f07%2f24%2fabstract-version-controll%2f" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f07%2f24%2fabstract-version-controll%2f" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>
+    <a href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f07%2f24%2fabstract-version-controll%2f&amp;description=Sketch%e3%81%ae%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e7%ae%a1%e7%90%86%e3%81%abAbstract%e3%82%92%e5%b0%8e%e5%85%a5%e3%81%97%e3%81%9f%e8%a9%b1" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>
+    <a href="https://plus.google.com/share?url=http%3a%2f%2ftechblog.housmart.co.jp%2f2018%2f07%2f24%2fabstract-version-controll%2f" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>
+    </a>
+</div>
+
+    
+</footer>
+
+        </div>
+
+        
+<nav id="article-nav">
+    
+    <a href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法</div>
+    </a>
+    
+
+    
+</nav>
+
+
+    </article>
+    <section id="comments">
+        <div id="disqus_thread">
+            
+        </div>
+    </section>
+
+</section>
+
+	    <aside id="sidebar">
+    
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Recents
+    </h3>
+    <div class="widget">
+        <ul id="recent-post">
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/cuIAYpdFRT-p6ILtYH19hySPo1QAc5na3ychujmZagBrcoNF2ap5nQnsVWoaqZ2o-L8q52tZfWTPxrcSkS49D1jKruAh4f7D27Ne7dKF5BBXil-cv68leqQHtCbz6kCRqt5UhAUe--R9MBpwqyp7vfsxx1iL42g3IBNcN6zuKHRNRVlh1__a8bRj55uoygyopqXtyU-Aqp9eP-EpKRaoPuXXNrcI3aRAjjzHafXRHMO3Dx5UrPjvwC9IUMnyZdWyIQriHpikIrEFF1hEZmlifdUoECOD4-II6IjxengE96MHIuWny2LOi_HcZDHjDnGzipCXSaQUoQeujWiv2-QMJBYcuPsgaEUvYojCfTn5y0mqPwBCTypCl2NIO73alIOTdRfZFVZjtnW7Z26nC-3nOCrOxtoNQULneuMDQMvo6reU9nAbrf1xU2bHbaUQVY67j4HILTs4RXzJO8RFC2ilIwGNcYgOdfLA-nA3j3-DoFKozhVv47Xq9Eeq_jSVEtlb3fhYbfDwMfLPSkXmwCuJGL3UxkRqNPUnk7YoHee178TjmDtZ8GlGk4XTFj7FugqnZAxGLrvTA0OwD0Qmfgv-3dTBRT6-ECt9sxiJC7teQXFCHg1w1VVM-dWXY8QlQUnthYRsRJdt3XFbs72rLmyNKkwfl9s=w600)" alt="Sketchのバージョン管理にAbstractを導入した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/" class="title">Sketchのバージョン管理にAbstractを導入した話</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-07-24 18:00:00 &#43;0900 JST" itemprop="datePublished">2018-07-24</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/vVynJJyGH3sntzJcj14TUe5ilTk0RVsJ1DV_ImlfJZaBZxpfgoaGB2h1jucf-mEpuztZmhcPYyaK8Zh2EvPZmq7HvPx8FJIx1IqOfzDU-qPq1hslhJKXoHSUHFqbnvH_LAKqx0iM3p51mDaMC1LfOQAiyw4mm3m0IozjbE-34HO7T17I6holgJpoAQk4ZT_aNM_U5x_mIGQnlA-5Mj69SJtbDD-n4VNICEkO5YOQ-1dpwlcrV9aT9QQNCqJTb8H-VyZnmZb7lEiCcOrDK_IAfSWjw9in5CYxwSyrlkbW-b2cwUI-8YhwzVT060drSnFyiovgk4v-wyuB6Hau3c0v5IgvlzPeXnAjAvk-fD-v1C-WSQZXP9X8Jji_GdNVYV1giWx-baw0_y8fLTNHiRM3LfuR-rEdSF-p3tOhhkks_Ja5RYopYNuNSEC67CIvYEbGtZPNrAGekvyGsSJJ86wYMSeXRMaWFddOjI3-3Py-M1obskpiU_-bnlGNn5ycJaRU_RiK_NIQ1FsI5X4QfMUvAWBnscZmuOfhp6oEY_GVyNaC8YX-NkK3oTQSQTWdD8vGmmxCRCoa1b7033nDwGUqhUuY_x4CVTAmNRu5MscVooK1wZ855LVJeI1IKPZ95zfvjulR84Tz0yh7AWY6cXC_BuV90x_Xcz8T=w600)" alt="Sketchのバージョン管理にAbstractを導入した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/infra">
+                        infra
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/03/22/managing-secrets-with-parameter-store/" class="title">AWS上のパスワードちゃんと管理できてますか？AWSパラメータストアで秘密情報を安全に管理する方法</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-03-22 18:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-22</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/03/20/minispec/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/JAQVo36baaq0zxd0J8nB9J02tfviMhac_BYbKURjJ2p_JPhpCIdYAF2I15CRq8BUX4_gqvJ29MrkbmoUA3wMeFKMTYmz1JpwRfyp3ur8zX5W4BcAPp-vihSinba8YH8mG9qKoAYOLAtiV2f09u58ANxqReK7ZnfWm6MZSZDJJQMbXO8V-uGYKl4g7jifAacERoLUHftm-Yb3m294nlt455AWNyeevj9ajt56SS04d0CshLVHuXW7EuY2CdgigjrLRCwiRJcZTCuAh2Qdfv-dETcgFce3XiV45wy1DfECdC4aSymzyQiDZt5fKkVjk98bqdC1WkwDl0-pt8xbYQ9szzgOkhdDg4-28KMYmCFjriNYiUELH6AzXLxhaZjtaaXA5KtQpPHouWpmFkFrzvY0zZOodJnaLvgkmNtxOZKhpaSZfDzVSjDL1lenj63lUYakvEi-raicCI2vBErC_iRU8LKKMNFgGq9HG9jM4AJdI1DmBQALcJdYiYa_jCbURL6INXpUz1alSzSB5lMKVviaBgyLu3AAEWJghCaZeEEQBDJyD3aSM0J1fWSiHMGUeYZXcp1ixIBxp8Aa9l7X1MMCVzDfhx_AcdGeXuMJ7ATn4tcqIKtRlVjiWOwxi_Mjpna74OPuw0cKPvXXD64bet1mm1Zto2w0aWjn=w640-h480-no)" alt="Sketchのバージョン管理にAbstractを導入した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/project">
+                        project
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/03/20/minispec/" class="title">スタートアップの現場で役立つ開発要件のまとめ方</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-03-20 20:03:55 &#43;0900 JST" itemprop="datePublished">2018-03-20</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/cWsGjIjek5On4wd6G_0MMr7cdF9MXB4EfR6vZTaMOiyHE15pLsuEhehApG2627J60PHsC5QUAjvotNlgAGTjXzQg_7815MM6AVJos2NFJFXNjg3gnh9afM9Ys3KXrvVcNKR-gkI1SIAf7UyczGDzrlgRr7yu4jkxetSdUG2lQLx8kRHYeNuKScuoP_P8Qe5hkNKBUppjSyu_RY0W08oD5lrqjXyV266J_-OXD_mKmVudeFX_DEQZ2HCtiXRHODT-WyjS0wnEkHkyvgxOPT2MLzJ7hyB0kOzzNlw_lafFNQShqdDzDyE261hZHh4cKbUXd6sQMTtDjnyqBDGzQTnGmSPjuS2Pj9B76VwMmNuNW7-6ZvZ0IotNZms3kSyTA4smnoDZfasMPypZC7ccGBchizIdyciR225-KjsRK1LmJd1W4vJYrYK7mCtHvNCi-no0dqjkOWjXGtDMTkS4uZRa3eddXy56Uye-BrQeEwIjk_CkEA99UXLLrEtLg-tZ-Am1rrFNh1rRimkD5ltJb4FXJ4rpHKWtlGIy_h8rZoSlICnhe1OZ6fj8gNE028dh4yXv8MMRbnJ1MYjq2XKtKmnub9j4g7Lvi0DOyxKvcyTgl4qNq4UMhOS4e4jOUyf4fZecqt29Vk_zpiHeZvpW04neaJs29A=w1600-h900-no)" alt="Sketchのバージョン管理にAbstractを導入した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/design">
+                        design
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/03/08/sketch-prototyping/" class="title">プロトタイピング戦国時代に終止符を打てるか？Sketch49のプロトタイピング機能を試して見た</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-03-08 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-03-08</time>
+                    </p>
+                </div>
+            </li>
+            
+            <li>
+                <div class="item-thumbnail">
+                    <a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="thumbnail">
+                    
+                        
+                        <span style="background-image:url(https://lh3.googleusercontent.com/c_9FEhwVpnmNYe6Vtp2Ue4-W5lRkNVNYEzk_CGIlnt44q4-UPqCiVrCtX7cZo8qjkC_vxMOJftEx4sMAmGAmZV0W1r9EPiLm473wAFpOYKxmYQ9QGfuVJlQh3d5ThePaDnXpT4FmO4tK11Gqi0vJI6KVbkd79VcH4RB9PKLJOiAaRbB4gzrTVEVCSvZMKr1UPJfjT8oEDZOVmBINtvkIckXCho9qNiQ0DrjduoJume-rnL4lPCcO2l2atseavpiJREznrbrPk9jezmIANK1G8FmdMSFRpiTBx1mce66RGplpfnx0DBdWSPipCv7fxVbUt3hXyk1DBd41fJ4Lw-ChbyzE6eiPEvcZBbZwKPEzCrbTogGRsf_02cV-yvJdiF3jZ8Ma5q8disxZPoj39LEiWC031jRABv7NQMup-LGJe1zk4mxuQTZBQlI3ITjBbN5lCMqpGJUfwVxjqHiZ-nqvtF1fhYF8DVrtpAkwBTdZ6PXZ9ARTOpdNR3bOJ_5LyRyoCLsoC_V_qTHtiybLR-4qUSIiXEc3qF-NUZIIld5kXa4N_i2sv0INMG1Z0apD_Jb7OMC4Ty6kfD8Bv1Aaz_a2PWcpcUzstl4cxTrk8MWvX26HwovZXrh2SjcL7qpUx_vbbHkDYD9ydTHPdyv2xoAlzBfGo1GrMxzf=w600)" alt="Sketchのバージョン管理にAbstractを導入した話" class="thumbnail-image"></span>
+                        
+                    
+                    </a>
+                </div>
+                <div class="item-inner">
+                    
+                    <p class="item-category">
+                        <a class="article-category-link" href="http://techblog.housmart.co.jp/categories/event">
+                        event
+                        </a>
+                    </p>
+                    
+                    <p class="item-title"><a href="http://techblog.housmart.co.jp/2018/02/26/good-notifications-at-roppongi-swift/" class="title">「良い通知」についてROPPONGI.swiftで発表しました</a></p>
+                    <p class="item-date">
+                        <time datetime="2018-02-26 16:00:00 &#43;0900 JST" itemprop="datePublished">2018-02-26</time>
+                    </p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/design">
+                    design
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/infra">
+                    infra
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/ios">
+                    ios
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/management">
+                    management
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/member">
+                    member
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/operation">
+                    operation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/project">
+                    project
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/tool">
+                    tool
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/categories/work">
+                    work
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/abstract">
+                    abstract
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/android">
+                    android
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/atlassian">
+                    atlassian
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/culture">
+                    culture
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/data-analysis">
+                    data-analysis
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/deep-learning">
+                    deep-learning
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/design">
+                    design
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/development">
+                    development
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/docker">
+                    docker
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ecs">
+                    ecs
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/elasticsearch">
+                    elasticsearch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/event">
+                    event
+                </a>
+                <span class="category-list-count">9</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gem">
+                    gem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/git">
+                    git
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/gpu">
+                    gpu
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hackathon">
+                    hackathon
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/hands-on">
+                    hands-on
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/infra">
+                    infra
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/introduction">
+                    introduction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ios">
+                    ios
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/jira">
+                    jira
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/kpi">
+                    kpi
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/lab">
+                    lab
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/management">
+                    management
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/media">
+                    media
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/operation">
+                    operation
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/pitch">
+                    pitch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/presentation">
+                    presentation
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/product">
+                    product
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/project">
+                    project
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/prototyping">
+                    prototyping
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/rails">
+                    rails
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ruby">
+                    ruby
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/search">
+                    search
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/sketch">
+                    sketch
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/startup">
+                    startup
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/swift">
+                    swift
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/tools">
+                    tools
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/ux">
+                    ux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                <a class="category-list-link" href="http://techblog.housmart.co.jp/tags/work">
+                    work
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        <a href="http://techblog.housmart.co.jp/tags/abstract" style="font-size: 12px;">abstract</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/android" style="font-size: 12px;">android</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/atlassian" style="font-size: 12px;">atlassian</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/culture" style="font-size: 12px;">culture</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/data-analysis" style="font-size: 12px;">data-analysis</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/deep-learning" style="font-size: 12px;">deep-learning</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/design" style="font-size: 12px;">design</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/development" style="font-size: 12px;">development</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/docker" style="font-size: 12px;">docker</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ecs" style="font-size: 12px;">ecs</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/elasticsearch" style="font-size: 12px;">elasticsearch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/event" style="font-size: 12px;">event</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gem" style="font-size: 12px;">gem</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/git" style="font-size: 12px;">git</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/gpu" style="font-size: 12px;">gpu</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hackathon" style="font-size: 12px;">hackathon</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/hands-on" style="font-size: 12px;">hands-on</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/infra" style="font-size: 12px;">infra</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/introduction" style="font-size: 12px;">introduction</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ios" style="font-size: 12px;">ios</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/jira" style="font-size: 12px;">jira</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/kpi" style="font-size: 12px;">kpi</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/lab" style="font-size: 12px;">lab</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/management" style="font-size: 12px;">management</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/media" style="font-size: 12px;">media</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/operation" style="font-size: 12px;">operation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/pitch" style="font-size: 12px;">pitch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/presentation" style="font-size: 12px;">presentation</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/product" style="font-size: 12px;">product</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/project" style="font-size: 12px;">project</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/prototyping" style="font-size: 12px;">prototyping</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/rails" style="font-size: 12px;">rails</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ruby" style="font-size: 12px;">ruby</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/search" style="font-size: 12px;">search</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/sketch" style="font-size: 12px;">sketch</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/startup" style="font-size: 12px;">startup</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/swift" style="font-size: 12px;">swift</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/tools" style="font-size: 12px;">tools</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/ux" style="font-size: 12px;">ux</a>
+        
+        <a href="http://techblog.housmart.co.jp/tags/work" style="font-size: 12px;">work</a>
+        
+    </div>
+</div>
+
+
+
+
+    <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018
+      Powered by <a href="//kawlu.com">Kawlu</a>.
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://techblog.housmart.co.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://techblog.housmart.co.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
