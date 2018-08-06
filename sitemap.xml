@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://techblog.housmart.co.jp/2018/08/06/vuejs-single-file-components-in-rails/</loc>
+    <lastmod>2018-08-06T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/2018/07/24/abstract-version-controll/</loc>
     <lastmod>2018-07-24T18:00:00+09:00</lastmod>
   </url>
@@ -281,7 +286,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/categories/development/</loc>
-    <lastmod>2017-12-11T17:00:00+09:00</lastmod>
+    <lastmod>2018-08-06T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -449,7 +454,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/post/</loc>
-    <lastmod>2018-07-24T18:00:00+09:00</lastmod>
+    <lastmod>2018-08-06T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -485,7 +490,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/tags/rails/</loc>
-    <lastmod>2017-12-11T17:00:00+09:00</lastmod>
+    <lastmod>2018-08-06T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -544,6 +549,12 @@
   </url>
   
   <url>
+    <loc>http://techblog.housmart.co.jp/tags/vuejs/</loc>
+    <lastmod>2018-08-06T18:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://techblog.housmart.co.jp/tags/work/</loc>
     <lastmod>2017-10-26T15:31:47+09:00</lastmod>
     <priority>0</priority>
@@ -557,7 +568,7 @@
   
   <url>
     <loc>http://techblog.housmart.co.jp/</loc>
-    <lastmod>2018-07-24T18:00:00+09:00</lastmod>
+    <lastmod>2018-08-06T18:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
